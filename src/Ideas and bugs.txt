@@ -3,6 +3,7 @@
 /////////////////////////////
 
 - Sometimes TNT not spawning when used, unable to pick up weapons afterwards.
+- Breathing effect is on in many maps.
 
 ///////////////////////////////
 ///////// I D E A S ///////////
