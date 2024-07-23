@@ -1,0 +1,65 @@
+Graphic ARWHUD, 32, 6 { XScale 0.5 YScale 0.5 Patch ARWPA7A3, 0, 0 {}}
+
+graphic STUNICO2, 24, 11
+{
+	XScale 0.25
+	YScale 0.25
+	Patch STUNICON, 0, 0 {}
+}
+
+graphic STUNBA2, 40, 4
+{
+	XScale 0.5
+	YScale 0.5
+	Patch STUNBAR, 0, 0 {}
+}
+
+graphic STUNBAK2, 40, 4
+{
+	XScale 0.5
+	YScale 0.5
+	Patch STUNBACK, 0, 0 {}
+}
+
+graphic STUNIC11, 24, 11
+{
+	XScale 0.25
+	YScale 0.25
+	Patch STUNIC1, 0, 0 {}
+}
+graphic STUNIC22, 24, 11
+{
+	XScale 0.25
+	YScale 0.25
+	Patch STUNIC2, 0, 0 {}
+}
+graphic STUNIC33, 24, 11
+{
+	XScale 0.25
+	YScale 0.25
+	Patch STUNIC3, 0, 0 {}
+}
+graphic STUNIC44, 24, 11
+{
+	XScale 0.25
+	YScale 0.25
+	Patch STUNIC4, 0, 0 {}
+}
+
+///////////////////////////// Teribear textures
+
+texture INFOBRD, 250, 178
+{
+  XScale 4.0
+  YScale 4.0
+  Patch INFOBRD, 0, 0
+  }
+  
+  texture BRDRULS, 1100, 840
+{
+  XScale 19.0
+  YScale 20.0
+  Patch BRDRULS, 0, 0
+  }
+  
+ ////////////////////////////////////////////////

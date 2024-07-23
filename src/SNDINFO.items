@@ -1,0 +1,60 @@
+//Healing
+Items/Healtiny HEALTINY
+
+Items/BigKitWarn BKITWARN
+Items/BigKitActivate BKITACTI
+Items/BigKitOpen BKITOPEN
+Items/BigKitHum BKITHUM
+
+// Flare
+FIZZLE FIZZLE
+$volume FIZZLE 0.2
+MATCH MATCH
+$volume MATCH 0.7
+
+// Pickups
+pickups/weapon weaponup
+Pickup/Ammo RIFLMGUP
+Pickup/Health HLTHPKUP
+Pickup/Key KEYPKUP2
+
+$volume Pickup/Ammo 0.8
+$volume Pickup/Health 0.8
+
+
+
+////////////////////////////////////////
+//////////// Murderer stuff ////////////
+////////////////////////////////////////
+
+//Smokebomb
+Smokebomb/Hiss	SMOKEHIS
+Smokebomb/Bang	SMOKEBAG
+
+//Chlorine Gas
+Gas/Pop1	GLASS2
+Gas/Pop2	GLASS3
+Gas/Pop3	GLASS4
+$Volume Gas/Pop1 1.8
+$Volume Gas/Pop2 1.8
+$Volume Gas/Pop3 1.8
+$Random weapons/Gasbreak
+{
+ Gas/Pop1
+ Gas/Pop2
+ Gas/Pop3
+}
+GasCan/Hiss SMOKEHIS
+$VOLUME GasCan/Hiss 0.5
+
+//Fake Stim
+Weapons/Aw_FFS		STIMHISS
+
+//Noise EMitter
+weapons/noiseready	DSELEC2
+
+
+
+
+
+

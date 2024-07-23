@@ -1,0 +1,213 @@
+{
+name = ShotgunSkin
+class = "Voice: Thick"
+sprite = PLA3
+CrouchSprite = PL3C
+}
+
+///////////////////////////////////////////////////////////
+{
+name = TwigSkin
+class = "Voice: Thick"
+sprite = PLTW
+CrouchSprite = PLTW
+}
+
+///////////////////////////////////////////////////////////
+{
+name = PistolSkin
+class = "Voice: Thick"
+sprite = PLA2
+CrouchSprite = PL2C
+}
+
+///////////////////////////////////////////////////////////
+{
+name = ChainsawSkin
+class = "Voice: Thick"
+sprite = PLA0
+CrouchSprite = PL8C
+}
+
+///////////////////////////////////////////////////////////
+{
+name = MurderSkin
+class = "Voice: Thick"
+sprite = PKNI
+CrouchSprite = PKNC //NEW SPRITES
+}
+
+///////////////////////////////////////////////////////////
+{
+name = FistSkin
+class = "Voice: Thick"
+sprite = PLA1
+CrouchSprite = PL1C //NEW SPRITES
+}
+
+///////////////////////////////////////////////////////////
+{
+name = WrenchSkin
+class = "Voice: Thick"
+sprite = PLA6
+CrouchSprite = PWNC //NEW SPRITES
+}
+
+///////////////////////////////////////////////////////////
+{
+name = PipeSkin
+class = "Voice: Thick"
+sprite = PLA7
+CrouchSprite = PIPC
+}
+
+///////////////////////////////////////////////////////////
+{
+name = M1Skin
+class = "Voice: Thick"
+sprite = PCBN
+CrouchSprite = PCBC //NEW SPRITES
+}
+
+///////////////////////////////////////////////////////////
+{
+name = AxeSkin
+class = "Voice: Thick"
+sprite = PLAX
+//CrouchSprite = PLAX
+}
+
+///////////////////////////////////////////////////////////
+{
+name = FlashLightSkin
+class = "Voice: Thick"
+sprite = SFLZ
+CrouchSprite = CFLZ
+}
+
+///////////////////////////////////////////////////////////
+{
+name = ShovelSkin
+class = "Voice: Thick"
+sprite = PLSH
+CrouchSprite = PSHC
+}
+
+///////////////////////////////////////////////////////////
+{
+name = SledgeSkin
+class = "Voice: Thick"
+sprite = PLSL
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+//New skins!!!!
+{
+name = FireAxeSkin
+class = "Voice: Thick"
+sprite = PLX2
+}
+///////////////////////////////////////////////////////////
+{
+name = PlankSkin
+class = "Voice: Thick"
+sprite = PLAP
+}
+///////////////////////////////////////////////////////////
+{
+name = NailedPlankSkin
+class = "Voice: Thick"
+sprite = PLP2
+}
+///////////////////////////////////////////////////////////
+{
+name = RevolverSkin
+class = "Voice: Thick"
+sprite = PLRV
+CrouchSprite = PCRV
+}
+///////////////////////////////////////////////////////////
+
+{
+name = BrickSkin
+class = "Voice: Thick"
+sprite = PLA5
+CrouchSprite = PL5C
+}
+
+///////////////////////////////////////////////////////////
+{
+name = MollySkin
+class = "Voice: Thick"
+sprite = PLA9
+CrouchSprite = PL9C
+}
+
+///////////////////////////////////////////////////////////
+{
+name = SprayCanSkin
+class = "Voice: Thick"
+sprite = PLA4
+CrouchSprite = PL4C
+}
+
+///////////////////////////////////////////////////////////
+{
+name = PoolCueSkin
+class = "Voice: Thick"
+sprite = PLPC
+//CrouchSprite = PLYC
+}
+
+///////////////////////////////////////////////////////////
+{
+name = CrowbarSkin
+class = "Voice: Thick"
+sprite = CRPL
+CrouchSprite = CRP2
+}
+
+///////////////////////////////////////////////////////////
+{
+name = BlueWrenchSkin
+class = "Voice: Thick"
+sprite = 2LA6
+CrouchSprite = 2WNC
+}
+
+///////////////////////////////////////////////////////////
+{
+name = FireExtSkin
+class = "Voice: Thick"
+sprite = PLFE
+CrouchSprite = PCFE
+}
+
+///////////////////////////////////////////////////////////
+{
+name = BottleSkin
+class = "Voice: Thick"
+sprite = PLBT
+CrouchSprite = PLBC
+}
+
+
+
+//UNUSED
+{
+name = JenniferSkin
+sprite = JENN
+class = "voice: thick"
+CrouchSprite = JENN
+//scale = 0.3
+gender = male
+}
+
+{
+name = ScissormanSkin
+sprite = SCIS
+class = "voice: thick"
+CrouchSprite = JENN
+//scale = 0.3
+gender = male
+}

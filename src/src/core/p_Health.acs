@@ -1,0 +1,120 @@
+//==================================================================
+////////////////////     HEALTH & REGEN    ////////////////////
+//=================================================================
+//SMALL MEDS
+script "health_me" (void)
+{
+	if(GetActorProperty(0, APROP_Health) < GetActorProperty(0, APROP_SpawnHealth))
+		SetResultValue(true);
+	else
+		SetResultValue(false);
+}
+
+//BIG MEDS
+script 752 (void)
+{
+	for(int p = 0; p < 32; p++)
+	{
+		if(FDistance(0,TID_START+p) <= 132.0 && GetActorProperty(TID_START+p, APROP_Health) < GetActorProperty(0, APROP_SpawnHealth))
+		{
+			GiveActorInventory(TID_START+p, "Health", 5);
+			GiveActorInventory(TID_START+p, "BigKitSparkle", 1);
+		}
+	}
+}
+//COUNTER   number of hits
+/*
+//script 407 (void)
+{
+	healthcounter[PlayerNumber()] = 0;
+}
+
+script 777 open //Health regen
+{
+	while(gameinfo[1] != GAMESTATE_GAMEOVER)
+	{
+		for(int i = 0; i < 32; i++)
+		{
+			if(!CheckActorInventory(TID_START+i, "NoRegen") && !CheckActorInventory(TID_START+i, "GotHurt") && GetActorProperty(TID_START+i, APROP_Health) > 0)
+			{
+				GiveActorInventory(TID_START+i, "Health", 1);
+			}
+			else if(CheckActorInventory(TID_START+i, "GotHurt"))
+			{
+				healthcounter[i]++;
+				if(healthcounter[i] >= 3)
+				{
+					healthcounter[i] = 0;
+					TakeActorInventory(TID_START+i, "GotHurt", 999);
+				}
+			}
+		}
+		Delay(2*35);
+	}
+}
+*/
+script "HEALTH_REGEN" (void) //New Health regen
+{
+	if(GetActorProperty(0,APROP_Health) < 35)
+	FadeRange(156,0,0,0.6,0,0,0,0.0,0.75);
+	else if(GetActorProperty(0,APROP_Health) < 50)
+	FadeRange(156,0,0,0.3,0,0,0,0.0,0.2);
+
+	if(CheckInventory("ReadyRegen") == 0)
+	{
+		GiveInventory("ReadyRegen",1);
+		While(GetActorProperty(0,APROP_Health) < GetActorProperty(0,APROP_SpawnHealth) && GetActorProperty(0,APROP_Health) > 0 && gameinfo[1] != GAMESTATE_GAMEOVER )
+		{
+			if(CheckInventory("GotHurt") > 0)
+			{
+				if(GetActorProperty(0,APROP_Health) < 20 )
+				{
+					FadeRange(156,0,0,0.2,0,0,0,0.0,0.75);
+					LocalAmbientSound("player/heartbeat",127);
+					TakeInventory("GotHurt",1);
+					delay(23);
+					continue;
+				}else if(GetActorProperty(0,APROP_Health) < 33){
+					FadeRange(156,0,0,0.3,0,0,0,0.0,0.5);
+					LocalAmbientSound("player/heartbeat",127);
+					TakeInventory("GotHurt",2);
+					delay(35);
+					continue;
+				}else if(GetActorProperty(0,APROP_Health) < 36){
+					FadeRange(156,0,0,0.3,0,0,0,0.0,0.5);
+					delay(70);
+					TakeInventory("GotHurt",3);
+					continue;
+				}
+			}
+
+			if(GetActorProperty(0,APROP_Health) < 20 )
+			{
+				FadeRange(156,0,0,0.2,0,0,0,0.0,0.75);
+				LocalAmbientSound("player/heartbeat",127);
+				delay(23);
+				FadeRange(156,0,0,0.2,0,0,0,0.0,0.75);
+				LocalAmbientSound("player/heartbeat",127);
+				delay(23);
+				FadeRange(156,0,0,0.2,0,0,0,0.0,0.75);
+				LocalAmbientSound("player/heartbeat",127);
+				delay(23);
+			}
+			else if(GetActorProperty(0,APROP_Health) < 33){
+				FadeRange(156,0,0,0.3,0,0,0,0.0,0.5);
+				LocalAmbientSound("player/heartbeat",127);
+				delay(35);
+			}
+			else if(GetActorProperty(0,APROP_Health) < 36){
+				FadeRange(156,0,0,0.3,0,0,0,0.0,0.5);
+				delay(70);
+			}else
+			delay(70);
+			
+			GiveInventory("Health",1);
+		}
+		TakeInventory("ReadyRegen",1);
+		if(GetActorProperty(0,APROP_Health) == GetActorProperty(0,APROP_SpawnHealth))
+		ActivatorSound("player/okay",127);
+	}
+}

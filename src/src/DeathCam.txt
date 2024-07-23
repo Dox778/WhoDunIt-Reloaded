@@ -1,0 +1,9 @@
+#library "DeathCam"
+#include "zcommon.acs"
+
+Script "WDIRendCamera" (int p_tid)
+{
+	Delay(2); //potential fix for the camera not working in proper matches (Thanks Kaminsky :3)
+	ChangeCamera(94582,1,0);
+	Thing_Hate(94582, p_tid, 6);
+}

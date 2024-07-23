@@ -1,0 +1,54 @@
+/////////////////////////////
+///////// B U G S ///////////
+/////////////////////////////
+
+- Sometimes TNT not spawning when used, unable to pick up weapons afterwards.
+
+///////////////////////////////
+///////// I D E A S ///////////
+///////////////////////////////
+
+- Be able to pickup bunnies. Use like in D-BD (maybe not hostile).
+- Be able to participate in a match after having died in the form of a ghost or drone or...
+
+
+
+
+Changes that have to be mentioned:
+Danny ~ To make FireworksItem able to be spawned in Flare spawner I had to swap the ID numbers for FlareSpawner and Flare. 
+        This is because all maps use 14434 for Flare spawn. FlareSpawner was not used at first. 
+		This should not be a problem, but maybe it could be with something specific. Hence why I noted it here. It's about Items.dec.
+
+========================================================================================================================================
+Dox778 section
+ideas:
+- reanimate twig and fleshlight (XDDDDDDDDDDDDDDDDD)
+- fix dropped items causing bleeding (murd items etc)
+- make healing effects green?
+- since i added the kick, make it super responsive (use gunflash to make the kick happen instantly while the knife is in A_Gunflash)
+- add +THRUACTORS for smoke and maybe gas?
+- some bodies still get stuck in dying anims
+- pistol cuts off the fire sound with its dryfire
+- dropped firearms have inconsistent bouncing
+- reanimate m1 reload
+- COMPLETELY redo lumps, like sndinfos, gldefs
+- update glowing shrooms
+- you can move freely during intermission (not controlled via cvar)
+- make less weapons stun for longer
+- make shells white
+- stun rework:
+idea 1:
+make EVERYTHING additive, stronger weapons add more stun
+give SlowCounter higher max for smoother bar movement + more flexibility
+idea 2:
+hitting legs increases stun duration
+- buff smoke (bigger radius)
+- dynamic respawn time for murd items depending on how many players there are in the server (more players = less time for respawn)
+- urinals are fucky
+- potential flare rework:
+add a detonator weapon, when activated it will blow up all murd flares
+----------------------------
+SKINS TO DO:
+- crossbow
+----------------------------
+========================================================================================================================================

@@ -1,0 +1,777 @@
+
+
+ACTOR RuneFistSpeed : PowerSpeed
+{
+	Speed 1.03
+	Powerup.Duration -1200
+	+POWERSPEED.NOTRAIL
+}
+
+Actor NewFist : Wdi_BaseWeapon// replaces NewFist
+{  
+	Tag "Bare hands"
+	Inventory.PickupMessage "You picked up... nothing. That's your fist :p"
+	Weapon.PreferredSkin "FistSkin"
+	Weapon.Kickback 900
+	Weapon.SelectionOrder 1
+	+WEAPON.NOALERT
+	+WEAPON.WIMPY_WEAPON
+	+WEAPON.NOAUTOFIRE
+	States 
+	{ 
+	Spawn:
+		TNT1 A -1
+		Loop
+		
+	PickUpAnim:
+		TNT1 A 0 A_TakeInventory("GotNewWeap",1)
+		TNT1 A 0 A_JumpIf(pitch > 90 || pitch < 30, "ready")
+		PDED PQRSTTUUUVWXYZ 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWZOOM)
+		PDED "[" 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWZOOM)
+		TNT1 A 4
+		FIST A 1 offset(-9,56)
+		FIST A 1 offset(-5,42)
+		FIST A 1 offset(-2,34)
+	Ready:
+		//FIST A 0 A_JumpIfInventory("GotNewWeap",1,"PickUpAnim")
+		FIST A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWZOOM)
+		Loop
+	ReadyStance:
+		2IST IIIIJJJJKKKKLLLLIIIIJJJJKKKKLLLLIIIIJJJJKKKKLLLLIIIIJJJJKKKKLLLLIIIIJJJJKKKKLLLLIIIIJJJJKKKKLLLLIIIIJJJJKKKKLLLLIIIIJJJJKKKKLLLLIIIIJJJJKKKKLLLLIIIIJJJJKKKKLLLL 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWZOOM)
+	//	2IST L 0 A_GiveInventory("FistIdleAnim",1)
+	//	2IST L 0 A_JumpIfInventory("FistIdleAnim",10,"ReturnReady")
+	//Goto Ready//	Loop 
+	//ReturnReady:
+		2IST MMNOP 1 A_WeaponReady
+		goto Ready	
+	Select:
+		FIST A 0 offset(1,0) A_Raise
+		NULL A 0 A_GiveInventory("RuneFistSpeed",1)
+		FIST A 1 A_Raise
+		Loop
+	Deselect:	
+		"####" "#" 1 offset(-1,33) A_Lower
+		"####" "#" 1 offset(-4,36) A_Lower
+		"####" "#" 1 offset(-8,40) A_Lower
+		"####" "#" 1 offset(-14,45) A_Lower
+		"####" "#" 1 offset(-20,54) A_Lower
+		"####" "#" 1 offset(-28,64) A_Lower
+		"####" "#" 1 offset(-36,76) A_Lower
+		"####" "#" 1 offset(-44,88) A_Lower
+		NULL A 0 A_TakeInventory("RuneFistSpeed",1)
+		NULL A 0 A_TakeInventory("IsPunching",1)
+		TNT1 A 0 A_WeaponReady(WRF_NOFIRE)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1 A_Lower
+		wait
+	Fire:
+		"####" "#" 0 A_Jump(128,"Fire2")
+		"####" "#" 0 A_JumpIfInventory("IsPunching",1,"Hold")
+		"####" "#" 1 offset(0,34) A_GiveInventory("IsPunching",1)
+		"####" "#" 1 offset(0,42) A_TakeInventory("FistIdleAnim",10)
+		"####" "#" 1 offset(0,56)
+	hold:
+		TNT1 A 2 A_WeaponReady(WRF_NOPRIMARY)
+		TNT1 A 0 A_GiveInventory("FireHold",1)
+		TNT1 A 0 A_ReFire("hold")
+		TNT1 A 0 A_JumpIfInventory("FireHold",3,"Cross")
+		TNT1 a 0 A_Takeinventory("FireHold",10)
+	Jab:
+		TNT1 A 0
+		FIST B 1 A_PlaySound("Weapons/Fistswing")
+		FIST C 1 A_CustomPunch(8,1,0,"FistPuff")
+		FIST DEFGHIJKLM 1
+		TNT1 AAAAAAAAA 1 A_WeaponReady(WRF_NoSwitch)
+		TNT1 A 0 A_ReFire("Hold")
+		2IST L 1 offset(0,56) A_TakeInventory("IsPunching",1)
+		2IST L 1 offset(0,42)
+		2IST L 1 offset(0,34)
+		Goto ReadyStance
+	Cross:
+		TNT1 A 2 A_Takeinventory("FireHold",10)
+		2IST C 1 A_PlaySound("Weapons/Fistswing")
+		2IST D 1 
+		2IST E 1 A_CustomPunch(16,1,0,"FistPuff")
+		2IST FGH 1	
+		TNT1 A 4
+		2IST ZYXWVUTSRQ 1
+		TNT1 A 0 A_TakeInventory("IsPunching",1)
+		Goto ReadyStance
+	Fire2:
+		"####" "#" 0 A_Jump(128,"Fire2")
+		"####" "#" 0 A_JumpIfInventory("IsPunching",1,"Hold2")
+		"####" "#" 1 offset(0,34) A_GiveInventory("IsPunching",1)
+		"####" "#" 1 offset(0,42) A_TakeInventory("FistIdleAnim",10)
+		"####" "#" 1 offset(0,56)
+	hold2:
+		TNT1 A 2 A_WeaponReady(WRF_NOPRIMARY)
+		TNT1 A 0 A_GiveInventory("FireHold",1)
+		TNT1 A 0 A_ReFire("hold2")
+		TNT1 A 0 A_JumpIfInventory("FireHold",3,"Cross2")
+		TNT1 a 0 A_Takeinventory("FireHold",10)
+	Jab2:
+		TNT1 A 0 
+		FIST N 1 A_PlaySound("Weapons/Fistswing")
+		FIST O 1 A_CustomPunch(8,1,0,"FistPuff2") 
+		FIST PQRSTUVWXY 1	
+		TNT1 AAAAAAAAA 1 A_WeaponReady(WRF_NoSwitch)
+		TNT1 A 0 A_ReFire("Hold")
+		2IST L 1 offset(0,56) A_TakeInventory("IsPunching",1)
+		2IST L 1 offset(0,42)
+		2IST L 1 offset(0,34)
+		Goto ReadyStance
+	Cross2:
+		TNT1 A 2 A_Takeinventory("FireHold",10)
+		FIST Z 1 A_PlaySound("Weapons/Fistswing")
+		FIST "[" 1 
+		FIST "\" 1 A_CustomPunch(16,1,0,"FistPuff2")
+		FIST "]" 1
+		2IST AB 1		
+		TNT1 A 4
+		3IST GFEDCBA 1
+		2IST "]\[" 1
+		TNT1 A 0 A_TakeInventory("IsPunching",1)
+		Goto ReadyStance
+	AltFire:
+		"####" "#" 0 A_JumpIfInventory("IsPunching",1,"UpperCutStart")
+		"####" "#" 1 offset(0,34) A_GiveInventory("IsPunching",1)
+		"####" "#" 1 offset(0,42) A_TakeInventory("FistIdleAnim",10)
+		"####" "#" 1 offset(0,56)
+	althold:
+		TNT1 A 2 A_WeaponReady(WRF_NOFIRE)
+		TNT1 A 0 A_GiveInventory("FireHold",1)
+		TNT1 A 0 A_ReFire("althold")
+		TNT1 A 0 A_JumpIfInventory("FireHold",3,"SLAP")
+		TNT1 a 0 A_Takeinventory("FireHold",10)		
+		PDED PQR 1
+		NULL A 0 A_CustomPunch(1,1,0,"GrabPuff",40)
+		PDED STT 1
+		PDED U 1 A_JumpIfInventory("HasGrabbed",1,"GrabbedSuccessfully")
+		PDED VWXYZ 1
+		PDED "[" 1
+		
+		TNT1 A 20 
+		2IST L 1 offset(0,56)
+		2IST A 0 A_TakeInventory("IsPunching",1)
+		2IST L 1 offset(0,42)
+		2IST L 1 offset(0,34)
+		Goto ReadyStance	
+		
+	GrabbedSuccessfully:
+		NULL A 0 ACS_NamedExecuteAlways("GrabbingPlayer",0)
+		NULL A 0 SetPlayerProperty(0,1,PROP_TOTALLYFROZEN )		
+		PDED UTUUTUU 2		
+		NULL A 0 A_Recoil(3)
+		PDED SRQP 1
+		NULL A 0 SetPlayerProperty(0,0,PROP_TOTALLYFROZEN )
+		NULL A 0 A_TakeInventory("HasGrabbed",1)
+		TNT1 A 20 
+		2IST L 1 offset(0,56)
+		NULL A 0 A_TakeInventory("IsPunching",1)
+		2IST L 1 offset(0,42)
+		2IST L 1 offset(0,34)
+		Goto ReadyStance
+	
+	UpperCutStart:
+		UCUT ABCDEE 1
+	UppercutWait:
+		UCUT F 1
+		TNT1 A 0 A_ReFire("UppercutWait")
+		UCUT GHI 1
+		TNT1 A 0 A_GunFlash("LightDone")
+		UCUT J 1 A_PlaySound("DSLZSW4")
+		TNT1 A 0 ThrustThingZ(0,12,0,1)
+		UCUT KL 1 A_CustomPunch(10,1,0,"FistPuff")
+		UCUT MN 1
+		UCUT O 4
+		
+		UCUT PPQRSTUV 1
+		TNT1 A 1
+		
+		TNT1 AAAAAAAAA 1 
+		2IST L 1 offset(0,56) //A_WeaponReady(WRF_NoSwitch)
+		2IST A 0 A_TakeInventory("IsPunching",1)
+		2IST L 1 offset(0,42) //A_WeaponReady(WRF_NoSwitch)
+		2IST L 1 offset(0,34)
+		Goto ReadyStance	
+
+		
+	SLAP:
+		SLAP BCDEZ 1
+		TNT1 A 3
+		TNT1 A 0 A_GunFlash("LightDone")
+		TNT1 Z 1 A_PlaySound("DSLZSW5")
+		SLAP G 1
+		SLAP H 1 A_FireCustomMissile("AfuckingSLAP",0,0,0,1)
+		SLAP IJKK 1
+		SLAP L 4 A_TakeInventory("IsPunching",1)
+		SLAP MMNOPQRS 1
+		FIST A 1 A_Takeinventory("FireHold",10)
+		goto Ready
+	Reload:
+		SLAP TU 1 A_WeaponReady(WRF_NOSECONDARY)
+		SLAP VW 2 A_WeaponReady(WRF_NOSECONDARY)
+		TNT1 A 0 A_PlaySound("KNUCKLED",CHAN_BODY)
+		SLAP X 1
+		SLAP Y 1 offset(0,33)
+		SLAP Y 1 offset(0,32)
+		SLAP Y 1 offset(0,33)
+		SLAP Y 1 offset(0,32)
+		SLAP Y 1 offset(0,33)
+		SLAP Y 1 offset(0,32)
+		SLAP Y 4 A_TakeInventory("FistIdleAnim",10)
+		SLAP XXWV 2 A_WeaponReady(WRF_NOSECONDARY)
+		SLAP UT 1 A_WeaponReady(WRF_NOSECONDARY)
+		Goto ReadyStance	
+		
+	Zoom: //A.k.a play dead :3
+		"####" "#" 0 A_JumpIfInventory("IsDancing",1,"Ready") //used for warmup shit ffs
+		"####" "#" 0 A_JumpIfInventory("PlayDead",1,"PlayDeadstop")
+		"####" "#" 3 ACS_NamedExecuteAlways("PlayDeadStart", 0, 0, 0, 0)
+		"####" "#" 0 A_JumpIfInventory("PlayDead",1,2) //prevents that on specific maps
+		Goto Ready
+		"####" "####" 0
+		"####" "#" 0 ACS_NamedExecuteAlways("CROUCH", 0, 0, 0, 0)
+		"####" "#" 0 A_GiveInventory("PlayDead",1)
+		
+		"####" "#" 0 A_stop //stop moving
+		"####" "#" 0 SetPlayerProperty(0,1,PROP_TOTALLYFROZEN ) //dont let the player move
+		"####" "#" 0 A_ChangeFlag("NOPAIN",1) //no pain
+		"####" "#" 0 A_ChangeFlag("FORCEXYBILLBOARD",1) //render style
+		"####" "#" 0 A_ChangeFlag("FORCEYBILLBOARD",0) //render style
+		"####" "#" 0 A_Scream //aaaaaaaarrrrgh
+		PDED NO 1
+		PDED BDCDCBDCDACBCDABDB 1
+		PDED EFG 1
+		PDED HIJKLL 1 A_SetPitch(Pitch+4)//9
+		
+		//29
+		PDED M 0 SetPlayerProperty(0,0,PROP_TOTALLYFROZEN )
+		PDED M 0 SetPlayerProperty(0,1,PROP_FROZEN )
+		PDED MMMMMMMMMMMMMMMMMMMMMMMMMMMM 1 A_SetPitch(20)
+	StayDown:
+		PDED M 1 A_SetPitch(20)
+		PDED M 0 A_WeaponReady(WRF_DISABLESWITCH|WRF_NOFIRE|WRF_ALLOWZOOM)
+		loop
+	PlayDeadStop:
+		NULL A 0 ACS_NamedExecuteAlways("GETUP", 0, 0, 0, 0)
+		NULL A 0 ACS_NamedExecuteAlways("PlayDeadStop", 0, 0, 0, 0)
+		PDED M 1 offset(0,34)
+		PDED M 1 offset(0,36)
+		PDED M 1 offset(0,38)
+		PDED M 1 offset(0,46)
+		PDED M 1 offset(0,58)
+		PDED M 1 offset(0,74)
+		PDED M 1 offset(0,86)
+		PDED M 1 offset(0,92)
+		PDED M 1 offset(0,100)
+		PDED M 1 offset(0,105)
+		PDED M 1 offset(0,108)
+		PDED M 1 offset(0,110)
+		//PDED M 1 offset(0,118)
+		//PDED M 1 offset(0,120)
+		PDED JIHGFED 1 offset(0,100)
+		
+		TNT1 A 10
+		//25
+		"####" "#" 0 A_ChangeFlag("FORCEXYBILLBOARD",0)
+		"####" "#" 0 A_ChangeFlag("FORCEYBILLBOARD",1)
+		NULL A 0 A_ChangeFlag("NOPAIN",0)
+		NULL A 0 SetPlayerProperty(0,0,PROP_FROZEN )
+		FIST A 1 offset(0,56) A_TakeInventory("IsPunching",1)
+		FIST A 1 offset(0,42)
+		FIST A 1 offset(0,34)
+		FIST AAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWZOOM)
+		Goto Ready
+}}
+
+ACTOR DropAnimWeaponFar: NewFist
+{
++WEAPON.CHEATNOTWEAPON
+Weapon.SelectionOrder 1
++INVENTORY.INTERHUBSTRIP
+	States
+	{
+		select:
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+		TNT1 A 1 A_Raise
+		wait
+		Deselect:
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1 A_Lower
+		wait
+		Ready:
+		THRW I 1
+		THRW JK 1
+		THRW LMMMNNOPQR 1
+		TNT1 A 2
+		TNT1 A 0 A_TakeInventory("DropAnimWeaponFar", 1)
+		TNT1 A 1 A_WeaponReady
+		Goto Ready
+	}
+}
+ACTOR DropAnimWeapon: NewFist
+{
++WEAPON.CHEATNOTWEAPON
+Weapon.SelectionOrder 1
++INVENTORY.INTERHUBSTRIP
+	States
+	{
+		select:
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+		TNT1 A 1 A_Raise
+		wait
+		Deselect:
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1 A_Lower
+		wait
+		Ready:
+		3IST HIJKKKLLMNOP 1
+		TNT1 A 2
+		TNT1 A 0 A_TakeInventory("DropAnimWeapon", 1)
+		TNT1 A 1 A_WeaponReady
+		Goto Ready
+	}
+}
+
+ACTOR StartUpWeapon: NewFist
+{
++WEAPON.CHEATNOTWEAPON
+//Weapon.SelectionOrder 3200
+Weapon.SelectionOrder 10
+	States
+	{
+	select:
+		TNT1 A 0 A_Raise
+		wait
+	Deselect:
+		"####" "#" 0 A_Lower
+		"####" "#" 1 A_Lower
+		wait
+	Ready:
+		TNT1 A 25 A_WeaponReady(WRF_NOFIRE)
+		TNT1 A 3 A_GiveInventory("NewFist",1)
+		TNT1 A 0 A_Jump(6,"Ready3","Ready4")
+		TNT1 A 0 A_Jump(256,"Ready1","Ready2","Ready5")
+	Ready1:
+		TNT1 A 35 A_WeaponReady(WRF_NOFIRE)
+		2IST L 1 offset(0,56)
+		2IST L 1 offset(0,42)
+		2IST L 1 offset(0,34)
+		SLAP TU 1 A_WeaponReady(WRF_NOFIRE)
+		SLAP VW 2
+		SLAP X 4
+		TNT1 A 0 A_PlaySound("KNUCKLED")
+		TNT1 A 0 A_PlaySound("KNUCKLED")//pls work you bich
+		SLAP Y 1 offset(0,33)
+		SLAP Y 1 offset(0,32)
+		SLAP Y 1 offset(0,33)
+		SLAP Y 1 offset(0,32)
+		SLAP Y 1 offset(0,33)
+		SLAP Y 1 offset(0,32)
+		SLAP Y 3
+		SLAP X 5
+		SLAP X 1 offset(0,34)
+		SLAP X 1 offset(0,39) 
+		SLAP X 1 offset(0,48)
+		SLAP X 1 offset(0,62)
+		SLAP W 1 offset(0,85)
+		SLAP W 1 offset(0,110)
+		TNT1 A 3 offset(0,32) 
+		TNT1 A 0 A_TakeInventory("StartUpWeapon", 1)
+		TNT1 A 1 A_WeaponReady
+		Goto Ready
+	Ready2:
+		TNT1 A 35 A_WeaponReady(WRF_NOFIRE)
+		WARM A 0 A_PlaySound("Weapons/Fistswing")
+		WARM ABC 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		WARM D 4 A_WeaponReady(WRF_NOFIRE)
+		WARM EF 1 A_WeaponReady(WRF_NOFIRE)
+		WARM G 0 A_PlaySound("Weapons/Fistswing")
+		WARM GHI 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		WARM J 4 A_WeaponReady(WRF_NOFIRE)
+		WARM KKLMNOPQ 1 A_WeaponReady(WRF_NOFIRE)
+		TNT1 A 3
+		WARM G 0 A_PlaySound("Weapons/Fistswing")
+		WARM RSTT 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		WARM U 4 A_WeaponReady(WRF_NOFIRE)
+		WARM VWXYZ 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		WARM "[\]" 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		2ARM ABC 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		TNT1 A 3
+		TNT1 A 0 A_TakeInventory("StartUpWeapon", 1)
+		TNT1 A 1 A_WeaponReady
+		Goto Ready
+	Ready3:
+		TNT1 A 35 A_WeaponReady(WRF_NOFIRE)
+		2ARM D 2 A_WeaponReady(WRF_NOFIRE)
+		TNT1 A 0 A_PlaySound("MariLeGo",0)
+		2ARM D 12
+		2ARM D 1 offset(0,34)
+		2ARM D 2 offset(0,37)
+		2ARM D 4 offset(0,41)
+		2ARM D 1 offset(0,35)
+		2ARM EF 1
+		TNT1 A 0 THrustThingZ(0,30,0,1)
+		TNT1 A 0 A_PlaySound("MarioJMP",0)
+		2ARM GHIJJ 1 offset(0,32) A_WeaponReady(WRF_NOFIRE)
+		2ARM K 6 A_WeaponReady(WRF_NOFIRE)
+		2ARM LMNOPQ 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		TNT1 A 3
+		TNT1 A 0 A_TakeInventory("StartUpWeapon", 1)
+		TNT1 A 1 A_WeaponReady
+		Goto Ready	
+	Ready4:
+		TNT1 A 35 A_WeaponReady(WRF_NOFIRE)
+		2ARM RSTUU 1 A_WeaponReady(WRF_NOFIRE)
+		2ARM X 0 A_PlaySound("BDGUYT1",CHAN_WEAPON)
+		2ARM V 16 A_WeaponReady(WRF_NOFIRE)
+		NULL A 0 A_StopSound(CHAN_WEAPON)
+		2ARM VVVVWX 1 A_WeaponReady(WRF_NOFIRE)
+		2ARM Y 20 A_WeaponReady(WRF_NOFIRE)
+		2ARM Z 1 A_WeaponReady(WRF_NOFIRE)
+		2ARM X 0 A_PlaySound("BDGUYOOF",CHAN_WEAPON)
+		2ARM "[\" 1 A_WeaponReady(WRF_NOFIRE)
+		2ARM "]" 16 A_WeaponReady(WRF_NOFIRE)
+		2ARM "]" 1 offset(0,34)
+		2ARM "]" 1 offset(0,39)
+		2ARM "]" 1 offset(0,48)
+		2ARM "]" 1 offset(0,62)
+		2ARM "]" 1 offset(0,85)
+		2ARM "]" 1 offset(0,110)
+		2ARM "]" 1 offset(0,140)
+		TNT1 A 3 offset(0,32) 
+		TNT1 A 0 A_TakeInventory("StartUpWeapon", 1)
+		TNT1 A 1 A_WeaponReady
+		Goto Ready
+	Ready5:
+		TNT1 A 35 A_WeaponReady(WRF_NOFIRE)
+		3ARM ABCDEFGHIJJ 1 A_WeaponReady(WRF_NOFIRE)
+		3ARM K 3 A_WeaponReady(WRF_NOFIRE)
+		NULL A 0 A_PlaySound ("Weapons/Weapondown")
+		3ARM L 1 A_WeaponReady(WRF_NOFIRE)
+		3ARM MNOPPPQQR 1 A_WeaponReady(WRF_NOFIRE)
+		3ARM S 12 A_WeaponReady(WRF_NOFIRE)
+		3ARM S 1 offset(0,34)
+		3ARM S 1 offset(0,39)
+		3ARM S 1 offset(0,48)
+		3ARM S 1 offset(0,62)
+		3ARM S 1 offset(0,85)
+		3ARM S 1 offset(0,110)
+		TNT1 A 3 offset(0,32) 
+		TNT1 A 0 SetPlayerProperty(0,0,PROP_INSTANTWEAPONSWITCH)
+		TNT1 A 0 A_TakeInventory("StartUpWeapon", 1)
+		TNT1 A 1 A_WeaponReady
+		Goto Ready
+	}
+}
+Actor FistWithFlashlight : FlashlightZ
+{
+	Tag "Flashlight"
+	Weapon.AmmoType1 "Lighterammo"
+	Weapon.AmmoUse1 1
+	Weapon.PreferredSkin "FlashLightSkin"
+	+WEAPON.CHEATNOTWEAPON
+	States
+	{
+	Select:
+		FLSG A 0 A_Giveinventory("NewFist",1)
+		FLSG AAAAAAAAAAAAAAA 0 A_Raise
+		"####" "#" 1 offset(44,88)
+		"####" "#" 1 offset(36,76)
+		"####" "#" 1 offset(28,64)
+		"####" "#" 1 offset(20,54)
+		"####" "#" 1 offset(14,45)
+		"####" "#" 1 offset(8,40)
+		"####" "#" 1 offset(4,36)
+		"####" "#" 1 offset(1,33)
+		"####" "#" 0 A_Jump(255,"Ready")
+		"####" "#" 0 A_Jump(255,"Ready")
+		goto Ready
+	Deselect:	
+		"####" "#" 1 offset(-1,33)
+		"####" "#" 1 offset(-4,36)
+		"####" "#" 1 offset(-8,40)
+		"####" "#" 1 offset(-14,45)
+		"####" "#" 1 offset(-20,54)
+		"####" "#" 1 offset(-28,64)
+		"####" "#" 1 offset(-36,76)
+		"####" "#" 1 offset(-44,88)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1 A_Lower
+		wait
+	Ready:
+		FLSG A 1 A_WeaponReady
+		Loop
+	Fire:
+		FL03 A 0 A_Light0
+		FLSG BCD 1
+		TNT1 A 3
+	Hold:
+		TNT1 A 1
+		NULL A 0 A_ReFire("Hold")
+		FLSG I 0 A_PlaySound("Flashlight/swing")
+		FLSG EFG 1
+		FLSG H 1 A_CustomPunch(14,1,0,"FlashlightPuff",72)
+		FLSG IJ 1
+		TNT1 A 6
+		FLSG KLMM 1
+		Goto Ready
+	AltFire:
+		FLSG A 0 A_JumpIfInventory("WDIFakeReload",1,"ReloadHold")
+		FLSG A 1
+		FLSG A 0 A_GiveInventory("WDIFakeReload")
+		NULL A 0 A_PlaySound("FLASHON",CHAN_WEAPON)
+	ReloadHold:
+		FLSG A 0 A_FireBullets(0,0,1,0, "LightBeam2", FBF_NOFLASH, 2048)
+		FLSG A 0 A_FireBullets(0,0,1,0, "LightBeam3", FBF_NOFLASH, 2048)
+		FLSG N 1 BRIGHT A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH) 
+		FLSG A 0 A_Refire("AltFire")
+	ReloadEnd:
+		NULL A 0 A_PlaySound("FLASHOFF",CHAN_WEAPON)
+		FLSG A 1
+		FLSG A 0 A_TakeInventory("WDIFakeReload")
+		Goto Ready
+	DropWeapon:
+		TNT1 A 0
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+		Goto Ready
+}}
+ACTOR FistWithLighter : NewFist
+{
+Weapon.AmmoType2 "Lighterammo"
+Weapon.AmmoUse2 0//1
+Weapon.AmmoGive2 500
++NOALERT
+Tag "Lighter"
+Weapon.PreferredSkin "FistSkin2"
++WEAPON.CHEATNOTWEAPON
+States
+{
+Deselect:
+FIST A 0 A_TakeInventory ("Sequence",99)
+FIST A 0 A_Lower
+FIST A 1 A_Lower
+LOOP
+	Select:
+		FLSG A 0 A_Giveinventory("NewFist",1)
+		FLSG AAAAAAAAAAAAAAA 0 A_Raise
+		LIT1 A 1 offset(44,88)
+		LIT1 B 1 offset(36,76)
+		LIT1 C 1 offset(28,64) A_PlaySound("Weapons/Lighteropen",CHAN_WEAPON)
+		LIT1 D 1 offset(20,54)
+		LIT1 E 1 offset(14,45)
+		LIT1 F 1 offset(8,40)
+		LIT1 F 1 offset(4,36)
+		LIT1 G 1 offset(1,33)
+		LIT1 H 0 A_Jump(255,"Ready")
+		LIT1 H 0 A_Jump(255,"Ready")
+		goto Ready
+Deselect:
+	LIT1 GFFED 1
+	LIT1 C 1 A_PlaySound("Weapons/Lighterclose",CHAN_WEAPON)
+	LIT1 BA 1
+	TNT1 AAAAAAAAAAAAAAAAAA 0 A_lower
+	wait
+Ready:
+	LIT1 H 1 A_Weaponready(WRF_NOSECONDARY)
+	loop
+  Fire:
+	LIT1 GFFF 1
+	LIT1 I 1 BRIGHT A_PlaySound("Weapons/LighterSuccess",CHAN_WEAPON)
+    LIT1 JKL 1 BRIGHT A_SpawnItem("FMBulletPuff2Lighter",20,30)
+  Hold:
+	LIT1 I 0 A_CustomPunch(1,1,0,"LighterPuff")
+    LIT1 MNOP 1 BRIGHT A_SpawnItem("FMBulletPuff2Lighter",20,30)
+	LIT1 J 0 A_Refire("Hold2")
+	Goto End
+  Hold2:
+	LIT1 QRST 1 BRIGHT A_SpawnItem("FMBulletPuff2Lighter",20,30)
+	LIT1 J 0 A_Refire("Hold")
+  End:
+	LIT1 DEFFG 1
+    Goto Ready
+  }
+}
+Actor FMBulletPuff2Lighter: FMBulletPuff2 
+{ 
++CLIENTSIDEONLY
++BLOODLESSIMPACT
+	States
+	{
+		Spawn:
+			TNT1 A 2
+			stop
+		}
+}
+Actor FMBulletPuff2LighterSmall: FMBulletPuff2 
+{ 
++CLIENTSIDEONLY
+	States
+	{
+		Spawn:
+			TNT1 A 2
+			stop
+		}
+}
+
+ACTOR Lightprojectile
+{
+damage 2
+Speed 20
++NOCLIP
+- SOLID
++DONTSPLASH
+scale 0.01
++CLIENTSIDEONLY
+States
+{
+Spawn:
+2IST J 1
+Stop
+}
+}
+
+actor FMBulletPuff2HitSound : BulletPuff
+{
+seesound "Fist/HitWall" //hits a shootable actor
+  attacksound "weapons/axebang" //hits the wall
+	+FORCEXYBILLBOARD
+	States
+	{
+	Melee:
+	TNT1 A 0 A_PlaySound("Fist/HitWall")
+	PUFF CD 4
+	stop
+	}
+}
+
+actor AfuckingSLAP
+{
+	//attacksound "SLAP" //hits the wall
+	//seesound "SLAP" //hits a shootable actor
+  ProjectileKickBack  80000
+  Speed 23
+  Radius 2
+  Height 4
+  PROJECTILE
+  Damage (1)
+  DeathSound "SLAP"
+	States
+	{
+	Spawn:
+	TNT1 A 1 NODELAY
+    Stop
+	}
+}
+actor AfuckingKICK: FastProjectile
+{
+  ProjectileKickBack  18000
+  Speed 28
+  Radius 2
+  Height 4
+  PROJECTILE
+  Damage (20)
+  DeathSound "KickHit"
+  DamageType "Kick"
+	States
+	{
+	Spawn:
+	TNT1 A 1 NODELAY
+    Stop
+	}
+}
+
+
+
+
+
+actor FMBulletPuff2HitSoundBloodless : BulletPuff
+{
+	+FORCEXYBILLBOARD
+	+BLOODLESSIMPACT
+	States
+	{
+	Melee:
+	TNT1 A 1 A_PlaySound("Fist/HitWall")
+	//PUFF CD 4
+	stop
+	}
+}
+
+
+
+
+
+actor FistPuff: BaseMeleePuff
+{
+  activesound "none" //swoosh sound if it doesnt hit anything
+  attacksound "Fist/HitWall" //hits the wall
+  seesound "Fist/HitWall" //hits a shootable actor
+  +BLOODLESSIMPACT
+  DamageType "fists"
+  states
+  {
+  Spawn:
+	TNT1 A 1 NODELAY
+     Stop
+  Crash:
+	TNT1 A 1
+    Stop
+  }
+}
+actor FistPuff2: BaseMeleePuff //knuckle duster
+{
+  activesound "none" //swoosh sound if it doesnt hit anything
+  seesound "Fist/HitWall" //hits a shootable actor
+  attacksound "weapons/axebang" //hits the wall
+  DamageType "fists"
+}
+actor GrabPuff: BaseMeleePuff
+{
+  activesound "none" //swoosh sound if it doesnt hit anything
+  attacksound "none" //hits the wall
+  seesound "none" //hits a shootable actor
+  +BLOODLESSIMPACT
+  DamageType "Grab"
+  +PUFFGETSOWNER
+  +PUFFONACTORS
+  states
+  {
+  Spawn:
+	TNT1 A 1 NODELAY
+     Stop
+	xdeath:
+	melee:
+	TNT1 A 1 A_GiveToTarget("HasGrabbed",1)
+     Stop
+  Crash:
+	TNT1 A 1 
+    Stop
+  }
+}
+
+
+
+
+
+actor LighterPuff: BaseMeleePuff
+{
+  DamageType "Fire"
+  states
+  {
+  Spawn:
+	EXPL A 0 NODELAY A_CustomMissile ("MeleeSmoke", 0, 0, random (160, -160), 2, random (0, 360))
+     Stop
+  Melee:
+	EXPL A 0 A_CustomMissile ("MeleeSmoke", 0, 0, random (160, -160), 2, random (0, 360))
+     Stop
+  XDeath:
+	EXPL A 0 A_CustomMissile ("MeleeSmoke", 0, 0, random (160, -160), 2, random (0, 360))
+     Stop
+  Crash:
+	EXPL A 0 A_CustomMissile ("MeleeSmoke", 0, 0, random (160, -160), 2, random (0, 360))
+    Stop
+  }
+}
+

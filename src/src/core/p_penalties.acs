@@ -1,0 +1,162 @@
+//==================================================================
+////////////////////     COMBAT & PENALTIES    ////////////////////
+//=================================================================
+//Print all the tkrs on console when the round is over/////////////
+script "Tkrs" (void){
+	for(int k = 0;k < 32; k++)
+	{
+		if(CheckActorInventory(TID_START+k, "tktoken"))
+		{
+			log(s:"--> ",n:k,s:" \cg !tkr his ID is\c- ",i: k);
+		}
+		delay(1);
+	}
+}
+
+// Speed setter script for the player ans stun speed 
+//(handles the combat slowdown and everything)///
+script "Slowdown_Control" enter
+{
+	int i =PlayerNumber();
+	int counter = 1;
+	while(gameinfo[1] != GAMESTATE_GAMEOVER && PlayerInGame(i))
+	{
+		while(!CheckActorInventory(TID_START+i, "SlowCounter") && CheckActorInventory(TID_START+i, "TKToken") < 2 && !PlayerIsSpectator(i))
+		{
+			Delay(1);
+			if(!CheckWeapon("MurderKnife") && !CheckWeapon("LChainsaw")) SetActorProperty(TID_START+i, APROP_Speed, 0.8);
+			if(CheckWeapon("LChainsaw")) SetActorProperty(TID_START+i, APROP_Speed, 0.75);
+			if(CheckWeapon("MurderKnife")) SetActorProperty(TID_START+i, APROP_Speed, 0.95);
+		}
+
+		while(!CheckActorInventory(TID_START+i, "SlowCounter") && CheckActorInventory(TID_START+i, "TKToken") >= 2 && !PlayerIsSpectator(i))
+		{
+			Delay(1);
+			if(!CheckWeapon("MurderKnife")) SetActorProperty(TID_START+i, APROP_Speed, 0.6);
+		}
+
+		if(CheckActorInventory(TID_START+i, "SlowCounter"))
+		{
+			if(GetActorProperty(TID_START+i, APROP_Health) < 20)
+			{
+				TakeActorInventory(TID_START+i, "SlowCounter",999);
+				counter = 0;
+			}
+			else
+			{
+				if(!CheckWeapon("MurderKnife") && !CheckWeapon("LChainsaw")) SetActorProperty(TID_START+i, APROP_Speed, 0.5);
+				if(CheckWeapon("LChainsaw")) SetActorProperty(TID_START+i, APROP_Speed, 0.45);
+				if(CheckWeapon("MurderKnife")) SetActorProperty(TID_START+i, APROP_Speed, 0.75);
+			}
+
+			if(counter == 15)
+			{
+				TakeActorInventory(TID_START+i, "SlowCounter",1);
+				counter = 0;
+			}
+		}
+		counter++;
+		Delay(1);
+	}
+}
+
+//script trigged for annoucements
+script 651 (void) ClientSide //TK vengence script
+{
+	if(!CheckInventory("MurderMarker"))
+	{
+		if(PlayerClass(PlayerNumber()) == -1  || CheckActorInventory(TID_START+PlayerNumber(), "ScriptDeath")) terminate;
+		// broadcast that this player has killed an innocent
+		SetFont("SmallFont");
+		HudMessageBold(n:0, s:" \c[Green]has avenged an innocents death!"; HUDMSG_FADEOUT|HUDMSG_LOG, 7, CR_UNTRANSLATED, 0.5, 0.85, 6.5, 1.0);
+		// tell the current player the he/she killed an innocent
+		SetFont("SmallFont");
+		HudMessage(s:"You have avenged an innocent death!"; HUDMSG_FADEOUT, 7, CR_RED, 0.5, 0.85, 6.5, 1.0);
+		TakeInventory("TKHero", 1);
+	}
+}
+
+// This script handles all TK-related penalties & no regen
+script 411 enter 
+{
+int i=PlayerNumber();
+
+	while(!CheckActorInventory(TID_START+i, "TKToken")) Delay(1);
+	if(CheckActorInventory(TID_START+i, "MurderMarker") || CheckActorInventory(TID_START+i, "ScriptDeath"))
+	{
+		TakeActorInventory(TID_START+i, "TKToken", 999);
+		terminate;
+	}
+	if(CheckActorInventory(TID_START+i, "TKToken") == 1 && !CheckActorInventory(TID_START+i, "MurderMarker"))
+	{
+		GiveActorInventory(TID_START+i, "TKSmallKitDropper",1);
+		WDI_DropPlayerWeapon_Tk(TID_START+i);
+
+		if(GetActorProperty(TID_START+i,APROP_Health) < 30)
+		{
+			bGotABeating[i] = TRUE;
+			UpdateClient(7,0,bGotABeating[i]);
+			SetFont("SmallFont");
+			HudMessageBold(n:0, s:" \c[Red]has killed an innocent player!"; HUDMSG_FADEOUT|HUDMSG_LOG, 7, CR_UNTRANSLATED, 0.5, 0.85, 6.5, 1.0);
+			SetFont("SmallFont");
+			HudMessage(s:"You killed an innocent!"; HUDMSG_FADEOUT, 7, CR_RED, 0.5, 0.85, 6.5, 1.0);
+			SetFont("SmallFont");
+			HudMessage(s:"You have been penalized! Don't do it again!"; HUDMSG_FADEOUT, 8, CR_RED, 0.5, 0.88, 6.5, 1.0);
+		}
+
+		if(GetActorProperty(0,APROP_Health) > 30)
+		{
+			GiveActorInventory(TID_START+i, "NoRegen",1);
+			SetFont("SmallFont");
+			HudMessageBold(n:0, s:" \c[Red]has killed an innocent player!"; HUDMSG_FADEOUT|HUDMSG_LOG, 7, CR_UNTRANSLATED, 0.5, 0.85, 6.5, 1.0);
+			SetFont("SmallFont");
+			HudMessage(s:"You killed an innocent!"; HUDMSG_FADEOUT, 7, CR_RED, 0.5, 0.85, 6.5, 1.0);
+			while((GetActorProperty(TID_START+i,APROP_Health) > 30) && (CheckActorInventory(TID_START+i, "TKToken") < 2))
+			{
+				GiveActorInventory(TID_START+i, "YellowHaloSpawner", 1);
+				Delay(1);
+			}
+			TakeActorInventory(TID_START+i, "NoRegen",1);
+			bGotABeating[i] = TRUE;
+			UpdateClient(7,0,bGotABeating[i]);
+			SetFont("SmallFont");
+			HudMessageBold(n:0, s:" \c[Red]has received a beating for their actions..."; HUDMSG_FADEOUT|HUDMSG_LOG, 7, CR_UNTRANSLATED, 0.5, 0.85, 6.5, 1.0);
+			SetFont("SmallFont");
+			HudMessage(s:"You have been penalized! Don't do it again..."; HUDMSG_FADEOUT, 7, CR_RED, 0.5, 0.88, 6.5, 1.0);
+		}
+	}
+	
+	while(CheckActorInventory(TID_START+i, "TKToken") < 2) Delay(1);
+	
+	if(CheckActorInventory(TID_START+i, "TKToken") >= 2 && !CheckActorInventory(TID_START+i, "MurderMarker"))
+	{
+		SetFont("SmallFont");
+		HudMessageBold(n:0, s:" \c[Red]has killed an innocent player and was removed from the game!"; HUDMSG_FADEOUT|HUDMSG_LOG, 7, CR_UNTRANSLATED, 0.5, 0.85, 6.5, 1.0);
+		SetFont("SmallFont");
+		HudMessage(s:"You killed an innocent!"; HUDMSG_FADEOUT, 7, CR_RED, 0.5, 0.85, 6.5, 1.0);
+		Thing_Destroy(TID_START+i, TRUE);
+		SetFont("SmallFont");
+		HudMessage(s:"You have been removed from the game for your mistakes..."; HUDMSG_FADEOUT, 8, CR_RED, 0.5, 0.88, 6.5, 1.0);
+	}
+}
+
+//***************************************
+
+script "Powercounter" (void)//m1 cooldown
+{
+	if(CheckInventory("Warm_weapon") == 0)
+	{
+		delay(35);
+		GiveInventory("Warm_weapon",1);
+		While( CheckInventory("Powercounter") && gameinfo[1] != GAMESTATE_GAMEOVER )
+		{
+			TakeInventory("Powercounter",1);
+			delay(35);
+		}
+		TakeInventory("Warm_weapon",1);
+	}
+	if(gameinfo[1] == GAMESTATE_GAMEOVER){
+		TakeInventory("Powercounter",20);
+	}
+}
+

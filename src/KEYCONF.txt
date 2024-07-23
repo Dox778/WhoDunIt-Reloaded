@@ -1,0 +1,52 @@
+ClearPlayerClasses 
+AddPlayerClass "Innocent"
+AddPlayerClass "Innocent2"
+AddPlayerClass "Innocent3" //doomguy
+AddPlayerClass "Innocent4" //doom64guy
+
+
+WeaponSection "Touchup"
+SetSlot 0 MurderKnife 20Dollars //knoife :3
+SetSlot 1 StartUpWeapon NewFist FistWithLighter FistWithFlashlight FlashlightZ Twig PoolCue BottleWeapon BottleWeapon2 BaseballBat LeadPipe Crowbar PipeWrench BlueWrench ScrewDriverWeapon Shovel Plank NailedPlank Axe FireAxe SledgeHammer Pickaxe FireExtinguisher ZSaber BladeOfAgony Brick Molotov WhiskeyMolly SprayCanPNK SprayCanORG SprayCanYLL SprayCanGRN SprayCanRED SprayCanBLU LChainsaw LCrossbow Deagle Beretta MurdBeretta WDIBeretta Revolver M1Carbine Shotgun2 DoubleBarrel SoulCube PickableTNT
+SetSlot 2 Shotgun2
+SetSlot 9 Magnum NO_WEAPON Murd_Vanish Scissors
+
+
+addkeysection "---------------------- Who Dun It? ----------------------" whodunit
+addkeysection "---- General ----" whodunit2
+addmenukey "Drop Weapon" +Zoom
+addmenukey "Ping" "use Action_Ping"
+addmenukey "Change appearance" changecolour
+alias changecolour "pukename ChangeIdentity"
+addmenukey "Favourite appearance" Favcolor
+alias Favcolor "pukename ChangeIdentity 1"
+
+addmenukey "Do Dance" "pukename WDIStartDance always"
+addmenukey "Change Dance Style" "pukename WDIChangeDanceStyle"
+
+addmenukey "Admin Vote Yes" "puke -830"
+addmenukey "Admin Vote No" "puke -835"
+addmenukey "kill the lag" "puke 75"
+addmenukey "Anti ghost" "puke +408"
+
+addkeysection "---- Murderer exclusive ----" whodunit3
+addmenukey "Wield Knife" "use murderknife"
+
+addkeysection "---- Quick use binds ----" whodunit4
+addmenukey "Use stimpack" "Use SmallKit"
+addmenukey "Use bigkit" "use bigkit"
+addmenukey "Use flare" "use Flare"
+addmenukey "Use trip shotgun" "use tripshotgun"
+addmenukey "Use fake stimpack" "use fakestim"
+addmenukey "Use chlorine gas" "use chlorinegas"
+addmenukey "Use sound emitter" "use soundemitter"
+addmenukey "Use smoke bomb" "use smokebomb"
+
+///////////////////////////////////
+	defaultbind Q +Zoom
+	defaultbind X "use murderknife"
+	defaultbind Z "pukename ChangeIdentity"
+	defaultbind C "Use SmallKit"
+
+	bind pgup "vote_yes;wdi_voteyes"
+	bind pgdn "vote_no;wdi_voteno"

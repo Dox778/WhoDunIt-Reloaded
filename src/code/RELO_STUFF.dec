@@ -1,0 +1,503 @@
+///////////////////////////////////////////////////////////
+//////////////////////  by Teribear  //////////////////////
+///////////////////////////////////////////////////////////
+
+ACTOR CrabSpawner 25310
+{
+    //$Category WDI Reloaded Stuff/Creatures
+    //$Sprite CRABA0
+    //$Title "Crab Spawner"
+	+NOGRAVITY +FORCEYBILLBOARD
+	+NOINTERACTION
+	States
+	{
+	Spawn:
+		TNT1 A 0 A_SpawnItemEx("Crab", random(-160,160), random(-160,160), 0, 0, 0, 0, 0, SXF_TRANSFERSCALE, 128)
+		TNT1 A 0 A_SetScale(frandom(0.3,0.5))
+		TNT1 A 0 A_SpawnItemEx("Crab", random(-160,160), random(-160,160), 0, 0, 0, 0, 0, SXF_TRANSFERSCALE, 128)
+		TNT1 A 0 A_SetScale(frandom(0.3,0.5))
+		TNT1 A 0 A_SpawnItemEx("Crab", random(-160,160), random(-160,160), 0, 0, 0, 0, 0, SXF_TRANSFERSCALE, 128)
+		TNT1 A 0 A_SetScale(frandom(0.3,0.5))
+		TNT1 A 0 A_SpawnItemEx("Crab", random(-160,160), random(-160,160), 0, 0, 0, 0, 0, SXF_TRANSFERSCALE, 128)
+		TNT1 A 0 A_SetScale(frandom(0.3,0.5))
+		stop
+	}
+}
+
+Actor Crab
+{
+  Monster
+  Health 50
+  Radius 7
+  Height 15
+  Speed 2
+  Mass 700
+  Scale 0.4
+  PainChance 180
+  -COUNTKILL
+  -solid
+  +FORCEXYBILLBOARD
+  +FLOORCLIP
+  +FLOAT // cuz need barriers in wdi16 for this type of monster
+  +NOBLOOD
+  +NEVERRESPAWN
+  DamageFactor "Gas", 1.0
+  DamageFactor "FlareEffect", 0.0
+	DamageFactor "SprayRED", 0.0
+	DamageFactor "SprayBLU", 0.0
+	DamageFactor "SprayYLL", 0.0
+	DamageFactor "SprayGRN", 0.0
+	DamageFactor "SprayORG", 0.0
+	DamageFactor "SprayPNK", 0.0
+	DamageFactor "burn", 0.0
+	DamageFactor "fire", 0.0
+	DamageFactor "ShovelMelee", 2.0
+	DamageFactor "SawMelee", 2.0
+	DamageFactor "friendlygun", 10.0
+  States
+  {
+  Spawn:
+	CRAB AAAAAA 10 A_Look
+	Goto See
+  See:
+    CRAB AAAABBBBCCCC 1 A_Wander
+	CRAB A 0 A_Chase
+	Loop
+  Pain:
+	CRAB D 10 //A_GiveToTarget("MadMeter", 5)
+	Goto RunAway
+  RunAway:
+	TNT1 A 0 A_ChangeFlag("Frightened", True)
+	TNT1 A 0 //A_SetSpeed(3,AAPTR_DEFAULT)
+	CRAB AAABBBCCC 1 A_Chase
+	CRAB AAABBBCCC 1 A_Chase
+	CRAB AAABBBCCC 1 A_Chase
+	CRAB AAABBBCCC 1 A_Chase
+	CRAB AAABBBCCC 1 A_Chase
+	CRAB AAABBBCCC 1 A_Chase
+	CRAB AAABBBCCC 1 A_Chase
+	CRAB AAABBBCCC 1 A_Chase
+	TNT1 A 0 //A_SetSpeed(3,AAPTR_DEFAULT)
+	TNT1 A 0 A_ChangeFlag("Frightened", False)
+	Goto See
+  Death:
+	CRAB D 1 A_Scream
+	CRAB D 1 A_NoBlocking
+	CRAB D -1
+	Stop
+  }
+}
+
+//CREDITS by Jaska
+/*Decorate: Ghastly_dragon
+Sprites: SolarSnowfall
+Copied and modified from CinderSpawner by Jaska (just renamed and recolored)*/
+Actor DustSpawner 25309
+{
+    //$Category WDI Reloaded Stuff/Effects
+    //$Sprite DUSTA0
+    //$Title "Dust Spawner"
+	
+	//$Arg0 "XY*2"
+	//$Arg0Tooltip "X and Y dimensions *2"
+	//$Arg1 "Z"
+	//$Arg1Tooltip "Z dimension, height"
+	//$Arg2 "Min. speed"
+	//$Arg2Tooltip "Minimum speed of the dust particles"	
+	//$Arg3 "Max. speed"
+	//$Arg3Tooltip "Maximum speed of the dust particles"	
+	//$Arg4 "Freqency. 0-255, 255 never."
+	//$Arg4Tooltip "Freqency of the spawner. 0 is always, 255 is never. "	
+  
+  Radius 1
+  Height 1
+  +NoClip
+  +NoGravity
+  +ClientSideOnly
+  States
+  {
+  Spawn:
+  Active:
+    TNT1 A 0
+    TNT1 A 5 A_SpawnItemEx("FloatingDust", Random(-Args[0],Args[0]), Random(-Args[0],Args[0]), Random(0,Args[1]), Random(Args[2],Args[3]), 0, Random(-Args[2],Args[2]), Random(-4, 4), 128, Args[4])
+    Loop
+  Inactive:
+    TNT1 A 1
+    Loop
+  }
+}
+
+Actor FloatingDust
+{
+  +Missile
+  +NoBlockmap
+  +NoGravity
+  -Solid
+  +DontSplash
+  +CLIENTSIDEONLY
+  Radius 0
+  Height 0
+  RenderStyle Add
+  Alpha 0.2
+  Scale 0.04
+  States
+  {
+  Spawn:
+    DUST A 0
+    DUST A 0 A_SetScale(FRandom(0.03, 0.06))
+    TNT1 A 0 A_Jump(80, 8)
+    TNT1 A 0 A_Jump(80, 6)
+    TNT1 A 0 A_Jump(80, 4)   
+    TNT1 A 0 A_Jump(80, 2)   
+    DUST AAAAAAAAAAAAAAAAAAAAAAAA 8 Bright
+  Death:
+    DUST A 1 Bright A_FadeOut(0.06)
+    Loop
+  }
+}
+
+// Created by SgtMarkIV. Added and edited by Teribear.
+ACTOR Alarm 25311
+{
+  //$Category WDI Reloaded Stuff/Effects
+  //$Sprite ALARA0
+  //$Title "Alarm (Controllable)"
+Radius 8
+Height 12
+Scale 0.6
++SPAWNCEILING
++NOGRAVITY
+States
+{
+ Spawn:
+ Inactive:
+ ALRM A 1
+ Loop
+ Active:
+ ALAR AAAABBBBCCCCDDDD 1 BRIGHT A_SetAngle(angle -15)
+ ALAR AAAABBBBCCCCDDDDAAAABBBBCCCCDDDDAAAABBBBCCCCDDDDAAAABBBBCCCCDDDDAAAABBBBCCCCDDDDAAAABBBBCCCCDDDD 1 BRIGHT A_SetAngle(angle -15)
+ TNT1 A 0 A_PlaySound ("YZALARM1", CHAN_BODY, 0.5, 1)
+ Loop
+}
+}
+
+ACTOR Grape : SwitchableDecoration 25312
+{
+	//$Category WDI Reloaded Stuff/Props
+	//$Sprite GRAPA0
+	//$Title "Grape"
+  mass 5000
+  Radius 5
+  Height 7
+  scale 0.7
+  Deathsound "EatMunch"
+  -SOLID
+  +FORCEXYBILLBOARD
+  +USESPECIAL
+  +PUSHABLE +SHOOTABLE +CANNOTPUSH +GHOST PushFactor 0.1
+  +NOBLOOD
+	Activation THINGSPEC_Activate | THINGSPEC_ThingTargets | THINGSPEC_NoDeathSpecial
+  States
+  {
+   Spawn:
+   GRAP A 35 NODELAY
+	GRAP A 0 A_SpawnItemEx("GoreFlies",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+	GRAP A 0 A_SpawnItemEx("Maggot",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+	GRAP A 0 A_SpawnItemEx("Worm",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+    GRAP A -1
+    loop
+	Active:
+	TNT1 A 0 A_Scream
+	TNT1 A 0 A_PlaySound("EatMunch")
+	//TNT1 A 0 A_GiveToTarget("HealthBonus", 1)
+	TNT1 A 0 A_Jump(256,"ok1","ok2","ok3","ok4","ok5")
+	ok1:
+	TNT1 A 1 A_Print("It doesn't seem to be ripe yet.")
+	stop
+	ok2:
+	TNT1 A 1 A_Print("It tastes like mold.")
+	stop
+	ok3:
+	TNT1 A 1 A_Print("This fruit is not supposed to be so mushy...")
+	stop
+	ok4:
+	TNT1 A 0 A_Print("That one tastes pretty good, actually...")
+	TNT1 A 1 A_GiveToTarget("HealthBonus", 1)
+	stop
+	ok5:
+	TNT1 A 0 A_Print("With sourness! Awesome!")
+	TNT1 A 1 A_GiveToTarget("HealthBonus", 1)
+	stop
+  }
+}
+
+ACTOR AppleA : SwitchableDecoration 25313
+{
+	//$Category WDI Reloaded Stuff/Props
+	//$Sprite APPLA0
+	//$Title "Apple 1"
+  mass 5000
+  Radius 4
+  Height 6
+  scale 0.6
+  Deathsound "MUAPPLE"
+  -SOLID
+  +FORCEXYBILLBOARD
+  +USESPECIAL
+  +PUSHABLE +SHOOTABLE +CANNOTPUSH +GHOST PushFactor 0.1
+  +NOBLOOD
+	Activation THINGSPEC_Activate | THINGSPEC_ThingTargets | THINGSPEC_NoDeathSpecial
+  States
+  {
+   Spawn:
+   APPL A 35 NODELAY
+	APPL A 0 A_SpawnItemEx("GoreFlies",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+	APPL A 0 A_SpawnItemEx("Maggot",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+	APPL A 0 A_SpawnItemEx("Worm",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+    APPL A -1
+    loop
+	Active:
+	TNT1 A 0 A_Scream
+	TNT1 A 0 A_PlaySound("MUAPPLE")
+	//TNT1 A 0 A_GiveToTarget("HealthBonus", 1)
+	TNT1 A 0 A_Jump(256,"ok1","ok2","ok3","ok4","ok5")
+	ok1:
+	TNT1 A 1 A_Print("I think there was a worm inside...")
+	stop
+	ok2:
+	TNT1 A 1 A_Print("It seems to be rotten...")
+	stop
+	ok3:
+	TNT1 A 1 A_Print("This fruit is not supposed to be so mushy...")
+	stop
+	ok4:
+	TNT1 A 0 A_Print("Yum-yum!")
+	TNT1 A 1 A_GiveToTarget("HealthBonus", 1)
+	stop
+	ok5:
+	TNT1 A 0 A_Print("This apple is so sweet!")
+	TNT1 A 1 A_GiveToTarget("HealthBonus", 1)
+	stop
+  }
+}
+
+ACTOR AppleB: AppleA 25314
+{
+	//$Category WDI Reloaded Stuff/Props
+	//$Sprite APPLB0
+	//$Title "Apple 2"
+  States
+  {
+   Spawn:
+   APPL B 35 NODELAY
+	APPL B 0 A_SpawnItemEx("GoreFlies",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+	APPL B 0 A_SpawnItemEx("Maggot",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+	APPL B 0 A_SpawnItemEx("Worm",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+    APPL B -1
+    loop
+  }
+}
+
+//////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+//////////////////////  by Dox778  ////////////////////////
+///////////////////////////////////////////////////////////
+
+Actor CeilingBrazier 25178
+{
+	//$Title Ceiling Brazier
+	//$Category WDI Reloaded Stuff/Obstacles
+	//$Sprite CBRAX0
+Radius 12
+Height 82
++SOLID
++NOGRAVITY
++SPAWNCEILING
+States
+{
+Spawn:
+	CBRA X -1
+	Loop
+}
+}
+
+
+ACTOR FireCauldron 25179
+{
+	//$Title Fire Cauldron Black
+	//$Category WDI Reloaded Stuff/Obstacles
+	//$Sprite LAVCI0
+	//$NotAngled
+	//$IsDecoration
+	//$Arg0 Spit Fireballs
+	//$Arg0Default 0
+	//$Arg0Type 11
+	//$Arg0Enum falsetrue
+
+	Radius 26
+	Height 28
+	+SOLID
+  
+		States
+		{
+			Spawn:
+				LAVC A 0 Bright NoDelay A_PlaySoundEx ("FireCauldron/Loop", "SoundSlot5", 1, -1)
+				LAVC A 0 Bright A_SpawnItem ("CoalSparkSpawner")
+				Stay:
+				LAVC GHIH 8 Bright Light("FireBurningLight")
+				Loop
+		}
+}
+
+ACTOR CoalSparkSpawner 25180
+{
+	//$Title Coal Spark Spawner
+	//$Sprite PUF2D0
+	//$Category WDI Reloaded Stuff/Effects
+	+NOINTERACTION
+	
+		States
+		{
+		Spawn:
+			TNT1 A 12 A_SpawnItemEx ("CoalSpark", random(0, 24), 0, 0, 0, 0, 1, random(0, 360), 0, 172)
+			TNT1 A 0 A_Warp (AAPTR_TARGET, 0, 0, 32)
+			Loop
+		}
+}
+
+ACTOR CoalSpark
+{
+	Scale 0.2
+	+CLIENTSIDEONLY
+	+NOINTERACTION
+	+FORCEXYBILLBOARD
+	Renderstyle stencil
+	stencilcolor black
+	+BRIGHT
+
+		States
+		{
+		Spawn:
+			PUF2 D 2 A_SetAngle (random (0, 360)) 
+			PUF2 E 2 A_Recoil (0.3)
+			FX10 B 0 A_FadeOut (0.1)
+			Loop
+		}
+}
+
+ACTOR ClockSounds 25288
+{
+    //$Category WDI Reloaded Stuff/Sounds
+    //$Title "Clock Sounds"
+Height 2
+Radius 2
++NOGRAVITY
++NOINTERACTION
++CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+	TNT1 A -1 NODELAY A_PlaySound("clokloop",0,1,1)
+	stop
+	}
+}
+
+Actor CricketSounds 25289
+{
+    //$Category WDI Reloaded Stuff/Sounds
+    //$Title "Cricket Sounds (Various Animals)"
++NOINTERACTION
++CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+	TNT1 A random(300,500) 
+	TNT1 A 0 A_Jump(256,"1","1","1","2","3")
+	1: TNT1 A 0 A_PlaySound("World/Cricket",0,0.5,0) Goto Spawn
+	2: TNT1 A 0 A_PlaySound("world/owl1",0,0.5,0) Goto Spawn
+	3: TNT1 A 0 A_PlaySound("warehouse/wolf",0,0.5,0) Goto Spawn
+	
+	}
+}
+
+Actor GeneratorSounds 25290
+{
+    //$Category WDI Reloaded Stuff/Sounds
+    //$Title "Generator Sounds"
++NOINTERACTION
++CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+	TNT1 A -1 NODELAY A_PlaySound("DSGEN",0,1,1)
+	stop
+	}
+}
+
+Actor WindSounds 25291
+{
+    //$Category WDI Reloaded Stuff/Sounds
+    //$Title "Wind Sounds"
++NOINTERACTION
++CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+	TNT1 A -1 NODELAY A_PlaySound("Wind/wind",0,2,1)
+	stop
+	}
+}
+
+ACTOR ChurchBells 25292
+{
+    //$Category WDI Reloaded Stuff/Sounds
+    //$Title "Church Bells"
+Height 2
+Radius 2
++NOGRAVITY
++NOINTERACTION
+	States
+	{
+	Spawn:
+	TNT1 A 2100
+	TNT1 A 0 A_Jump(32,2)
+	Loop
+	TNT1 AA 0
+	TNT1 A 6300 A_PlaySound("BigBell",0)
+	Goto Spawn
+	}
+}
+
+ACTOR WaveSounds 25293
+{
+    //$Category WDI Reloaded Stuff/Sounds
+    //$Title "Wave Sounds"
+Height 2
+Radius 2
++NOGRAVITY
++NOINTERACTION
++CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+	TNT1 A random(100,160) NODELAY A_PlaySound("waves/waves",0,1,0)
+	loop
+	}
+}
+
+actor FreezerSounds 25294
+{
+    //$Category WDI Reloaded Stuff/Sounds
+    //$Title "Freezer Sounds"
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZAMBI1", CHAN_BODY, 4.0, 1)
+        stop
+    }
+}

@@ -1,0 +1,39 @@
+// Replaces all Zandronum-defined obituaries from every supported language.
+
+// NOTE: Because some obituaries were already defined using a DEHACKED lump
+// found in Who Dun It's main core file, they can't be replaced by the strings
+// defined in this lump.
+
+[enu fr ita ptb pt br default]
+
+// Generic Obituaries
+
+OB_DEFAULT = ""; // (DEHACKED won't allow this string to be replaced).
+OB_MPDEFAULT = "";
+
+// Friendly Fire Obituaries (DEHACKED won't allow these strings to be replaced).
+
+OB_FRIENDLY1 = "";
+OB_FRIENDLY2 = "";
+OB_FRIENDLY3 = "";
+OB_FRIENDLY4 = "";
+
+// Self-Victim Obituaries
+
+OB_BARREL = "";
+OB_CRUSH = "";
+OB_EXIT = "";
+OB_FALLING = ""; // (DEHACKED won't allow this string to be replaced).
+OB_KILLEDSELF = "";
+OB_LAVA = "";
+OB_ROCKET = "";
+OB_R_SPLASH = "";
+OB_SLIME = "";
+OB_SPLASH = "";
+OB_SUICIDE = ""; // (DEHACKED won't allow this string to be replaced).
+OB_WATER = "";
+
+// Telefrag Obituaries
+
+OB_MONTELEFRAG = "";
+OB_MPTELEFRAG = "";

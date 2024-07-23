@@ -1,0 +1,398 @@
+//==================================================================
+////////////////////        PLANK      /////////////////////////////
+//=================================================================
+//Copied straight from Shovel (which was made by Marty Kirra and Firewolf)
+//Wooden Plank modified, drawn and coded by Lightman68
+//Additional code edits by Theshooter7
+Actor PlankSpawner : RandomSpawner 6867
+{
+	//$Category WDI Weapons
+	//$Sprite PLANK0
+	//$Title "Plank Spawner"
+	//Scale 0.5
+	DropItem "FakePlank"
+	DropItem "FakePlank"
+	DropItem "NailPiece"
+	DropItem "AnimalSpawner"
+} 
+
+Actor NailPiece : CustomInventory 8869
+{
+	//$Category WDI Weapons/Heavy Weapons
+	//$Sprite PLANA0
+	//$Title "Piece (Nailed)"
+	Radius 16
+	Height 8
+	Scale 0.4
+	Inventory.Respawntics 10500
+	//Inventory.PickupSound "Misc/W_pkup"
+	Inventory.PickupMessage "\cjUpgraded the plank with \c[M7]barbed wire!\n\caDamage: \c[C4]34"
+	+FORCEXYBILLBOARD
+	+DonTGib
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_SetScale(frandom(0.2,0.4),frandom(0.2,0.4))
+		PLAN A -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Plank",1,"Fakepickup")
+		Stop
+	Fakepickup:
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_TakeInventory("Plank",1)
+		TNT1 A 0 A_GiveInventory("NailedPlank",1)
+		TNT1 A 0 A_SelectWeapon("NailedPlank")
+		Stop
+}} 
+
+Actor FakePlank : CustomInventory 8868
+{
+	//$Category WDI Weapons/Heavy Weapons
+	//$Sprite PLANK0
+	//$Title "Plank"
+	Radius 16
+	Height 8
+	//Scale 0.5
+	Inventory.PickupMessage "\cjFound a \c[J4]wooden plank. \cjCould still be improved...\n\caDamage: \c[C4]24"
+	Inventory.Respawntics 10500 //5 Minutes
+	+FORCEXYBILLBOARD
+	+DonTGib
+	States
+	{
+	Spawn:
+		PLAN K 1 NODELAY A_SetScale(frandom(0.80,1.00),frandom(0.80,1.00))
+		TNT1 A 0 A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		PLAN K -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("Plank",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		PLAN K 1 ACS_NamedExecute("OldWeapon_ID",0,11)
+		Stop
+	NotPickup:
+		TNT1 A 0
+		PLAN K 1 ACS_NamedExecute("OldWeapon_ID",0,11)
+		Fail
+}}
+
+Actor FakePlankNoScale : FakePlank
+{
+States
+{
+Spawn:
+PLAN K -1
+Stop
+}
+}
+
+Actor Plank : Wdi_BaseWeapon
+{
+	Radius 8
+	Height 32
+	//Scale 0.5
+	Tag "Wooden Plank"
+	Inventory.PickupMessage "Found a wooden plank. How Minecrafty..."
+	Weapon.PreferredSkin "PlankSkin"
+	Inventory.Icon "WEPICO7"
+	States
+	{
+	Spawn:
+		PLAN K 0
+		Goto Death
+	Pickup:
+	Select:
+		TNT1 A 6
+		2PLA A 0 A_JumpIfInventory("Stained",1,2)
+		WPLA A 0
+		"####" AAAAAAAAAAAAAAA 0 A_Raise
+		"####" A 1 offset(71,156)
+		"####" A 1 offset(62,127)
+		"####" A 1 offset(52,106)
+		"####" A 1 offset(44,88)
+		"####" A 1 offset(36,76)
+		"####" A 1 offset(28,64)
+		"####" A 1 offset(20,54)
+		"####" A 1 offset(14,45)
+		"####" A 1 offset(8,40)
+		"####" A 1 offset(4,36)
+		"####" A 1 offset(1,33)
+		"####" A 0 A_Jump(255,"Ready")
+		"####" A 0 A_Jump(255,"Ready")
+		goto Ready
+	Ready:
+		2PLA A 0 A_JumpIfInventory("Stained",1,2)
+		WPLA A 0
+	stay:
+		"####" A 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+	Fire:
+		"####" BCDEFG 1
+		//TNT1 F 1
+		"####" V 2 A_ReFire
+		"####" HIJ 1
+		"####" K 1 A_PlaySound("Plank/Swing", CHAN_WEAPON)
+		"####" L 1
+		"####" M 1 A_CustomPunch(12, 1, 1, "PlankPuff", 68)
+		"####" N 1 A_CustomPunch(14, 1, 1, "PlankPuff2", 68)
+		"####" O 1
+		TNT1 A 6
+		2PLA A 0 A_JumpIfInventory("Stained",1,2)
+		WPLA A 0
+		"####" PQRSTU 1
+		Goto Ready
+	Hold:
+		"####" V 1
+		"####" V 2 A_ReFire
+		"####" HIJ 1
+		"####" K 1 A_PlaySound("Plank/Swing", CHAN_WEAPON)
+		"####" L 1
+		"####" M 1 A_CustomPunch(12, 1, 1, "PlankPuff", 68)
+		"####" N 1 A_CustomPunch(14, 1, 1, "PlankPuff2", 68)
+		"####" O 1
+		TNT1 A 6
+		2PLA A 0 A_JumpIfInventory("Stained",1,2)
+		WPLA A 0
+		"####" PQRSTU 1
+		Goto Ready
+	Death:
+		POOL A 0 A_SpawnItem("DroppedPlank",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		Goto Death + 1
+	//Zoom:
+		TNT1 A 0
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+}}
+
+ACTOR DroppedPlank: Wdi_BaseDroppedWeapon
+{
+//	Scale 0.5
+	bounceSound "plank/wall"
+	Damage (3)
+	States
+	{
+	Spawn:
+		PLAN K 1 NODELAY A_SetScale(frandom(0.80,1.00),frandom(0.80,1.00))
+		TNT1 A 0 A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		PLAN K -1
+		Loop
+	Death:
+		PLAN K 35 A_playSound("plank/wall",CHAN_BODY,0.5)
+		PLAN K 1 A_SpawnItemEx("FakePlankNoScale",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		Stop
+	}
+}
+ACTOR DroppedPlankFar: Wdi_BaseDroppedWeaponFar
+{
+	//Scale 0.5
+	bounceSound "plank/wall"
+	Damage (3)
+	States
+	{
+	Spawn:
+		PLAN K 1 NODELAY A_SetScale(frandom(0.80,1.00),frandom(0.80,1.00))
+		TNT1 A 0 A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		PLAN K -1
+		Loop
+	Death:
+		PLAN K 35 A_playSound("plank/wall",CHAN_BODY,0.5)
+		PLAN K 1 A_SpawnItemEx("FakePlankNoScale",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		Stop
+	}
+}
+//==================================================================
+///////////////////     NAILED PLANK   /////////////////////////////
+//=================================================================
+Actor FakeNailedPlank : CustomInventory
+{
+	//$Category WDI Weapons
+	//$Sprite PLANN0
+	//$Title "Plank (Nailed)"
+	Radius 16
+	Height 8
+	//Scale 0.5
+	Inventory.PickupMessage "\cjFound a \c[M7]nailed wooden plank. \cjIt's quite brutal!\n\caDamage: \c[C4]34"
+	Inventory.Respawntics 10500 //5 Minutes
+	+FORCEXYBILLBOARD
+	+DontGib
+	States
+	{
+	Spawn:
+		PLAN N 1 NODELAY A_SetScale(frandom(0.80,1.00),frandom(0.80,1.00))
+		TNT1 A 0 A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		PLAN N -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("NailedPlank",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		PLAN N 1 ACS_NamedExecute("OldWeapon_ID",0,12)
+		Stop
+	NotPickup:
+		TNT1 A 0
+		PLAN N 1 ACS_NamedExecute("OldWeapon_ID",0,12)
+		Fail
+}}
+
+Actor FakeNailedPlankNoScale : FakeNailedPlank
+{
+States
+{
+Spawn:
+PLAN N -1
+Stop
+}
+}
+
+Actor NailedPlank : Wdi_BaseWeapon
+{
+	Radius 8
+	Height 32
+	//Scale 0.5
+	Tag "Nailed Wooden Plank"
+	Inventory.PickupMessage "\cjFound a \c[M7]nailed wooden plank."
+	Weapon.PreferredSkin "NailedPlankSkin"
+	Inventory.Icon "WEPICO8"
+	States
+	{
+	Spawn:
+		PLAN N 0
+		Goto Death
+	Pickup:
+	Select:
+		TNT1 A 6
+		2PLB A 0 A_JumpIfInventory("Stained",1,2)
+		WPLB A 0
+		"####" AAAAAAAAAAAAAAA 0 A_Raise
+		"####" A 1 offset(71,156)
+		"####" A 1 offset(62,127)
+		"####" A 1 offset(52,106)
+		"####" A 1 offset(44,88)
+		"####" A 1 offset(36,76)
+		"####" A 1 offset(28,64)
+		"####" A 1 offset(20,54)
+		"####" A 1 offset(14,45)
+		"####" A 1 offset(8,40)
+		"####" A 1 offset(4,36)
+		"####" A 1 offset(1,33)
+		"####" A 0 A_Jump(255,"Ready")
+		"####" A 0 A_Jump(255,"Ready")
+		goto Ready
+	Ready:
+		2PLB A 0 A_JumpIfInventory("Stained",1,2)
+		WPLB A 0
+		stay:
+		"####" A 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+	Fire:
+		2PLB A 0 A_JumpIfInventory("Stained",1,2)
+		WPLB A 0
+		"####" BCDEFG 1
+	Hold:
+		"####" V 1
+		"####" V 2 A_ReFire
+		"####" A 0 A_PlaySound("Plank/Swing", CHAN_WEAPON)
+		"####" HIJ 1
+		"####" K 1 
+		"####" L 1
+		"####" M 1 A_CustomPunch(16, 1, 1, "PlankPuff3", 68)
+		"####" N 1 A_CustomPunch(18, 1, 1, "PlankPuff2", 68)
+		"####" O 1
+		TNT1 A 6
+		2PLB A 0 A_JumpIfInventory("Stained",1,2)
+		WPLB A 0
+		"####" PQRSTU 1
+		Goto Ready
+	Death:
+		POOL A 0 A_SpawnItem("DroppedNailedPlank",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		Goto Death + 1
+	//Zoom:
+		TNT1 A 0
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+}}
+
+ACTOR DroppedNailedPlank: Wdi_BaseDroppedWeapon
+{
+	BounceSound "plank/wall"
+	Damage (3)
+	States
+	{
+	Spawn:
+		PLAN N 1 NODELAY A_SetScale(frandom(0.80,1.00),frandom(0.80,1.00))
+		PLAN N 1
+		Goto Spawn+1
+	Death:
+		PLAN N 35 A_playSound("plank/wall",CHAN_BODY,0.5)
+		PLAN N 1 A_SpawnItemEx("FakeNailedPlankNoScale",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		Stop
+	}
+}
+ACTOR DroppedNailedPlankFar: Wdi_BaseDroppedWeaponFar
+{
+	BounceSound "plank/wall"
+	Damage (3)
+	States
+	{
+	Spawn:
+		PLAN N 1 NODELAY A_SetScale(frandom(0.80,1.00),frandom(0.80,1.00))
+		PLAN N 1
+		Goto Spawn+1
+	Death:
+		PLAN N 35 A_playSound("plank/wall",CHAN_BODY,0.5)
+		PLAN N 1 A_SpawnItemEx("FakeNailedPlankNoScale",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		Stop
+	}
+}
+
+actor PlankPuff: BaseMeleePuff
+{
+  DamageType "ShovelMelee"
+  attacksound "Plank/Wall"
+  seesound "Plank/hit"
+}
+actor PlankPuff2
+{
+  DamageType "ShovelMelee"
+  +NOBLOCKMAP
+  +NOGRAVITY
+  +PUFFONACTORS
+  activesound ""
+  attacksound ""
+  seesound ""
+  states
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 1
+    stop
+  Crash:
+  	TNT1 A 0
+  	TNT1 A 1
+  	stop
+  Melee:
+  	TNT1 A 0
+  	TNT1 A 1
+  	stop
+  }
+}
+
+actor PlankPuff3: PlankPuff { Decal "MeleeCrack" attacksound "NailedPlank/Wall" seesound "NailedPlank/hit"}

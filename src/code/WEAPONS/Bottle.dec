@@ -1,0 +1,815 @@
+Actor FakeBottle : CustomInventory 25349
+{
+	//$Category WDI Weapons/Heavy Weapons
+	//$Sprite PIVOB0
+	//$Title "Bottle (Green)"
+	Radius 16 
+	Height 8
+	Inventory.PickupMessage "\cjFound an \c[R5]empty bottle. \cjBoth blunt and sharp!\n\caDamage: \c[C4]30 and 14"
+	Inventory.Respawntics 10500 //5 minutes
+	+FORCEXYBILLBOARD
+	+DonTGib
+	alpha 0.9
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		PIVO D -1
+		Stop
+	Pickup:
+		PIVO A 0
+		PIVO A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		PIVO A 0 A_PlaySound("Pickups/Weapon")
+		PIVO A 0 A_GiveInventory("BottleWeapon",1)
+		PIVO A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		PIVO A 1 ACS_NamedExecute("OldWeapon_ID",0,0)
+		Stop
+	NotPickup:
+		PIVO A 0
+		PIVO A 1 ACS_NamedExecute("OldWeapon_ID",0,0)
+		Fail
+}}
+Actor FakeBottle2 : FakeBottle
+{
+States
+{
+	Spawn:
+		PIVO G -1
+		Stop
+	Pickup:
+		PIVO A 0
+		PIVO A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		PIVO A 0 A_PlaySound("Pickups/Weapon")
+		PIVO A 0 A_GiveInventory("BottleWeapon",1)
+		PIVO A 0 A_GiveInventory("BottleBroke",1)
+		PIVO A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		PIVO A 1 ACS_NamedExecute("OldWeapon_ID",0,0)
+		Stop
+	NotPickup:
+		PIVO A 0
+		PIVO A 1 ACS_NamedExecute("OldWeapon_ID",0,0)
+		Fail
+}
+}
+
+Actor FakeBottle3
+{
++CLIENTSIDEONLY
++NOBLOCKMAP
++FORCEXYBILLBOARD
+Radius 2
+Height 4
+alpha 0.8
+	States
+	{
+	Spawn:
+		PIVO H -1
+		stop
+	}
+}
+
+Actor BottleWeapon : Wdi_BaseWeapon
+{
+	Tag "Bottle"
+	Weapon.SelectionOrder 999
+	Weapon.Kickback 20
+	Weapon.PreferredSkin "BottleSkin"
+	+NOALERT
+	+NOAUTOFIRE
+	+NOAUTOAIM
+	Inventory.Icon "WEPICO29"
+	+INVENTORY.INTERHUBSTRIP
+	States
+	{
+	Spawn:
+		PIPP A 0
+		Goto Death
+	Ready:
+		2OTL G 0 A_JumpIfInventory("BottleBroke",1,2)
+		BOTL A 0
+		stay:
+		"####" "#" 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+	Select:
+		TNT1 A 6
+		2OTL G 0 A_JumpIfInventory("BottleBroke",1,2)
+		BOTL A 0
+		"####" "###############" 0 A_Raise
+		"####" "#" 1 offset(71,156)
+		"####" "#" 1 offset(62,127)
+		"####" "#" 1 offset(52,106)
+		"####" "#" 1 offset(44,88)
+		"####" "#" 1 offset(36,76)
+		"####" "#" 1 offset(28,64)
+		"####" "#" 1 offset(20,54)
+		"####" "#" 1 offset(14,45)
+		"####" "#" 1 offset(8,40)
+		"####" "#" 1 offset(4,36)
+		"####" "#" 1 offset(1,33)
+		"####" A 0 A_Jump(255,"Ready")
+		"####" A 0 A_Jump(255,"Ready")
+		goto Ready
+	Fire:
+		2OTL G 0 A_JumpIfInventory("BottleBroke",1,"Stab")
+		BOTL BBCDEFGHI 1
+		TNT1 A 3
+	Hold:
+		TNT1 A 1 //A_GiveInventory("PlayerAttackAnim",1)
+		TNT1 A 0 A_ReFire
+		BOTL J 1 A_PlaySound("Bottle/Swing")
+		BOTL KL 1
+		NULL A 0 A_CustomPunch(30,1,0,"BottlePuff", 72)
+		BOTL M 1 A_JumpIfInventory("BottleBroke",1,"Finish1")
+		BOTL N 1 A_JumpIfInventory("BottleBroke",1,"Finish2")
+		BOTL O 1 A_JumpIfInventory("BottleBroke",1,"Finish3")
+		BOTL P 1 A_JumpIfInventory("BottleBroke",1,"Finish4")
+		TNT1 A 8
+		//TNT1 AAAAAAAAAAA 1 A_WeaponReady(WRF_NoSwitch)
+		BOTL VUTSRQQ 1
+		//BOTL TUVWXY 1
+		Goto Ready
+	Finish1:
+		BOTL W 1
+	Finish2:
+		BOTL X 1
+	Finish3:
+		BOTL Y 1
+	Finish4:
+		BOTL Z 1
+		TNT1 A 8
+		2OTL ABCDEFF 1
+		Goto Ready
+		
+	Stab:
+		2OTL HIJK 1
+		TNT1 A 1
+	HoldStab:
+		TNT1 A 1 A_GiveInventory("PlayerAttackAnim",1)
+		TNT1 A 0 A_ReFire("HoldStab")
+		2OTL L 1 A_PlaySound("Bottle/Swing")
+		2OTL M 1
+		2OTL N 1 A_CustomPunch(12,1,0,"BottleStabPuff", 82)
+		2OTL O 1
+		2OTL PPPP 1 A_JumpIfInventory("BottleDurability",5,"Broken")
+		2OTL QQRST 1
+		2OTL UV 1 A_Refire("Stab")
+		Goto Ready
+		
+	Broken:
+		2OTL W 5
+		2OTL XXYZ 1
+		2OTL "[" 1
+		TNT1 A 5
+		TNT1 A 1 A_SpawnItemEx("FakeBottle3",0,12,28,0,0,-3,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		TNT1 A 0 A_TakeInventory("BottleDurability",10)
+		TNT1 A 0 A_TakeInventory("BottleBroke",10)
+		TNT1 A 0 A_TakeInventory("Slot1Filled",10)
+		TNT1 A 0 A_TakeInventory("BottleWeapon",10)
+		Goto Ready
+		
+	Death:
+		DHSP A 0 A_SpawnItem("DroppedBottle",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		Goto Death + 1
+	//Zoom:
+		TNT1 A 0
+		TNT1 A 0 A_TakeInventory("PipeSeq",999)
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+}}
+
+ACTOR BottlePuff: BaseMeleePuff
+{ 
+   AttackSound "Bottle/hit"
+   SeeSound "Bottle/hit"
+   +NOEXTREMEDEATH
+   Decal "MeleeCrack"
+   DamageType "CueMelee"
+   States
+   {
+     Spawn: //hit a non-bleeding actor
+	TNT1 A 0 NODELAY //A_Print("spawn state")
+	EXPL AAAA 0 A_CustomMissile ("MeleeSmoke", 0, 0, random (160, -160), 2, random (0, 360))
+	TNT1 AAAAAAA 0 A_SpawnItemEx("BottleWeaponShards", random(-1, 1), 0, random(-2, 2), random(-32, 32) * 0.1, random(-32, 32) * 0.1, random(-8, 32) * 0.2, 0, SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+	TNT1 A 1 A_GiveToTarget("BottleBroke",1)
+     Stop
+  Melee: //entered when attacked via melee (like A_CustomPunch) //replaces spawn
+	TNT1 AAAAAAA 0 A_SpawnItemEx("BottleWeaponShards", random(-1, 1), 0, random(-2, 2), random(-32, 32) * 0.1, random(-32, 32) * 0.1, random(-8, 32) * 0.2, 0, SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+  	TNT1 A 1 A_GiveToTarget("BottleBroke",1)//A_Print("Melee state")
+     Stop
+  XDeath: //hit a bleeding actor
+	TNT1 AAAAAAA 0 A_SpawnItemEx("BottleWeaponShards", random(-1, 1), 0, random(-2, 2), random(-32, 32) * 0.1, random(-32, 32) * 0.1, random(-8, 32) * 0.2, 0, SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+  	TNT1 A 1 A_GiveToTarget("BottleBroke",1)//A_Print("xded state")
+     Stop
+  Crash: //hit the wall
+	TNT1 A 0 //A_Print("crash state")
+	EXPL AAAA 0 A_CustomMissile ("MeleeSmoke", 0, 0, random (160, -160), 2, random (0, 360))
+	TNT1 AAAAAAA 0 A_SpawnItemEx("BottleWeaponShards", random(-1, 1), 0, random(-2, 2), random(-32, 32) * 0.1, random(-32, 32) * 0.1, random(-8, 32) * 0.2, 0, SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+	TNT1 A 1 A_GiveToTarget("BottleBroke",1)
+    Stop
+	}
+}
+
+ACTOR BottleStabPuff: BaseMeleePuff
+{ 
+   AttackSound "Bottle/hit"
+   SeeSound "Bottle/hit"
+   +NOEXTREMEDEATH
+   //Decal "MeleeCrack"
+   States
+   {
+     Spawn: //hit a non-bleeding actor
+	TNT1 A 0 NODELAY //A_Print("spawn state")
+	EXPL AAAA 0 A_CustomMissile ("MeleeSmoke", 0, 0, random (160, -160), 2, random (0, 360))
+	TNT1 A 0 A_SpawnItemEx("BottleWeaponShards", random(-1, 1), 0, random(-2, 2), random(-32, 32) * 0.1, random(-32, 32) * 0.1, random(-8, 32) * 0.2, 0, SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+	TNT1 A 1
+     Stop
+  Melee: //entered when attacked via melee (like A_CustomPunch) //replaces spawn
+	TNT1 A 0 A_SpawnItemEx("BottleWeaponShards", random(-1, 1), 0, random(-2, 2), random(-32, 32) * 0.1, random(-32, 32) * 0.1, random(-8, 32) * 0.2, 0, SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+  	TNT1 A 1 A_GiveToTarget("BottleDurability",1)
+     Stop
+  XDeath: //hit a bleeding actor
+	TNT1 A 0
+  	TNT1 A 1 A_GiveToTarget("BottleDurability",1)
+     Stop
+  Crash: //hit the wall
+	TNT1 A 0 //A_Print("crash state")
+	EXPL AAAA 0 A_CustomMissile ("MeleeSmoke", 0, 0, random (160, -160), 2, random (0, 360))
+	TNT1 A 0 A_SpawnItemEx("BottleWeaponShards", random(-1, 1), 0, random(-2, 2), random(-32, 32) * 0.1, random(-32, 32) * 0.1, random(-8, 32) * 0.2, 0, SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+	TNT1 A 1 A_GiveToTarget("BottleDurability",1)
+    Stop
+	}
+}
+ACTOR BottleWeaponShards : NewGlassShard { translation "80:111=[162,255,181]:[0,0,0]" }
+
+
+
+
+Actor DeathDropper_BottleWeapon : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("FakeBottle", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+
+Actor Dropper_BottleWeapon : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedBottleWeapon", 0, 0, 0)
+	Stop
+ }
+}
+Actor Dropper_BottleWeaponFAR : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedBottleWeaponFar", 0, 0, 0)
+	Stop
+ }
+}
+
+ACTOR DroppedBottleWeapon: Wdi_BaseDroppedWeapon
+{
+	Radius 16
+	Scale 1.0
+	BounceSound "molly/drop"
+	BounceFactor 0.4
+	+USEBOUNCESTATE
+	alpha 0.9
+	States
+	{
+	Spawn:
+		PIVO I -1
+		Loop
+	Bounce:
+		TNT1 A 0 A_JumpIfInventory("BottleBroke",1,"Bounce2")
+		TNT1 A 0 A_GiveInventory("BottleBroke",1)
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("BottleWeaponShards", random(-2, 2), 0, random(0, 5), random(-32, 32) * 0.1, random(-32, 32) * 0.1, random(-8, 32) * 0.2, 0, SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+		TNT1 A 0 A_PlaySound("GlassBreak",CHAN_BODY)
+	Bounce2:
+		PIVO E -1
+		loop
+	Death:
+		PIVO G 35 A_playSound("molly/drop",CHAN_BODY,0.5)
+		PIVO G 1 A_SpawnItemEx("FakeBottle2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		Stop
+	}
+}
+
+ACTOR DroppedBottleWeaponFar: Wdi_BaseDroppedWeaponFar
+{
+	Radius 16
+	Scale 1.0
+	BounceSound "molly/drop"
+	BounceFactor 0.4
+	+USEBOUNCESTATE
+	alpha 0.9
+	States
+	{
+	Spawn:
+		PIVO I -1
+		Loop
+	Bounce:
+		TNT1 A 0 A_JumpIfInventory("BottleBroke",1,"Bounce2")
+		TNT1 A 0 A_GiveInventory("BottleBroke",1)
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("BottleWeaponShards", random(-2, 2), 0, random(0, 5), random(-32, 32) * 0.1, random(-32, 32) * 0.1, random(-8, 32) * 0.2, 0, SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+		TNT1 A 0 A_PlaySound("GlassBreak",CHAN_BODY)
+	Bounce2:
+		PIVO E -1
+		loop
+	Death:
+		PIVO G 35 A_playSound("molly/drop",CHAN_BODY,0.5)
+		PIVO G 1 A_SpawnItemEx("FakeBottle2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		Stop
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////
+///////////////
+
+Actor Dropper_BottleWeapon2 : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedBottleWeapon2", 0, 0, 0)
+	Stop
+ }
+}
+Actor Dropper_BottleWeapon2FAR : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedBottleWeapon2FAR", 0, 0, 0)
+	Stop
+ }
+}
+
+ACTOR DroppedBottleWeapon2: Wdi_BaseDroppedWeapon
+{
+	Radius 16
+	Scale 1.0
+	BounceSound "molly/drop"
+	BounceFactor 0.4
+	+USEBOUNCESTATE
+	alpha 0.9
+	States
+	{
+	Spawn:
+		PIVO E -1
+		Loop
+	Bounce:
+		TNT1 A 0 A_JumpIfInventory("BottleBroke",1,"Bounce2")
+		TNT1 A 0 A_GiveInventory("BottleBroke",1)
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("BottleWeaponShards", random(-2, 2), 0, random(0, 5), random(-32, 32) * 0.1, random(-32, 32) * 0.1, random(-8, 32) * 0.2, 0, SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+		TNT1 A 0 A_PlaySound("GlassBreak",CHAN_BODY)
+	Bounce2:
+		PIVO F -1
+		loop
+	Death:
+		PIVO H 35 A_playSound("molly/drop",CHAN_BODY,0.5)
+		PIVO H 1 A_SpawnItemEx("FakeBottle3",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		Stop
+	}
+}
+
+ACTOR DroppedBottleWeapon2FAR: Wdi_BaseDroppedWeaponFar
+{
+	Radius 16
+	Scale 1.0
+	BounceSound "molly/drop"
+	BounceFactor 0.4
+	+USEBOUNCESTATE
+	alpha 0.9
+	States
+	{
+	Spawn:
+		PIVO E -1
+		Loop
+	Bounce:
+		TNT1 A 0 A_JumpIfInventory("BottleBroke",1,"Bounce2")
+		TNT1 A 0 A_GiveInventory("BottleBroke",1)
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("BottleWeaponShards", random(-2, 2), 0, random(0, 5), random(-32, 32) * 0.1, random(-32, 32) * 0.1, random(-8, 32) * 0.2, 0, SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+		TNT1 A 0 A_PlaySound("GlassBreak",CHAN_BODY)
+	Bounce2:
+		PIVO F -1
+		loop
+	Death:
+		PIVO H 35 A_playSound("molly/drop",CHAN_BODY,0.5)
+		PIVO H 1 A_SpawnItemEx("FakeBottle3",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		Stop
+	}
+}
+
+
+
+
+
+
+///////////////
+///////////////
+//////////////
+///////////////
+///////////////
+//////////////
+////////////////
+
+Actor FakeBrownBottle : CustomInventory 25356
+{
+	//$Category WDI Weapons/Heavy Weapons
+	//$Sprite PIVOB0
+	//$Title "Bottle (Brown)"
+	Radius 16 
+	Height 8
+	Inventory.PickupMessage "\cjFound an \c[R5]empty bottle. \cjBoth blunt and sharp!\n\caDamage: \c[C4]30 and 14"
+	Inventory.Respawntics 10500 //5 minutes
+	+FORCEXYBILLBOARD
+	+DonTGib
+	alpha 0.9
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		PIVO J -1
+		Stop
+	Pickup:
+		PIVO A 0
+		PIVO A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		PIVO A 0 A_PlaySound("Pickups/Weapon")
+		PIVO A 0 A_GiveInventory("BottleWeapon2",1)
+		PIVO A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		PIVO J 1 ACS_NamedExecute("OldWeapon_ID",0,0)
+		Stop
+	NotPickup:
+		PIVO A 0
+		PIVO J 1 ACS_NamedExecute("OldWeapon_ID",0,0)
+		Fail
+}}
+Actor FakeBrownBottle2 : FakeBottle
+{
+States
+{
+	Spawn:
+		PIVO N -1
+		Stop
+	Pickup:
+		PIVO A 0
+		PIVO A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		PIVO A 0 A_PlaySound("Pickups/Weapon")
+		PIVO A 0 A_GiveInventory("BottleWeapon2",1)
+		PIVO A 0 A_GiveInventory("BottleBroke",1)
+		PIVO A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		PIVO N 1 ACS_NamedExecute("OldWeapon_ID",0,0)
+		Stop
+	NotPickup:
+		PIVO A 0
+		PIVO N 1 ACS_NamedExecute("OldWeapon_ID",0,0)
+		Fail
+}
+}
+
+Actor FakeBrownBottle3
+{
++CLIENTSIDEONLY
++NOBLOCKMAP
++FORCEXYBILLBOARD
+Radius 2
+Height 4
+alpha 0.8
+	States
+	{
+	Spawn:
+		PIVO O -1
+		stop
+	}
+}
+
+Actor BottleWeapon2 : Wdi_BaseWeapon
+{
+	Tag "Bottle"
+	Weapon.SelectionOrder 999
+	Weapon.Kickback 20
+	Weapon.PreferredSkin "BottleSkin"
+	+NOALERT
+	+NOAUTOFIRE
+	+NOAUTOAIM
+	Inventory.Icon "WEPICO28"
+	+INVENTORY.INTERHUBSTRIP
+	States
+	{
+	Spawn:
+		PIPP A 0
+		Goto Death
+	Ready:
+		4OTL G 0 A_JumpIfInventory("BottleBroke",1,2)
+		3OTL A 0
+		stay:
+		"####" "#" 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+	Select:
+		TNT1 A 6
+		4OTL G 0 A_JumpIfInventory("BottleBroke",1,2)
+		3OTL A 0
+		"####" "###############" 0 A_Raise
+		"####" "#" 1 offset(71,156)
+		"####" "#" 1 offset(62,127)
+		"####" "#" 1 offset(52,106)
+		"####" "#" 1 offset(44,88)
+		"####" "#" 1 offset(36,76)
+		"####" "#" 1 offset(28,64)
+		"####" "#" 1 offset(20,54)
+		"####" "#" 1 offset(14,45)
+		"####" "#" 1 offset(8,40)
+		"####" "#" 1 offset(4,36)
+		"####" "#" 1 offset(1,33)
+		"####" A 0 A_Jump(255,"Ready")
+		"####" A 0 A_Jump(255,"Ready")
+		goto Ready
+	Fire:
+		4OTL G 0 A_JumpIfInventory("BottleBroke",1,"Stab")
+		3OTL BBCDEFGHI 1
+		TNT1 A 3
+	Hold:
+		TNT1 A 1 //A_GiveInventory("PlayerAttackAnim",1)
+		TNT1 A 0 A_ReFire
+		3OTL J 1 A_PlaySound("Bottle/Swing")
+		3OTL KL 1
+		NULL A 0 A_CustomPunch(30,1,0,"BottlePuff", 72)
+		3OTL M 1 A_JumpIfInventory("BottleBroke",1,"Finish1")
+		3OTL N 1 A_JumpIfInventory("BottleBroke",1,"Finish2")
+		3OTL O 1 A_JumpIfInventory("BottleBroke",1,"Finish3")
+		3OTL P 1 A_JumpIfInventory("BottleBroke",1,"Finish4")
+		TNT1 A 8
+		//TNT1 AAAAAAAAAAA 1 A_WeaponReady(WRF_NoSwitch)
+		3OTL VUTSRQQ 1
+		//BOTL TUVWXY 1
+		Goto Ready
+	Finish1:
+		3OTL W 1
+	Finish2:
+		3OTL X 1
+	Finish3:
+		3OTL Y 1
+	Finish4:
+		3OTL Z 1
+		TNT1 A 8
+		4OTL ABCDEFF 1
+		Goto Ready
+		
+	Stab:
+		4OTL HIJK 1
+		TNT1 A 1
+	HoldStab:
+		TNT1 A 1 A_GiveInventory("PlayerAttackAnim",1)
+		TNT1 A 0 A_ReFire("HoldStab")
+		4OTL L 1 A_PlaySound("Bottle/Swing")
+		4OTL M 1
+		4OTL N 1 A_CustomPunch(12,1,0,"BottleStabPuff", 82)
+		4OTL O 1
+		4OTL PPPP 1 A_JumpIfInventory("BottleDurability",5,"Broken")
+		4OTL QQRST 1
+		4OTL UV 1 A_Refire("Stab")
+		Goto Ready
+		
+	Broken:
+		4OTL W 5
+		4OTL XXYZ 1
+		4OTL "[" 1
+		TNT1 A 5
+		TNT1 A 1 A_SpawnItemEx("FakeBrownBottle3",0,12,28,0,0,-3,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		TNT1 A 0 A_TakeInventory("BottleDurability",10)
+		TNT1 A 0 A_TakeInventory("BottleBroke",10)
+		TNT1 A 0 A_TakeInventory("Slot1Filled",10)
+		TNT1 A 0 A_TakeInventory("BottleWeapon2",10)
+		Goto Ready
+		
+	Death:
+		DHSP A 0 A_SpawnItem("DroppedBottle",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		Goto Death + 1
+	//Zoom:
+		TNT1 A 0
+		TNT1 A 0 A_TakeInventory("PipeSeq",999)
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+		NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+		NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+}}
+
+Actor DeathDropper_BrownBottleWeapon : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("FakeBottle", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+
+Actor Dropper_BrownBottleWeapon : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedBrownBottleWeapon", 0, 0, 0)
+	Stop
+ }
+}
+Actor Dropper_BrownBottleWeaponFAR : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedBrownBottleWeaponFar", 0, 0, 0)
+	Stop
+ }
+}
+
+ACTOR DroppedBrownBottleWeapon: Wdi_BaseDroppedWeapon
+{
+	Radius 16
+	Scale 1.0
+	BounceSound "molly/drop"
+	BounceFactor 0.4
+	+USEBOUNCESTATE
+	alpha 0.9
+	States
+	{
+	Spawn:
+		PIVO K -1
+		Loop
+	Bounce:
+		TNT1 A 0 A_JumpIfInventory("BottleBroke",1,"Bounce2")
+		TNT1 A 0 A_GiveInventory("BottleBroke",1)
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("BottleWeaponShards", random(-2, 2), 0, random(0, 5), random(-32, 32) * 0.1, random(-32, 32) * 0.1, random(-8, 32) * 0.2, 0, SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+		TNT1 A 0 A_PlaySound("GlassBreak",CHAN_BODY)
+	Bounce2:
+		PIVO L -1
+		loop
+	Death:
+		PIVO N 35 A_playSound("molly/drop",CHAN_BODY,0.5)
+		PIVO N 1 A_SpawnItemEx("FakeBrownBottle2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		Stop
+	}
+}
+
+ACTOR DroppedBrownBottleWeaponFar: Wdi_BaseDroppedWeaponFar
+{
+	Radius 16
+	Scale 1.0
+	BounceSound "molly/drop"
+	BounceFactor 0.4
+	+USEBOUNCESTATE
+	alpha 0.9
+	States
+	{
+	Spawn:
+		PIVO K -1
+		Loop
+	Bounce:
+		TNT1 A 0 A_JumpIfInventory("BottleBroke",1,"Bounce2")
+		TNT1 A 0 A_GiveInventory("BottleBroke",1)
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("BottleWeaponShards", random(-2, 2), 0, random(0, 5), random(-32, 32) * 0.1, random(-32, 32) * 0.1, random(-8, 32) * 0.2, 0, SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+		TNT1 A 0 A_PlaySound("GlassBreak",CHAN_BODY)
+	Bounce2:
+		PIVO L -1
+		loop
+	Death:
+		PIVO N 35 A_playSound("molly/drop",CHAN_BODY,0.5)
+		PIVO N 1 A_SpawnItemEx("FakeBrownBottle2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		Stop
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////
+///////////////
+
+Actor Dropper_BrownBottleWeapon2 : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedBrownBottleWeapon2", 0, 0, 0)
+	Stop
+ }
+}
+Actor Dropper_BrownBottleWeapon2FAR : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedBrownBottleWeapon2FAR", 0, 0, 0)
+	Stop
+ }
+}
+
+ACTOR DroppedBrownBottleWeapon2: Wdi_BaseDroppedWeapon
+{
+	Radius 16
+	Scale 1.0
+	BounceSound "molly/drop"
+	BounceFactor 0.4
+	+USEBOUNCESTATE
+	alpha 0.9
+	States
+	{
+	Spawn:
+		PIVO L -1
+		Loop
+	Bounce:
+		TNT1 A 0 A_JumpIfInventory("BottleBroke",1,"Bounce2")
+		TNT1 A 0 A_GiveInventory("BottleBroke",1)
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("BottleWeaponShards", random(-2, 2), 0, random(0, 5), random(-32, 32) * 0.1, random(-32, 32) * 0.1, random(-8, 32) * 0.2, 0, SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+		TNT1 A 0 A_PlaySound("GlassBreak",CHAN_BODY)
+	Bounce2:
+		PIVO M -1
+		loop
+	Death:
+		PIVO O 35 A_playSound("molly/drop",CHAN_BODY,0.5)
+		PIVO O 1 A_SpawnItemEx("FakeBrownBottle3",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		Stop
+	}
+}
+
+ACTOR DroppedBrownBottleWeapon2FAR: Wdi_BaseDroppedWeaponFar
+{
+	Radius 16
+	Scale 1.0
+	BounceSound "molly/drop"
+	BounceFactor 0.4
+	+USEBOUNCESTATE
+	alpha 0.9
+	States
+	{
+	Spawn:
+		PIVO L -1
+		Loop
+	Bounce:
+		TNT1 A 0 A_JumpIfInventory("BottleBroke",1,"Bounce2")
+		TNT1 A 0 A_GiveInventory("BottleBroke",1)
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx("BottleWeaponShards", random(-2, 2), 0, random(0, 5), random(-32, 32) * 0.1, random(-32, 32) * 0.1, random(-8, 32) * 0.2, 0, SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+		TNT1 A 0 A_PlaySound("GlassBreak",CHAN_BODY)
+	Bounce2:
+		PIVO M -1
+		loop
+	Death:
+		PIVO O 35 A_playSound("molly/drop",CHAN_BODY,0.5)
+		PIVO O 1 A_SpawnItemEx("FakeBrownBottle3",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		Stop
+	}
+}

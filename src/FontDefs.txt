@@ -1,0 +1,11 @@
+"KAMINSKYBIG_THICK"
+{
+	SpaceWidth 9
+	Template BIGFN%03d
+}
+
+"KAMINSKYBIGSMALL_THICK"
+{
+	SpaceWidth 6
+	Template SMLFN%03d
+}

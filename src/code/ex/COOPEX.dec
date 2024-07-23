@@ -1,0 +1,687 @@
+Actor MarsisPlaya : Innocent
+{
+player.displayname "Voice: Thick"
+Player.SoundClass "TMC"
++NOSKIN
++NOBLOCKMONST
+-ISMONSTER
+	DamageFactor "FlareEffect", 0.0
+states
+	{
+Death.Backstab:
+	TNT1 A 0
+	TNT1 A 0 A_FadeOut(0.99)
+	TNT1 A 0 Acs_ExecuteAlways(407, 0, 0, 0)
+	TNT1 A 0 A_GiveInventory ("GotHurt", 1)
+	TNT1 A 0 A_PlaySound("P2Xdeath", CHAN_VOICE, 1.0, 0)
+        TNT1 A 0 A_SpawnItemEx ("Fakebody", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERTRANSLATION|SXF_NOCHECKPOSITION, 0)
+	TNT1 A 0 A_GiveInventory ("BackstabHero", 1)
+  	TNT1 A 0 A_JumpIfInventory ("MurderMarker", 1, "MurderDeath")
+	TNT1 A 0 A_JumpIfInventory ("TKToken", 1, "TKDeath")
+    	TNT1 A 0 A_GiveToTarget ("InoKill", 1)
+	TNT1 A 0 A_GiveToTarget ("KillMarker", 1)
+	TNT1 A 1 A_GiveToTarget ("GetSuperSane", 1)
+        TNT1 A 10 
+    	TNT1 A 1
+    	Wait
+	}
+}
+ACTOR Coop_ZombieMarine 17461
+{ 
+	//$Category COOPEX
+    spawnid 10
+    Health 262
+  Radius 1
+  Height 56
+  Meleedamage 1
+  Mass 100
+  Speed 5
+  Scale 0.9
+  PainChance 0
+  DamageFactor "FlareEffect", 0.0
+    MONSTER 
+    +FLOORCLIP
+    Obituary "%o was killed by A Zombie Marine!"
+    SeeSound "grunt/sight"
+    AttackSound "zombie/rifle"
+    PainSound "grunt/pain"
+    DeathSound "grunt/death"
+    ActiveSound "grunt/active"
+    DropItem Clip
+    DropItem Clip
+    States
+    {
+    Spawn:
+        UDM2 AB 10 A_Look
+        Loop
+    See:
+        UDM2 AABBCCDD 4 A_Chase
+        Loop
+    Melee:
+        UDM2 E 8 A_FaceTarget
+        UDM2 F 8 A_MeleeAttack
+        goto See
+    Pain:
+        UDM2 G 5
+        UDM2 G 3 A_Pain
+        Goto See
+    Death:
+        UDM2 H 5
+        UDM2 I 5 A_Scream
+        UDM2 J 5 
+        UDM2 KLM 5
+        UDM2 N -1
+        Stop
+    XDeath:
+        UDM2 O 5
+        UDM2 P 5 A_XScream
+        UDM2 Q 5 
+        UDM2 RSTU 5
+        UDM2 V -1
+        Stop
+    Raise:
+        UDM2 NMLKJIH 5
+        Goto See
+    }
+} 
+
+ACTOR SSGZombie 17462
+{
+	//$Category COOPEX
+	Health 120
+	Radius 20
+	Height 56
+	Scale 0.9
+	Speed 9
+	PainChance 170
+	DamageFactor "FlareEffect", 0.0
+	MONSTER 
+	Translation "112:127=16:47"
+	+FloorClip
+	SEESOUND "SSGUNER/sight"
+	ATTACKSOUND "SSGUNER/SSG"
+	PAINSOUND "grunt/pain"
+	DEATHSOUND "SSGUNER/death"
+	ACTIVESOUND "SSGUNER/idle"
+	OBITUARY "%o was blown open by a Super Shotgunner!"
+	DropItem "SuperShotgun"
+	Decal Bulletchip
+	states
+	{
+	Spawn:
+		GPOS A 10 A_Look
+		Loop
+	See:
+		GPOS AABBCCDD 4 A_Chase
+		Loop
+	Missile:
+		GPOS E 10 BRIGHT A_FaceTarget
+		GPOS F 8 BRIGHT A_CustomBulletAttack(11.2, 7.1, 20, 3, "Bulletpuff")
+		GPOS E 8 BRIGHT
+		Goto See
+	Pain:
+		GPOS G 3
+		GPOS G 3 A_Pain
+		Goto See
+	Death:
+		GPOS H 7
+		GPOS I 7 A_Scream
+		GPOS J 7 A_NoBlocking
+		GPOS K 7
+		GPOS L 7
+		GPOS M 7
+		GPOS N -1
+		Stop
+	XDeath:
+		GPOS O 5
+		GPOS P 5 A_XScream
+		GPOS Q 5 A_NoBlocking
+		GPOS RS 5
+		GPOS T -1
+		Stop
+	Raise:
+		GPOS NMLKJIH 5
+		Goto See
+	}
+}
+
+
+ACTOR COOP_Zombie_with_axe 17463
+{
+	//$Category COOPEX
+  Game Doom
+  obituary "%o was axe-murdered by a zombie scientist."
+  health 202
+  mass 90
+  speed 8
+  Radius 20
+  Height 52
+  painchance 200
+  seesound "grunt/sight"
+  painsound "grunt/pain"
+  deathsound "grunt/death"
+  activesound "grunt/active"
+  MONSTER
+  +FLOORCLIP
+  DamageFactor "FlareEffect", 0.0
+  States
+  {
+   Spawn:
+    SCZA A 1 A_LookEx(LOF_NOSOUNDCHECK, 0,640, 640, 0, "See")
+    loop
+  See:
+    SCZA AABBCCDD 4 A_Chase
+    loop
+  Melee:
+    SCZA E 8 A_FaceTarget
+    SCZA F 16 A_CustomMeleeAttack (random (2, 6) *5, "KnifeHit", "skeleton/swing")
+    SCZA E 4
+    goto See
+  Pain:
+    SCZA G 3
+    SCZA G 3 A_Pain
+    goto See
+  Death:
+    SCZA H 5
+    SCZA I 5 A_Scream
+    SCZA J 5 A_NoBlocking
+    SCZA K 5
+    SCZA L 5
+    SCZA M 5
+    SCZA N -1
+    stop
+  XDeath:
+    SCZA O 5
+    SCZA P 5 A_XScream
+    SCZA Q 5 A_NoBlocking
+    SCZA RSTUV 5
+    SCZA W -1
+    stop
+  Raise:
+    SCZA MLKJIH 5
+    goto See
+  }
+}
+
+ACTOR COOPFemaleZombie 17464
+{
+	//$Category COOPEX
+  health 150
+  mass 90
+  speed 13
+  Radius 19
+  Height 72
+  painchance 200
+  seesound "fem/sight"
+  painsound "fem/pain"
+  deathsound "fem/death"
+  activesound "fem/active"
+  MONSTER
+  +FLOORCLIP
+  DamageFactor "FlareEffect", 0.0
+  States
+  {
+   Spawn:
+   FSZK A 1 A_LookEx(LOF_NOSOUNDCHECK, 0, 448, 448, 0, "See")
+    //FSZK AB 10 A_Look
+    loop
+  See:
+    FSZK AABBCCDD 4 A_Chase
+    loop
+  Melee:
+    FSZK E 4 A_FaceTarget
+    FSZK F 8 A_CustomMeleeAttack (random (1, 5) *5, "KnifeHit", "skeleton/swing")
+    FSZK E 4
+    goto See
+  Pain:
+    FSZK G 3
+    FSZK G 3 A_Pain
+    goto See
+  Death:
+    FSZK H 5
+    FSZK I 5 A_Scream
+    FSZK J 5 A_NoBlocking
+    FSZK K 5
+    FSZK L 5
+    FSZK M 5
+    FSZK N -1
+    stop
+  XDeath:
+    FSZK O 5
+    FSZK P 5 A_XScream
+    FSZK Q 5 A_NoBlocking
+    FSZK RSTUV 5
+    FSZK W -1
+    stop
+  Raise:
+    FSZK MLKJIH 5
+    goto See
+  }
+}
+
+ACTOR AdvancedHelmet : Key 17465
+{
+	//$Category COOPEX
+  Radius 6
+  Height 10
+ inventory.pickupmessage "Got Helmet B1"
+  inventory.icon "ARTISAF"
+  +INVENTORY.UNDROPPABLE
+  States
+  {
+  Spawn:
+    DHLM A -1
+    Stop
+	 // Pickup:
+    //TNT1 A 0 ACS_Execute(353, 0)
+    //stop
+  }
+}
+
+actor CoopTrite 17466 ////////////////////from Shadow Mavericks
+{
+	//$Category COOPEX
+  Monster
+  Radius 12
+  Height 16
+  Health 10
+  SpawnID 251
+  Scale 0.4
+  Damage 2
+  PoisonDamage 3
+  Speed 10
+  Painchance 255
+  hitobituary "Someone didn't pay attention."
+  obituary "'"
+  Gravity 0.7
+  DamageType "Trite"
+  DamageFactor "Trite", 0
+  Bloodcolor "00 FF 00"
+  Seesound "tritesee"
+  Deathsound "tritedeath"
+  PainSound "tritepain"
+  MinMissileChance 116
+  MaxTargetRange 128
+  +DROPOFF
+  +LOOKALLAROUND
+      DamageFactor "FlareEffect", 0.0
+  States
+  {
+   Spawn:
+   TRIT A 1 A_LookEx(LOF_NOSOUNDCHECK, 0, 640, 640, 0, "See")
+loop
+  See:
+  TRIT ABCD 3 A_Chase
+  TRIT A 0 A_PlaySound("TriteStep")
+  loop
+  Missile:
+  TRIT E 8 A_FaceTarget
+  TRIT E 0 A_PlaySound("triteattack")
+  TRIT E 0 A_Recoil(-18)
+  TRIT E 0 ThrustThingZ(0, 4, 0, 0)
+  TRIT FFFFFF 3 A_CustomBulletAttack (4, 1, 1, 1, "TriteHit", 32)
+  TRIT E 4
+  goto See
+  Pain:
+  TRIT E 2
+  TRIT F 2 A_Pain
+  goto See
+  Death:
+  TRIT G 0 A_Scream
+  TRIT G 0 A_Fall
+  TRIT GHIJ 4
+  TRIT J -1
+  stop
+
+  Disabled:
+   TNT1 A 0
+   TNT1 A 0 A_JumpIfHealthLower(1, "Death")
+   TNT1 A 1 A_ChangeFlag("SOLID", 0)
+   TNT1 A 1 A_ChangeFlag("SHOOTABLE", 0)
+   TNT1 A 1 A_SetTranslucent(0.0, 0)
+   TNT1 A -1
+   loop
+
+  Enabled:
+   TNT1 A 0
+   TNT1 A 0 A_JumpIfHealthLower(1, "Death")
+   TNT1 A 1 A_ChangeFlag("SOLID", 1)
+   TNT1 A 1 A_ChangeFlag("SHOOTABLE", 1)
+   TNT1 A 1 A_SetTranslucent(1.0, 0)
+   goto Spawn
+  }
+}
+
+
+actor SND_CPS_HOTL 17467
+{
+	//$Category COOPEX
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("CPS_HOTL", CHAN_BODY, 1, 1)
+        stop
+    }
+}
+
+actor NOT_A_MONSTER_ANYMORE: CustomInventory
+{
+	//$Category Marsis_map_ONLY
+    +AUTOACTIVATE
+    States
+    {
+      Use:
+        TNT1 A 1 A_ChangeFlag("ISMONSTER", 0)
+		TNT1 A 1 A_ChangeFlag("NOBLOCKMONST", 0)
+        loop
+    }
+}
+
+ACTOR TVNOIZELight
+{
+	//$Category Marsis_map_ONLY
+    Health 0x7FFFFFFF
+    Radius 10
+    Height 34
+	+CLIENTSIDEONLY
+    -SOLID
+    -SHOOTABLE
+    States
+    {
+        Spawn:
+            TNT1 A 3
+			TNT1 B 5
+        loop
+    }
+}
+
+Actor DoorGreenLight 17468
+{
+	//$Category Marsis_map_ONLY
+	-SOLID
+	+NOGRAVITY
++GHOST
+-SHOOTABLE
+States
+ {
+Spawn:
+TNT1 A 4
+loop
+}}
+
+actor CoopGonarch  ////////////////////from Shadow Mavericks
+{
+	//$Category COOPEX
+  Monster
+  Radius 32
+  Height 64
+  Health 100
+  SpawnID 251
+  Scale 1.4
+  Damage 5
+  PoisonDamage 3
+  Speed 15
+  Painchance 255
+  hitobituary "Someone didn't pay attention."
+  obituary "'"
+  Gravity 0.7
+  DamageType "Trite"
+  DamageFactor "Trite", 0
+  Bloodcolor "00 FF 00"
+  Seesound "tritesee"
+  Deathsound "tritedeath"
+  PainSound "tritepain"
+  MinMissileChance 116
+  MaxTargetRange 128
+  +DROPOFF
+  +LOOKALLAROUND
+      DamageFactor "FlareEffect", 0.0
+  States
+  {
+   Spawn:
+   TRIT A 1 A_LookEx(LOF_NOSOUNDCHECK, 0, 640, 640, 0, "See")
+loop
+  See:
+  TRIT ABCD 3 A_Chase
+  TRIT A 0 A_PlaySound("TriteStep")
+  loop
+  Melee:
+    TRIT A 4 A_FaceTarget
+    TRIT A 8 A_CustomMeleeAttack (random (1, 24) *5, "triteattack")
+    TRIT A 4
+    goto See
+  Pain:
+  TRIT E 2
+  TRIT F 2 A_Pain
+  goto See
+  Death:
+  TRIT G 0 A_Scream
+  TRIT G 0 A_Fall
+  TRIT GHIJ 4
+  TNT1 A 0 ACS_Execute(193, 0)
+  TRIT J -1
+  stop
+}}
+
+actor CoopTriteRespawnable 17469////////////////////from Shadow Mavericks
+{
+	//$Category COOPEX
+  Monster
+  Radius 12
+  Height 16
+  Health 10
+  SpawnID 251
+  Scale 0.4
+  Damage 2
+  PoisonDamage 3
+  Speed 10
+  Painchance 255
+  hitobituary "Someone didn't pay attention."
+  obituary "'"
+  Gravity 0.7
+  DamageType "Trite"
+  DamageFactor "Trite", 0
+  Bloodcolor "00 FF 00"
+  Seesound "tritesee"
+  Deathsound "tritedeath"
+  PainSound "tritepain"
+  MinMissileChance 116
+  MaxTargetRange 128
+  +DROPOFF
+  +LOOKALLAROUND
+      DamageFactor "FlareEffect", 0.0
+  States
+  {
+   Spawn:
+   TRIT A 1 A_LookEx(LOF_NOSOUNDCHECK, 0, 640, 640, 0, "See")
+loop
+  See:
+  TRIT ABCD 3 A_Chase
+  TRIT A 0 A_PlaySound("TriteStep")
+  loop
+  Missile:
+  TRIT E 8 A_FaceTarget
+  TRIT E 0 A_PlaySound("triteattack")
+  TRIT E 0 A_Recoil(-18)
+  TRIT E 0 ThrustThingZ(0, 4, 0, 0)
+  TRIT FFFFFF 3 A_CustomBulletAttack (4, 1, 1, 1, "TriteHit", 32)
+  TRIT E 4
+  goto See
+  Pain:
+  TRIT E 2
+  TRIT F 2 A_Pain
+  goto See
+  Death:
+  TRIT G 0 A_Scream
+  TRIT G 0 A_Fall
+  TRIT GHIJ 4
+  TRIT J -1
+  TNT1 A 1 ACS_Execute(357, 0)
+  stop
+  }
+  }
+  
+  Actor SavePointLight 17470
+{
+	//$Category Marsis_map_ONLY
+	-SOLID
+	+NOGRAVITY
++GHOST
+-SHOOTABLE
+States
+ {
+Spawn:
+TNT1 A 4
+loop
+}}
+
+Actor Slenderman2: Slenderman
+{
+Scale 0.25
+Cameraheight 40
+Height 70
+Radius 15
+Speed 10
+Damage 1
+Health 9999
+MONSTER
++NOBLOCKMONST
++DROPOFF
++LOOKALLAROUND
++QUICKTORETALIATE
++DONTSPLASH
++NOCLIP
+Obituary "%o was kidnapped"
+painchance 0 
+mass 9999999999
+}
+
+Actor Slenderman3: Slenderman
+{
+Scale 0.25
+Cameraheight 40
+Height 70
+Radius 15
+Speed 11
+Damage 1
+Health 9999
+MONSTER
++NOBLOCKMONST
++DROPOFF
++LOOKALLAROUND
++QUICKTORETALIATE
++DONTSPLASH
++NOCLIP
+Obituary "%o was kidnapped"
+painchance 0 
+mass 9999999999
+}
+
+Actor Slenderman4: Slenderman
+{
+Scale 0.25
+Cameraheight 40
+Height 70
+Radius 15
+Speed 12
+Damage 1
+Health 9999
+MONSTER
++NOBLOCKMONST
++DROPOFF
++LOOKALLAROUND
++QUICKTORETALIATE
++DONTSPLASH
++NOCLIP
+Obituary "%o was kidnapped"
+painchance 0 
+mass 9999999999
+}
+
+Actor Slenderman5: Slenderman
+{
+Scale 0.25
+Cameraheight 40
+Height 70
+Radius 15
+Speed 13
+Damage 1
+Health 9999
+MONSTER
++NOBLOCKMONST
++DROPOFF
++LOOKALLAROUND
++QUICKTORETALIATE
++DONTSPLASH
++NOCLIP
+Obituary "%o was kidnapped"
+painchance 0 
+mass 9999999999
+}
+
+Actor Slenderman6: Slenderman
+{
+Scale 0.25
+Cameraheight 40
+Height 70
+Radius 15
+Speed 14
+Damage 1
+Health 9999
+MONSTER
++NOBLOCKMONST
++DROPOFF
++LOOKALLAROUND
++QUICKTORETALIATE
++DONTSPLASH
++NOCLIP
+Obituary "%o was kidnapped"
+painchance 0 
+mass 9999999999
+}
+
+Actor Slenderman7: Slenderman
+{
+Scale 0.25
+Cameraheight 40
+Height 70
+Radius 15
+Speed 15
+Damage 1
+Health 9999
+MONSTER
++NOBLOCKMONST
++DROPOFF
++LOOKALLAROUND
++QUICKTORETALIATE
++DONTSPLASH
++NOCLIP
+Obituary "%o was kidnapped"
+painchance 0 
+mass 9999999999
+}
+
+Actor Slenderman8: Slenderman
+{
+Scale 0.25
+Cameraheight 40
+Height 70
+Radius 15
+Speed 16
+Damage 1
+Health 9999
+MONSTER
++NOBLOCKMONST
++DROPOFF
++LOOKALLAROUND
++QUICKTORETALIATE
++DONTSPLASH
++NOCLIP
+Obituary "%o was kidnapped"
+painchance 0 
+mass 9999999999
+}

@@ -1,0 +1,53 @@
+texture INVARRO1
+	pic INVARRO1 tics 12
+	pic INVARRO2 tics 12
+
+texture STUNICO2
+    pic STUNIC11 tics 4
+    pic STUNIC22 tics 4
+    pic STUNIC33 tics 4
+    pic STUNIC44 tics 12
+
+
+warp texture PSBGD0
+warp texture PSBGE0
+warp texture PSBGF0
+warp texture PSBGG0
+warp texture PSBGH0
+
+//enviroment smog effects
+warp texture SMOGB0
+warp texture SMOGC0
+
+//warp texture XSMKA0 
+
+warp2 texture AZWATER1
+warp2 texture TS1WAT2
+warp2 texture DIRWAT3
+warp2 texture WFWATER1
+warp2 texture WBLOOD1
+warp2 texture HYNUKE
+warp2 texture GRANUKE1
+warp texture ASLIM01
+
+warp2 texture damda0
+warp2 texture damdb0
+warp2 texture damdc0
+warp2 texture damdd0
+
+
+texture BCLOCK04
+	allowdecals //35 tics
+	pic BCLOCK04 tics 4
+	
+	pic BCLOCK04 tics 8
+	pic BCLOCK05 tics 5
+	pic BCLOCK07 tics 8
+	pic BCLOCK08 tics 14
+	
+	pic BCLOCK08 tics 8
+	pic BCLOCK07 tics 5
+	pic BCLOCK05 tics 8
+	pic BCLOCK04 tics 10
+	
+texture VENT_A01 range VENT_A04 tics 1

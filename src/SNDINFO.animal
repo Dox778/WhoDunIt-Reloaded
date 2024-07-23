@@ -1,0 +1,68 @@
+SquirrelSpawn/Sight SQUISPAW
+SquirrelHit/Pain SQUIPAIN
+SquirrelAttack/Attack SQUIATTA
+SquirrelDead/Dead SQUIDEAD
+
+$random Purrs { PURR1 PURR2 PURR3 }
+PURR1 PURR1
+PURR2 PURR2
+PURR3 PURR3
+
+$random Squeaks { SQUEAK1 SQUEAK2 SQUEAK3 }
+SQUEAK1 SQUEAK1
+SQUEAK2 SQUEAK2
+SQUEAK3 SQUEAK3
+
+RabbitChew CHEWPURR
+
+RabDeath SQUEAK4
+
+
+$random Psight { snort1 snort2 snort3 snort4 snort5 snort6 }
+snort1		snort1
+snort2		snort2
+snort3		snort3
+snort4		snort4
+snort5		snort5
+
+PigHurt/Hurt SQUEEL1
+PigDeath/Death SQUEEL2
+
+CRWFLP CRWFLP
+$rolloff CRWFLP 120 720
+
+CRWCAW1 CRWCAW1
+$Limit CRWCAW1	0
+
+CRWCAW2 CRWCAW2
+$Limit CRWCAW2	0
+
+CRWCAW3 CRWCAW3
+$Limit CRWCAW3 0
+
+$rolloff CRWCAW1 300 1800
+$rolloff CRWCAW1 300 1800
+$rolloff CRWCAW1 300 1800
+
+$random sight { cluck1 cluck2 cluck3 cluck4 cluck5 cluck6 }
+cluck1		cluck1
+cluck2		cluck2
+cluck3		cluck3
+cluck4		cluck4
+cluck5		cluck5
+cluck6		cluck6
+
+ChickenHurt/Hurt cluck7
+ChickenDeath/Death cluck8
+
+
+$volume rat/1 0.6
+$volume rat/2 0.6
+$volume rat/3 0.6
+$volume rat/die 0.6
+
+$random rat/squeak {rat/1 rat/2 rat/3}
+rat/1 RAT1
+rat/2 RAT2
+rat/3 RAT3
+rat/die RATDIE

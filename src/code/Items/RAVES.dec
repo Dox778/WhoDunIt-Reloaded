@@ -1,0 +1,2468 @@
+///////////////////////===============RAVE STUFFF============////////////////////////////////////////////////////////////////////////////////
+Actor TechnoKit : CustomInventory
+{ 
+	Health 50
+	DamageType Heal
+	Inventory.MaxAmount 1
+	Inventory.Icon "ARTIRAVE"
+	Inventory.Respawntics 21000 //10 minutes
+	Inventory.PickupMessage "\cjPicked up a \c[C0]RAVE \c[C9]IN \c[M5]A \c[N6]BOX!\n\c[A2]Heals: \c[A6]Up to 90"
+	+FLOORCLIP
+	+INVENTORY.INVBAR
+	-INVENTORY.INTERHUBSTRIP
+	Inventory.PickupSound "Pickup/Health"
+	+FORCEXYBILLBOARD
+	+CANNOTPUSH
+	States
+	{
+	Spawn:
+		DKIT A -1
+	Use:
+		TNT1 A 0 A_SpawnItemEx("DroppedTechnoKit", 32, 0, 42, 0, 0, 0, 0, 0, 0)
+		Stop
+}}
+
+Actor TechnoKitSpawner : CustomInventory 32767
+{
+	//$Category WDI Easter Eggs
+	//$Sprite DKITA0
+	//$Title "TECHNO KIT (RAVE IN A BOX!)"
+	Health 50
+	DamageType Heal
+	Inventory.MaxAmount 1
+	Inventory.Icon "ARTIRAVE"
+	Inventory.Respawntics 21000 //10 minutes
+	Inventory.PickupMessage "\cjPicked up a \c[C0]RAVE \c[C9]IN \c[M5]A \c[N6]BOX!\n\c[A2]Heals: \c[A6]Up to 90"
+	Inventory.PickupSound "Pickup/Health"
+	+FLOORCLIP
+	+INVENTORY.INVBAR
+	-INVENTORY.INTERHUBSTRIP
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		DKIT A -1
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(180,2)
+		TNT1 A 1 A_JumpIfInventory("MurderKnife",1,"Francis")
+		TNT1 A 0 A_Jump(30,"Eclipsinakit","TigerKit","BlueTechnoKit","Zkit")
+	TechnoKit:
+		TNT1 A 0 A_GiveInventory("TechnoKit",1)
+		Stop
+	Tigerkit:
+		TNT1 A 0 A_GiveInventory("Tigerkit",1)
+		Stop
+	Eclipsinakit:
+		TNT1 A 0 A_GiveInventory("Eclipsinakit",1)
+		Stop
+	BlueTechnoKit:
+		TNT1 A 0 A_GiveInventory("BlueTechnoKit",1)
+		Stop
+	Zkit:
+		TNT1 A 0 A_GiveInventory("ZKit",1)
+		Stop
+		///////////////////////////////////////////
+	Francis://murd special rave
+		TNT1 A 0 A_GiveInventory("FrancisKit",1)
+		Stop
+}}
+
+Actor BlueTechnoKit : CustomInventory 30014
+{
+  //$Category WDI Easter Eggs
+  //$Sprite BKITA0
+  //$Title "BLUE TECHNO KIT (ANOTHER RAVE IN A BOX!)"
+  Health 50
+  DamageType Heal
+  +FLOORCLIP
+  +INVENTORY.INVBAR 
+  -INVENTORY.INTERHUBSTRIP
+  Inventory.MaxAmount 1
+  Inventory.Icon "BLUERAVE"
+  Inventory.RespawnTics 21000 //10 minutes
+  Inventory.PickupMessage "\c[M5]SUPER \c[C0]RAVE \c[C9]IN \c[M5]A \c[N6]BOX!"
+  +FORCEXYBILLBOARD
+  +CANNOTPUSH
+	States
+	{
+	Spawn:
+	 BKIT A -1
+
+	Use:
+	 TNT1 A 0 A_SpawnItemEx("DroppedBlueTechnoKit", 32, 0, 42, 0, 0, 0, 0, 0, 0)
+	 stop
+
+	}
+}
+
+////////////////////////////////OLD SHITTY RAVES/////////////////////////////////////////
+Actor DroppedTechnoKit2 : DroppedTechnoKit Replaces DroppedTechnoKit
+{ 
+	Gravity 0.8
+	+DONTSPLASH
+	-SHOOTABLE
+ // ReactionTime 105
+	-NOGRAVITY
+	Mass 5000
+	ReactionTime 107
+	States
+	{
+	Spawn:
+		DKIT Z 35
+		MEDI A 0 A_PlaySound("Items/BigKitWarn")
+		DKIT FFGHII 1
+		DKIT Z 3
+		DKIT JJKLMM 1
+		DKIT Z 20
+		MEDI A 0 A_PlaySound("Items/BigKitWarn")
+		DKIT NNOPQQ 1
+		DKIT Z 3
+		DKIT RRSTUU 1
+		DKIT Z 20
+		MEDI A 0 A_PlaySound("Items/BigKitWarn")
+		DKIT VVWXYY 1
+		DKIT Z 3
+		DKIT FFGHII 1
+		DKIT Z 20
+		DKIT Z 15
+		MEDI A 0 A_PlaySound("Items/BigKitActivate")
+		DKIT FGFGFGFGJKJKJKJKNONONONORSRSRSRSWVWV 1
+		MEDI A 0 A_PlaySound("Items/BigKitOpen")
+		TNT1 A 0 ThrustThingZ(0,14,0,0)
+		DKIT BCD 4
+		//DKIT E 15
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitRed", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitRed", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		DKIT E 5
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitOrange", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitOrange", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		DKIT E 5
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitYellow", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitYellow", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		DKIT E 5
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitGreen", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitGreen", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		DKIT E 5
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitBlue", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitBlue", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		DKIT E 5
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitPurple", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitPurple", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+	//	DKIT E 4
+		DKIT E 0 A_Jump(80,"HALLORV1","HALLORV2","GabeNewell","EpicMario")//,"HFLAG5")
+		DKIT E 1 A_SpawnItemEx("ILoveYouMisterCat", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+		DKIT E 1 A_SpawnItemEx("ILoveYouMisterCat", 0, 1, 31, 0, 0, 0, 0, 0, 0)
+		DKIT E 1 A_SpawnItemEx("ILoveYouMisterCat", 0, 2, 30, 0, 0, 0, 0, 0, 0)
+		DKIT E 0 A_SpawnItemEx("TechnoMusic", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+		Goto HealItUp
+	GabeNewell:
+		DKIT E 1 A_SpawnItemEx("Gaben", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+		DKIT E 0 A_SpawnItemEx("HumanTouch", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+		Goto HealItUp
+	HALLORV1:
+		DKIT E 0 A_SpawnItemEx("Skull1Seq")
+		DKIT E 1 A_SpawnItemEx("HSKULL1", 0,0 , 128, 0, 0, 0, 0, 0, 0)
+		DKIT E 0 A_SpawnItemEx("HumanTouch4", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+		Goto HealItUp
+	HALLORV2:
+		DKIT E 0 A_SpawnItemEx("Skull2Seq")
+		DKIT E 1 A_SpawnItemEx("HSKULL2", 0, 0, 128, 0, 0, 0, 0, 0, 0)
+		DKIT E 0 A_SpawnItemEx("HumanTouch2", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+		Goto HealItUp
+	EpicMario:
+		DKIT E 0 A_SpawnItemEx("Skull2Seq")
+		DKIT E 1 A_SpawnItemEx("EpicMarioDancing", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+		DKIT E 0 A_SpawnItemEx("EpicMarioMusic", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+		Goto HealItUp
+	HealItUp:
+		DKIT E 0 A_SpawnItemEx("RedLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		TNT1 A 0 A_CountDown
+		DKIT EEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("GreenLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		TNT1 A 0 A_CountDown
+		DKIT EEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		MEDI E 0 ACS_ExecuteAlways(752,0,0,0,0)
+		DKIT E 0 A_SpawnItemEx("BlueLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		TNT1 A 0 A_CountDown
+		DKIT EEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("YellowLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		TNT1 A 0 A_CountDown
+		DKIT EEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("PurpleLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		TNT1 A 0 A_CountDown
+		DKIT EEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("RedLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		TNT1 A 0 A_CountDown
+		DKIT EEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		Loop
+	Death:
+		DKIT E 30 A_StopSound(CHAN_VOICE)
+		DKIT E 0 A_RemoveChildren
+		DKIT E 0 A_SpawnItemEx("BigKitFake2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		Stop
+}}
+
+//RAVES--------------------------------------------------------------------------
+Actor Gaben
+{
+	+NOGRAVITY
+	+NOINTERACTION
+	RenderStyle Translucent
+	Alpha 0.75
+	Scale 0.35
+	ReactionTime 51
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		GABN BCDEFGHI 4 Bright
+		GABN B 0 A_CountDown
+		Loop
+	Death:
+		TNT1 A 1
+		Stop
+}}
+
+Actor HSKULL1
+{
+	+NOGRAVITY
+	+NOINTERACTION
+	RenderStyle Translucent
+	Alpha 0.75
+	Scale 0.35
+	ReactionTime 40
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		SKL1 A 5 Bright
+		SKL1 B 5 Bright
+		SKL1 C 5 Bright
+		SKL1 DEFGHIJ 4 Bright
+		SKL1 A 0 A_CountDown
+		Loop
+	Death:
+		TNT1 A 1
+		Stop
+}}
+
+Actor HSKULL2
+{
+	+NOGRAVITY
+	+NOINTERACTION
+	RenderStyle Translucent
+	Alpha 0.75
+	Scale 0.5
+	ReactionTime 54
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		SKL3 ABCDEFGHIJ 3 Bright
+		SKL3 A 0 A_CountDown
+		Loop
+	Death:
+		TNT1 A 1
+		Stop
+}}
+
+Actor HumanTouch
+{
+	+CLIENTSIDEONLY
+	ReactionTime 47
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound ("HUMTOUCH",CHAN_VOICE, 3.0, 0)
+		Goto ButtLoop
+	ButtLoop:
+		TNT1 A 35
+		TNT1 A 0 A_CountDown
+		Loop
+	Death:
+		TNT1 A 0
+		Stop
+}}
+
+Actor HumanTouch2
+{
+	+CLIENTSIDEONLY
+	ReactionTime 90
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound ("Rave2",CHAN_VOICE, 5.0, 0)
+		Goto ButtLoop
+	ButtLoop:
+		TNT1 A 60
+		TNT1 A 0 A_CountDown
+		Loop
+	Death:
+		TNT1 A 0
+		Stop
+}}
+
+Actor HumanTouch3
+{
+	+CLIENTSIDEONLY
+	ReactionTime 90
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound ("Rave3",CHAN_VOICE, 5.0, 0)
+		Goto ButtLoop
+	ButtLoop:
+		TNT1 A 60
+		TNT1 A 0 A_CountDown
+		Loop
+	Death:
+		TNT1 A 0
+		Stop
+}}
+
+Actor HumanTouch4
+{
+	+CLIENTSIDEONLY
+	ReactionTime 90
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound ("Rave4",CHAN_VOICE, 5.0, 0)
+		Goto ButtLoop
+	ButtLoop:
+		TNT1 A 60
+		TNT1 A 0 A_CountDown
+		Loop
+	Death:
+		TNT1 A 0
+		Stop
+}}
+
+Actor EpicMarioMusic
+{
+	+CLIENTSIDEONLY
+	ReactionTime 90
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound ("MarioDisco",CHAN_VOICE, 5.0, 0)
+		Goto ButtLoop
+	ButtLoop:
+		TNT1 A 60
+		TNT1 A 0 A_CountDown
+		Loop
+	Death:
+		TNT1 A 0
+		Stop
+}}
+
+Actor EpicMarioDancing
+{
+	+NOGRAVITY
+	+NOINTERACTION
+	RenderStyle Translucent
+	Alpha 0.75
+	Scale 0.15
+	ReactionTime 94
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		MARI ABCDEFGH 2 Bright
+		GABN B 0 A_CountDown
+		MARI IJKLMNOP 2 Bright
+		GABN B 0 A_CountDown
+		MARI QRSTUVWXYZ 2 Bright
+		GABN B 0 A_CountDown
+		2ARI ABCDEFGH 2 Bright
+		GABN B 0 A_CountDown
+		2ARI IJKLMNOP 2 Bright
+		GABN B 0 A_CountDown
+		2ARI QRSTUVWXYZ 2 Bright
+		GABN B 0 A_CountDown
+		Loop
+	Death:
+		TNT1 A 1
+		Stop
+}}
+
+Actor BigKitFake2
+{
+	States
+	{
+	Spawn:
+		DKIT E 35
+		DKIT E 1 A_FadeOut(0.01)
+		Wait
+}}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+//Note: code by lightman rewrited by prepper for cool raves
+Actor BlueSignTracer
+{	+FORCEXYBILLBOARD
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	States
+	{
+	Spawn:
+		FL1R A 1 A_FadeOut(0.13)
+		Loop
+}}
+
+Actor BlueSign
+{	+FORCEXYBILLBOARD
+	+CLIENTSIDEONLY
+	RenderStyle Add
+	States
+	{
+	Spawn:
+		FL1R AA 1 Bright A_SpawnItemEx("BlueSignTracer")
+		Goto Death
+	Death:
+		FL1R A 1 Bright A_FadeOut(0.3) //ITS VERY AWESOME :T!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		Loop
+}}
+
+Actor SkullBeat1
+{
+	RenderStyle Add
+	Alpha       0.9
+	+NOCLIP
+	+NOINTERACTION
+	+CLIENTSIDEONLY
+	ReactionTime 47
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		TNT1 A 0 A_SpawnItemEx("BlueSign",0,128,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",0,-128,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",128,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",-128,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",100,100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",100,-100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",-100,100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",-100,-100,0,0,0,20)
+		TNT1 A 18
+		TNT1 A 0 A_SpawnItemEx("BlueSign",0,128,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",0,-128,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",128,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",-128,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",100,100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",100,-100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",-100,100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",-100,-100,0,0,0,20)
+		TNT1 A 17 A_CountDown
+		TNT1 A 0 A_SpawnItemEx("BlueSign",0,128,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",0,-128,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",128,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",-128,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",100,100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",100,-100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",-100,100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",-100,-100,0,0,0,20)
+		TNT1 A 17
+		TNT1 A 0 A_SpawnItemEx("BlueSign",0,128,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",0,-128,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",128,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",-128,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",100,100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",100,-100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",-100,100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BlueSign",-100,-100,0,0,0,20)
+		TNT1 A 17 A_CountDown
+		Loop
+}}
+
+Actor Skull1Seq
+{
+	// +CLIENTSIDEONLY
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		TNT1 A 3
+		TNT1 A 3 A_SpawnItemEx("SkullBeat1")
+		Stop
+}}
+
+//----------------------------------------------------------------------
+Actor YellowSignTracer
+{
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		FL5R A 1 A_FadeOut(0.13)
+		Loop
+}}
+
+Actor WhiteSignTracer
+{
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		FL2R A 1 A_FadeOut(0.13)
+		Loop
+}}
+
+Actor WhiteSign
+{
+	+CLIENTSIDEONLY
+	+FORCEXYBILLBOARD
+	RenderStyle Add
+	States
+	{
+	Spawn:
+		FL2R AA 1 Bright A_SpawnItemEx("WhiteSignTracer")
+		Goto Death
+	Death:
+		FL2R A 1 Bright A_FadeOut(0.3)
+		Loop
+}}
+
+Actor YellowSign
+{
+	+CLIENTSIDEONLY
+	+FORCEXYBILLBOARD
+	RenderStyle Add
+	States
+	{
+	Spawn:
+		FL5R AA 1 Bright A_SpawnItemEx("YellowSignTracer")
+		Goto Death
+	Death:
+		FL5R A 1 Bright A_FadeOut(0.3)
+		Loop
+}}
+
+Actor SkullBeat2
+{
+	RenderStyle Add
+	Alpha       0.9
+	+NOCLIP
+	+NOINTERACTION
+	+CLIENTSIDEONLY
+	ReactionTime 47
+	States
+	{
+	Spawn:
+		TNT1 A 0 A_SpawnItemEx("WhiteSign",0,128,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("WhiteSign",0,-128,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("WhiteSign",128,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("WhiteSign",-128,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("WhiteSign",100,100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("WhiteSign",100,-100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("WhiteSign",-100,100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("WhiteSign",-100,-100,0,0,0,20)
+		TNT1 A 18
+		TNT1 A 0 A_SpawnItemEx("YellowSign",0,128,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("YellowSign",0,-128,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("YellowSign",128,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("YellowSign",-128,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("YellowSign",100,100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("YellowSign",100,-100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("YellowSign",-100,100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("YellowSign",-100,-100,0,0,0,20)
+		TNT1 A 17 A_CountDown
+		TNT1 A 0 A_SpawnItemEx("WhiteSign",0,128,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("WhiteSign",0,-128,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("WhiteSign",128,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("WhiteSign",-128,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("WhiteSign",100,100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("WhiteSign",100,-100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("WhiteSign",-100,100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("WhiteSign",-100,-100,0,0,0,20)
+		TNT1 A 17
+		TNT1 A 0 A_SpawnItemEx("YellowSign",0,128,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("YellowSign",0,-128,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("YellowSign",128,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("YellowSign",-128,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("YellowSign",100,100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("YellowSign",100,-100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("YellowSign",-100,100,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("YellowSign",-100,-100,0,0,0,20)
+		TNT1 A 17 A_CountDown
+		Loop
+}}
+
+Actor Skull2Seq
+{
+	//+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+		TNT1 A 3
+		TNT1 A 3 A_SpawnItemEx("SkullBeat2")
+		Stop
+}}
+
+//////////////////////////////NEW   RAVES//////////////////////////////////////////////////////////
+Actor Eclipsinakit: TechnoKit
+{
+	//$Category WDI Easter Eggs
+	//$Sprite DKITA0
+	//$Title "ECLIPSINA KIT(RAVE IN A BOX!)"
+	+FORCEXYBILLBOARD
+	States
+	{
+	Use:
+		TNT1 A 0 A_SpawnItemEx("DroppedEclipsinaKit", 32, 0, 42, 0, 0, 0, 0, 0, 0)
+		Stop
+}}
+
+Actor EclipOrbit
+{
+	Scale 1.5
+	Radius 6
+	Height 8
+	Speed 6
+	RenderStyle Add
+	SeeSound ""
+	Projectile
+	+BRIGHT
+	+NOINTERACTION
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+NOCLIP
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		ECLP JK 5
+		TNT1 A 0  A_CustomMissile("EclipOrbit", 0, 0,76)
+		Stop
+	Death:
+		ECLP I 0
+		Stop
+}}
+
+Actor EclipsinaMusic
+{
+	+CLIENTSIDEONLY
+	ReactionTime 90
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound ("SEXYECLIP",CHAN_VOICE, 4.0, 0)
+		Goto Buttloop
+	Buttloop:
+		TNT1 A 35
+		TNT1 A 0 A_CountDown
+		Loop
+	Death:
+		TNT1 A 0
+		Stop
+}}
+
+Actor Eclipsina
+{
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+NOINTERACTION
+	+BRIGHT
+	RenderStyle Translucent
+	Alpha 0.8
+	XScale 0.8
+	YScale 0.72
+	ReactionTime 75
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		ECLP A 10
+		ECLP AEF 2
+		ECLP G 4
+		ECLP H 2
+		ECLP A 0 A_SpawnItem("Eclipsina_hi",0,32)
+		ECLP A 80
+		ECLP BCD 3
+		ECLP D 0  A_SpawnItem("Eclipsina_Says",0,32)
+		Goto Buttloop
+	Buttloop:
+		ECLP A 15
+		ECLP BCD 2
+		ECLP A 14 A_CountDown
+		Loop
+	Death:
+		ECLP A 10
+		ECLW ABC 3
+		ECLW C 5
+		ECLW D 3
+		ECLP A 10
+		ECLP A 0 A_SpawnItem("Eclipsina_bye",0,32)
+		ECLP A 4 A_FadeOut(0.02)
+		Wait
+}}
+
+//************ECLIPSINA SEXY VOICE
+Actor EclipsinaVoice
+{
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+NOINTERACTION
+	+BRIGHT
+	RenderStyle Translucent
+	Alpha 0.8
+	XScale 0.8
+	YScale 0.72
+	+FORCEXYBILLBOARD
+}
+Actor Eclipsina_hi: EclipsinaVoice
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 1 A_Jump(256,"Hi","Hi1","Hi2")
+	Hi:
+		ECLP O 55 //HELLO
+		Stop
+	Hi1:
+		ECLP P 55 //HELLO EVERYONE
+		Stop
+	Hi2:
+		ECLP Q 40 //YOU HANDSOME
+		TNT1 A 20
+		ECLP N 40 //SAY HI
+		Stop
+}}
+
+Actor Eclipsina_bye: EclipsinaVoice
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 1 A_Jump(255,"Bye","Bye1","Bye2")
+	Bye:
+		ECLP R 45 //BYE BYE
+		TNT1 A 15
+		TNT1 A 0 A_Jump(100,"Quote","Quote1")
+		Stop
+	Bye1:
+		ECLP S 45 //BAII
+		TNT1 A 15
+		TNT1 A 0 A_Jump(100,"Quote","Quote1")
+		Stop
+	Bye2:
+		ECLP T 45 //BOOM BAYAH
+		Stop
+	Bye3:
+		ECLP U 45 //DONT FORGIVE ME
+		Stop
+	quote:
+		ECLP V 45 //CALL ME BB
+		Stop
+	quote1:
+		ECLP U 45 //DONT FORGETME
+		Stop
+	quote2:
+		ECLW Q 45 //i lov
+		Stop
+}}
+
+Actor Eclipsina_says: EclipsinaVoice
+{
+	States
+	{
+	Spawn:
+		TNT1 A 90
+		TNT1 A 1 A_Jump(255,"Say","Say1","Say2","Say3","Say4","Say5")
+	Say:
+		ECLP V 55 //CALLMEBB
+		TNT1 A 105
+		TNT1 A 0 A_Jump(255,"Quote","Quote1","Quote2","Quote3","Quote4","Quote6","Quote7")
+		Stop
+	Say1:
+		ECLP W 55 //CATCH ME
+		TNT1 A 210
+		TNT1 A 0 A_Jump(255,"Quote","Quote3","Quote4","Quote5")
+		Stop
+	Say2:
+		ECLP x 55 //MAKE SOMENOISE
+		TNT1 A 210
+		TNT1 A 0 A_Jump(255,"Quote1","Quote2","Quote4","Quote6")
+		Stop
+	Say3:
+		ECLP y 55 //PUT UR HANDSUP
+		TNT1 A 210
+		TNT1 A 0 A_Jump(255,"Quote","Quote1","Quote2","Quote4","Quote6")
+		Stop
+	Say4:
+		ECLP z 55 //SAY LALALA
+		TNT1 A 210
+		TNT1 A 0 A_Jump(255,"Quote","Quote1","Quote2","Quote4","Quote6")
+		Stop
+	Say5:
+		ECLW I 55 //TK A SMILE
+		TNT1 A 105
+		TNT1 A 0 A_Jump(255,"Quote","Quote3","Quote4","Quote5","Quote6")
+		Stop
+	quote:
+		ECLW J 45 //;)
+		TNT1 A 20
+		TNT1 A 0 A_Jump(128,"Quote1","Quote6")
+		TNT1 A 0 A_Jump(64,2)
+		TNT1 A 0 A_SpawnItem( "Eclipsina_love",0,0)
+		Stop
+		TNT1 A 35
+		TNT1 A 0 A_SpawnItem( "Eclipsina_mad",0,0)
+		Stop
+	quote1:
+		ECLW K 45 //HIHI
+		TNT1 A 20
+		TNT1 A 0 A_Jump(128,6)
+		TNT1 A 0 A_Jump(64,2)
+		TNT1 A 0 A_SpawnItem( "Eclipsina_love",0,0)
+		Stop
+		TNT1 A 35
+		TNT1 A 0 A_SpawnItem( "Eclipsina_mad",0,0)
+		Stop
+	quote2:
+		TNT1 A 0
+		ECLW L 45 //XDDDD
+		TNT1 A 35 A_Jump(64,2)
+		TNT1 A 0 A_SpawnItem( "Eclipsina_love",0,0)
+		Stop
+		TNT1 A 35
+		TNT1 A 0 A_SpawnItem( "Eclipsina_mad",0,0)
+		Stop
+	quote3:
+		ECLW M 45 //IM AN ANGEL
+		TNT1 A 35
+		Goto quote1
+	quote4:
+		ECLW N 45 //VERY GOOD
+		TNT1 A 35
+		TNT1 A 0 A_Jump(128,"Quote2","Quote6")
+		TNT1 A 35 A_Jump(64,2)
+		TNT1 A 0 A_SpawnItem( "Eclipsina_love",0,0)
+		Stop
+		TNT1 A 35
+		TNT1 A 0 A_SpawnItem( "Eclipsina_mad",0,0)
+		Stop
+	quote5:
+		ECLW O 45 //WTF
+		TNT1 A 35
+		TNT1 A 0 A_Jump(255,"Quote1","Quote2")
+		TNT1 A 35 A_Jump(128,2)
+		TNT1 A 0 A_SpawnItem( "Eclipsina_love",0,0)
+		Stop
+		TNT1 A 35
+		TNT1 A 0 A_SpawnItem( "Eclipsina_mad",0,0)
+		Stop
+	quote6:
+		ECLW P 45 //OKAY
+		TNT1 A 35
+		TNT1 A 0 A_Jump(128,"Quote4","Quote5")
+		TNT1 A 35 A_Jump(128,2)
+		TNT1 A 0 A_SpawnItem( "Eclipsina_love",0,0)
+		Stop
+		TNT1 A 35
+		TNT1 A 0 A_SpawnItem( "Eclipsina_mad",0,0)
+		Stop
+	quote7:
+		TNT1 A 35
+		EClM C 50 //BEACH
+		TNT1 A 35 A_Jump(32,2)
+		TNT1 A 0 A_SpawnItem( "Eclipsina_love",0,0)
+		Stop
+		TNT1 A 35
+		TNT1 A 0 A_SpawnItem( "Eclipsina_mad",0,0)
+		Stop
+}}
+
+Actor Eclipsina_mad: EclipsinaVoice
+{
+	States
+	{
+	Spawn:
+		TNT1 A 35
+		TNT1 A 1 A_Jump(255,"Mad","Mad1","Mad2","Mad3","Mad4")
+	mad:
+		EClM A 50  //fxx
+		TNT1 A 80
+		TNT1 A 0 A_Jump(156,"Mad1","Mad3","Mad4")
+		Stop
+	mad1:
+		EClM B 50 //ok im fine
+		TNT1 A 105 A_Jump(64,2)
+		Stop
+		TNT1 A 0
+		TNT1 A 105 A_SpawnItem( "Eclipsina_love",0,0)
+		Stop
+	mad2:
+		EClM C 50  //bitch please
+		Stop
+	mad3:
+		EClM D 50 //i hate u
+		TNT1 A 105
+		Goto mad1
+	mad4:
+		EClM E 50//oh No!!
+		TNT1 A 35 A_Jump(156,"Mad2","Mad3")
+		Stop
+}}
+
+Actor Eclipsina_love: EclipsinaVoice
+{
+	States
+	{
+	Spawn:
+		TNT1 A 35
+		TNT1 A 1 A_Jump(255,"Love","Love1","Love2","Love3","Love4")
+	love:
+		TNT1 A 35
+		ECLW Q 50// Ilovu
+		TNT1 A 35
+		ECLW R 50 //forever
+		TNT1 A 105 A_Jump(64,"Love1","Love2","Love3","Love4")
+		Stop
+	love1:
+		TNT1 A 35
+		ECLW S 50 // i want to spend
+		TNT1 A 105 A_Jump(64,"Love2","Love3","Love4")
+		Stop
+	love2:
+		TNT1 A 35
+		ECLW T 50 //my candy boi
+		TNT1 A 105 A_Jump(64,"Love","Love1","Love3")
+		Stop
+	love3:
+		TNT1 A 35
+		ECLW U 50 //i miss  u
+		TNT1 A 105 A_Jump(64,"Love1","Love2","Love4")
+		Stop
+	love4:
+		TNT1 A 35
+		ECLW  V	 50 //as long as you love me
+		TNT1 A 0 A_Jump(32,2)
+		Stop
+		TNT1 A 0
+		TNT1 A 105
+		TNT1 A 0 A_SpawnItem( "Eclipsina_mad",0,0)
+		Stop
+}}
+
+//************************
+Actor RheartSignTracer
+{
+	Scale 1.2
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		ECLP L 1 A_FadeOut(0.2)
+		Wait
+}}
+
+Actor RheartSign
+{
+	Scale 1.2
+	+BRIGHT
+	+CLIENTSIDEONLY
+	RenderStyle Add
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		ECLP LL 1 A_SpawnItemEx("RHeartSignTracer")
+		Goto Death
+	Death:
+		ECLP L 1 A_FadeOut(0.35)
+		Wait
+}}
+
+Actor BHeartSignTracer
+{
+	Scale 1.2
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		ECLP M 1 A_FadeOut(0.2)
+		Wait
+}}
+
+Actor BHeartSign
+{
+	Scale 1.2
+	+CLIENTSIDEONLY
+	RenderStyle Add
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		ECLP MM 1 Bright A_SpawnItemEx("BHeartSignTracer")
+		Goto Death
+	Death:
+		ECLP M 1 Bright A_FadeOut(0.35)
+		Wait
+}}
+
+Actor EclipBeat
+{
+	+NOCLIP
+	+CLIENTSIDEONLY
+	+NOINTERACTION
+	ReactionTime 58
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		TNT1 A 0 A_SpawnItemEx("RheartSign",0,115,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("RheartSign",0,-115,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("RheartSign",115,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("RheartSign",-115,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BHeartSign",75,75,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BHeartSign",75,-75,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BHeartSign",-75,75,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BHeartSign",-75,-75,0,0,0,20)
+		TNT1 A 26
+		TNT1 A 0 A_SpawnItemEx("BHeartSign",0,115,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BHeartSign",0,-115,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BHeartSign",115,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BHeartSign",-115,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("RHeartSign",75,75,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("RHeartSign",75,-75,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("RHeartSign",-75,75,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("RheartSign",-75,-75,0,0,0,20)
+		TNT1 A 25 A_CountDown
+		TNT1 A 0 A_SpawnItemEx("RHeartSign",0,115,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("RHeartSign",0,-115,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("RHeartSign",115,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("RHeartSign",-115,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BHeartSign",75,75,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BHeartSign",75,-75,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BHeartSign",-75,75,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BHeartSign",-75,-75,0,0,0,20)
+		TNT1 A 25
+		TNT1 A 0 A_SpawnItemEx("BHeartSign",0,115,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BHeartSign",0,-115,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BHeartSign",115,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("BHeartSign",-115,0,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("RHeartSign",75,75,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("RHeartSign",75,-75,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("RHeartSign",-75,75,0,0,0,20)
+		TNT1 A 0 A_SpawnItemEx("RHeartSign",-75,-75,0,0,0,20)
+		TNT1 A 25 A_CountDown
+		Loop
+}}
+
+Actor DroppedEclipsinaKit
+{
+	+FLOORCLIP
+	-NOGRAVITY
+	ReactionTime 29
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		DKIT Z 35
+		MEDI A 0 A_PlaySound("Items/BigKitWarn")
+		DKIT FFGHII 1
+		DKIT Z 3
+		DKIT JJKLMM 1
+		DKIT Z 20
+		MEDI A 0 A_PlaySound("Items/BigKitWarn")
+		DKIT NNOPQQ 1
+		DKIT Z 3
+		DKIT RRSTUU 1
+		DKIT Z 20
+		MEDI A 0 A_PlaySound("Items/BigKitWarn")
+		DKIT VVWXYY 1
+		DKIT Z 3
+		DKIT FFGHII 1
+		DKIT Z 20
+		DKIT Z 15
+		MEDI A 0 A_PlaySound("Items/BigKitActivate")
+		DKIT FGFGFGFGJKJKJKJKNONONONORSRSRSRSWVWV 1
+		MEDI A 0 A_PlaySound("Items/BigKitOpen")
+		TNT1 A 0 ThrustThingZ(0,14,0,0)
+		DKIT BCD 4
+		//DKIT E 15
+		DKIT E 0 A_SpawnItemEx ("EclipOrbit", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)
+		DKIT E 0 A_SpawnItemEx ("EclipOrbit", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)
+		DKIT E 11
+		DKIT E 0 A_SpawnItemEx ("EclipOrbit", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)
+		DKIT E 0 A_SpawnItemEx ("EclipOrbit", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)
+		DKIT E 11
+		DKIT E 0 A_SpawnItemEx ("EclipOrbit", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)
+		DKIT E 0 A_SpawnItemEx ("EclipOrbit", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)
+		DKIT E 11
+		DKIT E 0 A_SpawnItemEx ("EclipOrbit", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)
+		DKIT E 0 A_SpawnItemEx ("EclipOrbit", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)
+		DKIT E 11
+		DKIT E 0 A_SpawnItemEx ("EclipOrbit", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)
+		DKIT E 0 A_SpawnItemEx ("EclipOrbit", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)
+		DKIT E 1 A_SpawnItemEx("Eclipsina", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+		DKIT E 0 A_SpawnItemEx("EclipsinaMusic", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+		DKIT E 0 A_SpawnItemEx("EclipBeat",0, 0, 0, 0, 0, 0, 0, 0, 0)
+		Goto HealItUp
+	HealItUp:
+		DKIT E 0 A_SpawnItemEx("RedLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		TNT1 A 0 A_CountDown
+		DKIT EEEEEEEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("WhiteLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT EEEEEEEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("CyanLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT EEEEEEEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("WhiteLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT EEEEEEEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		MEDI E 0 ACS_ExecuteAlways(752,0,0,0,0)
+		DKIT E 0 A_SpawnItemEx("RedLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT EEEEEEEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("WhiteLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT EEEEEEEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("CyanLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT EEEEEEEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("WhiteLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		TNT1 A 0 A_CountDown
+		DKIT EEEEEEEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		Loop
+	Death:
+		DKIT E 80 A_StopSound(CHAN_VOICE)
+		DKIT E 0 A_RemoveChildren
+		DKIT E 0 A_SpawnItemEx("BigKitFake2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		Stop
+}}
+
+Actor WhiteLight
+{
+	+CLIENTSIDEONLY
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		TNT1 A 15
+		Stop
+}}
+
+Actor OrangeLight
+{
+	+CLIENTSIDEONLY
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		TNT1 A 15
+		Stop
+}}
+
+Actor CyanLight
+{
+	+CLIENTSIDEONLY
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		TNT1 A 15
+		Stop
+}}
+
+//////////////////////////TIGER RAVE/////////////////////////////////////////////
+Actor Tigerkit: TechnoKit
+{
+	//$Category WDI Easter Eggs
+	//$Sprite DKITA0
+	//$Title "TIGER KIT(RAVE IN A BOX!)"
+	States
+	{
+	Use:
+		TNT1 A 0 A_SpawnItemEx("DroppedTigerKit", 32, 0, 42, 0, 0, 0, 0, 0, 0)
+		Stop
+}}
+
+Actor Tigerfist
+{
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+NOINTERACTION
+	+BRIGHT
+	RenderStyle Translucent
+	Alpha 0.75
+	XScale 0.8
+	YScale 0.72
+	ReactionTime 34
+	States
+	{
+	Spawn:
+		TGAY A 831
+		TGAY A 0 A_SpawnItem("Tigerlagg",0,75)
+		Goto Buttloop
+	Buttloop:
+		TGAY AKL 2
+		TGAY A 12
+		TGAY AKL 2
+		TGAY A 11
+		TGAY A 0 A_CountDown
+		Loop
+	Death:
+		TGAY K 0 A_SpawnItem("Tigerbusted",0,75)
+		TGAY AKLAAAAAAAKL 2
+		TGAY A 12
+		TGAY AKLAAAAAAAKL 2
+		TGAY A 10
+		TGAY AKLAAAAAAAKL 2
+		TGAY A 12
+		TGAY AKLAAAAAAAKL 2
+		TGAY A 10
+		TGAY AKLAAAAAAAKL 2
+		TGAY A 12
+		TGAY AKLAAAAAAAKL 2
+		TGAY A 10
+		TGAY AKLAAAAAAAKL 2
+		TGAY A 12
+		TGAY AKLAAAAAAAKL 2
+		TGAY A 10
+		TGAY K 0 A_SpawnItem("MadTigerfist")
+		Stop
+}}
+
+Actor MadTigerfist
+{
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+NOINTERACTION
+	+BRIGHT
+	+FORCEXYBILLBOARD
+	RenderStyle Translucent
+	Alpha 0.75
+	XScale 0.8
+	YScale 0.72
+	ReactionTime 115
+	States
+	{
+	Spawn:
+		TGAY ABACADAEAF 2
+		TGAY A 0 A_CountDown
+		Loop
+	Death:
+		TGAY GHIJGHIJGHIJGHIJGHIJGHIJGHIJGHIJGHIJGHIJ 1
+		TGAY G 0 A_SpawnItem("TigerRq", 0,32)
+		Stop
+}}
+
+/////////shit tiger quotes///////////////////////
+Actor Shitqoutes
+{
+	Scale 0.6
+	Speed 6
+	RenderStyle Add
+	SeeSound ""
+	Projectile
+	+BRIGHT
+	+NOINTERACTION
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+NOCLIP
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 1 A_Jump(200,"Stfu","Yomna","Lagg","Okay","Anal")
+		TGAY y 9
+		Stop
+	lagg:
+		TGAY O 9
+		Stop
+	yomna:
+		TGAY W 8
+		TGAY x 8
+		Stop
+	Okay:
+		TGAY U 9
+		Stop
+	Stfu:
+		TGAY T 9
+		Stop
+	Anal:
+		TGAY V 9
+		Stop
+}}
+
+Actor TigerRq
+{
+	Scale 2
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+NOINTERACTION
+	+BRIGHT
+	+FORCEXYBILLBOARD
+	RenderStyle Translucent
+	Alpha 0.75
+	States
+	{
+	Spawn:
+		TGAY M 4  A_FadeOut(0.02)
+		Wait
+}}
+
+Actor Tigerlagg
+{
+	ReactionTime 17
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+NOINTERACTION
+	+BRIGHT
+	+FORCEXYBILLBOARD
+	RenderStyle Translucent
+	Alpha 0.75
+	Scale 0.75
+	States
+	{
+	Spawn:
+		TGAY O 6
+		TGAY O 6 A_SetScale(1)
+		TGAY O 6
+		TGAY O 6 A_SetScale(0.85)
+		TGAY O 6
+		TGAY O 6 A_SetScale(1)
+		TGAY O 6
+		TGAY O 6 A_SetScale(0.85)
+		TGAY O 6
+		TGAY O 6 A_SetScale(1)
+		TGAY O 6
+		TGAY O 6 A_SetScale(0.85)
+		TGAY O 6
+		TGAY O 6 A_SetScale(1)
+		TGAY O 24
+		TGAY O 75
+		Goto Buttloop
+	Buttloop:
+		TNT1 A 6 A_SpawnItemEx ("Shitqoutes", 0, 0, -64, 7, 7, 0, random(0,255),0, 0)
+		TNT1 A 12
+		TNT1 A 6 A_SpawnItemEx ("Shitqoutes", 0, 0, -64, 7, 7, 0, random(0,255),0, 0)
+		TNT1 A 11 A_CountDown
+		Loop
+}}
+
+//enoug
+//mouf
+//okay
+//anal'd
+//flmofa
+//wutf
+//orlf!
+//bTihc
+//lmao
+//x'd
+Actor Tigerbusted
+{
+	ReactionTime 27
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+NOINTERACTION
+	+BRIGHT
+	+FORCEXYBILLBOARD
+	RenderStyle Translucent
+	Alpha 0.75
+	Scale 0.75
+	States
+	{
+	Spawn:
+		TGAY N 6
+		TGAY N 6 A_SetScale(1)
+		TGAY N 6
+		TGAY N 6 A_SetScale(0.85)
+		TGAY N 6
+		TGAY N 6 A_SetScale(1)
+		TGAY N 6
+		TGAY N 6 A_SetScale(0.85)
+		TGAY N 6
+		TGAY N 6 A_SetScale(1)
+		TGAY N 6
+		TGAY N 6 A_SetScale(0.85)
+		TGAY N 6
+		TGAY N 6 A_SetScale(1)
+		TGAY N 144
+		TGAY Q 140 A_FadeOut(0.02)
+		Goto Buttloop
+	Buttloop:
+		TNT1 A 70
+		TNT1 A 0 A_CountDown
+		Loop
+	Death:
+		TGAY P 6
+		TGAY P 6 A_SetScale(1)
+		TGAY P 6
+		TGAY P 6 A_SetScale(0.85)
+		TGAY P 6
+		TGAY P 6 A_SetScale(1)
+		TGAY P 6
+		TGAY P 6 A_SetScale(0.85)
+		TGAY P 6
+		TGAY P 6 A_SetScale(1)
+		TGAY P 6
+		TGAY P 6 A_SetScale(0.85)
+		TGAY P 6
+		TGAY P 6 A_SetScale(1)
+		TGAY P 60
+		TGAY R 120
+		TGAY S 60
+		Stop
+}}
+
+Actor TigerOrbit
+{
+	Scale 0.7
+	Radius 6
+	Height 8
+	Speed 6
+	RenderStyle Add
+	SeeSound ""
+	Projectile
+	+BRIGHT
+	+NOINTERACTION
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+NOCLIP
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		TGAY ZZZ 3 A_SpawnItemEx("TigerFigureTracer")
+		TGAY z 0 A_CustomMissile("TigerOrbit", 0, 0,75)
+		Stop
+	Death:
+		TGAY z 5  A_FadeOut(0.01)
+		Wait
+}}
+
+Actor TigerFigureTracer
+{
+	Scale 0.7
+	RenderStyle Add
+	+NOINTERACTION
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		TGAY z 2  A_FadeOut(0.15)
+		Wait
+}}
+
+Actor TigerMusic
+{
+	+CLIENTSIDEONLY
+	ReactionTime 135
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound ("ILUVTIGER",CHAN_VOICE, 4.0, 0)
+		Goto Buttloop
+	Buttloop:
+		TNT1 A 35
+		TNT1 A 0 A_CountDown
+		Loop
+	Death:
+		TNT1 A 0
+		Stop
+}}
+
+Actor DroppedTigerkit
+{
+	+FLOORCLIP
+	-NOGRAVITY
+	ReactionTime 75
+	States
+	{
+	Spawn:
+		DKIT Z 35
+		MEDI A 0 A_PlaySound("Items/BigKitWarn")
+		DKIT FFGHII 1
+		DKIT Z 3
+		DKIT JJKLMM 1
+		DKIT Z 20
+		MEDI A 0 A_PlaySound("Items/BigKitWarn")
+		DKIT NNOPQQ 1
+		DKIT Z 3
+		DKIT RRSTUU 1
+		DKIT Z 20
+		MEDI A 0 A_PlaySound("Items/BigKitWarn")
+		DKIT VVWXYY 1
+		DKIT Z 3
+		DKIT FFGHII 1
+		DKIT Z 20
+		DKIT Z 15
+		MEDI A 0 A_PlaySound("Items/BigKitActivate")
+		DKIT FGFGFGFGJKJKJKJKNONONONORSRSRSRSWVWV 1
+		MEDI A 0 A_PlaySound("Items/BigKitOpen")
+		TNT1 A 0 ThrustThingZ(0,14,0,0)
+		DKIT BCD 4
+		DKIT E 4
+		DKIT E 0 A_SpawnItemEx("TigerMusic", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+		DKIT E 0 A_SpawnItemEx ("TigerOrbit", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)
+		DKIT E 7
+		DKIT E 0 A_SpawnItemEx ("TigerOrbit", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)
+		DKIT E 7
+		DKIT E 0 A_SpawnItemEx ("TigerOrbit", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)
+		DKIT E 7
+		DKIT E 0 A_SpawnItemEx ("TigerOrbit", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)
+		DKIT E 7
+		DKIT E 0 A_SpawnItemEx ("TigerOrbit", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)
+		DKIT E 7
+		DKIT E 0 A_SpawnItemEx ("TigerOrbit", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)
+		DKIT E 7
+		DKIT E 0 A_SpawnItemEx ("TigerOrbit", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)
+		DKIT E 7
+		// DKIT E 1 A_SpawnItemEx("Tigerfist", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+		DKIT E 1 A_SpawnItemEx("Tigerfist", 0, 1, 31, 0, 0, 0, 0, 0, 0)
+		DKIT E 1 A_SpawnItemEx("Tigerfist", 0, 2, 30, 0, 0, 0, 0, 0, 0)
+		//52
+		Goto HealItUp
+	HealItUp:
+		DKIT E 0 A_SpawnItemEx("RedLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT E 0 A_CountDown
+		DKIT EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("PurpleLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		MEDI E 0 ACS_ExecuteAlways(752,0,0,0,0)
+		DKIT E 0 A_SpawnItemEx("GreenLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT E 0 A_CountDown
+		DKIT EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("YellowLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("GreenLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("YellowLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT E 0 A_CountDown
+		DKIT EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		Loop
+	Death:
+		DKIT E 80 A_StopSound(CHAN_VOICE)
+		DKIT E 0 A_RemoveChildren
+		DKIT E 0 A_SpawnItemEx("BigKitFake2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		Stop
+}}
+
+/////////////////////////FRANCISRAVE////////////////////////////////////////////////////////////////////////////
+Actor FrancisKit: TechnoKit
+{
+	//$Category WDI Easter Eggs
+	//$Sprite DKITA0
+	//$Title "FRANCIS KIT (RAVE IN A BOX!)"
+	+INVENTORY.UNDROPPABLE
+	-INVENTORY.INTERHUBSTRIP
+	Inventory.Icon "FRANKIT"
+	Inventory.PickupMessage "FRANCIS IN A BOX!"
+	States
+	{
+	Use:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderKnife",1,"Francis")
+		TNT1 A 0 A_TakeInventory("FrancisKit",1)
+		Stop
+	Francis:
+		TNT1 A 0 A_SpawnItemEx("DroppedFranciskit", 32, 0, 42, 0, 0, 0, 0, 0, 0)
+		Stop
+}}
+
+Actor FrancisSmoke
+{
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+NOINTERACTION
+	+BRIGHT
+	RenderStyle Translucent
+	Alpha 0.75
+	XScale 0.6
+	YScale 0.56
+	ReactionTime 146
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		KANN A 20
+		KANN A 5 A_SpawnItemEx ("Flashraindropped")
+		KANN A 0 A_SpawnItem("SmokeCanister",0,0)
+		Goto Buttloop
+	Buttloop:
+		KANN B 35
+		KANN B 0 A_CountDown
+		KANN CD 2
+		KANN D 0 A_CountDown
+		Loop
+	Death:
+		KANN A 3 A_FadeOut(0.02)
+		Wait
+}}
+
+Actor FrancisBerth
+{
+	+NOGRAVITY
+	+NOINTERACTION
+	+BRIGHT
+	RenderStyle Translucent
+	Alpha 0.75
+	XScale 0.6
+	YScale 0.56
+	ReactionTime 146
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		KANN E 1
+		KANN E 0 A_SpawnItem("GasCanister",0,-15)
+		KANN E 19 A_SpawnItemEx ("Flashraindropped")
+		Goto Buttloop
+	Buttloop:
+		KANN F 35
+		KANN F 0 A_CountDown
+		KANN GH 2
+		KANN H 0 A_CountDown
+		Loop
+	Death:
+		KANN E 3 A_FadeOut(0.02)
+		Wait
+}}
+
+Actor FrancisTrips
+{
+	+NOGRAVITY
+	+NOINTERACTION
+	+BRIGHT
+	RenderStyle Translucent
+	Alpha 0.75
+	XScale 0.6
+	YScale 0.56
+	ReactionTime 146
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		KANN I 1
+		KANN I 0 A_SpawnItem("FrancisTrap",0,0)
+		KANN I 19 A_SpawnItemEx ("Flashraindropped")
+		Goto Buttloop
+	Buttloop:
+		KANN J 35
+		KANN J 0 A_CountDown
+		KANN KL 2
+		KANN D 0 A_CountDown
+		Loop
+	Death:
+		KANN I 3 A_FadeOut(0.02)
+		Wait
+}}
+
+Actor FrancisTrap: ShotgunTrap
+{
+	+LOOKALLAROUND
+	ReactionTime 3
+	Obituary "%o was killed by a francis rave."
+	States
+	{
+	Spawn:
+		//TURT A 10
+		TURT A 0 A_PlaySound("Weapons/Shotgunopen")
+		TURT A 15 A_FaceTarget
+		TURT A 1 A_PlaySound("Weapons/Shotgunload")
+		//TURT A 15
+		//TURT A 1 A_PlaySound("Weapons/Shotgunload")
+		TURT A 15 A_FaceTarget
+		TURT A 1 A_PlaySound("Weapons/Shotgunclose")
+		TURT A 15 A_FaceTarget
+		TURT A 1 A_PlaySound("Weapons/Turretready")
+		//TURT A 25
+		Goto look
+	look:
+		TURT AAAAAAAAAAAAAAAAAAAAAAAAA 1 A_LookEx(LOF_DONTCHASEGOAL, 0, 128, 256, 0, "See")
+		TURT A 1 A_LookEx(LOF_DONTCHASEGOAL, 0, 128, 256, 0, "Shoot")
+		Goto Death
+	Idle:
+		TURT A 15 A_ClearTarget
+		TURT A 0 A_CountDown
+		Goto look
+	See:
+		TURT A 0 A_JumpIfInTargetInventory("MurderMarker",1,"Idle")
+	Shoot:
+		TURT B 0 A_PlaySound("Weapons/Shotgunfire")
+		TURT B 0 A_SpawnItemEx ("ShotgunCasing", 0, 1, 0, 0, random(2, 6), random(2, 15), 0, 0, 0)
+		TURT BD 1 Bright A_CustomBulletAttack(7, 7, 6, 1, "BulletPuff", 10000, 0)
+		TURT A 4
+		TURT B 0 A_PlaySound("Weapons/Shotgunfire")
+		TURT B 1 A_SpawnItemEx ("ShotgunCasing", 0, -1, 0, 0, random(-2, -6), random(2, 15), 0, 0, 0)
+		TURT BD 1 Bright A_CustomBulletAttack(7, 7, 6, 1, "BulletPuff", 10000, 0)
+		TURT D 0 A_Die
+		Goto Death
+	Death:
+		TURT A 35
+		TURT A 0 A_PlaySound("Weapons/Turretdie")
+		TURT A 0 A_NoBlocking
+		TURT C -1
+		Stop
+}}
+
+Actor Francisbeat:skullBeat2
+{
+	ReactionTime 60
+}
+Actor Flashraindropped
+{
+	RenderStyle None
+	+ALLOWCLIENTSPAWN
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+NOBLOCKMAP
+	+NOLIFTDROP
+	+NOTELEPORT
+	+SPAWNCEILING
+	+NOCLIP
+	+BRIGHT
+	ReactionTime 150
+	States
+	{
+	Spawn:
+		TNT1 A 270
+		TNT1 A 0 A_SpawnItemEx("Francisbeat",0,0)
+		Goto Buttloop
+	Buttloop:
+		TNT1 A 1 A_SpawnItemEx("WhiteFlash", random(-90,90),random(-90,90),110,0,0,-0.7,random(0,360),128,0)
+		TNT1 A 15 A_CountDown
+		Loop
+}}
+
+//BUB1
+Actor WhiteFlash
+{
+	Scale 1.5
+	Alpha 0.6
+	+CLIENTSIDEONLY
+	+NOINTERACTION
+	//+NOGRAVITY // Greater fall Speed control
+	+NOBLOCKMAP
+	+NOTELEPORT
+	+INVULNERABLE
+	+NONSHOOTABLE
+	+DONTSPLASH
+	+CORPSE
+	RenderStyle Add
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		WFLS A 1 A_JumpIf(waterlevel > 0, "Death")
+		WFLS A 0 Bright
+		TNT1 A 35
+		WFLS B 0 Bright
+		tnt1 A 35
+		Loop
+	Death:
+		WFLS B 0 Bright
+		Stop
+}}
+
+Actor FrancisMusic
+{
+	+CLIENTSIDEONLY
+	ReactionTime 85
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound ("DFRANCIS",CHAN_VOICE, 4.0, 0)
+		Goto Buttloop
+	Buttloop:
+		TNT1 A 35
+		TNT1 A 0 A_CountDown
+		Loop
+	Death:
+		TNT1 A 0
+		Stop
+}}
+
+Actor DroppedFranciskit
+{
+	+FLOORCLIP
+	-NOGRAVITY
+	ReactionTime 48
+	States
+	{
+	Spawn:
+		DKIT Z 35
+		MEDI A 0 A_PlaySound("Items/BigKitWarn")
+		DKIT FFGHII 1
+		DKIT Z 3
+		DKIT JJKLMM 1
+		DKIT Z 20
+		MEDI A 0 A_PlaySound("Items/BigKitWarn")
+		DKIT NNOPQQ 1
+		DKIT Z 3
+		DKIT RRSTUU 1
+		DKIT Z 20
+		MEDI A 0 A_PlaySound("Items/BigKitWarn")
+		DKIT VVWXYY 1
+		DKIT Z 3
+		DKIT FFGHII 1
+		DKIT Z 20
+		DKIT Z 15
+		MEDI A 0 A_PlaySound("Items/BigKitActivate")
+		DKIT FGFGFGFGJKJKJKJKNONONONORSRSRSRSWVWV 1
+		MEDI A 0 A_PlaySound("Items/BigKitOpen")
+		TNT1 A 0 ThrustThingZ(0,14,0,0)
+		DKIT BCD 4
+		DKIT E 4 A_SpawnItemEx("FrancisMusic", 0, 1, 31, 0, 0, 0, 0, 0, 0)
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitRed", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitRed", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		DKIT E 4
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitOrange", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitOrange", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		DKIT E 4
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitYellow", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitYellow", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		DKIT E 4
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitGreen", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitGreen", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		DKIT E 4
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitBlue", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitBlue", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		DKIT E 4
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitPurple", 0, -110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		DKIT E 0 A_SpawnItemEx ("BigKitOrbitPurple", 0, 110, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		DKIT E 0 A_Jump(85,"Berth","Trips")
+		DKIT E 1 A_SpawnItemEx("FrancisSmoke", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+		Goto HealItUp
+	Berth:
+		DKIT E 1 A_SpawnItemEx("FrancisBerth", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+		Goto HealItUp
+	Trips:
+		DKIT E 1 A_SpawnItemEx("FrancisTrips", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+		Goto HealItUp
+	HealItUp:
+		DKIT E 0 A_SpawnItemEx("OrangeLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT EEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("GreenLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT EEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("BlueLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT EEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		MEDI E 0 ACS_ExecuteAlways(752,0,0,0,0)
+		DKIT E 0 A_SpawnItemEx("OrangeLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT EEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("PurpleLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT E 0 A_CountDown
+		DKIT EEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		DKIT E 0 A_SpawnItemEx("CyanLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		DKIT E 0 A_CountDown
+		DKIT EEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		Loop
+	Death:
+		DKIT E 80 A_StopSound(CHAN_VOICE)
+		DKIT E 0 A_RemoveChildren
+		DKIT E 0 A_SpawnItemEx("BigKitFake2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		Stop
+}}
+
+// RETORN FIX ZRAVE
+
+Actor DroppedZKit
+{
+	Mass 999999999
+	ReactionTime 82
+	-NOGRAVITY
+	States
+	{
+	Spawn:
+		ZKIT A 35
+		ZKIT A 0 A_PlaySound("Items/BigKitWarn")
+		ZKIT A 35
+		ZKIT A 0 A_PlaySound("Items/BigKitWarn")
+		ZKIT A 35
+		ZKIT A 0 A_PlaySound("Items/BigKitWarn")
+		ZKIT A 35
+		ZKIT A 15
+		ZKIT A 0 A_PlaySound("Items/BigKitActivate")
+		ZKIT A 35
+		ZKIT A 0 A_PlaySound("Items/BigKitOpen")
+		MEDI BCD 4
+		MEDI E 4
+		MEDI E 15
+		MEDI E 0 A_SpawnItemEx ("BigKitOrbitRed", 0, -64, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		MEDI E 0 A_SpawnItemEx ("BigKitOrbitRed", 0, 64, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		MEDI E 4
+		MEDI E 0 A_SpawnItemEx ("BigKitOrbitOrange", 0, -64, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		MEDI E 0 A_SpawnItemEx ("BigKitOrbitOrange", 0, 64, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		MEDI E 4
+		MEDI E 0 A_SpawnItemEx ("BigKitOrbitYellow", 0, -64, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		MEDI E 0 A_SpawnItemEx ("BigKitOrbitYellow", 0, 64, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		MEDI E 4
+		MEDI E 0 A_SpawnItemEx ("BigKitOrbitGreen", 0, -64, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		MEDI E 0 A_SpawnItemEx ("BigKitOrbitGreen", 0, 64, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		MEDI E 4
+		MEDI E 0 A_SpawnItemEx ("BigKitOrbitBlue", 0, -64, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		MEDI E 0 A_SpawnItemEx ("BigKitOrbitBlue", 0, 64, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		MEDI E 4
+		MEDI E 0 A_SpawnItemEx ("BigKitOrbitPurple", 0, -64, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		MEDI E 0 A_SpawnItemEx ("BigKitOrbitPurple", 0, 64, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		MEDI E 4
+		MEDI E 0 A_SpawnItemEx ("BigKitOrbit", 0, -64, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+		MEDI E 0 A_SpawnItemEx ("BigKitOrbit", 0, 64, 2, 0, 0, 0, 48,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+		MEDI E 1 A_SpawnItemEx("ZKITSEQ", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+		MEDI E 1 A_SpawnItemEx("ZKITSEQ", 0, 1, 31, 0, 0, 0, 0, 0, 0)
+		MEDI E 0 A_SpawnItemEx("ZKITMUSIC", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+		Goto HealItUp
+	HealItUp:
+		MEDI E 0 A_SpawnItemEx("YellowLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		MEDI E 0 A_CountDown
+		DKIT EEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		MEDI E 0 A_SpawnItemEx("RedLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		MEDI E 0 A_CountDown
+		DKIT EEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		MEDI E 0 ACS_ExecuteAlways(752,0,0,0,0)
+		MEDI E 0 A_SpawnItemEx("YellowLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		MEDI E 0 A_CountDown
+		DKIT EEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		MEDI E 0 A_SpawnItemEx("GreenLight", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		MEDI E 0 A_CountDown
+		DKIT EEEEEEEEEEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+		Loop
+	Death:
+		MEDI E 0 A_StopSound(CHAN_VOICE)
+		MEDI E 0 A_RemoveChildren
+		MEDI E 0 A_SpawnItemEx("BigKitFake", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		Stop
+}}
+
+Actor ZKITSEQ
+{
+	Alpha 0.75
+	ReactionTime 21
+	RenderStyle Add
+	+NOGRAVITY
+	+NOINTERACTION
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		ARZT A 20 Bright
+		ARZT B 20 Bright
+		ARZT A 20 Bright
+		ARZT C 20 Bright
+		ARZT A 0 Bright A_CountDown
+		Loop
+	Death:
+		ARZT A 4 A_FadeOut(0.02)
+		Stop
+}}
+
+
+
+//BLUE TECHNOKIT
+Actor DroppedBlueTechnoKit
+{ 
+-NOGRAVITY
+Mass 10
+  ReactionTime 570
+
+	States
+	{
+	Spawn:
+	 BKIT A 20
+	 BKIT A 0 A_PlaySound("Items/BigKitWarn")
+	 BKIT A 35
+	 BKIT A 0 A_PlaySound("Items/BigKitWarn")
+	 BKIT A 35
+	 BKIT A 0 A_PlaySound("Items/BigKitWarn")
+	 BKIT A 35
+	 BKIT A 15
+	 BKIT A 0 A_PlaySound("Items/BigKitActivate")
+	 BKIT A 35
+	 BKIT A 0 A_PlaySound("Items/BigKitOpen")
+	 TNT1 A 0 ThrustThingZ(0,14,0,0)
+	 BKIT BCDE 4
+	 BKIT E 0 A_SpawnItemEx ("BigBlueKitOrbit", 0, -64, 2, 0, 0, 0, 48, SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+	 BKIT E 0 A_SpawnItemEx ("BigBlueKitOrbit", 0, 64, 2, 0, 0, 0, 48, SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+	 BKIT E 4
+	 BKIT E 0 A_SpawnItemEx ("BigBlueKitOrbit", 0, -64, 2, 0, 0, 0, 48, SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+	 BKIT E 0 A_SpawnItemEx ("BigBlueKitOrbit", 0, 64, 2, 0, 0, 0, 48, SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+	 BKIT E 4
+	 BKIT E 0 A_SpawnItemEx ("BigBlueKitOrbit", 0, -64, 2, 0, 0, 0, 48, SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+	 BKIT E 0 A_SpawnItemEx ("BigBlueKitOrbit", 0, 64, 2, 0, 0, 0, 48, SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+	 BKIT E 4
+	 BKIT E 0 A_SpawnItemEx ("BigBlueKitOrbit", 0, -64, 2, 0, 0, 0, 48, SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+	 BKIT E 0 A_SpawnItemEx ("BigBlueKitOrbit", 0, 64, 2, 0, 0, 0, 48, SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+	 BKIT E 4
+	 BKIT E 0 A_SpawnItemEx ("BigBlueKitOrbit", 0, -64, 2, 0, 0, 0, 48, SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+	 BKIT E 0 A_SpawnItemEx ("BigBlueKitOrbit", 0, 64, 2, 0, 0, 0, 48, SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+	 BKIT E 4
+	 BKIT E 0 A_SpawnItemEx ("BigBlueKitOrbit", 0, -64, 2, 0, 0, 0, 48, SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+	 BKIT E 0 A_SpawnItemEx ("BigBlueKitOrbit", 0, 64, 2, 0, 0, 0, 48, SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+	 BKIT E 4
+	 BKIT E 0 A_SpawnItemEx ("BigBlueKitOrbit", 0, -64, 2, 0, 0, 0, 48, SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit", 48, 0, 0, 2, 0)
+	 BKIT E 0 A_SpawnItemEx ("BigBlueKitOrbit", 0, 64, 2, 0, 0, 0, 48, SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+	 BKIT E 1 A_SpawnItemEx("BBlueFlag", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+	 BKIT E 1 A_SpawnItemEx("BBlueFlag", 0, 1, 31, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_SpawnItemEx("BlueKitTechnoMusic", 0, 0, 32, 0, 0, 0, 0, 0, 0)
+	  goto HealItUp
+
+	HealItUp:
+	 BKIT E 0 A_CountDown BKIT EEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT E 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("GreenLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("YellowLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("GreenLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("YellowLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("GreenLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("YellowLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("GreenLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("YellowLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)	 
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("GreenLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("YellowLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("GreenLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("YellowLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("GreenLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("YellowLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("GreenLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("YellowLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("GreenLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("YellowLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("GreenLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("YellowLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)	 
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("GreenLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("YellowLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("GreenLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("YellowLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("GreenLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("YellowLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("GreenLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("YellowLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("GreenLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("YellowLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("GreenLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("BlueLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	  goto BringItDown
+	  
+   BringItDown: 
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 goto DunDun
+	 
+	DunDun:
+	 BKIT E 0 A_SpawnItemEx("Greenlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Greenlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Greenlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Greenlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Yellowlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Yellowlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Yellowlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Yellowlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Purplelight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Purplelight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Purplelight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Purplelight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Bluelight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Bluelight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Bluelight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("Redlight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	  goto Beats
+	  
+	Beats:
+	 BKIT E 1 A_SpawnItemEx("BlueBeat2B")
+	  goto Jenkin
+	
+	Jenkin:
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("GreenLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("PurpleLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 BKIT E 0 A_SpawnItemEx("YellowLight2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 BKIT E 0 A_CountDown BKIT EEEEEEEEEE 1 A_SpawnItemEx("BigKitHealDecoPartySpawner",random(80,-80),random(80,-80),0,0,0,random(1,3),0,SXF_NOCHECKPOSITION)
+	 loop
+	 
+	Death:
+	 BKIT E 0 A_StopSound(CHAN_VOICE)
+	 BKIT E 0 A_RemoveChildren
+	 BKIT E 0 A_SpawnItemEx("BlueKitFake", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	 stop
+	}
+}
+Actor BlueKitFake
+{
+states
+	{
+	 Spawn:
+	 BKIT E 35
+	 BKIT E 1 A_Fadeout(0.01)
+	 Wait
+	}
+}

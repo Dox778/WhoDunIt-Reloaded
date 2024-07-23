@@ -1,0 +1,386 @@
+Actor FakeWhiskey : CustomInventory 
+{
+	//$Category WDI Weapons
+	//$Sprite MOLPA0
+	//$Title "Molotov (Throwable)"
+	Radius 10
+	Height 12
+	Scale 0.65
+	Inventory.PickupMessage "\cjFound a \c[V7]Molotov cocktail. \cjDon't hold it for too long when lit!\n\caDamage: \c[C4]a lot"
+	Inventory.Respawntics 21000 //10 Minutes
+	//+FORCEYBILLBOARD
+	+DonTGib
+//	Renderstyle translucent
+	//Alpha 0.9
+	Mass 1000
+	States
+	{
+	Spawn:
+		MOLP A 0 NODELAY A_Jump(128,2)
+		MOLP A 0 A_SetScale(-scalex,scaley)
+		MOLP A 0 A_Jump(96,"Spawn2","Spawn3")
+		WHIS A -1
+		Stop
+	Spawn2:
+		WHIS R 0 A_ChangeFlag("FORCEYBILLBOARD",0)
+		WHIS R 0 A_ChangeFlag("FORCEXYBILLBOARD",1)
+		WHIS R -1
+		Stop
+	Spawn3:
+		WHIS S 0 A_ChangeFlag("FORCEYBILLBOARD",0)
+		WHIS S 0 A_ChangeFlag("FORCEXYBILLBOARD",1)
+		WHIS S -1
+		Stop
+			
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1, 2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("WhiskeyMolly",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,10)
+		Stop
+	NotPickup:
+		TNT1 A 0
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,10)
+		Fail
+		
+		Death:
+		TNT1 A 0 A_JumpIf(waterlevel >= 2, "InWater")
+		TNT1 A 0 A_Explode(10, 64, 1)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("MollyShard",1,0,random(0,360), 2, random(5, 45))
+		TNT1 AAAAA 0 A_CustomMissile("MollyFireSpawn2",1,0,random(0,360), 2, random(30, 70))
+		TNT1 A 1 A_SpawnItemEx("MollyGroundScorchHuge", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_SpawnItemEx("MollyFireDecorativeBig", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+		TNT1 AAAAAAAAAA 2 A_CustomMissile("MollyFireSpawn",1,0,random(0,360), 2, random(5, 30))
+		TNT1 AAAAA 1 A_CustomMissile("MollyFireSpawn3",1,0,random(0,360), 2, random(5, 30))
+		TNT1 A 1 A_Scream
+		Stop
+	InWater:
+		TNT1 A 1
+		Stop
+}}
+
+ACTOR FakeWhiskey1: FakeWhiskey
+{
+	States
+	{
+	Spawn:
+		WHIS A -1
+		Stop
+	}
+}
+ACTOR FakeWhiskey2: FakeWhiskey
+{
++FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		WHIS R -1
+		Stop
+	}
+}
+ACTOR FakeWhiskey3: FakeWhiskey
+{
++FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		WHIS S -1
+		Stop
+	}
+}
+ACTOR FakeWhiskey4: FakeWhiskey
+{
++FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		MOLP D -1
+		Stop
+	}
+}
+ACTOR FakeWhiskey5: FakeWhiskey
+{
++FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		MOLP E -1
+		Stop
+	}
+}
+
+Actor WhiskeyMolly : Wdi_BaseWeapon
+{
+	Radius 8
+	Height 32
+	Scale 0.65
+	Tag "Molotov Cocktail"
+	Inventory.PickupMessage "\cjFound a \c[V7]Molotov cocktail."
+	Weapon.PreferredSkin "MollySkin"
+	Inventory.Icon "WEPICO26"
+	+INVENTORY.INTERHUBSTRIP
+	-WEAPON.MELEEWEAPON
+	-NoAutoFire
+	States
+	{
+	Spawn:
+		MOLP A 1
+		Goto Death
+	Pickup:
+	Deselect:	
+		"####" P 1 offset(-1,33)
+		"####" D 1 offset(-4,36) A_GunFlash("StopFlash",GFF_NOEXTCHANGE)
+		"####" C 1 offset(-8,40) A_TakeInventory("MolotovLit",1)
+		"####" B 1 offset(-14,45) A_PlaySound("Weapons/Lighterclose",CHAN_WEAPON)
+		"####" B 1 offset(-20,54)
+		"####" "#" 1 offset(-28,64)
+		"####" "#" 1 offset(-36,76)
+		"####" "#" 1 offset(-44,88)
+		"####" "#" 1 offset(-52,106)
+		"####" "#" 1 offset(-62,127)
+		"####" "#" 1 offset(-71,156)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1 A_Lower
+		wait
+	Select:
+		TNT1 A 6
+		2LTV AAAAAAAAAAAAAAA 0 A_Raise
+		goto SelectAnim
+		
+		2LTV AAA 1 A_Raise
+		2LTV BC 1 A_Raise
+		TNT1 A 0 A_PlaySound("Weapons/Lighteropen",CHAN_WEAPON)
+		2LTV DEFFGI 1 A_Raise
+		NULL A 0 A_GunFlash("SpawnLight",GFF_NOEXTCHANGE)
+		TNT1 A 0 A_PlaySound("Weapons/LighterSuccess",CHAN_WEAPON)
+		2LTV MNNOP 1 A_Raise
+		Loop
+		
+	SelectAnim:
+		"####" B 1 offset(71,156)
+		"####" C 1 offset(62,127)
+		"####" D 1 offset(52,106) A_PlaySound("Weapons/Lighteropen",CHAN_WEAPON)
+		"####" E 1 offset(44,88)
+		"####" F 1 offset(36,76)
+		"####" F 1 offset(28,64)
+		"####" G 1 offset(20,54)
+		"####" I 1 offset(14,45)
+		"####" M 1 offset(8,40) A_PlaySound("Weapons/LighterSuccess",CHAN_WEAPON) 
+		"####" N 1 offset(4,36) A_GunFlash("SpawnLight",GFF_NOEXTCHANGE)
+		"####" N 1 offset(1,33)
+		"####" OP 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+		"####" X 0 A_Jump(255,"Ready")
+		"####" X 0 A_Jump(255,"Ready")
+		goto Ready	
+		
+	SpawnLight:
+		TNT1 A 1 A_SpawnItem("FMBulletPuff2LighterSmall",15,30)
+		loop
+	Ready:
+        2LTV Q 1 BRIGHT A_WeaponReady(WRF_ALLOWZOOM|WRF_NoSecondary)
+        2LTV R 1 BRIGHT A_WeaponReady(WRF_ALLOWZOOM|WRF_NoSecondary)
+        2LTV S 1 BRIGHT A_WeaponReady(WRF_ALLOWZOOM|WRF_NoSecondary)
+        2LTV T 1 BRIGHT A_WeaponReady(WRF_ALLOWZOOM|WRF_NoSecondary)
+        2LTV U 1 BRIGHT A_WeaponReady(WRF_ALLOWZOOM|WRF_NoSecondary)
+        2LTV V 1 BRIGHT A_WeaponReady(WRF_ALLOWZOOM|WRF_NoSecondary)
+        2LTV W 1 BRIGHT A_WeaponReady(WRF_ALLOWZOOM|WRF_NoSecondary)
+        2LTV X 1 BRIGHT A_WeaponReady(WRF_ALLOWZOOM|WRF_NoSecondary)
+        Loop
+	//Zoom:
+		TNT1 A 0
+		TNT1 A 0 A_TakeInventory("Flicked",999)
+		TNT1 A 0 A_TakeInventory("MolotovLit",1)
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+		TNT1 A 0 A_GunFlash("StopFlash",GFF_NOEXTCHANGE)
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+	Fire:
+		2OLV ABCD 1 Bright
+		2OLV EF 1 Bright
+		2OLV GH 1 Bright
+		2OLV IJKLM 1 BRIGHT
+		2OLV O 0 A_TakeInventory("MolotovLit",1)
+		2OLV O 0 A_PlaySound("Weapons/Lighterclose",CHAN_WEAPON)
+		2OLV NOPQ 1 BRIGHT
+		TNT1 A 3
+	Hold:
+		TNT1 A 0 A_jumpIfInventory("MollyHoldCounter",175,"ExplodeInHand")
+		TNT1 A 0 A_GiveInventory("MollyHoldCounter",1)
+		TNT1 A 1 A_GiveInventory("PlayerAttackAnim",1)
+		TNT1 A 0 A_ReFire("Hold")
+		TNT1 A 1 A_WeaponReady(WRF_NoPrimary)
+		TNT1 A 0 A_GunFlash("StopFlash",GFF_NOEXTCHANGE)
+		TNT1 A 0 A_TakeInventory("MollyHoldCounter",999)
+		THRW I 1 A_FireCustomMissile("ThrownWhiskey", 0, 0, 6, 10, 0, 8)
+		THRW JK 1
+		THRW LMM 1
+		THRW MNNOPQR 1
+		TNT1 A 2 A_TakeInventory("PlayerAttackAnim",1)
+		TNT1 A 0 A_TakeInventory("Slot1Filled",1)
+		TNT1 A 0 A_TakeInventory("WhiskeyMolly",1)
+		
+		//TNT1 A 5 ACS_ExecuteAlways(653, 0, 0, 0, 0)
+		TNT1 A 10
+		Goto Ready
+	ExplodeInHand:
+		TNT1 A 0 A_TakeInventory("MollyHoldCounter",999)
+		TNT1 A 0 A_Print("The bottle blew up in your hand!")
+		TNT1 A 0 A_GunFlash("StopFlash",GFF_NOEXTCHANGE)
+		TNT1 A 1 A_SpawnItemEx("MollyHandExplosion",0,16,32,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 0 A_TakeInventory("Slot1Filled",1)
+		TNT1 A 0 A_TakeInventory("WhiskeyMolly",1)
+		
+		//TNT1 A 5 ACS_ExecuteAlways(653, 0, 0, 0, 0)
+		TNT1 A 10
+		Goto Ready
+		
+	AltFire:
+		TNT1 A 0 A_TakeInventory("MollyHoldCounter",999)
+		TNT1 A 0 A_TakeInventory("PlayerAttackAnim",999)
+		TNT1 A 7 //Debuff pause (player stop fire).
+		TNT1 A 9 A_GunFlash("StopFlash",GFF_NOEXTCHANGE)
+		2LTV A 0 Offset(71,156)
+		Goto SelectAnim
+}}
+
+Actor Dropper_whiskey : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedWhiskey", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor DroppedWhiskey: Wdi_BaseDroppedWeapon
+{
+	Radius 16
+	Height 8
+	Scale 0.65
+	BounceSound "molly/drop"
+	Damage (2)
+	States
+	{
+	Spawn:
+		WHIS A 1
+		Loop
+	Death:
+		TNT1 A 0 A_playSound("molly/drop",CHAN_BODY,0.5)
+		TNT1 A 0 A_Jump(96,"Spawn2","Spawn3","Spawn4","Spawn5")
+		WHIS A 35
+		WHIS A 1 A_SpawnItemEx("FakeWhiskey1",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	Spawn2:
+		WHIS R 35 A_ChangeFlag("FORCEXYBILLBOARD",1)
+		WHIS R 1 A_SpawnItemEx("FakeWhiskey2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	Spawn3:
+		WHIS S 35 A_ChangeFlag("FORCEXYBILLBOARD",1)
+		WHIS S 1 A_SpawnItemEx("FakeWhiskey3",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	Spawn4:
+		WHIS R 0 A_SetScale(-scalex,scaley)
+		WHIS R 0 A_ChangeFlag("FORCEYBILLBOARD",0)
+		WHIS R 35 A_ChangeFlag("FORCEXYBILLBOARD",1)
+		WHIS R 1 A_SpawnItemEx("FakeWhiskey2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		Stop
+	Spawn5:
+		WHIS S 0 A_SetScale(-scalex,scaley)
+		WHIS S 0 A_ChangeFlag("FORCEYBILLBOARD",0)
+		WHIS S 35 A_ChangeFlag("FORCEXYBILLBOARD",1)
+		WHIS S 1 A_SpawnItemEx("FakeWhiskey3",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		Stop
+}}
+Actor DroppedWhiskeyFar: Wdi_BaseDroppedWeaponFar
+{
+	Radius 16
+	Height 8
+	Scale 0.65
+	BounceSound "molly/drop"
+	Damage (2)
+	States
+	{
+	Spawn:
+		WHIS A 1
+		Loop
+	Death:
+		TNT1 A 0 A_playSound("molly/drop",CHAN_BODY,0.5)
+		TNT1 A 0 A_Jump(96,"Spawn2","Spawn3","Spawn4","Spawn5")
+		WHIS A 35
+		WHIS A 1 A_SpawnItemEx("FakeWhiskey1",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	Spawn2:
+		WHIS R 35 A_ChangeFlag("FORCEXYBILLBOARD",1)
+		WHIS R 1 A_SpawnItemEx("FakeWhiskey2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	Spawn3:
+		WHIS S 35 A_ChangeFlag("FORCEXYBILLBOARD",1)
+		WHIS S 1 A_SpawnItemEx("FakeWhiskey3",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	Spawn4:
+		WHIS R 0 A_SetScale(-scalex,scaley)
+		WHIS R 0 A_ChangeFlag("FORCEYBILLBOARD",0)
+		WHIS R 35 A_ChangeFlag("FORCEXYBILLBOARD",1)
+		WHIS R 1 A_SpawnItemEx("FakeWhiskey2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		Stop
+	Spawn5:
+		WHIS S 0 A_SetScale(-scalex,scaley)
+		WHIS S 0 A_ChangeFlag("FORCEYBILLBOARD",0)
+		WHIS S 35 A_ChangeFlag("FORCEXYBILLBOARD",1)
+		WHIS S 1 A_SpawnItemEx("FakeWhiskey3",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		Stop
+}}
+
+Actor ThrownWhiskey
+{
+	Radius 6
+	Height 4
+	Speed 25
+	Damage 0
+	Scale 0.45
+	DamageType "Friendlythrown"
+	Projectile
+	-NOGRAVITY
+	-BOUNCEONACTORS
+	-BLOODSPLATTER
+	-EXPLODEONWATER
+	+NOBLOOD
+	+SKYEXPLODE
+	SeeSound "Molly/Flame"
+	DeathSound "Molly/Burst"
+	Obituary ""
+	Gravity 0.85
+	+FORCEXYBILLBOARD
+	+SKYEXPLODE
+	decal "Scorch"
+	States
+	{
+	Spawn:
+		WHIS BCDEFGHIJKLMNOPQ 2 Bright
+		Loop
+	Death:
+		TNT1 A 0 A_JumpIf(waterlevel >= 2, "InWater")
+		TNT1 A 0 A_Explode(10, 64, 1)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("MollyShard",1,0,random(0,360), 2, random(5, 45))
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("MollyFireSpawn",1,0,random(0,360), 2, random(5, 30))
+		TNT1 AAAAA 0 A_CustomMissile("MollyFireSpawn3",1,0,random(0,360), 2, random(5, 30))
+		TNT1 AAAAA 0 A_CustomMissile("MollyFireSpawn2",1,0,random(0,360), 2, random(30, 70))
+		TNT1 A 1 A_SpawnItemEx("MollyFireDecorativeBig", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_SpawnItemEx("MollyGroundScorchHuge", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+		Stop
+	InWater:
+		TNT1 A 1
+		Stop
+}}

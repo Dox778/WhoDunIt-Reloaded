@@ -1,0 +1,65 @@
+ACTOR SideCam
+{
++NOCLIP
++NOGRAVITY
++DONTSPLASH
+RenderStyle None
+States
+{
+Spawn:
+TNT1 A 1
+Loop
+Death:
+TNT1 A 0
+Stop
+}
+}
+
+Actor InMurdhole : Inventory
+{
+	Inventory.Amount 1
+	Inventory.MaxAmount 1
+}
+
+Actor InFoyer1 : Inventory
+{
+	Inventory.Amount 1
+	Inventory.MaxAmount 1
+}
+
+Actor InFoyer2 : Inventory
+{
+	Inventory.Amount 1
+	Inventory.MaxAmount 1
+}
+
+Actor InFoyer3 : Inventory
+{
+	Inventory.Amount 1
+	Inventory.MaxAmount 1
+}
+
+
+Actor InHall1_F1 : Inventory
+{
+	Inventory.Amount 1
+	Inventory.MaxAmount 1
+}
+
+Actor InCollapsed_F1 : Inventory
+{
+	Inventory.Amount 1
+	Inventory.MaxAmount 1
+}
+
+Actor InHall2_F1 : Inventory
+{
+	Inventory.Amount 1
+	Inventory.MaxAmount 1
+}
+
+Actor InBedroom : Inventory
+{
+	Inventory.Amount 1
+	Inventory.MaxAmount 1
+}

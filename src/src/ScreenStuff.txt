@@ -1,0 +1,290 @@
+#library "ScreenStuff"
+#include "zcommon.acs"
+//////////////////////////////////////////////////////////////////////////////////////////
+//BLOOD SPLATTERS
+str blood[10] = { "blood0", "blood1", "blood2", "blood3", "blood4", "blood5", "blood6", "blood7", "blood8", "blood9" };
+script "NewScreenBlood" (int type) CLIENTSIDE //Type currently does nothing, but will be used to define what kind of spatter will be drawn.
+{
+	SetHudSize(320, 200, 1);
+	If (GetCVar("WDI_ScreenSplashes") == true)
+	{
+	setfont(blood[random(0,9)]);	
+	hudmessage(s:"a"; HUDMSG_FADEOUT|HUDMSG_LAYER_UNDERHUD|HUDMSG_NOTWITHFULLMAP, 5463, CR_UNTRANSLATED, random(-20.0, 280.0), random(30.0, 160.0), random(1.5, 3.0), random(1.0, 2.0));
+	}
+}
+script "NewScreenBloodNoLimit" (int type) CLIENTSIDE //Type currently does nothing, but will be used to define what kind of spatter will be drawn.
+{
+	SetHudSize(320, 200, 1);
+	If (GetCVar("WDI_ScreenSplashes") == true)
+	{
+	setfont(blood[random(0,9)]);	
+	hudmessage(s:"a"; HUDMSG_FADEOUT|HUDMSG_LAYER_UNDERHUD|HUDMSG_NOTWITHFULLMAP, 0, CR_UNTRANSLATED, random(-20.0, 300.0), random(20.0, 180.0), random(1.5, 3.0), random(1.0, 2.0));
+
+}}
+
+str scburn[5] = { "scburn0", "scburn1", "scburn2", "scburn3", "scburn4"};
+script "NewScreenBurn" (int type) CLIENTSIDE //Type currently does nothing, but will be used to define what kind of spatter will be drawn.
+{
+	SetHudSize(320, 200, 1);
+	If (GetCVar("WDI_ScreenSplashes") == true)
+	{
+	setfont(scburn[random(0,4)]);	
+	hudmessage(s:"a"; HUDMSG_FADEOUT|HUDMSG_LAYER_UNDERHUD|HUDMSG_NOTWITHFULLMAP, 5463, CR_UNTRANSLATED, random(-20.0, 300.0), random(20.0, 180.0), random(1.5, 3.0), random(1.0, 2.0));
+
+}}
+
+str SCRNBUL[5] = { "SCRNBUL0", "SCRNBUL1", "SCRNBUL2"};
+script "NewScreenBullet" (int type) CLIENTSIDE //Type currently does nothing, but will be used to define what kind of spatter will be drawn.
+{
+	SetHudSize(320, 200, 1);
+	If (GetCVar("WDI_ScreenSplashes") == true)
+	{
+	setfont(SCRNBUL[random(0,2)]);	
+	hudmessage(s:"a"; HUDMSG_FADEOUT|HUDMSG_LAYER_UNDERHUD|HUDMSG_NOTWITHFULLMAP, 0, CR_UNTRANSLATED, random(-20.0, 300.0), random(20.0, 180.0), random(15.0, 30.0), random(1.0, 2.0));
+
+}}
+script "NewScreenFireExtSmoke" (int type) CLIENTSIDE //Type currently does nothing, but will be used to define what kind of spatter will be drawn.
+{
+	SetHudSize(320, 200, 1);
+	If (GetCVar("WDI_ScreenSplashes") == true)
+	{
+	setfont("Scorch3");	
+	hudmessage(s:"a"; HUDMSG_FADEOUT|HUDMSG_LAYER_UNDERHUD|HUDMSG_NOTWITHFULLMAP, 0, CR_UNTRANSLATED, random(-20.0, 300.0), random(20.0, 180.0), random(0.1, 1.0), random(1.0, 2.0));
+
+}}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+script "ScreenShatter" ENTER CLIENTSIDE
+{
+	if ( PlayerNumber( ) != ConsolePlayerNumber( ) || getCVAR("WDIR_LowHPScreen") == false) { terminate; } //Kaminsky told me to do that lol
+	SetHudSize(320,200,1);
+	while( GetActorProperty(0,APROP_HEALTH) > 31) { delay(5); }
+	setfont("BREAK1");
+	hudmessage(s:"A"; HUDMSG_PLAIN|HUDMSG_NOTWITHFULLMAP|HUDMSG_LAYER_UNDERHUD, 7878, CR_UNTRANSLATED, 150.0, 100.0, 0);
+	while( GetActorProperty(0,APROP_HEALTH) > 16) { delay(5); }
+	setfont("BREAK2");
+	hudmessage(s:"A"; HUDMSG_PLAIN|HUDMSG_NOTWITHFULLMAP|HUDMSG_LAYER_UNDERHUD, 7878, CR_UNTRANSLATED, 150.0, 100.0, 0);
+	
+	until( GetActorProperty(0,APROP_HEALTH) > 0) { delay(5); }
+	hudmessage(s:"A"; HUDMSG_FADEOUT|HUDMSG_NOTWITHFULLMAP|HUDMSG_LAYER_UNDERHUD, 7878, CR_UNTRANSLATED, 150.0, 100.0, 0.2, 1.0);
+	hudmessage(s:"A"; HUDMSG_FADEOUT|HUDMSG_NOTWITHFULLMAP|HUDMSG_LAYER_UNDERHUD, 0, CR_UNTRANSLATED, 150.0, 100.0, 0.2, 1.0);
+	
+	terminate;
+	
+}
+
+// Script "GoodbyeCracks" DEATH CLIENTSIDE
+// {
+// 	SetHudSize(320,200,1);
+// 	setfont("BREAK2");
+// 	hudmessage(s:"A"; HUDMSG_FADEOUT|HUDMSG_NOTWITHFULLMAP|HUDMSG_LAYER_UNDERHUD, 7878, CR_UNTRANSLATED, 150.0, 100.0, 1.0, 2.0);
+// 	hudmessage(s:"A"; HUDMSG_FADEOUT|HUDMSG_NOTWITHFULLMAP|HUDMSG_LAYER_UNDERHUD, 0, CR_UNTRANSLATED, 150.0, 100.0, 1.0, 2.0);
+// }
+
+
+script "LowHealthBlood" ENTER CLIENTSIDE
+{
+	if ( PlayerNumber( ) != ConsolePlayerNumber( ) || getCVAR("WDIR_LowHPScreen") == false) { terminate; } //Kaminsky told me to do that lol
+	SetHudSize(320,200,1);
+	setfont("BREAKS");
+	while(true)
+	{
+	if( GetActorProperty(0,APROP_HEALTH) < 1) { terminate; }
+	while( GetActorProperty(0,APROP_HEALTH) > 31) { delay(5); }
+	
+	hudmessage(s:"A"; HUDMSG_FADEINOUT|HUDMSG_NOTWITHFULLMAP|HUDMSG_LAYER_UNDERHUD, 0, CR_UNTRANSLATED, 150.0, 100.0, 0.5, 0.3, 1.0);
+	Delay(40);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+bool IsFlinching = false;
+Script "OuchCamera" (void) CLIENTSIDE
+{
+	if(GetCVAR("WDI_ScreenFlinch") == true && IsFlinching == false)
+	{
+	IsFlinching = true;
+	ACS_NamedExecuteAlways("OuchCameraX",0,0,0,0);
+	ACS_NamedExecuteAlways("OuchCameraY",0,0,0,0);
+	Delay(15);
+	IsFlinching = false;
+	}
+	terminate;
+}
+
+Script "OuchCameraX" (void)
+{
+	int Variant = random(1,2);
+	int intensity = GetCVAR("WDI_FlinchPower") * random(1,4);
+	Switch(Variant)
+	{
+	Default:
+	SetActorAngle(0,GetActorAngle(0)-(60*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)-(68*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)+(18*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)+(17*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)+(14*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)+(13*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)+(12*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)+(11*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)+(10*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)+(9*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)+(8*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)+(6*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)+(4*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)+(2*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)+(2*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)+(1*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)+(1*intensity)); Delay(1);
+	Terminate;
+	Case 2:
+	SetActorAngle(0,GetActorAngle(0)+(60*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)+(68*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)-(18*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)-(17*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)-(14*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)-(13*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)-(12*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)-(11*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)-(10*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)-(9*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)-(8*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)-(6*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)-(4*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)-(2*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)-(2*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)-(1*intensity)); Delay(1);
+	SetActorAngle(0,GetActorAngle(0)-(1*intensity)); Delay(1);
+	Terminate;
+	}
+}
+Script "OuchCameraY" (void)
+{
+	int Variant = random(1,2);
+	int intensity = GetCVAR("WDI_FlinchPower") * random(1,4);
+	//int pitch = GetActorPitch(0);
+	Switch(Variant)
+	{
+	Default:
+	SetActorPitch(0,GetActorPitch(0)-(60*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)-(68*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)+(18*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)+(17*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)+(14*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)+(13*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)+(12*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)+(11*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)+(10*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)+(9*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)+(8*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)+(6*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)+(4*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)+(2*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)+(2*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)+(1*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)+(1*intensity)); Delay(1);
+	Terminate;
+	Case 2:
+	SetActorPitch(0,GetActorPitch(0)+(60*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)+(68*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)-(18*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)-(17*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)-(14*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)-(13*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)-(12*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)-(11*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)-(10*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)-(9*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)-(8*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)-(6*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)-(4*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)-(2*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)-(2*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)-(1*intensity)); Delay(1);
+	SetActorPitch(0,GetActorPitch(0)-(1*intensity)); Delay(1);
+	Terminate;
+	}
+}
+
+
+Script "CROUCH" (void)
+{		
+		//on knees first
+		setactorproperty(0,APROP_viewheight,49.0); if(GetActorPitch(0) >> 0) { ChangeActorPitch(0, GetActorPitch(0)/2); } else { ChangeActorPitch(0, GetActorPitch(0)/-2); }
+		delay(1);
+		setactorproperty(0,APROP_viewheight,48.0); if(GetActorPitch(0) >> 0) { ChangeActorPitch(0, GetActorPitch(0)/2); } else { ChangeActorPitch(0, GetActorPitch(0)/-2); }
+		delay(1);
+		setactorproperty(0,APROP_viewheight,46.0); if(GetActorPitch(0) >> 0) { ChangeActorPitch(0, GetActorPitch(0)/2); } else { ChangeActorPitch(0, GetActorPitch(0)/-2); }
+		delay(1);
+		setactorproperty(0,APROP_viewheight,43.0); if(GetActorPitch(0) >> 0) { ChangeActorPitch(0, GetActorPitch(0)/2); } else { ChangeActorPitch(0, GetActorPitch(0)/-2); }
+		delay(1);
+		setactorproperty(0,APROP_viewheight,40.0); if(GetActorPitch(0) >> 0) { ChangeActorPitch(0, GetActorPitch(0)/2); } else { ChangeActorPitch(0, GetActorPitch(0)/-2); }
+		delay(1);
+		setactorproperty(0,APROP_viewheight,35.0); if(GetActorPitch(0) >> 0) { ChangeActorPitch(0, GetActorPitch(0)/2); } else { ChangeActorPitch(0, GetActorPitch(0)/-2); }
+		delay(1);
+		setactorproperty(0,APROP_viewheight,29.0); if(GetActorPitch(0) >> 0) { ChangeActorPitch(0, GetActorPitch(0)/2); } else { ChangeActorPitch(0, GetActorPitch(0)/-2); }
+		delay(1);
+		setactorproperty(0,APROP_viewheight,28.0); if(GetActorPitch(0) >> 0) { ChangeActorPitch(0, GetActorPitch(0)/2); } else { ChangeActorPitch(0, GetActorPitch(0)/-2); }
+		delay(2);
+		setactorproperty(0,APROP_viewheight,30.0); if(GetActorPitch(0) >> 0) { ChangeActorPitch(0, GetActorPitch(0)/2); } else { ChangeActorPitch(0, GetActorPitch(0)/-2); }
+		delay(2);
+		setactorproperty(0,APROP_viewheight,33.0); if(GetActorPitch(0) >> 0) { ChangeActorPitch(0, GetActorPitch(0)/2); } else { ChangeActorPitch(0, GetActorPitch(0)/-2); }
+		delay(2);
+		setactorproperty(0,APROP_viewheight,34.0); if(GetActorPitch(0) >> 0) { ChangeActorPitch(0, GetActorPitch(0)/2); } else { ChangeActorPitch(0, GetActorPitch(0)/-2); }
+		delay(2);
+		setactorproperty(0,APROP_viewheight,35.0); if(GetActorPitch(0) >> 0) { ChangeActorPitch(0, GetActorPitch(0)/2); } else { ChangeActorPitch(0, GetActorPitch(0)/-2); }
+		delay(7);
+		//falling flat now idk
+		
+		setactorproperty(0,APROP_viewheight,34.0); delay(2);
+		setactorproperty(0,APROP_viewheight,32.0); delay(1);
+		setactorproperty(0,APROP_viewheight,28.0); delay(1);
+		setactorproperty(0,APROP_viewheight,22.0); delay(1);
+		setactorproperty(0,APROP_viewheight,16.0); delay(1);
+		setactorproperty(0,APROP_viewheight,10.0); delay(1);
+		setactorproperty(0,APROP_viewheight,8.0); delay(1);
+		setactorproperty(0,APROP_viewheight,7.0); delay(1);
+		setactorproperty(0,APROP_viewheight,9.0); delay(1);
+		setactorproperty(0,APROP_viewheight,11.0); delay(1);
+		setactorproperty(0,APROP_viewheight,12.0); delay(3);
+		setactorproperty(0,APROP_viewheight,11.0); delay(1);
+		setactorproperty(0,APROP_viewheight,10.0); delay(1);
+}
+Script "GETUP" (void)
+{
+		//back to knees
+		setactorproperty(0,APROP_viewheight,11.0); delay(2);
+		setactorproperty(0,APROP_viewheight,12.0); delay(1);
+		setactorproperty(0,APROP_viewheight,14.0); delay(1);
+		setactorproperty(0,APROP_viewheight,17.0); delay(1);
+		setactorproperty(0,APROP_viewheight,20.0); delay(1);
+		setactorproperty(0,APROP_viewheight,24.0); delay(1);
+		setactorproperty(0,APROP_viewheight,28.0); delay(1);
+		setactorproperty(0,APROP_viewheight,32.0); delay(1);
+		setactorproperty(0,APROP_viewheight,35.0); delay(1);
+		setactorproperty(0,APROP_viewheight,37.0); delay(1);
+		setactorproperty(0,APROP_viewheight,37.0); delay(2);
+		setactorproperty(0,APROP_viewheight,36.0); delay(2);
+		setactorproperty(0,APROP_viewheight,35.0); delay(1);
+		//back to full stand
+		setactorproperty(0,APROP_viewheight,36.0); delay(1);
+		setactorproperty(0,APROP_viewheight,38.0); delay(1);
+		setactorproperty(0,APROP_viewheight,41.0); delay(1);
+		setactorproperty(0,APROP_viewheight,44.0); delay(1);
+		setactorproperty(0,APROP_viewheight,47.0); delay(1);
+		setactorproperty(0,APROP_viewheight,49.0); delay(1);
+		setactorproperty(0,APROP_viewheight,50.0); delay(1);
+		setactorproperty(0,APROP_viewheight,51.0); delay(2);
+		setactorproperty(0,APROP_viewheight,50.0); delay(1);
+}

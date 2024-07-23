@@ -1,0 +1,488 @@
+Model Brutal_BloodSpot      // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodspothd2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 40.0 40.0 1.0            // Scale values
+   ZOffset 0.4
+   FrameIndex BPDL A 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model Brutal_BloodSpot      // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodspothd.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 40.0 40.0 1.0            // Scale values
+   ZOffset 0.3
+   FrameIndex BPDL B 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model Brutal_BloodSpot      // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodspothd.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 40.0 40.0 1.0            // Scale values
+   ZOffset 0.2
+   FrameIndex BPDL C 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model Brutal_BloodSpot      // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodspothd2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 40.0 40.0 1.0            // Scale values
+   ZOffset 0.1
+   FrameIndex BPDL D 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 05.0 05.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 A 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 06.0 06.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 B 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 07.0 07.0 1.0           // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 C 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 08.0 08.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 D 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 09.0 09.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 E 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 10.0 10.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 F 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 11.0 11.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 G 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 12.0 12.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 H 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 13.0 13.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 I 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 14.0 14.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 J 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 15.0 15.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 K 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 16.0 16.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 L 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 17.0 17.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 M 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 18.0 18.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 N 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 19.0 19.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 O 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 20.0 20.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 P 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 21.0 21.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 Q 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 22.0 22.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 R 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 23.0 23.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 S 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 24.0 24.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 T 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 25.0 25.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 U 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 26.0 26.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 V 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 27.0 27.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 W 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 28.0 28.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 X 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 29.0 29.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 Y 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 30.0 30.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 Z 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model GrowingBloodPool     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 30.0 30.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex TNT5 Z 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+
+Model GrowingSmallBloodSpot     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodpool2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 30.0 30.0 30.0            // Scale values
+   ZOffset 0.3
+   FrameIndex BLOD M 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+////////////////////////
+//SPRAY PAINT ON FLOOR
+Model SprayFloorDecalBlu     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "PaintDecalBLU.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 20.0 20.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex XXXX A 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+Model SprayFloorDecalRed     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "PaintDecalRED.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 20.0 20.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex XXXX A 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+Model SprayFloorDecalYellow     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "PaintDecalYLW.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 20.0 20.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex XXXX A 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+Model SprayFloorDecalPink     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "PaintDecalPNK.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 20.0 20.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex XXXX A 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+Model SprayFloorDecalGreen     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "PaintDecalGRN.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 20.0 20.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex XXXX A 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+Model SprayFloorDecalOrange     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "PaintDecalORG.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 20.0 20.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex XXXX A 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+Model SprayFloorDecalWhite     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "SCORCH2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 60.0 60.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex XXXX A 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+Model SprayFloorDecalGrey     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "PaintDecalGrey.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 20.0 20.0 1.0            // Scale values
+   ZOffset 0.65
+   FrameIndex XXXX A 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+
+
+
+Model Footstep // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "Footprintpic.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 5.0 5.0 1.0            // Scale values
+   ZOffset 0.2
+   FrameIndex XXXX X 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model BulletTracer // Name of actor in DECORATE
+{ 
+   Path "Models/FuckingWork" // Path to model in PK3
+   SKIN 0 "tracer1.tga" // Model index, model file
+   MODEL 0 "Tracer.md3" // Model index, texture (can be in any format supported by GZDoom)
+   Scale 4.5 4.5 1.5 // Scale values
+   PITCHFROMMOMENTUM // A flag that will fix the model pitch for projectiles
+   
+   FrameIndex TRAC B 0 0 // The sprite lump, sprite frame, model index, frame number
+}
+
+Model MollyGroundScorch     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "buldecground1"    // Model index, model file
+   Skin 0 "SCORCH1.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 40.0 40.0 40.0            // Scale values
+   ZOffset 0.1
+   FrameIndex XXXX A 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+Model MollyGroundScorchHuge     // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "buldecground1"    // Model index, model file
+   Skin 0 "SCORCH1.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 90.0 90.0 90.0            // Scale values
+   ZOffset 0.2
+   FrameIndex XXXX A 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+
+
+Model SmallBrutal_BloodSpot      // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodspothd2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 40.0 40.0 1.0            // Scale values
+   ZOffset 0.1
+   FrameIndex BPDL A 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+Model SmallBrutal_BloodSpot      // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodspothd2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 40.0 40.0 1.0            // Scale values
+   ZOffset 0.1
+   FrameIndex BPDL B 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+Model SmallBrutal_BloodSpot      // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodspothd2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 40.0 40.0 1.0            // Scale values
+   ZOffset 0.1
+   FrameIndex BPDL C 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+Model SmallBrutal_BloodSpot      // Name of actor in DECORATE
+{
+   Path "models/FuckingWork"    // Path to model in PK3
+   Model 0 "bloodspot.md3"    // Model index, model file
+   Skin 0 "bloodspothd2.png"     // Model index, texture (can be in any format supported by GZDoom)
+   Scale 40.0 40.0 1.0            // Scale values
+   ZOffset 0.1
+   FrameIndex BPDL D 0 0         // The sprite lump, sprite frame, model index, frame number
+}
+
+

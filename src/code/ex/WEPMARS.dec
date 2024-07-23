@@ -1,0 +1,216 @@
+// Always spawn
+actor GunSpawnerX : RandomSpawner 32555
+{
+	//$Category Marsis_map_ONLY
+    DropItem "FakeBeretta" 
+	DropItem "FakeShotgun" 
+}
+
+// Always spawn
+actor GunSpawnerX2 : RandomSpawner 28351
+{
+	//$Category Marsis_map_ONLY
+    DropItem "FakeBeretta" 
+	DropItem "FakeShotgun"
+	DropItem "FakeCrossbow"
+	DropItem "FakeM1"
+	DropItem "ABigNothing"
+}
+
+
+
+ACTOR Lighter : Weapon 9904
+{
+  Weapon.SelectionOrder 32000
+  +NOALERT 
+  +DONTBOB
+  scale 0.2
+  Inventory.PickupMessage "Picked up a Lighter"
+  Inventory.PickupSound "weapons/combogun_open"
+  States
+  {
+  Spawn:
+    LIT1 H 1
+    Loop
+  Ready:
+    LIT1 A 0
+    LIT1 ABC 5
+    LIT1 C 0 A_PlaySoundEx("weapons/combogun_open","Weapon",0)
+    LIT1 C 1 A_WeaponReady
+    Goto Ready+5
+  Select:
+    LIT1 A 1 A_Raise
+    Loop
+  Deselect:
+    LIT1 C 0 A_PlaySoundEx("weapons/combogun_close","Weapon",0)
+    LIT1 CBA 5
+    LIT1 A 1 A_Lower
+    Goto Deselect+4
+  Fire:
+    LIT1 D 5
+    LIT1 EE 5
+    LIT1 F 5 A_PlaySoundEx("weapons/combogun_click","Weapon",0)
+    LIT1 E 5
+    LIT1 F 5 A_PlaySoundEx("weapons/combogun_click","Weapon",0)
+    Goto Hold
+  Hold:
+    LIT1 A 0 A_SpawnItemEx("Lightbeam1", 14.0, -6.0, 32.0, 0.0, 0.0, 0.0, 0.0, 128)
+    LIT1 A 0 A_SpawnItemEx("Lightbeam1", 32.0 * (cos(pitch) * 2), -6.0, (32.0 * (sin(pitch) * 2)) * -1.0 + 32.0, 0.0, 0.0, 0.0, 0.0, 128)
+    LIT1 A 0 A_SpawnItemEx("Lightbeam1", 64.0 * (cos(pitch) * 2), -6.0, (64.0 * (sin(pitch) * 2)) * -1.0 + 32.0, 0.0, 0.0, 0.0, 0.0, 128)
+    Goto loop
+  }
+}
+
+
+
+ACTOR Lightprojectile
+{
+damage 2
++NOCLIP
+- SOLID
++DONTSPLASH
+States
+{
+Spawn:
+TNT1 A 1
+Stop
+}
+}
+
+
+
+
+/////////////////////////////////////////////
+////////////////////////////////////////////
+////////////////////////////////////////////DUELKNIFE
+
+//Knife (Murderer only weapon!)
+
+actor DuelKnife : Weapon
+{
+  Weapon.SelectionOrder 5000
+  Weapon.Kickback 100
+  Weapon.UpSound "weapons/KnifeReady" 
+  Weapon.preferredSkin "MurderSkin"
+  +WEAPON.MELEEWEAPON
+  +WEAPON.BFG
+  +WEAPON.NO_AUTO_SWITCH
+  +WEAPON.NOAUTOFIRE
+  Obituary "%o was stabbed to death." 
+  States
+  {
+  Ready:
+  	KNIF A 0 A_JumpIfInventory("IsDropping",1,"DropWeapon")
+  	KNIF A 1 A_WeaponReady
+    loop
+	Death:
+	   DHSP A 0 A_SpawnItem("DroppedDuelKnife",0,0,0,0)
+	   TNT1 A 0 A_FadeOut(1.0)
+	   goto death + 1
+	Spawn:
+		YZNF A 0
+		goto Death
+  Deselect:
+    KNIF A 1 A_Lower
+    loop
+  Select: 
+	KNIF A 1 A_Raise 
+	loop
+  Fire:
+    KNIF B 0 A_JumpIf (ACS_ExecuteWithResult(555), "BackStab") 	
+    KNIF B 1 A_CustomPunch (10, 1, 0, "StabPuff2", 54)
+    KNIF C 1 A_CustomPunch (10, 1, 0, "StabPuff2", 64)
+    KNIF D 8 A_CustomPunch (20, 1, 0, "StabPuff", 70)
+    KNIF C 4
+    KNIF B 4 
+	KNIF A 15
+	KNIF A 1 A_ReFire
+    goto Ready
+
+  BackStab:
+    KNIF C 1 Offset(4, 32) A_CustomPunch (666, 1, 0, "BackStabPuff", 64)
+	KNIF C 1 Offset(36, 32)
+	KNIF C 1 Offset(72, 32)
+	KNIF C 1 Offset(108, 32)
+	KNIF C 1 Offset(144, 32)
+    KNIF E 1 Offset(178, 32) A_PlaySound ("weapons/KnifeStab")
+	KNIF E 1 Offset(144, 32)
+	KNIF E 1 Offset(108, 32)
+	KNIF E 1 Offset(72, 32)
+	//Stabbing
+	KNIF E 1 Offset(36, 40) //A_CustomPunch (666, 1, 0, "BackStabPuff", 72)
+	KNIF E 1 Offset(32, 48) //A_CustomPunch (666, 1, 0, "BackStabPuff", 72)
+	KNIF E 1 Offset(28, 56) //A_CustomPunch (666, 1, 0, "BackStabPuff", 72)
+	KNIF E 1 Offset(24, 74) //A_CustomPunch (666, 1, 0, "BackStabPuff", 72)
+	KNIF E 1 Offset(20, 82) //A_CustomPunch (666, 1, 0, "BackStabPuff", 72)
+	//Redraw
+	KNIF E 1 Offset(16, 90)
+	KNIF E 1 Offset(12, 100)
+	KNIF E 1 Offset(8, 110)
+	KNIF E 1 Offset(4, 120)
+	KNIF E 1 Offset(0, 130)
+	KNIF E 8 Offset(0, 152)
+	KNIF A 2 Offset(0, 130)
+	KNIF A 2 Offset(0, 100)
+	KNIF A 2 Offset(0, 70)
+	KNIF A 2 Offset(0, 40)
+	KNIF A 2 Offset(0, 32)
+    goto Ready
+  }
+}
+
+ACTOR FakeDuelKnife : CustomInventory 28468
+{
+    //$Category Marsis_map_ONLY
+    Scale 0.7
+	Radius 16
+	Height 8
+	Inventory.PickupMessage "Found a Knife." 
+	Inventory.RespawnTics 8150 
+	States
+	{
+	Spawn:
+		YZNF A 1
+		Loop
+	Pickup: 
+		YZNF A 0 
+		YZNF A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		YZNF A 0 A_PlaySound("pickups/weapon")
+		YZNF A 0 A_GiveInventory("DuelKnife",1)
+		YZNF A 0 A_GiveInventory("Slot1Filled",1)
+		YZNF A 1 ACS_Execute(670,0,10)
+		Stop
+	NotPickup:
+		YZNF A 0
+		YZNF A 1 ACS_Execute(670,0,10)
+		Fail						  
+	}
+}
+
+ACTOR DroppedDuelKnife
+{
+	PROJECTILE
+	-NOGRAVITY
+	Scale 0.7
+	Damage 0
+	Radius 16
+	Height 8
+	Speed 9
+	DeathSound "pipe/wall"
+	States
+	{
+	Spawn:
+		YZNF A 1
+		Loop
+	Death:
+		YZNF A 35
+		YZNF A 1 A_SpawnItem("FakeDuelKnife",0,0,0,0)
+		Stop
+	}
+}
+
+///////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
+/////////////////////SOULCUBE-----------------------
+

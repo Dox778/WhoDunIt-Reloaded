@@ -1,0 +1,2154 @@
+Actor PistolAmmo : Ammo
+{    
+	Inventory.MaxAmount 10
+	Inventory.Icon "PHUDA0"
+	+INVENTORY.UNDROPPABLE
+} 
+ 
+Actor FakeBeretta : CustomInventory Replaces Pistol //5010
+{
+	//$Category WDI Weapons/Limited Weapons
+	//$Sprite PISTA0
+	//$Title "Beretta"
+	Radius 16
+	Height 8
+	Inventory.PickupMessage "\cjFound an \c[R5]M1911 Colt. \cjDon't fire it too fast! \n\caDamage: \c[C4]16"
+	Inventory.Respawntics 42000 //20min
+	Scale 0.9
+	+FORCEXYBILLBOARD
+	+DonTGib
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		PIST A -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1, 2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 0 A_GiveInventory("PistolAmmo",Random(0,10))
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	PickupMurd:
+		TNT1 A 0 A_GiveInventory("MurdBeretta",1)
+		TNT1 A 0 A_Log("\cjMurderer's colt is modified in multiple ways...")
+		TNT1 A 0 A_Jump(256,"ContinuePickup")
+		Goto ContinuePickup
+	NotPickup:
+		TNT1 A 0
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Fail
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",10,"AmmoPickupFull")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",Random(0,10))
+		TNT1 A 0 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickupFull:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolClip",2,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolClip",1)
+		TNT1 A 0 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	ForgetIt:
+		TNT1 A 1
+		Stop
+}}
+Actor FakeBerettaNoRandom : FakeBeretta
+{
+	States
+	{
+	Spawn:
+		PIST A -1
+		Stop
+	}
+}
+
+Actor TKFakeBeretta : FakeBeretta
+{
+states
+	{
+	Pickup:
+		PIST A 0
+		PIST A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		PIST A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")		
+		PIST A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		PIST A 0 A_PlaySound("pickups/weapon")
+		PIST A 0 A_GiveInventory("Beretta",1)
+		PIST A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 0 //A_Print("Picked up a Beretta.")
+		PIST A 1 ACS_ExecuteAlways(670,0,20)
+		PIST A 0 A_JumpIfInventory("PistolOnce",1,"ForgetIt")
+		PIST A 0 A_GiveInventory("PistolAmmo",random(1,8))
+		PIST A 0 A_GiveInventory("PistolOnce",1)
+		Stop
+	NotPickup:
+		PIST A 0
+		PIST A 1 ACS_ExecuteAlways(670,0,20)
+		Fail
+	}
+}
+
+
+//M1911 
+Actor Beretta : Wdi_BaseWeapon
+{ 
+	Tag "M1911 Colt"
+	Weapon.PreferredSkin "PistolSkin"
+	Weapon.SelectionOrder 400
+	Weapon.SlotNumber 1
+	Weapon.Kickback 100
+	Weapon.AmmoType "PistolAmmo"
+	Weapon.AmmoType2 "PistolClip"
+	Weapon.AmmoUse 0
+	-WEAPON.MELEEWEAPON
+	States
+	{
+	Spawn:
+		PIST A -1
+		Stop
+	Select:
+		TNT1 A 5 A_TakeInventory("FidgetSpam",1)
+		REPS AAAAAAAAAAAAAAA 0 A_Raise
+		REPS P 0 A_JumpIfInventory("NeedToUnjamPistol",1,"SelectJammed")
+		Goto SelectAnim
+		
+	SelectAnim:
+		"####" P 1 offset(71,156) A_PlaySound("PISTJMSL",CHAN_WEAPON)
+		"####" P 1 offset(62,127)
+		"####" P 1 offset(52,106)
+		"####" O 1 offset(44,88)
+		"####" N 1 offset(36,76) A_PlaySound("PISTJMFX",CHAN_WEAPON)
+		"####" M 1 offset(28,64)
+		"####" L 1 offset(20,54)
+		"####" K 1 offset(14,45)
+		"####" J 1 offset(8,40)
+		"####" I 1 offset(4,36)
+		"####" H 1 offset(1,33)
+		"####" GF 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+		"####" "#" 0 A_Jump(255,"Ready")
+		"####" "#" 0 A_Jump(255,"Ready")
+		goto Ready	
+		
+	SelectJammed:
+		REPS K 1 A_GiveInventory("JamCountPistol2",3)
+		Goto SelectAnim
+		
+	Ready:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"ReadyJammed")
+		TNT1 A 0 A_TakeInventory("JamCountPistol2",1)
+		 REPS A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD)
+		 REPS A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD)
+		 REPS A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD)
+		 REPS A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD)
+		 REPS A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD)
+		 REPS A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD)
+		 REPS A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD)
+		 REPS A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD)
+		 REPS A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD)
+		 REPS A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD)
+		 REPS A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD)
+		 REPS A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD)
+		loop 
+	ReadyJammed:
+		REPS K 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_NOSECONDARY|WRF_NOSWITCH)
+		loop 
+	
+	Fire:
+		REPS A 0
+		REPS A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"TryToUnjam")
+		REPS A 0 A_JumpIfInventory("PistolAmmo",1,2)
+		Goto NoAmmo
+		REPS AAA 0
+		NULL A 0 A_JumpIfInventory("JamCountPistol2",3,"Jam")//forces the gun to jam if you fire too fast a few times
+		REPS A 0 ACS_NamedExecuteAlways("Powercounter",0)
+		M1TU A 0 A_GiveInventory("Powercounter",1)//< speed trigger
+		M1TU A 0 A_JumpIfInventory("M1AntiJam",1,"Fakefire") //Goodbye Jambingo D:
+		M1TU A 0 A_JumpIfInventory("Powercounter",3,"JAM60") //trigger this at 60%
+		M1TU A 0 A_JumpIfInventory("Powercounter",2,"JAM40") //40%
+	Fakefire:
+		BDPI B 0 Bright A_TakeInventory("PistolAmmo",1)
+		2EPR AA 0 A_FireCustomMissile ("PistolSmokeSpawner", 0, 0, 4,12, 0, 0)
+		RIFF A 0 A_FireCustomMissile("BulletTracer", frandom(1.8,2.8), 0, 9, 7)
+		PISG B 0 A_FireBullets(1.50, 1.0, -1, 16, "FFBulletPuff",FBF_NORANDOM)
+		PISG B 0 A_PlaySound("PistolV2/Fire",CHAN_WEAPON)
+		PISG B 0 A_AlertMonsters
+		TNT1 A 0 A_GunFlash("RecoilStuff",GFF_NOEXTCHANGE)
+		REPS B 1 Bright A_SpawnItem("FMBulletPuff2Lighter",10,30)
+		PISG B 0 A_FireCustomMissile ("PisCaseSpawn", 0, 0, 3, 10, 0, 0)
+		NULL A 0 A_GiveInventory("JamCountPistol2",1)//shots counter
+		REPS CDE 1 A_TakeInventory("M1AntiJam")
+		REPS FF 1 A_WeaponReady(WRF_NOBOB|WRF_NOSWITCH)
+		REPS A 5 A_WeaponReady(WRF_NOBOB|WRF_NOSWITCH)
+		Goto Ready
+	RecoilStuff:
+		NULL A 1 A_SetPitch(Pitch-1)
+		NULL A 0 A_SetPitch(Pitch-3)
+		TNT1 A 0 A_SetAngle(random(-2,2)+angle)
+		TNT1 A 1 A_ZoomFactor(0.99)
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 AA 1 A_SetPitch(Pitch+1)
+		TNT1 A 1 A_SetPitch(Pitch+0.5)
+		stop
+		
+	Jam40:
+		M1TU A 0 A_Jump(6,"Jam")
+		Goto Fakefire
+	Jam60:
+		M1TU A 0 A_Jump(10,"Jam")
+		Goto Fakefire		
+		
+	Jam:
+		2EPR A 0 
+		NULL A 0 A_TakeInventory("Powercounter",10)
+		TNT1 A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 0 A_GiveInventory("JamCountPistol2",3)
+		REPS A 2 offset(0,34) A_PlaySound("pistol/DRYFIRE")
+		REPS A 1 offset(0,33)
+		REPS A 6 offset(0,32)
+		REPS A 1 A_Print("Your pistol is jammed.",2)
+		REPS A 2 offset(0,34) A_PlaySound("pistol/DRYFIRE")
+		REPS A 1 offset(0,33)
+		REPS A 4 offset(0,32)
+		REPS GHIJK 1
+		TNT1 A 0 A_GiveInventory("NeedToUnjamPistol",1)
+		Goto Ready
+	TryToUnjam:	
+		TNT1 A 0 A_Jump(12,"UnjamFinish")
+		TNT1 A 0 A_JumpIfInventory("JamCountPistol",10,"UnjamFinish")
+		REPS M 1 A_PlaySound("PISTJMSL",CHAN_WEAPON)
+		REPS M 2
+		REPS L 1 A_GiveInventory("JamCountPistol",1)
+		Goto ReadyJammed
+	UnjamFinish:
+		NULL A 0
+		REPS L 1 A_PlaySound("PISTJMSL",CHAN_WEAPON)
+		REPS NO 1
+		REPS P 1 A_PlaySound("PISTJMFX",CHAN_WEAPON)
+		TNT1 A 0 A_TakeInventory("JamCountPistol2",3)
+		REPS QRSSTTTUVWX 1
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",10)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		NULL A 0 A_GiveInventory("M1AntiJam")
+		Goto Ready	
+		/*
+	NoAmmo:
+		2EPR A 0 A_PlaySound("Newpistol/DRYFIRE")
+		REPS A 2 offset(0,34)
+		REPS A 1 offset(0,33)
+		REPS A 1 A_WeaponReady(WRF_NOFIRE)
+		Goto Ready
+		*/
+	NoAmmo:
+		REPS A 0 A_PlaySound("DRYF1", CHAN_WEAPON)
+	NoAmmoHold:
+		REPS A 1 offset(0,34)
+		REPS A 1 A_ReFire("NoAmmoHold")
+		"####" "#" 0 A_PlaySound("DRYF2", CHAN_WEAPON)
+		"####" "#" 1 A_WeaponReady(WRF_NOFIRE)
+		Goto Ready	
+		
+	ToReady:
+		2EPR A 0
+		Goto Ready
+	AltFire:
+		BDRI A 0 A_JumpIfInventory("PistolAmmo",10,"Reload")
+		BDRI A 0 A_JumpIfInventory("PistolClip",1,"ReloadB")
+		Goto Reload
+	
+	Reload:
+		REPS GHIJ 1 A_WeaponReady(WRF_NOSECONDARY)
+		REPS KKKK 1 A_WeaponReady(WRF_NOSECONDARY)
+		REPS L 0 A_PlaySound("PISTJMSL",CHAN_WEAPON)
+		REPS MNO 1 A_WeaponReady(WRF_NOSECONDARY)
+	FidgetHold:
+		REPS P 1 A_WeaponReady(WRF_NOSECONDARY)
+		NULL A 0 A_ReFire("FidgetHold")
+		REPS Q 0 A_PlaySound("PISTJMFX",CHAN_WEAPON)
+		REPS PQRSSTTTUVWX 1 A_WeaponReady(WRF_NOSECONDARY)
+		Goto ToReady
+		
+	ReloadB:
+		REPR ABCC 1 A_WeaponReady(WRF_NOFIRE)
+		TNT1 A 0 A_PlaySound("pistolV2/Clipout")
+		REPR D 1 A_WeaponReady(WRF_NOFIRE)
+		M1TR E 0 A_FireCustomMissile("PistolMagEmpty",random(30,40),0,0,0)
+		REPR EFFFFFGGH 1 A_WeaponReady(WRF_NOFIRE)
+		NULL A 0 A_PlaySound("pistolV2/Clipin") 
+		REPR IJJ 1 A_WeaponReady(WRF_NOFIRE)
+		REPR K 7 A_WeaponReady(WRF_NOFIRE)
+		REPR LMNOP 1 A_WeaponReady(WRF_NOFIRE)
+		M1GN A 0 A_JumpIfInventory("PistolClip",1,2)
+        goto CanIhavesex
+        TNT1 A 0
+		TNT1 A 0 A_TakeInventory("PistolClip",1)
+		TNT1 a 0 A_JumpIfInventory("PistolAmmo",1,2)
+		Goto ReloadEmpty
+		TNT1 AAA 0
+		REPR O 0 A_GiveInventory("PistolAmmo",10)
+		REPR Q 4
+		REPR RS 1
+		REPR T 2
+		REPR UUVWXYY 1
+		REPS A 1 A_TakeInventory("JamCountPistol",10)
+		Goto Ready
+		
+	ReloadEmpty:
+		REPS O 0 A_GiveInventory("PistolAmmo",10)
+		REPR Q 4
+		REPR RS 1
+		REPR T 2
+		REPR UUVWXYY 1
+		REPS G 1 A_TakeInventory("JamCountPistol",10)
+		REPS HIJ 1
+		REPS KK 1
+		REPS L 0 A_PlaySound("PISTJMSL",CHAN_WEAPON)
+		REPS MNOPPP 1
+		REPS Q 0 A_PlaySound("PISTJMFX",CHAN_WEAPON)
+		REPS PQRSSTTTUVWX 1
+		Goto ToReady
+	canIhavesex:
+        tnt1 a 0 a_print("fuck you now its jammed")
+        REPR Q 4
+		REPR RS 1
+		REPR T 2
+		REPR UUVWXYY 1
+		REPS A 1 A_takeInventory("JamCountPistol",10)
+		REPS A 1 A_giveInventory("NeedToUnjamPistol",10)
+		Goto Ready
+	//zoom:
+		"####" "#" 0
+		"####" "#" 1 offset(3,34)
+		"####" "#" 1 offset(7,39)
+		"####" "#" 1 offset(12,46)
+		"####" "#" 1 offset(20,57)
+		"####" "#" 1 offset(32,70)
+		
+		TNT1 A 0 A_TakeInventory("PistolOnce",1)
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+}}
+
+Actor MurdBeretta : Wdi_BaseWeapon
+{ 
+	Radius 20
+	Height 16
+	Scale 0.9
+	Obituary ""
+	Tag "Murderer's M1911 Colt"
+	Inventory.PickupMessage "You find an M1911."
+	Weapon.PreferredSkin "PistolSkin"
+	Weapon.SelectionOrder 400
+	Weapon.SlotNumber 1
+	Weapon.Kickback 100
+	Weapon.AmmoType "PistolAmmo"
+	Weapon.AmmoType2 "PistolClip"
+	Weapon.AmmoUse 0
+	-WEAPON.MELEEWEAPON
+	Weapon.BobStyle Smooth
+	+INVENTORY.INTERHUBSTRIP
+	States
+	{
+	Spawn:
+		PIST A -1
+		Stop
+	RecoilStuff:
+		NULL A 1 A_SetPitch(Pitch-1)
+		NULL A 0 A_SetPitch(Pitch-3)
+		TNT1 A 0 A_SetAngle(random(-2,2)+angle)
+		TNT1 A 1 A_ZoomFactor(0.99)
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 AA 1 A_SetPitch(Pitch+1)
+		TNT1 AA 1 A_SetPitch(Pitch+0.5)
+		stop	
+		
+	Select:
+		TNT1 A 1
+		2EPS AAAAAAAAAAAAAAA 0 A_Raise
+		2EPS A 1 offset(71,156)
+		2EPS A 1 offset(62,127)
+		2EPS A 1 offset(52,106)
+		2EPS A 1 offset(44,88)
+		2EPS A 1 offset(36,76)
+		2EPS A 1 offset(28,64)
+		2EPS A 1 offset(20,54)
+		2EPS A 1 offset(14,45)
+		2EPS A 1 offset(8,40)
+		2EPS A 1 offset(4,36)
+		2EPS A 1 offset(1,33)
+		2EPS A 0 A_Jump(255,"Ready")
+		2EPS A 0 A_Jump(255,"Ready")
+		goto Ready
+	Ready:
+		2EPS A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD)
+		loop 
+	Fire:
+		TNT1 A 0
+		NULL A 0 A_JumpIfInventory("FiredColt",1,"NoAmmoFired")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",1,2)
+		Goto NoAmmo
+		TNT1 AA 0
+		2EPS A 0 A_fireBullets(0,0,1,0,"MurdLaserPuff",FBF_NORANDOM|FBF_NOFLASH|FBF_NORANDOMPUFFZ)
+		2EPS A 0 A_ZoomFactor(1.1)
+	Laser:
+		2EPS A 0 A_fireBullets(0,0,1,0,"MurdLaserPuff",FBF_NORANDOM|FBF_NOFLASH|FBF_NORANDOMPUFFZ)
+		2EPS A 1 A_WeaponReady(WRF_NOSWITCH|WRF_NOFIRE)
+		2EPS A 0 A_ReFire("Laser")
+		TNT1 A 0 A_ZoomFactor(1.0)
+		BDPI B 0 Bright A_TakeInventory("PistolAmmo",1)
+		2EPR AA 0 A_FireCustomMissile ("PistolSmokeSpawner", 0, 0, 4,12, 0, 0)
+		PISG B 0 A_PlaySound("PISTFIR4",CHAN_WEAPON)
+		PISG B 0 A_FireBullets(0, 0, 1, 80, "FFBulletPuff",FBF_NORANDOM|FBF_NOFLASH) // 1/4th of the damage for innos
+		TNT1 A 0 A_GunFlash("RecoilStuff",GFF_NOEXTCHANGE)
+		2EPS B 1 offset(0,32)
+		NULL A 0 A_GiveInventory("FiredColt",1)
+		2EPS CDE 1
+		2EPS EF 1 A_WeaponReady(WRF_NOBOB|WRF_NOSWITCH)
+		2EPS A 5 A_WeaponReady(WRF_NOBOB|WRF_NOSWITCH)
+		Goto Ready	
+	FireBack:
+		TNT1 A 0 A_Print("Backshot successful!")
+		PISG B 0 A_FireBullets(0, 0, 1, 75, "FFBulletPuff",FBF_NORANDOM|FBF_NOFLASH) // 1/4th of the damage for innos
+		2EPS B 1
+		2EPS CDE 1 
+		2EPS EF 1 A_WeaponReady(WRF_NOBOB|WRF_NOSWITCH)
+		2EPS A 5 A_WeaponReady(WRF_NOBOB|WRF_NOSWITCH)
+		Goto Ready
+	SpawnLaserSight:
+		TNT1 A 1 A_fireBullets(0,0,1,0,"MurdLaserPuff",FBF_NORANDOM|FBF_NOFLASH|FBF_NORANDOMPUFFZ)
+		loop
+	NoAmmoFired:
+		TNT1 A 0 A_print("Rechamber the gun manually!")
+	NoAmmo:
+		2EPS A 0 A_PlaySound("DRYF1", CHAN_WEAPON)
+	NoAmmoHold:
+		2EPS A 1 offset(0,34)
+		2EPS A 1 A_ReFire("NoAmmoHold")
+		"####" "#" 0 A_PlaySound("DRYF2", CHAN_WEAPON)
+		"####" "#" 1 A_WeaponReady(WRF_NOFIRE)
+		Goto Ready	
+	ToReady:
+		2EPR A 0
+		Goto Ready
+	AltFire:
+		TNT1 A 0 A_JumpIfInventory("FiredColt",1,"Rechamber")
+		BDRI A 0 A_JumpIfInventory("PistolAmmo",10,"reload")
+		BDRI A 0 A_JumpIfInventory("PistolClip",1,"ReloadB")
+		Goto Reload
+	
+	Rechamber:
+		2EPS GHIJ 1 
+		2EPS KKKK 1
+		TNT1 A 0 A_TakeInventory("FiredColt",1)
+		2EPS L 0 A_PlaySound("PISTJMSLquiet",CHAN_WEAPON)
+		PISG B 0 A_FireCustomMissile ("PisCaseSpawn", 0, 0, 3, 12, 0, 0)
+		2EPS MNO 1 
+	RechamberHold:
+		2EPS P 1 
+		NULL A 0 A_ReFire("RechamberHold")
+		2EPS Q 0 A_PlaySound("PISTJMFXquiet",CHAN_WEAPON)
+		2EPS PQRSSTTTUVWX 1
+		Goto Ready
+	
+	Reload:
+		2EPS GHIJ 1 A_WeaponReady(WRF_NOSECONDARY)
+		2EPS KKKK 1 A_WeaponReady(WRF_NOSECONDARY)
+		2EPS L 0 A_PlaySound("PISTJMSL",CHAN_WEAPON)
+		2EPS MNO 1 A_WeaponReady(WRF_NOSECONDARY)
+	FidgetHold:
+		2EPS P 1 A_WeaponReady(WRF_NOSECONDARY)
+		NULL A 0 A_ReFire("FidgetHold")
+		2EPS Q 0 A_PlaySound("PISTJMFX",CHAN_WEAPON)
+		2EPS PQRSSTTTUVWX 1 A_WeaponReady(WRF_NOSECONDARY)
+		Goto ToReady
+		
+	ReloadB:
+		2EPR ABCC 1 A_WeaponReady(WRF_NOFIRE)
+		TNT1 A 0 A_PlaySound("pistolV2/Clipout")
+		2EPR D 1 A_WeaponReady(WRF_NOFIRE)
+		M1TR E 0 A_FireCustomMissile("PistolMagEmpty",random(30,40),0,0,0)
+		2EPR EFFFFFGGH 1 A_WeaponReady(WRF_NOFIRE)
+		NULL A 0 A_PlaySound("pistolV2/Clipin") 
+		2EPR IJJ 1 A_WeaponReady(WRF_NOFIRE)
+		2EPR K 7 A_WeaponReady(WRF_NOFIRE)
+		2EPR LMNOP 1 A_WeaponReady(WRF_NOFIRE)
+		M1GN A 0 A_JumpIfInventory("PistolClip",1,2)
+        goto CanIhavesex
+        TNT1 A 0
+		TNT1 A 0 A_TakeInventory("PistolClip",1)
+		TNT1 A 0 A_GiveInventory("PistolAmmo",10)
+		2EPR Q 4
+		2EPR RS 1
+		2EPR T 2
+		2EPR UUVWXYY 1
+		2EPS A 1 A_TakeInventory("JamCountPistol",10)
+		Goto Ready
+	canIhavesex:
+        tnt1 a 0 a_print("fuck you")
+        REPR Q 4
+		REPR RS 1
+		REPR T 2
+		REPR UUVWXYY 1
+		Goto Ready	
+		
+	ReloadEmpty:
+		2EPR O 0 A_GiveInventory("PistolAmmo",10)
+		2EPR Q 4
+		2EPR RS 1
+		2EPR T 2
+		2EPR UUVWXYY 1
+		2EPS G 1 A_TakeInventory("JamCountPistol",10)
+		2EPS HIJ 1
+		2EPS KK 1
+		2EPS L 0 A_PlaySound("PISTJMSL",CHAN_WEAPON)
+		2EPS MNOPPP 1
+		2EPS Q 0 A_PlaySound("PISTJMFX",CHAN_WEAPON)
+		2EPS PQRSSTTTUVWX 1
+		Goto ToReady
+	//zoom:
+		TNT1 A 0
+		TNT1 A 0 A_GunFlash("LightDone",GFF_NOEXTCHANGE)
+		TNT1 A 0 A_TakeInventory("PistolOnce",1)
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 ACS_NamedExecuteAlways("WDINewActivateDrop",0,0,0,0)
+		Goto Ready
+}}
+
+ACTOR MurdLaserPuff
+{
+	Radius 1
+	Height 2
+	+NOGRAVITY
+	+NOINTERACTION
+	+CLIENTSIDEONLY
+	+BRIGHT
+	+FORCEXYBILLBOARD
+	+DONTSPLASH
+	+BLOODLESSIMPACT
+	+PUFFONACTORS
+	Renderstyle ADD
+	//Scale 0.3
+	Scale 0.6
+	States
+	{
+	Spawn:
+	bal3 f 1 NODELAY
+	stop
+	}
+}
+
+
+
+
+ACTOR PistolMagEmpty
+{
++NOTELEPORT
+-NOBLOCKMAP
+   Height 12
+   Radius 8
+   Speed 4
+   Scale 0.3
+   PROJECTILE
+   - NOGRAVITY
+   - NOLIFTDROP
+   BounceType Doom
+   BounceFactor 0.5
+   BounceSound "MagBounce2"
+   SeeSound ""
+   +FORCEXYBILLBOARD
+   +PUSHABLE +SHOOTABLE +CANNOTPUSH +GHOST PushFactor 0.1
+   States
+   {
+   Spawn:
+      CLP4 BCDEFGHA 3
+      loop
+   Death:
+	  CLP4 "#" 0
+	  CLP4 "#" 0 A_ChangeFlag("PUSHABLE",1)
+	  CLP4 "#" 0 A_ChangeFlag("NOBLOCKMAP",0)
+	  CLP4 "#" 0 A_ChangeFlag("MISSILE",0)
+      CLP4 "#" 900
+      Stop
+   }
+}
+
+//Ammo save after drop weapon.//////////////////////////////////////////////////
+Actor Dropper_Beretta : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",10,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",9,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",8,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",7,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",6,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",5,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",4,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",3,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",2,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",1,"Pickup1")
+	PickupEmpty:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"PickupEmptyJammed")
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+	Pickup1:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup1Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta1",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup2:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup2Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta2",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup3:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup3Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta3",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup4:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup4Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta4",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup5:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup5Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta5",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup6:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup6Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta6",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup7:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup7Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta7",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup8:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup8Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta8",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup9:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup9Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta9",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	PickupFull:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"PickupFullJammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBerettaFull",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	PickupEmptyJammed:
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmptyJammed",0,0,0)
+		Stop
+	Pickup1Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta1Jammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup2Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta2Jammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup3Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta3Jammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup4Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta4Jammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup5Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta5Jammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup6Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta6Jammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup7Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta7Jammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup8Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta8Jammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup9Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta9Jammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	PickupFullJammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBerettaFullJammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+Actor DeathDropper_Beretta : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",10,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",9,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",8,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",7,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",6,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",5,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",4,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",3,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",2,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",1,"Pickup1")
+	PickupEmpty:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"PickupEmptyJammed")
+		TNT1 A 1 A_SpawnItemEx("FakeBerettaEmpty",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	Pickup1:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup1Jammed")
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta1",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup2:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup2Jammed")
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta2",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup3:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup3Jammed")
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta3",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup4:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup4Jammed")
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta4",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup5:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup5Jammed")
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta5",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup6:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup6Jammed")
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta6",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup7:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup7Jammed")
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta7",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup8:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup8Jammed")
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta8",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup9:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup9Jammed")
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta9",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	PickupFull:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"PickupFullJammed")
+		TNT1 A 0 A_SpawnItemEx("FakeBerettaFull",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	/////////////////////////
+	PickupEmptyJammed:
+		TNT1 A 1 A_SpawnItemEx("FakeBerettaEmpty",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	Pickup1Jammed:
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta1Jammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup2Jammed:
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta2Jammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup3Jammed:
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta3Jammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup4Jammed:
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta4Jammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		
+		Stop
+	Pickup5Jammed:
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta5Jammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup6Jammed:
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta6Jammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup7Jammed:
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta7Jammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup8Jammed:
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta8Jammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup9Jammed:
+		TNT1 A 0 A_SpawnItemEx("FakeBeretta9Jammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	PickupFullJammed:
+		TNT1 A 0 A_SpawnItemEx("FakeBerettaFullJammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+ACTOR DroppedBeretta
+{
+	PROJECTILE
+	-NOGRAVITY
+	+EXPLODEONWATER
+	+SKYEXPLODE
+	Damage 0
+	Radius 16
+	Height 8
+	Speed 9
+  	Scale 0.9
+	DeathSound "weapons/gundrop"
+	BounceSound "weapons/gundrop"
+	Bouncetype Doom
+	BounceFactor 0.3
+	BounceCount 2
+	States
+	{
+	Spawn:
+		PIST A 1
+		Loop
+	Death:
+		PIST A 35 A_playSound("weapons/gundrop",CHAN_BODY,0.5)
+		PIST A 1 A_SpawnItemEx("FakeBeretta",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBerettaFull : DroppedBeretta
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBerettaFull",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta9 : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta9",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta8 : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta8",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta7 : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta7",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta6 : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta6",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta5 : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta5",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta4 : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta4",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta3 : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta3",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta2 : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta1 : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta1",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBerettaEmpty : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBerettaEmpty",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBerettaFullJammed : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBerettaFullJammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta9Jammed : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta9Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta8Jammed : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta8Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta7Jammed : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta7Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta6Jammed : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta6Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta5Jammed : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta5Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta4Jammed : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta4Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta3Jammed : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta3Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta2Jammed : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta2Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta1Jammed : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta1Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBerettaEmptyJammed : DroppedBeretta
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBerettaEmptyJammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+Actor FakeBerettaFull : FakeBerettaNorandom
+{+FORCEXYBILLBOARD
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",10)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",1,"AmmoPickupFull")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",10)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+	AmmoPickupFull:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolClip",2,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolClip",1)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta9 : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",9)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",2,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",9)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta8 : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",8)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",3,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",8)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta7 : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",7)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",4,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",7)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta6 : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",6)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",5,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",6)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta5 : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",5)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",6,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",5)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta4 : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",4)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",7,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",4)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta3 : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",3)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",8,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",3)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta2 : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",2)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",9,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",2)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta1 : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",10,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",1)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBerettaEmpty : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"ForgetIt")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+}}
+
+Actor FakeBerettaFullJammed : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",10)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",1,"AmmoPickupFull")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",10)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+	AmmoPickupFull:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolClip",2,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolClip",1)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta9Jammed : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",9)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",2,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",9)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta8Jammed : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",8)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",3,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",8)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta7Jammed : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",7)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",4,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",7)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta6Jammed : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",6)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",5,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",6)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta5Jammed : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",5)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",6,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",5)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta4Jammed : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",4)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",7,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",4)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta3Jammed : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",3)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",8,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",3)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta2Jammed : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",2)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",9,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",2)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBeretta1Jammed : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIBeretta",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("PistolAmmo",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",10,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolAmmo",1)
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeBerettaEmptyJammed : FakeBerettaNorandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Beretta",1,"ForgetIt")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		NULL A 0 A_JumpIfinventory("MurderMarker",1,"PickupMurd")
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+	ContinuePickup:
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+}}
+
+
+//FAR THROWS
+ACTOR DroppedBerettaFar: DroppedBeretta
+{
+	Speed 30
+}
+
+Actor Dropper_BerettaFar : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",10,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",9,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",8,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",7,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",6,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",5,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",4,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",3,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",2,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("PistolAmmo",1,"Pickup1")
+	PickupEmpty:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"PickupEmptyJammed")
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmptyFar",0,0,0)
+		Stop
+	Pickup1:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup1Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta1Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup2:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup2Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta2Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup3:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup3Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta3Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup4:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup4Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta4Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup5:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup5Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta5Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup6:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup6Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta6Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup7:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup7Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta7Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup8:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup8Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta8Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup9:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"Pickup9Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta9Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	PickupFull:
+		NULL A 0 A_JumpIfInventory("NeedToUnjamPistol",1,"PickupFullJammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedBerettaFullFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	PickupEmptyJammed:
+		TNT1 A 1 A_FireCustomMissile("DroppedBerettaEmptyJammedFar",0,0,0)
+		Stop
+	Pickup1Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta1JammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup2Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta2JammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup3Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta3JammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup4Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta4JammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup5Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta5JammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup6Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta6JammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup7Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta7JammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup8Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta8JammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Pickup9Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBeretta9JammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	PickupFullJammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedBerettaFullJammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("PistolAmmo",10)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+ACTOR DroppedBerettaFullFar : DroppedBeretta
+{ +FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBerettaFull",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta9Far : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta9",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta8Far : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta8",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta7Far : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta7",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta6Far : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta6",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta5Far : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta5",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta4Far : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta4",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+} 
+
+ACTOR DroppedBeretta3Far : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta3",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta2Far : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta1Far : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta1",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBerettaEmptyFar : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBerettaEmpty",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBerettaFullJammedFar : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBerettaFullJammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta9JammedFar : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta9Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta8JammedFar : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta8Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta7JammedFar : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta7Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta6JammedFar : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta6Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta5JammedFar : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta5Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta4JammedFar : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta4Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta3JammedFar : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta3Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta2JammedFar : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta2Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBeretta1JammedFar : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBeretta1Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedBerettaEmptyJammedFar : DroppedBeretta
+{+FORCEXYBILLBOARD Speed 30
+	States
+	{
+	Death:
+		PIST A 35
+		PIST A 1 A_SpawnItemEx("FakeBerettaEmptyJammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}

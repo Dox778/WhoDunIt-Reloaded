@@ -1,0 +1,49 @@
+Model KITTPlayer
+{
+	Path "MODELS\KITT"
+	Model 0 "KITT.md3"
+	Skin 0 "KITTskin.png"
+	Model 1 "Scanner.md3"
+	Skin 1 "SCANNR1.png"
+	Scale 2.7 2.7 2.7
+	FrameIndex CARB A 0 0
+}
+
+Model Motortrn
+{
+	Path "MODELS\MOTORTORN"
+	Model 0 "motor.md2"
+	Skin 0 "motor.tga"
+	Scale 1 1 1
+	FrameIndex MOTR A 0 0
+}
+
+Model TripodLight
+{
+	Path "Models"
+	Model 0 "tripodlight.md3"
+	Skin 0 "tripodlight.png"
+	Scale 23.0 23.0 23.0
+
+	FrameIndex TRIB A 0 0
+}
+
+Model TripodLightBulb
+{
+	Path "Models"
+	Model 0 "tripodlightbulb.md3"
+	Skin 0 "tripodlight.png"
+	Scale 23.0 23.0 23.0
+
+	FrameIndex TRIB A 0 0
+}
+
+Model TripodLightBeam
+{
+	Path "Models"
+	Model 0 "lightbeam.md3"
+	Skin 0 "lightbeam.png"
+	Scale 23.0 23.0 23.0
+
+	FrameIndex TRIB B 0 0
+}

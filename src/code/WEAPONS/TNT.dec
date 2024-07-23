@@ -1,0 +1,854 @@
+ACTOR DroppedPickableTNT : Wdi_BaseDroppedWeapon
+{
+	States
+	{
+	Spawn:
+		TALI A 1
+		Loop
+	Death:
+		TALI A 35
+		TALI A 1 A_SpawnItemEx("FakePickableTNT",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+Actor FakePickableTNT : CustomInventory 30025
+{
+	//$Category WDI Weapons/Limited Weapons
+	//$Sprite TALIA0
+	//$Title "TNT"
+	Radius 16
+	Height 8
+	Scale 0.8
+	Inventory.PickupMessage "\cjFound a \c[L3]bunch of explosives. \cjIt takes a moment to plant... \n\caDamage: \c[C4]999999"
+	Inventory.Respawntics 63000 //30min
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		TALI A -1
+		Stop
+	Pickup:
+		PIPP B 0
+		PIPP B 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		PIPP B 0 A_PlaySound("Pickups/Weapon")
+		PIPP B 0 A_GiveInventory("PickableTNT",1)
+		PIPP B 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TALI A 1 ACS_NamedExecute("WDIROldWeapon_id",0,41)
+		TNT1 A 0 A_PlaySound("ohno1",0)
+		Stop
+	NotPickup:
+		PIPP B 0
+		TALI A 1 ACS_NamedExecute("WDIROldWeapon_id",0,41)
+		Fail
+}}
+
+Actor Dropper_PickableTNT : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedPickableTNT", 0, 0, 0)
+	Stop
+ }
+}
+Actor Dropper_PickableTNTFar : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedPickableTNTFar", 0, 0, 0)
+	Stop
+ }
+}
+ACTOR DroppedPickableTNTFar : Wdi_BaseDroppedWeapon
+{
+	States
+	{
+	Spawn:
+		TALI A 1
+		Loop
+	Death:
+		TALI A 35
+		TALI A 1 A_SpawnItemEx("FakePickableTNT",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+Actor PickableTNT : WDI_BaseWeapon
+{
+	Radius 20
+	Height 12
+	Tag "TNT"
+	Inventory.PickupMessage "\cjFound a \c[L3]bunch of explosives."
+	Weapon.SelectionOrder 2200
+	Weapon.PreferredSkin "WrenchSkin2"
+	+INVENTORY.UNDROPPABLE
+	+WEAPON.NOAUTOAIM
+	+WEAPON.MELEEWEAPON
+	+WEAPON.NOAUTOFIRE
+	+FORCEXYBILLBOARD
+	Weapon.UpSound "ohno2" 
+	Weapon.BobRangeX 1.0
+	Weapon.BobRangeY 0.6
+	Weapon.BobSpeed 1.5
+	Weapon.BobStyle InverseSmooth
+	+INVENTORY.INTERHUBSTRIP
+	Inventory.Icon "WEPICO24"
+	States
+	{
+	Spawn:
+		TALI A 0
+		Goto Death
+	Pickup:
+	Select:
+		TNT1 A 6
+		TALI BBBBBBBBBBBBBBB 0 A_Raise
+		TALI b 1 offset(71,156)
+		TALI b 1 offset(62,127)
+		TALI b 1 offset(52,106)
+		TALI b 1 offset(44,88)
+		TALI b 1 offset(36,76)
+		TALI b 1 offset(28,64)
+		TALI b 1 offset(20,54)
+		TALI b 1 offset(14,45)
+		TALI b 1 offset(8,40)
+		TALI b 1 offset(4,36)
+		TALI b 1 offset(1,33)
+		TALI b 0 A_Jump(255,"Ready")
+		TALI b 0 A_Jump(255,"Ready")
+		goto Ready
+	Ready:
+		TALI B 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+	//Zoom:
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 ACS_NamedExecuteAlways("WDINewActivateDrop",0,0,0,0)
+		Goto Ready
+	Fire:
+		TNT1 A 0 SetPlayerProperty(0, 1, PROP_FROZEN)
+		TALI CDEFG 1
+		TNT1 A 0 A_PlaySound("C4PLACE",CHAN_WEAPON)
+		TNT1 A 20
+		TNT1 A 1 A_ReFire("Hold")
+		TNT1 A 0 SetPlayerProperty(0, 0, PROP_FROZEN)
+		TALI GFEDC 1
+		Goto Ready
+	Hold:
+		TNT1 A 1
+		TALI HIJKLMNOPQRS 1
+		TNT1 A 0 A_PlaySound("C4PLACE",CHAN_WEAPON)
+		TNT1 A 20
+		TNT1 A 1 A_ReFire("Hold2")
+		TNT1 A 0 SetPlayerProperty(0, 0, PROP_FROZEN)
+		TALI GFEDC 1
+		Goto Ready
+	Hold2:
+		TNT1 A 0 SetPlayerProperty(0, 0, PROP_FROZEN)
+		TNT1 A 0 A_PlaySound("C4PLACE2",CHAN_WEAPON)
+		TNT1 A 0 A_SpawnItemEx("WDI18bombdropped",0,0,0)
+		TNT1 A 0 A_TakeInventory("Slot1Filled",1)
+		TNT1 A 0 A_TakeInventory("PickableTNT",1)
+		Goto Ready
+	Death:
+		DHSP A 0 A_SpawnItemEx("DroppedPickableTNT",0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		Goto Death + 1
+}}
+
+
+Actor WDI18bombdropped
+{
+	+SHOOTABLE
+	+FORCEXYBILLBOARD
+	+NOBLOOD
+	Health 26
+	MASS 99999
+	DamageFactor "Gas", 0.0
+	DamageFactor "FlareEffect", 0.0
+	DamageFactor "SprayRED", 0.0
+	DamageFactor "SprayBLU", 0.0
+	DamageFactor "SprayYLL", 0.0
+	DamageFactor "SprayGRN", 0.0
+	DamageFactor "SprayORG", 0.0
+	DamageFactor "SprayPNK", 0.0
+	DamageFactor "burn", 0.0
+	DamageFactor "fire", 0.0
+	DamageFactor "ShovelMelee", 2.0
+	DamageFactor "SawMelee", 2.0
+	DamageFactor "friendlygun", 10.0
+  States
+  {
+  Spawn:
+    TALI A 12
+	TALI A 25 A_PlaySound("ohno3",0)
+    TALI A 36 A_PlaySound("C4BEEP")
+	TALI A 31 A_PlaySound("C4BEEP")
+	TALI A 26 A_PlaySound("C4BEEP")
+	TALI A 21 A_PlaySound("C4BEEP")
+	TALI A 16 A_PlaySound("C4BEEP")
+	TALI A 11 A_PlaySound("C4BEEP")
+	TALI A 6 A_PlaySound("C4BEEP")
+	TALI A 6 A_PlaySound("C4BEEP")
+	TALI A 4 A_PlaySound("C4BEEP")
+	TALI A 3 A_PlaySound("C4BEEP")
+	TALI A 2 A_PlaySound("C4BEEP")
+  Death:
+	TNT1 A 0 A_PlaySound("panzexpl")
+	tnt1 a 0 A_Spawnitemex("PanzerNuke",0,0,48)
+    tnt1 a 0 A_Spawnitemex("WDI18bombexplosion") // Riclo500's 2024 edit to make WDI18 walls break when TNT placed into it.
+	TNT1 A 0 A_PlaySound("C4DEBRIS",0) 
+//	TNT1 A 0 A_Recoil(32)
+	TNT1 A 5
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_DIE
+    Stop
+  }
+}
+
+ACTOR WDI18bombexplosion
+{
+  DamageType "bombstuff"
+  //Radius 256
+  //Height 256
+  Damage 999
+  Scale 4.0
+  Projectile
+  -NOGRAVITY
+  +RANDOMIZE
+  +DEHEXPLOSION
+  +GRENADETRAIL
+  States
+  {
+  Spawn:
+    goto death
+  Death:
+    EXP2 CDEFGH 3 Bright A_Explode(125,850)
+    EXP2 IJKLMN 3 Bright
+    Stop
+  }
+}
+
+actor Nuke
+{
+	+NOBLOCKMAP
+	+NOGRAVITY
+	+NOINTERACTION
+	Radius 0
+	Height 0
+	//SeeSound "panzexpl"
+	+CLIENTSIDEONLY
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY
+		TNT1 A 0 A_PlaySound("panzexpl")
+		"####" A 0 Radius_Quake(7,30,0,96,0)
+		"####" A 0 A_SpawnItemEx("TankBoom",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS)
+		"####" A 0 A_SpawnItemEx("TankFlare")
+		"####" A 25 A_SpawnItemEx("NukeFloor")
+		"####" AA 0 A_SpawnItemEx("NukeSmokeFloor")
+		"####" A 0 A_SpawnItemEx("TankPillar",0,0,0,0,0,2)
+		"####" A 45 A_SpawnItemEx("TankSmokePillar",0,0,0,0,0,2)
+		"####" A 0 A_SpawnItemEx("TankMushroom",0,0,56)
+		"####" AA 0 A_SpawnItemEx("TankSmokeMushroom",0,0,56)
+		Stop
+	}
+}
+
+actor PanzerNuke : Nuke //for panzerschreck rockets
+{
+	//scale 2.0
+  DamageType "bombstuff"
+  //Radius 256
+  //Height 256
+  Damage 999
+  Scale 4.0
+  Projectile
+  -NOGRAVITY
+  +RANDOMIZE
+  +DEHEXPLOSION
+  +GRENADETRAIL
+  -CLIENTSIDEONLY
+    States
+    {
+    Spawn:
+        TNT1 A 0 NODELAY 
+		//TNT1 A 0 A_PlaySound("panzexpl")
+      //  "####" A 0 Radius_Quake(7,30,0,96,0)
+	  "####" A 0 A_SpawnItemEx("ExplosionQuake",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS)
+        "####" A 0 A_SpawnItemEx("TankBoom",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION )
+        "####" A 0 A_SpawnItemEx("TankFlare")
+        "####" A 6 A_SpawnItemEx("NukeFloor")
+        "####" AA 0 A_SpawnItemEx("NukeSmokeFloor")
+        "####" A 11 A_SpawnItemEx("TankSmokePillar",0,0,0,0,0,2)
+        "####" AA 0 A_SpawnItemEx("TankSmokeMushroom",0,0,56)
+        Stop
+    }
+}
+actor TankBoom
+{
+	  DamageType "bombstuff"
+  //Radius 256
+  //Height 256
+  Damage 999
+  Scale 4.0
+  Projectile
+  -NOGRAVITY
+  +RANDOMIZE
+  +DEHEXPLOSION
+  +GRENADETRAIL
+    States
+    {
+    Spawn:
+        TNT1 A 0
+       // "####" AAAAA 1 A_Explode(666,768,0)
+	   TNT1 AAAAAA 5 A_Explode(400,820)
+	   TNT1 AAAAA 5 A_Explode(400,1048)
+	//   TNT1 AAAAAAA 5 A_Explode(200,256,0)
+        Stop
+    }
+}
+actor ExplosionQuake
+{
+    +FORCERADIUSDMG
+    +NOBLOCKMAP
+    +NOGRAVITY
+	-CLIENTSIDEONLY
+    States
+    {
+    Spawn:
+        TNT1 A 0
+       // "####" AAAAA 1 A_Explode(10,256,0)
+	    TNT1 A 35 Radius_Quake(10,35,0,96,0)
+		TNT1 A 30 Radius_Quake(9,30,0,96,0)
+		TNT1 A 25 Radius_Quake(7,25,0,96,0)
+		TNT1 A 20 Radius_Quake(5,20,0,96,0)
+		TNT1 A 10 Radius_Quake(3,10,0,96,0)
+		TNT1 A 5 Radius_Quake(1,5,0,96,0)
+        Stop
+    }
+}
+
+actor TankFire : Nuke
+{
+	RenderStyle "Add"
+	+BRIGHT
+	+DONTSPLASH
+	+EXPLODEONWATER
+	+NOINTERACTION
+	Scale 1.0
+	+FORCEXYBILLBOARD
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_Jump(256,1,2,3,4)
+		//FLA1 A 0 A_SetScale(ScaleX-0.3,ScaleY-0.3)
+		FLA1 A 2 A_FadeOut(0.03)
+		Wait
+		FLA2 A 2 A_FadeOut(0.02)
+		Wait
+		FLA3 A 2 A_FadeOut(0.03)
+		Wait
+		FLA4 A 2 A_FadeOut(0.02)
+		Wait
+	}
+}
+
+actor TankFlare : TankFire
+{
+	Scale 4.0
+	+NOINTERACTION
+	States
+	{
+	Spawn:
+		FLAR B 1 A_FadeOut(0.015)
+		Wait
+	}
+}
+
+actor NukeFloor : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		"####" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("TankFire",random(-12,12),random(-12,12),random(0,12),0.3 * random(0,10),0.3 * random(0,10),0,random(0,359),128)
+		Stop
+	}
+}
+
+actor NukeSmokeFloor : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		"####" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeSmoke",random(-12,12),random(-12,12),random(0,12),0.3 * random(0,10),0.3 * random(0,10),0,random(0,359),128)
+		Stop
+	}
+}
+actor TankPillar : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		"####" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("TankFire",random(-12,12),random(-12,12),random(0,12),0.3 * random(0,10),0.3 * random(0,10),random(0,-3),random(0,359),128)
+		"####" A 0 A_SpawnItemEx("TankSmokeRing")
+		"####" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("TankFire",random(-12,12),random(-12,12),random(0,12),0.3 * random(0,10),0.3 * random(0,10),random(0,-3),random(0,359),128)
+		Stop
+	}
+}
+
+actor TankSmokePillar : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		"####" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeSmoke",random(-12,12),random(-12,12),random(0,12),0.3 * random(0,10),0.3 * random(0,10),0.3 * random(0,-40),random(0,359),128)
+		Stop
+	}
+}
+actor TankMushroom : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		"####" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("TankFire",random(-12,12),random(-12,12),random(0,12),0.3 * random(0,25),0.01 * random(0,25),0.3 * random(-10,10),random(0,359),128)
+		Stop
+	}
+}
+actor TankSmokeMushroom : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		"####" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeSmoke",random(-12,12),random(-12,12),random(0,12),0.3 * random(0,25),0.3 * random(0,25),0.3 * random(-10,10),random(0,359),128)
+		Stop
+	}
+}
+
+
+
+actor NukeSmoke : Nuke
+{
+	Scale 1.0
+	+DONTSPLASH
+	+EXPLODEONWATER
+	Alpha 0.5
+	States
+	{
+	Spawn:
+		
+		TNT1 A 0 A_Jump(256,1,2,3,4)
+		NSMK ABCD 0 A_Jump(256,"End")
+	End:
+		//NSMK "#" 0 A_SetScale(ScaleX-0.3,ScaleY-0.3)
+		NSMK "#" 2 A_FadeOut(0.008)
+		Wait
+	EndSpawn:
+		TNT1 A 1
+		Stop
+	}
+}
+
+//Sticky pipebomb
+Actor StickyProjectile
+{
+	Projectile
+	Speed 40
+	Radius 4
+	Height 4
+	+SEEKERMISSILE
+//	var int user_angle;
+	states
+	{
+	Spawn:
+		MISL A 1
+		loop
+	Crash:
+	Death:
+		MISL A 1
+		stop
+	XDeath:
+		MISL B 0 A_SeekerMissile(360,360,SMF_LOOK,256,12)
+		//MISL A 1 A_Warp(AAPTR_TRACER|WARPF_WARPINTERPOLATION|WARPF_NOCHECKPOSITION)
+	//	TNT1 A 0 A_SetUserVar("user_angle", user_angle)
+		MISL A 1 A_Warp(AAPTR_TRACER,15,0,10,0)//,0,0,0,0,WARPF_WARPINTERPOLATION|WARPF_NOCHECKPOSITION)
+		loop
+	}
+}
+Actor FakeStickyPipebomb : CustomInventory
+{
+	//$Category WDI Weapons
+	//$Sprite PIPPB0
+	//$Title "Wrench"
+	Radius 16
+	Height 8
+	Scale 0.8
+	Inventory.PickupMessage "Found a sticky pipebomb with a detonator."
+	Inventory.Respawntics 63000 //30min
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		PIPB A -1
+		Stop
+	Pickup:
+		PIPP B 0
+		PIPP B 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		PIPP B 0 A_PlaySound("Pickups/Weapon")
+		PIPP B 0 A_GiveInventory("StickyPipebomb",1)
+		NULL A 0 A_TakeInventory("HasThrownPipebomb",1)
+		NULL A 0 A_TakeInventory("NoDeto",1)
+		PIPP B 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TALI A 1 ACS_NamedExecute("WDIROldWeapon_id",0,41)
+		TNT1 A 0 A_PlaySound("ohno1",0)
+		Stop
+	NotPickup:
+		PIPB B 0
+		PIPB A 1 ACS_NamedExecute("WDIROldWeapon_id",0,41)
+		Fail
+}}
+
+Actor Dropper_StickyPipebomb : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedStickyPipebomb", 0, 0, 0)
+	Stop
+ }
+}
+ACTOR DroppedStickyPipebomb
+{
+	PROJECTILE
+	-NOGRAVITY
+	Damage 0
+	Radius 16
+	Height 8
+	Speed 9
+	Scale 0.8
+	DeathSound "weapons/gundrop"
+	States
+	{
+	Spawn:
+		PIPB A 1
+		Loop
+	Death:
+		PIPB A 35
+		PIPB A 1 A_SpawnItemEx("FakeStickyPipebomb",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+Actor FakeStickyPipebombOnlyDeto : CustomInventory
+{
+	//$Category WDI Weapons
+	//$Sprite PIPPB0
+	//$Title "Wrench"
+	Radius 16
+	Height 8
+	Scale 0.8
+	Inventory.PickupMessage "Found a detonator."
+	Inventory.Respawntics 63000 //30min
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		PIPB B -1
+		Stop
+	Pickup:
+		PIPP B 0
+		PIPP B 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		PIPP B 0 A_PlaySound("Pickups/Weapon")
+		PIPP B 0 A_GiveInventory("StickyPipebomb",1)
+		PIPP B 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TALI A 1 ACS_NamedExecute("WDIROldWeapon_id",0,41)
+		NULL A 0 A_GiveInventory("HasThrownPipebomb",1)
+		NULL A 0 A_TakeInventory("NoDeto",1)
+		TNT1 A 0 A_PlaySound("ohno1",0)
+		Stop
+	NotPickup:
+		PIPB B 0
+		PIPB B 1 ACS_NamedExecute("WDIROldWeapon_id",0,41)
+		Fail
+}}
+
+Actor Dropper_StickyPipebombOnlyDeto : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedStickyPipebombOnlyDeto", 0, 0, 0)
+	Stop
+ }
+}
+ACTOR DroppedStickyPipebombOnlyDeto
+{
+	PROJECTILE
+	-NOGRAVITY
+	Damage 0
+	Radius 16
+	Height 8
+	Speed 9
+	Scale 0.8
+	DeathSound "weapons/gundrop"
+	States
+	{
+	Spawn:
+		PIPB B 1
+		Loop
+	Death:
+		PIPB B 35
+		PIPB B 1 A_SpawnItemEx("FakeStickyPipebombOnlyDeto",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+Actor FakeStickyPipebombNoDeto : CustomInventory
+{
+	//$Category WDI Weapons
+	//$Sprite PIPPB0
+	//$Title "Wrench"
+	Radius 16
+	Height 8
+	Scale 0.8
+	Inventory.PickupMessage "Found a sticky pipebomb."
+	Inventory.Respawntics 63000 //30min
+	+FORCEXYBILLBOARD
+	Species "TossedPipebomb"
+	States
+	{
+	Spawn:
+		PIPB C -1
+		Stop
+	Pickup:
+		PIPP B 0
+		PIPP B 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		PIPP B 0 A_PlaySound("Pickups/Weapon")
+		PIPP B 0 A_GiveInventory("StickyPipebomb",1)
+		PIPP B 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		PIPB C 1 ACS_NamedExecute("WDIROldWeapon_id",0,41)
+		NULL A 0 A_GiveInventory("NoDeto",1)
+		NULL A 0 A_TakeInventory("HasThrownPipebomb",1)
+		TNT1 A 0 A_PlaySound("ohno1",0)
+		Stop
+	NotPickup:
+		PIPB B 0
+		PIPB C 1 ACS_NamedExecute("WDIROldWeapon_id",0,41)
+		Fail
+}}
+
+Actor Dropper_StickyPipebombNoDeto : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedStickyPipebombNoDeto", 0, 0, 0)
+	Stop
+ }
+}
+ACTOR DroppedStickyPipebombNoDeto
+{
+	PROJECTILE
+	-NOGRAVITY
+	Damage 0
+	Radius 16
+	Height 8
+	Speed 9
+	Scale 0.8
+	DeathSound "weapons/gundrop"
+	States
+	{
+	Spawn:
+		PIPB C 1
+		Loop
+	Death:
+		PIPB C 35
+		PIPB C 1 A_SpawnItemEx("FakeStickyPipebombNoDeto",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+Actor HasThrownPipebomb: Inventory {Inventory.MaxAmount 1}
+Actor NoDeto: Inventory {Inventory.MaxAmount 1}
+Actor DetonateNOW: Inventory {Inventory.MaxAmount 1}
+Actor StickyPipebomb : Weapon
+{
+	SpawnID 32
+	Radius 20
+	Height 12
+	Tag "Sticky Pipebomb"
+	Inventory.PickupMessage "Found a bunch of explosives."
+	Weapon.SelectionOrder 2200
+	Weapon.PreferredSkin "WrenchSkin2"
+	+INVENTORY.UNDROPPABLE
+	+WEAPON.NOAUTOAIM
+	+WEAPON.MELEEWEAPON
+	+WEAPON.NOAUTOFIRE
+	+FORCEXYBILLBOARD
+	Weapon.UpSound "ohno2" 
+	Weapon.BobRangeX 1.0
+	Weapon.BobRangeY 0.6
+	Weapon.BobSpeed 1.5
+	Weapon.BobStyle InverseSmooth
+	States
+	{
+	Spawn:
+		PIPP B 0
+		Goto Death
+	Pickup:
+	Select:
+		TALI B 1 A_Raise
+		Wait
+	Deselect:
+		TALI B 1 A_Lower
+		Wait
+	Ready:
+		PIPB A 0 A_JumpIfInventory("HasThrownPipebomb",1,"ReadyDeto")
+		PIPE A 0 A_JumpIfInventory("IsDropping",1,"DropWeapon")
+		PIPB D 1 A_WeaponReady
+		Loop
+	ReadyDeto:
+		PIPB A 0 A_JumpIfInventory("NoDeto",1,"TakeTheGunAway")
+		PIPE A 0 A_JumpIfInventory("IsDropping",1,"DropWeapon")
+		TALI E 1 A_WeaponReady
+		Loop
+	ReadyNothing:
+	DropWeapon:
+		TNT1 A 0
+		NULL A 0 A_TakeInventory("NoDeto",1)
+		NULL A 0 A_TakeInventory("HasThrownPipebomb",1)
+		PIPB A 0 A_JumpIfInventory("HasThrownPipebomb",1,"DropWeaponDeto")
+		PIPB A 0 A_JumpIfInventory("NoDeto",1,"DropWeaponOnlyBomb")
+		TALI B 1
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+		TNT1 A 0 ACS_NamedExecuteAlways("WDINewActivateDrop",0,0,0,0)
+		Goto Ready
+	DropWeaponDeto:
+		TNT1 A 0
+		TALI B 1
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+		TNT1 A 0 ACS_NamedExecuteAlways("WDINewActivateDrop",0,0,0,0)
+		Goto Ready
+	DropWeaponOnlyBomb:
+		TNT1 A 0
+		TALI B 1
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+		TNT1 A 0 ACS_NamedExecuteAlways("WDINewActivateDrop",0,0,0,0)
+		Goto Ready
+	Fire:
+		TNT1 A 0 A_JumpIfInventory("HasThrownPipebomb",1,"FireDetonator")
+		TALI CDEFG 1
+		TNT1 A 2
+		TNT1 A 1 A_ReFire("Hold")
+		TNT1 A 0 A_PlaySound("BRIKTHRW",Chan_Weapon)
+		THRW I 1 A_FireCustomMissile("TossedStickyPipebomb", 0, 0, 6, 10, 0, 8)
+		NULL A 0 A_GiveInventory("HasThrownPipebomb",1)
+		THRW JK 1
+		THRW LMMMNNOPQR 1
+		PIPB A 0 A_JumpIfInventory("NoDeto",1,"TakeTheGunAway")
+		Goto Ready
+	Hold:
+		TNT1 A 1
+		TNT1 A 0 A_ReFire
+		TNT1 A 0 A_PlaySound("BRIKTHRW",Chan_Weapon)
+		THRW I 1 A_FireCustomMissile("TossedStickyPipebomb", 0, 0, 6, 10, 0, 8)
+		NULL A 0 A_GiveInventory("HasThrownPipebomb",1)
+		THRW JK 1
+		THRW LMMMNNOPQR 1
+		PIPB A 0 A_JumpIfInventory("NoDeto",1,"TakeTheGunAway")
+		Goto Ready
+	
+	FireDetonator:
+		PIPB F 3
+		PIPB F 4 A_RadiusGive("DetonateNOW",4096,RGF_NOSIGHT|RGF_MONSTERS|RGF_MISSILES,1)
+		PIPB E 12
+		
+	TakeTheGunAway:
+		NULL A 0 A_TakeInventory("NoDeto",1)
+		NULL A 0 A_TakeInventory("HasThrownPipebomb",1)
+		TNT1 A 0 A_TakeInventory("StickyPipebomb",1)
+		Goto ReadyNothing
+		
+	Death:
+		DHSP A 0 A_SpawnItem("DroppedPickableTNT",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		Goto Death + 1
+}}
+
+actor TossedStickyPipebomb
+{
+  Radius 4
+  Height 4
+  Speed 30
+  Damage (4)
+  DamageType "friendlythrown"
+  Projectile
+  -NOGRAVITY
+  BounceType Doom
+  //+BOUNCEONACTORS
+  +BLOODSPLATTER
+  +EXPLODEONWATER
+  +SKYEXPLODE
+  Bouncecount 3
+  //SeeSound "shovel/hit"
+  //SeeSound "BRIKTHRW"
+  AttackSound "Brick/Flesh"
+  DeathSound "Brick/Wall"
+  BounceSound "Brick/Wall"
+  BounceFactor 0.3
+  Obituary ""
+  Gravity 0.8
+  Decal "MeleeCrack"
+  +SEEKERMISSILE
+  Species "TossedPipebomb"
+  +ISMONSTER
+  States
+  {
+  Spawn:
+    PIPB C 1
+    Loop
+	XDeath:
+		PIPB B 0 A_SeekerMissile(360,360,SMF_LOOK,256,8)
+		TNT1 A 0 A_JumpIfInventory("DetonateNOW",1,"DetonateNOW")
+		//MISL A 1 A_Warp(AAPTR_TRACER|WARPF_WARPINTERPOLATION|WARPF_NOCHECKPOSITION)
+	//	TNT1 A 0 A_SetUserVar("user_angle", user_angle)
+		PIPB C 1 A_Warp(AAPTR_TRACER,10,0,20,0)//,0,0,0,0,WARPF_WARPINTERPOLATION|WARPF_NOCHECKPOSITION)
+		loop
+	DetonateNOW:
+		TNT1 A 1 A_SpawnItem("PanzerNuke")
+		stop
+  Death:
+    PIPB C 1 A_SpawnItem("FakeStickyPipebombNoDeto",0,0,0,0)
+    stop
+  }
+} 

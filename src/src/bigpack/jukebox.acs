@@ -1,0 +1,156 @@
+bool JBXonoff;
+
+function int keysPressed(void)
+{
+    int buttons     = GetPlayerInput(-1, INPUT_BUTTONS);
+    int oldbuttons  = GetPlayerInput(-1, INPUT_OLDBUTTONS);
+    int newbuttons  = (buttons ^ oldbuttons) & buttons;
+
+    return newbuttons;
+}
+
+function int keyPressed(int key)
+{
+    if ((keysPressed() & key) == key) { return 1; }
+    return 0;
+}
+
+function int mod(int x, int y)
+{
+    int ret = x - ((x / y) * y);
+    if (ret < 0) { ret = y + ret; }
+    return ret;
+}
+
+function void freezplayer (bool set) {
+SetPlayerProperty(0, set, PROP_TOTALLYFROZEN);
+}
+
+script 110 (int loopedsong) {  //scripted by prepper for WDI
+    if (WDI_IsFinale())
+        {
+        print(s:"\I don't have time for this!!");
+        delay(15);
+        terminate;
+        }  
+		
+freezplayer(true); 
+
+int cursong;
+bool usedsong=false;
+SetHudSize(640, 480, 1);
+
+print (s:"\cqCharging Playlist: 0% IIIIIIIIIIIIIIIIIIII");
+delay (50);
+print (s:"\cqCharging Playlist: 15% \cgIIII\cqIIIIIIIIIIIIIIII");
+delay (30);
+print (s:"\cqCharging Playlist: 60% \cgIIIIIIIIIIII\cqIIIIIIII");
+delay (30);
+print (s:"\cqconfiguring buttoms: 70% \cgIIIIIIIIIIIIII\cqIIIIII");
+delay (40);
+print (s:"\cqconfiguring buttoms: 90% \cgIIIIIIIIIIIIIIIIII\cqII");
+delay (30);
+print (s:"\cqconfiguring buttoms successful : 100% \cIIIIIIIIIIIIIIIIIIII");
+  //necesary delay to work well
+print(s:"\cr[]IIIIIIIIIIIIIIIIIIII[]");
+delay(1);
+print(s:"\cr[]IIIIIIIIIIIIII[]");
+delay(1);
+print(s:"\cr[]IIIIIIIIII[]");
+delay(1);
+print(s:"\cr[]IIIIIII[]");
+delay(1);
+print(s:"\cr[]IIIII[]");
+delay(1);
+print(s:"\cr[]III[]");
+delay(1);
+print(s:"\cr[]II[]");
+delay(1);
+print(s:"\cr[]I[]");
+delay(1);
+print(s:"\cr[][]");
+delay(1);
+print(s:"\cr[]");
+delay(1);
+print(s:"\cqPress buttom : \crfire \cqor \craltfire \cqto choose your song"); 
+delay(15);
+delay(1);
+	while (!WDI_IsFinale() &&  playeringame(0))
+	{
+  
+        cursong += keyPressed(BT_ATTACK);
+        cursong -= keyPressed(BT_ALTATTACK);
+        cursong = mod(cursong, SongCounter+1);
+		
+    SetFont("BIGFONT");	
+    HudMessage(s:"SELECT A SONG";
+                HUDMSG_FADEOUT, 1785, CR_RED, 320.4, 240.0, 1.0, 0.5);
+	if (curSong == 0)
+        {
+			HudMessage(s:"Default map";
+                HUDMSG_FADEOUT, 1780, CR_WHITE, 320.4, 280.0, 1.0, 0.5);      
+        }
+ else
+        {
+            HudMessage(s:SongsNames[cursong-1];
+                HUDMSG_FADEOUT, 1780, CR_WHITE, 320.4, 280.0, 1.0, 0.5);
+        }        
+		 HudMessage(s:"<-";
+                HUDMSG_FADEOUT, 1781, CR_GREEN, 240.2, 280.0, 1.0, 0.5);
+
+        HudMessage(s:"->";
+                HUDMSG_FADEOUT, 1782, CR_GREEN, 400.1, 280.0, 1.0, 0.5);
+				
+        SetFont("SMALLFONT");
+        HudMessage(s:"Song number ", d:cursong;
+                HUDMSG_FADEOUT, 1783, CR_WHITE, 320.0, 310.0, 1.0, 0.5);
+
+        HudMessage(s:"press button: \cg", k:"+use", s:"\c- select or \cg", k:"+jump", s:"\c- exits";
+                HUDMSG_FADEOUT, 1784, CR_WHITE, 310.0, 330.0, 1.0, 0.5);
+	 
+		 if (keyPressed(BT_USE))
+			{
+				usedsong = true;
+				FadeRange(255, 255, 255, 0.5, 255, 255, 255, 0.0, 0.25);
+			   break;
+			}
+
+			if (keyPressed(BT_JUMP))
+			{
+			freezplayer(false);
+			terminate;
+			} 
+Delay(1); 
+} 
+freezplayer(false);    
+
+if(WDI_IsFinale())
+{
+delay(15);
+print (s:"sorry, the time ends up");
+terminate;
+ }
+ 
+JBXonoff=true;
+//////////////playerexits successful selecting a song
+        HudMessage(s:""; HUDMSG_PLAIN, 1780, 0,0,0,0);
+        HudMessage(s:""; HUDMSG_PLAIN, 1781, 0,0,0,0);
+        HudMessage(s:""; HUDMSG_PLAIN, 1782, 0,0,0,0);
+        HudMessage(s:""; HUDMSG_PLAIN, 1783, 0,0,0,0);
+        HudMessage(s:""; HUDMSG_PLAIN, 1784, 0,0,0,0);
+        HudMessage(s:""; HUDMSG_PLAIN, 1785, 0,0,0,0); 
+
+    if (usedsong && cursong != 0  )
+    {
+    print(s:"your current song now is \cg",s: SongsNames[cursong-1] );
+         setmusic(FileSongNames[cursong-1]);
+             if(!loopedsong) { 
+             delay(Durationsong [cursong-1]);
+             setmusic("*");
+             }        
+        }
+        else {log (s:"Suggestions go to: \cg#whodunithelp");
+             setmusic("*");
+    }  	
+JBXonoff=false;    
+}

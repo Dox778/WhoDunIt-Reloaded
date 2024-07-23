@@ -1,0 +1,613 @@
+Actor FakeRevolver : CustomInventory replaces SuperShotgun
+{
+	//$Category WDI Weapons
+	//$Sprite PISTA0
+	//$Title "Revolver"
+	Radius 16
+	Height 8
+	Inventory.PickupMessage "\cjFound a \c[R5]Revolver. \cjBe mindful of its slow trigger pull!\n\caDamage: \c[C4]25"
+	Inventory.Respawntics 42000 //20min
+	Scale 0.7
+	+FORCEXYBILLBOARD
+	+DonTGib
+	States
+	{
+	Spawn:
+		DEAG A -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1, 2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Revolver",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIRevolver",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("Revolver",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)
+		TNT1 A 1
+		TNT1 A 0 A_JumpIfInventory("PistolOnce",1,"ForgetIt")
+		TNT1 A 0 A_GiveInventory("RevolverAmmo",Random(0,6))
+		TNT1 A 0 A_GiveInventory("PistolOnce",1)
+		Stop
+	NotPickup:
+		TNT1 A 0
+		TNT1 A 1
+		Fail
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",6,"AmmoPickupFull")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("RevolverAmmo",Random(0,10))
+		TNT1 A 1 A_FireCustomMissile("DroppedRevolverEmpty",0,0,0)
+		Stop
+	AmmoPickupFull:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolClip",2,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolClip",1)
+		TNT1 A 1 A_FireCustomMissile("DroppedRevolverEmpty",0,0,0)
+		Stop
+	ForgetIt:
+		TNT1 A 1
+		Stop
+}}
+Actor FakeRevolverNoRandom : FakeRevolver
+{
+States
+	{
+	Spawn:
+		2EVR "[" -1
+		Stop
+}}
+
+
+ACTOR RevolverAmmo : Ammo
+{
+	Inventory.MaxAmount 6
+	+INVENTORY.UNDROPPABLE
+	Inventory.Icon "2EVR]0"
+}
+
+ACTOR BulletTrail
+{
+	+NOBLOCKMAP
+    +NOTELEPORT
+    +DONTSPLASH
+	+MISSILE
+	+FORCEXYBILLBOARD
+    +CLIENTSIDEONLY
+    +NOINTERACTION
+	+NOGRAVITY
+	+THRUACTORS
+	RenderStyle Translucent
+	Mass 0
+	Speed 1
+	Alpha 0.45
+	Scale 0.02
+	height 2
+	radius 1
+States
+{
+Spawn:
+SMK3 N 2 NODELAY
+SMK3 NNNNNNNNNNNN 1 A_FadeOut(0.08)
+Stop
+}
+}
+
+//M1911 
+Actor Deagle : Wdi_BaseWeapon
+{ 
+	Radius 20
+	Height 16
+	Scale 0.7
+	Obituary ""
+	Tag "Revolver"
+	Inventory.PickupMessage "You find a Deagle."
+	Weapon.PreferredSkin "RevolverSkin"
+	Weapon.SelectionOrder 400
+	Weapon.SlotNumber 1
+	Weapon.Kickback 200
+	Weapon.AmmoType "RevolverAmmo"
+	Weapon.AmmoType2 "PistolClip"
+	Weapon.AmmoUse 0
+	-WEAPON.MELEEWEAPON
+	+INVENTORY.INTERHUBSTRIP
+	States
+	{
+	Spawn:
+		DEAG A -1
+		Stop
+	Select:
+		TNT1 A 6
+		REVO BBBBBBBBBBBBBBB 0 A_Raise
+		DEAG B 1 offset(71,156)
+		DEAG B 1 offset(62,127)
+		DEAG B 1 offset(52,106)
+		DEAG B 1 offset(44,88)
+		DEAG B 1 offset(36,76)
+		DEAG B 1 offset(28,64)
+		DEAG B 1 offset(20,54)
+		DEAG B 1 offset(14,45)
+		DEAG B 1 offset(8,40)
+		DEAG B 1 offset(4,36)
+		DEAG B 1 offset(1,33)
+		DEAG B 0 A_Jump(255,"Ready")
+		DEAG B 0 A_Jump(255,"Ready")
+		goto Ready
+	Ready:
+		DEAG B 1 A_WeaponReady
+		REVO A 0 A_JumpIfInventory("IsDropping",1,"WeaponDrop") 
+		loop 
+	
+	Fire:
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",1,2)
+		Goto NoAmmo
+		TNT1 AAA 0
+		2EVR "\" 0 A_TakeInventory("RevolverAmmo",1)
+		REVR AA 0 A_FireCustomMissile ("PistolSmokeSpawner", 0, 0, 4,12, 0, 0)
+		RIFF A 0 A_FireCustomMissile("BulletTracer", frandom(1.8,2.8), 0, 9, 7)
+		PISG B 0 A_FireBullets(1.0, 1.0, -1, 25, "FFBulletPuff",FBF_NORANDOM)
+		PISG B 0 A_PlaySound("REVFIRE2",CHAN_WEAPON)
+		PISG B 0 A_AlertMonsters
+		TNT1 A 0 A_GunFlash("RecoilStuff",GFF_NOEXTCHANGE)
+		DEAG C 1 Bright A_SpawnItem("FMBulletPuff2Lighter",10,30)
+		DEAG DEFGHII 1
+		DEAG JJKLMNOPQRS 1
+		DEAG B 5 A_WeaponReady(WRF_NOBOB|WRF_NOSWITCH)
+		Goto Ready
+	RecoilStuff:
+		TNT1 A 1 A_ZoomFactor(0.99)
+		TNT1 A 0 A_SetAngle(random(-3,3)+angle)
+		NULL A 1 A_SetPitch(Pitch-2)
+		TNT1 A 1 A_ZoomFactor(1.0)
+		NULL A 1 A_SetPitch(Pitch-2)
+		NULL A 1 A_SetPitch(Pitch-1)
+		NULL AA 2 A_SetPitch(Pitch-0.2)
+		TNT1 A 1
+		NULL AA 1 A_SetPitch(Pitch+0.2)
+		TNT1 AAA 1 A_SetPitch(Pitch+0.6)
+		TNT1 A 1
+		TNT1 AA 1 A_SetPitch(Pitch+0.1)
+		
+		stop
+	NoAmmo:
+		REVR A 0 A_JumpIfInventory("IsDropping",1,"WeaponDrop")
+		REVR A 0 A_PlaySound("REVDRY")
+		REVO A 2 offset(0,34)
+		REVO A 1 offset(0,33)
+		REVO A 1 A_WeaponReady(WRF_NOFIRE)
+		Goto Ready
+	ToReady:
+		REVR A 0
+		Goto Ready
+	AltFire:
+		BDRI A 0 A_JumpIfInventory("IsDropping",1,"WeaponDrop")
+		BDRI A 0 A_JumpIfInventory("RevolverAmmo",6,"Ready")
+		BDRI A 0 A_JumpIfInventory("PistolClip",1,"ReloadB")
+		Goto Ready
+	ReloadB:
+		TNT1 A 0 A_TakeInventory("PistolClip",1)
+		TNT1 AA 0
+		REVR AABCDEEFFFFG 1
+		REVR H 1 A_PlaySound("REVOPEN")
+		REVR IJJKKK 1
+		REVR LMNOPPQQQQQ 1
+		REVR RSTUVVV 1
+		REVR W 1 A_PlaySound("REVFLY")
+		REVR XYZ 1
+		TNT1 AAAAAA 0 A_FireCustomMissile("PistolCasing",random(-6,6),0,random(2,-2),random(-1,-2),2,random(-85,-105))
+		REVR "[\\\\]]" 1
+		2EVR ABCDEFGG 1
+		2EVR H 8
+		2EVR IJKLMMNNNNNN 1
+		2EVR O 1 A_GiveInventory("RevolverAmmo",6)
+		2EVR O 1 A_PlaySound("REVINSRT") 
+		2EVR PQQQQRRSTUVWWWWXXYZZZZ 1
+		REVR I 1
+		REVR H 1 A_PlaySound("REVCLOSE")
+		REVR GEFFFFEEDCBA 1
+		Goto Ready //49
+
+	WeaponDrop:
+		TNT1 A 0
+		TNT1 A 0 A_GiveInventory("DropAnimWeapon",1)
+		TNT1 A 0 A_TakeInventory("PistolOnce",1)
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+		TNT1 A 0 ACS_NamedExecuteAlways("WDINewActivateDrop",0,0,0,0)
+		Goto Ready
+}}
+
+ACTOR DroppedRevolver
+{
+	PROJECTILE
+	-NOGRAVITY
+	Damage 0
+	Radius 16
+	Height 8
+	Speed 9
+  	Scale 0.7
+	DeathSound "weapons/gundrop"
+	BounceSound "weapons/gundrop"
+	Bouncetype Doom
+	BounceFactor 0.3
+	BounceCount 2
+	States
+	{
+	Spawn:
+		2EVR "[" 1
+		Loop
+	Death:
+		2EVR "[" 35 A_playSound("weapons/gundrop",CHAN_BODY,0.5)
+		2EVR "[" 1 A_SpawnItemEx("FakeBeretta",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+Actor Dropper_Revolver : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",6,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",5,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",4,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",3,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",2,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",1,"Pickup1")
+	PickupEmpty:
+		TNT1 A 1 A_FireCustomMissile("DroppedRevolverEmpty",0,0,0)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_FireCustomMissile("DroppedRevolver1",0,0,0)
+		TNT1 A 1 A_TakeInventory("RevolverAmmo",10)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_FireCustomMissile("DroppedRevolver2",0,0,0)
+		TNT1 A 1 A_TakeInventory("RevolverAmmo",10)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_FireCustomMissile("DroppedRevolver3",0,0,0)
+		TNT1 A 1 A_TakeInventory("RevolverAmmo",10)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_FireCustomMissile("DroppedRevolver4",0,0,0)
+		TNT1 A 1 A_TakeInventory("RevolverAmmo",10)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_FireCustomMissile("DroppedRevolver5",0,0,0)
+		TNT1 A 1 A_TakeInventory("RevolverAmmo",10)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_FireCustomMissile("DroppedRevolverFull",0,0,0)
+		TNT1 A 1 A_TakeInventory("RevolverAmmo",10)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+
+Actor DeathDropper_Revolver : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",6,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",5,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",4,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",3,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",2,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",1,"Pickup1")
+	PickupEmpty:
+		TNT1 A 1 A_SpawnItemEx("FakeRevolverEmpty",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_SpawnItemEx("FakeRevolver1",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("RevolverAmmo",10)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_SpawnItemEx("FakeRevolver2",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("RevolverAmmo",10)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_SpawnItemEx("FakeRevolver3",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("RevolverAmmo",10)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_SpawnItemEx("FakeRevolver4",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("RevolverAmmo",10)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_SpawnItemEx("FakeRevolver5",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("RevolverAmmo",10)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_SpawnItemEx("FakeRevolverFull",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("RevolverAmmo",10)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+ACTOR DroppedRevolverFull : DroppedRevolver
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		2EVR "[" 35
+		2EVR "[" 1 A_SpawnItemEx("FakeRevolverFull",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+ACTOR DroppedRevolver5 : DroppedRevolver
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		2EVR "[" 35
+		2EVR "[" 1 A_SpawnItemEx("FakeRevolver5",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+ACTOR DroppedRevolver4 : DroppedRevolver
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		2EVR "[" 35
+		2EVR "[" 1 A_SpawnItemEx("FakeRevolver4",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+ACTOR DroppedRevolver3 : DroppedRevolver
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		2EVR "[" 35
+		2EVR "[" 1 A_SpawnItemEx("FakeRevolver3",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+ACTOR DroppedRevolver2 : DroppedRevolver
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		2EVR "[" 35
+		2EVR "[" 1 A_SpawnItemEx("FakeRevolver2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+ACTOR DroppedRevolver1 : DroppedRevolver
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		2EVR "[" 35
+		2EVR "[" 1 A_SpawnItemEx("FakeRevolver1",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+ACTOR DroppedRevolverEmpty : DroppedRevolver
+{+FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		2EVR "[" 35
+		2EVR "[" 1 A_SpawnItemEx("FakeRevolverEmpty",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+Actor FakeRevolverFull : FakeRevolver
+{+FORCEXYBILLBOARD
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Revolver",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIRevolver",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("Revolver",1)
+		TNT1 A 0 A_GiveInventory("RevolverAmmo",6)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",1,"AmmoPickupFull")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("RevolverAmmo",10)
+		TNT1 A 1 A_FireCustomMissile("DroppedRevolverEmpty",0,0,0)
+		Stop
+	AmmoPickupFull:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PistolClip",2,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("PistolClip",1)
+		TNT1 A 1 A_FireCustomMissile("DroppedRevolverEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeRevolver5 : FakeRevolver
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Revolver",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIRevolver",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("Revolver",1)
+		TNT1 A 0 A_GiveInventory("RevolverAmmo",5)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",6,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("RevolverAmmo",5)
+		TNT1 A 1 A_FireCustomMissile("DroppedRevolverEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeRevolver4 : FakeRevolver
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Revolver",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIRevolver",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("Revolver",1)
+		TNT1 A 0 A_GiveInventory("RevolverAmmo",4)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",7,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("RevolverAmmo",4)
+		TNT1 A 1 A_FireCustomMissile("DroppedRevolverEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeRevolver3 : FakeRevolver
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Revolver",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIRevolver",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("Revolver",1)
+		TNT1 A 0 A_GiveInventory("RevolverAmmo",3)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",8,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("RevolverAmmo",3)
+		TNT1 A 1 A_FireCustomMissile("DroppedRevolverEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeRevolver2 : FakeRevolver
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Revolver",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIRevolver",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("Revolver",1)
+		TNT1 A 0 A_GiveInventory("RevolverAmmo",2)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",9,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("RevolverAmmo",2)
+		TNT1 A 1 A_FireCustomMissile("DroppedRevolverEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeRevolver1 : FakeRevolver
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Revolver",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("WDIRevolver",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("Revolver",1)
+		TNT1 A 0 A_GiveInventory("RevolverAmmo",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("RevolverAmmo",10,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("RevolverAmmo",1)
+		TNT1 A 1 A_FireCustomMissile("DroppedRevolverEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeRevolverEmpty : FakeRevolver
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Revolver",1,"ForgetIt")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("Revolver",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)
+		NULL A 0 A_TakeInventory("NeedToUnjamPistol",1)
+		NULL A 0 A_TakeInventory("JamCountPistol",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,3)
+		Stop
+}}
+

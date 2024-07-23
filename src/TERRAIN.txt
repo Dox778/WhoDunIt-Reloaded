@@ -1,0 +1,1832 @@
+//First of all, the splashes
+
+splash Water
+{
+	smallclass		WaterSplashBase
+	smallclip		12
+	smallsound		world/watersplashsmall
+
+	baseclass		WaterSplashBase2
+	chunkclass		WaterSplash
+	chunkxvelshift	8
+	chunkyvelshift	8
+	chunkzvelshift	8
+	chunkbasezvel	2
+	sound			world/watersplash
+	NoAlert
+}
+
+splash DarkWater
+{
+	smallclass		WaterSplashBase
+	smallclip		12
+	smallsound		world/watersplashsmall
+
+	baseclass		DarkWaterSplashBase2
+	chunkclass		WaterSplash
+	chunkxvelshift	8
+	chunkyvelshift	8
+	chunkzvelshift	8
+	chunkbasezvel	2
+	sound			world/watersplash
+	NoAlert
+}
+
+splash Blood
+{
+	smallclass		BloodSplash
+	smallclip		10
+	smallsound		world/sludgegloopsmall
+
+	baseclass		bloodsplashbase3
+	chunkclass		BloodSplash
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			world/sludgegloop
+	NoAlert
+}
+
+splash Nuke
+{
+	smallclass		SludgeSplash
+	smallclip		6
+	smallsound		world/sludgegloopsmall//world/lavasizzlesmall
+
+	baseclass		nukageSplashBase
+	chunkclass		LavaSmoke
+	chunkxvelshift	-1
+	chunkyvelshift	-1
+	chunkzvelshift	7
+	chunkbasezvel	1
+	sound			world/sludgegloop//world/lavasizzle
+	NoAlert
+}
+
+splash Lava
+{
+	smallclass		LavaSplash
+	smallclip		12
+	smallsound		world/lavasizzlesmall
+
+	baseclass		LavaSplash
+	chunkclass		LavaSmoke
+	chunkxvelshift	-1
+	chunkyvelshift	-1
+	chunkzvelshift	7
+	chunkbasezvel	1
+	sound			world/lavasizzle
+	NoAlert
+}
+
+
+splash Lav2
+{
+	smallclass		BloodSplash
+	smallclip		12
+	smallsound		world/lavasizzlesmall
+
+	baseclass		BloodSplash
+	chunkclass		LavaSmoke
+	chunkxvelshift	-1
+	chunkyvelshift	-1
+	chunkzvelshift	7
+	chunkbasezvel	1
+	sound			world/lavasizzle
+	NoAlert
+}
+
+splash Lav3
+{
+	smallclass		LavaSmoke
+	smallclip		12
+	smallsound		world/lavsiz2
+
+	baseclass		LavaSmoke
+	chunkclass		LavaSmoke
+	chunkxvelshift	-1
+	chunkyvelshift	-1
+	chunkzvelshift	7
+	chunkbasezvel	1
+	sound			world/lavsiz2
+	NoAlert
+}
+
+splash Slime
+{
+	smallclass		SlimeSplash
+	smallclip		6
+	smallsound		world/sludgegloopsmall
+
+	baseclass		SlimeSplashBase
+	chunkclass		SlimeChunk
+	chunkxvelshift	8
+	chunkyvelshift	8
+	chunkzvelshift	8
+	chunkbasezvel	1
+	sound			world/sludgegloop
+	NoAlert
+}
+
+splash Grey
+{
+	smallclass		BloodSplashBase
+	smallclip		12
+	smallsound		world/watersplashsmall
+	
+	baseclass		BloodSplashBase
+	chunkclass		SludgeChunk
+	chunkxvelshift	8
+	chunkyvelshift	8
+	chunkzvelshift	8
+	chunkbasezvel	2
+	sound			world/watersplash
+	NoAlert
+}
+
+
+splash Sludge
+{
+	smallclass		SludgeSplash
+	smallclip		8
+	smallsound		world/sludgegloopsmall
+
+	baseclass		SlimeSplashBase
+	chunkclass		SlimeChunk
+	chunkxvelshift	6
+	chunkyvelshift	6
+	chunkzvelshift	6
+	chunkbasezvel	1
+	sound			world/sludgegloop
+	NoAlert
+}
+
+//And now the hard floor sound definitions
+
+splash carpet
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/carpet
+	NoAlert
+}
+
+splash dirt
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/dirt
+	NoAlert
+}
+
+splash gravel
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/gravel
+	NoAlert
+}
+
+splash metal
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/metal
+	NoAlert
+}
+
+splash metal2
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/met2
+	NoAlert
+}
+
+splash rock
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/rock
+	NoAlert
+}
+
+
+splash slimy
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/slimy
+	NoAlert
+}
+
+
+splash snow
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/snow
+	NoAlert
+}
+
+splash hard
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/hard
+	NoAlert
+}
+
+splash tile
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/tile
+	NoAlert
+}
+
+splash tile2
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/tile2
+	NoAlert
+}
+
+splash wood
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/wood
+	NoAlert
+}
+
+
+splash electric
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/elec1
+	NoAlert
+}
+
+
+splash sand
+{
+	smallclass		SandSplashBase
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		SandSplashBase//None//Footprint
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/sand
+	NoAlert
+}
+
+splash grass
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/grass
+	NoAlert
+}
+
+splash ice
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/ice
+	NoAlert
+}
+
+//Terrains
+
+//defaultterrain default
+
+terrain defaultterrain
+{
+	splash			hard
+	footclip		0
+
+}
+
+terrain Water
+{
+	splash			Water
+	footclip		10
+	liquid
+	friction 0.96
+}
+
+terrain DarkWater
+{
+	splash			DarkWater
+	footclip		10
+	liquid
+	friction 0.96
+}
+
+terrain Lava
+{
+	splash			Lava
+	footclip		1
+	liquid
+}
+
+terrain Lav2
+{
+	splash			Lav2
+	footclip		1
+	liquid
+}
+
+terrain Lav3
+{
+	splash			Lav3
+	footclip		0
+	liquid
+}
+
+terrain Blood
+{
+	splash			Blood
+	footclip		2
+	liquid
+//	friction 0.96
+}
+
+terrain Nuke
+{
+	splash			Nuke
+	footclip		1
+	liquid
+	friction 0.96
+	footclip		10
+}
+
+terrain Slime
+{
+	splash			Slime
+	footclip		1
+	liquid
+	friction 0.96
+	footclip		10
+}
+
+terrain Grey
+{
+	splash			Grey
+	footclip		1
+	liquid
+	friction 0.96
+}
+
+terrain Sludge
+{
+	splash			Sludge
+	footclip		1
+	liquid
+	friction 0.96
+	footclip		10
+}
+
+//And now the hard terrains
+
+terrain carpet
+{
+	splash			carpet
+	footclip		0
+	//liquid
+}
+
+terrain dirt
+{
+	splash			dirt
+	footclip		0
+	//liquid
+}
+
+terrain gravel
+{
+	splash			gravel
+	footclip		0
+	//liquid
+}
+
+terrain metal
+{
+	splash			metal
+	footclip		0
+	//liquid
+}
+
+terrain metal2
+{
+	splash			metal2
+	footclip		0
+	//liquid
+}
+
+terrain rock
+{
+	splash			rock
+	footclip		0
+	//liquid
+}
+
+
+terrain slimy
+{
+	splash			slimy
+	footclip		0
+	//liquid
+}
+
+terrain hard
+{
+	splash			hard
+	footclip		0
+	//liquid
+}
+
+terrain tile
+{
+	splash			tile
+	footclip		0
+	//liquid
+}
+
+terrain tile2
+{
+	splash			tile2
+	footclip		0
+	//liquid
+}
+
+terrain wood
+{
+	splash			wood
+	footclip		0
+	//liquid
+	
+}
+
+terrain electric
+{
+	splash			electric
+	footclip		0
+	//liquid
+}
+
+splash Sewer
+{
+	smallclass		SlimeSplash
+	smallclip		6
+	smallsound		world/sludgegloopsmall
+
+	baseclass		SlimeSplash
+	chunkclass		SlimeChunk
+	chunkxvelshift	8
+	chunkyvelshift	8
+	chunkzvelshift	8
+	chunkbasezvel	1
+	sound			world/sludgegloop
+	NoAlert
+}
+
+splash vent
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/vent
+	NoAlert
+}
+
+terrain vent
+{
+	splash			vent
+	footclip		0
+	//liquid
+}
+
+terrain Sewer
+{
+	splash			Sewer
+	footclip		9
+	liquid
+}
+
+splash snow
+{
+	smallclass		None
+	smallclip		0
+	smallsound		njmt
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			floor/snow
+	NoAlert
+}
+
+terrain ice
+{
+	splash			ice
+	footclip		0
+	friction 2.0
+}
+terrain sand
+{
+	splash			sand
+	footclip		2
+}
+terrain grass
+{
+	splash			grass
+	footclip		0
+}
+terrain snow
+{
+	splash			snow
+	footclip		4
+}
+
+
+//WDI25:
+splash vent2
+{
+	smallclass		None
+	smallclip		0
+	smallsound		VENTWALK
+
+	baseclass		None
+	chunkclass		None
+	chunkxvelshift	0
+	chunkyvelshift	0
+	chunkzvelshift	0
+	chunkbasezvel	0
+	sound			VENTWALK
+	NoAlert
+}
+
+terrain vent2
+{
+	splash			vent2
+	footclip		0
+}
+
+
+//EX:
+terrain stucksuperdeep
+{
+    splash            stuck
+    footclip        0
+    friction        0.39
+}
+
+terrain stuckwater
+{
+    splash            Water
+    footclip        20
+    friction        0.8
+}
+
+terrain stuckdeep
+{
+    splash            stuck
+    footclip        20
+    friction        0.6
+}
+
+terrain stuck
+{
+    splash            stuck
+    footclip        0
+    //liquid
+}
+
+
+//defaultterrain hard
+
+//Which flat does what
+
+ifdoom
+
+floor BBRICK77 tile
+floor BKACH46 tile
+floor BKACH09 tile
+floor BKACH06 tile
+floor ARUST04 tile
+floor ABRICK77 tile
+floor BLHEDGEB dirt
+floor NOVENT2 hard
+floor WF02 metal
+floor AGREYFL2 metal
+floor BLGRBRK1 rock
+floor BRICK11 wood
+floor BGREYFL1 rock
+floor AGREYFL3 metal
+floor 64GRATE metal
+
+floor BSNOW01 snow
+floor BSLIM01 Sewer
+floor VENT vent
+floor VENTFLAT vent
+floor CONCFLT1 tile
+floor CONCFLT2 tile
+floor FN_CATFR tile
+floor MPANEL2 metal
+floor AKACH46 tile
+floor ABRWN04 tile
+floor ABRICK04 tile
+
+floor ABRICK10 tile
+floor ABRICK77 tile
+floor ASTON65 dirt
+floor ASTON14 dirt
+floor ASTON09 gravel
+floor BSTON09 gravel
+FLOOR VENTFLAT METAL2
+FLOOR VENTWALL METAL2
+FLOOR MOEZ44 TILE
+FLOOR NFSTEP05 METAL
+FLOOR NFSTEP06 METAL
+FLOOR BROCK05 ROCK
+FLOOR BGREY57 ROCK
+FLOOR BSLMR05 CARPET
+FLOOR BWOOD32 WOOD
+FLOOR FN_WBLKS WOOD
+FLOOR AHEU02 WOOD
+FLOOR BSTON01 dirt
+FLOOR GRASS1_2 gravel
+FLOOR BBRICK10 tile
+floor ABRWN04 HARD
+floor CFM13 carpet
+FLOOR ERHELL2 DIRT
+FLOOR FLRGUT carpet
+
+//Splash floors first
+floor BLOOD1 Blood
+floor BLOOD2 Blood
+floor BLOOD3 Blood
+floor FWATER1 Water
+floor FWATER2 Water
+floor FWATER3 Water
+floor FWATER4 Water
+floor LAVA1 Lava
+floor LAVA2 Lava
+floor LAVA3 Lava
+floor LAVA4 Lava
+floor NUKAGE1 Nuke
+floor NUKAGE2 Nuke
+floor NUKAGE3 Nuke
+floor SLIME01 Slime
+floor SLIME02 Slime
+floor SLIME03 Slime
+floor SLIME04 Slime
+floor SLIME05 Slime
+floor SLIME06 Slime
+floor SLIME07 Slime
+floor SLIME08 Slime
+floor SLIME09 Lav3
+floor SLIME10 Lav3
+floor SLIME11 Lav3
+floor SLIME12 Lav3
+floor RROCK01 Lav3
+floor RROCK02 Lav3
+floor RROCK05 Lav3
+floor RROCK06 Lav3
+floor RROCK07 Lav3
+floor RROCK08 Lav3
+floor HYWATER Water
+floor LAVA Lava
+floor LAVA1 Lava
+floor LAVA2 Lav3
+floor LAVA2A Lava
+floor LAVA2B Lava
+floor LAVA2M Lav2
+floor LAVA2M1 Lav2
+floor LAVA2MA Lav2
+floor LAVAB Lava
+floor MLAVA Lava
+floor MLAVA2 Lav2
+floor WATER-S Water
+floor WAR-RUN Water
+
+//And now sound only (hard) floors
+floor CEIL1_1 wood
+floor CEIL1_2 metal
+floor CEIL1_3 tile
+floor CEIL3_1 hard
+floor CEIL3_2 hard
+floor CEIL3_3 tile
+floor CEIL3_4 tile
+floor CEIL3_5 hard
+floor CEIL3_6 hard
+floor CEIL4_1 carpet
+floor CEIL4_2 carpet
+floor CEIL4_3 carpet
+floor CEIL5_1 hard
+floor CEIL5_2 hard
+floor COMP01 tile
+floor CONS1_1 tile
+floor CONS1_5 tile
+floor CONS1_7 tile
+floor CRATOP1 wood
+floor CRATOP2 wood
+floor DEM1_1 tile2
+floor DEM1_2 tile2
+floor DEM1_3 tile2
+floor DEM1_4 tile2
+floor DEM1_5 tile2
+floor DEM1_6 tile2
+floor FLAT1 rock
+floor FLAT1_1 rock
+floor FLAT1_2 rock
+floor FLAT1_3 metal
+//floor FLAT1_4 metal
+floor FLAT2 tile
+floor FLAT3 tile
+floor FLAT4 metal
+floor FLAT5 hard
+floor FLAT5_1 wood
+floor FLAT5_2 wood
+floor FLAT5_3 carpet
+floor FLAT5_4 carpet
+floor FLAT5_5 carpet
+floor FLAT5_6 rock
+floor FLAT5_7 rock
+floor FLAT5_8 rock
+floor FLAT8 tile
+floor FLAT9 tile
+floor FLAT10 dirt
+floor FLAT14 carpet
+floor FLAT17 tile
+floor FLAT18 tile
+floor FLAT19 tile
+floor FLAT20 metal
+floor FLAT22 metal
+floor FLAT23 metal
+floor FLOOR0_1 hard
+floor FLOOR0_2 hard
+floor FLOOR0_3 hard
+floor FLOOR0_5 tile
+floor FLOOR0_6 tile
+floor FLOOR0_7 tile
+floor FLOOR1_1 carpet
+floor FLOOR1_6 hard
+floor FLOOR1_7 hard
+floor FLOOR3_3 tile
+floor FLOOR4_1 tile
+floor FLOOR4_5 tile
+floor FLOOR4_6 tile2
+floor FLOOR4_8 tile2
+floor FLOOR5_1 tile2
+floor FLOOR5_2 tile2
+floor FLOOR5_3 tile2
+floor FLOOR5_4 rock
+floor FLOOR6_1 gravel
+floor FLOOR6_2 gravel
+floor FLOOR7_1 hard
+floor FLOOR7_2 tile2
+floor GATE1 metal
+floor GATE2 metal
+floor GATE3 metal
+floor GATE4 metal
+floor GRASS1 dirt
+floor GRASS2 dirt
+floor GRNLITE1 hard
+floor GRNROCK rock
+floor MFLR8_1 hard
+floor MFLR8_2 metal
+floor MFLR8_3 gravel
+floor MFLR8_4 dirt
+floor RROCK03 rock
+floor RROCK04 rock
+floor RROCK09 rock
+floor RROCK10 rock
+floor RROCK11 rock
+floor RROCK12 rock
+floor RROCK13 rock
+floor RROCK14 rock
+floor RROCK15 rock
+floor RROCK16 dirt
+floor RROCK17 dirt
+floor RROCK18 dirt
+floor RROCK19 dirt
+floor RROCK20 dirt
+floor SFLR6_1 slimy
+floor SFLR6_4 slimy
+floor SFLR7_1 slimy
+floor SFLR7_4 slimy
+floor SLIME13 rock
+floor SLIME14 metal2
+floor SLIME15 metal2
+floor SLIME16 metal2
+floor STEP1 metal
+floor STEP2 metal
+
+floor TLITE6_1 tile
+floor TLITE6_4 tile
+floor TLITE6_5 tile
+floor TLITE6_6 tile
+
+
+//====================================================
+
+//Spooky House stuff
+
+//Carpet
+	floor ATEP01 carpet
+	floor ATEP02 carpet
+	floor ATEP04 carpet
+	floor ATEP05 carpet
+	
+	floor BTEPPI01 carpet
+	floor BTEPPI02 carpet
+	floor BTEPPI04 carpet
+	floor BTEPPI05 carpet
+	
+	
+//Tile
+	floor ATEP07 tile
+
+	floor ATEPP01 tile
+	floor ATEPP02 tile
+	floor ATEPP03 tile
+	floor ATEPP04 tile
+	floor ATEPP06 tile
+	floor ATEPP09 tile
+	
+	floor AKACH01 tile
+	floor AKACH02 tile
+	floor AKACH03 tile
+	floor AKACH04 tile
+	floor AKACH05 tile
+	floor AKACH06 tile
+	floor AKACH07 tile
+	floor AKACH08 tile
+	floor AKACH09 tile
+	
+	floor URWALL07 tile
+	
+	floor WF08 tile
+	floor WF10 tile
+	
+
+
+//Wood
+	floor URWOOD01 wood
+	floor URWOOD02 wood
+	floor URWOOD03 wood
+	floor URWOOD04 wood
+	
+	floor CFM32 wood
+	
+	floor AWOOD01 wood
+	floor AWOOD02 wood
+	floor AWOOD03 wood
+	floor AWOOD08 wood
+	floor AWOOD22 wood
+	floor AWOOD32 wood
+	
+	floor BWOOD01 tile
+	floor BWOOD02 tile
+	floor BWOOD03 tile
+	floor BWOOD04 tile
+	floor BWOOD08 tile
+	floor BWOOD10 tile
+	floor BWOOD11 tile
+	floor BWOOD12 tile
+	floor BWOOD13 tile
+	floor BWOOD14 tile
+	floor BWOOD15 tile
+	floor BWOOD21 tile
+	floor BWOOD22 tile
+	floor BWOOD32 tile
+	floor BWOOD67 tile
+	floor BWOOD99 tile
+	
+
+
+//Metals
+	floor URGRAT01 metal
+
+
+//WDI shit
+floor HYWATER Water
+
+floor ATEP08 Carpet
+floor TRAV_F02 Carpet
+floor TRAV_F04 Carpet
+
+floor AKACH10 tile
+floor BWOOD81 tile
+floor BWOOD82 tile
+floor BWOOD83 tile
+floor BWOOD84 tile
+
+floor WOODVERT wood
+
+	floor ERGRAY2S rock
+	floor ERGRAY3S rock
+	floor ERGRAY2 rock
+	floor BSTON87 rock
+	floor BSTON32 rock
+	floor ASTON13 rock
+	floor ABRICK01 rock
+	floor AMARB19 rock 
+	floor BBRICK01 rock
+	floor BROCK01 rock
+	floor BBRICK44 rock
+	floor BROCK32 rock 
+
+	floor BROCK33 gravel
+	floor BTREE01 gravel
+
+	floor URGRAT02 metal2
+	floor AGREYFL5 metal2 
+	floor AMETAL60 metal2
+	floor TUT10 metal2
+
+	floor FN_PMTL1 metal
+
+	floor FNSHOWA tile
+	floor SPACEW6 tile
+	floor ERWALL11 tile
+	floor FNDNTLE1 tile
+	floor ERFLAT10 tile
+	floor BKACH75 tile
+	floor AKACH75 tile
+	floor AKACH01 tile
+	floor AKACH09 tile
+	floor BKACH05 tile
+	floor RWALL14 tile
+	floor ATEPP03 tile
+	floor ATEPP02 tile
+	floor AGRN01 tile
+	floor NEST06 tile
+
+	floor FNSPAD1 carpet
+	floor BTEPP45 carpet
+
+	floor GRASS1_2 grass
+	floor WF14 grass
+	floor BGRASS02 grass
+	floor MOEZ27 grass
+	
+	floor MOEZ1 wood
+	floor MOES20 wood
+	floor MOEZ20 wood
+	floor AKISTE01 wood
+	floor DM37 wood
+	
+floor BKACH01 tile
+floor DFICE tile
+
+
+floor DWATER-S Water
+floor DWAT-RUN Water
+floor DWATERXS Blood
+floor DWATXRUN Blood
+
+//Bigpack stuff
+
+//wdi14
+floor ASNOW01 snow
+floor ASNOW99 snow
+floor TILE1_BR tile
+floor FLOOR7_3 tile
+floor TILE1_BL tile
+floor WALLR64 carpet
+floor GRASS3 dirt
+floor EARTH1 dirt
+floor MOSSYCO rock
+floor WOOD7 wood
+floor WRCKA1 rock
+floor SQCO2 rock
+
+//wdi16
+floor SAND1 gravel
+floor EBAR01 metal
+floor TANK_2 metal
+floor ETEX36 metal
+floor ECEIL17 metal
+floor BRICK2 hard
+floor TMAYWL15 rock
+floor ECEIL29 tile
+floor TMAYFL08 rock
+floor BRICK5 hard
+floor BRICK6 hard
+floor ETEX62 rock
+floor EFLOOR16 rock
+floor EWALL12 rock
+floor BRICK10 hard
+
+//wdi23
+Floor	FFLAT09		Tile
+Floor	ADEL_J10	Tile
+Floor	TFLOR100	Tile
+Floor	MGRASS7		Dirt
+Floor	RTEX348		Carpet
+Floor	CRP21		Carpet
+Floor	CRV21		Carpet
+Floor	CRV22		Carpet
+Floor	CRP22		Carpet
+Floor	F_CARP2A	Carpet
+Floor	F_CARP2B	Carpet
+Floor	F_CARP2C	Carpet
+Floor	F_CARP2D	Carpet
+Floor	F_CARP2E	Carpet
+Floor	F_CARP2F	Carpet
+Floor	F_CARP3A	Carpet
+Floor	F_CARP3B	Carpet
+Floor	F_CARP3C	Carpet
+Floor	F_CARP3D	Carpet
+Floor	F_CARP3E	Carpet
+Floor	F_CARP3F	Carpet
+Floor	TFLAT54		Carpet
+Floor	TFLOR011	Carpet
+Floor	TFLOR010	Carpet
+Floor	TFLOR007	Carpet
+Floor	TFLOR006	Carpet
+Floor	A-DROCK2	Rock
+Floor	TWALL02		Rock
+Floor	QFLAT04		Rock
+Floor	ZIMMER3		Gravel
+Floor	WOOD_11		Wood
+Floor	WOOD_10		Wood
+Floor	OLA_F_01	Hard
+Floor	OLA_F_02	Hard
+Floor	FWAL01		Hard
+Floor	FWAL02		Hard
+Floor	FWAL03		Hard
+Floor	TFLOR016	Hard
+Floor	TFLOR015	Hard
+Floor	TFLOR014	Hard
+Floor	TFLOR013	Hard
+Floor	TFLOR012	Hard
+Floor	TFLOR009	Hard
+Floor	TFLOR008	Hard
+Floor	TFLOR005	Hard
+Floor	TFLOR004	Hard
+Floor	TFLOR003	Hard
+Floor	TFLOR002	Hard
+Floor	TFLOR001	Hard
+
+floor WATER4 water
+floor BADWATER water
+floor 64vent vent2
+floor ROCK001 rock
+floor ROCK002 rock
+floor ROCK003 rock
+floor ROCK004 rock
+floor ROCK005 rock
+floor ROCK006 rock
+floor TILE001 tile
+floor TILE002 tile
+floor WOOD001 wood
+floor WOOD002 wood
+floor WOOD003 wood
+floor WOOD004 wood
+floor WOOD005 wood
+floor WOOD006 wood
+floor WOOD007 wood
+floor WOOD008 wood
+floor WOOD009 wood
+floor WOOD010 wood
+floor WOOD011 wood
+floor WOOD012 wood
+floor BOX001 wood
+floor CEMNT001 hard
+floor CEMNT002 hard
+floor CEMNT003 hard
+floor CEMNT004 hard
+floor MARB001 tile
+floor MARB002 tile
+floor MARB003 tile
+floor MARB004 tile
+floor MARB005 tile
+floor MARB006 tile
+
+//EX
+floor CTFLOOR stuckwater
+floor DIRWAT3 stuckwater
+floor DIRWAT2 stuckdeep
+floor DIRWAT4 stucksuperdeep
+floor ZCHORN2 stucksuperdeep
+floor ZCHORN3 stucksuperdeep
+floor XCGIANTS stucksuperdeep
+floor YZTX4061 Water
+floor DCWAVE2 Water
+floor DCWAVE3 Water
+floor DCWAVE4 Water
+floor DIRWAT5 Water
+floor YZLOST04 metal
+floor YZLOST05 metal
+floor YZTX124 metal
+floor YZTXSTK1 metal
+floor YZTXSTK2 metal
+floor YZTXSTK3 metal
+floor KPTX0494 metal
+floor SNEG19 metal
+floor KPTX0495 metal
+floor KPTX0475 metal
+floor XCTX0017 metal
+floor MOEZ41 metal
+floor YZTX874 metal
+floor KPTX0397 metal
+floor LOS_P017 metal
+floor SLTX004 metal
+floor YZLOST06 rock
+floor YZLOST07 rock
+floor YZGLASS4 rock
+floor YZTX54 rock
+floor YZTX461 rock
+floor YZTX464 rock
+floor YZTX3989 rock
+floor KPTX0560 rock
+floor XCAMUS37 rock
+floor EST_DRYL rock
+floor YZTX159 tile
+floor LOS_F068 tile
+floor YZTX206 tile
+floor YZTX208 tile
+floor YZTX214 tile
+floor YZTX229 tile
+floor YZTX424 tile
+floor YZTX426 tile
+floor YZTX3279 tile
+floor YZTX432 tile
+floor YZTX436 tile
+floor YZTX884 tile
+floor BOW_SIDE tile
+floor DER_ALLE tile
+floor XCTX0085 tile
+floor XCTXRR01 tile
+floor XCTXRR02 tile
+floor XCTXRR03 tile
+floor VOINI30 tile
+floor VOINI25 tile
+floor XCTX0075 tile
+floor KPTX0056 tile
+floor CJ_DIRTY tile
+floor KPTX0244 tile
+floor YZTX175A grass
+floor YZTX1877 grass
+floor XCTX0110 grass
+floor VOINI29 grass
+floor XCTX162 grass
+floor YZTX181A lava
+floor YZTX3A85 wood
+floor XCTX0111 wood
+floor XCTX0072 wood
+floor XCTX0077 wood
+floor XCTX199 wood
+floor SNEG14 carpet
+floor XXTXRR04 gravel
+floor XCTX0062 gravel
+floor DER_GREY gravel
+floor XCTX0049 gravel
+
+//Dox's stuff
+/////////////////////
+//FLOORS
+floor -NOFLAT- hard
+Floor TS1FLR5 tile
+//I DONT KNOW LMAO
+Floor WQLAVA lava
+Floor CFMF02 metal2
+Floor DFMAR3 rock
+Floor BLUEWALL carpet
+Floor FN_WHITE hard
+Floor ROCK7 rock
+Floor N_SHRD01 metal
+Floor CAMO carpet
+Floor DISHWASH metal2
+Floor ROCKFAC1 rock
+
+Floor AZWATER3 water
+Floor AZWATER2 water
+Floor TS1WAT1 water
+
+
+//WDIEXSEC
+Floor BLEIT02 Wood
+Floor XCTX0072 Wood
+Floor XCTX0073 Tile
+Floor AZTXGN01 Grass
+Floor AZTXGN02 Grass
+Floor AZTXGN03 Grass
+Floor AZTX007 Tile
+Floor AZTX034 Tile
+Floor AZTX059 Tile
+Floor AZTX063 Tile
+Floor AZTX064 Tile
+Floor AZTX079 Tile
+Floor AZTX095 Dirt
+Floor AZTX101 Dirt
+Floor AZTX102 Dirt
+Floor AZTX103 Dirt
+Floor AZWATER1 Water
+Floor SH4RMFF2 Carpet
+Floor TS1WAT2 Water
+Floor TS1WAL1 Metal
+Floor TS1FLR2 Tile
+Floor TS1FLR3 Tile
+Floor TS1FLR4 Tile
+Floor TS1FLR6 Tile
+Floor TS1FLR7 Tile
+Floor TS1FLR8 Tile
+Floor TS1FLR9 Metal2
+Floor TS1FLR10 Tile
+Floor TS1FLR11 Tile
+Floor TS1FLR12 Tile
+Floor TS1FLR13 Tile
+Floor TS1FLR14 Tile
+Floor TS1FLR15 Tile
+Floor TS1FLR16 Metal2
+Floor TS1FLR17 Metal2
+Floor TS1FNC2 Metal2
+Floor TS1CRT5 Metal
+Floor TS1CRT6 Metal2
+Floor TS1CRAT3 Metal2
+Floor TS1CAR4 Metal
+Floor TS1CAR4B Metal
+Floor TS1CAR6 Metal
+Floor TS1CAR7 Metal
+Floor TS2FLR1 Tile
+Floor TS2FLR2 Tile
+Floor TS2FLR3 Tile
+Floor TS2FLR5 Tile
+Floor TS2FLR6 Tile
+Floor TS2FLR7 Tile
+Floor DIRWAT5 Water
+//WDIEX03
+floor VOINI29 gravel
+floor RMETL89 metal2 
+floor XCTX209 metal2 
+floor XCTX0017 wood 
+floor ASTON65 rock 
+floor kurad15 wood 
+floor YZTX3150 metal2 
+floor XCTX198 metal2 
+floor YZTX1877 dirt 
+floor DIRWAT2 DarkWater 
+//WDIEX02
+floor XCTX0110 sand 
+floor XCTXCRT1 carpet 
+floor REDWALL carpet 
+floor KPTX0025 tile 
+floor ABRICK19 rock 
+floor XCTXCRN1 metal2 
+floor ERWNDW02 metal2 
+floor VOINI63 metal2 
+floor ASPHALT1 tile 
+floor UPT_PREC sand 
+floor EST_DRYL grass
+floor XCTX162 grass
+floor nfltwt02 metal2 
+floor DIRWAT3 DarkWater 
+Floor XCTX0052 Metal2
+floor XCTX0009 tile 
+Floor SNEG15 Metal2
+Floor KURAD14 gravel
+Floor XCTX0015 carpet 
+Floor VOINI32 rock
+Floor KURAD3 metal
+Floor BKAND01 metal 
+Floor BOW_SIDE tile
+Floor DER_BRIC tile
+Floor DER_PLAI rock
+Floor KPTX0003 rock
+Floor XCTX0153 metal//maybe
+Floor XCTX0154 metal//maybe
+Floor RWIND8 tile2
+Floor URDOOR10 metal2
+Floor BSCHACH2 metal
+Floor KPTX0243 hard
+Floor XCTX0109 rock 
+Floor CABINET2 metal2 
+Floor KPTX0155 metal
+//WDIEX01
+floor LOS_F106 metal
+floor METAL4 metal
+floor YZTX3524 carpet
+floor YZTX3449 carpet
+floor BKISTE01 wood
+floor YZTX4148 tile2
+floor YZTX1101 tile2
+floor YZTX424 tile2
+floor YZTX4147 metal2
+floor YZTX206 metal2
+floor YZTX1986 metal2
+floor YZTX1992 tile
+floor DIRWAT DarkWater
+Floor YZTX3706 Tile
+Floor YZTX2943 rock
+Floor YZTX2039 Metal
+Floor YZTX1180 Metal
+Floor YZTX4194 Metal
+Floor YZLOST06 Metal
+Floor YZTX435 Metal
+Floor YZTX1691 Metal
+Floor YZLOST07 Metal 
+Floor YZTX1984 metal
+Floor LOS_P397 metal
+Floor YZTX1689 hard
+Floor YZTX424 metal
+Floor YZTX2094 carpet
+Floor YZTX461 metal
+Floor YZTX1691 metal
+Floor YZTX2230 metal
+Floor YZTX651 tile
+Floor YZTX2099 carpet
+Floor ZCHORN tile
+Floor YZTX3512 tile //kitchen table thing
+Floor YZTX319 tile
+Floor YZTX2097 carpet
+Floor AKACH09 tile
+Floor YZTX706 metal2
+Floor YZTX1266 tile
+Floor LOS_F127 tile
+Floor YZTX434 metal
+Floor YZTX651 tile2
+Floor YZTX4061 slimy
+Floor YZTX2036 metal
+Floor YZTXSTK2 metal2
+Floor YZTX4058 slimy
+Floor YZTX1426 metal
+Floor LOS_P150 metal2
+Floor YZTX2096 carpet
+Floor YZTX136 metal
+Floor YZTX3319 metal
+Floor POSLTRA1 carpet
+Floor LOS_P018 metal
+Floor YZCYANSP tile
+Floor PDATX5 metal
+Floor YZTX2052 metal
+Floor YZTX175A dirt
+Floor ABRICK10 rock
+Floor YZTX2933 rock
+Floor YZTLEP1 hard
+Floor YZTX606 slimy
+//WDI01
+floor AROCK32 rock 
+floor GRASS1_2 grass 
+floor AGRASS02 grass 
+floor GRANUKE1 Sludge 
+floor BGRID01 metal2 
+floor BSTON45 rock 
+floor DM2 tile 
+floor JNWOOD02 wood 
+floor PSYPAD3 carpet 
+floor JNROCK01 rock 
+floor CFM51 hard 
+//WDI02
+floor WLQ5 dirt 
+floor AGRASS03 dirt 
+floor AGRN02 rock
+floor AHAUS04 rock
+floor AMARB00 rock
+floor AMARB09 rock
+floor ABRWNFL wood
+floor AMETAL99 metal2
+floor PANEL5 metal2
+floor ATEPP45 carpet
+floor BBRICK18 rock
+floor METAL metal
+floor AKACH86 tile
+Floor URWALL14 carpet 
+Floor BBRICK05 rock
+//WDI03
+floor MOEZ27 grass 
+floor MOEZ37 grass 
+floor MOEZ39 rock 
+floor BBRICK06 rock 
+floor AMARB19 rock 
+floor ASHWALL3 dirt 
+Floor FGRASS1 Grass
+Floor AMARB10 Rock
+Floor AROCK33 Rock
+Floor FNSWPAD1 carpet 
+Floor ASPHALT5 metal2 
+//WDI04
+floor FN_BK2FT rock 
+floor CEMENT7 rock 
+floor FN_PTMT2 metal 
+floor FN_PTMT1 metal 
+floor FNLOCK1 metal2  
+floor GRAY4 rock  
+floor BROWNP6 metal2  
+floor ERMETFLR metal  
+//WDI05
+floor CFMF09 carpet 
+floor ABLOOD03 carpet //it's used as cushioning for chairs
+floor AGRASS01 rock //used as parking floor outside
+floor ASPHALT2 rock 
+floor BROCK01 dirt //replace from original sound choice
+floor ABRWZ04 dirt
+//WDI06
+floor ASHWALL4 dirt
+floor CRATOP4 hard
+floor AROCK74 wood
+floor CFMF08 wood
+//WDI07
+floor FLOOR1_8 carpet
+floor ABRWNFL2 hard
+floor BTEPPI07 carpet
+floor AWOOD08 wood 
+floor ABLOOD09 carpet 
+floor WF25 tile
+floor BTEPP03 tile
+floor PRUG01 carpet
+floor ERFLAT09 rock
+floor BGRASS03 grass
+//wdi08
+floor RWALL15 tile
+//wdi09
+floor CRATE7 wood
+floor GRATE metal2
+floor ASLIM01 Sludge
+floor BROCK41 rock
+floor ERAROCK rock
+floor JNWOOD01 wood
+floor MPANEL5 metal2
+floor WF26 tile
+Floor BMETALGR Metal2
+//wdi10
+Floor URDOOR07 Wood
+floor COMPTALL metal
+floor PLANKS2 wood
+floor CRATINY metal
+floor CRATINY2 metal
+floor CRATE5 metal
+floor CRATE10 metal
+floor CRATOP3 metal
+floor WOOD10 wood
+floor CRATE6 metal
+floor N_WOOD07 wood
+floor SHAWN2 metal
+floor FLAT27 metal
+floor AKACH08 tile
+//wdi11
+Floor STONEG Rock
+floor ROCK19_1 rock
+floor NFMTSQ02 metal
+floor COMPBLUE metal
+floor DOORTRAK metal
+floor N_MTSP3E metal
+floor NFMBGY01 tile
+floor COMPSPAN metal
+floor METAL metal
+floor TLITE6_4 metal
+floor N_GRAY11 tile
+floor ROCK19_1 rock
+floor FLATNEW3 metal
+floor FN_RCT metal2
+floor FLRMET metal2
+floor N_STNE15 rock  
+//wdi12
+floor ASTON14 rock
+floor BSTON01 rock
+floor BROOM69 rock
+floor ASLMR05 carpet
+//wdi13
+floor ICEF1 tile2
+floor BSTON11 rock
+floor JNTILE02 tile
+floor URMACH02 metal
+floor JNGRND16 rock
+floor TILE rock
+floor ATEP07 carpet
+floor NATROCK2 rock
+floor AWOOD03 wood
+floor CABDOR01 wood
+floor DM30 rock
+floor BKAND01 metal1
+Floor AWATER01 water
+Floor DOORPLA2 wood
+//wdi14
+floor AGREYFL6 rock
+floor AWOOD32 wood
+floor BWOOD84 wood
+floor PWWINDOW hard
+floor URCLOSE2 carpet //pillow?
+floor DF_MACH4 metal
+floor CFMF03 carpet
+//wdi15
+floor WOOD12 wood
+floor BWOOD21 wood
+floor BLACKTX hard
+floor CFM01 dirt
+floor ERFLAT07 gravel //idk what that is supposed to be
+floor ABRICK62 rock
+floor CFMF04 rock //bricks?
+floor BBRICK20 rock
+floor ASTON09 rock
+floor AGREYFL4 tile
+floor ERWOODN2 wood
+floor BPANEL09 wood//wooden chair?
+floor CFM30 wood
+//wdi16
+floor MYSAND01 sand 
+floor GRASS grass 
+floor DIRT2F wood //it's used for the trees
+floor ANOX0600 wood
+floor ETEX40 wood
+floor ROCK9 rock
+floor ROCKWAL4 rock
+floor ROCK7A rock
+floor ROCK8C rock
+floor ROCK1B rock
+floor WRCKA2 rock
+floor ROCK6B rock
+floor ROCK1 rock
+floor ROCK3 rock
+Floor DIRT_SU Dirt
+//wdi17
+floor SAND1 sand
+floor ASHWALL7 gravel
+floor RTEX014 rock
+floor ETEX12 rock
+floor TMAYWL15 rock
+floor BSTONE1 rock
+floor ECEIL01 rock
+floor N_SHRD01 metal
+floor N_SHYL01 metal
+floor N_SHBL01 metal
+floor N_SHGN01 metal
+floor GRAY1 rock
+floor FLAT15 carpet 
+floor ZIMMER7 carpet 
+floor NGRYMTL1 rock 
+floor FNEW2 metal 
+floor WFWATER1 water 
+floor N_SILV04 metal 
+floor N_SILV05 metal  
+floor BOX1F metal  
+floor CRATOP8 wood  
+floor N_TKGR19 metal  
+floor N_STNE19 rock  
+floor FLAT14-Y carpet  
+floor FIREBLU1 lava  
+floor FNEW5 metal  
+floor N_BNGR05 rock  
+floor Q2GRATE1 metal2  
+floor N_MTSP3G metal  
+
+//wdi18
+floor ERFLAT04 rock
+floor MOEZ5 tile2
+floor MYWOOD wood
+floor WOOD3 wood
+floor ATEPP99 carpet
+floor WF14 grass 
+floor AKACH05 tile 
+floor AGREYFL1 tile 
+floor WF12 rock 
+floor BLHEDGEB gravel 
+floor MUDFLR dirt 
+floor MUD dirt 
+floor DM64 tile 
+floor WOOD9 wood 
+floor RWOOD26 wood 
+floor TW_SHIP1 rock 
+floor RWALL11 carpet 
+floor 0_RUS02A metal2 
+floor DIRT2 dirt 
+floor DIRT_SU2 dirt 
+floor RROCK03 rock 
+floor GRASS1_3 grass 
+floor ALEAVES0 carpet//in one map its used as a carpet so idk 
+floor ABRWN78 carpet 
+floor ERWOODN1 wood 
+floor F_ROCK01 rock 
+      //nether stuff
+floor NETHCARP carpet
+floor NETHFLOR wood
+floor NETHROCK wood //drawer top
+floor NETHCEIL wood //drawer top
+floor NETHWOOD wood
+//wdi19
+floor CFMF06 tile
+floor CFM10 wood
+floor CFM27 tile
+floor WF27 tile2
+floor AICE01 snow
+floor AGREY50 tile2
+floor CFMF06 tile
+floor CFMF06 tile
+//wdi20
+floor CONCFLT1 tile
+floor URWALL15 metal2//metal surgeon type of table
+floor STARGR1 metal
+floor ASHWALL2 gravel
+Floor ERVENT Tile
+Floor BROCK42 Tile
+Floor DORMAT1 Carpet
+Floor GEN_DOOR wood
+Floor ERWARN1 metal 
+//wdi21
+floor WOOD8 wood
+floor STONE6 rock
+floor SAND sand
+floor STONE4 rock
+floor STONE7 rock
+floor NFPP01VT metal
+floor WBLOOD1 Blood
+floor DF_MARB2 slimy//green food in dining areaa
+floor HYNUKE Nuke
+floor CRATOP6 wood
+//wdi22
+floor MGRASS7 grass
+floor CRATE2 metal
+floor CRATE11 metal
+floor CRATE9 wood
+floor GRASSWLL carpet //used as a play table thing idk
+floor ROCK6 rock
+floor MSROCK2 rock
+floor BMINE05 wood
+floor ACOMP02 rock
+floor BSIGN50 carpet
+//wdi23
+floor F_NAT85 rock
+floor MARBLE01 rock
+floor CFLAT01 tile2
+floor AWOOD02 wood
+floor BLEIT01 wood
+floor BOX01 wood
+floor BOX02 wood
+floor ABRICK2 rock
+floor JNROCK13 wood //used as a table here...
+
+//wdi24
+floor FN_CRCFR metal2
+floor BMINE02 wood
+floor WF30 carpet//i think
+floor VOINI36 wood
+floor MOEZ8 tile
+floor DARKROCK rock
+floor AMETA01 metal2
+floor PLANKS wood
+floor DFICE tile2
+floor AKACH43 rock
+floor KPTX0071 tile2
+floor SNEG21 wood
+floor SNEG02 wood
+floor SNEG03 wood
+floor KPTILE tile2
+floor BZIMMR22 wood//even tho it looks like dirt...
+floor ASCHACHT metal
+floor SUPFLOR metal2
+floor KPTX0493 metal
+Floor SNEG01 Wood
+Floor KPTile Tile
+Floor BSNOWY1 Tile
+Floor BZIMMR22 Wood
+Floor SUPFLOR Metal
+Floor ASCHACHT Metal2
+Floor BWALL01 rock 
+Floor BMINEST wood 
+Floor CONCRETE rock 
+Floor LITE3 metal  
+Floor DM47 hard   
+Floor FUZZ5 tile    
+endif

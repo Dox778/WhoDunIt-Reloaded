@@ -1,0 +1,126 @@
+ACTOR DroppedSoulcube
+{
+	PROJECTILE
+	-NOGRAVITY
+	Scale 0.5
+	Damage 0
+	Radius 16
+	Height 8
+	Speed 9
+	States
+	{
+	Spawn:
+		SCUF ABCD 5
+		Loop
+	Death:
+		SCUF ABCD 5
+		SCUF A 1 A_SpawnItem("FakeSoulcube",0,0,0,0)
+		Stop
+	}
+}
+
+Actor FakeSoulcube : CustomInventory 28467//FakeSoulcube Replaces FakeSoulcube
+{
+	//$Category Marsis_map_ONLY
+	Scale 0.5
+	Radius 16
+	Height 8
+	Inventory.PickupMessage "looks like some kind of artifact."
+	Inventory.Respawntics 8150
+	+FORCEXYBILLBOARD
+	+DonTGib
+	States
+	{
+	Spawn:
+		SCUF ABCD 5
+		Loop
+	Pickup:
+		SCUF A 0
+		SCUF A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		SCUF A 0 A_GiveInventory("Soulcube",1)
+		TNT1 A 0 A_PlaySound("YZCUBPIK")
+		SCUF A 1 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		SCUF A 1 ACS_NamedExecute("OldWeapon_ID",0,17)
+		SCUF A 0 ACS_Execute(5,0)
+		Stop
+	NotPickup:
+		SCUF A 0
+		SCUF A 1 ACS_NamedExecute("OldWeapon_ID",0,17)
+		Fail
+}}
+
+Actor SoulCube : Wdi_BaseWeapon
+{
+	Scale 0.5
+	DamageType Cube
+	AttackSound "Skull/Melee"
+	Inventory.PickupSound "Misc/Usgpickup"
+	Obituary "$o'soul was taken by %k."
+	Weapon.SelectionOrder 352
+	Weapon.PreferredSkin "FistSkin"
+	Weapon.UpSound "YZCUBPIK"
+	Weapon.SlotNumber 2
+	+WEAPON.NO_AUTO_SWITCH
+	Inventory.Icon "WEPICO27"
+	States
+	{
+	Spawn:
+		SCUF ABCD 5
+		Loop
+	Select:
+		SCUB A 0 A_PlaySound("YZVVSOUL")
+		SCUB AAAAAAAAAAAAAAA 0 A_Raise
+		SCUB A 1 offset(62,127)
+		SCUB A 1 offset(52,106)
+		SCUB A 1 offset(44,88)
+		SCUB A 1 offset(36,76)
+		SCUB A 1 offset(28,64)
+		SCUB A 1 offset(20,54)
+		SCUB A 1 offset(14,45)
+		SCUB A 1 offset(8,40)
+		SCUB A 1 offset(4,36)
+		SCUB A 1 offset(1,33)
+		goto Ready
+	Ready:
+		SCUB A 0 A_PlaySound ("YZCUBLOP", CHAN_WEAPON)
+		SCUB ABCD 3 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+	Zoom:
+	/*
+		"####" "#" 0
+		"####" "#" 1 offset(3,34)
+		"####" "#" 1 offset(7,39)
+		"####" "#" 1 offset(12,46)
+		"####" "#" 1 offset(20,57)
+		"####" "#" 1 offset(32,70)
+	*/
+	TNT1 A 0
+		SCUB A 0 A_TakeInventory("IsDropping",1)
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 1 ACS_NamedExecuteAlways("WDINewActivateDrop",0,0,0,0)
+		Goto Ready
+	Fire:
+		TNT1 A 0 A_GunFlash("ShakeCamera",GFF_NOEXTCHANGE)
+		SCUB E 2 A_PlaySound ("YZCUBFIR",CHAN_WEAPON)
+		SCUB FG 1
+		SCUB H 13 A_CustomPunch(16,1,0,"FMBulletPuff",75, 0.4)
+		SCUB GGG 1
+		SCUB F 1 A_CustomPunch(16,1,0,"FMBulletPuff",75, 0.4)
+		SCUB FFG 1
+		SCUB H 26 A_CustomPunch(16,1,0,"FMBulletPuff",75, 0.4)
+		TNT1 A 0 A_GunFlash("StopFlash",GFF_NOEXTCHANGE)
+		SCUB GGGFFF 1
+		Goto Ready
+	ShakeCamera:
+		TNT1 A 1 offset(0,33)
+		TNT1 A 1 offset(0,32)
+		loop
+	StopFlash:
+		TNT1 A 0
+		stop
+	Death:
+		TNT1 A 0 A_SpawnItem("DroppedSoulcube",0,0,0,0)
+		TNT1 A 1 A_FadeOut(1.0)
+		Goto Death + 1
+}}

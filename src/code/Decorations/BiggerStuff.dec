@@ -1,0 +1,148 @@
+actor TrickyStatueSpawner : RandomSpawner 14246
+{
+  //$Category WDI Props
+  //$Sprite STT1A8A2
+  //$Title "Player Statue Spawner"
+DropItem "DeathStatue" 128 1
+}
+ACTOR DeathStatue 14244
+{
+  //$Category WDI Props
+  //$Sprite STT1A8A2
+  //$Title "Player Statue"
+	Health 400
+	Radius 20
+	Height 56
+	speed 3
+	Mass 2000
+	BloodColor 88 88 88
+	PAINSOUND "PotBits"
+	DEATHSOUND "pot/break" 
+	DamageFactor "Gas", 0.0
+	DamageFactor "FlareEffect", 0.0
+	DamageFactor "SprayRED", 0.0
+	DamageFactor "SprayBLU", 0.0
+	DamageFactor "SprayYLL", 0.0
+	DamageFactor "SprayGRN", 0.0
+	DamageFactor "SprayORG", 0.0
+	DamageFactor "SprayPNK", 0.0
+	DamageFactor "burn", 0.0
+	DamageFactor "fire", 0.0
+	DamageFactor "ShovelMelee", 2.0
+	DamageFactor "SawMelee", 2.0
+	DamageFactor "friendlygun", 10.0
+    +SOLID +SHOOTABLE
+	+NOBLOOD +FORCEYBILLBOARD
+	States
+	{
+	Spawn:
+		STT1 A -1
+		Loop
+	Pain:
+		STT1 A 3 A_Pain
+		goto See
+	
+	Death:
+		STT1 H 5
+		STT1 I 3 A_PlayerScream
+		STT1 J 3 A_NoBlocking
+		STT1 KLM 6
+		STT1 NO 3
+		STT1 P -1
+		Stop
+	}
+}
+
+Actor MinotaurStatue 16134
+{
+  //$Category WDI Props
+  //$Sprite MTSTA0
+  //$Title "Minotaur Statue"
+  Radius 32
+  Height 68
+  +SOLID
+  States
+  {
+  Spawn:
+    MTST A -1
+    Loop
+  }
+}
+
+Actor ArmorSuit 32003 
+{
+  //$Category WDI Props
+  //$Sprite SUITA0
+  //$Title "Armor Suit"
+	radius 16
+	height 56
+	+FORCEYBILLBOARD
+	+SOLID
+	states 
+	{
+	Spawn:
+	SUIT A -1
+	loop
+	}
+}
+
+ACTOR HPipe2 31016
+{
+  //$Category WDI Props
+  //$Sprite PIP2A0
+  //$Title "Horizontal Pipe 1"
+	Radius 16
+	Height 128
+	Tag "Pipe 2"
+	+FORCEYBILLBOARD
+		+SOLID
+	States
+	{
+	Spawn:
+		PIP2 A -1
+		Stop
+	}
+}
+
+ACTOR HPipe3 : HPipe2 31017
+{
+  //$Category WDI Props
+  //$Sprite PIP3A0
+  //$Title "Horizontal Pipe 2"
+	Tag "Pipe 3"
+	States
+	{
+	Spawn:
+		PIP3 A -1
+		Stop
+	}
+}
+
+ACTOR HPipe4 : HPipe2 31018
+{
+  //$Category WDI Props
+  //$Sprite PIP4A0
+  //$Title "Horizontal Pipe 3"
+	Tag "Pipe 4"
+	States
+	{
+	Spawn:
+		PIP4 A -1
+		Stop
+	}
+}
+
+ACTOR HPipe5 : HPipe2 31019
+{
+  //$Category WDI Props
+  //$Sprite PIP5A0
+  //$Title "Horizontal Pipe 4"
+	Tag "Pipe 5"
+	States
+	{
+	Spawn:
+		PIP5 A -1
+		Stop
+	}
+}
+

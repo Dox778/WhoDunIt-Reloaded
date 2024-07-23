@@ -1,0 +1,35 @@
+define FULLEFT 412 72
+define EMPLEFT 412 72
+define FULRIGHT 412 72
+define EMPRIGHT 412 72
+define HUDCOLOR 64 48
+
+define HUDCLRBG 64 48//64
+define HUDCLRCD 64 48//64
+
+
+define SKYB_N 512 512
+define SKYB_E 512 512
+define SKYB_S 512 512
+define SKYB_W 512 512
+define SKYB_T 512 512
+define SKYB_B 512 512
+
+
+remap MMTOPL FULLEFT
+remap MMBOTL EMPLEFT
+remap MMTOPR FULRIGHT
+remap MMBOTR EMPRIGHT
+remap HEALCOL HUDCOLOR
+
+//BIGPACK STUFF
+define "CRIM_N" 512 512
+define "CRIM_E" 512 512
+define "CRIM_S" 512 512
+define "CRIM_W" 512 512
+define "CRIM_T" 512 512
+define "CRIM_B" 512 512
+define "TRAP1" 80 37
+
+//102, 24 Desired pixel size (As it would look at 320 x 200)
+//1092, 298 Original Pixel size.

@@ -1,0 +1,317 @@
+ACTOR DeadGirl 9416
+{
+  //$Category Phobos Outpost Things
+  //$Sprite GIRLA0
+  //$Title "Dead girl"
+	Radius 18
+	Height 79
+	+SOLID
+	+NOGRAVITY
+	States
+	{
+	Spawn:
+		GIRL A -1
+		Stop
+	}
+}
+
+ACTOR DeadDude 9413
+{
+  //$Category Phobos Outpost Things
+  //$Sprite ABDEA0
+  //$Title "Decayed body"
+	Radius 14
+	Height 51
+	States
+	{
+	Spawn:
+		ABDE A -1
+		Stop
+	}
+}
+
+ACTOR AbGradient1 9414
+{
+//$Category Fx
++NOGRAVITY
++FORCEXYBILLBOARD
+Radius 4
+Height 4
+	States
+	{
+		Spawn:
+		ABGR A -1
+		Stop
+	}
+}
+
+ACTOR AbGradient2 9415
+{
+//$Category Fx
++NOGRAVITY
++FORCEXYBILLBOARD
+Radius 4
+Height 4
+	States
+	{
+		Spawn:
+		ABGR B -1
+		Stop
+	}
+}
+
+ACTOR AbGradient3 9412
+{
+//$Category Fx
++NOGRAVITY
++FORCEXYBILLBOARD
+Radius 4
+Height 4
+	States
+	{
+		Spawn:
+		ABGR C -1
+		Stop
+	}
+}
+
+ACTOR AbSkull1 9417
+{
+  //$Category Church Things
+  //$Sprite ABSKA0
+  //$Title "Skull 1"
+	Radius 8
+	Height 8
+	YScale 0.5
+	States
+	{
+	Spawn:
+		ABSK A -1
+		Stop
+	}
+}
+ACTOR AbSkull2 9418
+{
+  //$Category Church Things
+  //$Sprite ABSKB0
+  //$Title "Skull 2"
+	Radius 8
+	Height 8
+	YScale 0.5
+	States
+	{
+	Spawn:
+		ABSK B -1
+		Stop
+	}
+}
+ACTOR AbSkull3 9419
+{
+  //$Category Church Things
+  //$Sprite ABSKC0
+  //$Title "Skull 3"
+	Radius 8
+	Height 8
+	YScale 0.5
+	States
+	{
+	Spawn:
+		ABSK C -1
+		Stop
+	}
+}
+ACTOR AbSkull4 9420
+{
+  //$Category Church Things
+  //$Sprite ABSKD0
+  //$Title "Skull 4"
+	Radius 8
+	Height 8
+	YScale 0.5
+	States
+	{
+	Spawn:
+		ABSK D -1
+		Stop
+	}
+}
+ACTOR AbSkull5 9421
+{
+  //$Category Church Things
+  //$Sprite ABSKE0
+  //$Title "Skull 5"
+	Radius 8
+	Height 8
+	YScale 0.5
+	States
+	{
+	Spawn:
+		ABSK E -1
+		Stop
+	}
+}
+/*ACTOR FakeExtinguisher : CustomInventory 6046 //by Minigunner
+{
+  //$Category Phobos Outpost Things
+  //$Sprite FEXTA0
+  //$Title "Fire Extinguisher"
+	Radius 16
+	Height 8
+	Scale 0.6
+	Inventory.PickupMessage "Found a heavy fire extinguisher. Now, how the hell is this thing operated?" 
+	Inventory.RespawnTics 21000 //10 Minutes
+	States
+	{
+	Spawn:
+		FEXT A 1
+		Loop
+	Pickup: 
+		FEXT A 0 
+		FEXT A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		FEXT A 0 A_PlaySound("pickups/weapon")
+		FEXT A 0 A_GiveInventory("FireExtinguisher",1)
+		FEXT A 0 A_GiveInventory("Slot1Filled",1)
+		FEXT A 1 //ACS_Execute(670,0,14)
+		Stop
+	NotPickup:
+		FEXT A 0
+		FEXT A 1 //ACS_Execute(670,0,14)
+		Fail						  
+	}
+}
+
+ACTOR DroppedExtinguisher
+{
+	PROJECTILE
+	-NOGRAVITY
+	Damage 0
+	Radius 16
+	Height 8
+	Speed 9
+	Scale 0.6
+	DeathSound "FEXTel/wall"
+	States
+	{
+	Spawn:
+		FEXT A 1
+		Loop
+	Death:
+		FEXT A 35
+		FEXT A 1 A_SpawnItem("FakeExtinguisher",0,0,0,0)
+		Stop
+	}
+}
+
+Actor FireExtinguisher : Weapon
+{
+	Radius 8
+	Height 32
+	Scale 0.2
+	Inventory.PickupMessage "Found a heavy Fire Extinguisher."
+	Weapon.SelectionOrder 2200
+	+WEAPON.MeleeWeapon
+	+WEAPON.NoAutoFire
+	+INVENTORY.UNDROPPABLE
+	
+	States
+	{
+	Spawn:
+		FEXT A 0
+		goto Death
+	Pickup: 
+	
+	Select:
+		FEXT B 1 A_Raise
+		loop
+		
+	Deselect:
+		FEXT B 1 A_Lower
+		loop
+		
+	Ready:
+		FEXT B 0 A_JumpIfInventory("IsDropping",1,"DropWeapon")
+		FEXT B 1 A_WeaponReady
+		Loop
+		
+	DropWeapon:
+		FEXT B 0
+		FEXT B 1 A_TakeInventory("IsDropping",1)
+		FEXT B 0 A_TakeInventory("Slot1Filled",1)
+		FEXT B 0 A_FireCustomMissile("DroppedExtinguisher",0,0,0)
+		FEXT B 1 A_TakeInventory("FireExtinguisher",1)
+		Stop
+		
+	Fire:
+		FEXT B 1 Offset(0, 48)
+		FEXT B 1 Offset(0, 64)
+		FEXT B 1 Offset(0, 80)
+		FEXT B 1 Offset(0, 96)
+		FEXT B 1 Offset(0, 112)
+		FEXT B 1 Offset(0, 128)
+		TNT1 A 10
+		TNT1 A 1 A_Refire
+        Goto Swing
+
+    Hold:
+		TNT1 A 1
+		TNT1 A 1 A_Refire
+		Goto Swing
+		
+	Swing:
+		FEXX C 2 Offset(0, 33)
+		FEXT C 2
+		FEXX D 1 A_CustomPunch(10, 1, 1, "ShovelPuff", 64)
+		FEXT D 1 A_Recoil(-0.2*cos(pitch))
+		FEXX E 1 A_CustomPunch(15, 1, 1, "ShovelPuff", 64)
+		FEXT E 1 A_Recoil(-0.2*cos(pitch))
+		FEXX F 1 A_CustomPunch(20, 1, 1, "ShovelPuff", 64)
+		FEXT F 1 A_Recoil(-0.2*cos(pitch))
+		FEXT GH 1
+		TNT1 A 22
+		TNT1 A 0 A_Refire
+		FEXT B 1 Offset(0, 112)
+		FEXT B 1 Offset(0, 96)
+		FEXT B 1 Offset(0, 80)
+		FEXT B 1 Offset(0, 64)
+		FEXT B 1 Offset(0, 48)
+		FEXT B 1 Offset(0, 33)
+		Goto Ready
+		
+	Death:
+	   FEXT A 0 A_SpawnItem("DroppedExtinguisher",0,0,0,0)
+	   TNT1 A 0 A_FadeOut(1.0)
+	   goto death + 1
+	}
+}*/
+
+actor MedKey : Key 240
+{
+  //$Category Phobos Outpost Things
+  //$Sprite MDKYA0
+  //$Title "Medical Supplies key"
+  inventory.pickupmessage "Found the medical supplies room keycard."
+  inventory.icon "MEDKEYA0"
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    MDKY A -1
+    stop
+  }
+}
+
+actor SecKey : Key 210
+{
+  //$Category Phobos Outpost Things
+  //$Sprite SCKYA0
+  //$Title "Security Room keycard"
+  inventory.pickupmessage "Found the security room keycard."
+  inventory.icon "MEDKEYA0"
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    SCKY A -1
+    stop
+  }
+}

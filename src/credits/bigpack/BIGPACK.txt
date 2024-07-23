@@ -1,0 +1,84 @@
+Maps fixed and upgraded by Prepper, Francis, and TigerFist
+thanks to sicamore, captj3, jigsaw and 
+theshooter7 for allowing us to fix up these maps
+WDI02 "Now Museum,Now You Don't!"- by TheMisterCat
+WDI05 "Men's Night Out" - by Sicamore
+WDI08 "St. Mercy Hospital" - by CaptJ3
+WDI09 "Sewer Showdown" - by TheMisterCat
+WDI13 "Echo Ridge" - by Peanut
+WDI14 "Cold Night" - by Prepper
+WDI15 "Halls of Silence" - by JigSaw
+WDI16 "Castaway" - by TheShooter7 & Conflagrated
+WDI17 "The Tomb of Ramses II"  - by CaptJ3
+WDI18 "Stormy Night" - by Riclo500
+WDI19 "WDI Mansion" - by Conflagrated & Zap
+WDI20 "Insomnia" - by Jigsaw
+WDI21 "Knee-deep in the murderer" - by Gardevoir
+WDI22 "Herrenhaus" - by Francis
+WDI23 "Mixture of Ages" - by Shift & Big Memka
+
+
+
+wdi02:all the systems of security camera  are fixed
+grafics in soft and geometry.
+
+wdi05: apparently some of the ladders of the map 
+could enable anyone to perform an exploit where 
+someone could fly around the map and screw up 
+with everyone, the map has a bunch of anti-fly 
+scripts rounded about to prevent that, also some 
+areas had HOMs on software mode, we removed a 
+small exploit on the blue murdhole just under the 
+m1 carbine spawn that enabled people to grab a 
+bertholite canister or some tripwire shotguns 
+(other times known as the berth-grab exploit)
+
+wdi08: there were some murderer holes that did 
+not have a monster block lines to prevent 
+innocents from going inside the murdholes, also 
+some textures on some walls/floors were wrong 
+and thus the right textures were added to them
+
+wdi09: the map was a massive lagfest and some 
+3dfloor areas were damaging sectors, also some 
+murdholes could be opened and accessed by 
+innocents as well as some locker areas with guns,
+those were fixed, also there was apparently a 
+bug with the ladders that made anyone that was 
+on a ladder when the game ended have 30 
+gravity on the next map (and maybe forever if 
+he din't die/get forcespectated.).
+fixed elevator the  ppl can jam the elevator under
+
+wdi13: massive lag reduced 'nuff said 
+(also removed the white fog on the map, 
+because lolcantsee)
+
+wdi14: nothing was fixed, map by prepper, 
+actually some areas were prettied up but eh
+wdi15: HOMs on some areas, also prepper made a 
+skybox, as to not make the open area on the 
+left area of the map look ugly and boring
+
+wdi16: nothing was changed but a small 3d floor 
+near the lava caverns as to make it easier for 
+people to cross from one side to the other 
+without having to waste 10 minutes going back 
+and forth from the waterfall to the beach.
+*Fixed "player count"when begins the ppl go into the cliff
+and die this create a glitch with the number of players 
+*fixed if the ppl jump into the cliff, they can survive
+
+wdi17: some homs, missing 3d floors 
+(they did not appear in software mode cuz they 
+were sloped 3dfloors) yadda yadda all murdholes 
+din't have monster block lines etc. etc.
+
+wdi18: cooperation with abbuw as to not leave 
+his first wdi map to be ultimately a cramped 
+shithole of cockblocking and berthspamming, 
+also some areas got better details 'n stuff
+
+hi i'm roman6a here, and this is all that was 
+changed from the maps, have a good night 
+(or evening, whatever suits you fine gentlemen.)

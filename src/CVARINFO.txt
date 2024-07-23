@@ -1,0 +1,81 @@
+//base WDI cvars
+server bool wdi_enable_antighost   = false;
+server bool wdi_disable_autoconfig  = false;
+server int wdi_safety_time = 30;
+server int wdi_murd_maxbonus  = 300;
+server int wdi_murd_healthbonus  = 10;
+server int wdi_blacklist_rounds = 5;
+server bool wdi_enable_blacklistinno = false;
+server bool wdi_disable_blacklistafk = false;
+server int wdi_innoslot = 3;
+
+local int wdi_filmgrain_level = 0;
+
+
+
+
+
+
+//Bigpack cvars
+server bool scarlet_teleport = TRUE;
+server bool scarlet_gunvents = TRUE;
+server bool scarlet_disco = TRUE;
+server bool scarlet_sunrise = FALSE; //TURN THIS OFF
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//Who Dun It: Reloaded
+server bool WDI_RandomMusic = true; //randomly selects a track for the map (only applies to "generic" sounding maps)
+server bool WDIR_EndGameMove = true; //players can move freely when the tally happens lol
+server bool WDIR_MurdCam = true; //murd's death/win cam
+
+//weather
+server bool WDI_rain = false; //enable for the serverside rain handling
+server int WDI_WTimer = 420; //how many tics between a chance to switch the weather
+local bool WDI_Clientrain = true; //enable weather for the client
+local Int WDI_Wpower = 3; //amount of drops when it rains
+local Int WDI_Wpower2 = 3; //amount of snowflake when it snows
+local float WDIR_RainVolume = 0.3;
+//DEBUGGING
+server bool WDIR_Debug  = false;
+server int WDIR_DebugH  = 100; //health
+server bool WDIR_Debug1  = false; //god
+server bool WDIR_Debug2  = false; //buddha
+server bool WDIR_Debug3  = false; //turbo 255
+server bool WDIR_Debug4  = false; //vid_fps 1
+server bool WDIR_Debug5  = false; //flashlight
+server bool WDIR_Debug6  = false; //infrared
+server bool WDIR_Debug7  = false; //location
+server bool WDIR_Debug8  = false; //murdermarker
+
+
+//gameplay
+server bool WDI_NoDance = true;
+server int WDI_InvDropType = 0;
+server int WDI_PingCooldown = 3; //in seconds
+server bool WDI_RipWeapons = true; //gives your weapons a chance to break very infrequently
+//////////////////////////////////////////////////
+//Let the user client :3
+user bool WDIR_UseFavColor = false;
+user color WDIR_FavColor = FFFFFF;
+user int WDIR_FOV = 90; //zandro's "FOV" is not actually a cvar .-.
+local Int WDI_PingType = 0;
+local bool WDI_ScreenFlinch = true; //your screen will move when you get hurt
+local Int WDI_FlinchPower = 3; //how much will it move when you get hurt tho?
+local bool WDI_ScreenSplashes = false; //shows blood splatters or other stuff on your screen when you get ouchie'd
+local bool WDIR_LowHPScreen = false;
+local int WDI_PermaDebris = 1; //small objects and debris (broken parts, casings, used items) will stay on the ground forever
+local Int WDI_Pretty = 1; //Some actors will have extra details
+
+user Int WDIMAX_Reanimated_DanceStyle = 0; //What kinda dance do you want to use?
+user Int WDI_SClass = 0; //sound class, currently unused
+user Int WDI_HudTimer = 1; //shows a timer in the corner of your hud
+user float WDIR_PlayerScaleX = 1.00; 
+user float WDIR_PlayerScaleY = 1.00;
+user bool WDIR_RandomPlayerScaleX = true;
+user bool WDIR_RandomPlayerScaleY = true;
+
+//DEAd Scripts:
+Server NoArchive String WDI_Admin_Thing = "RandomWeaponKit";	//Predefined item for admin scripts.
+Server NoArchive Int WDIR_RandomBox_NoMurdItems = 1;			//Remove any chances for murderer items drop from random box.
+Server NoArchive Int WDIR_RandomBox_NoOPItems = 1;				//Remove any chances for overpowered items drop from random box.

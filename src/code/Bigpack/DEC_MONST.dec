@@ -1,0 +1,109 @@
+//=================================================================================================================
+// MONSTERS STUFF
+//---------------------------------------------------------------------------------------------------
+ 
+Actor Netherdemon 30010
+{
+  //$Category WDI Creatures
+  //$Sprite NTDMA0
+  //$Title "Nether demon"
+  +FLOORCLIP
+  +FASTER
+  +NOGRAVITY
+  +FLOAT
+  Health 166
+  PainChance 180
+  Speed 13
+  Radius 18
+  Height 59
+  Mass 0x7fffffff
+  scale .90
+DamageFactor "Gas", 0.0
+DamageFactor "FlareEffect", 0.0
+meleedamage 3
+meleerange 66
+Monster
+  Obituary "%o was slain"
+  States
+  {
+  Spawn:
+    NTDM A 2 A_Look
+	NTDM B 2 A_Look
+	NTDM C 1 A_Look
+	NTDM D 2 A_Look
+	NTDM E 2 A_Look
+    Loop
+  See:
+    NTDM A 1 A_Chase
+	NTDM B 1 A_Chase
+	NTDM C 1 A_Chase
+	NTDM D 1 A_Chase
+	NTDM E 1 A_Chase
+   Loop
+  Melee:
+    NTDM F 5 A_FaceTarget
+    NTDM F 1 A_MeleeAttack
+	NTDM F 5 A_FaceTarget
+	NTDM A 2 A_FaceTarget
+   Goto See
+  Pain:
+    NTDM R 6 A_Pain
+    Goto See
+  Death:
+    NTDM F 320 A_PlaySound("CVOICES")
+    NTDM G 70 A_Scream
+    NTDM H 2
+	NTDM I 2
+	NTDM J 2
+	NTDM K 2
+	NTDM L 2
+	NTDM M 2 A_SpawnItemEx("Netheregg")
+    NTDM N 2 A_NoBlocking
+    Stop
+  }
+}
+//wdi21
+//Porkymans
+ACTOR MyJellyfishPrince 14889 //<3
+{
+  //$Category WDI Creatures
+  //$Sprite FRILA0
+  //$Title "Pokemon 1"
+	Radius 16
+	Height 44
+	XScale 0.9
+	YScale 0.8
+	+CLIENTSIDEONLY +NOINTERACTION
+	+FLOATBOB
+	States
+	{
+	Spawn:
+		FRIL ABCDEFGHIJKLMNOPQRSTUVWXYABCDEFGHIJKLMNOPQRSTUVWXYABCDEFGHIJKLMNOPQRSTUVWXYABCDEFGHIJKLMNOPQRSTUVWXY 3
+		FRIS ABCDEFGHIJKLMNOPQRSTUVWX 4
+		Loop
+	}
+}
+
+ACTOR TheCutestCandle 14890 //Om nom nom souls
+{
+  //$Category WDI Creatures
+  //$Sprite LITWA0
+  //$Title "Pokemon 2"
+	Radius 4
+	Height 20
+	XScale 0.6
+	YScale 0.6
+	+CLIENTSIDEONLY +NOINTERACTION
+	+FLOATBOB
+	States
+	{
+	Spawn:
+		LITW "ABCDEFGHIJKLMNOPQRSTUVWXYZ[\ABCDEFGHIJKLMNOPQRSTUVWXYZ[\ABCDEFGHIJKLMNOPQRSTUVWXYZ[\" 3 Bright
+		LITK ABCDE 4 Bright
+		LITK FGHIJ 5 Bright
+		LITK KLMNABCDE 4 Bright
+		LITK FGHIJ 5 Bright
+		LITK KLMN 4 Bright
+		Loop
+	}
+}

@@ -1,0 +1,217 @@
+===========================================================================
+Advanced engine needed  : Zandronum
+Primary purpose         : Survival Cooperative (for WhoDunIt modification)
+===========================================================================
+---------------------------------------------------------------------------
+Title                   : eXpack for WhoDunIt
+                                         
+---------------------------------------------------------------------------
+Filename                : wdi_expack_1a.pk3
+Version                 : rel-1a (3a)
+First release date      : Jan 2013
+Latest release date     : Sep 2014
+Author                  : see Author(s)
+Email Addresses         : zeberpal-98@yandex.ru
+--------------------------------------------------------------------------------
+
+================================================================================
+Map Credits
+================================================================================
+
+Title:                                Author(s)
+--------------------------------------------------------------------------------
+WDIEX01:  Marsis                      Zeberpal
+WDIEX02:  Retorn'79                   Zeberpal
+WDIEX03:  SlenderDunIt                Zeberpal
+WDIEX04:  Clock Tower (concept)       Zeberpal
+WDIEXSEC: Unfinished stuff            Zeberpal
+//WDIEXMG: Zanzibarland: MG2          Zeberpal   
+
+                                                          forever alone
+
+
+
+--------------------------------------------------------------------------------
+Description             : A bit of plot behind the maps. 
+                      This nearly doesn't have to do anything with Doom 3 story.
+ 
+ WDIEX01 - MARSIS        
+ 
+ The year is 2161.
+ Well as i think in 2161 due to innovations and techincal progress
+ USA are now known as United Solaris States of American Aerospace (USSAA) and was formed in 2080's.
+ It was all south-american, south african and partly north american (without Canada) territories on Earth
+ and 3/4 of Moon territories.
+ Post-Soviet states failed to create strong democracy and it was hard time fullfilled with civil wars
+ and ethnic cleansing. Howether up to 2110's Russia and post-soviet states reunited as confederation
+ at rough rule of dictator and became of somewhat a strong country again. it is now know as
+ United Solaris Socialist Confederation (USSC) and it's soviet, nothern China, eastern europe territories
+ on Earth and 1/4 of Moon territories.
+ After events of Doom 3 in 2145, UAC couldn't investigate Mars resources by herself anymore. With the complicity of the government
+ of USSAA corporation made a deal with russian investment government companies. 
+ So UAC is now 75% of USSAA property and 25% of USSC property.
+ Mars is a territorial dispute. thnx
+  
+  *Marsis is a building analog to Mars-City. After the events in Doom3 mars-city was too much destroyed to be repaired.
+  Since it's being a "pseudo-sequel" of Mars-City people call Marsis so too.
+  *Walking around Marsis base you can find M1 Carbine.It's the very last remaing copies, it's  been delivered on Marsis to USSC mission director
+ as a souvenire gift. Few hours later It's been sent to warehouse due to uselessness. 
+  *SRSS stays for Some Red Shitty Shit
+  *Music in planetarium is from Cybercrime3 map02 
+
+ **This shit looks crazy but that's what i thought while making map, lol
+  -------------------------------------------------------------------------------
+ 
+                          
+
+Additional Credits to   : TheShooter7
+                          Qent
+						  HexaDoken
+						  Cervilisantom
+						  IjonTichy
+						  XutaWoo!
+						  Snowstorm
+						  Mytis
+						  MiamiVice
+						  Konda
+						  Toxicity
+						  Dark-Assassin
+						  Akerspaark
+						  and everyone i forgot
+
+Resource Credits to     : Dr.Doctor
+                          scalliano
+						  GhastlyDragon (Badlag)
+						  Logan MTM : few LOS textures
+						  [SM]Strikerman
+						  IDsoftware
+						  Rhoq, Aerial
+						  
+						  and everyone i forgot.
+						  
+===========================================================================
+ 
+ 
+ WDIEX02 - RETORN'79  (Return to Torn City)
+ 
+ Why "Retorn"?  The place takes in Torn City. 1979.
+ A group of the "Doomguys" gang (you) arrived to east part of this city to reunite rebel gangs into one.
+ There are lots of them : "Renegades", "Satanic Warriors", "Doom Barrackers", "Savage Assassins" and more.
+ Once you arrive, you find this part of town deadly silent. Later you find out that nearly all gang 
+ members of these sets are killed by someone. Then you find out that one of your "Doomguys" member
+ is a murderer himself..
+ Or maybe it's you?
+ 
+ *Gangs are named after really existing/ed Doom clans.
+ *This map influenced by "The Warriors" movie.
+ *Torn City first appeared in tcgold.wad by Conflagrated.
+   -------------------------------------------------------------------------------
+ 
+                          
+
+Additional Credits to   : HeavenWraith
+                          TheShooter7
+						  HexaDoken
+						  ZZombo
+						  TheMisterCat
+						  Unknown Jackass
+
+Resource Credits to     : Dr.Doctor
+						  
+						  and everyone i forgot..again
+	
+===========================================================================
+ 
+ 
+ WDIEX03 - SlenderDunIt
+ 
+ Obviosly an adaptation of "Eight Pages" to WDI.
+ Map is huge, however many things done to make this map enjoyable.
+ 
+-------------------------------------------------------------------------------
+ 
+                          
+
+Additional Credits to   : IjonTichy
+                          Tribeam
+						  Zupoman
+
+Resource Credits to     : Kashtanka
+                          SergeantMarkIV
+						  Zetsui
+	
+===========================================================================
+===========================================================================
+ 
+ 
+ SECRET MAPS.
+ 
+ First one is a mix of areas from different games.
+ The other one is just a try to adapt Clock Tower to online Doom.
+ 
+-------------------------------------------------------------------------------
+ 
+                          
+
+Additional Credits to   : Klofkac
+                          Catastrophe
+						  ibm5155
+
+Resource from           : Metal Gear Solid 1
+                          Cursed Amulet
+						  Silent Hill 4
+						  Clock Tower SNES
+						  StrikerMan780 (SM taunts)
+						  Doorhenge or Mike12(snes texture)
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+* What is included *
+
+New levels              : 3
+Secret levels           : 2
+Sounds                  : Yes
+Music                   : Yes
+Graphics                : Yes
+Demos                   : No
+Other files required    : whodunit_fixed2.pk3 or higher
+
+
+* Play Information *
+
+Game                    : Doom 2
+Map #                   : WDIEX01-03, WDIEXSEC, WDIEXCT.
+Single Player           : Player starts only
+Survival 2-4 Player     : Yes
+Survival 8-16 Player    : Designed for
+Other game styles       : None
+Difficulty Settings     : Ultra-Violence
+
+
+* Construction *
+
+Base                    : New from scratch
+Build Time              : Each map around 7 months.
+Editor(s) used          : GZDoomBuilder, XWE, Slade3, Slumped, 
+                          Photoshop, PNGmonster, Dragon Unpacker
+May Not Run With...     : Zandronum 2.0, GZDoom, Zdoom.
+
+
+* Copyright / Permissions *
+
+Authors may NOT use the contents of this file as a base for modification or
+reuse.  Permissions have been obtained from original authors for any of
+their resources modified or included in this file.
+
+You MAY distribute this file, provided you include this text file, with no
+modifications.  You may distribute this file in any electronic format
+(BBS, Diskette[rofl go on], CD, etc) as long as you include this file intact.  I have
+received permission from the original authors of any modified or included
+content in this file to allow further distribution.. I did?
+
+* Where to get the file that this text file describes *
+
+1)Install Internet browser
+2)Google -> wdi_expack_1a
+3)PROFIT!!
+

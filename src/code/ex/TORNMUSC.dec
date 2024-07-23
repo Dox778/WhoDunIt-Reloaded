@@ -1,0 +1,278 @@
+
+actor MUS_MoonrunnersTheme 17141
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("MOONRUNNERSTHEME", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+
+actor MUS_JSBTheme 17142
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("JONESSTREETBOYSSEQUENCE", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+actor MUS_STRIPCLUB1 17143
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("STRIPCLUB1", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+actor MUS_STRIPCLUB2 17144
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("STRIPCLUB2", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+actor MUS_AMUSEMENT1 17145
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("JCCONEY", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+actor MUS_CLUB> 17146
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("CLUBTHEME", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+actor MUS_LOADING1 17147
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("LOADINGLOOP1", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+actor MUS_LOADING2 17148
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("LOADINGLOOP2", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+actor MUS_ORPHANS 17149
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("ORPHANSTHEME", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+actor MUS_TURNBULL 17150
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("TURNBULLTHEME", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+actor MUS_RADIO1 17151
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("WARRADIO1", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+actor MUS_RADIO2 17152
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("WARRADIO2", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+actor MUS_TRAINRIDE 17153
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("XCTRNSND", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+actor MUS_MALLMUSIC 17154
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("XSMALLMS", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+actor MUS_AMBIENT 17155
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("XSAMBINT", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+actor MUS_POLICESIRENRAID  17157
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("XSPSIREN", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+actor MUS_STRIPDANCE : RandomSpawner 17156
+{
+	//$Category Retorn_map_ONLY
+    DropItem "MUS_STRIPCLUB2" 
+	DropItem "MUS_STRIPCLUB1"
+}
+
+actor MUS_ARCADE  17158
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("XSARMIES", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+actor MUS_RING  17159
+{
+	//$Category Retorn_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("DSRING", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}

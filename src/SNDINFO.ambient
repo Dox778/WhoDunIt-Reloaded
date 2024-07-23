@@ -1,0 +1,187 @@
+//PLACES
+warehouse/caralarm CALARM
+warehouse/wolf woof
+warehouse/manwhore MANHO
+warehouse/presssound PRESSM
+warehouse/pressfinal FINALS
+warehouse/pop POP
+warehouse/chinese CHINESE
+
+$random waves/waves { Waves/Waves1 Waves/Waves2 Waves/Waves3 Waves/Waves4 }
+$random wind/wind { Wind/Wind1 Wind/Wind2 }
+$ambient 60 waves/waves POINT 0.5 periodic 7  1.0
+$ambient 61 wind/wind POINT 0.5 random 15 30 2.0
+$ambient 62 Creak/wood POINT 0.5 random 15 45 0.3
+$ambient 64 Water/Fall POINT 0.5 continuous 0.2
+
+$ambient 31 misc/drip POINT 1.0 CONTINUOUS 1.0
+misc/drip		DRIP
+
+DSTRANCL           DSTRANCL
+DSTRAIN1           DSTRAIN1
+DSTRNHRN           DSTRNHRN
+
+$AMBIENT 51 DSTRANCL POINT CONTINUOUS 0.5
+$AMBIENT 52 DSTRAIN1 POINT CONTINUOUS 0.5
+
+World/Waves WAVES1
+
+//Lake waves
+Waves/Waves1  WAVE1
+Waves/Waves2  WAVE2
+Waves/Waves3  WAVE3
+Waves/Waves4  WAVE4
+
+//Deep wind
+Wind/Wind1 WIND1
+Wind/Wind2 WIND2
+
+
+//Creaking Wood
+$random Creak/wood { Creak/Wood1 Creak/Wood2 Creak/Wood3 }
+Creak/Wood1 WOOD1
+Creak/Wood2 WOOD2
+Creak/Wood3 WOOD3
+
+Water/Fall WATERFL
+
+DSGEN  DSGEN1
+$ambient 22 DSGEN POINT 1.0 CONTINUOUS 1.0
+
+World/Cricket	CRICKET1
+$ambient 20 World/Cricket POINT 1.5 random 1 30 0.2
+World/PoolPump	POOLPUMP
+$ambient 21 World/PoolPump POINT 1.0 CONTINUOUS 2.0
+Ambient/Rain	AMBRAIN
+$ambient 25 Ambient/Rain POINT 0.75 CONTINUOUS 2.0
+World/owl1	OWLCALL1
+
+
+
+
+$random world/thunder {env/thunder1 env/thunder2 env/thunder3 env/thunder4 env/thunder5 env/thunder6 env/thunder7 env/thunder8 env/thunder9}
+env/thunder1 THUND1
+env/thunder2 THUND2
+env/thunder3 THUND3
+env/thunder4 THUND5
+env/thunder5 THUND5
+env/thunder6 THUND6
+env/thunder7 THUND7
+env/thunder8 THUND8
+env/thunder9 THUND9
+
+world/drip			dsempty
+$limit world/drip 1
+
+
+////////////////////////////////////////
+//////////// OBJECT-ISH ////////////////
+////////////////////////////////////////
+
+// Door Sounds
+$random doors/dr1_open		{ Door/Start1 Door/Start2 Door/Start3 Door/Start4 }
+$random doors/dr2_open		{ Door/Start1 Door/Start2 Door/Start3 Door/Start4 }
+$random Door/Middle		{ Door/Mid1 Door/Mid2 Door/Mid3 Door/Mid4 }
+$random doors/dr1_clos	{ Door/End1 Door/End2 Door/End3 Door/End4 }
+$random doors/dr2_clos		{ Door/End1 Door/End2 Door/End3 Door/End4 }
+Door/Start1 DOpen1
+Door/Start2 DOpen2
+Door/Start3 DOpen3
+Door/Start4 DOpen4
+Door/Mid1 DMid1
+Door/Mid2 DMid2
+Door/Mid3 DMid3
+Door/Mid4 DMid4
+Door/End1 DClose1
+Door/End2 DClose2
+Door/End3 DClose3
+Door/End4 DClose4
+
+Door/DoorFail			DOORJAM
+Door/DoorKnock			DSKNOCK
+
+LockJam5	LOCKJAM5
+LockJam6	LOCKJAM6
+LockJam7	LOCKJAM7
+
+// Elevator
+Lift/Start LIFTSTAR
+Lift/Loop LIFTLOOP
+Lift/Stop LIFTSTOP
+$volume Lift/Start 15.0
+$volume Lift/Loop 15.0
+$volume Lift/Stop 15.0
+Lift/OpenDoor LIFTDOR1
+Lift/CloseDoor LIFTDOR2
+Lift/Button ELEVBUTT
+Lift/OHSHIT OHSHIT
+Mary/Laugh MARYLAFF
+
+fire/fire FIRE1
+$ambient 10 fire/fire point 2.0 continuous 60
+
+
+//Lift Sounds
+plats/pt1_strt			DORSTP3
+plats/pt1_stop			DORSTP1B
+plats/pt1_mid			STNMV4
+
+
+
+//Switch Sounds
+
+//Light Switch
+Light/On1	LITEON1
+Light/On2	LITEON2
+Light/Off1	LITEOFF1
+Light/Off2	LITEOFF2
+$random LightOn		{Light/On1 Light/On2}
+$random LightOff	{Light/Off1 Light/Off2}
+
+//Sounds for my extra switch definitions
+
+switches/electri2		dselec2
+switches/electri3		dselec3
+switches/eclunk			dseclunk
+switches/clunk			dsclunk
+switches/china			dschina1
+switches/eye			dseye
+switches/bige			dsbige
+switches/keycard		dskeyc
+switches/gargoyle		dsgrgyle
+switches/skin			dsskinny
+switches/lever			dslever
+switches/lever2			dslever2
+switches/valve			dsvalve
+
+
+
+//Fans and electrical stuff
+floor/elec1	dselec1
+$limit floor/elec1 1
+
+
+////////////////////////////////////////
+//////////// HORROR-ISH ////////////////
+////////////////////////////////////////
+EVILJBOX    EVILJBOX
+
+env/screams1 AMBSCR1
+env/screams2 AMBSCR2
+env/screams3 AMBSCR3
+env/bells BELLS
+env/voices1 vox1
+env/voices2 vox2
+env/voices3 vox3
+
+//Peanut sounds
+DSCRY DSCRY1
+$ambient 23 DSCRY POINT 3.0 random 60 120 1.0
+$random whisper/whisper { Whisper/Whisper1 Whisper/Whisper2 Whisper/Whisper3 Whisper/Whisper4 } //Sounds by TheMisterCat
+Whisper/Whisper1 DSWHIS1
+Whisper/Whisper2 DSWHIS2
+Whisper/Whisper3 DSWHIS3
+Whisper/Whisper4 DSWHIS4
+$ambient 24 whisper/whisper POINT 3.5 random 35 85 0.2
+World/Whispers  WHISPER1
+$ambient 30 World/Whispers point 6.0 random 30 120 60

@@ -1,0 +1,693 @@
+
+//ACTUAL WEAPON DEFINITIONS HAVE BEEN MOVED TO THEIR RESPECTIVE TEXT FILES!!!!
+
+//======================================================================================
+//Lol friendly fire hacks.
+//For guns.
+actor FFBulletPuff : BulletPuff replaces BulletPuff
+{
+	DamageType "friendlygun"
+	Decal "BulletChip"
+	activesound "none"
+	attacksound "Bullet/Ricochet"
+	seesound "Bullet/Hit"
+	vspeed 0
+	renderstyle Add
+	alpha 1.0
+	Scale 0.1
+	Species "IgnoreDecorations"
+	+THRUSPECIES 	+FORCEXYBILLBOARD
+	+BRIGHT
+	states
+	{
+	Spawn:
+		BPUF A 1 NODELAY A_SpawnItemEx ("RicoChet",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		BPUF D 1 A_SetScale(0.16,0.16)
+	Melee:
+		TNT1 A 1
+		stop
+	xdeath:
+		TNT1 A 0
+	//	TNT1 A 0 A_PlaySound("Bullet/Hit")
+		stop
+  }
+}
+
+
+//For melee attacks. 
+actor FMBulletPuff : BulletPuff
+{
+DamageType "friendlymelee"
+//+THRUGHOST
+}
+
+//This fixes the fist damage
+actor FMBulletPuff2 : BulletPuff
+{
+//+THRUGHOST
+}
+
+//======================================================================================
+//PING
+ACTOR Action_Ping : CustomInventory
+{
+   Inventory.Amount 1
+   Inventory.MaxAmount 1
+   -INVBAR
+   States
+   {
+       Use:
+	   TNT1 A 0 ACS_NamedExecuteAlways("PingCooldown",0)
+	   TNT1 A 0 A_railAttack(0,0,0,none,white,RGF_SILENT,0,"ABigNothing",0,0,1024,15,0.4,0,none,10)
+       TNT1 A 0 A_SpawnItemEX("PingMissile",0,0,height,cos(pitch)*500,0,-sin(pitch)*500,0,SXF_TRANSFERTRANSLATION)
+       stop
+   }
+}
+ACTOR PingMissile: FastProjectile
+{
+	PROJECTILE
+	Radius 1
+	Height 2
+	Speed 500
+	Scale 1.9
+	Renderstyle Translucent
+	Alpha 0.75
+	Damage 0
+	+BRIGHT
+	-SOLID
+	+DONTSPLASH
+	mass 9000
+	+SKYEXPLODE
+	+BLOODLESSIMPACT
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		loop
+	Death:
+		TNT1 A 3 A_SpawnItemEX("ClientsidePing",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+		stop
+	}
+}
+
+Actor ClientsidePing //needs to be separated so the pitch is correct and cvars can be used
+{
+	Radius 1
+	Height 2
+	Scale 1.9
+	Renderstyle Translucent
+	Alpha 0.75
+	+BRIGHT
+	+CLIENTSIDEONLY +NOINTERACTION
+	+FORCEXYBILLBOARD +DONTSPLASH
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY
+		PING A 0 A_JumpIf(CallACS("CheckPingType", 0, 0, 0) == 2, "null")
+		PING A 0 A_JumpIf(CallACS("CheckPingType", 0, 0, 0) == 1, "Hi")
+		PING A 0 A_PlaySound("Menu/Backup",CHAN_BODY)
+	Hi:
+		PING A 1 A_SpawnItemEX("PingEffect",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+		PING A 1 A_SetScale(1.6)
+		PING A 1 A_SetScale(1.4)
+		PING A 17 A_SetScale(1.3)
+		PING AA 20 A_SpawnItemEX("PingEffectSmol",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+		PING A 0 A_SpawnItemEX("PingEffectSmol",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+		PING AAAAAAAAAAAAAAA 1 A_FadeOut(0.05)
+		stop
+	}
+}
+
+Actor PingEffect
+{
+	Renderstyle Add
+	Alpha 0.5
+	Scale 1.8
+	ReactionTime 20
+	+BRIGHT
+	+NOINTERACTION +CLIENTSIDEONLY
+	+NOGRAVITY +FORCEXYBILLBOARD
+	States
+	{
+	SPAWN:
+		PING A 0
+		PING A 0 A_SetScale(scalex+ ReactionTime*0.003)
+		PING A 0 A_SetTranslucent(ReactionTime*0.03,0)
+		PING A 1  A_CountDown
+		loop
+	Death:
+		TNT1 A 1
+		stop
+	}
+}
+Actor PingEffectSmol
+{
+	+NOINTERACTION
+	+NOGRAVITY
+	Renderstyle Add
+	Alpha 0.5
+	Scale 1.3
+	+BRIGHT
+	ReactionTime 10
+	+CLIENTSIDEONLY
+	+FORCEXYBILLBOARD
+	States
+	{
+	SPAWN:
+		PING A 0 NODELAY A_SetScale(scalex+ ReactionTime*0.005)
+		PING A 0 A_SetTranslucent(ReactionTime*0.03,0)
+		PING A 1  A_CountDown
+		loop
+	Death:
+		TNT1 A 1
+		stop
+	}
+}
+
+//========================================================================================
+// Weapon/Ammo spawners
+
+actor GunSpawner : RandomSpawner 32050
+{
+  //$Category WDI Weapons
+  //$Sprite TNT1A0
+  //$Title "Gun Spawner"
+    DropItem "FakeBeretta" 
+	DropItem "FakeShotgun"
+	DropItem "FakeRevolver"
+	DropItem "AnimalSpawner"
+}
+
+actor MeleeSpawner : RandomSpawner 32051
+{
+  //$Category WDI Weapons
+  //$Sprite TNT1A0
+  //$Title "Melee Spawner"
+	DropItem "FakeWrenchSpawner"  255, 50
+	DropItem "FakePipe" 255, 50
+	DropItem "FakeCrowbar" 255, 5
+	DropItem "AnimalSpawner" 255, 65
+	
+	DropItem "RandomWeaponKit" 255, 2
+	DropItem "Beartrap" 255, 12
+	DropItem "FakePickableTNT" 255, 2
+}
+
+actor AmmoSpawner : RandomSpawner 32060
+{
+  //$Category WDI Ammo
+  //$Sprite TNT1A0
+  //$Title "Ammo Spawner"
+    DropItem "NewShell"
+    DropItem "NewShell"
+    DropItem "NewShell"
+	DropItem "NewShell"
+    DropItem "NewShell"
+    DropItem "PistolClip"
+    DropItem "PistolClip"
+    DropItem "PistolClip"
+	DropItem "SpareSawFuel"
+}
+
+//========================================================================================
+// 'Munittion
+ACTOR SuperShells : Ammo
+{
+Inventory.Amount 0
+Inventory.MaxAmount 4
+Inventory.Icon "DHSPA0"
++INVENTORY.UNDROPPABLE
+States
+{
+Spawn:
+TNT1 A -1
+LOOP
+}
+}    
+ACTOR M1CarbineClipIn : Ammo
+{
+   Inventory.MaxAmount 8 
+   Inventory.Icon "M1HUDA0"
+   States
+   {
+   Spawn:
+   CLP1 C 1
+   Loop
+   }
+}
+
+
+ACTOR PistolClip : Ammo replaces Clip 30062
+{
+  //$Category WDI Ammo
+  //$Sprite CLP4A0
+  //$Title "Pistol Magazine"
+   Scale 0.35	
+   Inventory.MaxAmount 2
+   +INVENTORY.INVBAR 
+   -INVENTORY.INTERHUBSTRIP
+   Inventory.Icon "ARTICLIP"
+   Inventory.Pickupmessage "\cjPicked up a \c[R5]9mm magazine."
+   Inventory.RespawnTics 21000 //10 minutes
+   Inventory.PickupSound "Pickup/Ammo"
+   +FORCEXYBILLBOARD
+   +CANNOTPUSH
+   States
+   {
+   Spawn:
+   CLP4	I -1
+   stop
+   }
+}
+
+ACTOR M1Ammo : Ammo replaces Clipbox 31013
+{ 
+  //$Category WDI Ammo
+  //$Sprite CLP3A0
+  //$Title "M1 Magazine"
+   Scale 0.9
+   Inventory.MaxAmount 1
+   Inventory.Icon "ARTIM1"
+   Inventory.Pickupmessage "\cjPicked up a \c[M8]7.62mm magazine."
+   Inventory.RespawnTics 21000 //10 minutes
+   Inventory.PickupSound "Pickup/Ammo"
+  +INVENTORY.INVBAR 
+  -INVENTORY.INTERHUBSTRIP
+  +FORCEXYBILLBOARD
+  +CANNOTPUSH
+   States
+   {
+	Spawn:
+	CLIP A 1
+	CLIP A 0 A_Jump(96,"Spawn2","Spawn3")
+	Spawn1:
+	CLIP A -1
+	stop
+	Spawn2:
+	CLIP B -1
+	stop
+	Spawn3:
+	CLIP C -1
+	stop
+   }
+}
+
+ACTOR NewShell : Ammo replaces Shell 30061
+{ 
+  //$Category WDI Ammo
+  //$Sprite D3S1E0
+  //$Title "Shotgun Shell"
+  Game Doom
+  SpawnID 12
+  Scale 0.4
+  Inventory.PickupMessage "\cjFound a \c[I7]12 gauge shotgun shell." 
+  Inventory.Amount 1
+  Inventory.MaxAmount 4
+  Inventory.RespawnTics 21000 //10 minutes 
+  Ammo.BackpackAmount 1
+  Ammo.BackpackMaxAmount 4
+  +INVENTORY.INVBAR 
+  -INVENTORY.INTERHUBSTRIP
+  Inventory.Icon "ARTISHEL"
+  Inventory.PickupSound "Pickup/Ammo"
+  +FORCEXYBILLBOARD
+  +CANNOTPUSH
+  States
+  {
+  Spawn: 
+   // D3S1 E -1
+   TNT1 A 1 NODELAY A_Jump(128,2)
+   TNT1 A 0 A_SetScale(-scalex,scaley)
+   TNT1 A 0
+   D3S1 E 0 A_Jump(128,"Spawn2")
+	Spawn1:
+	D3S1 I -1
+	stop
+	Spawn2:
+	D3S1 J -1
+	stop
+	
+  }
+}
+ACTOR SpareSawFuel : Ammo 
+{ 
+  Game Doom
+  XScale 0.7
+	YScale 0.6
+  Inventory.PickupMessage "\cjFound some \c[I7]chainsaw fuel." 
+  Inventory.Amount 1
+  Inventory.MaxAmount 5
+  Inventory.RespawnTics 21000 //10 minutes 
+  Ammo.BackpackAmount 1
+  Ammo.BackpackMaxAmount 5
+  +INVENTORY.INVBAR 
+  -INVENTORY.INTERHUBSTRIP
+  Inventory.Icon "JERRYCAN"
+  Inventory.PickupSound "Pickup/Ammo"
+  +FORCEXYBILLBOARD
+  +CANNOTPUSH
+ // +INVENTORY.UNDROPPABLE
+  States
+  {
+  Spawn: 
+   JERR Y -1
+	stop
+	
+  }
+}
+Actor JerryCan : CustomInventory
+{
+	//$Category WDI Weapons
+	//$Sprite MOLPA0
+	//$Title "Molotov (Throwable)"
+	Radius 10
+	Height 12
+	Game Doom
+	XScale 0.7
+	YScale 0.6
+	Inventory.PickupMessage "\cjFound some \c[I7]chainsaw fuel." 
+	Inventory.Respawntics 21000 //10 Minutes
+	+FORCEXYBILLBOARD
+	+DonTGib
+	Mass 1000
+	States
+	{
+	Spawn:
+		JERR Y -1
+		Stop		
+	Pickup:
+		TNT1 A 0 A_GiveInventory("SpareSawFuel",1)
+		TNT1 A 0 A_PlaySound("Pickups/ammo")
+		TNT1 A 1
+		Stop
+	Death:
+		TNT1 A 0 A_JumpIf(waterlevel >= 2, "InWater")
+		TNT1 A 0 A_Explode(10, 64, 1)
+	//	TNT1 a 0 A_SpawnItem("MollyFireMedium")
+		TNT1 AAAAA 0 A_CustomMissile("MollyShard",1,0,random(0,360), 2, random(5, 45))
+		TNT1 AAAAAAAAAAAAAAAAA 0 A_CustomMissile("MollyFireSpawn",1,0,random(0,360), 2, random(5, 30))
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("MollyFireSpawn3",1,0,random(0,360), 2, random(5, 30))
+		TNT1 AAAAAAAA 0 A_CustomMissile("MollyFireSpawn2",1,0,random(0,360), 2, random(30, 70))
+		TNT1 A 1 A_SpawnItemEx("MollyFireDecorativeBig", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_Scream
+		Stop
+}}
+
+
+ACTOR Gasoline : Ammo
+{
+  Game Doom
+  SpawnID 12
+  Inventory.PickupMessage "Found a can of gasoline." 
+  Inventory.Amount 500
+  Inventory.MaxAmount 500
+  Inventory.RespawnTics 21000 //10 minutes
+  Ammo.BackpackAmount 0
+  Ammo.BackpackMaxAmount 500
+  Inventory.Icon "SHELA0"
+  +INVENTORY.UNDROPPABLE
+  States
+  {
+  Spawn:
+    SHEL A -1
+    Stop
+  }
+}
+
+//========================================================================================
+//Visuals :)
+ACTOR LSawSmoke
+{
+Radius 1
+Height 1
+Speed 1
+Damage 0
+RenderStyle Add
+Alpha 0.8
+Scale 0.35
+PROJECTILE
++NOGRAVITY
+
+States
+ {
+ Spawn:
+ SMOK QPONM 1
+ SMOK LKJIH 2 A_SetTranslucent(0.2,1)
+ SMOK GFEDEDCBA 3 A_FadeOut
+ Goto Death
+ 
+ Death:
+ TNT1 A 1 
+ Stop
+ }
+}
+
+ACTOR SawAlt
+{
+Radius 2
+Height 2
+Speed 10
+Damage 30
+PROJECTILE
+DamageType SuperSaw
+  
+States
+ {
+ Spawn:
+ TNT1 A 1 
+ Goto Death
+
+ Death:
+ TNT1 A 1
+ Stop
+ }
+}
+
+ACTOR Sequence : Ammo
+{
+Inventory.Amount 0
+Inventory.MaxAmount 1
+Inventory.Icon "TNT1A0"
+States
+{
+Spawn:
+TNT1 A -1
+Loop
+}
+}
+
+
+
+ACTOR M1ClipCasing
+{
++NOTELEPORT
+-NOBLOCKMAP
+   Height 12
+   Radius 8
+   Speed 4
+   Scale 0.8
+   PROJECTILE
+   - NOGRAVITY
+   - NOLIFTDROP
+   BounceType Doom
+   BounceFactor 0.4
+   BounceSound "MagBounce"
+   SeeSound ""
+   +FORCEXYBILLBOARD
+   +SHOOTABLE +CANNOTPUSH +GHOST PushFactor 0.1
+   States
+   {
+   Spawn:
+      CLIP DEFGHIJK 3
+      loop
+   	Death:
+		"####" "#" 0 A_ChangeFlag("NOINTERACTION", true)
+		"####" "#" 350
+		"####" "#" 1 A_JumpIf(CallACS("CheckPerma") == 1,"Death")
+		stop
+   }
+}
+
+ACTOR CaseSpawn2
+{
+	Speed 20
+	PROJECTILE
+	+NOCLIP
+	States
+	{
+	Spawn:
+		NULL AA 1 A_CustomMissile("BulletCasing2",0,0,random(-85,-95),2,random(20,50))
+		Stop
+	}
+}
+
+ACTOR BulletCasing2
+{
+	Height 8
+	Radius 6
+	Speed 7
+    Scale 0.45
+	PROJECTILE
+	Bouncetype doom
+	BounceFactor 0.6
+	- NOGRAVITY
+	- NOBLOCKMAP
+	BounceSound "weapons/casing2"
+	+FORCEXYBILLBOARD
+	+DONTSPLASH
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+	   CAS2 ABCD 2
+	   loop
+	Death:
+		TNT1 A 0 A_ChangeFlag("PUSHABLE",1)
+	   CAS2 A 0 A_Jump(32,7)
+	   CAS2 A 0 A_Jump(37,7)
+	   CAS2 A 0 A_Jump(43,7)
+	   CAS2 A 0 A_Jump(51,7)
+	   CAS2 A 0 A_Jump(64,7)
+	   CAS2 A 0 A_Jump(85,7)
+	   CAS2 A 900
+	   Stop
+	   CAS2 B 900
+	   Stop
+	   CAS2 C 900
+	   Stop
+	   CAS2 D 900
+	   Stop
+	   CAS2 C 900
+	   Stop
+	   CAS2 B 900
+	   Stop
+	   CAS2 A 900
+	   Stop
+	}
+}
+
+ACTOR PisCaseSpawn     //Borrowed from the in-limbo ZNew mod (WildWeasel)
+{
+	Speed 15
+	PROJECTILE
+	+NOCLIP
+	States
+	{
+	Spawn:
+		TNT1 AA 1 A_CustomMissile("PistolCasing",0,2,random(-100,-80),2,random(-5,25))
+		Stop
+	}
+}      
+
+ACTOR PistolSmokeSpawner
+{
+    Radius 1
+    Height 1
+    Speed 25
+    PROJECTILE
+    States
+    {
+    Spawn:
+        TNT1 A 1
+        TNT1 A 0 A_Die
+        Goto Death
+    Death:
+        TNT1 A 0 A_CustomMissile("PistolSmoke",-2,0,0)
+        Stop
+    }
+}
+
+ACTOR PistolSmoke
+{
+	Radius		1
+	Height		1
+	RenderStyle ADD
+	Alpha		.6
+	Scale		.1
+	+NOGRAVITY
+	+NOBLOCKMAP
+	+FLOORCLIP
+	+FORCEXYBILLBOARd
+	+NOINTERACTION
+	VSpeed 2
+	States
+	{
+	Spawn:
+		SMOK ABCDEFGHIJKLMNOPQ 1 
+		Stop
+	}
+}
+
+ACTOR PistolCasing
+{
+	Height 2
+	Radius 2
+	Speed 10
+	Scale 0.15	
+	BounceFactor 0.4
+	Mass 4
+	PROJECTILE                    
+	BounceType Doom
+	- NOGRAVITY  
+	- NOBLOCKMAP
+	Seesound "weapons/casing1"
+	Bouncesound "weapons/casing1"
+	+DONTSPLASH +SHOOTABLE +CANNOTPUSH +GHOST PushFactor 0.1
+	+FORCEXYBILLBOARD
+	+DONTSPLASH
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+	   SCAC A 0 A_Playsound("NULL")
+	   SCAC ABCDE 2 A_CustomMissile("PisCaseSmoke",0,0,0,2,0)
+	   Goto Spawn+1
+	Death:
+		"####" "#" 0 A_ChangeFlag("NOINTERACTION", true)
+		"####" "#" 350
+		"####" "#" 1 A_JumpIf(CallACS("CheckPerma") == 1,"Death")
+		stop
+	}
+}       
+
+ACTOR PisCaseSmoke
+{
+   Radius 1
+   Height 1
+   PROJECTILE
+   +NOCLIP
+   Scale 0.125
+   Speed 0
+   RENDERSTYLE TRANSLUCENT
+   ALPHA 0.25
+   States
+   {
+   Spawn:
+      SMKE ABCDEFGH 1 
+      Stop
+   }
+}
+
+ACTOR SpentClip5 //pistol-type clip
+{ 
+    Scale 0.35
+    Radius 3
+    Height 3
+    Speed 0
+    Mass 5
+    +NOBLOCKMAP +DROPOFF +MISSILE +NOTELEPORT +FLOORCLIP
+    DeathSound "weapons/smallclip"
+    States
+    {
+    Spawn:
+      CLP4 ABCDEF 3
+      Loop
+    Death:
+      CLP4 A 1000
+      CLP4 AAAAAAAAAAAAAAAAAAAA 1 A_FadeOut(0.05)
+      Stop
+    }
+}
+
+

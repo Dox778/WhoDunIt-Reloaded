@@ -1,0 +1,149 @@
+script 402 (int arrayid, int pos, int val) ClientSide
+{
+	Switch(arrayid)
+	{
+		Case 0:
+		gameinfo[pos] = val;
+		break;
+
+		Case 1:
+		playinfo[pos] = val;
+		break;
+
+		Case 2:
+		murdinfo[pos] = val;
+		break;
+
+		Case 3:
+		remainingpercentage = val;
+		break;
+
+		Case 4:
+		dwindlemessage = val;
+		break;
+
+		Case 5:
+		bCameraState = val;
+		break;
+
+		Case 6:
+		bCameraDestroyed = val;
+		break;
+
+		Case 7:
+		bGotABeating[PlayerNumber()] = val;
+		break;
+	}
+}
+
+script 403 enter
+{
+	Thing_ChangeTID(0,TID_START+PlayerNumber());
+	died[PlayerNumber()] = FALSE;
+	spawned[PlayerNumber()] = TRUE;
+	TakeInventory("TKToken", 9);
+	SetActorProperty(0,APROP_RenderStyle,STYLE_Normal); //shitty weird bug 3.0
+	ResetInventorySelf();
+}
+
+script 404 respawn
+{
+	Thing_ChangeTID(TID_START+PlayerNumber(),0);
+	Thing_ChangeTID(0,TID_START+PlayerNumber());
+	died[PlayerNumber()] = FALSE;
+	spawned[PlayerNumber()] = TRUE;
+	TakeInventory("TKToken", 9);
+	SetActorProperty(0,APROP_RenderStyle,STYLE_Normal);//shitty weird bug znd 3.0
+	ResetInventorySelf();
+}
+
+script 405 (int who) disconnect
+{
+	if(!PlayerIsSpectator( who))
+	onoff_Blist[who]=FALSE;
+
+	if(gameinfo[1] == GAMESTATE_GAMEACTIVE)
+	{
+		if(died[who] == FALSE && spawned[who] == TRUE)
+		{
+			if(who == gameinfo[2]) murdinfo[0] = FALSE;
+
+			GiveActorInventory(TID_START+WDI_MurdID(), "MadMeter", 150);
+			GiveActorInventory(TID_START+WDI_MurdID(), "Health", 20);
+
+			// RAGEQUIT
+			///*
+			Switch(Random(0,10))
+			{
+				Case 0:
+				HudMessageBold(n:who+1,s:" RAGE-QUIT!";HUDMSG_PLAIN | HUDMSG_LOG, 1024, CR_WHITE, 0.0, 0.0, 0.001);
+				HudMessageBold(s:"";HUDMSG_PLAIN, 1024, CR_WHITE, 0.0, 0.0, 0.001);
+				break;
+
+				Case 1:
+				HudMessageBold(n:who+1,s:" got a bit scared...";HUDMSG_PLAIN | HUDMSG_LOG, 1024, CR_WHITE, 0.0, 0.0, 0.001);
+				HudMessageBold(s:"";HUDMSG_PLAIN, 1024, CR_WHITE, 0.0, 0.0, 0.001);
+				break;
+
+				Case 2:
+				HudMessageBold(n:who+1,s:" is a bit squeamish.";HUDMSG_PLAIN | HUDMSG_LOG, 1024, CR_WHITE, 0.0, 0.0, 0.001);
+				HudMessageBold(s:"";HUDMSG_PLAIN, 1024, CR_WHITE, 0.0, 0.0, 0.001);
+				break;
+
+				Case 3:
+				HudMessageBold(n:who+1,s:" fled.";HUDMSG_PLAIN | HUDMSG_LOG, 1024, CR_WHITE, 0.0, 0.0, 0.001);
+				HudMessageBold(s:"";HUDMSG_PLAIN, 1024, CR_WHITE, 0.0, 0.0, 0.001);
+				break;
+
+				Case 4:
+				Case 5:
+				Case 6:
+				Case 7:
+				Case 8:
+				Case 9:
+				Case 10:
+				break;
+			}
+			//*/
+
+			playinfo[3]++;
+			UpdateClient(ARRAY_PLAYINFO, CLIENT_DISCONNECTS, playinfo[3]);
+			playinfo[1]--;
+			UpdateClient(ARRAY_PLAYINFO, CLIENT_CIVMAX, playinfo[1]);
+			playinfo[0]--;
+			UpdateClient(ARRAY_PLAYINFO, CLIENT_CIVCOUNT, playinfo[0]);
+			spawned[who] = FALSE;
+			if(playinfo[0] == 0) remainingpercentage = 0;
+			if(playinfo[0] != 0) remainingpercentage = (FixedDiv(Int2Fix(playinfo[0]),Int2Fix(playinfo[1])) * 100) >> 16;
+			UpdateClient(3, 0, remainingpercentage);
+			if(((remainingpercentage <= REMAINING  && remainingpercentage != 0) || (playinfo[0] <= 2 && playinfo[0] > 0)) && !dwindlemessage)
+			{
+				SetFont("BIGFONT");
+				HudMessageBold(s:"The Innocent's numbers are dwindling..."; HUDMSG_PLAIN|HUDMSG_LOG, 0, CR_RED, 0.5, 0.3, 3.0);
+				int odds = Random(1,100);
+				if(odds >= 99)
+				ACS_Execute(415,0,0,0,0);
+
+				else
+				{
+					if(StrLen(finalesong) > 1)
+					{
+						SetMusic(finalesong);
+					}
+
+					else
+					{
+						int odds2 = Random(1,5);
+						if(odds2 == 1) SetMusic("D_HLMS02");
+						else if(odds2 == 2) SetMusic("D_FINAL1");
+						else if(odds2 == 3) SetMusic("D_FINAL2");
+						else if(odds2 == 4) SetMusic("D_FINAL3");
+						else SetMusic("D_FINAL4");
+					}
+				}
+				dwindlemessage = TRUE;
+				UpdateClient(4, 0, dwindlemessage);
+			}
+		}
+	}
+}

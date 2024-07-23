@@ -1,0 +1,146 @@
+//yes it's from that Wolfenstein TC mod lol
+Actor FakeBoA : CustomInventory
+{ 
+	//$Category WDI Weapons
+	//$Sprite PIPPB0
+	//$Title "Wrench"
+	Radius 16
+	Height 8 
+	Scale 0.5
+	Inventory.PickupMessage "\cjFound the \c[D9]Blade of Agony. \cjTotally not stolen from another mod!"
+	Inventory.Respawntics 10500 //5 minutes
+	+FORCEXYBILLBOARD
+	+DonTGib
+	States
+	{
+	Spawn:
+		SRDP "]" -1 
+		Stop
+	Pickup:
+		PIPP B 0
+		PIPP B 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		PIPP B 0 A_PlaySound("Pickups/Weapon")
+		PIPP B 0 A_GiveInventory("BladeOfAgony",1)
+		PIPP B 0 A_GiveInventory("Slot1Filled",1)
+		PIPP B 1
+		Stop
+	NotPickup:
+		PIPP B 0
+		SRDP "]" 1
+		Fail
+}}
+
+ACTOR MeleeHit: Inventory {Inventory.MaxAmount 1}
+
+Actor BladeOfAgony : Wdi_BaseWeapon
+{
+	SpawnID 32
+	Radius 20
+	Height 12
+	Tag "Blade of Agony"
+	Inventory.PickupMessage "\cjFound the \c[D9]Blade of Agony. \cjTotally not stolen from another mod!\n\caDamage: \c[C4]18"
+	Weapon.SelectionOrder 2200
+//	Weapon.PreferredSkin "WrenchSkin2"
+	+INVENTORY.INTERHUBSTRIP
+	States
+	{
+	Spawn:
+		PIPP B 0
+		Goto Death
+	Pickup:
+	Select:
+		TNT1 A 6
+		SRDG AAAAAAAAAAAAAAA 0 A_Raise
+		SRDG A 1 offset(71,156)
+		SRDG A 1 offset(62,127)
+		SRDG A 1 offset(52,106)
+		SRDG A 1 offset(44,88)
+		SRDG A 1 offset(36,76)
+		SRDG A 1 offset(28,64)
+		SRDG A 1 offset(20,54)
+		SRDG A 1 offset(14,45)
+		SRDG A 1 offset(8,40)
+		SRDG A 1 offset(4,36)
+		SRDG A 1 offset(1,33)
+		SRDG A 0 A_Jump(255,"Ready")
+		SRDG A 0 A_Jump(255,"Ready")
+		goto Ready
+	Ready:
+		SRDG A 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+	DropWeapon:
+		TNT1 A 0
+		TNT1 A 0 A_GiveInventory("DropAnimWeapon",1)
+		TNT1 A 0 A_TakeInventory("PipeSeq",999)
+		NULL A 0 A_GiveInventory("DroppingAnimation",1)
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+		TNT1 A 0 ACS_NamedExecuteAlways("WDINewActivateDrop",0,0,0,0)
+		Goto Ready
+	Fire:
+		SRDG A 0 A_JumpIfInventory("PipeSeq",2,"Hold")
+		SRDG A 0 A_JumpIfInventory("PipeSeq",1,"Fire2")
+		SRDG BCDEF 1
+	Hold:
+		TNT1 A 1 A_TakeInventory("PipeSeq",1)
+		TNT1 A 1 A_ReFire("Hold")
+		TNT1 A 6 A_GiveInventory("PipeSeq",1)
+		SRDG G 1
+		TNT1 A 0 A_PlaySound("Boa/swing")
+		SRDG HI 1
+		SRDG JK 1 A_CustomPunch(18,1,0,"BoAPuff", 72)
+		SRDG LM 1
+		TNT1 A 2
+		TNT1 AAAAAAAAAA 1 A_WeaponReady(WRF_NoSwitch)
+		SRDG Z 1 A_TakeInventory("PipeSeq",10)
+		SRDG YXWVU 1
+		NULL A 0 A_takeInventory("MeleeHit",1)
+		Goto Ready
+	Fire2:
+		TNT1 A 1
+		TNT1 A 0 A_ReFire("Fire2")
+		TNT1 A 7 A_GiveInventory("PipeSeq",1)
+		SRDG N 1
+		TNT1 A 0 A_PlaySound("Boa/swing")
+		SRDG OP 1
+		SRDG QR 1 A_CustomPunch(18,1,0,"BoAPuff", 72)
+		SRDG ST 1
+		TNT1 A 2
+		TNT1 AAAAAAAAAAAA 1 A_WeaponReady(WRF_NoSwitch)
+		SRDG F 1 A_TakeInventory("PipeSeq",10)
+		SRDG EDCB 1
+		NULL A 0 A_takeInventory("MeleeHit",1)
+		Goto Ready
+
+	Death:
+		DHSP A 0 A_SpawnItem("DroppedBoA",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		Goto Death + 1
+	WeaponDeath:
+		2IST JUVVKUUKVJKVJUKVJVJUVJKUVJUVKUJJKUV 1
+		2IST KKLMNOPRSS 1
+		2IST T 1
+		wait
+}}
+
+ACTOR DroppedBoA: Wdi_BaseDroppedWeapon
+{
+	BounceSound "Boa/Wall"
+	BounceFactor 0.4
+	States
+	{
+	Spawn:
+		SRDP "]" 1
+		Loop
+	Death:
+		SRDP "]" 35 A_playSound("Boa/Wall",CHAN_BODY,0.5)
+		SRDP "]" 1 A_SpawnItemEx("FakeBoA",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+actor BoAPuff: BaseMeleePuff
+{
+  attacksound "Boa/Wall"
+  seesound "Boa/hit"
+  Decal "MeleeCrack"
+}

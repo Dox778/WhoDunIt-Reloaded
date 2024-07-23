@@ -1,0 +1,105 @@
+//From Brightmaps Plus https://forum.zdoom.org/viewtopic.php?t=64299
+// ===================================================================================== FLATS
+
+// brightmap flat grnlite1    { map "brightmaps/textures/doom2/flats/grnlite1.png"  }
+
+brightmap flat rrock01     { map "brightmaps/textures/doom2/flats/rrock01.png"  }
+brightmap flat rrock02     { map "brightmaps/textures/doom2/flats/rrock02.png"  }
+brightmap flat rrock05     { map "brightmaps/textures/doom2/flats/rrock05.png"  }
+brightmap flat rrock06     { map "brightmaps/textures/doom2/flats/rrock06.png"  }
+brightmap flat rrock07     { map "brightmaps/textures/doom2/flats/rrock07.png"  }
+brightmap flat rrock08     { map "brightmaps/textures/doom2/flats/rrock08.png"  }
+
+brightmap flat slime01     { map "brightmaps/textures/doom2/flats/slime01.png"  }
+brightmap flat slime02     { map "brightmaps/textures/doom2/flats/slime02.png"  }
+brightmap flat slime03     { map "brightmaps/textures/doom2/flats/slime03.png"  }
+brightmap flat slime04     { map "brightmaps/textures/doom2/flats/slime04.png"  }
+brightmap flat slime05     { map "brightmaps/textures/doom2/flats/slime05.png"  }
+brightmap flat slime06     { map "brightmaps/textures/doom2/flats/slime06.png"  }
+brightmap flat slime07     { map "brightmaps/textures/doom2/flats/slime07.png"  }
+brightmap flat slime08     { map "brightmaps/textures/doom2/flats/slime08.png"  }
+brightmap flat slime09     { map "brightmaps/textures/doom2/flats/slime09.png"  }
+brightmap flat slime10     { map "brightmaps/textures/doom2/flats/slime10.png"  }
+brightmap flat slime11     { map "brightmaps/textures/doom2/flats/slime11.png"  }
+brightmap flat slime12     { map "brightmaps/textures/doom2/flats/slime12.png"  }
+
+
+// ===================================================================================== TEXTURES
+
+brightmap texture bfall1   { map "brightmaps/textures/doom2/bfall1.png"  }
+brightmap texture bfall2   { map "brightmaps/textures/doom2/bfall2.png"  }
+brightmap texture bfall3   { map "brightmaps/textures/doom2/bfall3.png"  }
+brightmap texture bfall4   { map "brightmaps/textures/doom2/bfall4.png"  }
+
+brightmap texture wfall1   { map "brightmaps/textures/doom2/bfall1.png"  }
+brightmap texture wfall2   { map "brightmaps/textures/doom2/bfall2.png"  }
+brightmap texture wfall3   { map "brightmaps/textures/doom2/bfall3.png"  }
+brightmap texture wfall4   { map "brightmaps/textures/doom2/bfall4.png"  }
+
+brightmap texture bricklit { map "brightmaps/textures/doom2/bricklit.png"  }
+
+brightmap texture bronze4  { map "brightmaps/textures/doom2/bronze4.png"  }
+
+brightmap texture bigbrik3 { map "brightmaps/textures/doom2/bronze4.png"  }
+
+brightmap texture brwindow { map "brightmaps/textures/doom2/brwindow.png"  }
+
+brightmap texture bstone3  { map "brightmaps/textures/doom2/bstone3.png"  }
+
+brightmap texture crackle2 { map "brightmaps/textures/doom2/crackle4.png"  }
+brightmap texture crackle4 { map "brightmaps/textures/doom2/crackle4.png"  }
+
+brightmap texture dbrain1  { map "brightmaps/textures/doom/100.png"  }
+brightmap texture dbrain2  { map "brightmaps/textures/doom/100.png"  }
+brightmap texture dbrain3  { map "brightmaps/textures/doom/100.png"  }
+brightmap texture dbrain4  { map "brightmaps/textures/doom/100.png"  }
+
+brightmap texture metal3   { map "brightmaps/textures/doom2/metal3.png"  }
+brightmap texture metal6   { map "brightmaps/textures/doom2/metal6.png"  }
+brightmap texture metal7   { map "brightmaps/textures/doom2/metal7.png"  }
+
+brightmap texture panbook  { map "brightmaps/textures/doom2/panbook.png"  }
+
+brightmap texture pipewal1 { map "brightmaps/textures/doom2/pipewal1.png"  }
+
+brightmap texture sfall1   { map "brightmaps/textures/doom2/sfall1.png"  }
+brightmap texture sfall2   { map "brightmaps/textures/doom2/sfall2.png"  }
+brightmap texture sfall3   { map "brightmaps/textures/doom2/sfall3.png"  }
+brightmap texture sfall4   { map "brightmaps/textures/doom2/sfall4.png"  }
+
+brightmap texture silver2  { map "brightmaps/textures/doom2/silver2.png"  }
+brightmap texture silver3  { map "brightmaps/textures/doom2/silver3.png"  }
+
+brightmap texture spacew3  { map "brightmaps/textures/doom2/spacew3.png"  }
+
+brightmap texture spcdoor1 { map "brightmaps/textures/doom2/spcdoor1.png"  }
+brightmap texture spcdoor2 { map "brightmaps/textures/doom2/spcdoor1.png"  }
+brightmap texture spcdoor3 { map "brightmaps/textures/doom2/spcdoor3.png"  }
+brightmap texture spcdoor4 { map "brightmaps/textures/doom2/spcdoor4.png"  }
+
+brightmap texture sw1brik  { map "brightmaps/textures/doom/sw1strtn.png"  }
+brightmap texture sw1met2  { map "brightmaps/textures/doom/sw1dirt.png"  }
+brightmap texture sw1wdmet { map "brightmaps/textures/doom2/sw1wdmet.png"  }
+
+brightmap texture sw2brik  { map "brightmaps/textures/doom/sw2strtn.png"  }
+brightmap texture sw2marb  { map "brightmaps/textures/doom2/sw2marb.png"  }
+brightmap texture sw2met2  { map "brightmaps/textures/doom/sw2dirt.png"  }
+brightmap texture sw2mod1  { map "brightmaps/textures/doom/sw2brngn.png"  }
+brightmap texture sw2panel { map "brightmaps/textures/doom2/sw2panel.png"  }
+brightmap texture sw2rock  { map "brightmaps/textures/doom/sw2wood.png"  }
+brightmap texture sw2skull { map "brightmaps/textures/doom2/sw2skull.png"  }
+brightmap texture sw2starg { map "brightmaps/textures/doom/sw2brcom.png"  }
+brightmap texture sw2ston6 { map "brightmaps/textures/doom/sw2comp.png"  }
+brightmap texture sw2tek   { map "brightmaps/textures/doom/sw2brn2.png"  }
+brightmap texture sw2wdmet { map "brightmaps/textures/doom2/sw2wdmet.png"  }
+brightmap texture sw2zim   { map "brightmaps/textures/doom2/sw2zim.png"  }
+
+brightmap texture tekbron2 { map "brightmaps/textures/doom2/tekbron2.png"  }
+brightmap texture tekgren1 { map "brightmaps/textures/doom2/tekgren1.png"  }
+brightmap texture tekgren3 { map "brightmaps/textures/doom2/tekgren3.png"  }
+brightmap texture tekgren5 { map "brightmaps/textures/doom2/tekgren5.png"  }
+brightmap texture teklite  { map "brightmaps/textures/doom2/teklite.png"  }
+brightmap texture teklite2 { map "brightmaps/textures/doom2/teklite2.png"  }
+brightmap texture tekwall6 { map "brightmaps/textures/doom2/tekwall6.png"  }
+
+brightmap texture zzzface4 { map "brightmaps/textures/doom2/zzzface4.png"  }

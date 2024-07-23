@@ -1,0 +1,153 @@
+PLAYLAND PLAYLAND
+$random Ouchie
+{
+	P2Pain1
+	P2Pain7
+	P2Pain5
+	P2Pain2
+	P1Pain1
+	P1Pain7
+	P1Pain5
+	P1Pain2
+}
+
+//breath
+$random Coughing {COUGH1  COUGH1 PLAYPN1 PLAYPN7 PLAYPN1 PLAYPN7 P1Pain1  P1Pain7 P2Pain1 P2Pain7 DSNULL} 
+cough1 cough1
+PLAYPN1 P_PN1
+PLAYPN7 P_PN2
+
+$random player/okay {player/okay1 player/okay2 player/okay3 }
+player/okay1			p_oky1
+player/okay2			p_oky2
+player/okay3			p_oky3
+
+$rolloff player/okay 32 200
+
+//TMC Sounds (Soundset 1)
+//Use
+UsefailA1	plyrspk1	
+UsefailB1	plyrspk2
+UsefailC1	plyrspk3
+
+//death
+P1Death		DeathA1
+P1Xdeath	P1Xdeath
+
+//P1 Pain
+P1Light1	PAIN100A	
+P1Light2	PAIN100B
+P1Light3	PAIN100C
+
+P1Medium1	PAIN75A
+P1Medium2	PAIN75B
+P1Medium3	PAIN75C	
+
+P1Heavy1	PAIN50A
+P1Heavy2	PAIN50B
+P1Heavy3	PAIN50C
+
+P1Mortal1	PAIN25A
+P1Mortal2	PAIN25B
+P1Mortal3	PAIN25C
+
+$random P1Use { DSNULL DSNULL DSNULL } 
+$random P1Pain1 { P1Light1 P1Light2 P1Light3 } 
+$random P1Pain7 { P1Medium1 P1Medium2 P1Medium3 } 
+$random P1Pain5 { P1Heavy1 P1Heavy2 P1Heavy3 } 
+$random P1Pain2 { P1Mortal1 P1Mortal2 P1Mortal3 } 
+$random P1Taunt { P1Help1 P1Help2 P1Help3 P1Help4 P1Help5 } 
+
+
+//Firewolf Sounds (Soundset 2)
+//Use
+UsefailA2	P1NO1	
+UsefailB2	P1NO2
+UsefailC2	P1NO3
+
+//death
+P2Death		P2DEATH
+P2Xdeath	P2XDEATH
+
+//P1 Pain
+P1LightA1	PANA100A	
+P1LightA2	PANA100B
+P1LightA3	PANA100C
+
+P1MediumA1	PANA75A
+P1MediumA2	PANA75B
+P1MediumA3	PANA75C	
+
+P1HeavyA1	PANA50A
+P1HeavyA2	PANA50B
+P1HeavyA3	PANA50C
+
+P1MortalA1	PANA25A
+P1MortalA2	PANA25B
+P1MortalA3	PANA25C
+
+$random P2Use { DSNULL DSNULL DSNULL } 
+$random P2Pain1 { P1LightA1 P1LightA2 P1LightA3 } 
+$random P2Pain7 { P1MediumA1 P1MediumA2 P1MediumA3 } 
+$random P2Pain5 { P1HeavyA1 P1HeavyA2 P1HeavyA3 } 
+$random P2Pain2 { P1MortalA1 P1MortalA2 P1MortalA3 } 
+$random P2Taunt { P1Help1 P1Help2 P1Help3 P1Help4 P1Help5 } 
+
+
+$PlayerAlias Firewolf male *Usefail P2Use
+$PlayerAlias Firewolf male *pain100 P2Pain1
+$PlayerAlias Firewolf male *pain75 P2Pain7
+$PlayerAlias Firewolf male *pain50 P2Pain5
+$PlayerAlias Firewolf male *pain25 P2Pain2
+$PlayerAlias Firewolf male *death P2Death
+$PlayerAlias Firewolf male *crazydeath P2XDeath
+$PlayerAlias Firewolf male *taunt P2Taunt
+$PlayerAlias Firewolf male *land PLAYLAND
+$PlayerAlias Firewolf male *grunt P1Use
+$PlayerAlias DoomGuy male *falling PLAYBURN 
+
+$PlayerAlias TMC male *Usefail P1Use
+$PlayerAlias TMC male *Puzzfail P1Puzz
+$PlayerAlias TMC male *pain100 P1Pain1
+$PlayerAlias TMC male *pain75 P1Pain7
+$PlayerAlias TMC male *pain50 P1Pain5
+$PlayerAlias TMC male *pain25 P1Pain2
+$PlayerAlias TMC male *death P1Death
+$PlayerAlias TMC male *crazydeath P1XDeath
+$PlayerAlias TMC male *taunt P1Taunt
+$PlayerAlias TMC male *land PLAYLAND
+$PlayerAlias TMC male *falling PLAYBURN 
+
+$PlayerAlias DoomGuy male *Usefail P1Use
+$PlayerAlias DoomGuy male *Puzzfail P1Use
+$PlayerAlias DoomGuy male *pain100 DGuyOuch
+$PlayerAlias DoomGuy male *pain50 DGuyOuch
+$PlayerAlias DoomGuy male *pain75 DGuyOuch
+$PlayerAlias DoomGuy male *pain25 DGuyOuch
+$PlayerAlias DoomGuy male *death DGuyDie
+$PlayerAlias DoomGuy male *crazydeath DGuyDie2
+$PlayerAlias DoomGuy male *taunt P1Taunt
+$PlayerAlias DoomGuy male *land PLAYLAND
+$PlayerAlias DoomGuy male *grunt P1Use
+$PlayerAlias DoomGuy male *falling PLAYBURN 
+
+DGuyDie DGuyDie
+DGuyDie2 DGuyDie2
+DGuyOof DGuyOof
+DGuyOuch DGuyOuch
+
+$PlayerAlias D64Guy male *Usefail P1Use
+$PlayerAlias D64Guy male *Puzzfail P1Use
+$PlayerAlias D64Guy male *pain100 D64PAIN
+$PlayerAlias D64Guy male *pain75 D64PAIN
+$PlayerAlias D64Guy male *pain50 D64PAIN
+$PlayerAlias D64Guy male *pain25 D64PAIN
+$PlayerAlias D64Guy male *death D64DIE
+$PlayerAlias D64Guy male *crazydeath D64DIE
+$PlayerAlias D64Guy male *taunt P1Taunt
+$PlayerAlias D64Guy male *land PLAYLAND
+$PlayerAlias D64Guy male *grunt P1Use
+$PlayerAlias D64Guy male *falling PLAYBURN 
+
+D64PAIN D64PAIN
+D64DIE D64DIE

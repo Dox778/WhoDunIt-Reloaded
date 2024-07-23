@@ -1,0 +1,198 @@
+$random generic/floor		{ generic/floor01  generic/floor02 generic/floor03 generic/floor04  generic/floor05 generic/floor06 }
+generic/floor01	dshard1
+generic/floor02	dshard2
+generic/floor03	dshard3
+generic/floor04	dshard4
+generic/floor05	dshard5
+generic/floor06	dshard6
+
+$volume generic/floor 0.75
+$volume generic/floor01 0.75
+$volume generic/floor02 0.75
+$volume generic/floor03 0.75
+$volume generic/floor04 0.75
+$volume generic/floor05 0.75
+$volume generic/floor06 0.75
+//Piano - OMFG IT'S BOBBY
+$random floor/piano		{ floor/piano1  floor/piano2 floor/piano3 floor/piano4 floor/piano5  floor/piano6 floor/piano7 floor/piano8  floor/piano9}
+floor/piano1	PSTEP1
+floor/piano2	PSTEP2
+floor/piano3	PSTEP3
+floor/piano4	PSTEP4
+floor/piano5	PSTEP5
+floor/piano6	PSTEP6
+floor/piano7	PSTEP7
+floor/piano8	PSTEP8
+floor/piano9	PSTEP9
+
+$random floor/ice	{ ICESTP1 ICESTP2 ICESTP3 ICESTP4 }
+ICESTP1 ICESTP1
+ICESTP2 ICESTP2
+ICESTP3 ICESTP3
+ICESTP4 ICESTP4
+
+//Sand
+$random floor/sand	{ SANDSTP1 SANDSTP2 SANDSTP3 SANDSTP4 }
+SANDSTP1 SANDSTP1
+SANDSTP2 SANDSTP2
+SANDSTP3 SANDSTP3
+SANDSTP4 SANDSTP4
+
+$limit floor/sand 3
+$Volume floor/sand 0.7
+//Grass
+$random floor/grass	{ GRASSTP1 GRASSTP2 GRASSTP3 GRASSTP4 }
+GRASSTP1 GRASSTP1
+GRASSTP2 GRASSTP2
+GRASSTP3 GRASSTP3
+GRASSTP4 GRASSTP4
+
+$limit floor/grass 3
+$Volume floor/grass 0.7
+//Carpet - soft ground
+$random floor/carpet	{ CARPSTP1  CARPSTP2 CARPSTP3 CARPSTP4 }
+CARPSTP1 CARPSTP1
+CARPSTP2 CARPSTP2
+CARPSTP3 CARPSTP3
+CARPSTP4 CARPSTP4
+
+$limit floor/carpet 3
+$Volume floor/carpet 0.6
+//Dirt
+$random floor/dirt	{ DIRTSTP1 DIRTSTP2 DIRTSTP3 DIRTSTP4 }
+DIRTSTP1 DIRTSTP1
+DIRTSTP2 DIRTSTP2
+DIRTSTP3 DIRTSTP3
+DIRTSTP4 DIRTSTP4
+
+$limit floor/dirt 3
+
+//Gravel - loose crunchy surface
+$random floor/gravel		{ GRAVSTP1 GRAVSTP2 GRAVSTP3 GRAVSTP4 }
+GRAVSTP1 GRAVSTP1
+GRAVSTP2 GRAVSTP2
+GRAVSTP3 GRAVSTP3
+GRAVSTP4 GRAVSTP4
+
+$limit floor/gravel 3
+
+//Metal - hard metal
+$random floor/metal		{ METASTP1 METASTP2 METASTP3 METASTP4 }
+METASTP1 METASTP1
+METASTP2 METASTP2
+METASTP3 METASTP3
+METASTP4 METASTP4
+
+$limit floor/metal 3
+
+//Metal2 - clanky metal
+$random floor/met2	{ CMETSTP1 CMETSTP2 CMETSTP3 CMETSTP4 }
+CMETSTP1 CMETSTP1
+CMETSTP2 CMETSTP2
+CMETSTP3 CMETSTP3
+CMETSTP4 CMETSTP4
+
+$limit floor/met2 3
+
+//Rock - Hard outdoor type floor
+$random floor/rock	{ ORCKSTP1 ORCKSTP2 ORCKSTP3 ORCKSTP4 }
+ORCKSTP1 ORCKSTP1
+ORCKSTP2 ORCKSTP2
+ORCKSTP3 ORCKSTP3
+ORCKSTP4 ORCKSTP4
+
+$limit floor/rock 3
+
+//Snow
+$random floor/snow	{ SNOWSTP1 SNOWSTP2 SNOWSTP3 SNOWSTP4 }
+SNOWSTP1 SNOWSTP1
+SNOWSTP2 SNOWSTP2
+SNOWSTP3 SNOWSTP3
+SNOWSTP4 SNOWSTP4
+
+$limit floor/snow 3
+
+//Hard - generic hard floor
+$random floor/hard		{ HDGNSTP1 HDGNSTP2 HDGNSTP3 HDGNSTP4 }
+HDGNSTP1 HDGNSTP1
+HDGNSTP2 HDGNSTP2
+HDGNSTP3 HDGNSTP3
+HDGNSTP4 HDGNSTP4
+
+$limit floor/hard 3
+
+//Tile - Hard indoor floor
+$random floor/tile		{ TILESTP1 TILESTP2 TILESTP3 TILESTP4 }
+TILESTP1 TILESTP1
+TILESTP2 TILESTP2
+TILESTP3 TILESTP3
+TILESTP4 TILESTP4
+
+$limit floor/tile 3
+
+//Tile2 - More echoey traditional tile
+$random floor/tile2		{ TIECSTP1 TIECSTP1 TIECSTP1 TIECSTP2 TIECSTP2 TIECSTP2 TIECSTP3 TIECSTP3 TIECSTP3 TIECSTP4 } //less of that squeaky sound
+TIECSTP1 TIECSTP1
+TIECSTP2 TIECSTP2
+TIECSTP3 TIECSTP3
+TIECSTP4 TIECSTP4
+
+$limit floor/tile2 3
+
+//Wood
+$random floor/wood		{ WOODSTP1 WOODSTP2 WOODSTP3 WOODSTP4 }
+WOODSTP1 WOODSTP1
+WOODSTP2 WOODSTP2
+WOODSTP3 WOODSTP3
+WOODSTP4 WOODSTP4
+
+$limit floor/wood 3
+$Volume floor/wood 0.8
+//Slimy - for the Doom snake floors
+$random floor/slimy		{ GORESTP1 GORESTP2 GORESTP3 GORESTP4 }
+GORESTP1 GORESTP1
+GORESTP2 GORESTP2
+GORESTP3 GORESTP3
+GORESTP4 GORESTP4
+
+$limit floor/slimy 4
+
+
+$random  world/watersplash { WATRSTP1 WATRSTP2 WATRSTP3 WATRSTP4 }
+WATRSTP1 WATRSTP1
+WATRSTP2 WATRSTP2
+WATRSTP3 WATRSTP3
+WATRSTP4 WATRSTP4
+
+$limit world/watersplash 5
+
+$random world/sludgegloop { SLIMSTP1 SLIMSTP2 SLIMSTP3 SLIMSTP4 }
+SLIMSTP1 SLIMSTP1
+SLIMSTP2 SLIMSTP2
+SLIMSTP3 SLIMSTP3
+SLIMSTP4 SLIMSTP4
+
+$limit world/sludgegloop 5
+
+$random world/lavasizzle { LAVASTP1 LAVASTP2 LAVASTP3 LAVASTP4 }
+LAVASTP1 LAVASTP1
+LAVASTP2 LAVASTP2
+LAVASTP3 LAVASTP3
+LAVASTP4 LAVASTP4
+
+$limit world/lavasizzle 5
+
+
+
+$rolloff floor/sand 20 560
+$rolloff floor/grass 30 620
+$rolloff floor/carpet 30 620
+$rolloff floor/gravel 40 680
+$rolloff floor/dirt 60 780 
+$rolloff floor/snow 60 780
+$rolloff floor/rock 80 900 
+$rolloff floor/hard 80 900
+$rolloff floor/tile2 100 980 
+$rolloff floor/tile2 100 980
+$rolloff floor/wood 120 1060
+$rolloff floor/ice 120 1060

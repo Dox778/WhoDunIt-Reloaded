@@ -1,0 +1,189 @@
+Actor FakeScrewDriver : CustomInventory 22006
+{
+	//$Category WDI Weapons/Light Weapons
+	//$Sprite SCRWZ0
+	//$Title "ScrewDriver"
+	Radius 12 
+	Height 8
+	Inventory.PickupMessage "\cjFound a \c[Q9]Screw Driver. \cjNow it'll be a stabbing duel!\n\caDamage: \c[C4]25"
+	Inventory.Respawntics 10500 //5 minutes
+	+FORCEXYBILLBOARD
+	+DonTGib
+	States
+	{
+	Spawn:
+		SCRW Z -1
+		Stop
+	Pickup:
+		SCRW Z 0
+		SCRW Z 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		SCRW Z 0 A_PlaySound("Pickups/Weapon")
+		SCRW Z 0 A_GiveInventory("ScrewDriverWeapon",1)
+		SCRW Z 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		SCRW Z 1 ACS_NamedExecute("WDIROldWeapon_id",0,44)
+		Stop
+	NotPickup:
+		SCRW Z 0
+		SCRW Z 1 ACS_NamedExecute("WDIROldWeapon_id",0,44)
+		Fail
+}}
+Actor ScrewDriverWeapon : Wdi_BaseWeapon
+{
+	Tag "Screw driver"
+	Weapon.SelectionOrder 999
+	Weapon.Kickback 20
+	Weapon.PreferredSkin "FistSkin"
+	+NOALERT
+	+NOAUTOFIRE
+	+NOAUTOAIM
+	+INVENTORY.INTERHUBSTRIP
+	Inventory.Icon "WEPICO13"	
+	States
+	{
+	Spawn:
+		CRBR "[" 0
+		Goto Death
+	Ready:
+		
+		SCRB B 0 A_JumpIfInventory("StabbedAPerson",1,"ReadyStained")
+		SCRW B 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+	ReadyStained:
+		SCRB B 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+	Deselect:
+		"####" "#" 1 offset(-1,33) A_StopSoundEx ("WEAPON")
+		"####" "#" 1 offset(-4,36)
+		"####" "#" 1 offset(-8,40)
+		"####" "#" 1 offset(-14,45)
+		"####" "#" 1 offset(-20,54)
+		"####" "#" 1 offset(-28,64)
+		"####" "#" 1 offset(-36,76)
+		"####" "#" 1 offset(-44,88)
+		"####" "#" 1 offset(-52,106)
+		"####" "#" 1 offset(-62,127)
+		"####" "#" 1 offset(-71,156)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1 A_Lower
+		wait
+	Select:
+		SCRB B 0 A_JumpIfInventory("StabbedAPerson",1,2)
+		SCRW B 0
+	  "####" B 0
+		"####" "#" 2
+		"####" BBBBBBBBBBBBBBB 0 A_Raise
+		"####" "#" 1 offset(44,88)
+		"####" "#" 1 offset(36,76)
+		"####" "#" 1 offset(28,64)
+		"####" "#" 1 offset(20,54)
+		"####" "#" 1 offset(14,45)
+		"####" "#" 1 offset(8,40)
+		"####" "#" 1 offset(4,36)
+		"####" "#" 1 offset(1,33)
+		goto Ready
+	
+	Fire:
+		"####" A 0 A_PlaySound("Knife/Swing")
+		"####" C 0 A_Recoil(-1)
+		"####" L 1
+		"####" C 1 A_CustomPunch (10, 1, 0, "ScrewPuffNoBlood", 64)
+		"####" D 1 A_CustomPunch (10, 1, 0, "ScrewPuff", 72)
+		SCRB B 0 A_JumpIfInventory("StabbedAPerson",1,2)
+		SCRW B 0
+	    "####" A 0
+		"####" E 1 A_CustomPunch (5, 1, 0, "ScrewPuffNoBlood", 72)
+		"####" E 6
+		"####" FFGHIJKK 1
+		"####" B 15
+		"####" B 1 A_ReFire
+		Goto Ready
+	
+	Death:
+		DHSP A 0 A_SpawnItem("Dropper_ScrewDriver",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		Goto Death + 1
+	//Zoom:
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+		TNT1 A 0 A_takeInventory("StabbedAPerson",1)
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 ACS_NamedExecuteAlways("WDINewActivateDrop",0,0,0,0)
+		Goto Ready
+}}
+
+
+
+ACTOR DroppedScrewDriver: Wdi_BaseDroppedWeapon
+{
+	Radius 16
+	BounceSound "ScrewPuff"
+	BounceFactor 0.4
+	Scale 1.0
+	States
+	{
+	Spawn:
+		SCRW Z -1
+		Loop
+	Death:
+		SCRW Z 35 A_playSound("ScrewPuff",CHAN_BODY,0.5)
+		SCRW Z 1 A_SpawnItemEx("FakeScrewDriver",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+
+ACTOR DroppedScrewDriverFar: Wdi_BaseDroppedWeaponFar
+{
+	Radius 16
+	BounceSound "ScrewPuff"
+	BounceFactor 0.4
+	Scale 1.0
+	States
+	{
+	Spawn:
+		SCRW Z -1
+		Loop
+	Death:
+		SCRW Z 35 A_playSound("ScrewPuff",CHAN_BODY,0.5)
+		SCRW Z 1 A_SpawnItemEx("FakeScrewDriver",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+
+
+
+ACTOR ScrewPuff: BaseMeleePuff
+{ 
+   +NOBLOCKMAP
+  +NOGRAVITY
+  +PUFFONACTORS
+  seesound "weapons/Knifehit"
+  AttackSound "ScrewPuff"
+  Obituary "" 
+  Decal "KnifeDecal"
+  States
+  {
+  	Spawn:
+		TNT1 A 0
+		TNT1 A 1
+		Stop
+	Crash:
+		TNT1 A 0
+		TNT1 A 1
+		Stop
+	Melee:
+		TNT1 A 0
+		TNT1 A 1 A_GiveToTarget("StabbedAPerson",1)
+		Stop
+  }
+}
+ACTOR ScrewPuffNoBlood: ScrewPuff
+{ 
+   +NOBLOOD
+   +BLOODLESSIMPACT
+Decal ""
++DONTSPLASH
+seesound ""
+  AttackSound ""
+}

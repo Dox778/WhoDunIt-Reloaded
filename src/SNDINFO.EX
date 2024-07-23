@@ -1,0 +1,329 @@
+$RANDOM monster/dvlsit { monster/dvlsi1 monster/dvlsi2 }
+monster/dvlsi1 dsdvlsi1
+monster/dvlsi2 dsdvlsi2
+
+monster/dvlpai dsdvlpai
+$RANDOM monster/dvldth { monster/dvldt1 monster/dvldt2 }
+monster/dvldt1 dsdvldt1
+monster/dvldt2 dsdvldt2
+
+monster/dvlact dsdvlact
+
+SSGUNER/sight	DSGPOSIT
+SSGUNER/SSG 	DSSGGATK
+SSGUNER/death	DSGPODTH
+SSGUNER/idle	DSGPOACT
+			
+dyzzomchain/death	YZZDEATH
+
+weapons/combogun_click			dszip
+weapons/combogun_open			dszopen
+weapons/combogun_close			dszclose
+Weapons/Scissors       HASAMI
+
+lessermutant/painr	 PAIN	
+lessermutant/deathr	 DEATH
+lessermutant/activer	 ACTIVE
+lessermutant/seer	 SEE
+lessermutant/attackr	 ATTACK
+lessermutant/projectiler PROJATTK
+MELEE1 MELEE1
+MELEE2 MELEE2
+ZKITM1 ZKITM1
+ZKITM2 ZKITM2
+TROLLTN1 TROLLTN1
+TROLLTN2 TROLLTN2
+TROLLTN3 TROLLTN3
+TROLLTN4 TROLLTN4
+TROLLTN5 TROLLTN5
+TROLLTN6 TROLLTN6
+TROLLTN7 TROLLTN7
+TROLLTN8 TROLLTN8
+TROLLTN9 TROLLTN9
+TROLLTN0 TROLLTN0
+TROLLWN1 TROLLWN1
+TROLLWN2 TROLLWN2
+
+$Random lessermutant/meleer     { MELEE1 MELEE2 }
+$random ZKITrandom { ZKITM1 ZKITM2 }
+$random TROLLTAUNT { TROLLTN1 TROLLTN2 TROLLTN3 TROLLTN4 TROLLTN5 TROLLTN6 TROLLTN7 TROLLTN8 TROLLTN9 TROLLTN0 }
+$random TROLLWIN { TROLLWN1 TROLLWN2 YOUHACK}
+
+XSCOPS01   XSCOPS01
+XSCOPS02   XSCOPS02
+XSCOPS03   XSCOPS03
+XSCOPS04   XSCOPS04
+XSCOPS05   XSCOPS05
+XSCOPP01   XSCOPP01
+XSCOPP02   XSCOPP02
+XSCOPP03   XSCOPP03
+XSPSIREN   XSPSIREN
+HEAVYMUC   HEAVYMUC
+SKEETERM   SKEETERM 
+DSRING     DSRING
+XSDOORLK   XSDOORLK
+XSDTAUNT   XSDTAUNT
+SLSDPG12   SLSDPG12
+SLSDPG34   SLSDPG34
+SLSDPG56   SLSDPG56
+SLSDPG78   SLSDPG78
+SLSDNZ01   SLSDNZ01
+SLSDNZ02   SLSDNZ02
+FOIGKQNDOIWGIHEWHGWBJWHEBJWK   SLSDNZ03
+JUMPNOTE   JUMPNOTE
+SLSD20DS   SLSD20DS
+AZBIRYUZA   AZSND001
+AZCALENDAR   AZSND002
+AZCEREMONIALNIYCENTR   AZSND003
+AZDEREVUSHECHKA   AZSND004
+AZDVORCOVIEINTRIGI   AZSND005
+AZKVARTALREMESLINEKOV   AZSND006
+AZAKVEDUKUPESHERI   AZSND007
+AZSND011   AZSND011
+AZSND012   AZSND012
+AZSND013   AZSND013
+AZSND014   AZSND014
+AZSND015   AZSND015
+CPS_HOTL   CPS_HOTL
+YZSTEP1    YZSTEP1
+YZSTEP2    YZSTEP2
+MGS_WARH   MGS_WARH
+MGSNINJA   MGSNINJA
+SH4JOSEF   SH4JOSEF
+zolt!		DSLTNGTR // Lightning Trap Zap
+lightning!  DSTHLTNG // Lightning Strike
+CT_DRSND   CT_DRSND
+CT_START   CT_START
+PIERO   PIERO
+SNDSPACE   SNDSPACE
+KOROBU   KOROBU
+KTATAKI   KTATAKI
+
+
+$Random XSCOPS    { XSCOPS01 XSCOPS02 XSCOPS03 XSCOPS04 XSCOPS05 }
+$Random XSCOPP    { XSCOPP01 XSCOPP02 XSCOPP03 }
+$limit XSCOPS  0
+$limit XSCOPP  0
+
+$random Zomchainsawpain { yzzpain1 yzzpain2 yzzpain3 }
+$limit Zomchainsawpain 0
+
+KnifeHit DSFEMKN
+
+$RANDOM FEMAPAIN { fem/pain YZNOSND1 YZNOSND1 }
+fem/pain FEMZPAIN
+YZNOSND1       YZNOSND1
+fem/sight FEMZSIT
+fem/death FEMZDHT
+fem/active FEMZACT
+
+
+//Evil Laugh
+
+$random YZLAUGHA { YZLAUGH1 YZLAUGH2 YZLAUGH3 YZLAUGH4 } 
+
+YZLAUGH1 	YZLAUGH1
+YZLAUGH2 	YZLAUGH2
+YZLAUGH3 	YZLAUGH3
+YZLAUGH4 	YZLAUGH4
+
+
+//Radio Bait & Switch| Moorehead rides again
+
+
+//Beats
+
+YZELEC1        YZELEC1
+YZELEC2        YZELEC2
+YZELEC3        YZELEC3
+YZPUMP1        YZPUMP1
+YZPDAUP        YZPDAUP
+YZALARM1       YZALARM1
+YZALARM2       YZALARM2
+YZLTFLI1       YZLTFLI1
+YZTELE1A       YZTELE1A
+yztube         yztube
+yztelout       yztelout
+YZPRAYR1       YZPRAYR1
+YZBADPLC       YZBADPLC
+YZCRY1         YZCRY1
+
+//////////////////////////////////TELEVISION
+
+YZNEWS1        YZNEWS1 
+YZRADPT1       YZRADPT1
+YZRADPT2       YZRADPT2
+YZRADPT3       YZRADPT3
+YZCLUBMZ       YZCLUBMZ
+YZCC3MZ        YZCC3MZ
+YZLAMOUR       YZLAMOUR
+YZVVBFG        YZBFG
+YZVVWELC       YZVVWELC
+YZVVWEL2       YZVVWEL2
+YZSDMZ         YZSDMZ
+YOUHACK        YOUHACK
+
+////////////////////////////////SITE3
+
+YZVVSOUL       YZVVSOUL
+YZVVTABL       YZVVTABL
+YZWATER1       YZWATER1
+YZAMBI1        YZAMBI1
+YZALARM1       YZALARM1
+YZPLASMA       YZPLASMA
+YZPLASM2       YZPLASM2
+YZWIND02       YZWIND02
+YZWIND01       YZWIND01
+YZLETSND       YZLETSND
+YZNOENTR       YZNOENTR
+YZTOILT1       YZTOILT1
+YZXBOSND       YZXBOSND
+YZDRSMKE       YZDRSMKE
+YZANGELF       YZANGELF
+X7KQ9G4J       X7KQ9G4J
+YZGLSSBK       YZGLSSBK
+YZPROBIL       YZPROBIL
+YZFOSIRN       YZFOSIRN
+YZFLUSHS       YZFLUSHS
+YZSOULPK       YZSOULPK
+YZ1MINRE       YZ1MINRE
+YZ2MINRE       YZ2MINRE
+YZ3MINRE       YZ3MINRE
+YZ30SECS       YZ30SECS
+YZCREDIS       YZCREDIS
+YZEVACUS       YZEVACUS
+YZPSYCHS       YZPSYCHS
+YZSMOKES       YZSMOKES
+YZMEATSN       YZMEATSN
+YZDRIP3 	   YZDRIP3
+YZSHUMTV       YZSHUMTV
+YZNOSND1       YZNOSND1
+CC3LOOP        CC3LOOP
+FUCKINLA       FUCKINLA
+YZBALHIT       YZBALHIT
+YZDENIAC       YZDENIAC
+YZREACWR       YZREACWR
+YZFEMDIE       YZFEMDIE
+YZDENIED 	   YZDENIED
+YZRUTABA       YZRUTABA
+YZSOSSNT       YZSOSSNT
+JIQBXIAVEZIGBJITNDHSINKA       D_MARSMU  
+D3DR01OP       D3DR01OP
+D3DR01CL       D3DR01CL
+D3DR02OP       D3DR02OP
+D3DR02CL       D3DR02CL
+D3DR03OP       D3DR03OP
+D3DR03CL       D3DR03CL
+D3DR04OP       D3DR04OP
+D3DR04CL       D3DR04CL
+D3DR05OP       D3DR05OP
+D3DR05CL       D3DR05CL
+
+// Trite
+tritedeath1 dstdth1
+tritedeath2 dstdth2
+tritedeath3 dstdth3
+$random tritedeath { tritedeath1 tritedeath2 tritedeath3 }
+TriteAttack1 dstatk1
+TriteAttack2 dstatk2
+TriteAttack3 dstatk3
+$random triteattack { TriteAttack1 TriteAttack2 TriteAttack3 }
+TriteBite1 dstbit1
+TriteBite2 dstbit2
+$random tritebite { tritebite1 tritebite2 }
+TriteSplat1 dstspl1
+TriteSplat2 dstspl2
+$random tritesplat { tritesplat1 tritesplat2 }
+TriteSee1 dstsit1
+TriteSee2 dstsit2
+TriteSee3 dstsit3
+TriteSee4 dstsit4
+$random TriteSee { tritesee1 tritesee2 tritesee3 tritesee4 }
+TritePain1 dstpn1
+TritePain2 dstpn2
+TritePain3 dstpn3
+TritePain4 dstpn4
+$random TritePain { tritepain1 tritepain2 tritepain3 tritepain4 }
+TriteStep1 dstst1
+TriteStep2 dstst2
+TriteStep3 dstst3
+TriteStep4 dstst4
+$random TriteStep { tritestep1 tritestep2 tritestep3 tritestep4 }
+$limit TriteStep 0
+
+//Sparks -----------------
+CHEL4OK1     CHEL4OK1 
+CHEL4OK2     CHEL4OK2 
+
+
+$Random Tehsparks:p	
+{
+ CHEL4OK1 
+ CHEL4OK2 
+}
+
+YZCUBFIR      YZCUBFIR
+YZCUBLOP      YZCUBLOP
+YZCUBPIK      YZCUBPIK
+YZVVSOUL      YZVVSOUL
+
+
+World/cops1	COPCHSE1
+World/cops2	COPCHSE2
+
+$random bat/hitwall { bat/hitwall1 bat/hitwall2 bat/hitwall3 }
+bat/hitwall1 XSBBAT1
+bat/hitwall2 XSBBAT2
+bat/hitwall3 XSBBAT3
+
+creeperact creep1
+creeperattack creep2
+creeperpain creep3
+creeperdie creep4
+sjasattack		sjasatta
+sjasdeath		sjasdeat
+sjaspain		sjaspain
+sjasact			sjasact
+
+
+// Spiderer
+
+
+SpidererBite1 dstbit1
+SpidererBite2 dstbit2
+$random spidererbite { spidererbite1 spidererbite2 }
+SpidererSplat1 dstspl1
+SpidererSplat2 dstspl2
+$random spiderersplat { spiderersplat1 spiderersplat2 }
+SpidererStep1 dstst1
+SpidererStep2 dstst2
+SpidererStep3 dstst3
+SpidererStep4 dstst4
+$random SpidererStep { spidererstep1 spidererstep2 spidererstep3 spidererstep4 }
+$limit SpidererStep 0
+
+//MUSIC
+MOONRUNNERSTHEME    MOONRUNR
+JONESSTREETBOYSSEQUENCE    JONESSTR
+STRIPCLUB1     XCSTRIP1
+STRIPCLUB2     XCSTRIP2
+JCCONEY     JCCONEY
+CLUBTHEME     XCSNDCLB
+LOADINGLOOP1     LDNLOOP1
+LOADINGLOOP2     LDNLOOP2
+ORPHANSTHEME     ORPHANSM
+TURNBULLTHEME     TURNBULL
+WARRADIO1      XSRADIO1
+WARRADIO2      XSRADIO2
+
+DSSPRY		DSSPRY
+DSSPRYSH	DSSPRYSH
+XSDOGBRK     XSDOGBRK
+XCTRNSND     XCTRNSND
+XSMALLMS     XSMALLMS
+XSAMBINT     XSAMBINT
+XSPOLICE     XSPOLICE
+XSARMIES     XSARMIES
+GLASS_S    	GLASS_S
+GURLOGUN     GURLOGUN
+DISCO79   DISCO79

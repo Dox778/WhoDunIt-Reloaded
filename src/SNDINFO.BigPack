@@ -1,0 +1,115 @@
+
+//=================================================================================================================
+//SOUNDS STUFFS
+//---------------------------------------------------------------------------------------------------------------
+//ENVIROMENTS----------------------------------------------------------------------------------------------------
+
+
+//=================================================================================================================
+//MONSTER 
+//Riclo sounds
+CVOICES CVOICES
+KABOOM KABOOM
+BEEPP5 BEEPP5
+TVON TVON
+CLANG CLANG
+GATEOPEN GATEOPEN
+GATECLOS GATECLOS
+
+//=================================================================================================================
+//WEAPONS
+
+
+//=================================================================================================================
+//LIGHTS
+
+
+//=================================================================================================================
+//SFX
+
+//prepper sounds///////////////////////////
+EVILS1  EVILS1
+EVILS2  EVILS2
+DRAGS   DRAGS
+COINFX  COINFX
+
+//Jigsaw sounds////////////////////////////
+PIANOC PIANOC
+PIANOD PIANOD
+PIANOE PIANOE
+PIANOF PIANOF
+PIANOG PIANOG
+PIANOB PIANOB
+PIANC2 PIANC2
+PIAND2 PIAND2
+PIANE2 PIANE2
+//WDI20-------------------
+eight/eight eight
+amb/peron peron
+amb/jazzy barjazz
+amb/avalon avalon
+amb/fog DARKFOG
+music/JIGFINAL JIGFINAL
+
+$pitchshift amb/peron 0
+$pitchshift amb/jazzy 0
+$pitchshift amb/avalon 0
+$pitchshift amb/fog 0
+
+//Riclo sounds//////////////////////////////
+GLASS5 GLASS5
+GLASS4 GLASS4
+GLASS1 GLASS1
+DSLEVER DSLEVER
+DOORJAM DOORJAM
+XAPOS XAPOS
+FINALS FINALS
+POP POP
+PIASONG1 PIASONG1
+GATEBREK GATEBREK
+D_BBLUE D_BBLUE
+D_DCHASE D_DCHASE
+BEEPP1 BEEPP1
+BEEPP2 BEEPP2
+BEEPP3 BEEPP3
+BEEPP4 BEEPP4
+THUNDD1 THUNDD1
+THUNDD2 THUNDD2
+PIFAIL1 PIFAIL1
+PIFAIL2 PIFAIL2
+PIFAIL3 PIFAIL3
+GETHAP GETHAP
+
+//Francis sounds//////////////////////////////
+UFO UFO
+BUZZ BUZZ
+//=================================================================================================================
+//ITEMS
+
+
+
+
+//Jigsaw
+PRTYTIME PRTYTIME
+VENTBUST VENTBUST
+POWERSW POWERSW
+BUZZER BUZZER
+UNLOCK UNLOCK
+
+
+
+//Abbuw - WDI25:
+DIALUP DIALUP
+CRYSTAL CRYSTAL
+GANDHIII GANDHIII
+MP5FIRE MP5FIRE
+SHITFACE SHITFACE
+jesuschatline JC
+
+
+$ambient 300 jesuschatline point 0.5 continuous 1
+$random VENTWALK {duct1 duct2 duct3 duct4}
+duct1 duct1
+duct2 duct2
+duct3 duct3
+duct4 duct4

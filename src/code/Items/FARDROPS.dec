@@ -1,0 +1,246 @@
+
+Actor Dropper_PoolCueFar : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedCueFar", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_WrenchFar : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedWrenchFar", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_BlueWrenchFar : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedBlueWrenchFar", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_PipeFar : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedPipeFar", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_ShovelFar : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedShovelFar", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_CrossbowFar : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedCrossbowHi", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_BrickFar : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedBrickFar", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_MollyFar : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedMollyFar", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_WhiskeyFar : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedWhiskeyFar", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_NailedPlankFar : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedNailedPlankFar", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_PlankFar : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedPlankFar", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_TwigFar : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedTwigFar", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_FireAxeFar: DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Use:
+		TNT1 A 1 A_FireCustomMissile("DroppedFireAxeFar", 0, 0, 0)
+		Stop
+}}
+
+Actor Dropper_AxeFar: DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Use:
+		TNT1 A 1 A_FireCustomMissile("DroppedAxeFar", 0, 0, 0)
+		Stop
+}}
+
+Actor Dropper_SledgeFar: DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Use:
+		TNT1 A 1 A_FireCustomMissile("DroppedSledgeFar", 0, 0, 0)
+		Stop
+}}
+
+Actor Dropper_ScrewDriverFar : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedScrewDriverFar", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_BaseballBatFar : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedBatFar", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_FlashlightZFar : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedFlashlightZFar", 0, 0, 0)
+	Stop
+ }
+}

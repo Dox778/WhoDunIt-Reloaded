@@ -1,0 +1,2085 @@
+Actor WDIEX01EndingItem : RandomSpawner
+{
+    DropItem "KeyCard_LV7", 255, 3
+    DropItem "DynamiteKey", 255, 2
+    DropItem "FakeSoulCube", 255, 1
+}
+
+ACTOR GreenfallMarker : MapMarker 13811
+{
+   //$Category Marsis_map_ONLY
+  +NOBLOCKMAP
+  +NOGRAVITY
+  +DONTSPLASH
+  +INVISIBLE
+  Scale 0.2
+  States
+  {
+  Spawn:
+    MPK1 A -1
+    Stop
+  }
+}
+
+ACTOR FiredecMarker : MapMarker 13812
+{
+   //$Category Marsis_map_ONLY
+  +NOBLOCKMAP
+  +NOGRAVITY
+  +DONTSPLASH
+  +INVISIBLE
+  Scale 0.2
+  States
+  {
+  Spawn:
+    FFLG FGHIJKLMNOPQ 3
+    loop
+  }
+}	
+
+ACTOR CC3Stalagmite
+{
+  Game Doom
+  Radius 16
+  Height 48
+  +SOLID
+  States
+  {
+  Spawn:
+    CC3L A -1
+    Stop
+  }
+}
+
+Actor StallEX  {
+  //$Category WDI Models
+  //$Sprite TNT1A0
+  //$Title "Stall"
+
+States
+{
+Spawn:
+
+STAL A -1
+stop
+}}
+
+Actor StallEXa  {
+  //$Category WDI Models
+  //$Sprite TNT1A0
+  //$Title "Stall"
+
+States
+{
+Spawn:
+
+STAL A -1
+stop
+}}
+
+Actor StallEXb  {
+  //$Category WDI Models
+  //$Sprite TNT1A0
+  //$Title "Stall"
+
+States
+{
+Spawn:
+
+STAL A -1
+stop
+}}
+
+
+ACTOR Pentagram_Marker : MapMarker 13631
+{
+   //$Category Marsis_map_ONLY
+  +NOBLOCKMAP
+  +NOGRAVITY
+  +DONTSPLASH
+  +INVISIBLE
+  Scale 0.5
+  States
+  {
+  Spawn:
+    PENT A -1
+    Stop
+  }
+}
+
+
+actor Keycard_LV4 : Key 13632
+{
+  //$Category Marsis_map_ONLY
+  Scale 0.15
+  spawnid 86
+  inventory.pickupmessage "\cjPocketed \c[J1]Keycard Level 4"
+  inventory.icon "ARTISAF"
+  +INVENTORY.UNDROPPABLE
+  +FORCEXYBILLBOARD
+  states
+  {
+  Spawn:
+    CRD1 A -1
+    stop
+  }
+}
+
+actor Keycard_LV7 : Key 13633
+{
+  //$Category Marsis_map_ONLY
+  Scale 0.15
+  spawnid 86
+  inventory.pickupmessage "\cjPocketed \c[V4]Keycard Level 7"
+  inventory.icon "ARTISAF"
+  +INVENTORY.UNDROPPABLE
+  +FORCEXYBILLBOARD
+  states
+  {
+  Spawn:
+    CRD2 A -1
+    stop
+  }
+}
+
+actor Dynamitekey: Key 13634
+{
+  //$Category Marsis_map_ONLY
+  Scale 0.7
+  spawnid 86
+  inventory.pickupmessage "Found some dynamite."
+  inventory.icon "ARTISAF"
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    DYNA A -1
+    stop
+  }
+}
+
+
+actor IwillDie : Key 
+{
+  Scale 0.35
+  spawnid 86
+  inventory.pickupmessage "Hihi."
+  inventory.icon "ARTISAF"
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    KEY5 A -1
+    stop
+  }
+}
+
+actor OUTSIDE : Key 
+{
+  Scale 0.35
+  spawnid 86
+  inventory.pickupmessage "Outside."
+  inventory.icon "ARTISAF"
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    KEY5 A -1
+    stop
+  }
+}
+
+actor DarkModeActivator : Key 
+{
+  Scale 0.35
+  spawnid 86
+  inventory.pickupmessage "\n\n\ciAll memos collected."
+  inventory.icon "ARTISAF"
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    KEY5 A -1
+    stop
+  }
+}
+
+ACTOR ChainsawZombie 3202
+{ 
+	//$Category Marsis_map_ONLY
+    Health 170 
+    Radius 20 
+    Height 72 
+    Speed 20 
+    MeleeDamage 1 
+    Painchance 50
+	DamageFactor "FlareEffect", 0.0
+    MONSTER 
+    +FLOORCLIP  
+    SeeSound "Weapons/Sawup" 
+    PainSound "Zomchainsawpain" 
+    MeleeSound "Weapons/Sawfull" 
+    ActiveSound "grunt/active" 
+    States 
+    { 
+    Spawn: 
+        CHZN A 4 A_Look 
+        CHZN A 4 A_PlayWeaponSound("Weapons/Sawready") 
+        CHZN A 4 A_Look 
+        CHZN B 4 A_PlayWeaponSound("Weapons/Sawready") 
+        CHZN B 4 A_Look 
+        CHZN B 4 A_PlayWeaponSound("Weapons/Sawready") 
+        Loop 
+    See: 
+        CHZN A 4 A_Chase 
+        CHZN A 4 A_Chase 
+        CHZN B 0 A_PlayWeaponSound("Weapons/Sawready") 
+        CHZN B 4 A_Chase 
+        CHZN B 4 A_Chase 
+        CHZN C 0 A_PlayWeaponSound("Weapons/Sawready") 
+        CHZN C 4 A_Chase 
+        CHZN C 4 A_Chase 
+        CHZN D 0 A_PlayWeaponSound("Weapons/Sawready") 
+        CHZN D 4 A_Chase 
+        CHZN D 4 A_Chase 
+        CHZN A 0 A_PlayWeaponSound("Weapons/Sawready") 
+        Loop 
+    Melee: 
+        CHZN E 1 A_FaceTarget 
+        CHZN F 3 A_MeleeAttack 
+        Goto See 
+    Pain: 
+        CHZN G 5 
+        CHZN G 3 A_Pain 
+        Goto See 
+    Death: 
+        CHZN A 1 A_PlaySound("yzzomchain/death")
+        CHZN H 5 
+        CHZN I 5 A_Scream 
+        CHZN J 5 A_Fall 
+		BEXP D 5 BRIGHT A_Explode(5,15)
+		BEXP E 4 BRIGHT
+        CHZN KLM 5 
+        CHZN N -1 
+        Stop 
+    XDeath:
+        CHZN O 5
+        CHZN P 5 A_XScream
+        CHZN Q 5 A_Fall
+        CHZN RSTUV 5
+        CHZN W -1
+        Stop
+    Raise: 
+        CHZN NMLKJIH 5 
+        Goto See 
+    } 
+} 
+
+ACTOR FemaleZombie 3203
+{
+	//$Category Marsis_map_ONLY
+  health 220
+  mass 90
+  speed 13
+  Radius 19
+  Height 72
+  painchance 200
+  DamageFactor "FlareEffect", 0.0
+  seesound "fem/sight"
+  painsound "fem/pain"
+  deathsound "fem/death"
+  activesound "fem/active"
+  MONSTER
+  +FLOORCLIP
+  States
+  {
+   Spawn:
+    FSZK AB 10 A_Look
+    loop
+  See:
+    FSZK AABBCCDD 4 A_Chase
+    loop
+  Melee:
+    FSZK E 4 A_FaceTarget
+    FSZK F 8 A_CustomMeleeAttack (random (1, 5) *5, "KnifeHit", "skeleton/swing")
+    FSZK E 4
+    goto See
+  Pain:
+    FSZK G 3
+    FSZK G 3 A_Pain
+    goto See
+  Death:
+    FSZK H 5
+    FSZK I 5 A_Scream
+    FSZK J 5 A_NoBlocking
+    FSZK K 5
+    FSZK L 5
+    FSZK M 5
+    FSZK N -1
+    stop
+  XDeath:
+    FSZK O 5
+    FSZK P 5 A_XScream
+    FSZK Q 5 A_NoBlocking
+    FSZK RSTUV 5
+    FSZK W -1
+    stop
+  Raise:
+    FSZK MLKJIH 5
+    goto See
+  }
+}
+
+actor SND_DevilPrayer 3204
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZPRAYR1", CHAN_BODY, 1.0, 1)
+        stop
+    }
+}
+
+actor SND_EvilLaugh 3205
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZLAUGHA", CHAN_BODY, 1.0, 1)
+        stop
+    }
+}
+
+actor SND_RADIO 3206
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZRADIOA", CHAN_BODY, 0.4, 1)
+        stop
+    }
+}
+
+actor SND_CPUloop1 3207
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZELEC1", CHAN_BODY, 0.9, 1)
+        stop
+    }
+}
+
+
+actor SND_CPUloop2 3208
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZELEC2", CHAN_BODY, 1.2, 1)
+        stop
+    }
+}
+
+
+actor SND_CPUloop3 3209
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZELEC3", CHAN_BODY, 0.5, 1)
+        stop
+    }
+}
+
+actor SND_Machineloop 3210
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZPUMP1", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+Actor SmallRat 3211
+{
+MONSTER
+-ISMONSTER
++ALWAYSRESPAWN
+-TELESTOMP
+-CANPASS
++DONTFALL
++PUSHABLE
++NODROPOFF
+-CANUSEWALLS
+-COUNTKILL
+-CANPUSHWALLS
+health 10
+radius 4
+height 6
+speed 7
+DamageFactor "FlareEffect", 0.0
+activesound "rat/squeak"
+deathsound "rat/die"
+states
+{
+Spawn:
+RATT A 1 A_Chase
+RATT A 8 A_Jump(60, "Walk", "TryAgain")
+loop
+TryAgain:
+RATT B 8 A_Jump(60, "Walk", "Spawn")
+loop
+Walk:
+RATT ABABAB 4 A_Wander
+RATT A 0 A_JumpIfCloser(64, "Scared")
+RATT A 0 A_CheckSight("Spawn")
+loop
+Scared:
+RATT A 1 A_ChangeFlag("FRIGHTENED", 1)
+RATT ABABABAB 3 A_Chase
+RATT A 0 A_CheckSight("Spawn")
+loop
+death:
+RATT A 1 A_PlaySound("rat/die")
+MEAT R 4 A_Burst("RatMeat")
+MEAT QP 4
+MEAT P -1
+stop
+}}
+
+Actor CarcassSittingMarine 3221
+{
+	//$Category Marsis_map_ONLY
++Solid
+Height 32
+Radius 20
+  States
+  {
+  Spawn:
+    SIT2 A -1
+    Stop
+  }
+}
+
+
+actor SND_FlickeringLight1 3212
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZLTFLI1", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+actor SND_Tube 3213
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZTUBE", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+ACTOR MummySoulWDI
+{
+  +NOBLOCKMAP
+  +NOGRAVITY
+  States
+  {
+  Spawn:
+    7MUM QRS 5
+    7MUM TUVW 9
+    Stop
+  }
+}
+Actor QUESTFakeBody1 17411
+{
+  //$Category Marsis_map_ONLY
+  Health 100
+  Radius 16
+  Height 8
+  Mass 700
+  DamageFactor "Default", 45
+  -SOLID
+  +SHOOTABLE
+  -PUSHABLE
+  +SLIDESONWALLS
+  +DONTSPLASH
+  +NORADIUSDMG
+  States
+  {
+    Spawn:
+    DDPL A -1
+    Loop
+	
+	  Pain:
+    DDPL A 3 A_Pain
+    goto See
+	
+  Death:
+    DDPL A  1 A_SpawnItemEx("MummySoulWDI", 0,0,10, 0,0,1)
+	DDPL A  3 A_SpawnItemEx("DoorJet", 10, 4, 28, 0, 0, 0, 0)
+	DDPL A  3 A_SpawnItemEx("DoorJet", 0, 4, 28, 0, 0, 0, 0)
+	DDPL A  3 A_SpawnItemEx("DoorJet", 0, 0, 28, 0, 0, 0, 0)
+	TNT1 A -1
+	Stop
+	
+  }
+}
+
+Actor QUESTFakeBody2 17412
+{
+  //$Category Marsis_map_ONLY
+  Health 300
+  Radius 16
+  Height 8
+  Mass 33000
+  DamageFactor "Default", 45
+  
+  -SOLID
+  +SHOOTABLE
+  -PUSHABLE
+  +SLIDESONWALLS
+  +DONTSPLASH
+  +NORADIUSDMG
+  States
+  {
+    Spawn:
+    DDPL A -1
+    Loop
+	
+	  Pain:
+    DDPL A 3 A_Pain
+    goto See
+	
+  Death:
+    DDPL A  1 A_SpawnItemEx("MummySoulWDI", 0,0,10, 0,0,1)
+	DDPL A  3 A_SpawnItemEx("EasterEgg", 10, 13, 28, 0, 0, 0, 0)
+	DDPL A  -1
+	DDPL A  1 A_Fadeout(0.01)
+	Wait
+	
+  }
+}
+
+Actor QUESTFakeBody3 17413
+{
+  //$Category Marsis_map_ONLY
+  Health 500
+  Radius 16
+  Height 8
+  Mass 700
+  DamageFactor "Default", 45
+  -SOLID
+  +SHOOTABLE
+  -PUSHABLE
+  +SLIDESONWALLS
+  +DONTSPLASH
+  +NORADIUSDMG
+  States
+  {
+    Spawn:
+    DDPL A -1
+    Loop
+	
+	  Pain:
+    DDPL A 3 A_Pain
+    goto See
+	
+  Death:
+    DDPL A 1 A_SpawnItemEx("MummySoulWDI", 0,0,10, 0,0,1)
+	DDPL A 3 A_SpawnItemEx("Keycard_LV4", 10, 13, 28, 0, 0, 0, 0)
+	DDPL A -1
+	DDPL A 1 A_Fadeout(0.01)
+	Wait
+	
+  }
+}
+
+Actor QUESTFakeBody4 17414
+{
+  //$Category Marsis_map_ONLY
+  Health 100
+  Radius 16
+  Height 8
+  Mass 700
+  DamageFactor "Default", 45
+  -SOLID
+  +SHOOTABLE
+  -PUSHABLE
+  +SLIDESONWALLS
+  +DONTSPLASH
+  +NORADIUSDMG
+  States
+  {
+    Spawn:
+    DDPL A -1
+    Loop
+	
+	  Pain:
+    DDPL A 3 A_Pain
+    goto See
+	
+  Death:
+    DDPL A 1 A_SpawnItemEx("MummySoulWDI", 0,0,10, 0,0,1)
+	DDPL A 3 A_SpawnItemEx("Trite", 10, 53, 28, 0, 0, 0, 0)
+	DDPL A 3 A_SpawnItemEx("Trite", 10, 13, 28, 0, 0, 0, 0)
+	DDPL A -1
+	DDPL A 1 A_Fadeout(0.01)
+	Wait
+	
+  }
+}
+
+Actor QUESTFakeBody5 17415
+{
+  //$Category Marsis_map_ONLY
+  Health 200
+  Radius 16
+  Height 8
+  Mass 700
+  DamageFactor "Default", 45
+  -SOLID
+  +SHOOTABLE
+  -PUSHABLE
+  +SLIDESONWALLS
+  +DONTSPLASH
+  +NORADIUSDMG
+  States
+  {
+    Spawn:
+    DDPL A -1
+    Loop
+	
+	  Pain:
+    DDPL A 3 A_Pain
+    goto See
+	
+  Death:
+    DDPL A 1 A_SpawnItemEx("MummySoulWDI", 0,0,10, 0,0,1)
+	DDPL A 3 A_SpawnItemEx("Stimpack", 10, 13, 28, 0, 0, 0, 0)
+	DDPL A -1
+	DDPL A 1 A_Fadeout(0.01)
+	Wait
+	
+  }
+}
+
+// Always spawn
+actor QUESTFAKEBODY_SPAWNER : RandomSpawner 17416
+{
+	//$Category Marsis_map_ONLY
+    DropItem "QUESTFakeBody1" 
+	DropItem "QUESTFakeBody2"
+	DropItem "QUESTFakeBody3"
+	DropItem "QUESTFakeBody4"
+	DropItem "QUESTFakeBody5"
+}
+
+actor YZQUESTKEY1 : Key 
+{
+  Scale 0.3
+  spawnid 86
+  inventory.pickupmessage "\cjPocketed \c[I2]Disc of Ourboros"
+  inventory.icon "ARTISAF"
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    5AR1 A -1
+    stop
+  }
+}
+
+
+actor YZQUESTKEY2 : Key 
+{
+  Scale 0.3
+  spawnid 86
+  inventory.pickupmessage "\cjPocketed \c[J4]Dagger of Melchior"
+  inventory.icon "ARTISAF"
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    5AR2 A -1
+    stop
+  }
+}
+
+
+actor YZQUESTKEY3 : Key 
+{
+  Scale 0.3
+  spawnid 86
+  inventory.pickupmessage "\cjPocketed \c[H4]Amulet of Solomon"
+  inventory.icon "ARTISAF"
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    5AR3 A -1
+    stop
+  }
+}
+
+
+actor YZQUESTKEY4 : Key 
+{
+  Scale 0.3
+  spawnid 86
+  inventory.pickupmessage "\cjPocketed \c[H4]Crest of Mercury"
+  inventory.icon "ARTISAF"
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    5AR4 A -1
+    stop
+  }
+}
+
+actor YZQUESTKEY5 : Key 
+{
+  Scale 0.3
+  spawnid 86
+  inventory.pickupmessage "\cjPocketed \c[M1]Ankh"
+  inventory.icon "ARTISAF"
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    5AR5 A -1
+    stop
+  }
+}
+
+
+
+Actor QuestSittingMarine 3214
+{
+	//$Category Marsis_map_ONLY
++Solid
++SHOOTABLE
+Health 200
+Height 32
+Radius 20
+Mass 900
+  PAINSOUND "PotBits"
+  DEATHSOUND "pot/break" 
+  States
+  {
+  Spawn:
+    SIT2 A -1
+    Stop
+Pain:
+    SIT2 A 3 A_Pain
+    goto See
+
+Death:
+     SIT2 B -1
+SIT2 B 3 A_SpawnItemEx("SoldierArm", 10, 13, 28, 0, 0, 0, 0)
+SIT2 B 3 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 3 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 3 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 3 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 3 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 3 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 3 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 3 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 6 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 6 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 6 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 6 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 6 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 12 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 12 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 12 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 12 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 12 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 24 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 24 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 24 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 56 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 104 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 200 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 200 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B 200 A_CustomMissile("bloody1",10,13,(random(0,254)),2,(random(0,128)))
+SIT2 B -1
+ stop
+  }
+}
+
+actor Bloody1
+{
+  height 8
+  mass 30
+  radius 8
+  damage 0
+  speed 6 
+  attacksound DSSLOP
+  seesound DSSLOP
+  painsound DSSLOP
+  DeathSound DSSLOP
+  activesound DSSLOP
+  projectile
+  +CLIENTSIDEONLY
+  -LowGravity
+  -nogravity
+  +NoTeleport
+  -doombounce
+  States
+  {
+    Spawn:
+      BLOD A -1 
+      loop
+    Death:
+      BLOD  C  600
+      BLOD  DEF 6  
+      stop
+  }
+}
+
+
+actor SoldierArm : Key 3215
+{
+	//$Category Marsis_map_ONLY
+  Scale 0.22
+  spawnid 86
+  inventory.icon "ARTIBAR"
+  +INVENTORY.UNDROPPABLE
+  inventory.pickupmessage "Pocketed soldier arm...\neew, that's disgusting!"
+  states
+  {
+  Spawn:
+    HNDK A -1
+    stop
+  }
+}
+
+actor SND_BoilerWater 3216
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZWATER1", CHAN_BODY, 0.5, 1)
+        stop
+    }
+}
+
+actor SND_BoilerWater2 3217
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZAMBI1", CHAN_BODY, 4.0, 1)
+        stop
+    }
+}
+
+actor SND_ALARM1 3218
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZALARM1", CHAN_BODY, 4.0, 1)
+        stop
+    }
+}
+
+actor SND_WaterDrip 3219
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZDRIP3", CHAN_BODY, 4.0, 1)
+        stop
+    }
+}
+
+actor SND_ALARM2 3220
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZALARM2", CHAN_BODY, 4.0, 1)
+        stop
+    }
+}
+
+actor SND_COLLAIDER 3222
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZPLASMA", CHAN_BODY, 4.0, 1)
+        stop
+    }
+}
+
+actor SND_COLLAIDER2 3223
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZPLASM2", CHAN_BODY, 4.0, 1)
+        stop
+    }
+}
+
+actor SND_strongwind 3224
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZWIND01", CHAN_BODY, 4.0, 1)
+        stop
+    }
+}
+
+actor SND_justwind 3225
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZWIND02", CHAN_BODY, 4.0, 1)
+        stop
+    }
+}
+
+ACTOR MedEquip1 20083 /////////by Dr. Doctor
+{
+  Health 1000000
+  Radius 8
+  Height 64
+  Mass 100
+  scale .8
+  +SOLID
+  +SHOOTABLE
+  +NOBLOOD
+  +PUSHABLE
+  States
+  {
+  Spawn:
+    CTHR A -1
+    Loop
+  Death:
+    TNT1 A 1 
+    stop
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////BAAAAAAAAAAAAALS
+ACTOR BilliardBall_01 3226 
+{
+    Radius 2
+    Scale 0.15
+    Height 4
+	PAINSOUND "YZBALHIT"
+- SOLID
++FORCEXYBILLBOARD
++SHOOTABLE
++PUSHABLE
+MaxStepHeight 2
++NOBLOOD
+MASS 1
+//DamageFactor 0.1
+Health 99999
+  States
+  {
+	Pain:
+	"####" "#" 0 A_FaceTarget
+	"####" "#" 0 ThrustThing(180,10,0,0)
+	"####" "#" 0 A_Jump(256,"Spawn")
+  Spawn:
+    8B01 A -1
+    Loop
+  Death:
+    TNT1 A 1 
+    stop
+  }
+}
+
+ACTOR BilliardBall_02 : BilliardBall_01 3227 
+{
+  States
+  {
+  Spawn:
+    8B02 A -1
+    Loop
+  Death:
+    TNT1 A 1 
+    stop
+  }
+}
+
+ACTOR BilliardBall_03 : BilliardBall_01 3228 
+{
+  States
+  {
+  Spawn:
+    8B03 A -1
+    Loop
+  Death:
+    TNT1 A 1 
+    stop
+  }
+}
+
+ACTOR BilliardBall_04 : BilliardBall_01 3229 
+{
+  States
+  {
+  Spawn:
+    8B04 A -1
+    Loop
+  Death:
+    TNT1 A 1 
+    stop
+  }
+}
+
+ACTOR BilliardBall_05 : BilliardBall_01 3230 
+{
+  States
+  {
+  Spawn:
+    8B05 A -1
+    Loop
+  Death:
+    TNT1 A 1 
+    stop
+  }
+}
+
+ACTOR BilliardBall_06 : BilliardBall_01 3231 
+{
+  States
+  {
+  Spawn:
+    8B06 A -1
+    Loop
+  Death:
+    TNT1 A 1 
+    stop
+  }
+}
+
+ACTOR BilliardBall_07 : BilliardBall_01 3232 
+{
+  States
+  {
+  Spawn:
+    8B07 A -1
+    Loop
+  Death:
+    TNT1 A 1 
+    stop
+  }
+}
+
+ACTOR BilliardBall_08 : BilliardBall_01 3233 
+{
+  States
+  {
+  Spawn:
+    8B08 A -1
+    Loop
+  Death:
+    TNT1 A 1 
+    stop
+  }
+}
+
+ACTOR BilliardBall_09 : BilliardBall_01 3234 
+{
+  States
+  {
+  Spawn:
+    8B09 A -1
+    Loop
+  Death:
+    TNT1 A 1 
+    stop
+  }
+}
+
+ACTOR BilliardBall_10 : BilliardBall_01 3235 
+{
+  States
+  {
+  Spawn:
+    8B10 A -1
+    Loop
+  Death:
+    TNT1 A 1 
+    stop
+  }
+}
+
+ACTOR BilliardBall_11 : BilliardBall_01 3236 
+{
+  States
+  {
+  Spawn:
+    8B11 A -1
+    Loop
+  Death:
+    TNT1 A 1 
+    stop
+  }
+}
+
+ACTOR BilliardBall_12 : BilliardBall_01 3237 
+{
+  States
+  {
+  Spawn:
+    8B12 A -1
+    Loop
+  Death:
+    TNT1 A 1 
+    stop
+  }
+}
+
+ACTOR BilliardBall_13 : BilliardBall_01 3238 
+{
+  States
+  {
+  Spawn:
+    8B13 A -1
+    Loop
+  Death:
+    TNT1 A 1 
+    stop
+  }
+}
+
+ACTOR BilliardBall_14 : BilliardBall_01 3239 
+{
+  States
+  {
+  Spawn:
+    8B14 A -1
+    Loop
+  Death:
+    TNT1 A 1 
+    stop
+  }
+}
+
+ACTOR BilliardBall_15 : BilliardBall_01 3240 
+{
+  States
+  {
+  Spawn:
+    8B15 A -1
+    Loop
+  Death:
+    TNT1 A 1 
+    stop
+  }
+}
+
+ACTOR BilliardBall_16 : BilliardBall_01 3241 
+{
+    
+  States
+  {
+  Spawn:
+    8B16 A -1
+    Loop
+  Death:
+    TNT1 A 1 
+    stop
+  }
+}
+
+
+
+actor DoorJet
+{
+	Radius 1
+	Height 1
+	+CLIENTSIDEONLY
+	+ALLOWCLIENTSPAWN
+	+NOGRAVITY
+	+NOBLOCKMAP
+	+NOINTERACTION
+	states
+	{
+		Spawn:
+			TNT1 A 0
+			TNT1 A 0 A_PlaySound("YZDRSMKE")
+			TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("CoolingSmoke", 0, 0, 0, random(-1, 1), random(-1, 1), random(-1, 1), random(-180,180), 128, 0)
+			stop
+	}
+}
+
+actor CoolingSmoke
+{
+ Radius 6
+ Height 6
+ Speed 7
+ Scale 0.4
+ RenderStyle Add
+ Alpha 0.4
+ Projectile
+ +GHOST
+ +HEXENBOUNCE
+ +THRUGHOST
+ +CORPSE
+ +FORCEXYBILLBOARD
+ +DONTSPLASH
+ +CLIENTSIDEONLY
+ States
+ {
+ Spawn:
+ TNT1 A 0
+ TNT1 A 1 ThrustThingZ(0, Random(0, 2), random(0,1), 1)
+ PUF2 ABCDEFGHIJKLMNOPQRSTUVWXYZ 1
+ PUF3 ABC 1
+ stop
+ }
+}
+
+actor SND_ANGELSOUND 3242
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZANGELF", CHAN_BODY, 11.0, 1)
+        stop
+    }
+}
+
+//Stealth Camo (MGS2 STYLE)
+ACTOR StealthCamouflage : PowerupGiver 3243
+{
+  //$Category Marsis_map_ONLY
+  +INVBAR
+  +FANCYPICKUPSOUND
+  +INVENTORY.UNDROPPABLE
+  +FLOATBOB
+  Inventory.DefMaxAmount
+  Inventory.PickupFlash "PickupFlash"
+  Inventory.MaxAmount 1
+  Inventory.Icon "ARTISTLT"
+   powerup.type "Invisibility"
+  Inventory.PickupSound ""
+  Inventory.PickupMessage "Found a Stealth Camouflage."
+  Inventory.RespawnTics 42000 //20 minutes
+  scale 0.45
+  States
+  {
+  Spawn:
+    STLT A -1
+    Stop
+  }
+}
+
+Actor Pedestal 32444 {
++SOLID
+radius 24
+height 48
+states {
+Spawn:
+YZPD A -1
+loop
+}}
+
+ACTOR Doom3Imp 3245
+{
+  //$Category Marsis_map_ONLY
+  OBITUARY "%o was mutated by imp."
+  HITOBITUARY "%o was dismbowled by imp."
+  Health 240
+  Radius 20
+  Height 56
+  Mass 100
+  Speed 6
+  MeleeDamage 5
+  PainChance 200
+  DamageFactor "FlareEffect", 0.0
+  Bloodcolor "00 10 00"
+  SEESOUND "lessermutant/seer"
+  PAINSOUND "lessermutant/painr"
+  DEATHSOUND "lessermutant/deathr"
+  ACTIVESOUND "lessermutant/activer"
+  ATTACKSOUND "lessermutant/attackr"
+  MONSTER
+  +DontHurtSpecies
+  +FloorClip
+  +NoRadiusDMG
+  states
+  {
+  Spawn:
+    TROO AB 10 A_Look
+    Loop
+  See:
+    TROO AABBCCDD 3 A_Chase
+    Loop
+  Melee:
+    TROO E 6 A_FaceTarget
+    TROO E 0 A_PlaySound("lessermutant/meleer")
+    TROO F 6 A_MeleeAttack
+    Goto See
+  Missile:
+    TROO E 0 A_Jump(64,4)
+    TROO F 8 A_FaceTarget
+    TROO E 6 A_CustomMissile("AcidBall",25,5,0,0)
+    Goto See
+      TROO E 8 A_FaceTarget
+  TROO E 0 A_PlaySound("lessermutant/attackr")
+  TROO E 0 A_Recoil(-18)
+  TROO E 0 ThrustThingZ(0, 24, 0, 0)
+  TROO FFFFFF 3 A_CustomBulletAttack (4, 2, 1, 1, "TriteHit", 32)
+  TROO E 4
+Goto See
+	TROO EF 8 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(95,-95),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(90,-90),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(85,-85),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(80,-80),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(75,-75),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(70,-70),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(65,-65),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(60,-60),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(55,-55),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(50,-50),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(45,-45),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(40,-40),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(35,-35),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(30,-30),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(25,-25),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(20,-20),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(15,-15),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(10,-10),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(5,-5),0)
+    TROO F 0 A_FaceTarget
+    TROO G 4 A_CustomMissile("MiniAcidBall",30,0,Random(0,0),0)
+    TROO F 0 A_FaceTarget
+    Goto See
+  Pain:
+    TROO H 2
+    TROO H 2 A_Pain
+    Goto See
+  Death:
+    TROO I 8 A_Scream
+    TROO J 0 A_FaceTarget
+    TROO K 6 A_NoBlocking
+    TROO L 6
+    TROO M -1
+    Stop
+  Raise:
+    TROO MLK 8
+    TROO JI 6
+    Goto See
+  }
+}
+
+ACTOR AcidBall
+{
+  Radius 6
+  Scale 0.1
+  Height 8
+  Speed 10
+  Damage 2
+  PoisonDamage 15
+  RENDERSTYLE Add
+  Alpha 0.75
+  SEESOUND "lessermutant/projectiler"
+  DEATHSOUND "imp/shotx"
+  PROJECTILE
+  +Randomize
+  +DontHurtSpecies
+  Decal DoomImpScorch
+  states
+  {
+  Spawn:
+    MTIF A 4 BRIGHT A_SpawnItem("AcidBallMushroom",0,10,0,0)
+    MTIF B 4 BRIGHT A_BishopMissileWeave
+    Loop
+  Death:
+    MTIF C 6 BRIGHT
+    MTIF DE 6 BRIGHT
+    Stop
+  }
+}
+
+ACTOR AcidBallMushroom
+{
+  Radius 6
+  Height 4
+  Speed 12
+  Damage 1
+  PoisonDamage 1
+  RENDERSTYLE Add
+  Alpha 0.40
+  PROJECTILE
+  +DontHurtSpecies
+  states
+  {
+  Spawn:
+    MFMP AB 4 BRIGHT
+    Goto Death
+  Death:
+    MFMP CD 4 BRIGHT
+    Stop
+  }
+}
+
+ACTOR MiniAcidBall
+{
+  Radius 3
+  Scale 0.05
+  Height 4
+  Speed 20
+  Damage 1
+  PoisonDamage 10
+  RENDERSTYLE Add
+  Alpha 0.75
+  SEESOUND "lessermutant/projectiler"
+  DEATHSOUND "imp/shotx"
+  PROJECTILE
+  +Ripper
+  +Randomize
+  +DontHurtSpecies
+  Decal Bulletchip
+  states
+  {
+  Spawn:
+    MTIF A 4 BRIGHT A_BishopMissileWeave
+    MTIF B 4 BRIGHT A_BishopMissileWeave
+    Loop
+  Death:
+    MTIF C 6 BRIGHT
+    MTIF DE 6 BRIGHT
+    Stop
+  }
+}
+
+ACTOR MutantArm1
+{
+	Radius 8
+	Height 8
+	Speed 8
+	+DOOMBOUNCE
+	+DROPOFF
+	+Missile
+      States
+	{
+	Spawn:
+         MAR1 ABCDABCD 2
+         Loop
+	Death:
+	 MAR1 E -1
+	 Loop
+	}
+}
+
+ACTOR MutantArm2
+{
+	Radius 8
+	Height 8
+	Speed 8
+	+DOOMBOUNCE
+	+DROPOFF
+	+Missile
+      States
+	{
+	Spawn:
+         MAR2 ABCDABCD 2
+         Loop
+	Death:
+	 MAR2 E -1
+	 Loop
+	}
+}
+
+
+
+actor MURD_secretpoint 3246
+{
+- SOLID
++NOBLOCKMAP
++NOGRAVITY
++CLIENTSIDEONLY
+Radius 2
+Height 2
+Renderstyle Add
+Alpha 0.25
+States
+{
+Spawn:
+YZSH A 1 BRIGHT
+loop
+}
+}
+
+
+
+actor Trite 17121 ////////////////////from Shadow Mavericks
+{
+  //$Category Marsis_map_ONLY
+  Monster
+  Radius 12
+  Height 16
+  Health 10
+  SpawnID 251
+  Scale 0.4
+  Damage 2
+  PoisonDamage 3
+  Speed 10
+  Painchance 255
+  DamageFactor "FlareEffect", 0.0
+  hitobituary "Someone didn't pay attention."
+  obituary "'"
+  Gravity 0.7
+  DamageType "Trite"
+  DamageFactor "Trite", 0
+  Bloodcolor "00 FF 00"
+  Seesound "tritesee"
+  Deathsound "tritedeath"
+  PainSound "tritepain"
+  MinMissileChance 116
+  MaxTargetRange 128
+  +DROPOFF
+  +LOOKALLAROUND
+  States
+  {
+  Spawn:
+  TRIT A 10 A_Look
+  loop
+  See:
+  TRIT ABCD 3 A_Chase
+  TRIT A 0 A_PlaySound("TriteStep")
+  loop
+  Missile:
+  TRIT E 8 A_FaceTarget
+  TRIT E 0 A_PlaySound("triteattack")
+  TRIT E 0 A_Recoil(-18)
+  TRIT E 0 ThrustThingZ(0, 4, 0, 0)
+  TRIT FFFFFF 3 A_CustomBulletAttack (4, 1, 1, 1, "TriteHit", 32)
+  TRIT E 4
+  goto See
+  Pain:
+  TRIT E 2
+  TRIT F 2 A_Pain
+  goto See
+  Death:
+  TRIT G 0 A_Scream
+  TRIT G 0 A_Fall
+  TRIT GHIJ 4
+  TRIT J -1
+  stop
+
+  Disabled:
+   TNT1 A 0
+   TNT1 A 0 A_JumpIfHealthLower(1, "Death")
+   TNT1 A 1 A_ChangeFlag("SOLID", 0)
+   TNT1 A 1 A_ChangeFlag("SHOOTABLE", 0)
+   TNT1 A 1 A_SetTranslucent(0.0, 0)
+   TNT1 A -1
+   loop
+
+  Enabled:
+   TNT1 A 0
+   TNT1 A 0 A_JumpIfHealthLower(1, "Death")
+   TNT1 A 1 A_ChangeFlag("SOLID", 1)
+   TNT1 A 1 A_ChangeFlag("SHOOTABLE", 1)
+   TNT1 A 1 A_SetTranslucent(1.0, 0)
+   goto Spawn
+  }
+}
+
+actor TriteHit : BulletPuff
+{
+ DamageType "Trite"
+ PoisonDamage 2
+ +BLOODLESSIMPACT
+ +NOBLOOD
+ +PUFFONACTORS
+ -BLOODSPLATTER
+ States
+ {
+ Spawn:
+  TNT1 A 0
+  TNT1 A 1 A_PlaySound("TriteBite")
+  stop
+ }
+}
+
+ACTOR SparkEffectOnce // From LegacyOfSuffering
+{
+Radius 2
+Height 2
+Scale 0.15
+RenderStyle Add
+Alpha 0.8
+
++CLIENTSIDEONLY
++NOGRAVITY
++DORMANT 
++FORCEXYBILLBOARD
+renderstyle add
++BRIGHT
+States
+ {
+ Spawn:
+ NULL A 1 NODELAY A_PlaySound("Tehsparks:p")
+ NULL A 1 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 0 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 1 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 0 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ LEXP A 1 BRIGHT A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 0 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 1 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 0 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 1 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 0 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ LEXP A 1 BRIGHT
+ stop
+ }
+}
+
+ACTOR SparkEffect 6630 // From LegacyOfSuffering
+{
+SpawnID 101
+Radius 2
+Height 2
+Scale 0.15
+RenderStyle Add
+Alpha 0.8
+
++CLIENTSIDEONLY
++NOGRAVITY
++DORMANT 
++FORCEXYBILLBOARD
+renderstyle add
++BRIGHT
+States
+ {
+ Spawn:
+ LEXP A 1 BRIGHT
+ NULL A 15
+ NULL A 15 A_Jump(50,"smallsparky")
+ NULL A 15 A_Jump(50,"smallsparky")
+ NULL A 15 A_Jump(50,"smallsparky")
+ NULL A 15 A_Jump(50,"smallsparky")
+ NULL A 15 A_Jump(50,"smallsparky")
+	
+ smallsparky:
+ NULL A 1 A_PlaySound("Tehsparks:p")
+ NULL A 1 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 0 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 1 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 0 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ LEXP A 1 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 0 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 1 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 0 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 1 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 0 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ Goto Spawn
+ }
+}
+
+ACTOR TehSpark
+{
+Height 2
+Radius 2
+Speed 3
+Scale .01
+
+PROJECTILE
++CLIENTSIDEONLY
++NONSHOOTABLE
++DONTSPLASH
+-ACTIVATEIMPACT
+-NOGRAVITY
+-NOBLOCKMAP
+renderstyle add
++FORCEXYBILLBOARD
++BRIGHT
+States
+ {
+ Spawn:
+ BPUF ABCD 1 BRIGHT
+ NULL A 0 A_Jump(75,"Death")
+ Loop
+	  
+ Death:
+ BPUF AAAAA 1 BRIGHT A_FadeOut
+ Stop
+ }
+}
+
+ACTOR SparkEffect(nosound) 3251
+{
+SpawnID 101
+Radius 2
+Height 2
+Scale 0.15
+RenderStyle Add
+Alpha 0.5
+
++CLIENTSIDEONLY
++NOGRAVITY
++DORMANT 
+renderstyle add
++FORCEXYBILLBOARD
++BRIGHT
+States
+ {
+ Spawn:
+ LEXP A 1 BRIGHT
+ NULL A 15
+ NULL A 15 A_Jump(50,"smallsparky2")
+ NULL A 15 A_Jump(50,"smallsparky2")
+ NULL A 15 A_Jump(50,"smallsparky2")
+ NULL A 15 A_Jump(50,"smallsparky2")
+ NULL A 15 A_Jump(50,"smallsparky2")
+	
+ smallsparky2:
+ NULL A 1 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 0 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 1 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 0 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 1 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 0 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 1 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 0 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 1 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ NULL A 0 A_CustomMissile ("TehSpark",0.0,0,Random(-90,90),2,Random(100,200))
+ Goto Spawn
+ }
+}
+
+actor SND_MEATSND 3254
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZMEATSN", CHAN_BODY, 1.0, 1)
+        stop
+    }
+}
+
+//CatEyes BRIGHTNESS
+ACTOR CatEyes : PowerupGiver 
+{
+  //$Category Marsis_map_ONLY
+  +INVBAR
+  +FANCYPICKUPSOUND
+  +INVENTORY.UNDROPPABLE
+  Inventory.DefMaxAmount
+  Inventory.PickupFlash "PickupFlash"
+  Inventory.MaxAmount 1
+  Inventory.Icon "ARTICATY"
+   powerup.type "LightAmp"
+  Inventory.PickupSound ""
+  Inventory.PickupMessage "Found a Stealth Camouflage."
+  Inventory.RespawnTics 42000 //20 minutes
+  scale 0.45
+  States
+  {
+  Spawn:
+    CATY A -1
+    Stop
+  }
+}
+
+actor SND_TVNOIZZ 32577
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("YZSHUMTV", CHAN_BODY, 1.0, 1)
+        stop
+    }
+}
+
+
+actor REDLIGHTPANDEMONIUM 3259
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        NULL A -1
+        stop
+    }
+}
+
+actor SND_CC3LOOP 3260
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("CC3LOOP", CHAN_BODY, 1.0, 1)
+        stop
+    }
+}
+
+actor SND_SPACE 3261
+{
+	//$Category Marsis_map_ONLY
+    +NOINTERACTION
+    +CLIENTSIDEONLY
+   
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("SNDSPACE", CHAN_BODY, 1.0, 1)
+        stop
+    }
+}
+
+actor Fish1 24221
+{
+  radius 3
+  height 6
+  speed 4
+  scale 0.2
+  -SOLID
+  +CANPASS
+  +FLOAT
+  +FLOATBOB
+  +NOGRAVITY
+  +FORCEXYBILLBOARD
+  
+  +NODROPOFF
+  +THRUACTORS
+  MaxStepHeight 4
+  MaxDropOffHeight 4
+  states
+  {
+  Spawn:
+    FSH1 A 2 A_Wander
+	loop
+  }
+}
+
+actor Fish1Small : Fish1 24222
+{
+  radius 2
+  height 4
+  speed 2
+  scale 0.15
+  states
+  {
+  Spawn:
+    FSH1 A 2 A_Wander
+	loop
+  }
+}
+
+actor Fish2 : Fish1 24223
+{
+  states
+  {
+  Spawn:
+    FSH2 A 2 A_Wander
+	loop
+  }
+}
+
+actor Fish3 : Fish1 24224
+{
+  states
+  {
+  Spawn:
+    FSH3 A 2 A_Wander
+	loop
+  }
+}
+
+actor Fish4Small : Fish1Small 24225
+{
+  speed 4
+  states
+  {
+  Spawn:
+    FSH4 A 2 A_Wander
+	loop
+  }
+}
+
+actor SND_LEVELMUSIC 26185
+{
+	//$Category Marsis_map_ONLY
+	+NOINTERACTION
+    +CLIENTSIDEONLY
+    States
+    {
+      Spawn:
+        TNT1 A 0
+        TNT1 A -1 A_PlaySound("JIQBXIAVEZIGBJITNDHSINKA", CHAN_BODY, 24.0, 1)
+        stop
+    }
+}
+
+actor HujKeySpawner : RandomSpawner 19914 //////////////////ULTIMATE WDI03 KEY FIX
+{
+    DropItem "HujKey" 128 1
+
+	//DropItem "AnimalSpawner"  2
+}
+
+actor HujKey : Key 19915
+{
+  Scale 0.35
+  inventory.pickupmessage "\cjPocketed the \c[J7]Bar Safe key."
+  inventory.icon "ARTISAF"
+  +INVENTORY.UNDROPPABLE
+  Inventory.PickupSound "Pickup/Key"
+  states
+  {
+  Spawn:
+    KEY5 A -1
+    stop
+  }
+}
+
+actor DunHavCub : Key 
+{
+  +INVENTORY.UNDROPPABLE
+}

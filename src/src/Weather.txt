@@ -1,0 +1,137 @@
+#library "Weather"
+#include "zcommon.acs"
+
+str RDROP[9] = { "RDROP0", "RDROP1", "RDROP2", "RDROP3", "RDROP4", "RDROP5", "RDROP6", "RDROP7", "RDROP8" };
+
+script "Rainy" OPEN CLIENTSIDE
+{
+int currLevelNum = GetLevelInfo(LevelInfo_LevelNum);
+while(true)
+    {
+	Int RSC = random(1,80); //rain splash chance
+	int cameraTID = CheckPlayerCamera( ConsolePlayerNumber( )); //idk? Kaminsky's idea
+	
+	SetActivatorToPlayer( ConsolePlayerNumber( ) );
+    if(GetCVAR("WDI_rain") == false || GetCVAR("WDI_Clientrain") == false)
+		{
+		Delay(105);
+		}
+    else
+		{
+		If((currLevelNum == 13)||(currLevelNum == 14)||(currLevelNum == 24))
+			{
+				if(GetActorPitch(cameraTID) < -0.12 && CheckActorCeilingTexture(cameraTID, "F_SKY1") && RSC < 3*GetCVAR("WDI_Wpower2"))
+				{
+				setfont("RNDRE10");	
+				hudmessage(s:"a"; HUDMSG_FADEOUT|HUDMSG_LAYER_UNDERHUD|HUDMSG_NOTWITHFULLMAP, 0, CR_UNTRANSLATED, random(-0.90, 0.90), random(-0.80, 1.60), random(1.5, 3.0), random(1.0, 2.0));
+				}
+			SpawnWeather(cameraTID,1);
+			if(GetCVAR("WDI_WPower2") == 1) { Delay(5); }
+            }
+        else
+			{
+				if(GetActorPitch(cameraTID) < -0.12 && CheckActorCeilingTexture(cameraTID, "F_SKY1") && RSC < 2*GetCVAR("WDI_Wpower"))
+				{
+				PlaySound(cameraTID,"RainScreen",0);
+				setfont(RDROP[random(0,8)]);	
+				hudmessage(s:"a"; HUDMSG_FADEOUT|HUDMSG_LAYER_UNDERHUD|HUDMSG_NOTWITHFULLMAP, 0, CR_UNTRANSLATED, random(-0.90, 0.90), random(-0.80, 1.60), random(1.5, 3.0), random(1.0, 2.0));
+				}
+				if(RSC == 9)
+				{
+				PlaySound(cameraTID,"DistantThunder",0);
+				}	
+			SpawnWeather(cameraTID, 0);
+			}
+		}
+	SetActivator( 0 );
+	Delay(1);
+    }
+}
+
+function void SpawnWeather(int tid, int bSpawnSnow )
+{
+    str prefix;
+    str cvarName;
+    str className;
+	//int cameraTID = CheckPlayerCamera( ConsolePlayerNumber( )); //idk? Kaminsky's idea
+    if ( bSpawnSnow == 1 )
+    {
+        prefix = "Snow";
+        cvarName = "WDI_Wpower2";
+    }
+    else
+    {
+        prefix = "Rain";
+        cvarName = "WDI_Wpower";
+    }
+
+    switch ( GetCVar( cvarName ))
+    {
+        case 1: className = "SpawnerLowest"; break;
+        case 2: className = "SpawnerLow"; break;
+        case 4: className = "SpawnerHigh"; break;
+        case 5: className = "SpawnerHighest"; break;
+        case 6: className = "SpawnerSilly"; break;
+        case 7: className = "SpawnerWtf"; break;
+        case 8: className = "SpawnerOhMyGod"; break;
+        default: className = "Spawner"; break;
+    }
+
+    className = StrParam( s:prefix, s:className );
+//	print(d:tid);
+    SpawnSpotFacing( className, tid );
+}
+
+
+script "StartRain" (void) //so it can easily be turned into a bind for Danny
+{
+  if(GetCVAR("WDI_rain") == false)
+	{
+	SetCVAR("WDI_rain",true);
+	}
+  else
+	{
+	SetCVAR("WDI_rain",false);
+	}
+}
+
+script "SkyChecking" (void) NET
+{
+if (CheckActorCeilingTexture(0, "F_SKY1"))
+{
+SetResultValue(1);
+}
+else
+{
+SetResultValue(0);
+}
+}
+
+script "RandomRain" open
+{
+	If((GetLevelInfo(LevelInfo_LevelNum) == 4)||(GetLevelInfo(LevelInfo_LevelNum) == 6)||(GetLevelInfo(LevelInfo_LevelNum) == 9)||(GetLevelInfo(LevelInfo_LevelNum) == 11)||(GetLevelInfo(LevelInfo_LevelNum) == 16)||(GetLevelInfo(LevelInfo_LevelNum) == 21)||(GetLevelInfo(LevelInfo_LevelNum) == 25)||(GetLevelInfo(LevelInfo_LevelNum) == 31))
+		{
+		SetCVAR("WDI_rain",0);
+		Terminate;
+		}
+	while(true)
+    {
+	SetCVAR("WDI_rain",random(0,1));
+	Delay(35*getCVAR("WDI_WTimer"));
+	}
+}
+
+Script "FogStart" (void)
+{
+	Sector_SetFade(171, 30, 30, 30);
+	Delay(2);
+	terminate;
+
+}
+Script "FogStop" (void)
+{
+	Sector_SetFade(171, 0, 0, 0);
+	Delay(2);
+	terminate;
+
+}

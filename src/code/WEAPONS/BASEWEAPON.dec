@@ -1,0 +1,208 @@
+////////////////////////////////////////////////////////////////////////////////////////////////
+// BASE WEAPON ACTORS
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+ACTOR Wdi_BaseWeapon: Weapon
+{
+	Radius 20
+	Height 12
+	Inventory.PickupMessage "Found a... default weapon? Huh?"
+	Weapon.SelectionOrder 2200
+	Weapon.Kickback 400
+	+INVENTORY.UNDROPPABLE
+	+WEAPON.NOAUTOAIM
+	+FORCEXYBILLBOARD
+	+WEAPON.MELEEWEAPON
+	+WEAPON.NOAUTOFIRE
+	-INVENTORY.INTERHUBSTRIP
+	+WEAPON.ALT_AMMO_OPTIONAL
+	+WEAPON.AMMO_OPTIONAL
+	Weapon.BobRangeX 1.0
+	Weapon.BobRangeY 0.6
+	Weapon.BobSpeed 1.8
+	Weapon.BobStyle InverseSmooth
+	States
+	{
+	Spawn:
+		PLA5 A -1
+		stop
+	Select:
+		TNT1 A 6
+		TNT1 AAAAAAAAAAAAAAA 0 A_Raise
+		goto SelectAnim
+	SelectAnim:
+		"####" "#" 1 offset(71,156)
+		"####" "#" 1 offset(62,127)
+		"####" "#" 1 offset(52,106)
+		"####" "#" 1 offset(44,88)
+		"####" "#" 1 offset(36,76)
+		"####" "#" 1 offset(28,64)
+		"####" "#" 1 offset(20,54)
+		"####" "#" 1 offset(14,45)
+		"####" "#" 1 offset(8,40)
+		"####" "#" 1 offset(4,36)
+		"####" "#" 1 offset(1,33)
+		"####" "#" 0 A_Jump(255,"Ready")
+		"####" "#" 0 A_Jump(255,"Ready")
+		goto Ready
+	Deselect:	
+		"####" "#" 1 offset(-1,33)
+		"####" "#" 1 offset(-4,36)
+		"####" "#" 1 offset(-8,40)
+		"####" "#" 1 offset(-14,45)
+		"####" "#" 1 offset(-20,54)
+		"####" "#" 1 offset(-28,64)
+		"####" "#" 1 offset(-36,76)
+		"####" "#" 1 offset(-44,88)
+		"####" "#" 1 offset(-52,106)
+		"####" "#" 1 offset(-62,127)
+		"####" "#" 1 offset(-71,156)
+		TNT1 A 0 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1 A_Lower
+		wait
+	Ready:
+		TNT1 A 1
+		loop
+	Fire:
+		TNT1 A 1
+		goto Ready
+		
+	
+	WeaponDrop:
+	Zoom:
+		"####" "#" 1 offset(3,34) A_JumpIfInventory("ThrowFar",1,"ZoomFar")
+		"####" "#" 1 offset(7,38) 
+		"####" "#" 1 offset(15,50)
+		"####" "#" 1 offset(27,76)
+		"####" "#" 1 offset(40,94)
+		"####" "#" 1 offset(52,112)
+		TNT1 A 2
+		TNT1 A 0 A_TakeInventory("SprayCanOnce",1)
+        TNT1 A 0 A_TakeInventory("PistolOnce",1)
+        TNT1 A 0 A_TakeInventory("M1Raised",1)
+        TNT1 A 0 A_TakeInventory("CrossbowOnce",1)
+        TNT1 A 0 A_TakeInventory("Flicked",999)
+		TNT1 A 0 A_TakeInventory("MolotovLit",1)
+        TNT1 A 0 A_TakeInventory("ChainsawOnce",1)
+		TNT1 A 0 A_TakeInventory("PipeSeq",999)
+		TNT1 A 0 A_TakeInventory("WDIFakeReload",1)
+        TNT1 A 0 A_TakeInventory("IsDropping",1)
+		TNT1 A 0 A_TakeInventory("SawOn",1) 
+		TNT1 A 0 A_TakeInventory("Stained",1)
+		TNT1 A 0 A_TakeInventory("BottleDurability",10)
+		TNT1 A 0 A_GiveInventory("ThrowFar",1)
+		TNT1 A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_NOFIRE)
+		TNT1 A 0 A_TakeInventory("ThrowFar",1)
+		NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+		NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		TNT1 A 0 ACS_NamedExecuteAlways("WDINewActivateDrop",0,0,0,0)
+		TNT1 A 2
+		TNT1 A 0 A_Jump(256,"Ready")
+		Goto Ready
+	ZoomFar:
+		TNT1 A 0 A_TakeInventory("ThrowFar",1)
+		NULL A 0 A_GiveInventory("DropAnimWeaponFar",1)
+		NULL A 0 A_SelectWeapon("DropAnimWeaponFar")
+		TNT1 A 0 ACS_NamedExecuteAlways("WDIActivateDropFar",0,0,0,0)
+		TNT1 A 2
+		TNT1 A 0 A_Jump(256,"Ready")
+		Goto Ready	
+	
+	FireHands: //Death anim lol
+		PDED NO 1
+		PDED BDCDCBDCDACBCDABDB 1
+		PDED EFG 1
+		PDED HIJKLL 1 
+		PDED M -1
+		wait
+	StopFlash:
+		TNT1 A 1
+		stop
+	}
+}
+
+actor BaseMeleePuff
+{
+  DamageType "friendlymelee"
+  activesound "none" //swoosh sound if it doesnt hit anything
+  attacksound "none" //hits the wall
+  seesound "none" //hits a shootable actor
+  RenderStyle Add
+  +NOBLOCKMAP
+  +NOGRAVITY
+  +PUFFONACTORS
+  +PUFFGETSOWNER
+ // +CLIENTSIDEONLY
+  +NOINTERACTION
+ // +THRUGHOST
+  Species "IgnoreDecorations"
+  +THRUSPECIES
+  Radius 1
+  Height 2
+  -SOLID
+  +THRUACTORS
+  +ALLOWPARTICLES
+ // +ALWAYSPUFF
+  states
+  {
+  Spawn: //hit a non-bleeding actor
+	TNT1 A 0 NODELAY //A_Print("spawn state")
+	EXPL AAAA 0 A_CustomMissile ("MeleeSmoke", 0, 0, random (160, -160), 2, random (0, 360))
+	TNT1 A 1
+//	TNT1 A 4 A_Quake(8,12,0,40,"none")
+     Stop
+  Melee: //entered when attacked via melee (like A_CustomPunch) //replaces spawn
+  	TNT1 A 1 //A_Print("Melee state")
+     Stop
+  XDeath: //hit a bleeding actor
+	TNT1 A 1 A_Jump(210,"null")
+  	TNT1 A 1 A_GiveToTarget("Stained",1)//A_Print("xded state")
+     Stop
+  Crash: //hit the wall
+	TNT1 A 0 //A_Print("crash state")
+	EXPL AAAA 0 A_CustomMissile ("MeleeSmoke", 0, 0, random (160, -160), 2, random (0, 360))
+//	TNT1 A 4 A_Quake(8,12,0,40,"none")
+    Stop
+  }
+}
+
+ACTOR Wdi_BaseDroppedWeapon
+{
+	PROJECTILE
+	-NOGRAVITY
+	Radius 16
+	Height 8
+	Speed 10
+	Scale 0.5
+	DeathSound "dsempty"
+	BounceSound "bat/hitwall"
+	Bouncetype Doom
+	BounceFactor 0.3
+	//BounceCount 2
+	+FORCEXYBILLBOARD
+	Damage (4)
+	DamageType "friendlymelee"
+	+EXPLODEONWATER
+	+SKYEXPLODE
+	//+THRUGHOST
+	States
+	{
+	Spawn:
+		PLAY A 1
+		Loop
+	Death:
+		PLAY A 35
+		PLAY A 1 A_SpawnItem("Innocent",0,0,0,0)
+		Stop
+	}
+}
+ACTOR Wdi_BaseDroppedWeaponFar : Wdi_BaseDroppedWeapon
+{
+	Speed 30
+	BounceFactor 0.12//0.2
+	WallBounceFactor 0.3
+	Damage (8)
+	
+}

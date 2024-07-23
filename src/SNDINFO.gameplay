@@ -1,0 +1,22 @@
+//================================================================
+//================================================
+//================================
+//hello
+
+//Gamemode sounds
+Game/MurdererChosen	UMURDER
+Game/CountStart		TIMENOTE
+
+$random DeathNote		{Game/DeathNote1 Game/DeathNote2 Game/DeathNote3 Game/DeathNote4}
+Game/DeathNote1		DEATHKE1
+Game/DeathNote2		DEATHKE2
+Game/DeathNote3		DEATHKE3
+Game/DeathNote4		DEATHKE4
+
+
+
+
+
+
+
+

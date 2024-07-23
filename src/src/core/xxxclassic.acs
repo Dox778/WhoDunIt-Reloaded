@@ -1,0 +1,775 @@
+/***************************************************************************
+============================================================================
+
+
+                                                                                                              '#'
+                                                                                                              @@@
+                                                                                                              +@@
+                                    ;                                                                         @@.
+              @        .#       #: +'                          '@#@@@;+,`                                     @@@
+             @@.       @`       @  .@                           @@     ;@@@@`                                 @@@
+              @.       +@       @  .@                           @'         #@@                              ..`@@..
+              @@       @@`     .@   @                           @@          .@@`                             '@@@'
+              @@       ;@@     #    @                           +@            @@                              @@@
+              `@      + @@     @    @                           @@            .@.                             #@#   ;@
+               @      @ `@     @    @                           #@             @#                             #@@   @@
+               #@     #  @`    ;    @                           `@             @@                             @@@.  ++
+               .@    ,.  +@   ;     @  +';       +@@,           ;.             @@  `#    ,'   ' .;#;          @@@  .#@`.'
+                @+   #    @   @     @@@+@@@    #'   @#          .@             @:  @@    @+  .@+ : @#         @@@  .@#`#`
+                #@   @    @'  @     @     @   @.     @+         `@            :@   @#    @+   @     @         @@@   '#
+                 @   #    #@ ,.     @     @  .@      @@         .@            @,   @@    @:   +     ;         `@@   :'
+                 @; +     `@ @      @     @  @+      #@         .@           .@    #;    +;   @     ,         #;@   ::
+                 #@ @      @;@      @    `@  ;@      @.         `@           @:    @'    @.   @     :         +;#   ;:
+                 :@ @      @@@      @     @  `@`    .@           @          @.     #+   '@#   @     @         ;'.   ;,  '
+                  @@+      +@@      @    #@   `@@@+@`            @        ;@        @@;@`',   @     ;         ,:'   ,'+,
+                  @@`       @;                                  .@      .@'                                   ,;.
+                   @.       @;                                  ;@    #@`                                     ,.'
+                   @        ,                                  ;@@@@#,                                        `+:
+                                                                                                              ``.
+                                                                                                               ``
+                                                                                                                `
+                                                                                                                `
+
+Classic Mode Plugin
+
+V4.0 Rigorously Re-Written by Theshooter7 (again)
+
+============================================================================
+***************************************************************************/
+
+#library "classic"
+
+#include "ZCommon.acs"
+//functions,vars
+#Import "redrum.acs"
+//sublibrary
+#include "p_game_generic.acs"
+#include "p_Health.acs"
+#include "p_penalties.acs"
+#include "p_client.acs"
+#include "p_extern.acs"
+#include "m_antighost.acs"
+
+int x, y, z;
+
+script 400 open //This script handles running the game mode progression, mostly using an event-driven system, though not entirely, as the progression cannot go backwards.
+{
+	if(GameType() == GAME_TITLE_MAP) terminate;	// don't run ON the titlemap
+	/*
+	if(GetCVar("wdi_enable_antighost") <= 0)
+	{
+		ConsoleCommand("set wdi_enable_antighost 0");
+		ConsoleCommand("archivecvar wdi_enable_antighost");
+	}
+
+	if(GetCVar("wdi_disable_autoconfig") <= 0)
+	{
+		ConsoleCommand("set wdi_disable_autoconfig 0");
+		ConsoleCommand("archivecvar wdi_disable_autoconfig");
+	} 
+
+	if(GetCVar("wdi_safety_time") < 5)
+	{
+		ConsoleCommand("set wdi_safety_time 30");
+		ConsoleCommand("archivecvar wdi_safety_time");
+	}
+
+	if(GetCVar("wdi_murd_maxbonus") < 100)
+	{
+		ConsoleCommand("set wdi_murd_maxbonus 300");
+		ConsoleCommand("archivecvar wdi_murd_maxbonus");
+	}
+
+	if(GetCVar("wdi_murd_healthbonus") <= 0)
+	{
+		ConsoleCommand("set wdi_murd_healthbonus 10");
+		ConsoleCommand("archivecvar wdi_murd_healthbonus");
+	}
+
+	if(GetCVar("wdi_blacklist_rounds") <= 0)
+	{
+		ConsoleCommand("set wdi_blacklist_rounds 5");
+		ConsoleCommand("archivecvar wdi_blacklist_rounds");
+	}
+
+	if(GetCVar("wdi_enable_blacklistinno") <= 0)
+	{
+		ConsoleCommand("set wdi_enable_blacklistinno 0");
+		ConsoleCommand("archivecvar wdi_enable_blacklistinno");
+	}
+
+	if(GetCVar("wdi_disable_blacklistafk")<= 0)
+	{
+		ConsoleCommand("set wdi_disable_blacklistafk 0");
+		ConsoleCommand("archivecvar wdi_disable_blacklistafk");
+	}
+
+	if(GetCVar("wdi_innoslot")<= 0)
+	{
+		ConsoleCommand("set wdi_innoslot 3");
+		ConsoleCommand("archivecvar wdi_innoslot");
+	}
+
+	//check	validation
+	if(GetCVar("wdi_enable_blacklistinno")>1)
+	{
+		ConsoleCommand("set wdi_enable_blacklistinno 1");
+		ConsoleCommand("archivecvar wdi_enable_blacklistinno");
+		Log(s:"error must be TRUE or FALSE");
+	}
+
+	if(GetCVar("wdi_disable_blacklistafk")>1)
+	{
+		ConsoleCommand("set wdi_disable_blacklistafk 1");
+		ConsoleCommand("archivecvar wdi_disable_blacklistafk");
+		Log(s:"error must be TRUE or FALSE");
+	}
+
+	if(GetCVar("wdi_enable_seekmurd")>1)
+	{
+		ConsoleCommand("set wdi_enable_seekmurd 1");
+		ConsoleCommand("archivecvar wdi_enable_seekmurd");
+		Log(s:"error must be TRUE or FALSE");
+	}
+	*/
+	
+	gameinfo[CLIENT_SAFETIMER] = GetCVar("wdi_safety_time");
+	UpdateClient(ARRAY_GAMEINFO, CLIENT_SAFETIMER, gameinfo[0]);
+
+	gameinfo[CLIENT_GAMESTATE] = GAMESTATE_WAITFORPLAYERS;
+	UpdateClient(ARRAY_GAMEINFO, CLIENT_GAMESTATE, gameinfo[1]);
+
+	while(PlayerCount() < 2 && !DEBUG) Delay(1);
+	gameinfo[CLIENT_GAMESTATE] = GAMESTATE_SAFETYCOUNTDOWN;
+	UpdateClient(ARRAY_GAMEINFO, CLIENT_GAMESTATE, gameinfo[1]);
+
+	//ResetInventory();
+
+	// safety period
+	while(gameinfo[CLIENT_SAFETIMER] > 0)
+	{
+		Wdi_Setinvulnerable(TRUE);
+		//SetPlayerProperty(1,2,PROP_INVULNERABILITY);
+		SetPlayerProperty(1,0,PROP_FROZEN);
+		SetPlayerProperty(1,0,PROP_TOTALLYFROZEN);
+		SetPlayerProperty(1,0,PROP_FLY);
+		gameinfo[CLIENT_GAMESTATE] = GAMESTATE_SAFETYCOUNTDOWN;
+		UpdateClient(ARRAY_GAMEINFO, CLIENT_GAMESTATE, gameinfo[1]);
+		Delay(35);
+		if(PlayerCount() < 2)
+		{
+			gameinfo[CLIENT_SAFETIMER] = GetCVar("wdi_safety_time");
+			UpdateClient(ARRAY_GAMEINFO, CLIENT_SAFETIMER, gameinfo[0]);
+
+			gameinfo[CLIENT_GAMESTATE] = GAMESTATE_WAITFORPLAYERS;
+			UpdateClient(ARRAY_GAMEINFO, CLIENT_GAMESTATE, gameinfo[1]);
+			restart;
+		}
+		gameinfo[CLIENT_SAFETIMER]--;
+		UpdateClient(ARRAY_GAMEINFO, CLIENT_SAFETIMER, gameinfo[0]);
+	}
+
+	dwindlemessage = FALSE;
+	UpdateClient(4, 0, dwindlemessage);
+
+	gameinfo[1] = GAMESTATE_MURDERCHOOSE;
+	UpdateClient(ARRAY_GAMEINFO, CLIENT_GAMESTATE, gameinfo[1]);
+
+	//reset all statistics, mostly useful if a new murderer has to be chosen.
+	for(int b = 0;b < 6;b++)
+	{
+		murdinfo[b] = 0;
+		UpdateClient(ARRAY_MURDINFO, b, murdinfo[b]);
+	}
+
+	for(int b2 = 0;b2 < 5;b2++)
+	{
+		playinfo[b2] = 0;
+		UpdateClient(ARRAY_PLAYINFO, b2, playinfo[b2]);
+	}
+
+	// choose a murderer
+	Delay(128);
+	while(!WDI_MurderChooser()) Delay(1); // This'll loop until a murderer is chosen (function returns success)
+	playinfo[1] = WDI_CountInnocents();
+	playinfo[0] = playinfo[1];
+	playinfo[5] = playinfo[1];
+	UpdateClient(ARRAY_PLAYINFO, CLIENT_CIVCOUNT, playinfo[0]);
+	UpdateClient(ARRAY_PLAYINFO, CLIENT_CIVMAX, playinfo[1]);
+	UpdateClient(ARRAY_PLAYINFO, CLIENT_STARTPLAYERS, playinfo[5]);
+	gameinfo[1] = GAMESTATE_GAMEACTIVE;
+	UpdateClient(ARRAY_GAMEINFO, CLIENT_GAMESTATE, gameinfo[1]);
+	Wdi_Setinvulnerable(FALSE);
+	//SetPlayerProperty(1,0,PROP_INVULNERABILITY);
+	remainingpercentage = (FixedDiv(Int2Fix(playinfo[0]),Int2Fix(playinfo[1])) * 100) >> 16;
+	UpdateClient(3, 0, remainingpercentage);
+
+	for(int f = 0; f < 32; f++)
+	{
+		if(f != gameinfo[2])
+		GiveActorInventory(TID_START+f, "MarkMe", 1);
+	}
+
+	int loopcount = 0;
+	while(gameinfo[1] == GAMESTATE_GAMEACTIVE)	// now the actual game begins
+	{
+	Wdi_Setinvulnerable(FALSE);
+		//SetPlayerProperty(1,0,PROP_INVULNERABILITY);
+		if(!murdinfo[0])
+		{
+			SetFont("BigFont");
+			HudMessageBold(s:"The Murderer has left the game. Selecting a new murderer..."; HUDMSG_PLAIN|HUDMSG_LOG, 2005, CR_RED, 0.5, 0.35, 3.0);
+			if(PlayerCount() < 2)
+			{
+				PrintBold(s:"Not enough players left, ending map!");
+				Delay(15);
+				Exit_Normal(0);
+				Delay(1);
+				terminate;
+			}
+			for(int u = 0; u < 32; u++)
+			{
+				TakeActorInventory(TID_START+u, "KillMarker", 999); // This fixes issues with tallyboard miscounts
+				TakeActorInventory(TID_START+u, "TKToken", 999);
+			}
+			SetMusic("*");
+			tallycounts[0] = 0;
+			tallycounts[1] = 0;
+			tallycounts[2] = 0;
+			tallycounts[3] = 0;
+			playinfo[3] = 0;
+			ResetMap();
+			ResetHealth();
+			//ResetInventory();
+			restart;
+			break;
+		}
+		loopcount++;
+		if(loopcount >= 15)		// this drains the murderer's sanity
+		{
+			TakeActorInventory(TID_START+gameinfo[2], "MadMeter", 1);
+			loopcount = 0;
+		}
+
+		// if he's out of sanity, kill him
+		if(CheckActorInventory(TID_START+gameinfo[2], "MurderMarker") && CheckActorInventory(TID_START+gameinfo[2], "MadMeter") <= 0)
+		{
+			murdinfo[1] = CheckActorInventory(TID_START+gameinfo[2], "TripUsed");
+			murdinfo[2] = CheckActorInventory(TID_START+gameinfo[2], "GasUsed");
+			murdinfo[3] = CheckActorInventory(TID_START+gameinfo[2], "SmokeUsed");
+			murdinfo[4] = CheckActorInventory(TID_START+gameinfo[2], "FakeStimUsed");
+			murdinfo[5] = CheckActorInventory(TID_START+gameinfo[2], "NoiseMakerUsed");
+			murdinfo[6] = CheckActorInventory(TID_START+gameinfo[2], "StimUsed");
+			murdinfo[7] = CheckActorInventory(TID_START+gameinfo[2], "BackStabCount");
+			Thing_Destroy(TID_START+gameinfo[2], TRUE);
+			playinfo[4] = END_MURSUICIDE;
+			UpdateClient(ARRAY_PLAYINFO, CLIENT_ENDING, playinfo[4]);
+			gameinfo[1] = GAMESTATE_GAMEOVER;
+			UpdateClient(ARRAY_GAMEINFO, CLIENT_GAMESTATE, gameinfo[1]);
+		}
+		if(playinfo[0] <= 0)
+		{
+			playinfo[4] = END_INOLOSE;
+			UpdateClient(ARRAY_PLAYINFO,CLIENT_ENDING, playinfo[4]);
+			gameinfo[1] = GAMESTATE_GAMEOVER;
+			UpdateClient(ARRAY_GAMEINFO,CLIENT_GAMESTATE, gameinfo[1]);
+		}
+		Delay(1);
+	}
+
+	ACS_Execute(412,0,0,0,0);
+	ACS_Execute(413,0,doendfade,0,0);
+
+
+	SetMusic("");
+	Switch(playinfo[4])
+	{
+		Case END_INOLOSE:
+		//Dox's murd camera (he wins :3)
+		if(GetCVAR("WDIR_MurdCam") == true)
+		{
+		SpawnSpotFacing("MurdWinCamera", TID_START+gameinfo[2], 94583);
+		ChangeCamera(94583,1,0);
+		Thing_Hate(94583, TID_START+gameinfo[2], 6);
+		}
+		AmbientSound("D_CTTAL1",127);
+		break;
+
+		Case END_MURLOSE:
+		AmbientSound("D_CTTAL2",127);
+		break;
+
+		Case END_MURSUICIDE:
+		AmbientSound("D_CTTAL2",127);
+		break;
+	}
+
+	if(GetCVAR("WDIR_EndGameMove") == true) { SetPlayerProperty(1,1,PROP_TOTALLYFROZEN); }
+	Wdi_Setinvulnerable(TRUE);
+	//SetPlayerProperty(1,2,PROP_INVULNERABILITY);
+	ACS_Namedexecute("tkrs",0); //reveal all the tks in rcon
+	SetHUDSize(640, 480, 0); //320.0, 240.0 center.
+	SetFont("Smallfont");
+	HudMessageBold(s:"End game tally for:"; HUDMSG_FADEINOUT, 0, CR_RED, 320.0, 16.0, 35.0, 1.0, 1.0);
+	Delay(35*4);
+	//=== Murderer Name ===//
+	SetFont("Bigfont");
+	HudMessageBold(s:"\cc---", n:gameinfo[2]+1, s:"\cc---";  HUDMSG_FADEOUT, 0, CR_UNTRANSLATED, 320.0, 32.0, 35.0, 1.0);
+
+	tallycounts[1] -= tallycounts[0]; // Subtract the murderer's kills from the total game kills to get the amount of Team Kills.
+
+	//=== Murderer Info (Health / Sanity) / Suicide, etc ===//
+	int score_player = wdi_scoreplayer();
+	int thehero = -1;
+	switch(playinfo[4])
+	{
+		Case END_INOLOSE: //Murderer Wins
+		tallycounts[0] = CheckActorInventory(TID_START+gameinfo[2], "KillMarker");
+		murdinfo[1] = CheckActorInventory(TID_START+gameinfo[2], "TripUsed");
+		murdinfo[2] = CheckActorInventory(TID_START+gameinfo[2], "GasUsed");
+		murdinfo[3] = CheckActorInventory(TID_START+gameinfo[2], "SmokeUsed");
+		murdinfo[4] = CheckActorInventory(TID_START+gameinfo[2], "FakeStimUsed");
+		murdinfo[5] = CheckActorInventory(TID_START+gameinfo[2], "NoiseMakerUsed");
+		murdinfo[6] = CheckActorInventory(TID_START+gameinfo[2], "StimUsed");
+		murdinfo[7] = CheckActorInventory(TID_START+gameinfo[2], "BackStabCount");
+		HudMessageBold(s:"GAME OVER: ", n:gameinfo[2]+1, s:" \ccwins with a score of \ck", d:(FixedDiv(Int2Fix(score_player),Int2Fix(10 * playinfo[1])) * 100) >> 16, s:"%", s:" (", d:score_player, s:" / ", d:(10 * playinfo[1]), s:") ";  HUDMSG_PLAIN | HUDMSG_LOG, 1, CR_WHITE, 0.0, 0.0, 0.001);
+		HudMessageBold(s:""; HUDMSG_PLAIN, 1, CR_WHITE, 0.0, 0.0, 0.1);
+		SetFont("Smallfont");
+		HudMessageBold(s:"\cgHealth: ", d:tallycounts[3], s:" / ", d:(FixedDiv(Int2Fix(tallycounts[2]),Int2Fix(500)) * 100) >> 16, s:"% :Sanity";  HUDMSG_FADEOUT, 0, CR_RED, 320.0, 44.0, 35.0, 1.0);
+		break;
+
+		Case END_MURLOSE: //Killed
+		SetFont("Smallfont");
+		for(int k = 0;k < 32; k++)
+		{
+			if(CheckActorInventory(TID_START+k, "Hero"))
+			{
+				thehero = k;
+				break;
+			}
+		}
+		if(thehero == gameinfo[2] || thehero == -1) HudMessageBold(s:"Self-Victim";  HUDMSG_FADEOUT, 0, CR_RED, 320.0, 44.0, 35.0, 1.0);
+		if(thehero != gameinfo[2] && thehero != -1)
+		{
+			HudMessageBold(s:"Killed by:";  HUDMSG_FADEOUT, 0, CR_RED, 320.0, 44.0, 35.0, 1.0);
+			HudMessageBold(s:"\cc---", n:thehero+1, s:"\cc---";  HUDMSG_FADEOUT, 0, CR_UNTRANSLATED, 320.0, 52.0, 35.0, 1.0);
+		}
+		// Put this at the end so it shows the killer's name properly
+		HudMessageBold(s:"GAME OVER: ", n:gameinfo[2]+1, s:" \ccwas killed by ", n:thehero+1, s:" \ccand scored \ck", d:(FixedDiv(Int2Fix(score_player),Int2Fix(10 * playinfo[1])) * 100) >> 16, s:"%", s:" (", d:score_player, s:" / ", d:(10 * playinfo[1]), s:") ";  HUDMSG_PLAIN | HUDMSG_LOG, 1, CR_WHITE, 0.0, 0.0, 0.001);
+		HudMessageBold(s:""; HUDMSG_PLAIN, 1, CR_WHITE, 0.0, 0.0, 0.1);
+		break;
+
+		Case END_MURSUICIDE: //Suicide (By Sanity loss or otherwise)
+		HudMessageBold(s:"GAME OVER: ", n:gameinfo[2]+1, s:" \ccran out of sanity and scored \ck", d:(FixedDiv(Int2Fix(score_player),Int2Fix(10 * playinfo[1])) * 100) >> 16, s:"%", s:" (", d:score_player, s:" / ", d:(10 * playinfo[1]), s:") ";  HUDMSG_LOG, 0, CR_WHITE, 0.0, 0.0, 0.001);
+		HudMessageBold(s:""; HUDMSG_PLAIN, 1, CR_WHITE, 0.0, 0.0, 0.1);
+		SetFont("Smallfont");
+		HudMessageBold(s:"Mental Breakdown";  HUDMSG_FADEOUT, 0, CR_RED, 320.0, 44.0, 35.0, 1.0);
+		break;
+	}
+
+	Delay(35*4);
+	//=== Tallying ===//
+
+	//Personal Kills
+	SetFont("Bigfont");
+	HudMessageBold(s:"\cg-Personal Victims- "; HUDMSG_FADEOUT, 0, CR_RED, 320.0, 78.0, 35.0, 1.0);
+
+	Delay(35);
+
+	SetFont("Bigfont");
+	HudMessageBold(d:tallycounts[0], s:" out of ", d:playinfo[1];  HUDMSG_FADEOUT, 0, CR_UNTRANSLATED, 320.0, 98.0, 35.0, 1.0);
+	SetFont("Smallfont");
+	HudMessageBold(d:murdinfo[7], s:" Backstab victims";  HUDMSG_FADEOUT, 0, CR_WHITE, 320.0, 124.0, 35.0, 1.0);
+	SetFont("Smallfont");
+	HudMessageBold(d:((FixedDiv(Int2Fix(tallycounts[0]),Int2Fix(playinfo[1])) * 100) >> 16), s:"%";  HUDMSG_FADEOUT, 0, CR_WHITE, 320.0, 110.0, 35.0, 1.0);
+
+	Delay(35);
+
+	//Paranoia kills
+	SetFont("Bigfont");
+	HudMessageBold(s:"\cg-Paranoia Victims- "; HUDMSG_FADEOUT, 0, CR_RED, 320.0, 144.0, 35.0, 1.0);
+
+	Delay(35);
+
+	SetFont("Bigfont");
+	tallycounts[1] = max(tallycounts[1], 0);
+	HudMessageBold(d:tallycounts[1], s:" out of ", d:playinfo[1];  HUDMSG_FADEOUT, 0, CR_UNTRANSLATED, 320.0, 164.0, 35.0, 1.0);
+	SetFont("Smallfont");
+	HudMessageBold(d:((FixedDiv(Int2Fix(tallycounts[1]),Int2Fix(playinfo[1])) * 100) >> 16), s:"%";  HUDMSG_FADEOUT, 0, CR_WHITE, 320.0, 176.0, 35.0, 1.0);
+
+	Delay(35);
+
+	//Disconnects (lolololol RAGEQUIT)
+	SetFont("Bigfont");
+	HudMessageBold(s:"\cg-Disconnects- "; HUDMSG_FADEOUT, 0, CR_RED, 320.0, 210.0, 35.0, 1.0);
+
+	Delay(35);
+
+	SetFont("Bigfont");
+	HudMessageBold(d:playinfo[3], s:" out of ", d:playinfo[5];  HUDMSG_FADEOUT, 0, CR_UNTRANSLATED, 320.0, 230.0, 35.0, 1.0);
+	SetFont("Smallfont");
+	HudMessageBold(d:((FixedDiv(Int2Fix(playinfo[3]),Int2Fix(playinfo[5])) * 100) >> 16), s:"%";  HUDMSG_FADEOUT, 0, CR_WHITE, 320.0, 242.0, 35.0, 1.0);
+
+	Delay(35);
+
+	//=== Item Useage ===//
+	SetFont("Smallfont");
+	HudMessageBold(s:"--Items Used-- "; HUDMSG_FADEOUT, 0, CR_RED, 320.0, 266.0, 35.0, 1.0);
+
+	HudMessageBold(s:"\ccBertholite"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 224.0, 278.0, 35.0, 1.0, 1.0);
+	HudMessageBold(d:murdinfo[2]; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 224.0, 286.0, 35.0, 1.0, 1.0);
+
+	HudMessageBold(s:"\ccSmoke Bomb"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 320.0, 278.0, 35.0, 1.0, 1.0);
+	HudMessageBold(d:murdinfo[3]; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 320.0, 286.0, 35.0, 1.0, 1.0);
+
+	HudMessageBold(s:"\ccTrip Shotgun"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 416.0, 278.0, 35.0, 1.0, 1.0);
+	HudMessageBold(d:murdinfo[1]; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 416.0, 286.0, 35.0, 1.0, 1.0);
+
+	HudMessageBold(s:"\ccMedkit"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 320.0, 296.0, 35.0, 1.0, 1.0);
+	HudMessageBold(d:murdinfo[6]; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 320.0, 304.0, 35.0, 1.0, 1.0);
+
+	HudMessageBold(s:"\ccFake Stimpack"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 416.0, 296.0, 35.0, 1.0, 1.0);
+	HudMessageBold(d:murdinfo[4]; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 416.0, 304.0, 35.0, 1.0, 1.0);
+
+	HudMessageBold(s:"\ccSound Emitter"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 224.0, 296.0, 35.0, 1.0, 1.0);
+	HudMessageBold(d:murdinfo[5]; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 224.0, 304.0, 35.0, 1.0, 1.0);
+
+	Delay(35*3);
+
+	//=== Ranking ===//
+	SetFont("Bigfont");
+	HudMessageBold(s:"\cc---\cgRanking\cc---"; HUDMSG_FADEOUT, 0, CR_RED, 320.0, 324.0, 35.0, 1.0);
+	Delay(35*3);
+	int percentage = (FixedDiv(Int2Fix(score_player),Int2Fix(10 * playinfo[1])) * 100) >> 16;
+	SetFont("Bigfont");
+	HudMessageBold(d:(FixedDiv(Int2Fix(score_player),Int2Fix(10 * playinfo[1])) * 100) >> 16, s:"%"; HUDMSG_FADEOUT, 0, CR_WHITE, 320.0, 342.0, 35.0, 1.0);
+	SetFont("SMALLFONT");
+	HudMessageBold(d:score_player, s:" / ", d:(10 * playinfo[1]); HUDMSG_FADEOUT, 0, CR_WHITE, 320.0, 365.0, 35.0, 1.0);
+	SetHUDSize(1920, 1080, 0);
+	wdi_showmedalrank(percentage);
+
+	Delay(35*5);
+
+	//=== End Map ===//
+	SetHUDSize(640, 480, 0);
+	SetFont("Bigfont");
+	HudMessageBold(s:"Going to next map..."; HUDMSG_FADEINOUT, 0, CR_RED, 320.0, 420.0, 35.0, 1.0, 1.0);
+	ResetInventory();
+	
+	Delay(35 * 5);
+	Wdi_Setinvulnerable(FALSE);
+	//SetPlayerProperty(1,0,PROP_INVULNERABILITY);  //experiment
+	SetPlayerProperty(1,0,PROP_FROZEN); //experiment
+	SetPlayerProperty(1,0,PROP_TOTALLYFROZEN);  //experiment
+	SetPlayerProperty(1,0,PROP_FLY); //experiment
+	delay(1); //experiment
+	Exit_Normal(0);
+	Delay(1);
+	terminate;
+}
+
+script 401 enter net ClientSide // This script controls HUD-related stuff, like messages and text.
+{
+	if(GameType() == GAME_TITLE_MAP || ConsolePlayerNumber() != PlayerNumber()) terminate;
+
+	bool tenseshown = FALSE;
+	while(1)
+	{
+		Switch(gameinfo[1])
+		{
+			Case GAMESTATE_WAITFORPLAYERS:
+			SetFont("BigFont");
+			HudMessage(s:"WAITING for PLAYERS..."; HUDMSG_PLAIN, 2000, CR_RED, 0.5, 0.85, 0);
+			HudMessage(s:""; HUDMSG_PLAIN, 2001, CR_WHITE, 0.0, 0.0, 0.1);
+			HudMessage(s:""; HUDMSG_PLAIN, 2002, CR_WHITE, 0.0, 0.0, 0.1);
+			SetFont("SmallFont");
+			while(gameinfo[1] == GAMESTATE_WAITFORPLAYERS) Delay(1);
+			break;
+
+			Case GAMESTATE_SAFETYCOUNTDOWN:
+			tenseshown = FALSE;
+			SetFont("BigFont");
+			HudMessage(s:"SAFETY"; HUDMSG_PLAIN, 2000, CR_RED, 0.5, 0.85, 0);
+			LocalAmbientSound("Game/CountStart",127);
+			SetFont("SmallFont");
+			HudMessage(s:"Players cannot harm eachother until a murderer is chosen..."; HUDMSG_PLAIN, 2001, CR_RED, 0.5, 0.88, 0);
+			ACS_Execute(414,0,0,0,0);
+			while(gameinfo[1] == GAMESTATE_SAFETYCOUNTDOWN)
+			{
+				HudMessage(d:gameinfo[0]; HUDMSG_PLAIN, 2002, CR_RED, 0.5, 0.9, 0);
+				Delay(1);
+				//if(tiptime == 0) HudMessage(s:InoTip[Random(0,16)]; HUDMSG_PLAIN, 2083 + PlayerNumber(), CR_WHITE, 0.5, 0.8, 12.0);
+				//tiptime++;
+				//if(tiptime >= (35 * 10)) tiptime = 0;
+			}
+			break;
+
+			Case GAMESTATE_MURDERCHOOSE:
+			if(tenseshown) break;
+			tenseshown = TRUE;
+			HudMessage(s:""; HUDMSG_PLAIN, 2001, CR_WHITE, 0.0, 0.0, 0.1);
+			HudMessage(s:""; HUDMSG_PLAIN, 2002, CR_WHITE, 0.0, 0.0, 0.1);
+			HudMessage(s:""; HUDMSG_PLAIN, 2003, CR_WHITE, 0.0, 0.0, 0.1);
+			SetFont("SmallFont");
+			HudMessage(s:"a murderer has been chosen."; HUDMSG_FADEOUT, 2004, CR_WHITE, 0.5, 0.5, 6.5, 1.0);
+			Delay(35);
+			SetFont("SmallFont");
+			HudMessage(s:"a murderer has been chosen.."; HUDMSG_FADEOUT, 2004, CR_WHITE, 0.5, 0.5, 6.5, 1.0);
+			Delay(35);
+			SetFont("SmallFont");
+			HudMessage(s:"a murderer has been chosen..."; HUDMSG_FADEOUT, 2004, CR_WHITE, 0.5, 0.5, 4.5, 1.0);
+			Delay(60);
+			break;
+
+			Case GAMESTATE_GAMEACTIVE:
+			HudMessage(s:""; HUDMSG_PLAIN, 2000, CR_WHITE, 0.0, 0.0, 0.1);
+			HudMessage(s:""; HUDMSG_PLAIN, 2001, CR_WHITE, 0.0, 0.0, 0.1);
+			HudMessage(s:""; HUDMSG_PLAIN, 2002, CR_WHITE, 0.0, 0.0, 0.1);
+			if(gameinfo[2] == PlayerNumber())
+			{
+				LocalAmbientSound("Game/MurdererChosen",127);
+				SetFont("SmallFont");
+				HudMessage(s:MurTip[Random(0,21)]; HUDMSG_PLAIN, 2004, CR_WHITE, 0.5, 0.8, 5.0);
+				SetFont("BigFont");
+				HudMessage(s:"... and it's you!"; HUDMSG_FADEOUT, 2003, CR_RED, 0.5, 0.55, 6.5, 1.0); //Murderer message
+				//ACS_Execute(416,0,0,0,0);
+			}
+			else
+			{
+				LocalAmbientSound("Game/MurdererChosen",127);
+				SetFont("SmallFont");
+				HudMessage(s:InoTip[Random(0,19)]; HUDMSG_PLAIN, 2004, CR_WHITE, 0.5, 0.8, 5.0);
+				SetFont("BigFont");
+				HudMessage(s:"... and it's not you!"; HUDMSG_FADEOUT, 2003, CR_WHITE, 0.5, 0.55, 6.5, 1.0); //Innocent message
+			}
+			for(int i = 0; i < 32; i++)
+			{
+				if(i != gameinfo[2])
+				GiveActorInventory(TID_START+i, "MarkMe", 1);
+			}
+			while(gameinfo[1] == GAMESTATE_GAMEACTIVE)
+			{
+				Delay(1);
+			}
+			break;
+
+			Case GAMESTATE_GAMEOVER:
+			FadeTo(0, 0, 0, 1.0, 2.0);
+			Delay(70);
+			terminate;
+			break;
+		}
+		Delay(1);
+	}
+}
+
+script 406 death
+{
+	TakeActorInventory(TID_START + gameinfo[2], "TKToken", 3);
+
+	TakeActorInventory(ActivatorTID(), "MarkMe", 1);
+
+	WDI_DropPlayerWeapon(ActivatorTID());
+
+	if(gameinfo[1] == GAMESTATE_GAMEACTIVE)
+	{
+		AmbientSound("DeathNote", 128);
+		died[PlayerNumber()] = TRUE;
+		if(CheckActorInventory(TID_START+gameinfo[2], "MurderMarker") && CheckActorInventory(TID_START+gameinfo[2], "MadMeter"))
+		{
+			tallycounts[0] = CheckActorInventory(TID_START+gameinfo[2], "KillMarker");
+			//TakeActorInventory(TID_START+gameinfo[2],"KillMarker",999);
+			murdinfo[1] = CheckActorInventory(TID_START+gameinfo[2], "TripUsed");
+			murdinfo[2] = CheckActorInventory(TID_START+gameinfo[2], "GasUsed");
+			murdinfo[3] = CheckActorInventory(TID_START+gameinfo[2], "SmokeUsed");
+			murdinfo[4] = CheckActorInventory(TID_START+gameinfo[2], "FakeStimUsed");
+			murdinfo[5] = CheckActorInventory(TID_START+gameinfo[2], "NoiseMakerUsed");
+			murdinfo[6] = CheckActorInventory(TID_START+gameinfo[2], "StimUsed");
+			murdinfo[7] = CheckActorInventory(TID_START+gameinfo[2], "BackStabCount");
+		}
+
+		if(!CheckInventory("MurderMarker"))
+		{
+			Delay(1);
+			tallycounts[1]++;
+			playinfo[0]--;
+			UpdateClient(ARRAY_PLAYINFO, CLIENT_CIVCOUNT, playinfo[0]);
+			if(playinfo[0] == 0) remainingpercentage = 0;
+			if(playinfo[0] != 0) remainingpercentage = (FixedDiv(Int2Fix(playinfo[0]),Int2Fix(playinfo[1])) * 100) >> 16;
+			UpdateClient(3, 0, remainingpercentage);
+			if(((remainingpercentage <= REMAINING  && remainingpercentage != 0) || (playinfo[0] <= 2 && playinfo[0] > 0)) && !dwindlemessage)
+			{
+				SetFont("BIGFONT");
+				HudMessageBold(s:"The Innocent's numbers are dwindling..."; HUDMSG_PLAIN|HUDMSG_LOG, 0, CR_RED, 0.5, 0.3, 3.0);
+				int odds = Random(1,100);
+				if(odds >= 99)
+				ACS_Execute(415,0,0,0,0);
+
+				else
+				{
+					if(custom_finale == TRUE)
+					{
+						SetMusic(finalesong);
+					}
+
+					else
+					{
+						int ran = Random(0, 4);
+						SetMusic(default_songs[ran]);
+					}
+				}
+
+				dwindlemessage = TRUE;
+				UpdateClient(4, 0, dwindlemessage);
+			}
+		}
+
+		if(PlayerNumber() == gameinfo[2] && CheckActorInventory(TID_START+gameinfo[2], "MadMeter") > 0)
+		{
+			playinfo[4] = END_MURLOSE;
+			UpdateClient(ARRAY_PLAYINFO,CLIENT_ENDING, playinfo[4]);
+			gameinfo[1] = GAMESTATE_GAMEOVER;
+			UpdateClient(ARRAY_GAMEINFO,CLIENT_GAMESTATE, gameinfo[1]);
+		}
+	}
+}
+
+script 409 (void)
+{
+	GiveActorInventory(TID_START+gameinfo[2], "KillMarker", 1);
+	GiveActorInventory(TID_START+gameinfo[2], "GetSuperSane", 1);
+}
+
+script 412 (void)
+{
+	if(WDI_Ending() == END_INOLOSE)
+	while(GetActorProperty(TID_START+WDI_MurdID(), APROP_Health) > 0) Delay(1);
+
+	else if(WDI_Ending() != END_INOLOSE)
+	while(PlayerCount() > 0) Delay(1);
+
+	PrintBold(s:"NO players left, ending map!");
+	Delay(15);
+	Exit_Normal(0);
+	Delay(1);
+	terminate;
+}
+
+// Fade All Players
+script 413 (int fade ) clientside
+{
+	if(fade == FALSE) terminate;
+
+	for(int i = 0; i < 32; i++)
+	{
+		SetActivator(TID_START + i);
+		FadeTo(0, 0, 0, 1.0, 3.0);
+	}
+
+	Delay(35 * 3);
+
+	for(int v = 0; v < 32; v++)
+	{
+		SetActivator(TID_START + v);
+		FadeTo(0, 0, 0, 1.0, 3.0);
+	}
+
+	Delay(35 * 3);
+
+	for(int g = 0; g < 32; g++)
+	{
+		SetActivator(TID_START + g);
+		FadeTo(0, 0, 0, 1.0, 3.0);
+	}
+}
+
+script 414 (void) net ClientSide
+{
+	int tiptime = 0;
+	while(gameinfo[1] == GAMESTATE_SAFETYCOUNTDOWN)
+	{
+		Delay(1);
+		if(tiptime == 0)
+		{
+			SetFont("SmallFont");
+			HudMessageBold(s:InoTip[Random(0,19)]; HUDMSG_PLAIN, 2083 + PlayerNumber(), CR_WHITE, 0.5, 0.8, 12.0);
+		}
+		tiptime++;
+		if(tiptime >= (35 * 10)) tiptime = 0;
+	}
+}
+
+script 415 (void)
+{
+	int odds = Random(0,4);
+	SetMusic("");
+	AmbientSound("D_FATE", 127);
+	Delay(28 * 35);
+
+	if(custom_finale == TRUE)
+	SetMusic(finalesong);
+
+	else
+	SetMusic(default_songs[odds]);
+}
+
+script 416 (void) net ClientSide
+{
+	SetActorState(256, "ON", TRUE);
+	SetActorState(257, "ON", TRUE);
+	//Thing_Activate(256);
+	//Thing_Activate(257);
+}
+
+script 417 (void)
+{
+	tallycounts[2] = CheckActorInventory(TID_START+gameinfo[2], "MadMeter");
+	tallycounts[3] = GetActorProperty(TID_START+gameinfo[2], APROP_Health);
+}
+
+script 418 (void)
+{
+	WDI_DropPlayerWeapon_Live(ActivatorTID());
+}
+
+script 419 enter
+{
+	while(gameinfo[1] != GAMESTATE_GAMEOVER)
+	{
+		while(gameinfo[1] != GAMESTATE_GAMEACTIVE) Delay(1);
+		Delay(35);
+
+		if(!CheckActorInventory(TID_START+playernumber(),"MurderMarker")) terminate;
+
+		while(gameinfo[1] == GAMESTATE_GAMEACTIVE)
+		{
+			Delay(1);
+				if(remainingpercentage <= remaining_tracker || (playinfo[0] <= 2) || forcetracker == TRUE)
+				{
+				 ACS_NamedExecute("seek_inno_marks",0);
+				 terminate;
+				}
+		}
+	}
+}
+
+script "seek_inno_marks" (void) clientside
+{
+if (!Client_action()) { terminate;}
+	while(WDI_GameState() == GAMESTATE_GAMEACTIVE)
+	{
+		seek_marks();
+		Delay(1);		
+	}
+}
+
+
+Script "WinCam" (void)
+{
+	SpawnSpotFacing("MurdWinCamera", TID_START+gameinfo[2], 94583);
+	ChangeCamera(94583,1,0);
+	Thing_Hate(94583, TID_START+gameinfo[2], 6);
+}
+
+
+		

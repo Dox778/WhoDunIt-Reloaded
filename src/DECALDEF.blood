@@ -1,0 +1,138 @@
+//Copied from Zdoom.pk3, because the defaults smears don't have mother-fucking Decal ID's. >:(
+
+stretcher BloodStretcher
+{
+	StretchTime	35
+	GoalY		2.0
+}
+
+slider BloodSlider
+{
+	SlideTime	35
+	DistY		-5
+}
+
+combiner BloodSmearer
+{
+	BloodStretcher
+	BloodSlider
+}
+
+
+/***** Blood Decals ********************************************************/
+/*
+ * Blood splats just stick to the walls.
+ * Blood smears crawl down walls a bit like in Blood.
+ *
+ * These do not need generators; the engine will create them automatically
+ * when something bleeds. If a blood color is set, the shade color will be ignored,
+ * and the actor's blood color will be used instead.
+ */
+decal BloodSplat1 1
+{
+	pic BSPLAT1
+	shade "BloodDefault"
+	x-scale 0.75
+	y-scale 0.75
+	randomflipx
+	randomflipy
+}
+
+decal BloodSplat2 2
+{
+	pic BSPLAT2
+	shade "BloodDefault"
+	x-scale 0.75
+	y-scale 0.75
+	randomflipx
+	randomflipy
+}
+
+decal BloodSplat3 3
+{
+	pic BSPLAT3
+	shade "BloodDefault"
+	x-scale 0.75
+	y-scale 0.75
+	randomflipx
+	randomflipy
+}
+
+decal BloodSplat4 4
+{
+	pic BSPLAT4
+	shade "BloodDefault"
+	x-scale 0.75
+	y-scale 0.75
+	randomflipx
+	randomflipy
+}
+
+decal BloodSplat5 5
+{
+	pic BSPLAT5
+	shade "BloodDefault"
+	x-scale 0.75
+	y-scale 0.75
+	randomflipx
+	randomflipy
+}
+
+decal BloodSplat6 6
+{
+	pic BSPLAT6
+	shade "BloodDefault"
+	x-scale 0.75
+	y-scale 0.75
+	randomflipx
+	randomflipy
+}
+
+decal BloodSplat7 7
+{
+	pic BSPLAT7
+	shade "BloodDefault"
+	x-scale 0.75
+	y-scale 0.75
+	randomflipx
+	randomflipy
+}
+
+// The smaller blood splats are more common than the big ones.
+
+decalgroup BloodSplat
+{
+	BloodSplat1	2
+	BloodSplat2	1
+	BloodSplat3	5
+	BloodSplat4	5
+	BloodSplat5	5
+	BloodSplat6	5
+	BloodSplat7	6
+}
+
+decal BloodSmear1 8
+{
+	pic BSMEAR1
+	x-scale 0.625
+	y-scale 0.625
+	shade "BloodDefault"
+	randomflipx
+	animator BloodSmearer
+}
+
+decal BloodSmear2 9
+{
+	pic BSMEAR1
+	x-scale 0.625
+	y-scale 0.625
+	shade "BloodDefault"
+	randomflipx
+	animator BloodSmearer
+}
+
+decalgroup BloodSmear
+{
+	BloodSmear1	1
+	BloodSmear2	1
+}

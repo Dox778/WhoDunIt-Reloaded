@@ -1,0 +1,217 @@
+$random BKITDROP {BKITDRP1 BKITDRP2}
+BKITDRP1 BKITDRP1
+BKITDRP2 BKITDRP2
+
+BRLBREAK BRLBREAK
+
+FireCauldron/Loop FIREPLAC
+TPortalLoop tp_loop
+
+TPZap1	tp_zap1
+TPZap2	tp_zap2
+
+$random TPortalZap {TPZap1 TPZap2}
+
+TPortalFade tp_fade
+
+TPortalAppear tp_app
+
+Menu/Activate "Sounds/MenuAndGame/Activate.ogg"
+Menu/Backup "Sounds/MenuAndGame/error.ogg"
+Menu/Prompt "Sounds/MenuAndGame/Activate.ogg"
+Menu/Cursor "Sounds/MenuAndGame/Cursor.ogg"
+Menu/Change "Sounds/MenuAndGame/Change.ogg"
+Menu/Invalid "Sounds/MenuAndGame/Error.ogg"
+Menu/Dismiss "Sounds/MenuAndGame/Backup.ogg"
+Menu/Choose "Sounds/MenuAndGame/Activate.ogg"
+Menu/Clear "Sounds/MenuAndGame/error.ogg"
+
+
+
+FLEAS FLEAS
+$rolloff FLEAS 50 256
+AMBRAIN AMBRAIN
+$limit AMBRAIN 1
+$volume AMBRAIN 0.25
+$random RainScreen { rdrop1 rdrop2 rdrop3 rdrop4 rdrop5 rdrop6  }
+rdrop1 rdrop1
+rdrop2 rdrop2
+rdrop3 rdrop3
+rdrop4 rdrop4
+rdrop5 rdrop5
+rdrop6 rdrop6
+$volume RainScreen 0.8
+
+WOODBRK WOODBRK
+EatMunch EatMunch
+$limit EatMunch 10
+DSTORCH2 DSTORCH2
+DSTORCH DSTORCH
+$rolloff DSTORCH 600 1600
+PLAYBURN PLAYBURN
+$rolloff PLAYBURN 3000 6000
+
+RandomScream randomaa
+//$pitchshift 4
+//$pitchset RandomScream 3// 0.6
+
+$random BodyThud { BTHUD1 BTHUD2 BTHUD3 BTHUD4 BTHUD5 BTHUD6 }
+BTHUD1 BTHUD1
+BTHUD2 BTHUD2
+BTHUD3 BTHUD3
+BTHUD4 BTHUD4
+BTHUD5 BTHUD5
+BTHUD6 BTHUD6
+
+$random blooddrop2  { LQDRIP4 LQDRIP5 LQDRIP6 LQDRIP7 }
+LQDRIP4 LQDRIP4
+LQDRIP5 LQDRIP5
+LQDRIP6 LQDRIP6
+LQDRIP7 LQDRIP7
+
+//////////////////////////////////////
+//ITEMS
+//////////////////////////////////////
+SDBEARTP SDBEARTP
+
+$random MICMUSIC { NGGUP WhatIsLo TakeOnMe}
+NGGUP NGGUP
+WhatIsLo WhatIsLo
+TakeOnMe TakeOnMe
+$limit NGGUP 1
+$limit WhatIsLo 1
+$limit TakeOnMe 1
+
+$rolloff TakeOnMe 500 2400
+$rolloff WhatIsLo 500 2400
+$rolloff NGGUP 500 2400
+
+$random DISCO { oldDISCO Mario1 Mario2 Mario3 mario4 BackOnTr}
+oldDISCO DISCO
+BackOnTr BackOnTr
+Mario1 Mario1
+Mario2 Mario2
+Mario3 Mario3
+mario4 mario4
+
+$random MarioDisco { mario5 mario6 mario7 mario8 }
+mario5 mario5 
+mario6 mario6 
+mario7 mario7 
+mario8 mario8 
+
+$rolloff oldDISCO 1200 2200
+$rolloff Mario1 1200 2200
+$rolloff Mario2 1200 2200
+$rolloff Mario3 1200 2200
+$rolloff Mario4 1200 2200
+$rolloff Mario5 1200 2200
+$rolloff Mario6 1200 2200
+$rolloff Mario7 1200 2200
+$rolloff Mario8 1200 2200
+$rolloff BackOnTr 1200 2200
+$rolloff HUMTOUCH 1200 2200
+$rolloff rave2 1200 2200
+$rolloff rave3 1200 2200
+$rolloff rave4 1200 2200
+$rolloff ILUVTIGER 1200 2200
+$rolloff SEXYECLIP 1200 2200
+$rolloff DFRANCIS 1200 2200
+$rolloff D_DCHASE 1200 2200
+$rolloff D_BBLUE 1200 2200
+
+
+
+//random item box
+WDIREACT WDIREACT
+DSRACKUP DSRACKUP
+DSCHOSEN DSCHOSEN
+RNCROPEN RNCROPEN
+
+SHTRDEPL SHTRDEPL
+$rolloff SHTRDEPL 50 850
+SHTRLOAD SHTRLOAD
+$rolloff SHTRLOAD 50 850
+SHTRLRDY SHTRLRDY
+$rolloff SHTRLRDY 50 850
+$random SHTRFIRE { SHTRFIR1 SHTRFIR2 SHTRFIR3 }
+SHTRFIR1 SHTRFIR1
+SHTRFIR2 SHTRFIR2
+SHTRFIR3 SHTRFIR3
+$rolloff SHTRFIRE 1500 2500
+SHTREJSH SHTREJSH
+$rolloff SHTREJSH 50 850
+SHTRDEST SHTRDEST
+$rolloff SHTRDEST 50 850
+
+
+
+
+$rolloff BodyThud 400 1700
+
+DSDAMND1	DSDAMND1
+DSDAMND2	DSDAMND2
+$random DamnedSoul/Moan	{ DSDAMND1 DSDAMND2 }
+$limit DamnedSoul/Moan 0
+$random AssClap	{ AssClap1 AssClap2 AssClap3 AssClap4 AssClap5 }
+AssClap1 AssClap1
+AssClap2 AssClap2
+AssClap3 AssClap3
+AssClap4 AssClap4
+AssClap5 AssClap5
+$limit DamnedSoul/Moan 0
+$rolloff AssClap 50 400
+ImBallin ImBallin
+$limit ImBallin 0
+$random DistantThunder { DISTTHUN dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty dsempty}
+DISTTHUN DISTTHUN
+$limit DISTTHUN 1
+
+clokloop clokloop
+$rolloff clokloop 120 600
+$volume clokloop 0.8
+BigBell BigBell
+$rolloff BigBell 2048 12288
+
+$random GlassBreak  { glasbrk1 glasbrk2 }
+glasbrk1 glasbrk1
+glasbrk2 glasbrk2
+
+POOFLUSH POOFLUSH
+$limit POOFLUSH 10
+DryOn DryOn
+DryOff DryOff
+DryLoop DryLoop
+
+$rolloff DryOn 150 800
+$rolloff DryLoop 150 800
+$rolloff DryOff 150 800
+
+$limit DryOn 8
+$limit DryOff 8
+$limit DryLoop 8
+
+//dance 6 (guitar)
+D6Mus1 D6Mus1 
+D6MUS2 D6MUS2
+D6MUS3 D6MUS3
+D6MUS4 D6MUS4
+D6MUS5 D6MUS5
+D6MUS6 D6MUS6
+D6MUS7 D6MUS7
+D6MUS8 D6MUS8
+D6MUS9 D6MUS9
+D6MUS10 D6MUS10
+D6MUS11 D6MUS11
+D6MUS12 D6MUS12
+D6MUS13 D6MUS13
+D6Mus14 D6Mus14 
+D6Mus15 D6Mus15 
+D6Mus16 D6Mus16 
+D6Mus17 D6Mus17 
+D6Mus18 D6Mus18 
+D6Mus19 D6Mus19 
+D6Mus20 D6Mus20 
+D6Mus21 D6Mus21 
+
+$random SoundEmitter/Pain { PepPain MarioOw2 LuigiOw2 WormPl2 BDGUYP2 DUKEP2 MONKP2 SamPain1 CalebPain }

@@ -1,0 +1,65 @@
+Actor GenericLight 
+{
+	+NOGRAVITY
+	+NOBLOCKMAP
+	+DONTSPLASH
+	States
+	{
+		Spawn:
+		TNT1 A 1 BRIGHT
+		goto Active
+		Active:
+		TNT1 A 1 BRIGHT A_TakeInventory("PowerOff", 1)
+		loop
+		Inactive:
+		TNT1 B 1 A_GiveInventory("PowerOff", 1)
+		loop
+	}
+}
+
+Actor HallwayLight 20050 { }
+
+Actor LibraryLight 20051 { }
+
+Actor ElevatorLight 20052
+{
+	Radius 4
+Height 48
+	-NOGRAVITY
+	-SOLID
+	+DONTSPLASH
+	+CLIENTSIDEONLY
+	States
+	{
+		Spawn:
+		ELIT A 1
+		goto On
+		On:
+		ELIT A -1 
+		loop
+		Off:
+		ELIT B -1
+		loop
+	}
+}
+
+ACTOR PoliceLight 30666
+{
+  //$Category WDI Effects
+  //$Sprite TNT1A0
+  //$Title "Police Lights"
+	Health 0x7FFFFFFF
+    Radius 10
+    Height 34
+	+CLIENTSIDEONLY
+    -SOLID
+    -SHOOTABLE
+    States
+    {
+	Spawn:
+        TNT1 AB 10
+        loop
+    }
+}
+
+

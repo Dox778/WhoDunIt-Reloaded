@@ -1,0 +1,426 @@
+episode "WDI01"
+{
+picname = "M_WDIMNU"
+key = 1
+}
+
+episode "WDIEXHUB"
+{
+picname = "M_WDIEX"
+key = 2
+}
+
+gameinfo
+{
+	titlepage = "TITLEPIC"
+	creditpage = "CREDIT"
+	titlemusic = "$MUSIC_DM2TTL"
+	titletime = 11
+	advisorytime = 0
+	pagetime = 5
+	chatsound = "misc/chat"
+	finalemusic = "$MUSIC_READ_M"
+	finaleflat = "SLIME16"
+	finalepage = "CREDIT"
+	infopage = "WDIHELP1", "WDIHELP2", "WDIHELP3", "WDIHELP4"
+	quitsound = "menu/quit2"
+	borderflat = "GRNROCK"
+	border = DoomBorder
+	telefogheight = 0
+	defkickback = 100
+	skyflatname = "F_SKY1"
+	translator = "xlat/doom.txt"
+	defaultbloodcolor = "68 00 00"
+	defaultbloodparticlecolor = "ff 00 00"
+	backpacktype = "Backpack"
+	intermissionmusic = "$MUSIC_DM2INT"
+	drawreadthis = true
+	
+	MenuFontColor_Header = "DarkGrey" //static text
+	MenuFontColor_Title = "Oxygen Rich"
+	MenuFontColor_Label = "Grey"
+	MenuFontColor_Value = "Red"
+	MenuFontColor_Action = "DarkRed"
+	MenuFontColor_Selection = "Gold"
+	MenuFontColor_Highlight = "Rich Yellow"
+	
+	MenuSliderColor = "Red"
+	MenuSliderBackColor = "DarkRed"
+	
+	QuitSound = "Knife/Backstab"
+	ForceTextInMenus = "true"
+	
+	DimColor = "Black"
+	DimAmount = 0.5
+	
+	QuitMessages = 
+"\cgAre you sure you want to quit? \n\ccadd me on discord for suggestions and feedback :3333 Dox778#3485",
+"\cgAre you sure you want to quit? \n\ccily Kaminsky",
+"\cgAre you sure you want to quit? \n\ccMETAL DANNY 420 smells",
+"\cgAre you sure you want to quit? \n\cchi DEA when are you going to abuse bugs again",
+"\cgAre you sure you want to quit? \n\ccFlares no longer disable shotgun traps. Watch your step!",
+"\cgAre you sure you want to quit? \n\ccEach weapon lists the amount of damage it deals per hit.",
+"\cgAre you sure you want to quit? \n\ccThe murderer has a few exclusive firearms. Be wary near someone with a shotgun or a pistol!",
+"\cgAre you sure you want to quit? \n\ccMOST weapons used by the innocents deal less damage against them.",
+"\cgAre you sure you want to quit? \n\ccYou can throw your weapons further by holding down the 'drop weapon' bind. Useful for sharing your weapons at a distance, or just to goof around!",
+"\cgAre you sure you want to quit? \n\ccYou can cancel the reload animation by deselecting your gun before you insert the ammunition.",
+"\cgAre you sure you want to quit? \n\ccDances are fun! Though they do leave you vulnerable for their duration. Be wary!",
+"\cgAre you sure you want to quit? \n\ccRandom lootboxes can spawn many things, even live TNT or gas...",
+"\cgAre you sure you want to quit? \n\ccThis addon features A LOT more enviromental interactivity. Have fun breaking beer bottles!",
+"\cgAre you sure you want to quit? \n\ccIt's 3 am at the time of writing this message lol",
+"\cgAre you sure you want to quit? \n\ccWith your fists out, hold down the 'alt fire' button for a short moment, and you'll perform a slap! It deals poor damage, but it's useful and funny for pushing stuff around - even other players!"
+	
+	PrecacheTextures =
+"SW0001", "SW0003", "SW0005", "SW0007", "SW0009", "SW0011", "SW0013", "SW0015", 
+"SW0017", "SW0019", "SW0021", "SW0023", "SW0025", "SW0027", "SW0029", "SW0031",
+"SB0001", "SB0003", "SB0005", "SB0007", "SB0009", "SB0011", "SB0013", "SB0015", 
+"SB0017", "SB0019", "SB0021", "SB0023", "SB0025", "SB0027", "SB0029", "SB0031",
+"SS0001", "SS0003", "SS0005", "SS0007","SS0009", "SS0011", "SS0013", "SS0015", 
+"SS0017", "SS0019", "SS0021", "SS0023", "SS0025", "SS0027", "SS0029", "SS0031", 
+"SN0001", "SN0003", "SN0005", "SN0007", "SN0009", "SN0011", "SN0013", "SN0015", 
+"SN0017", "SN0019",	"SN0021", "SN0023", "SN0025", "SN0027", "SN0029", "SN0031",
+"SL0001", "SL0003", "SL0005", "SL0007", "SL0009", "SL0011", "SL0013", "SL0015", 
+"SL0017", "SL0019", "SL0021", "SL0023", "SL0025", "SL0027", "SL0029", "SL0031",
+"WF0001", "WF0003", "WF0005", "WF0007", "WF0009", "WF0011", "WF0013", "WF0015", 
+"WF0017", "WF0019", "WF0021", "WF0023", "WF0025", "WF0027", "WF0029", "WF0031",
+"BF0001", "BF0003", "BF0005", "BF0007", "BF0009", "BF0011", "BF0013", "BF0015", 
+"BF0017", "BF0019", "BF0021", "BF0023", "BF0025", "BF0027", "BF0029", "BF0031",
+"SF0001", "SF0003", "SF0005", "SF0007", "SF0009", "SF0011", "SF0013", "SF0015", 
+"SF0017", "SF0019", "SF0021", "SF0023", "SF0025", "SF0027", "SF0029", "SF0031",
+"NF0001", "NF0003", "NF0005", "NF0007", "NF0009", "NF0011", "NF0013", "NF0015", 
+"NF0017", "NF0019", "NF0021", "NF0023", "NF0025", "NF0027", "NF0029", "NF0031",
+"LF0001", "LF0003", "LF0005", "LF0007", "LF0009", "LF0011", "LF0013", "LF0015", 
+"LF0017", "LF0019", "LF0021", "LF0023", "LF0025", "LF0027", "LF0029", "LF0031",
+"SNN0001", "SNN0003", "SNN0005", "SNN0007", "SNN0009", "SNN0011", "SNN0013", "SNN0015", 
+"SNN0017", "SNN0019", "SNN0021", "SNN0023", "SNN0025", "SNN0027", "SNN0029", "SNN0031",
+"NNF0001", "NNF0003", "NNF0005", "NNF0007", "NNF0009", "NNF0011", "NNF0013", "NNF0015", 
+"NNF0017", "NNF0019", "NNF0021", "NNF0023", "NNF0025", "NNF0027", "NNF0029", "NNF0031"
+}
+
+map TITLEMAP "Welcome to Who Dun It: Reloaded"
+{
+	levelnum = 700
+	next = "TITLEMAP"
+	sky1 = "SKYB", 0.0
+	lightning 
+	smoothlighting 
+}
+
+defaultmap
+{
+	allowcrouch
+	allowjump
+	AllowFreelook 
+	checkswitchrange
+	fallingdamage
+	forcefallingdamage
+	TeamDamage = 1.0
+	nointermission
+	f1 = "WDIHELP1" "WDIHELP2" "WDIHELP3" "WDIHELP4"
+	next = WDI01
+	//OutsideFog = "06 06 06"
+}
+
+map TEST "Modder Test Map"
+{
+	levelnum = 778
+	next = "TEST"
+	secretnext = "MAP31"
+	sky1 = "GCLOU", 0.6
+	music = "TESTMUS"
+}
+
+Map TEX01 "Texture Testmap"
+{
+	levelnum = 779
+	next = "TEX01"
+	secretnext = "TEX01"
+	sky1 = "GCLOU", 0.6
+	music = "TESTMUS"
+}
+
+map WDI01 "Asylum"
+{
+	levelnum = 1
+	next = WDI02
+	sky1 = "SKYB", 0.0
+	music = D_SPOOK
+	horizwallshade = 8
+	vertwallshade = 0
+}
+
+map WDI02 "Now Museum, Now You Don't!"
+{
+	levelnum = 2
+	next = WDI03
+	sky1 = "STSKY8B", 0.0
+	music = D_LEVEL1
+	lightning 
+	smoothlighting 
+}
+
+map WDI03 "Clock Town"
+{
+	levelnum = 3
+	next = WDI04
+	sky1 = "OVERCAST", 0.0
+	music = WDIZEB1M
+	evenlighting 
+}
+
+map WDI04 "Confinement"
+{
+	levelnum = 4
+	next = WDI05
+	sky1 = "STSKY8B", 0.0
+	music = D_HLMS01
+	evenlighting 
+}
+
+map WDI05 "Men's Night Out"
+{
+	levelnum = 5
+	next = WDI06
+	sky1 = "DRKSKY", 0.0 //old "STSKY8B", 0.0
+	music = D_SPOOK
+	smoothlighting
+	lightning 
+}
+
+map WDI06 "Surrounded"
+{
+	levelnum = 6
+	sky1 = "STSKY8B", 0.0
+	music = D_LEVEL1
+	next = WDI07
+	lightning 
+	smoothlighting 
+}
+
+map WDI07 "Cradle Under The Star" //not Included
+{
+	levelnum = 7
+	next = WDI08
+	sky1 = "DRKSKY", 0.0
+	music = D_LEVEL1
+	evenlighting
+}
+
+map WDI08 "St. Mercy Hospital"
+{
+	levelnum = 8
+	next = WDI09
+	sky1 = "STSKY8", 0.0
+	music = D_SPOOK
+	evenlighting
+}
+
+map WDI09 "Applesauce Factory"
+{
+	levelnum = 9
+	next = WDI10
+	sky1 = "CSKY", 0.0
+	music = D_SEWER
+}
+
+map WDI10 "Slaughter Seminar"
+{
+	levelnum = 10
+	next = WDI11
+	sky1 = "STSKY8B", 0.0
+	//music = D_SPOOK
+	music = D_SKOOL1
+	evenlighting 
+}
+
+
+map WDI11 "Bunker Down"
+{
+	levelnum = 11
+	next = WDI12
+	sky1 = "YZSKY2", 0.15
+	music = BASSRUMB
+	fade = "black"	
+}
+
+map WDI12 "Where-house"
+{
+	levelnum = 12
+	next = WDI13
+	sky1 = "SICASKY2", 0.0
+	music = D_SICA
+}
+
+map WDI13 "Echo Ridge"
+{
+	levelnum = 13
+	next = WDI14
+	sky1 = "GCLOU", 0.03
+	music = D_ECHO
+	horizwallshade = 6
+	vertwallshade = 0
+}
+
+map WDI14 "Cold Night"
+{
+	levelnum = 14
+	next = WDI15
+	music = D_MIDN
+ }  
+ 
+map WDI15 "Halls Of Silence"
+{
+	levelnum = 15
+	next = WDI16
+	Music= D_KIWI01
+    evenlighting
+ }      
+
+map WDI16 "Castaway"
+{
+	levelnum = 16
+	next = WDI17
+	SKY1 = "DAWNCLOD", 0.0
+	music = D_OCEAN
+	evenlighting
+}
+
+map WDI17 "The Tomb of Ramses II"
+{
+	levelnum = 17
+	next = WDI18
+	sky1 = "SKY2", 0.0
+	music = D_TOMB
+	horizwallshade = 8
+	vertwallshade = 0
+}
+
+map WDI18 "Stormy Night"
+{
+	levelnum = 18
+	next= WDI19
+	sky1 = STSKY8
+	music = "meduamb"
+	horizwallshade = 8
+	vertwallshade = 0
+	evenlighting	
+}
+
+map WDI19 "Whodunit Mansion"
+{
+	levelnum = 19
+	next= WDI20 
+	sky1 = "SRISE", 0.00
+	sky2 = "SLSKY", 0.00
+	Music="D_MANSI"
+	SkyStretch
+}
+
+map WDI20 "Insomnia"
+{
+    levelnum = 20
+	sky1 = "SKYB", 0.0
+	UsePlayerStartZ	
+}
+
+Map WDI21 "Knee-Deep in The Murder"
+{
+	levelnum = 21
+	Music = "D_E1M1_"
+	Next = WDI22
+	AllowMonsterTelefrags
+}
+
+map WDI22 "Nicht einmal ein Herrenhaus"
+{
+	levelnum = 22
+	next = WDI23
+	music = d_thewal
+	fade = "black"
+}
+
+map WDI23 "Mixture of Ages"
+{
+	levelnum = 23
+	next= WDI24
+	sky1= "rsky03",0.0
+	Music = "D_MANSI"
+	evenlighting
+	oldfallingdamage
+	strifefallingdamage
+}
+
+map WDI24 "Scarlet Blizzard"
+{
+	levelnum = 24
+	fade ="black"
+	Music = "D_ARCTIC"
+	nointermission
+	next = WDI01
+}
+
+
+map WDI25 "Phobos Outpost (TEST)"
+{
+	levelnum = 25
+	music = "D_H2AMB"
+	next = WDI01
+	evenlighting
+}
+
+map WDIEX01 "Marsis"
+{
+	levelnum = 31
+	next = WDIEX02
+	fade = "black"
+	Music = "D_TISHIN"
+	sky1 = YZSKY2, 0.15
+	sky2 = YZSKY1, 0.0
+	AllowMonsterTelefrags
+}
+
+map WDIEX02 "Retorn'79"
+{
+	levelnum = 32
+	next = WDIEX03
+	fade = "black"
+	Music = "D_TISHIN"
+	evenlighting
+}
+
+map WDIEX03 "SlenderDunIt"
+{
+	levelnum = 33
+	next = WDIEXSEC
+	fade = "black"
+	Music = "D_SLWIND"
+	evenlighting
+}
+
+map WDIEXSEC "MGS1, Sacred Amulet, SH4"
+{
+	levelnum = 34
+	next = WDI01
+	Music = "D_TISHIN"
+	evenlighting
+}
+
+
+map WDIEXHUB "Welcome to EX"
+{
+levelnum = 77
+next = WDIEX01
+fade = "black"
+Music = "D_SPOOK"
+sky1 = YZSKY2, 0.15
+sky2 = YZSKY1, 0.0
+nocrouch
+NoJump 
+checkswitchrange
+fallingdamage
+forcefallingdamage
+nointermission 
+TeamDamage = 1.0
+AllowMonsterTelefrags
+}
+

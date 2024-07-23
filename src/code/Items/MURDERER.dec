@@ -1,0 +1,1035 @@
+Actor MurderMarker : Inventory
+{
+  Inventory.PickupSound ""
+  Inventory.MaxAmount 1
+  +INVENTORY.UNDROPPABLE
+  +INVENTORY.UNTOSSABLE
+}
+Actor MadMeter : Ammo
+{
+	Inventory.Amount 5
+	Inventory.MaxAmount 500
+	Ammo.BackpackAmount 500
+	Ammo.BackpackMaxAmount 500
+	+INVENTORY.UNDROPPABLE
+	+INVENTORY.UNTOSSABLE
+	-INVENTORY.INTERHUBSTRIP
+}
+
+actor GetSane : CustomInventory //Given in pain states
+{
+  inventory.pickupsound ""
+  Inventory.MaxAmount 100
+  states
+  {
+  Spawn:
+    AWI3 A -1
+    stop
+  Pickup:
+    TNT1 A 1 ACS_ExecuteAlways(417,0,0,0)
+    TNT1 A 0 A_GiveInventory("MadMeter", 15)
+    stop
+  }
+}
+
+actor GetHimSane : CustomInventory //Given to the attacker in pain states
+{
+  inventory.pickupsound ""
+  Inventory.MaxAmount 100
+  states
+  {
+  Spawn:
+    AWI3 A -1
+    stop
+  Pickup:
+    TNT1 A 1 ACS_ExecuteAlways(417,0,0,0)
+    TNT1 A 0 A_GiveInventory("MadMeter", 10)
+    stop
+  }
+}
+
+actor GetSuperSane : CustomInventory //Given on death.
+{
+  inventory.pickupsound ""
+  Inventory.MaxAmount 100
+  states
+  {
+  Spawn:
+    AWI3 A -1
+    stop
+  Pickup:
+    TNT1 A 0 A_JumpifInventory("MurderMarker", 1, 2)
+	TNT1 A 0 A_Jump(256, "ByeBye")
+    TNT1 A 1 ACS_ExecuteAlways(417,0,0,0)
+	TNT1 A 0 A_GiveInventory("Health", 30)
+    TNT1 A 0 A_GiveInventory("MadMeter", 250)
+	TNT1 A 0
+    stop
+  ByeBye:
+    TNT1 A -1
+	stop
+  }
+}
+
+
+//================================================================
+//================================================
+//================================
+//MURD ITEMS
+
+//Bertholite (Chlorine Gas)
+
+Actor ChlorineGas : CustomInventory 10492
+{
+	//$Category WDI Murderer Stuff
+	//$Sprite PSBGA0
+	//$Title "Bertholite"
+	Inventory.PickupFlash "PickupFlash"
+	Inventory.MaxAmount 1
+	Inventory.Amount 1
+	Inventory.Icon "ARTIPSBG"
+	Inventory.PickupSound ""
+	Inventory.PickupMessage "\cjPicked up a \c[Q9]Bertholite canister."
+	Inventory.Respawntics 10500 // 5 minutes
+	+INVBAR
+	+FANCYPICKUPSOUND
+	+INVENTORY.UNDROPPABLE
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		PSBG A -1
+		Stop
+	Use:
+		TNT1 A 0 A_JumpIfInventory("PlayDead",1,"Nope")
+		TNT1 A 0 A_FireCustomMissile("GasCanister", 0, 0, 0, 0)
+		TNT1 A 0 A_GiveInventory("GasUsed", 1)
+		Stop
+	Nope:
+		TNT1 A 1 A_Print("Can't do it like this!")
+		fail
+}}
+
+Actor GasCanister
+{
+	Radius 12
+	Height 12
+	Mass 10
+	Speed 25
+	DamageType "Gas"
+	PROJECTILE
+	-NOGRAVITY
+    +NODAMAGETHRUST
+	+NOBLOOD
+	-BLOODSPLATTER
+//	DeathSound "molly/drop"
+	Renderstyle translucent
+	Alpha 0.7
+	+DONTSPLASH
+	+FORCEXYBILLBOARD
+	+SKYEXPLODE
+	+EXPLODEONWATER
+	+THRUACTORS
+	BounceType Hexen
+	BounceFactor 0.3
+	WallBounceFactor 0.2
+	ReactionTime 35
+	DeathSound "weapons/Gasbreak"
+    States
+	{
+	Spawn:
+		PSBG A 1 A_CountDown
+		loop
+	
+	Death:
+		PSBG A 0 A_Scream
+		TNT1 AAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("NewGlassShard", random(-4, 4), random(-4, 4), random(1, 6), random(-16, 16), random(-16, 16), random(-4, 16), random(0, 360), SXF_ABSOLUTEMOMENTUM|SXF_ABSOLUTEANGLE|SXF_NOCHECKPOSITION, 0)
+		TNT1 A 0 ThrustThingZ(0,8,0,0)
+		PSBG BC 3 A_Explode(10,312)
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx ("ChlorineCloud", 0, 0, 0, random(-4.0,4.0), random(-4.0,4.0), random(-0.6, 1.0), random(0, 360), SXF_ABSOLUTEMOMENTUM|SXF_ABSOLUTEANGLE|SXF_NOCHECKPOSITION, 0)	
+		TNT1 AAAAAAAAAA 0 A_SpawnItemEx ("ChlorineCloud", 0, 0, 0, random(-6.0,6.0), random(-6.0,6.0), random(-1.5, 2.5), random(0, 360), SXF_ABSOLUTEMOMENTUM|SXF_ABSOLUTEANGLE|SXF_NOCHECKPOSITION, 0)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx ("ChlorineCloud", 0, 0, 0, random(-15.0,15.0), random(-15.0,15.0), random(-5.0, 5.0), random(0, 360), SXF_ABSOLUTEMOMENTUM|SXF_ABSOLUTEANGLE|SXF_NOCHECKPOSITION, 0)
+		TNT1 A 1  A_PlaySound("GasCan/Hiss",0)
+		stop	
+	}	
+}
+
+ACTOR ChlorineCloud //Lol hexen cloud.
+{
+	Radius 10
+	Height 12
+	DamageType "Gas"
+	PoisonDamage 3
+	Mass 0x7fffffff
+	ReactionTime 120
+	BounceFactor 0.15
+	MaxStepHeight 64
+	Gravity 0.0001
+	BounceType "Hexen"
+	BounceFactor 0.4
+	WallBounceFactor 0.15
+	RenderStyle Add
+	Alpha 0.2
+	+CANNOTPUSH +CANBLAST
+	+NOEXPLODEFLOOR +DONTSPLASH
+	+DROPOFF +NOBLOCKMAP
+	+NODAMAGETHRUST +BLOODLESSIMPACT
+	+SLIDESONWALLS +FORCEXYBILLBOARD
+	Speed 2
+	States
+	{
+	Spawn:
+		PSBG D 1 NODELAY
+		PSBG DEFH 4
+		PSBG H 1 A_Explode(4, 128)
+		Goto Float
+	Float:
+		PSBG HH 18 A_Explode(4, 128)
+		PSBG H 0 A_Countdown	
+		loop
+	Death:
+		PSBG H 1 A_FadeOut(0.001)
+		loop
+  }
+}
+
+//==========================
+//Smoke Bomb (SPLINTER CELL VERSUS STYLE)
+ACTOR SmokeBomb : CustomInventory 10498
+{
+  //$Category WDI Murderer Stuff
+  //$Sprite SSBGA0
+  //$Title "Smoke Bomb"
+  +INVBAR
+  +FANCYPICKUPSOUND
+  +INVENTORY.UNDROPPABLE
+  Inventory.DefMaxAmount
+  Inventory.PickupFlash "PickupFlash"
+  Inventory.MaxAmount 2
+  Inventory.Icon "ARTISSBG"
+  Inventory.PickupSound ""
+  Inventory.PickupMessage "\cjPicked up a \c[H2]Smoke Bomb."
+  Inventory.RespawnTics 2100 // 1 minute
+  +FORCEXYBILLBOARD
+  Scale 0.25
+  States
+  {
+  Spawn:
+    SSBG A -1
+    Stop
+
+  Use:
+	TNT1 A 0 A_JumpIfInventory("PlayDead",1,"Nope")
+    TNT1 A 0 A_FireCustomMissile("SmokeCanister", 0, 0, 0, 0, 0, 0)
+	TNT1 A 0 A_GiveInventory("SmokeUsed", 1)
+	stop
+	Nope:
+		TNT1 A 1 A_Print("Can't do it like this!")
+		fail
+  }
+}
+
+Actor SmokeCanister
+{
+	Radius 12
+	Height 12
+	Mass 10
+	Speed 25
+	DamageType "Cough"
+	PROJECTILE
+	+NOGRAVITY
+	+NOBLOOD
+	-BLOODSPLATTER
+	+FORCEXYBILLBOARD
+	+THRUACTORS
+	Renderstyle Translucent
+    States
+{
+	Spawn:
+	SSBG A 3
+	SSBG A 1 A_Stop
+	SSBG A 1 ThrustThingZ (0, 128, 1, 0)
+	Goto Death
+	
+	Death:
+	SSBG A 2
+	TNT1 A 0 A_PlaySound("Smokebomb/Bang")
+	TNT1 A 0 A_FadeOut(0.3)
+	SSBG BC 4
+	TNT1 A 0
+	TNT1 A 0 A_PlaySound("Smokebomb/Hiss")
+	TNT1 AAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx ("SmokeCloud", random(5,-5), random(5,-5), 0, random(-5.0,5.0), random(-5.0,5.0), random(-1.0, 1.0), random(0, 360), SXF_ABSOLUTEMOMENTUM|SXF_ABSOLUTEANGLE|SXF_NOCHECKPOSITION, 0)
+	TNT1 AAAAAAAAAAAAA 0 A_SpawnItemEx ("SmokeCloud", random(5,-5), random(5,-5), 0, random(-8.0,8.0), random(-8.0, 8.0), random(-1.0, 1.0), random(0, 360), SXF_ABSOLUTEMOMENTUM|SXF_ABSOLUTEANGLE|SXF_NOCHECKPOSITION, 0)
+	TNT1 AAAAAAAAAA 0 A_SpawnItemEx ("SmokeCloud", random(5,-5), random(5,-5), 0, random(-15.0, 15.0), random(-15.0, 15.0), random(-1.0, 1.0), random(0, 360), SXF_ABSOLUTEMOMENTUM|SXF_ABSOLUTEANGLE|SXF_NOCHECKPOSITION, 0)
+	TNT1 A 1
+	stop
+		
+}
+}
+
+ACTOR SmokeCloud //Lol wut
+{
+  Radius 20
+  Height 30
+  scale 0.95
+  DamageType "Cough"
+  Mass 0x7fffffff
+  ReactionTime 1
+  BounceFactor 0.0
+  MaxStepHeight 64
+  Gravity 0.0001
+  WallBounceFactor 0.0
+  +HEXENBOUNCE 
+  //+FLOATBOB
+  +NOBLOCKMAP
+  +NOGRAVITY
+  +CANNOTPUSH
+  +DROPOFF
+  +DONTSPLASH
+  +FOILINVUL
+  +CANBLAST
+  +BLOODLESSIMPACT
+  +SLIDESONWALLS
+  +FORCEXYBILLBOARD
+  +CLIENTSIDEONLY
+  Renderstyle Translucent
+  Alpha 0.85
+  DeathSound "PoisonShroomDeath"
+
+  States
+  {
+  Spawn:
+    XSMK A 1
+    XSMK A 1 A_Scream
+    XSMK A 4
+ 	Goto Float
+  
+  Float:
+    XSMK A 35 
+	XSMK A 0 A_Countdown
+	loop
+ 
+ Death:
+    XSMK A 1 A_FadeOut(0.001)
+    loop
+  }
+}
+
+
+
+//===========================
+//Shotgun trap (Totally not like Saw or anything)
+ACTOR TripShotgun : CustomInventory 10493
+{
+  //$Category WDI Murderer Stuff
+  //$Sprite TURTA8A2
+  //$Title "Trip Shotgun"
+  +INVBAR
+  +FANCYPICKUPSOUND
+  +INVENTORY.UNDROPPABLE
+  Scale 0.5	
+  Inventory.DefMaxAmount
+  Inventory.PickupFlash "PickupFlash"
+  Inventory.MaxAmount 2
+  Inventory.Icon "ARTITURT"
+  Inventory.PickupSound ""
+  Inventory.PickupMessage "\cjPicked up a \c[S7]Tripwire Shotgun.\n\caDamage: \c[C4]up to 130"
+  Inventory.RespawnTics 2625 // 1 minute 15 sec
+  +FORCEXYBILLBOARD
+  States
+  {
+  Spawn:
+    TURT A -1
+    Stop
+  Use:
+	TNT1 A 0 A_JumpIfInventory("PlayDead",1,"Nope")
+	TURT A 0 A_FireCustomMissile("ThrownTripShotgun", 0, 0, 0, 0)
+	TURT A 0 A_GiveInventory("TripUsed", 1)
+	stop
+	Nope:
+		TNT1 A 1 A_Print("Can't do it like this!")
+		fail
+  }
+}
+
+Actor ShotgunTrap
+{
+	Health 50
+	Radius 8
+	Height 8
+	Mass 0x7fffffff
+	Scale 0.5	
+	DamageType "ShotgunTrap"
+	DamageFactor "Gas", 0.0
+	DamageFactor "Heal", 0.0
+	Obituary ""
+	SeeSound "weapons/turretactive"
+	-SOLID
+	-NOGRAVITY
+	+SHOOTABLE
+	+STRIFEDAMAGE
+	+STANDSTILL
+	+NOBLOOD
+	+QUICKTORETALIATE
+	+BUMPSPECIAL
+	+FORCEXYBILLBOARD
+	+SKYEXPLODE
+	+EXPLODEONWATER
+    States
+{
+	Spawn:
+	TURT A 10 
+	TURT A 0 A_PlaySound("SHTRDEPL")
+	TURT A 24 A_KillMaster
+	TURT A 1 A_PlaySound("SHTRLOAD")
+	TURT A 28
+	TURT A 1 A_PlaySound("SHTRLOAD")
+	TURT A 30
+	TURT A 1 A_PlaySound("SHTRLRDY")
+	TURT A 25
+    goto Look
+	
+	Look:
+	TURT A 1 A_LookEx(LOF_DONTCHASEGOAL|LOF_NOSOUNDCHECK, 1, 256, 1, 45, "Shoot")
+	Wait
+
+	See:	
+	Shoot:
+	TURT B 1 A_ClearTarget //Because of the wide FOV needed to set them off.
+	TURT B 0 A_PlaySound("SHTRFIRE")
+	TURT B 0 ThrustThingZ(0,12,0,1)
+	TURT BD 1 BRIGHT Light("FireBurningLight") A_CustomBulletAttack(8, 8, 6, 3, "TripShotgunPuff", 10000, 1)
+	TURT A 4
+	TURT B 0 A_PlaySound("SHTRFIRE")
+	TURT B 0 ThrustThingZ(0,12,0,1)
+	TURT BD 1 BRIGHT Light("FireBurningLight") A_CustomBulletAttack(8, 8, 6, 3, "TripShotgunPuff", 10000, 1)
+	TURT A 35 
+	TURT A 4 A_Playsound("SHTREJSH")
+	TURT B 0 A_SpawnItemEx ("ShotgunCasing", 0, 1, 0, 0, random(2, 6), random(2, 15), 0, 0, 0)
+	TURT A 12 
+	TURT A 4 A_Playsound("SHTREJSH")
+	TURT B 0 A_SpawnItemEx ("ShotgunCasing", 0, -1, 0, 0, random(-2, -6), random(2, 15), 0, 0, 0)
+	TURT A 35
+	TURT A 1 A_Die
+    Goto Death
+	
+	Death:
+	TNT1 A 0 A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	TURT C 1 A_Playsound("SHTRDEST")
+	TURT A 0 A_NoBlocking
+	DKIT E 0 A_SpawnItemEx ("SparkEffect", 0, 0, 6, 0, 0, 0, 0,SXF_SETMASTER, 0)
+	TURT C 70
+	TURT C 1 A_RemoveChildren
+	TURT C -1
+	stop
+	
+}
+}
+
+ACTOR ThrownTripShotgun
+{
+	PROJECTILE
+	-NOGRAVITY
+	+NOBLOOD
+	-BLOODSPLATTER
+	scale 0.5
+	Damage 0
+	Radius 8
+	Height 8
+	Speed 10
+	DeathSound "weapons/gundrop"
+	States
+	{
+	Spawn:
+		TURT A 1 
+		Loop
+	Death:
+		TURT A 0
+		TURT A 1 A_SpawnItemEx("ShotgunTrap", 0, 0, 0, 0, 0, 0, 180, 0, 0)
+		Stop
+	}
+}
+
+
+Actor DefaultPuff : BulletPuff
+{
+DamageType "Default"
+}
+
+Actor TripShotgunPuff : DefaultPuff
+{
+DamageType "ShotgunTrap"
+Decal "BulletChip"
+activesound "none"
+attacksound "Bullet/Ricochet"
+seesound "Bullet/Hit"
+vspeed 0
++FORCEXYBILLBOARD
++PUFFONACTORS
+	renderstyle Add
+	alpha 1.0
+	Scale 0.1
+	+BRIGHT
+  states
+  {
+Crash:
+  Spawn:
+    TNT1 A 0
+	BPUF A 1 A_SpawnItemEx ("RicoChet",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+	BPUF D 1 A_SetScale(0.16,0.16)
+  Melee:
+	TNT1 A 1
+	stop
+	xdeath:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound("Bullet/Hit")
+		stop
+}
+}
+Actor LolTrap
+{
+	Radius 8
+	Height 8
+	Mass 10
+	Scale 0.5	
+	Obituary "oh my god %o got fucking BLASTED by a LOLTRAP LMAOOOOOOOOOOOOOOO!!!!!! MY MAN GOT DEMOLISHED BY A SILLY LEVEL HAZARD NO WAYYYYYY are you silly man? are you stupid????? yes you are lmfafooooweoe"
+	SeeSound "weapons/turretactive"
+	DamageType "ShotgunTrap"
+	+SOLID
+	+FORCEXYBILLBOARD
+    States
+{
+	/*
+	Spawn:
+	TURT A 10
+	TURT A 0 A_PlaySound("SHTRDEPL")
+	TURT A 24
+	TURT A 1 A_PlaySound("SHTRLOAD")
+	TURT A 28
+	TURT A 1 A_PlaySound("SHTRLOAD")
+	//TURT A 25
+	//TURT A 1 A_PlaySound("weapons/Shotgunclose")
+	TURT A 30
+	TURT A 1 A_PlaySound("SHTRLRDY")
+	TURT A 25
+	TURT AAAAAAAAAAAAAAAAAAAAAAAAA 1 A_LookEx(LOF_DONTCHASEGOAL|LOF_NOSOUNDCHECK, 0, 256, 0, 2, "Shoot")
+    goto Spawn + 11
+	*/
+	
+	Spawn:
+	TURT A 10
+	TURT A 0 A_PlaySound("SHTRDEPL")
+	TURT A 24
+	TURT AAAAAAAAAA 10 A_PlaySound("SHTRLOAD", 0)
+	NULL A 0 ThrustThingZ(0,16,0,1)
+	NULL A 0 A_SetAngle(angle+45)
+	TURT A 5 A_PlaySound("SHTRLRDY")
+	NULL A 0 ThrustThingZ(0,16,0,1)
+	NULL A 0 A_SetAngle(angle+45)
+	TURT A 5 A_PlaySound("SHTRLRDY")
+	NULL A 0 ThrustThingZ(0,16,0,1)
+	NULL A 0 A_SetAngle(angle+45)
+	TURT A 5 A_PlaySound("SHTRLRDY")
+	NULL A 0 ThrustThingZ(0,16,0,1)
+	NULL A 0 A_SetAngle(angle+45)
+	TURT A 5 A_PlaySound("SHTRLRDY")
+	NULL A 0 ThrustThingZ(0,16,0,1)
+	NULL A 0 A_SetAngle(angle+45)
+	TURT A 5 A_PlaySound("SHTRLRDY")
+	NULL A 0 ThrustThingZ(0,16,0,1)
+	NULL A 0 A_SetAngle(angle+45)
+	TURT A 5 A_PlaySound("SHTRLRDY")
+	NULL A 0 ThrustThingZ(0,16,0,1)
+	NULL A 0 A_SetAngle(angle+45)
+	TURT A 5 A_PlaySound("SHTRLRDY")
+	NULL A 0 ThrustThingZ(0,16,0,1)
+	NULL A 0 A_SetAngle(angle+45)
+	TURT A 5 A_PlaySound("SHTRLRDY")
+	TURT A 25
+	Stay:
+	TURT AAAAAAAAAAAAAAAAAAAAAAAAA 1 A_LookEx(LOF_DONTCHASEGOAL|LOF_NOSOUNDCHECK, 0, 256, 0, 2, "Shoot")
+    loop
+	
+	
+	Shoot:
+	TURT B 0 A_PlaySound("SHTRFIRE")
+	TURT B 0 A_SpawnItemEx ("ShotgunCasing", 0, 1, 0, 0, random(2, 6), random(2, 15), 0, 0, 0)
+	TURT B 0 ThrustThingZ(0,4,0,1)
+	TURT BD 1 BRIGHT A_CustomBulletAttack(7, 7, 6, 1, "TripShotgunPuff", 10000, 0)
+	TURT A 2
+	TURT B 0 A_PlaySound("SHTRFIRE")
+	TURT B 1 A_SpawnItemEx ("ShotgunCasing", 0, -1, 0, 0, random(-2, -6), random(2, 15), 0, 0, 0)
+	TURT B 0 ThrustThingZ(0,4,0,1)
+	TURT BD 1 BRIGHT A_CustomBulletAttack(7, 7, 6, 1, "TripShotgunPuff", 10000, 0)
+	TURT A 2
+    loop
+	
+	Death:
+	TURT A 35
+	TURT A 0 A_Playsound("weapons/turretdie")
+	TURT A 0 A_NoBlocking
+	TURT C -1
+	stop
+	
+}
+}
+
+
+//Spy Camera
+
+Actor RemoteCamera: CustomInventory
+{
+	Scale 0.1
+	Inventory.DefMaxAmount
+	Inventory.PickupFlash "PickupFlash"
+	Inventory.MaxAmount 1
+	Inventory.Icon "ARTICAM"
+	Inventory.PickupSound ""
+	Inventory.PickupMessage "\cjPicked up a \c[R5]Remote Camera"
+	Inventory.Respawntics 1575 // 45 Seconds
+	+INVBAR
+	+FANCYPICKUPSOUND
+	+INVENTORY.UNDROPPABLE
+	+DonTGib
+	+SKYEXPLODE
+	States
+	{
+	Spawn:
+		CAM2 A -1
+		Stop
+	Pickup:
+		TNT1 A 0 A_GiveInventory("FakeTeamkillHalo",1)
+		stop
+		
+	Use:
+		TNT1 A 0
+		TNT1 A 0 ACS_Execute(711, 0, 0, 0, 0)
+		TNT1 A 1 ACS_Execute(712, 0, 0, 0, 0)
+		Fail
+}}
+
+
+ACTOR RemoteCameraLauncher : CustomInventory 
+{
+  -INVBAR
+  +FANCYPICKUPSOUND
+  +INVENTORY.UNDROPPABLE
+  Inventory.DefMaxAmount
+  Inventory.PickupFlash "PickupFlash"
+  Inventory.MaxAmount 1
+  Inventory.Icon "ARTIBEAC"
+  Inventory.PickupSound ""
+  Inventory.PickupMessage "Picked up a Remote Camera"
+  Inventory.RespawnTics 21000 //10 minutes
+  scale 0.2
+  States
+  {
+  Spawn:
+    CAM3 A -1
+    Stop
+  Pickup:
+    TNT1 A 0 A_FireCustomMissile("DeployingCamera", 0, 0, 0, 0)
+	stop
+  }
+}
+
+ACTOR DeployingCamera
+{
+	PROJECTILE
+	-NOGRAVITY
+	+THRUGHOST
+	+RIPPER
+	+NOBLOOD
+	-BLOODSPLATTER
+	scale 0.2
+	Damage 0
+	Radius 2
+	Height 2
+	Speed 25
+	DeathSound "weapons/gundrop"
+	+SKYEXPLODE
+	+EXPLODEONWATER
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+        CAM3 A 0
+		CAM3 A 1 //Thing_ChangeTID(0, 1336)
+		Loop
+	Death:
+		CAM3 A 0
+		CAM3 A 1 A_SpawnItemEx("DeployedCamera", 0, 0, 0, 0, 0, 0, 180, 0, 0)
+		Stop
+	}
+}
+
+Actor DeployedCamera
+{
+	Health 10
+	Radius 16
+	Height 16
+	Mass 1000
+	scale 0.2
+	Obituary ""
+	SeeSound ""
+	ReactionTime 2500
+	DamageFactor "Gas", 0.0
+	CameraHeight 1
+	-SOLID
+	+SHOOTABLE
+	+STRIFEDAMAGE
+	+NOBLOOD
+	+NOGRAVITY
+	+FORCEXYBILLBOARD
+	DeathSound "weapons/gundrop"
+    States
+{
+	Spawn:
+	CAM3 A 0
+    CAM3 A 0 Thing_Destroy (1337)
+	CAM3 A 72 Thing_ChangeTID(0, 1337)
+	CAM3 A 1 //ACS_Execute(713, 0, 1, 0, 0)
+    CAM3 A -1 A_PlaySound("weapons/noiseready")
+	loop
+	
+	Death:
+    CAM3 A 0 Acs_Execute(713, 0, 2, 0, 0)
+	CAM3 A 0 A_NoBlocking 
+	CAM3 A 0 A_Scream
+	CAM3 A 0 A_ChangeFlag("NOGRAVITY",true)
+	CAM3 A 0 //A_Takefromtarget("CameraOn", 1)
+	CAM3 A 0 //A_Givetotarget("CameraCheck", 1)
+	CAM3 A -1 A_SpawnItemEx ("SparkEffect", 0, 0, 2, 0, 0, 0, 0,SXF_SETMASTER, 0)
+	stop
+	
+}
+}
+
+
+//Sound Emitter
+ACTOR SoundEmitter : CustomInventory 10495
+{
+  //$Category WDI Murderer Stuff
+  //$Sprite BEACA0
+  //$Title "Sound Emitter"
+  +INVBAR
+  +FANCYPICKUPSOUND
+  +INVENTORY.UNDROPPABLE
+  Inventory.DefMaxAmount
+  Inventory.PickupFlash "PickupFlash"
+  Inventory.MaxAmount 4
+  Inventory.Icon "ARTIBEAC"
+  Inventory.PickupSound ""
+  Inventory.PickupMessage "\cjPicked up a \c[S7]sound emitter."
+  Inventory.RespawnTics 2100 // 1 minute
+  Scale 0.2
+  +FORCEXYBILLBOARD
+  States
+  {
+  Spawn:
+    BEAC A -1
+    Stop
+
+  Use:
+    TNT1 A 0 A_FireCustomMissile("SoundThingy", 0, 0, 0, 0)
+    TNT1 A 0 A_GiveInventory("NoiseMakerUsed", 1)
+	stop
+  }
+}
+
+ACTOR SoundThingy
+{
+	PROJECTILE
+	-NOGRAVITY
+	+RIPPER
+	+NOBLOOD
+	-BLOODSPLATTER
+	scale 0.2
+	Damage 0
+	Radius 8
+	Height 8
+	Speed 10
+	//DeathSound "weapons/gundrop"
+	DeathSound ""
+	States
+	{
+	Spawn:
+		BEAC A 1 
+		Loop
+	Death:
+		BEAC A 0
+		BEAC A 1 A_SpawnItemEx("SoundThingy2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		Stop
+	}
+}
+
+
+
+Actor SoundThingy2
+{
+	Health 10
+	Radius 8
+	Height 8
+	Mass 0x7fffffff
+	Scale 0.2	
+	Obituary ""
+	SeeSound ""
+	ReactionTime 2500
+	DamageFactor "Gas", 0.0
+	DamageFactor "FlareEffect", 0.0
+	-SOLID
+	+SHOOTABLE
+	+STRIFEDAMAGE
+	+NOBLOOD
+	+LOOKALLAROUND
+    States
+{
+	Spawn:
+	BEAC A 72
+	BEAC A 1 A_PlaySound("weapons/noiseready")
+    goto SuperLoop
+	
+	SuperLoop:
+	BEAC A 1 A_ClearTarget
+	BEAC AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_LookEx(LOF_DONTCHASEGOAL|LOF_NOSOUNDCHECK, 1, 512, 0, 360, "MakeNearSound")
+	BEAC A 1 A_JumpIf(Random(0,10) > 8, "MakeSound")
+	loop
+	
+	MakeSoundPre:
+	BEAC A 1
+	MakeSound:
+	BEAC AAAAAAAAAAA 1 A_LookEx(LOF_DONTCHASEGOAL|LOF_NOSOUNDCHECK, 1, 512, 0, 360, "MakeNearSound")
+	BEAC A 0 A_SpawnItemEx("FootStep", 0, 0, 12, 0, 0, 0, 0, 0, 0)
+	BEAC AAAAAAAAAAA 1 A_LookEx(LOF_DONTCHASEGOAL|LOF_NOSOUNDCHECK, 1, 512, 0, 360, "MakeNearSound")
+	BEAC A 0 A_SpawnItemEx("FootStep", 0, 0, 12, 0, 0, 0, 0, 0, 0)
+	BEAC A 1 A_CountDown
+	BEAC A 0 A_JumpIf(Random(0,10) > 8, "MakeSoundPre")
+	BEAC A 0 A_JumpIf(Random(0,10) > 8, "SuperLoop")
+	BEAC A 1 A_PlaySound("weapons/KnifeReady")
+	BEAC A 0 A_JumpIf(Random(0,10) > 9, "SuperLoop") //Have a small chance to make it sound like somebody is getting attack with that knife
+	BEAC A 15 
+	BEAC A 4 A_PlaySound("Knife/Swing")
+	BEAC A 4 A_PlaySound("weapons/Knifehit")
+	BEAC A 1 A_PlaySound("SoundEmitter/Pain")
+	goto SuperLoop
+	
+	WaitingForSound:
+	BEAC A 1
+	MakeNearSound: //Loops if the object 'sees' a player. Has a chance of playing the knife draw when they break LOS (leave the room)
+	BEAC A 35 
+	BEAC A 1 A_JumpIfTargetInLOS("WaitingForSound", 360, 0)
+	BEAC A 1 A_JumpIf(Random(0,10) > 5, "SuperLoop")
+	BEAC A 3 A_PlaySound("weapons/KnifeReady")
+	BEAC A 0 A_JumpIf(Random(0,10) > 8, "SuperLoop") //Have a small chance to make it sound like somebody is getting attack with that knife
+	BEAC A 15 
+	BEAC A 4 A_PlaySound("Knife/Swing")
+	BEAC A 2 A_PlaySound("weapons/Knifehit")
+	BEAC A 1 A_PlaySound("SoundEmitter/Pain")
+	BEAC A 1 A_ClearTarget //Stop chasing that asshole
+    goto SuperLoop
+
+	Death:
+	BEAC A 1 A_Playsound("SHTRDEST")
+	TURT A 0 A_NoBlocking
+	TNT1 a 0 A_SetScale(0.15,0.2)
+	DKIT E 0 A_SpawnItemEx ("SparkEffect", 0, 0, 4, 0, 0, 0, 0,SXF_SETMASTER, 0)//A_CustomMissile("BigKitOrbit2", 48, 0, 180, 2, 0)
+	TURT C 70
+	TURT C 1 A_RemoveChildren
+	TURT C -1
+	stop
+	
+}
+}
+
+
+//Poisoned Stimpack
+
+actor FakeStim : CustomInventory 10500
+{
+  //$Category WDI Murderer Stuff
+  //$Sprite FTIMA0
+  //$Title "Poison Stimpack"
+  inventory.pickupmessage "\cjPicked up a \c[V1]Rigged Stimpack."
+  inventory.pickupsound ""
+  Inventory.Icon "ARTIFTIM"
+  Inventory.MaxAmount 3
+  Inventory.RespawnTics 2275 // 65 Seconds
+  +INVBAR
+  +INVENTORY.UNDROPPABLE
+  Radius 8
+  Height 8
+  +FORCEXYBILLBOARD
+  states
+  {
+  Spawn:
+    FTIM A -1
+    stop  
+
+Use:
+    TNT1 A 0 A_FireCustomMissile("DeployingStimGas", 0, 0, 0, 0)
+    TNT1 A 0 A_GiveInventory("FakeStimUsed", 1)
+    stop
+  }
+}
+
+actor FakeStimActive : CustomInventory 
+{
+  inventory.pickupmessage "\c[Q9]WHOOPS!"
+  inventory.pickupsound ""
+  +NODAMAGETHRUST
+  -solid
+  +shootable
+  +NOBLOOD
+  +DonTGib
+  Mass 0x7fffffff
+  Radius 8
+  Height 8
+  Health 20
+  DamageFactor "Gas", 0.0
+  DamageFactor "FlareEffect", 0.0
+  +FORCEXYBILLBOARD
+  states
+  {
+  Spawn:
+    FTIM A 10 //nodelay A_Jump(256,"Spawn1","Spawn2","Spawn3")
+   Spawn1:
+	FTIM A -1
+	stop
+ //  Spawn2:
+//	FTIM E -1
+//	stop
+ //  Spawn3:
+//	FTIM F -1
+//	stop
+
+  Pickup:
+    TNT1 A 0 A_GiveInventory("SlowCounter", 5)
+    TNT1 A 0 A_SpawnItemEx ("StimGas", 0, 0, 0, 0, 0, 0, 0, SXF_ABSOLUTEMOMENTUM|SXF_ABSOLUTEANGLE, 0)
+    stop
+
+  Death:
+	FTIM D 1 A_Playsound("SHTRDEST")
+	FTIM D 0 A_SpawnItemEx ("FakeStimBroken", 0, 0, 0, 0, 0, 0, 0,SXF_SETMASTER, 0)
+	FTIM D 0 A_SpawnItemEx ("SparkEffect", 0, 0, 4, 0, 0, 0, 0,SXF_SETMASTER, 0)
+	stop
+  }
+}
+Actor FakeStimBroken
+{
++CLIENTSIDEONLY
++MOVEWITHSECTOR
++FORCEXYBILLBOARD
+height 4
+radius 2
+	States
+	{
+	Spawn:
+	FTIM D 0 NODELAY A_Jump(128,2)
+	FTIM D 0 A_SetScale(-scalex,scaley)
+	FTIM D -1
+	stop
+	}
+}
+
+
+ACTOR DeployingStimGas
+{
+	PROJECTILE
+	-NOGRAVITY
+	-SOLID
+	+RIPPER
+	+NOBLOOD
+	-BLOODSPLATTER
+	Damage 0
+	Radius 4
+	Height 4
+	Speed 10
+	//DeathSound "weapons/gundrop"
+	+SKYEXPLODE
+	+EXPLODEONWATER
+	+FORCEXYBILLBOARD
+	BounceSound "molly/drop"
+	States
+	{
+	Spawn:
+		FTIM A 1 
+		Loop
+	Death:
+		FTIM A 35
+		FTIM A 1 A_SpawnItemEx("FakeStimActive", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		Stop
+	}
+}
+
+actor StimGas
+{
+PROJECTILE
+-NOGRAVITY
++NODAMAGETHRUST
+Obituary ""
+DamageType "Gas"
++FORCEXYBILLBOARD
+states
+{
+Spawn:
+	FTIM A 0
+	//lol fall through!
+Death:
+	FTIM A 0 A_PlaySound("Weapons/Aw_FFS")
+	FTIM A 1 A_Explode(20, 40)
+	FTIM BCBCBCBCBCBCBCBC 2
+	FTIM CCCCCCCCCCCCCCC 2 A_SpawnItemEx ("ChlorineCloudMini", 0, 0, 0, random(-6.0,6.0), random(-6.0,6.0), 0, random(0, 360), SXF_ABSOLUTEMOMENTUM|SXF_ABSOLUTEANGLE|SXF_NOCHECKPOSITION, 0)
+
+Deathloop: //Because state offsets didn't work for whatever reason
+	FTIM C 350
+	FTIM C 1 A_JumpIf(CallACS("CheckPerma") == 1,"Deathloop")
+	FTIM C 1 A_FadeOut(0.01)
+	loop
+} 
+}
+
+ACTOR ChlorineCloudMini : ChlorineCloud
+{
+Reactiontime 45
+DamageType "Gas"
+}
+
+ACTOR FakeTeamkillHalo : CustomInventory
+{
+  //$Category WDI Murderer Stuff
+  //$Sprite TURTA8A2
+  //$Title "Fake Halo"
+  +INVBAR
+  +FANCYPICKUPSOUND
+  +INVENTORY.UNDROPPABLE
+  Scale 0.5	
+  Inventory.DefMaxAmount
+  Inventory.PickupFlash "PickupFlash"
+  Inventory.MaxAmount 1
+  Inventory.Icon "ARTIHALO"
+  Inventory.PickupSound ""
+  Inventory.PickupMessage "\cjPicked up a fake teamkill halo."
+  Inventory.RespawnTics 2625 // 1 minute 15 sec
+  +FORCEXYBILLBOARD
+  +INVENTORY.INTERHUBSTRIP
+  States
+  {
+  Spawn:
+    TURT A -1
+    Stop
+	
+  Use:
+    TNT1 A 0 ACS_NamedExecuteAlways("FakeHalo",0)
+	TNT1 A 0 A_GiveInventory("MadMeter",100)
+	stop
+  }
+}
+
+
+
+
+
+
+
+

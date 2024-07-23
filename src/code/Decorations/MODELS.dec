@@ -1,0 +1,608 @@
+Actor Dryer : SwitchableDecoration 22222 {
+  //$Category WDI Models
+  //$Sprite DRARA0
+  //$Title "Dryer"
+	+solid
+	+USESPECIAL
+	+NOGRAVITY
+	Activation THINGSPEC_Switch|THINGSPEC_ThingActs
+	Radius 12
+	States
+	{
+	Spawn:
+		DRAR A -1
+		stop
+	Active:
+		DRAR A 66 A_PlaySound("DryOn",Chan_BODY)
+		DRAR A -1 A_PlaySound("DryLoop",Chan_BODY,1,1)
+		stop
+	InActive:
+		DRAR A -1 A_PlaySound("DryOff",Chan_BODY)
+		stop
+	}
+}
+
+Actor Sink 12222 {
+  //$Category WDI Models
+  //$Sprite SANKA1A5
+  //$Title "Sink"
+	States
+	{
+	Spawn:
+		SANK A -1
+		stop
+	}
+}
+
+Actor Toilet : SwitchableDecoration 800 {
+  //$Category WDI Models
+  //$Sprite TNT1A0
+  //$Title "Toilet"
+	+USESPECIAL
+	Activation THINGSPEC_Switch|THINGSPEC_ThingActs
+	Radius 12
+	States
+	{
+	Spawn:
+		MOIL A -1
+		stop
+	Active:
+		MOIL A 0 A_SpawnItemEX("SlimeParticleX",0,0,12,frandom(0.2,1.2),frandom(0.2,1.2),frandom(2.2,3.6),random(-90,90),SXF_NOCHECKPOSITION,248)
+		MOIL AA 0 A_SpawnItemEX("WaterParticleX",0,0,12,frandom(0.2,1.2),frandom(0.2,1.2),frandom(2.2,3.6),random(-90,90),SXF_NOCHECKPOSITION,220)
+		MOIL A 1 A_CHangeFlag("USESPECIAL",False)
+		MOIL A 180 A_PlaySound("POOFLUSH",Chan_BODY)
+		MOIL A -1 A_CHangeFlag("USESPECIAL",true)
+		stop
+	InActive:
+		MOIL A 0 A_SpawnItemEX("SlimeParticleX",0,0,12,frandom(-1.2,1.2),frandom(-1.2,1.2),frandom(2.2,3.6),random(0,90),SXF_NOCHECKPOSITION,248)
+		MOIL A 0 A_SpawnItemEX("WaterParticleX",0,0,12,frandom(-1.2,1.2),frandom(-1.2,1.2),frandom(2.2,3.6),random(0,90),SXF_NOCHECKPOSITION,220)
+		MOIL A 1 A_CHangeFlag("USESPECIAL",False)
+		MOIL A 180 A_PlaySound("POOFLUSH",Chan_BODY)
+		MOIL A -1 A_CHangeFlag("USESPECIAL",true)
+		stop
+	}
+}
+
+Actor ToiletSoundOnly: Toilet
+{ 
+Renderstyle None 
+Radius 4
+Height 32
+}
+
+Actor Car 900 {
+  //$Category WDI Models
+  //$Sprite CARRA6A8
+  //$Title "Car"
+	States
+	{
+	Spawn:
+		CARR A -1
+		stop
+	}
+}
+
+Actor Soap 4000 {
+  //$Category WDI Models
+  //$Sprite SOAPA0
+  //$Title "Soap"  
+	+NOGRAVITY
+	Height 14
+	Radius 8  
+	States
+	{
+	Spawn:
+		SOAP A -1
+		Stop
+	}
+}
+
+Actor Tpaper 5000 {
+  //$Category WDI Models
+  //$Sprite WDIMA0
+  //$Title "Toilet Paper"
+	Radius 8
+	Height 8  
+	+NOGRAVITY
+	//+SOLID  
+	States
+	{
+	Spawn:
+		TPAP A -1
+		Stop
+	}
+}
+
+Actor Television 6000 {
+  //$Category WDI Models
+  //$Sprite TNT1A0
+  //$Title "Television"
+	States
+	{
+	Spawn:
+		TVEL A -1
+		stop
+	}
+}
+
+Actor Piano 8000 {
+  //$Category WDI Models
+  //$Sprite TNT1A0
+  //$Title "Piano"
+	States
+	{
+	Spawn:
+		PIAN A -1
+		stop
+	}
+}
+
+Actor Stall : Toilet 9000 {
+  //$Category WDI Models
+  //$Sprite STALA2A6
+  //$Title "Stall"
+	States
+	{
+	Spawn:
+		STAL A -1
+		stop
+	Active:
+		STAL A 0 A_SpawnItemEX("SlimeParticleX",0,0,12,frandom(0.2,1.2),frandom(0.2,1.2),frandom(2.2,3.6),random(-90,90),SXF_NOCHECKPOSITION,248)
+		STAL AA 0 A_SpawnItemEX("WaterParticleX",0,0,12,frandom(0.2,1.2),frandom(0.2,1.2),frandom(2.2,3.6),random(-90,90),SXF_NOCHECKPOSITION,220)
+		STAL A 1 A_CHangeFlag("USESPECIAL",False)
+		STAL A 180 A_PlaySound("POOFLUSH",Chan_BODY)
+		STAL A -1 A_CHangeFlag("USESPECIAL",true)
+		stop
+	InActive:
+		STAL A 0 A_SpawnItemEX("SlimeParticleX",0,0,12,frandom(-1.2,1.2),frandom(-1.2,1.2),frandom(2.2,3.6),random(0,90),SXF_NOCHECKPOSITION,248)
+		STAL A 0 A_SpawnItemEX("WaterParticleX",0,0,12,frandom(-1.2,1.2),frandom(-1.2,1.2),frandom(2.2,3.6),random(0,90),SXF_NOCHECKPOSITION,220)
+		STAL A 1 A_CHangeFlag("USESPECIAL",False)
+		STAL A 180 A_PlaySound("POOFLUSH",Chan_BODY)
+		STAL A -1 A_CHangeFlag("USESPECIAL",true)
+		stop
+	}
+}
+
+
+//================================================================
+//================================================
+//================================
+//TheMisterCat's STUFF
+Actor Grate 10315
+{
+  //$Category WDI Models
+  //$Sprite GRATA0
+  //$Title "Grate"
+	Scale 4
+	+NOGRAVITY +NOINTERACTION
+	+CLIENTSIDEONLY
+	states
+	{
+		Spawn:
+		GRAT A -1
+		stop
+	}
+}
+
+Actor CatBox1 10316
+{
+  //$Category WDI Models
+  //$Sprite CBOXA0
+  //$Title "Cardboard box 1 (big)"
+	Mass 2000
+	radius 10
+	height 16
+	Health 10000
+	+SOLID +CANPASS
+	+SHOOTABLE +NOBLOOD
+	//+NODAMAGE
+	States
+	{
+		Spawn:
+			CBOX A -1
+			stop
+	}
+}
+
+Actor CatBox2 : CatBox1 10317 
+{ 
+  //$Category WDI Models
+  //$Sprite CBOXA0
+  //$Title "Cardboard box 2 (small)"
+	Scale 0.7 height 11 radius 6 
+}
+Actor CatBox3 : CatBox1 10318 
+{ 
+  //$Category WDI Models
+  //$Sprite CBOXA0
+  //$Title "Cardboard box 3 (wide)"
+	YScale 0.7 height 11 
+}
+Actor CatBox4 : CatBox1 10319 
+{ 
+  //$Category WDI Models
+  //$Sprite CBOXA0
+  //$Title "Cardboard box 4 (tiny)"
+	Scale 0.5 height 8 radius 2
+}
+Actor CatBox5 : CatBox1 10320 
+{
+  //$Category WDI Models
+  //$Sprite CBOXA0
+  //$Title "Cardboard box 5 (big open)
+}
+Actor CatBox6 : CatBox1 10321 
+{ 
+  //$Category WDI Models
+  //$Sprite CBOXA0
+  //$Title "Cardboard box 6 (wide open)"
+	YScale 0.7 Height 11 
+}
+Actor CatBoxUnwrapped : CatBox1 10322 
+{ 
+  //$Category WDI Models
+  //$Sprite CBOXA0
+  //$Title "Cardboard box (unwrapped)"
+	-SOLID -SHOOTABLE -CANPASS
+}
+
+Actor CatMartiniGlass 10281
+{
+  //$Category WDI Models
+  //$Sprite CBOXA0
+  //$Title "3D Martini Glass"
+	Scale 1.0
+	radius 2
+	height 4
+	RenderStyle translucent
+	alpha 0.8
+	PushFactor 0.1
+	+CANNOTPUSH +PUSHABLE
+	-SOLID -SHOOTABLE
+	states
+	{
+		Spawn:
+			MART A -1
+			stop
+	}
+}
+
+Actor CatTrashcan 10201 //Doesnt work :(
+{
+  //$Category WDI Models
+  //$Sprite TNT1A0
+  //$Title "3D trash can (broken)"
+	YScale 0.8
+	+SOLID
+	+NOBLOOD
+	+NODAMAGE
+	radius 16
+	height 28
+	
+	states
+		{
+			Spawn:
+			BARR A -1
+			stop
+		}
+}
+
+Actor CatBarrel 10202
+{
+  //$Category WDI Models
+  //$Sprite BARRA0
+  //$Title "3D barrel"
+	Scale 1.0
+	+SOLID
+	+NOBLOOD
+	+NODAMAGE
+	+PUSHABLE
+	radius 16
+	height 32
+	
+	states
+		{
+			Spawn:
+			BARR A -1
+			stop
+		}
+}
+
+
+Actor CatBottleLabelSpawner : RandomSpawner
+{
+Dropitem "CatBottleLabel1"
+Dropitem "CatBottleLabel2"
+Dropitem "CatBottleLabel3"
+Dropitem "CatBottleLabel4"
+}
+
+Actor CatBottleLabel1
+{
+	Scale 1.0
+	-SOLID
+	+NOINTERACTION
+	+NOBLOOD
+	+NODAMAGE
+	radius 3
+	height 6
+	States
+	{
+	Spawn:
+	BOTT A -1
+	stop
+	}
+}
+
+Actor CatBottleLabel2 : CatBottleLabel1 {}
+Actor CatBottleLabel3 : CatBottleLabel1 {}
+Actor CatBottleLabel4 : CatBottleLabel1 {}
+
+Actor CatBottle1 10210
+{
+  //$Category WDI Models
+  //$Sprite BOTTA0
+  //$Title "3D beer bottle (orange)"
+	Scale 1.0
+	alpha 0.7
+	renderstyle Add
+	radius 3
+	height 6
+	+SOLID
+	+NOBLOOD
+	+NODAMAGE
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+	BOTT A 35 NODELAY
+	BOTT A -1 A_SpawnItemEx("CatBottleLabel1", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	stop
+	}
+}
+
+Actor CatBottle2 : CatBottle1 10211 
+{
+  //$Category WDI Models
+  //$Sprite BOTTA0
+  //$Title "3D beer bottle (green)"
+} 
+Actor CatBottle3 : CatBottle1 10212 
+{
+  //$Category WDI Models
+  //$Sprite BOTTA0
+  //$Title "3D beer bottle (blue"
+} 
+
+Actor Page1a
+{
+	Scale 0.4
+	radius 1
+	height 2
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+		PAGE A -1
+		stop
+	}
+}
+
+actor Page1b : Page1a {}
+actor Page1c : Page1a {}
+actor Page1d : Page1a {}
+actor Page2a : Page1a {}
+actor Page2b : Page1a {}
+actor Page2c : Page1a {}
+actor Page2d : Page1a {}
+
+Actor Page : RandomSpawner 10358
+{
+  //$Category WDI Models
+  //$Sprite PAGEA0
+  //$Title "Loose page"
+Dropitem "page1a"
+Dropitem "page1b"
+Dropitem "page1c"
+Dropitem "page1d"
+}
+
+Actor Page2 : RandomSpawner 10359
+{
+  //$Category WDI Models
+  //$Sprite PAGEA0
+  //$Title "Loose booklet"
+Dropitem "page2a"
+Dropitem "page2b"
+Dropitem "page2c"
+Dropitem "page2d"
+}
+
+Actor Page3 : Page 10360 {}
+
+Actor ToolBox 10357
+{
+  //$Category WDI Models
+  //$Sprite TLBXA0
+  //$Title "Toolbox"
+	Scale 1.2
+	+SOLID
+	Height 12
+	Radius 6
+	+CANPASS
+	+SHOOTABLE
+	+NOBLOOD
+	+NODAMAGE
+	States
+	{
+	Spawn:
+	TLBX A -1
+	stop
+	}
+}
+
+Actor Spanner 10704
+{
+  //$Category WDI Models
+  //$Sprite SPANA0
+  //$Title "Spanner"
+	Height 4
+	Radius 8
+	-NOGRAVITY
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+	SPAN A -1
+	stop
+	}
+}
+
+Actor PipeSet 10703
+{
+  //$Category WDI Models
+  //$Sprite PIPPA0
+  //$Title "Pipe set"
+	Height 2
+	Radius 1
+	+NOGRAVITY
+	+FIXMAPTHINGPOS
+
+	States
+	{
+	Spawn:
+	PIPP A -1
+	stop
+	}
+}
+Actor PipeHorizontal : PipeSet 10705 
+{
+  //$Category WDI Models
+  //$Sprite PIPPA0
+  //$Title "Horizontal pipe"
+}
+Actor PipeCurved : PipeSet 10706 
+{
+  //$Category WDI Models
+  //$Sprite PIPPA0
+  //$Title "Curved pipe"
+}
+
+Actor BigPipe1 10707 
+{
+  //$Category WDI Models
+  //$Sprite PIPPA0
+  //$Title "Big pipe 1"
+	height 64
+	radius 16
+	+NOCLIP
+	+NOGRAVITY
+	+NOINTERACTION
+	-SHOOTABLE
+	+FORCEYBILLBOARD
+	scale 1.05
+
+	States
+	{
+	Spawn:
+	PIPP A -1
+	stop
+	}
+}
+Actor BigPipe1A : BigPipe1 10708 
+{
+  //$Category WDI Models
+  //$Sprite PIPPA0
+  //$Title "Big pipe 2"
+}
+Actor BigPipe1B : BigPipe1 10709 
+{
+  //$Category WDI Models
+  //$Sprite PIPPA0
+  //$Title "Big pipe 3"
+}
+Actor BigPipe1C : BigPipe1 10710 
+{
+  //$Category WDI Models
+  //$Sprite PIPPA0
+  //$Title "Big pipe 4"
+}
+
+Actor TripodLight 22007 
+{
+  //$Category WDI Models
+  //$Sprite PIPPA0
+  //$Title "Big pipe 4"
+	Height 8
+	Radius 18
+	+SOLID
+	States
+	{
+	Spawn:
+		TRIB A 35
+		TRIB A 1 A_SpawnItemEx("TripodLightBulb", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		TRIB A -1 A_SpawnItemEx("TripodLightBeam", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	}
+}
+
+Actor TripodLightBulb {
+	+NOCLIP
+	+NOINTERACTION
+	States
+	{
+	Spawn:
+		TRPA A -1 Bright
+		Stop
+}}
+
+Actor TripodLightBeam {
+	+NOCLIP
+	+NOINTERACTION
+	RenderStyle Add
+	Alpha 0.4
+	States
+	{
+	Spawn:
+		TRPA B -1 Bright
+		Stop
+}}
+
+Actor TripodLightStanding 22012 {
+	Height 52
+	Radius 12
+	+SOLID
+	+NODAMAGE
+	States
+	{
+	Spawn:
+		TRIP A 35
+		TRIP A 1 A_SpawnItemEx("TripodLightStandingBulb", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		TRIP A -1 A_SpawnItemEx("TripodLightStandingBeam", 0, 0, 0, 0, 0, 0, 0, 0, 0)
+		Stop
+}}
+
+Actor TripodLightStandingBulb {
+	+NOCLIP
+	+NOINTERACTION
+	States
+	{
+	Spawn:
+		TRPA A -1 Bright
+		Stop
+}}
+
+Actor TripodLightStandingBeam {
+	+NOCLIP
+	+NOINTERACTION
+	RenderStyle Add
+	Alpha 0.4
+	States
+	{
+	Spawn:
+		TRPA B -1 Bright
+		Stop
+}}
+
+
+
+

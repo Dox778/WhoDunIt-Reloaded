@@ -1,0 +1,129 @@
+///////////////////////////////////////////////////////////////////
+///////////////GLOWING TOXIC TEXTURE///////////////////////////////
+///////////////////////////////////////////////////////////////////
+brightmap TEXTURE SNN0001 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SNN0003 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SNN0005 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SNN0007 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SNN0009 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SNN0011 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SNN0013 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SNN0015 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SNN0017 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SNN0019 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SNN0021 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SNN0023 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SNN0025 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SNN0027 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SNN0029 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SNN0031 {map "BRIGHTMAPS/BMSL.png"}
+
+/////////////////////GLOWING TOXIC FALL////////////////////////////////////
+
+brightmap TEXTURE NNF0001 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE NNF0003 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE NNF0005 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE NNF0007 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE NNF0009 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE NNF0011 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE NNF0013 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE NNF0015 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE NNF0017 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE NNF0019 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE NNF0021 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE NNF0023 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE NNF0025 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE NNF0027 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE NNF0029 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE NNF0031 {map "BRIGHTMAPS/BMLF.png"}
+
+///////////////////LAVA//////////////////////////////////////////
+
+brightmap TEXTURE SL0001 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SL0003 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SL0005 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SL0007 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SL0009 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SL0011 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SL0013 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SL0015 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SL0017 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SL0019 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SL0021 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SL0023 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SL0025 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SL0027 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SL0029 {map "BRIGHTMAPS/BMSL.png"}
+brightmap TEXTURE SL0031 {map "BRIGHTMAPS/BMSL.png"}
+
+/////////////////////LAVA FALL////////////////////////////////////
+
+brightmap TEXTURE LF0001 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE LF0003 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE LF0005 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE LF0007 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE LF0009 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE LF0011 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE LF0013 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE LF0015 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE LF0017 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE LF0019 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE LF0021 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE LF0023 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE LF0025 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE LF0027 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE LF0029 {map "BRIGHTMAPS/BMLF.png"}
+brightmap TEXTURE LF0031 {map "BRIGHTMAPS/BMLF.png"}
+
+
+
+
+
+Glow
+{
+	Flats
+	{
+	LAVA1
+	LAVA2
+	LAVA3
+	LAVA4
+	//TLITE6_5
+	//TLITE6_6
+	}
+	Texture "FLAT17", white, 64
+	Texture "TLITE6_1", "FFEBCD", 64
+	Texture "TLITE6_4", "FFEBCD", 64
+	Texture "TLITE6_5", red, 64
+	Texture "TLITE6_6", "FFEBCD", 64
+	
+	Texture "SL0001", color, 35, fullbright
+	Texture "SL0003", color, 35, fullbright
+	Texture "SL0005", color, 35, fullbright
+	Texture "SL0007", color, 35, fullbright
+	Texture "SL0009", color, 35, fullbright
+	Texture "SL0011", color, 35, fullbright
+	Texture "SL0013", color, 35, fullbright
+	Texture "SL0015", color, 35, fullbright
+	Texture "SL0017", color, 35, fullbright
+	Texture "SL0019", color, 35, fullbright
+	Texture "SL0021", color, 35, fullbright
+	Texture "SL0023", color, 35, fullbright
+	Texture "SL0025", color, 35, fullbright
+	Texture "SL0027", color, 35, fullbright
+	Texture "SL0029", color, 35, fullbright
+	Texture "SL0031", color, 35, fullbright
+
+	Texture "LPLava", color, 35, fullbright
+	Texture "LAVAB", color, 35, fullbright
+	Texture "LAVA1", color, 35, fullbright
+	Texture "LAVA2", color, 35, fullbright
+	Texture "LAVA3", color, 35, fullbright
+	Texture "LAVA4", color, 35, fullbright
+	
+}
+
+
+
+
+
+

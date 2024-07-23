@@ -1,0 +1,161 @@
+//=================================================================================================================
+// SFX STUFF
+//---------------------------------------------------------------------------------------------------
+
+//Riclo: wdi18
+actor Asinglerainspawn : RandomSpawner 
+{
+    DropItem "Raindrop" 
+	DropItem "Raindrop" 
+	DropItem "Raindrop"
+	DropItem "Catdrip2"
+}
+Actor CatDrip2 //Similar to the other catdrip but with no death sound
+{
+	+CLIENTSIDEONLY
+	+BRIGHT
+	PROJECTILE
+	-NOGRAVITY
+	+DONTSPLASH
+	damage 0
+	renderstyle add
+	alpha 0.7
+	scale 0.7
+	
+	states
+		{
+			Spawn:
+				DRIP A -1
+				stop
+			Death:
+				DRIP A 1
+				DRIP A 1 A_Scream
+				stop
+		}
+}
+Actor Blooddropp
+{
+	+CLIENTSIDEONLY
+	+BRIGHT
+	PROJECTILE
+	-NOGRAVITY
+	+DONTSPLASH
+	damage 0
+	renderstyle add
+	alpha 0.7
+	scale 0.7
+	DeathSound "wdrip"
+	
+	states
+		{
+			Spawn:
+				BLDR A -1
+				stop
+			Death:
+				BLDR A 1
+				BLDR A 1 A_Scream
+				stop
+		}
+}
+Actor BloodDripSpawner 30012
+{
+//$Category WDI Effects
+//$Sprite BLDRA0
+	+CLIENTSIDEONLY
+	+INVISIBLE
+	+NOGRAVITY
+	-SOLID
+	States
+		{
+			Spawn:
+				BLDR A 0
+				BLDR A 7 A_SpawnItemEx("Blooddropp", 0, 0, 0, 0, 0, Random(0, -3), 0, 0, 241)
+				loop
+		}
+}
+
+//////SOUNDS SFX/////////////////////////////////
+
+Actor SoundPeron 11700
+{
+//$Category WDI Effects
++NOINTERACTION
++CLIENTSIDEONLY
+- SOLID
++NOBLOCKMAP
++NOGRAVITY
+Radius 10
+Height 10
+Renderstyle Add
+
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A -1 A_PlaySound("amb/peron",0,0.35,1,ATTN_NORM)
+stop
+}
+}
+
+Actor SoundJazzy 11701
+{
+//$Category WDI Effects
++NOINTERACTION
++CLIENTSIDEONLY
+- SOLID
++NOBLOCKMAP
++NOGRAVITY
+Radius 10
+Height 10
+Renderstyle Add
+
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A -1 A_PlaySound("amb/jazzy",0,0.5,1,ATTN_NORM)
+stop
+}
+}
+
+Actor SoundAvalon 11702
+{
+//$Category WDI Effects
++NOINTERACTION
++CLIENTSIDEONLY
+- SOLID
++NOBLOCKMAP
++NOGRAVITY
+Radius 10
+Height 10
+Renderstyle Add
+
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A -1  A_PlaySound("amb/avalon",0,0.4,1,ATTN_NORM)
+stop
+}
+}
+
+Actor SoundFog 11703
+{
+//$Category WDI Effects
++NOINTERACTION
++CLIENTSIDEONLY
+- SOLID
++NOBLOCKMAP
++NOGRAVITY
+Radius 10
+Height 10
+Renderstyle Add
+
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A -1 A_PlaySound("amb/fog",0,0.4,1,ATTN_NORM)
+stop
+}
+}

@@ -1,0 +1,4958 @@
+//==================================================================
+/////////////////////   SPRAYCAN NEW COLORS &FIX  ////////////////////////////
+//=================================================================
+ACTOR SprayAmmo : Ammo 22116
+{  
+  Game Doom
+  Inventory.PickupMessage "Found spray can." 
+  Inventory.Amount 750
+  Inventory.MaxAmount 750
+  Inventory.RespawnTics 10500 //5 minutes
+  Ammo.BackpackAmount 0
+  Ammo.BackpackMaxAmount 750
+  +INVENTORY.UNDROPPABLE
+  States
+  {
+  Spawn:
+    TNT1 A -1
+    Stop
+  }
+}
+
+Actor SpraySpawner : RandomSpawner 22141
+{
+	//$Category WDI Weapons/Sprays
+	//$Sprite SPRYB0
+	//$Title "Spray Spawner"
+	Scale 0.5
+	DropItem "AnimalSpawner"
+	DropItem "FakeSprayCanRED"
+	DropItem "FakeSprayCanBLU"
+	DropItem "FakeSprayCanYRED"
+	DropItem "FakeSprayCanYBLU"
+	DropItem "FakeSprayCanGRN"
+	DropItem "FakeSprayCanORG"
+	DropItem "FakeSprayCanPNK"
+	DropItem "FakeSprayCanYLL"
+	DropItem "FakeFireExt"
+}
+
+Actor OnlySpraySpawner : SpraySpawner
+{
+	Scale 0.5
+	DropItem "FakeSprayCanRED"
+	DropItem "FakeSprayCanBLU"
+	DropItem "FakeSprayCanYRED"
+	DropItem "FakeSprayCanYBLU"
+	DropItem "FakeSprayCanGRN"
+	DropItem "FakeSprayCanORG"
+	DropItem "FakeSprayCanPNK"
+	DropItem "FakeSprayCanYLL"
+}
+
+ACTOR SprayFloorDecalBlu
+{
+ radius 2
+ height 2
+ mass 1
++NOBLOCKMAP
++CLIENTSIDEONLY
++MOVEWITHSECTOR
++DONTSPLASH
+Alpha 0.8
+Mass 999
+Scale 0.5
+ Renderstyle normal
+ states
+ {
+ Spawn:
+ BPDL A 0 NODELAY A_JumpIf(waterlevel > 1, "Death")
+  XXXX A -1 A_SetAngle(random(0,359))
+	Death:
+	TNT1 A 1
+	Stop
+ }
+}
+ACTOR SprayFloorDecalRed: SprayFloorDecalBlu { }
+ACTOR SprayFloorDecalYellow: SprayFloorDecalBlu { }
+ACTOR SprayFloorDecalPink: SprayFloorDecalBlu { }
+ACTOR SprayFloorDecalGreen: SprayFloorDecalBlu { }
+ACTOR SprayFloorDecalOrange: SprayFloorDecalBlu { }
+ACTOR SprayFloorDecalWhite: SprayFloorDecalBlu { }
+ACTOR SprayFloorDecalGrey: SprayFloorDecalBlu { Alpha 0.5 } //bottle stains
+////////////////////////////////////////////////////////////////
+Actor FakeSprayCanYRED : CustomInventory 22143
+{
+	//$Category WDI Weapons/Sprays
+	//$Title "Spray Can (Red)"
+	Scale 0.2
+	Radius 4
+	Height 12
+	Inventory.PickupMessage "\cjFound a \c[C4]Spray Can. \n\caDamage: \c[C4]1"
+	Inventory.Respawntics 15750 //7 minute 30 seconds
+	+FORCEXYBILLBOARD
+	+DonTGib
+	States
+	{
+	Spawn:
+		SPRY G -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1, 2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanRED",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1)
+		TNT1 AAA 0 A_GiveInventory("SprayAmmo",Random(0,250))
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+	NotPickup:
+		TNT1 A 0
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Fail
+	ForgetIt:
+		TNT1 A 1
+		Stop
+}}
+
+Actor FakeSprayCanRED : CustomInventory 22142
+{
+	//$Category WDI Weapons/Sprays
+	//$Title "Spray Can (Red, standing)"
+	Scale 0.2
+	Radius 4
+	Height 12
+	Inventory.PickupMessage "\cjFound a \c[C4]Spray Can. \n\caDamage: \c[C4]1"
+	Inventory.Respawntics 15750 //7 minute 30 seconds
+//	+FORCEXYBILLBOARD
+	+DonTGib
+	States
+	{
+	Spawn:
+		SPRY F -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1, 2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanRED",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 AAA 0 A_GiveInventory("SprayAmmo",Random(0,250))
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+	NotPickup:
+		TNT1 A 0
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Fail
+	ForgetIt:
+		TNT1 A 1
+		Stop
+}}
+
+Actor TKFakeSprayCanRED : FakeSprayCanRED
+{
+states
+	{
+	Pickup:
+		SPRY B 0
+		SPRY B 0 A_JumpIfInventory("TKToken",1,"NotPickup")	
+		TNT1 A 0 A_JumpIfInventory("SprayCanRED",1,"NotPickup")	
+		SPRY B 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		SPRY B 0 A_PlaySound("pickups/weapon")
+		SPRY B 0 A_GiveInventory("SprayCanRED",1)
+		SPRY B 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 0 //A_Print("Picked up a Shotgun.")
+		SPRY B 1 ACS_Execute(669,0,15)
+		SPRY B 0 A_GiveInventory("SprayAmmo",random(0,750))
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+	NotPickup:
+		SPRY B 0
+		SPRY B 1 ACS_Execute(669,0,15)
+		Fail
+	}
+}
+
+Actor FakeSprayCanBLU : CustomInventory 22475
+{
+	//$Category WDI Weapons/Sprays
+	//$Title "Spray Can (Blue, standing)"
+	Scale 0.2
+	Radius 4
+	Height 12
+	Inventory.PickupMessage "\cjFound a \c[C1]Spray Can. \n\caDamage: \c[C4]1"
+	Inventory.Respawntics 15750 //7 minute 30 seconds
+//	+FORCEXYBILLBOARD
+	+DonTGib
+	States
+	{
+	Spawn:
+		SPRY B -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1, 2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanBLU",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 AAA 0 A_GiveInventory("SprayAmmo",Random(3,250))
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+	NotPickup:
+		TNT1 A 0
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Fail
+	ForgetIt:
+		TNT1 A 1
+		Stop
+}}
+
+Actor FakeSprayCanYBLU : CustomInventory 22476
+{
+	//$Category WDI Weapons/Sprays
+	//$Title "Spray Can (Blue)"
+	Scale 0.2
+	Radius 4
+	Height 12
+	Inventory.PickupMessage "\cjFound a \c[C1]Spray Can. \n\caDamage: \c[C4]1"
+	Inventory.Respawntics 15750 //7 minute 30 seconds
+	+FORCEXYBILLBOARD
+	+DonTGib
+	States
+	{
+	Spawn:
+		SPRY D -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1, 2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanBLU",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 AAA 0 A_GiveInventory("SprayAmmo",Random(3,250))
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+	NotPickup:
+		TNT1 A 0
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Fail
+	ForgetIt:
+		TNT1 A 1
+		Stop
+}}
+
+Actor TKFakeSprayCanBLU : FakeSprayCanBLU
+{
+states
+	{
+	Pickup:
+		SPRY B 0
+		SPRY B 0 A_JumpIfInventory("TKToken",1,"NotPickup")	
+		TNT1 A 0 A_JumpIfInventory("SprayCanBLU",1,"NotPickup")		
+		SPRY B 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		SPRY B 0 A_PlaySound("pickups/weapon")
+		SPRY B 0 A_GiveInventory("SprayCanBLU",1)
+		SPRY B 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 0 //A_Print("Picked up a Shotgun.")
+		SPRY B 1 ACS_Execute(669,0,14)
+		SPRY B 0 A_GiveInventory("SprayAmmo",random(0,750))
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+	NotPickup:
+		SPRY B 0
+		SPRY B 1 ACS_Execute(669,0,14)
+		Fail
+	}
+}
+
+Actor SprayCanBLU : Wdi_BaseWeapon
+{
+	Damage (1)
+	Scale 0.5
+	Tag "Blue Spray Can"
+	Inventory.PickupMessage "Found a Spray can."
+	Inventory.PickupSound "Misc/I_pkup"
+	Weapon.AmmoType1 "SprayAmmo"
+	Weapon.AmmoUse 1
+	Weapon.PreferredSkin "SprayCanSkin"
+	Weapon.UpSound "DSSPRYSH"
+	+WEAPON.WIMPY_WEAPON
+	+WEAPON.AMMO_OPTIONAL
+	+DonTGib
+	States
+	{
+	Spawn:
+		SPRY B -1
+		Stop
+	Ready:
+		
+		SPRY A 0 A_StopSoundEx("Body")
+		SPRY Y 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+	Select:
+		SPRY YYYYYYYYYYYYYYY 0 A_Raise
+		"####" "#" 1 offset(36,76)
+		"####" "#" 1 offset(28,64)
+		"####" "#" 1 offset(20,54)
+		"####" "#" 1 offset(14,45)
+		"####" "#" 1 offset(8,40)
+		"####" "#" 1 offset(4,36)
+		"####" "#" 1 offset(1,33)
+		goto Ready	
+	FireEmpty:
+		SPRY Z 1 A_StopSoundEx("Body")
+		SPRY A 0 A_ReFire
+		Goto Ready
+	Fire:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",1,2)
+		Goto FireEmpty
+		TNT1 AAA 0
+		SPRY A 0 A_PlaySoundEx("DSSPRY", "Body", 1)
+		SPRY Z 1 Offset (0,34) A_FireCustomMissile ("PaintSprayBLU",0,1)
+		SPRY Z 1 Offset (0,33) A_FireCustomMissile ("PuffBLU",0,0)
+		
+		SPRY A 0 A_ReFire
+		SPRY A 0 A_StopSoundEx("Body")
+		Goto Ready
+	Death:
+		BBAT A 0 A_SpawnItem("DroppedSprayCanBLU",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		Goto Death + 1
+	//Zoom:
+		TNT1 A 0
+		TNT1 A 0 A_TakeInventory("SprayCanOnce",1)
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+}}
+
+actor PuffBLU : FastProjectile
+{
+  Projectile
+  Speed 200
+  RenderStyle none
+  //+NOBLOCKMAP
+  +NOGRAVITY
+  +DONTSPLASH
+  +BLOODLESSIMPACT
+  +NOBLOOD
+  Damage 0
+//  +CLIENTSIDEONLY
+  //+NOINTERACTION
+  decal SprayPaintDecalBLU
+  DamageType "SprayCan"
+  VSpeed 0
+  Height 2
+  Radius 1
+  states
+  {
+  Spawn:
+	TNT1 AA 1 NODELAY
+	stop
+	Death:
+	TNT1 AA 1 A_CheckFloor("DeathFloor")
+    stop
+	DeathFloor:
+	TNT1 A 0 A_SpawnitemEx("SprayFloorDecalBlu",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	stop
+  }
+}
+actor PuffRED: PuffBLU
+{
+decal SprayPaintDecalRED
+DamageType "SprayCan"
+states
+  {
+  Death:
+	TNT1 AA 1 A_CheckFloor("DeathFloor")
+    stop
+	DeathFloor:
+	TNT1 A 0 A_SpawnItemEX("SprayFloorDecalRed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	stop
+	}
+}
+actor PuffYLL: PuffBLU
+{
+decal SprayPaintDecalYLL
+DamageType "SprayCan"
+states
+  {
+  Death:
+	TNT1 AA 1 A_CheckFloor("DeathFloor")
+    stop
+	DeathFloor:
+	TNT1 A 0 A_SpawnItemEX("SprayFloorDecalYellow",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	stop
+	}
+}
+actor PuffORG: PuffBLU
+{
+decal SprayPaintDecalORG
+DamageType "SprayCan"
+states
+  {
+  Death:
+	TNT1 AA 1 A_CheckFloor("DeathFloor")
+    stop
+	DeathFloor:
+	TNT1 A 0 A_SpawnItemEX("SprayFloorDecalOrange",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	stop
+	}
+}
+actor PuffGRN: PuffBLU
+{
+decal SprayPaintDecalGRN
+DamageType "SprayCan"
+states
+  {
+  Death:
+	TNT1 AA 1 A_CheckFloor("DeathFloor")
+    stop
+	DeathFloor:
+	TNT1 A 0 A_SpawnItemEX("SprayFloorDecalGReen",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	stop
+	}
+}
+actor PuffPNK: PuffBLU
+{
+decal SprayPaintDecalPNK
+DamageType "SprayCan"
+states
+  {
+  Death:
+	TNT1 AA 1 A_CheckFloor("DeathFloor")
+    stop
+	DeathFloor:
+	TNT1 A 0 A_SpawnItemEX("SprayFloorDecalPink",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	stop
+	}
+}
+
+
+actor PaintSprayBLU
+{
+  Scale 0.3
+  Radius 3
+  Height 6
+  Speed 20
+  DamageType "SprayBLU"
+  Damage (Random(0,1))
+  Projectile
+  RenderStyle add
+ // decal SprayPaintDecalBLU
+  Alpha 0.70
+  +CANNOTPUSH
+  +BLOODLESSIMPACT
+  +NODAMAGETHRUST
+  +DONTSPLASH
+  +FORCEXYBILLBOARD
+  States
+  {
+  Spawn:
+    SPRA A 0 NODELAY A_Jump(128,"Spawn0") 
+    SPRA AAAABCDE 1 A_FadeOut(0.05)
+    Stop
+  Spawn0:
+    SPRA FFFFGHIJ 1 A_FadeOut(0.05)
+    Stop
+  Death:
+	TNT1 AA 1 //A_CheckFloor("DeathFloor")
+    stop
+	DeathFloor:
+	TNT1 A 0 A_SpawnItem("SprayFloorDecalBlu", 0, 0)
+	stop
+  }
+}
+
+Actor Dropper_SprayCanBLU : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLUEmpty",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU1",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU2",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU3",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU4",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU5",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU6",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU7",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU8",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU9",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLUFull",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+Actor DeathDropper_SprayCanBLU : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanBLUEmpty",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanBLU1",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanBLU2",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanBLU3",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanBLU4",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanBLU5",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanBLU6",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanBLU7",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanBLU8",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanBLU9",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanBLUFull",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+ACTOR DroppedSprayCanBLU: Wdi_BaseDroppedWeapon
+{
+	Radius 4
+	Height 12
+	Scale 0.2
+	DeathSound "SprayCan/Drop"
+	BounceSound "SprayCan/Drop"
+	States
+	{
+	Spawn:
+		SPRY B 1
+		Loop
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanYBLU",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLUFull : DroppedSprayCanBLU
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLUFull",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU9 : DroppedSprayCanBLU
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU9",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU8 : DroppedSprayCanBLU
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU8",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU7 : DroppedSprayCanBLU
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU7",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU6 : DroppedSprayCanBLU
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU6",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU5 : DroppedSprayCanBLU
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU5",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU4 : DroppedSprayCanBLU
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU4",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU3 : DroppedSprayCanBLU
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU3",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU2 : DroppedSprayCanBLU
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU2",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU1 : DroppedSprayCanBLU
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU1",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLUEmpty : DroppedSprayCanBLU
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLUEmpty",0,0,0,0)
+		Stop
+	}
+}
+
+Actor FakeSprayCanBLUFull : FakeSprayCanYBLU
+{ 
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanBLU",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",750)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanBLU9 : FakeSprayCanYBLU
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanBLU",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",675)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanBLU8 : FakeSprayCanYBLU
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanBLU",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",600)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanBLU7 : FakeSprayCanYBLU
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanBLU",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",525)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanBLU6 : FakeSprayCanYBLU
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanBLU",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",450)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanBLU5 : FakeSprayCanYBLU
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanBLU",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",375)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanBLU4 : FakeSprayCanYBLU
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanBLU",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",300)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanBLU3 : FakeSprayCanYBLU
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanBLU",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",225)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanBLU2 : FakeSprayCanYBLU
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanBLU",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",150)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanBLU1 : FakeSprayCanYBLU
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanBLU",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",75)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanBLUEmpty : FakeSprayCanYBLU
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanBLU",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+//==================================================================
+/////////////////////   SPRAYCAN RED  ////////////////////////////
+//=================================================================
+Actor SprayCanRED :  SprayCanBLU
+{
+	Tag "Red Spray Can"
+	States
+	{
+	Spawn:
+		SPRY B -1
+		Stop
+	Ready:
+		
+		SPRY A 0 A_StopSoundEx("Body")
+		SPRY S 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+	Select:
+		SPRY SSSSSSSSSSSSSSS 0 A_Raise
+		"####" "#" 1 offset(36,76)
+		"####" "#" 1 offset(28,64)
+		"####" "#" 1 offset(20,54)
+		"####" "#" 1 offset(14,45)
+		"####" "#" 1 offset(8,40)
+		"####" "#" 1 offset(4,36)
+		"####" "#" 1 offset(1,33)
+		goto Ready
+
+	FireEmpty:
+		SPRY T 1 A_StopSoundEx("Body")
+		SPRY A 0 A_ReFire
+		Goto Ready
+	Fire:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",1,2)
+		Goto FireEmpty
+		TNT1 AAA 0
+		SPRY A 0 A_PlaySoundEx("DSSPRY", "Body", 1)
+		SPRY T 1 Offset (0,34) A_FireCustomMissile ("PaintSprayRED",0,1)
+		SPRY T 1 Offset (0,33) A_FireCustomMissile ("PuffRED",0,0)
+		
+		SPRY A 0 A_ReFire
+		SPRY A 0 A_StopSoundEx("Body")
+		Goto Ready
+	Death:
+		BBAT A 0 A_SpawnItem("DroppedSprayCanRED",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		Goto Death + 1
+	//Zoom:
+		TNT1 A 0
+		TNT1 A 0 A_TakeInventory("SprayCanOnce",1)
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+}}
+
+actor PaintSprayRED
+{
+  Scale 0.3
+  Radius 3
+  Height 6
+  Speed 20
+  DamageType "SprayRED"
+  Damage (Random(0,1))
+  Projectile
+  RenderStyle add
+ // decal SprayPaintDecalRED
+  Alpha 0.70
+  +CANNOTPUSH
+  +BLOODLESSIMPACT
+  +NODAMAGETHRUST
+  +DONTSPLASH
+  +FORCEXYBILLBOARD
+  States
+  {
+  Spawn:
+    SPRB A 0 A_Jump(128,"Spawn0") 
+    SPRB AAAABCDE 1 A_FadeOut(0.05)
+    Stop
+  Spawn0:
+    SPRB FFFFGHIJ 1 A_FadeOut(0.05)
+    Stop
+  Death:
+    NULL A 1
+    stop
+  }
+}
+
+Actor Dropper_SprayCanRED : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanREDEmpty",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED1",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED2",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED3",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED4",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED5",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED6",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED7",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED8",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED9",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanREDFull",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+Actor DeathDropper_SprayCanRED : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup1")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup1")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanREDEmpty",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanRED1",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanRED2",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanRED3",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanRED4",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanRED5",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanRED6",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanRED7",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanRED8",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanRED9",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanREDFull",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+ACTOR DroppedSprayCanRED : Wdi_BaseDroppedWeapon
+{
+	Radius 4
+	Height 12
+	Scale 0.2
+	DeathSound "SprayCan/Drop"
+	BounceSound "SprayCan/Drop"
+	States
+	{
+	Spawn:
+		SPRY F 1
+		Loop
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanYRED",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanREDFull : DroppedSprayCanRED
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanREDFull",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED9 : DroppedSprayCanRED
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED9",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED8 : DroppedSprayCanRED
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED8",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED7 : DroppedSprayCanRED
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED7",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED6 : DroppedSprayCanRED
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED6",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED5 : DroppedSprayCanRED
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED5",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED4 : DroppedSprayCanRED
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED4",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED3 : DroppedSprayCanRED
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED3",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED2 : DroppedSprayCanRED
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED2",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED1 : DroppedSprayCanRED
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED1",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanREDEmpty : DroppedSprayCanRED
+{
+	States
+	{
+	Death:
+		SPRY G 35
+		SPRY G 1 A_SpawnItem("FakeSprayCanREDEmpty",0,0,0,0)
+		Stop
+	}
+}
+
+Actor FakeSprayCanREDFull : FakeSprayCanYRED
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanRED",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",750)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanRED9 : FakeSprayCanYRED
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanRED",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",675)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanRED8 : FakeSprayCanYRED
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanRED",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",600)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanRED7 : FakeSprayCanYRED
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanRED",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",525)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanRED6 : FakeSprayCanYRED
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanRED",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",450)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanRED5 : FakeSprayCanYRED
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanRED",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",375)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanRED4 : FakeSprayCanYRED
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanRED",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",300)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanRED3 : FakeSprayCanYRED
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanRED",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",225)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanRED2 : FakeSprayCanYRED
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanRED",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",150)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanRED1 : FakeSprayCanYRED
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanRED",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",75)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanREDEmpty : FakeSprayCanYRED
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanRED",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+//==================================================================
+/////////////////////   SPRAYCAN GREEN   ////////////////////////////
+//=================================================================
+Actor FakeSprayCanGRN : FakeSprayCanYBLU
+{
+	//$Category WDI Weapons
+	//$Title "SprayCan Green"
+	Inventory.PickupMessage "\cjFound a \c[C2]Spray Can. \n\caDamage: \c[C4]1"
+	States
+	{
+	Spawn:
+		SPRY E -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1, 2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanGRN",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 AAA 0 A_GiveInventory("SprayAmmo",Random(0,250))
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor SprayCanGRN : SprayCanBLU
+{
+	Tag "Green Spray Can"
+	States
+	{
+	Spawn:
+		SPRY B -1
+		Stop
+	Ready:
+		
+		SPRY A 0 A_StopSoundEx("Body")
+		SPRY W 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+	Select:
+		SPRY WWWWWWWWWWWWWWW 0 A_Raise
+		"####" "#" 1 offset(36,76)
+		"####" "#" 1 offset(28,64)
+		"####" "#" 1 offset(20,54)
+		"####" "#" 1 offset(14,45)
+		"####" "#" 1 offset(8,40)
+		"####" "#" 1 offset(4,36)
+		"####" "#" 1 offset(1,33)
+		goto Ready
+
+	FireEmpty:
+		SPRY X 1 A_StopSoundEx("Body")
+		SPRY A 0 A_ReFire
+		Goto Ready
+	Fire:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",1,2)
+		Goto FireEmpty
+		TNT1 AAA 0
+		SPRY A 0 A_PlaySoundEx("DSSPRY", "Body", 1)
+		SPRY X 1 Offset (0,34) A_FireCustomMissile ("PaintSprayGRN",0,1)
+		SPRY X 1 Offset (0,33) A_FireCustomMissile ("PuffGRN",0,0)
+		
+		SPRY A 0 A_ReFire
+		SPRY A 0 A_StopSoundEx("Body")
+		Goto Ready
+	Death:
+		BBAT A 0 A_SpawnItem("DroppedSprayCanGRN",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		Goto Death + 1
+	//Zoom:
+		TNT1 A 0
+		TNT1 A 0 A_TakeInventory("SprayCanOnce",1)
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+}}
+
+Actor PaintSprayGRN : PaintSprayBLU
+{
+	Translation "192:207=112:127"
+//	Decal SprayPaintDecalGRN
+	DamageType "SprayGRN"
+}
+
+Actor Dropper_SprayCanGRN : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRNEmpty",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN1",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN2",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN3",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN4",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN5",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN6",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN7",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN8",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN9",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRNFull",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+Actor DeathDropper_SprayCanGRN : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanGRNEmpty",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanGRN1",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanGRN2",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanGRN3",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanGRN4",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanGRN5",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanGRN6",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanGRN7",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanGRN8",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanGRN9",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanGRNFull",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+Actor DroppedSprayCanGRN:DroppedSprayCanBLU
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		SPRY N -1
+		Stop
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN",0,0,0,0)
+		Stop
+}}
+
+ACTOR DroppedSprayCanGRNFull : DroppedSprayCanGRN
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRNFull",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN9 : DroppedSprayCanGRN
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN9",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN8 : DroppedSprayCanGRN
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN8",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN7 : DroppedSprayCanGRN
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN7",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN6 : DroppedSprayCanGRN
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN6",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN5 : DroppedSprayCanGRN
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN5",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN4 : DroppedSprayCanGRN
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN4",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN3 : DroppedSprayCanGRN
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN3",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN2 : DroppedSprayCanGRN
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN2",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN1 : DroppedSprayCanGRN
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN1",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRNEmpty : DroppedSprayCanGRN
+{
+	States
+	{
+	Death:
+		SPRY E 35
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRNEmpty",0,0,0,0)
+		Stop
+	}
+}
+
+Actor FakeSprayCanGRNFull : FakeSprayCanGRN
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanGRN",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",750)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanGRN9 : FakeSprayCanGRN
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanGRN",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",675)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanGRN8 : FakeSprayCanGRN
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanGRN",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",600)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanGRN7 : FakeSprayCanGRN
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanGRN",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",525)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanGRN6 : FakeSprayCanGRN
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanGRN",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",450)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanGRN5 : FakeSprayCanGRN
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanGRN",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",375)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanGRN4 : FakeSprayCanGRN
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanGRN",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",300)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanGRN3 : FakeSprayCanGRN
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanGRN",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",225)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanGRN2 : FakeSprayCanGRN
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanGRN",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",150)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanGRN1 : FakeSprayCanGRN
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanGRN",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",75)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanGRNEmpty : FakeSprayCanGRN
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanGRN",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+//==================================================================
+/////////////////////   SPRAYCAN YELLOW  ////////////////////////////
+//=================================================================
+Actor FakeSprayCanYLL : FakeSprayCanYBLU
+{
+	//$Category WDI Weapons
+	//$Title "SprayCan Yellow"
+	Inventory.PickupMessage "\cjFound a \c[C3]Spray Can. \n\caDamage: \c[C4]1"
+	States
+	{
+	Spawn:
+		SPRY I -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1, 2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanYLL",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 AAA 0 A_GiveInventory("SprayAmmo",Random(0,250))
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor SprayCanYLL : SprayCanBLU
+{
+	Tag "Yellow Spray Can"
+	States
+	{
+	Spawn:
+		SPRY B -1
+		Stop
+	Ready:
+		
+		SPRY A 0 A_StopSoundEx("Body")
+		SPRY O 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+	Select:
+		SPRY OOOOOOOOOOOOOOO 0 A_Raise
+		"####" "#" 1 offset(36,76)
+		"####" "#" 1 offset(28,64)
+		"####" "#" 1 offset(20,54)
+		"####" "#" 1 offset(14,45)
+		"####" "#" 1 offset(8,40)
+		"####" "#" 1 offset(4,36)
+		"####" "#" 1 offset(1,33)
+		goto Ready
+	FireEmpty:
+		SPRY P 1 A_StopSoundEx("Body")
+		SPRY A 0 A_ReFire
+		Goto Ready
+	Fire:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",1,2)
+		Goto FireEmpty
+		TNT1 AAA 0
+		SPRY A 0 A_PlaySoundEx("DSSPRY", "Body", 1)
+		SPRY P 1 Offset (0,34) A_FireCustomMissile ("PaintSprayYLL",0,1)
+		SPRY P 1 Offset (0,33) A_FireCustomMissile ("PuffYLL",0,0)
+		
+		SPRY A 0 A_ReFire
+		SPRY A 0 A_StopSoundEx("Body")
+		Goto Ready
+	Death:
+		BBAT A 0 A_SpawnItem("DroppedSprayCanYLL",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		Goto Death + 1
+	//Zoom:
+		TNT1 A 0
+		TNT1 A 0 A_TakeInventory("SprayCanOnce",1)
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+}}
+
+Actor PaintSprayYLL : PaintSprayBLU
+{
+	Translation "192:207=160:167"
+//	Decal SprayPaintDecalYLL
+	DamageType "SprayYLW"
+}
+
+Actor Dropper_SprayCanYLL : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLLEmpty",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL1",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL2",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL3",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL4",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL5",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL6",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL7",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL8",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL9",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLLFull",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+Actor DeathDropper_SprayCanYLL : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanYLLEmpty",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanYLL1",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanYLL2",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanYLL3",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanYLL4",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanYLL5",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanYLL6",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanYLL7",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanYLL8",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanYLL9",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanYLLFull",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+Actor DroppedSprayCanYLL:DroppedSprayCanBLU
+{
+	States
+	{
+	Spawn:
+		SPRY L -1
+		Stop
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL",0,0,0,0)
+		Stop
+}}
+
+ACTOR DroppedSprayCanYLLFull : DroppedSprayCanYLL
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLLFull",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL9 : DroppedSprayCanYLL
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL9",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL8 : DroppedSprayCanYLL
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL8",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL7 : DroppedSprayCanYLL
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL7",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL6 : DroppedSprayCanYLL
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL6",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL5 : DroppedSprayCanYLL
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL5",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL4 : DroppedSprayCanYLL
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL4",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL3 : DroppedSprayCanYLL
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL3",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL2 : DroppedSprayCanYLL
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL2",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL1 : DroppedSprayCanYLL
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL1",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLLEmpty : DroppedSprayCanYLL
+{
+	States
+	{
+	Death:
+		SPRY I 35
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLLEmpty",0,0,0,0)
+		Stop
+	}
+}
+
+Actor FakeSprayCanYLLFull : FakeSprayCanYLL
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanYLL",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",750)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanYLL9 : FakeSprayCanYLL
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanYLL",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",675)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanYLL8 : FakeSprayCanYLL
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanYLL",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",600)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanYLL7 : FakeSprayCanYLL
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanYLL",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",525)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanYLL6 : FakeSprayCanYLL
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanYLL",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",450)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanYLL5 : FakeSprayCanYLL
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanYLL",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",375)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanYLL4 : FakeSprayCanYLL
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanYLL",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",300)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanYLL3 : FakeSprayCanYLL
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanYLL",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",225)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanYLL2 : FakeSprayCanYLL
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanYLL",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",150)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanYLL1 : FakeSprayCanYLL
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanYLL",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",75)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanYLLEmpty : FakeSprayCanYLL
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanYLL",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+//==================================================================
+/////////////////////   SPRAYCAN ORANGE  ////////////////////////////
+//=================================================================
+Actor FakeSprayCanORG : FakeSprayCanYBLU
+{
+	//$Category WDI Weapons
+	//$Title "SprayCan Orange"
+	Inventory.PickupMessage "\cjFound a \c[C5]Spray Can. \n\caDamage: \c[C4]1"
+	States
+	{
+	Spawn:
+		SPRY H -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1, 2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanORG",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 AAA 0 A_GiveInventory("SprayAmmo",Random(0,250))
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor SprayCanORG : SprayCanBLU
+{
+	Tag "Orange Spray Can"
+	States
+	{
+	Spawn:
+		SPRY B -1
+		Stop
+	Ready:
+		
+		SPRY A 0 A_StopSoundEx("Body")
+		SPRY U 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+	Select:
+		SPRY UUUUUUUUUUUUUUU 0 A_Raise
+		"####" "#" 1 offset(36,76)
+		"####" "#" 1 offset(28,64)
+		"####" "#" 1 offset(20,54)
+		"####" "#" 1 offset(14,45)
+		"####" "#" 1 offset(8,40)
+		"####" "#" 1 offset(4,36)
+		"####" "#" 1 offset(1,33)
+		goto Ready
+	FireEmpty:
+		SPRY V 1 A_StopSoundEx("Body")
+		SPRY A 0 A_ReFire
+		Goto Ready
+	Fire:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",1,2)
+		Goto FireEmpty
+		TNT1 AAA 0
+		SPRY A 0 A_PlaySoundEx("DSSPRY", "Body", 1)
+		SPRY V 1 Offset (0,34) A_FireCustomMissile ("PaintSprayORG",0,1)
+		SPRY V 1 Offset (0,33) A_FireCustomMissile ("PuffORG",0,0)
+		
+		SPRY A 0 A_ReFire
+		SPRY A 0 A_StopSoundEx("Body")
+		Goto Ready
+	Death:
+		BBAT A 0 A_SpawnItem("DroppedSprayCanORG",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		Goto Death + 1
+	//Zoom:
+		TNT1 A 0
+		TNT1 A 0 A_TakeInventory("SprayCanOnce",1)
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+}}
+
+Actor PaintSprayORG : PaintSprayBLU
+{
+	Translation "192:207=208:223"
+//	Decal SprayPaintDecalORG
+	DamageType "SprayORG"
+}
+
+Actor Dropper_SprayCanORG : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORGEmpty",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG1",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG2",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG3",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG4",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG5",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG6",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG7",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG8",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG9",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORGFull",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+Actor DeathDropper_SprayCanORG : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanORGEmpty",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanORG1",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanORG2",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanORG3",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanORG4",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanORG5",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanORG6",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanORG7",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanORG8",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanORG9",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanORGFull",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+Actor DroppedSprayCanORG: DroppedSprayCanBLU
+{
+	States
+	{
+	Spawn:
+		SPRY K -1
+		Stop
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG",0,0,0,0)
+		Stop
+}}
+
+ACTOR DroppedSprayCanORGFull : DroppedSprayCanORG
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORGFull",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG9 : DroppedSprayCanORG
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG9",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG8 : DroppedSprayCanORG
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG8",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG7 : DroppedSprayCanORG
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG7",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG6 : DroppedSprayCanORG
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG6",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG5 : DroppedSprayCanORG
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG5",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG4 : DroppedSprayCanORG
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG4",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG3 : DroppedSprayCanORG
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG3",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG2 : DroppedSprayCanORG
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG2",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG1 : DroppedSprayCanORG
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG1",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORGEmpty : DroppedSprayCanORG
+{
+	States
+	{
+	Death:
+		SPRY H 35
+		SPRY H 1 A_SpawnItem("FakeSprayCanORGEmpty",0,0,0,0)
+		Stop
+	}
+}
+
+Actor FakeSprayCanORGFull : FakeSprayCanORG
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanORG",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",750)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanORG9 : FakeSprayCanORG
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanORG",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",675)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanORG8 : FakeSprayCanORG
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanORG",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",600)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanORG7 : FakeSprayCanORG
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanORG",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",525)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanORG6 : FakeSprayCanORG
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanORG",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",450)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanORG5 : FakeSprayCanORG
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanORG",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",375)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanORG4 : FakeSprayCanORG
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanORG",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",300)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanORG3 : FakeSprayCanORG
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanORG",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",225)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanORG2 : FakeSprayCanORG
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanORG",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",150)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanORG1 : FakeSprayCanORG
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanORG",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",75)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanORGEmpty : FakeSprayCanORG
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanORG",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+//==================================================================
+/////////////////////   SPRAYCAN PINK  ////////////////////////////
+//=================================================================
+Actor FakeSprayCanPNK : FakeSprayCanYBLU
+{
+	//$Category WDI Weapons
+	//$Title "SprayCan Orange"
+	Inventory.PickupMessage "\cjFound a \c[C7]Spray Can. \n\caDamage: \c[C4]1"
+	States
+	{
+	Spawn:
+		SPRY J -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1, 2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanPNK",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 AAA 0 A_GiveInventory("SprayAmmo",Random(1,250))
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor SprayCanPNK : SprayCanBLU
+{
+	Tag "Pink Spray Can"
+	States
+	{
+	Spawn:
+		SPRY B -1
+		Stop
+	Ready:
+		
+		SPRY A 0 A_StopSoundEx("Body")
+		SPRY Q 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+	Select:
+		SPRY QQQQQQQQQQQQQQQ 0 A_Raise
+		"####" "#" 1 offset(36,76)
+		"####" "#" 1 offset(28,64)
+		"####" "#" 1 offset(20,54)
+		"####" "#" 1 offset(14,45)
+		"####" "#" 1 offset(8,40)
+		"####" "#" 1 offset(4,36)
+		"####" "#" 1 offset(1,33)
+		goto Ready
+	FireEmpty:
+		SPRY R 1 A_StopSoundEx("Body")
+		SPRY A 0 A_ReFire
+		Goto Ready
+	Fire:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",1,2)
+		Goto FireEmpty
+		TNT1 AAA 0
+		SPRY A 0 A_PlaySoundEx("DSSPRY", "Body", 1)
+		SPRY R 1 Offset (0,34) A_FireCustomMissile ("PaintSprayPNK",0,1)
+		SPRY R 1 Offset (0,33) A_FireCustomMissile ("PuffPNK",0,0)
+		
+		SPRY A 0 A_ReFire
+		SPRY A 0 A_StopSoundEx("Body")
+		Goto Ready
+	Death:
+		BBAT A 0 A_SpawnItem("DroppedSprayCanPNK",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		Goto Death + 1
+	//Zoom:
+		TNT1 A 0
+		TNT1 A 0 A_TakeInventory("SprayCanOnce",1)
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+}}
+
+Actor PaintSprayPNK : PaintSprayBLU
+{
+	Translation "192:207=16:31"
+//	Decal SprayPaintDecalPNK
+	DamageType "SprayPNK"
+}
+
+
+Actor Dropper_SprayCanPNK : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNKEmpty",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK1",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK2",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK3",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK4",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK5",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK6",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK7",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK8",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK9",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNKFull",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+Actor DeathDropper_SprayCanPNK : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanPNKEmpty",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanPNK1",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanPNK2",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanPNK3",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanPNK4",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanPNK5",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanPNK6",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanPNK7",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanPNK8",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanPNK9",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_SpawnItemEx("FakeSprayCanPNKFull",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+Actor DroppedSprayCanPNK: DroppedSprayCanBLU
+{
+	States
+	{
+	Spawn:
+		SPRY M -1
+		Stop
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK",0,0,0,0)
+		Stop
+}}
+
+ACTOR DroppedSprayCanPNKFull : DroppedSprayCanPNK
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNKFull",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK9 : DroppedSprayCanPNK
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK9",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK8 : DroppedSprayCanPNK
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK8",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK7 : DroppedSprayCanPNK
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK7",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK6 : DroppedSprayCanPNK
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK6",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK5 : DroppedSprayCanPNK
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK5",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK4 : DroppedSprayCanPNK
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK4",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK3 : DroppedSprayCanPNK
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK3",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK2 : DroppedSprayCanPNK
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK2",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK1 : DroppedSprayCanPNK
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK1",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNKEmpty : DroppedSprayCanPNK
+{
+	States
+	{
+	Death:
+		SPRY J 35
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNKEmpty",0,0,0,0)
+		Stop
+	}
+}
+
+Actor FakeSprayCanPNKFull : FakeSprayCanPNK
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanPNK",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",750)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanPNK9 : FakeSprayCanPNK
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanPNK",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",675)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanPNK8 : FakeSprayCanPNK
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanPNK",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",600)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanPNK7 : FakeSprayCanPNK
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanPNK",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",525)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanPNK6 : FakeSprayCanPNK
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanPNK",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",450)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanPNK5 : FakeSprayCanPNK
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanPNK",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",375)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanPNK4 : FakeSprayCanPNK
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanPNK",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",300)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanPNK3 : FakeSprayCanPNK
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanPNK",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",225)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanPNK2 : FakeSprayCanPNK
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanPNK",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",150)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanPNK1 : FakeSprayCanPNK
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanPNK",1)
+		TNT1 A 0 A_GiveInventory("SprayAmmo",75)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+Actor FakeSprayCanPNKEmpty : FakeSprayCanPNK
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("SprayCanPNK",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,18)
+		Stop
+}}
+
+
+
+//Far spray cans
+//Far spray cans
+//Far spray cans
+//Far spray cans
+//Far spray cans
+//Far spray cans
+//Far spray cans
+//Far spray cans
+//Far spray cans
+//Far spray cans
+//Far spray cans
+//Far spray cans
+//Far spray cans
+//Far spray cans
+Actor Dropper_SprayCanBLUFar : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLUEmptyFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU1Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU2Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU3Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU4Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU5Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU6Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU7Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU8Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLU9Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanBLUFullFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+ACTOR DroppedSprayCanBLUFar: Wdi_BaseDroppedWeaponFar
+{
+	Radius 4
+	Height 12
+	Scale 0.2
+	DeathSound "SprayCan/Drop"
+	BounceSound "SprayCan/Drop"
+	States
+	{
+	Spawn:
+		SPRY B 1
+		Loop
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanYBLU",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLUFullFar : DroppedSprayCanBLUFar
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLUFull",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU9Far : DroppedSprayCanBLUFar
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU9",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU8Far : DroppedSprayCanBLUFar
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU8",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU7Far : DroppedSprayCanBLUFar
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU7",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU6Far : DroppedSprayCanBLUFar
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU6",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU5Far : DroppedSprayCanBLUFar
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU5",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU4Far : DroppedSprayCanBLUFar
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU4",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU3Far : DroppedSprayCanBLUFar
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU3",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU2Far : DroppedSprayCanBLUFar
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU2",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLU1Far : DroppedSprayCanBLUFar
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35 A_PlaySound("DSSPRYSH")
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLU1",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanBLUEmptyFar : DroppedSprayCanBLUFar
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		SPRY D 35
+		SPRY D 1 A_SpawnItem("FakeSprayCanBLUEmpty",0,0,0,0)
+		Stop
+	}
+}
+
+///////////////////////////
+Actor Dropper_SprayCanREDFar : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanREDEmptyFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED1Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED2Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED3Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED4Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED5Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED6Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED7Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED8Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanRED9Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanREDFullFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+
+ACTOR DroppedSprayCanREDFar: Wdi_BaseDroppedWeaponFAR
+{
+	Radius 4
+	Height 12
+	Scale 0.2
+	DeathSound "SprayCan/Drop"
+	BounceSound "SprayCan/Drop"
+	States
+	{
+	Spawn:
+		SPRY F 1
+		Loop
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanYRED",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanREDFullFar : DroppedSprayCanREDFar
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanREDFull",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED9Far : DroppedSprayCanREDFar
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED9",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED8Far : DroppedSprayCanREDFar
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED8",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED7Far : DroppedSprayCanREDFar
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED7",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED6Far : DroppedSprayCanREDFar
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED6",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED5Far : DroppedSprayCanREDFar
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED5",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED4Far : DroppedSprayCanREDFar
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED4",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED3Far : DroppedSprayCanREDFar
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED3",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED2Far : DroppedSprayCanREDFar
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED2",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanRED1Far : DroppedSprayCanREDFar
+{
+	States
+	{
+	Death:
+		SPRY G 35 A_PlaySound("DSSPRYSH")
+		SPRY G 1 A_SpawnItem("FakeSprayCanRED1",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanREDEmptyFar : DroppedSprayCanREDFar
+{
+	States
+	{
+	Death:
+		SPRY G 35
+		SPRY G 1 A_SpawnItem("FakeSprayCanREDEmpty",0,0,0,0)
+		Stop
+	}
+}
+
+//////////////////////////////////////////
+
+Actor Dropper_SprayCanGRNFar : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRNEmptyFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN1Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN2Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN3Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN4Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN5Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN6Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN7Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN8Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRN9Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanGRNFullFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+Actor DroppedSprayCanGRNFar:DroppedSprayCanBLUFar
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		SPRY N -1
+		Stop
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN",0,0,0,0)
+		Stop
+}}
+
+ACTOR DroppedSprayCanGRNFullFar : DroppedSprayCanGRNFar
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRNFull",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN9Far : DroppedSprayCanGRNFar
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN9",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN8Far : DroppedSprayCanGRNFar
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN8",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN7Far : DroppedSprayCanGRNFar
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN7",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN6Far : DroppedSprayCanGRNFar
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN6",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN5Far : DroppedSprayCanGRNFar
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN5",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN4Far : DroppedSprayCanGRNFar
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN4",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN3Far : DroppedSprayCanGRNFar
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN3",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN2Far : DroppedSprayCanGRNFar
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN2",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRN1Far : DroppedSprayCanGRNFar
+{
+	States
+	{
+	Death:
+		SPRY E 35 A_PlaySound("DSSPRYSH")
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRN1",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanGRNEmptyFar : DroppedSprayCanGRNFar
+{
+	States
+	{
+	Death:
+		SPRY E 35
+		SPRY E 1 A_SpawnItem("FakeSprayCanGRNEmpty",0,0,0,0)
+		Stop
+	}
+}
+
+//////////////////////////////////////
+Actor Dropper_SprayCanYLLFar : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLLEmptyFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL1Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL2Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL3Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL4Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL5Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL6Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL7Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL8Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLL9Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanYLLFullFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+
+Actor DroppedSprayCanYLLFar:DroppedSprayCanBLUFar
+{
+	States
+	{
+	Spawn:
+		SPRY L -1
+		Stop
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL",0,0,0,0)
+		Stop
+}}
+
+ACTOR DroppedSprayCanYLLFullFar : DroppedSprayCanYLLFar
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLLFull",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL9Far : DroppedSprayCanYLLFar
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL9",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL8Far : DroppedSprayCanYLLFar
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL8",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL7Far : DroppedSprayCanYLLFar
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL7",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL6Far : DroppedSprayCanYLLFar
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL6",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL5Far : DroppedSprayCanYLLFar
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL5",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL4Far : DroppedSprayCanYLLFar
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL4",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL3Far : DroppedSprayCanYLLFar
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL3",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL2Far : DroppedSprayCanYLLFar
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL2",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLL1Far : DroppedSprayCanYLLFar
+{
+	States
+	{
+	Death:
+		SPRY I 35 A_PlaySound("DSSPRYSH")
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLL1",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanYLLEmptyFar : DroppedSprayCanYLLFar
+{
+	States
+	{
+	Death:
+		SPRY I 35
+		SPRY I 1 A_SpawnItem("FakeSprayCanYLLEmpty",0,0,0,0)
+		Stop
+	}
+}
+///////////////////////////////////
+Actor Dropper_SprayCanORGFar : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORGEmptyFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG1Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG2Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG3Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG4Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG5Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG6Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG7Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG8Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORG9Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanORGFullFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+
+Actor DroppedSprayCanORGFar: DroppedSprayCanBLUFar
+{
+	States
+	{
+	Spawn:
+		SPRY K -1
+		Stop
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG",0,0,0,0)
+		Stop
+}}
+
+ACTOR DroppedSprayCanORGFullFar : DroppedSprayCanORGFar
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORGFull",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG9Far : DroppedSprayCanORGFar
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG9",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG8Far : DroppedSprayCanORGFar
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG8",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG7Far : DroppedSprayCanORGFar
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG7",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG6Far : DroppedSprayCanORGFar
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG6",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG5Far : DroppedSprayCanORGFar
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG5",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG4Far : DroppedSprayCanORGFar
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG4",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG3Far : DroppedSprayCanORGFar
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG3",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG2Far : DroppedSprayCanORGFar
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG2",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORG1Far : DroppedSprayCanORGFar
+{
+	States
+	{
+	Death:
+		SPRY H 35 A_PlaySound("DSSPRYSH")
+		SPRY H 1 A_SpawnItem("FakeSprayCanORG1",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanORGEmptyFar : DroppedSprayCanORGFar
+{
+	States
+	{
+	Death:
+		SPRY H 35
+		SPRY H 1 A_SpawnItem("FakeSprayCanORGEmpty",0,0,0,0)
+		Stop
+	}
+}
+
+/////////////////////////////////
+Actor Dropper_SprayCanPNKFar : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",750,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",675,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",600,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",525,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",450,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",375,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",300,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",225,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",150,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("SprayAmmo",75,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNKEmptyFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK1Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK2Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK3Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK4Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK5Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK6Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK7Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK8Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNK9Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_FireCustomMissile("DroppedSprayCanPNKFullFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("SprayAmmo",750)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+
+Actor DroppedSprayCanPNKFar: DroppedSprayCanBLUFar
+{
+	States
+	{
+	Spawn:
+		SPRY M -1
+		Stop
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK",0,0,0,0)
+		Stop
+}}
+
+ACTOR DroppedSprayCanPNKFullFar : DroppedSprayCanPNKFar
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNKFull",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK9Far : DroppedSprayCanPNKFar
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK9",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK8Far : DroppedSprayCanPNKFar
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK8",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK7Far : DroppedSprayCanPNKFar
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK7",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK6Far : DroppedSprayCanPNKFar
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK6",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK5Far : DroppedSprayCanPNKFar
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK5",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK4Far : DroppedSprayCanPNKFar
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK4",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK3Far : DroppedSprayCanPNKFar
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK3",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK2Far : DroppedSprayCanPNKFar
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK2",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNK1Far : DroppedSprayCanPNKFar
+{
+	States
+	{
+	Death:
+		SPRY J 35 A_PlaySound("DSSPRYSH")
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNK1",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedSprayCanPNKEmptyFar : DroppedSprayCanPNKFar
+{
+	States
+	{
+	Death:
+		SPRY J 35
+		SPRY J 1 A_SpawnItem("FakeSprayCanPNKEmpty",0,0,0,0)
+		Stop
+	}
+}

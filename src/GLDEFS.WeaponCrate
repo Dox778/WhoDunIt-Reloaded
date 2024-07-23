@@ -1,0 +1,57 @@
+pointlight DiscoRed
+{
+    color 1.0 0.0 0.0
+    size 64
+}
+pointlight VeryBeryWhiteLight
+{
+	Color 1 1 1
+	Size 100
+}
+pointlight DiscoWhite
+{
+	color 1.0 1.0 1.0
+	Size 64
+}
+pointlight DeathRed
+{
+	color 0.6 0.0 0.0
+	size 100
+}
+pointlight BlackThingy
+{
+	color 0.9 0.9 0.9
+	size 120
+	subtractive 1
+}
+pointlight DiscoGreen
+{
+    color 0.0 1.0 0.0
+    size 64
+}
+
+pointlight DiscoBlue
+{
+    color 0.0 0.0 1.0
+    size 64
+}
+
+pointlight DiscoYellow
+{
+    color 1.0 1.0 0.0
+    size 64
+}
+
+pointlight DiscoPurple
+{
+    color 1.0 0.0 1.0
+    size 64
+}
+
+object WhiteFlash { frame WFLSA { light VeryBeryWhiteLight }}
+object RedLight { frame TNT1A { light DiscoRed}}
+object GreenLight { frame TNT1A { light DiscoGreen}}
+object BlueLight { frame TNT1A { light DiscoBlue}}
+object YellowLight { frame TNT1A { light DiscoYellow}}
+object PurpleLight { frame TNT1A { light DiscoPurple}}
+object WhiteLight { frame TNT1A { light DiscoWhite}}

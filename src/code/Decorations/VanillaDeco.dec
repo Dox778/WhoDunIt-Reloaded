@@ -1,0 +1,418 @@
+ACTOR NewCandelabra: Candelabra replaces Candelabra
+{
+//+PUSHABLE
++FORCEYBILLBOARD
+PushFactor 0.1
+Scale 0.5
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_Jump(64,"1","2","3","4","5","6","7","8","9","10","11")
+		1:
+		CBRA BC 2 BRIGHT
+		loop
+		2:
+		CBRA DE 2 BRIGHT Light("CANDELABRA")
+		loop
+		3:
+		CBRA FG 2 BRIGHT Light("CANDELABRA")
+		loop
+		4:
+		CBRA HI 2 BRIGHT Light("CANDELABRA")
+		loop
+		5:
+		CBRA JK 2 BRIGHT Light("CANDELABRA")
+		loop
+		6:
+		CBRA LM 2 BRIGHT Light("CANDELABRA")
+		loop
+		7:
+		CBRA "NO" 2 BRIGHT Light("CANDELABRA")
+		loop
+		8:
+		CBRA PQ 2 BRIGHT Light("CANDELABRA")
+		loop
+		9:
+		CBRA RS 2 BRIGHT Light("CANDELABRA")
+		loop
+		10:
+		CBRA TU 2 BRIGHT Light("CANDELABRA")
+		loop
+		11:
+		CBRA VW 2 BRIGHT Light("CANDELABRA")
+		loop
+	}
+}
+
+ACTOR NewCandlestick: Candlestick replaces Candlestick
+{
+	Scale 0.5
+	+FORCEYBILLBOARD
+	States
+	{
+	Spawn:
+		CAND BC 2 BRIGHT
+		loop
+	}
+}
+
+ACTOR NewShortRedTorch: ShortRedTorch replaces ShortRedTorch
+{
+	Radius 6
+	+FORCEYBILLBOARD
+	States
+	{
+	Spawn:
+	SMRT E 35
+	TNT1 A 0 A_SetScale(0.4,0.5)
+	TNT1 A 0 A_SpawnItemEx("FireDecorativeNew",0,0,30,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+	//TNT1 A 0 A_SpawnItemEx("TorchFire",0,0,27,0,0,0,0,SXF_NOCHECKPOSITION)
+	TNT1 A 0 A_SetScale(1)
+	SMRT E -1
+    Loop
+	}
+}
+
+ACTOR TorchFire
+{
++NOINTERACTION
++CLIENTSIDEONLY
++THRUACTORS
++NOGRAVITY
+Radius 1
+Height 2
++BRIGHT
+Scale 0.5
+RenderStyle add
+	States
+	{
+	Spawn:
+		TFIR ABCDEFGHIJKLMNOPQR 2
+		loop
+	}
+}
+
+ACTOR NewRedTorch: RedTorch replaces RedTorch
+{	
+	Radius 8
+	+FORCEYBILLBOARD
+	States
+	{
+	Spawn:
+	TRED E 35
+	TNT1 A 0 A_SetScale(0.5,0.6)
+	TNT1 A 0 A_SpawnItemEx("FireDecorativeNew",0,0,55,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+	TNT1 A 0 A_SetScale(1)
+	TRED E -1
+    Loop
+	}
+}
+ACTOR NewShortGreenTorch: ShortGreenTorch replaces ShortGreenTorch
+{
+	Radius 6
+	+FORCEYBILLBOARD
+	States
+	{
+	Spawn:
+	SMRT E 35
+	TNT1 A 0 A_SetScale(0.4,0.5)
+	TNT1 A 0 A_SpawnItemEx("FireDecorativeGreen",0,0,30,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+	TNT1 A 0 A_SetScale(1)
+	SMRT E -1
+    Loop
+	}
+}
+ACTOR NewGreenTorch: GreenTorch replaces GreenTorch
+{	
+	Radius 8
+	+FORCEYBILLBOARD
+	States
+	{
+	Spawn:
+	TRED E 35
+	TNT1 A 0 A_SetScale(0.5,0.6)
+	TNT1 A 0 A_SpawnItemEx("FireDecorativeGreen",0,0,55,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+	TNT1 A 0 A_SetScale(1)
+	TRED E -1
+    Loop
+	}
+}
+ACTOR NewShortBlueTorch: ShortBlueTorch replaces ShortBlueTorch
+{
+	Radius 6
+	+FORCEYBILLBOARD
+	States
+	{
+	Spawn:
+	SMRT E 35
+	TNT1 A 0 A_SetScale(0.4,0.5)
+	TNT1 A 0 A_SpawnItemEx("FireDecorativeBlue",0,0,30,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+	TNT1 A 0 A_SetScale(1)
+	SMRT E -1
+    Loop
+	}
+}
+ACTOR NewBlueTorch: BlueTorch replaces BlueTorch
+{	
+	Radius 8
+	+FORCEYBILLBOARD
+	States
+	{
+	Spawn:
+	TRED E 35
+	TNT1 A 0 A_SetScale(0.5,0.6)
+	TNT1 A 0 A_SpawnItemEx("FireDecorativeBlue",0,0,55,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+	TNT1 A 0 A_SetScale(1)
+	TRED E -1
+    Loop
+	}
+}
+
+ACTOR NewBurningBarrel: BurningBarrel replaces BurningBarrel
+{
+-SYNCHRONIZED
+Radius 14
++FORCEYBILLBOARD
+States
+	{
+	Spawn:
+	FCAN D 70 ThrustThingZ(0,20,1,1) //wdiex02 patch
+	TNT1 A 0 A_SetScale(0.7,0.5)
+	TNT1 A 0 A_SpawnItemEx("FireDecorativeNew",0,0,29,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+	TNT1 A 0 A_SetScale(1)
+	FCAN D -1
+	stop
+	}
+} 
+
+ACTOR TechLampPart //"lightbulp" part
+{
+	PROJECTILE
+	Bouncetype doom
+	BounceFactor 0.4
+	WallBounceFactor 0.3
+	Radius 2
+	Height 4
+	+CLIENTSIDEONLY
+	+DONTSPLASH
+	+THRUACTORS
+	+FORCEXYBILLBOARD
+	-NOGRAVITY
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_SetScale(frandom(0.9,0.4),frandom(0.9,0.4))
+		TNT1 A 0 A_Jump(128,"Stay")
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		TNT1 A 0 A_Jump(256,"Stay")
+		Stay:
+		TLMP I -1
+		stop
+	Death:
+		"####" "#" 0 A_ChangeFlag("NOINTERACTION", true)
+		"####" "#" 175 A_JumpIf(CallACS("CheckPerma") == 1,"Stay2")
+		stop
+		Stay2:
+		"####" "#" -1
+		stop
+}}
+ACTOR TechLampPart2 : TechLampPart
+{
+	States
+	{
+	Stay:
+		TLMP J -1
+		stop
+	}
+}
+ACTOR TechLampPart3 : TechLampPart
+{
+	States
+	{
+	Stay:
+		TLMP K -1
+		stop
+	}
+}
+ACTOR TechLampPart4 : TechLampPart
+{
+	States
+	{
+	Stay:
+		TLMP L -1
+		stop
+	}
+}
+ACTOR TechLampPart5 : TechLampPart
+{
+	States
+	{
+	Stay:
+		TLMP M -1
+		stop
+	}
+}
+ACTOR GenericTechLampParts : RandomSpawner
+{
+DropItem "TechLampPart2"
+DropItem "TechLampPart3"
+DropItem "TechLampPart4"
+DropItem "TechLampPart5"
+}
+
+
+ACTOR NewTechLamp: TechLamp replaces TechLamp
+{
++SHOOTABLE
++NOBLOOD
++FORCEYBILLBOARD
+Health 50
+MASS 999999
+DamageFactor "Gas", 0.0
+	DamageFactor "FlareEffect", 0.0
+	DamageFactor "SprayRED", 0.0
+	DamageFactor "SprayBLU", 0.0
+	DamageFactor "SprayYLL", 0.0
+	DamageFactor "SprayGRN", 0.0
+	DamageFactor "SprayORG", 0.0
+	DamageFactor "SprayPNK", 0.0
+	DamageFactor "burn", 0.0
+	DamageFactor "fire", 0.0
+	DamageFactor "ShovelMelee", 2.0
+	DamageFactor "SawMelee", 2.0
+	DamageFactor "friendlygun", 10.0
+	Radius 6
+	states
+	{
+	Death:
+		TURT A 0 A_Playsound("SHTRDEST")
+		TNT1 AAAAAAA 0 A_SpawnItemEx("NewGlassShard", random(-2,2), random(-2,2), 70, Random(2, 7), Random(2, 7), Random(5, 1), Random(0, 360), SXF_NOCHECKPOSITION, 20)  
+		//DKIT E 0 A_SpawnItemEx ("SparkEffect", 0, 0, 68, 0, 0, 0, 0,SXF_NOCHECKPOSITION, 0)
+		TNT1 A 1 A_SpawnItemEx ("NewTechLamp11", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION, 0)
+		stop
+	}
+}
+ACTOR NewTechLamp11: NewTechLamp
+{
+	Height 80
+	States
+	{
+	Spawn:
+	TLMP E random(30,100) A_SpawnItemEx("SparkEffectOnce", 0, 0, 70, 0, 0, 0, 0,SXF_NOCHECKPOSITION, 0)
+	loop
+	Death:
+	TNT1 AAAAA 0 A_SpawnItemEx("TechLampPart", random(-2,2), random(-2,2), random(78,68), Random(2, 6), Random(2, 6), Random(5, -3), Random(0, 360), SXF_NOCHECKPOSITION, 20)
+	TNT1 AAAAA 0 A_SpawnItemEx("GenericTechLampParts", random(-2,2), random(-2,2), random(66,52), Random(2, 6), Random(2, 6), Random(5, -3), Random(0, 360), SXF_NOCHECKPOSITION, 20)
+	TNT1 A 1 A_SpawnItemEx ("NewTechLamp12", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION, 0)
+	stop
+	}
+}
+ACTOR NewTechLamp12: NewTechLamp
+{
+	Height 50
+	States
+	{
+	Spawn:
+	TLMP F random(30,100) A_SpawnItemEx("SparkEffectOnce", 0, 0, 55, 0, 0, 0, 0,SXF_NOCHECKPOSITION, 0)
+	loop
+	Death:
+	TNT1 AAAAAAAA 0 A_SpawnItemEx("GenericTechLampParts", random(-2,2), random(-2,2), random(48,40), Random(2, 6), Random(2, 6), Random(5, -3), Random(0, 360), SXF_NOCHECKPOSITION, 20)
+	TNT1 A 1 A_SpawnItemEx ("NewTechLamp13", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION, 0)
+	stop
+	}
+}
+ACTOR NewTechLamp13: NewTechLamp
+{
+	Height 40
+	DeathHeight 30
+	States
+	{
+	Spawn:
+	TLMP G random(30,100) A_SpawnItemEx("SparkEffectOnce", 0, 0, height, 0, 0, 0, 0,SXF_NOCHECKPOSITION, 0)
+	loop
+	Death:
+	TNT1 AAAAAAAA 0 A_SpawnItemEx("GenericTechLampParts", random(-2,2), random(-2,2), random(38,32), Random(2, 6), Random(2, 6), Random(5, -3), Random(0, 360), SXF_NOCHECKPOSITION, 20)
+	DeathStay:
+	TLMP H random(30,100) A_SpawnItemEx("SparkEffectOnce", 0, 0, 30, 0, 0, 0, 0,SXF_NOCHECKPOSITION, 0)
+	loop
+	}
+}
+
+
+
+
+ACTOR NewTechLamp2: TechLamp2 replaces TechLamp2
+{
++SHOOTABLE
++NOBLOOD
++FORCEYBILLBOARD
+Health 50
+MASS 999999
+DamageFactor "Gas", 0.0
+	DamageFactor "FlareEffect", 0.0
+	DamageFactor "SprayRED", 0.0
+	DamageFactor "SprayBLU", 0.0
+	DamageFactor "SprayYLL", 0.0
+	DamageFactor "SprayGRN", 0.0
+	DamageFactor "SprayORG", 0.0
+	DamageFactor "SprayPNK", 0.0
+	DamageFactor "burn", 0.0
+	DamageFactor "fire", 0.0
+	DamageFactor "ShovelMelee", 2.0
+	DamageFactor "SawMelee", 2.0
+	DamageFactor "friendlygun", 10.0
+	Radius 6
+	states
+	{
+	Death:
+		TURT A 0 A_Playsound("SHTRDEST")
+		TNT1 AAAAAAA 0 A_SpawnItemEx("NewGlassShard", random(-2,2), random(-2,2), 54, Random(3, 7), Random(3, 7), Random(5, 5), Random(0, 360), SXF_NOCHECKPOSITION, 20) 
+		TNT1 A 1 A_SpawnItemEx ("NewTechLamp21", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION, 0)
+		stop
+	}
+}
+ACTOR NewTechLamp21: NewTechLamp2
+{
+	Height 60
+	States
+	{
+	Spawn:
+	TLP2 E random(30,100) A_SpawnItemEx("SparkEffectOnce", 0, 0, height, 0, 0, 0, 0,SXF_NOCHECKPOSITION, 0)
+	loop
+	Death:
+	TNT1 AAAAA 0 A_SpawnItemEx("TechLampPart", random(-2,2), random(-2,2), random(52,58), Random(2, 6), Random(2, 6), Random(5, -3), Random(0, 360), SXF_NOCHECKPOSITION, 20)
+	TNT1 AAAA 0 A_SpawnItemEx("GenericTechLampParts", random(-2,2), random(-2,2), random(50,45), Random(2, 6), Random(2, 6), Random(5, -3), Random(0, 360), SXF_NOCHECKPOSITION, 20)
+	TNT1 A 1 A_SpawnItemEx ("NewTechLamp22", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION, 0)
+	stop
+	}
+}
+ACTOR NewTechLamp22: NewTechLamp2
+{
+	Height 45
+	States
+	{
+	Spawn:
+	TLP2 F random(30,100) A_SpawnItemEx("SparkEffectOnce", 0, 0, height, 0, 0, 0, 0,SXF_NOCHECKPOSITION, 0)
+	loop
+	Death:
+	TNT1 AAAAAAA 0 A_SpawnItemEx("GenericTechLampParts", random(-2,2), random(-2,2), random(45,34), Random(2, 6), Random(2, 6), Random(5, -3), Random(0, 360), SXF_NOCHECKPOSITION, 20)
+	TNT1 A 1 A_SpawnItemEx ("NewTechLamp23", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION, 0)
+	stop
+	}
+}
+ACTOR NewTechLamp23: NewTechLamp2
+{
+	Height 34
+	DeathHeight 24
+	States
+	{
+	Spawn:
+	TLP2 G random(30,100) A_SpawnItemEx("SparkEffectOnce", 0, 0, height, 0, 0, 0, 0,SXF_NOCHECKPOSITION, 0)
+	loop
+	Death:
+	TNT1 AAAAAAA 0 A_SpawnItemEx("GenericTechLampParts", random(-2,2), random(-2,2), random(24,34), Random(2, 6), Random(2, 6), Random(5, -3), Random(0, 360), SXF_NOCHECKPOSITION, 20)
+	DeathStay:
+	TLP2 H random(30,100) A_SpawnItemEx("SparkEffectOnce", 0, 0, 24, 0, 0, 0, 0,SXF_NOCHECKPOSITION, 0)
+	loop
+	}
+}

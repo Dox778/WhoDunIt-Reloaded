@@ -1,0 +1,1560 @@
+
+//modify by zedek and prepper fixed Raise
+Actor FakeM1 : CustomInventory replaces Chaingun 31011
+{ 
+	//$Category WDI Weapons/Limited Weapons
+	//$Sprite M1GNY0
+	//$Title "M1 Carbine"
+	Radius 16 
+	Height 8
+	Tag "M1 Carbine"
+	Inventory.PickupMessage "\cjFound an \c[C8]M1 Carbine. \cjUnreliable when constantly firing! \n\caDamage: \c[C4]20"
+	Inventory.Respawntics 42000 //20min
+	+FORCEXYBILLBOARD
+	+DonTGib
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		M1GN Y -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1, 2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1)  
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",Random(0,8))
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	NotPickup:
+		TNT1 A 0
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Fail
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",8,"AmmoPickupFull")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",Random(0,8))
+		TNT1 A 0 A_FireCustomMissile("DroppedM1Empty",0,0,0)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	AmmoPickupFull:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Ammo",1,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1Ammo",1)
+		TNT1 A 0 A_FireCustomMissile("DroppedM1Empty",0,0,0)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	ForgetIt:
+		TNT1 A 1
+		Stop
+}}
+Actor FakeM1NoRandom : FakeM1
+{ 
+	States
+	{
+	Spawn:
+		M1GN Y -1
+		Stop
+}}
+
+Actor TKFakeM1 : FakeM1
+{
+states
+	{
+	Pickup:
+		PIST A 0
+		PIST A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		PIST A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")		
+		PIST A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		PIST A 0 A_PlaySound("pickups/weapon")
+		PIST A 0 A_GiveInventory("M1Carbine",1)
+		PIST A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 0 //A_Print("Picked up a Beretta.")
+		PIST A 1 ACS_Execute(670,0,23)
+		PIST A 0 A_JumpIfInventory("M1Once",1,"ForgetIt")
+		PIST A 0 A_GiveInventory("M1CarbineClipIn",random(1,8))
+		PIST A 0 A_GiveInventory("M1Once",1)
+		Stop
+	NotPickup:
+		PIST A 0
+		M1GN Y 1 ACS_Execute(670,0,23)
+		Fail
+	}
+}
+
+
+Actor M1Carbine : Wdi_BaseWeapon
+{
+	Decal BulletChip
+	Tag "M1 Carbine"
+	AttackSound "M1/Fire"
+	Weapon.SelectionOrder 1900
+	Weapon.PreferredSkin "M1Skin"
+	Weapon.AmmoType "M1CarbineClipIn"
+	Weapon.AmmoType2 "M1Ammo"
+	Weapon.AmmoGive 0
+	Weapon.AmmoGive2 0
+	Weapon.AmmoUse 0
+	+WEAPON.AMMO_OPTIONAL
+	+WEAPON.ALT_AMMO_OPTIONAL
+	-WEAPON.MELEEWEAPON
+	States
+	{
+	Spawn:
+		TNT1 A -1
+		Stop
+	Ready:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"ReadyJammed")
+		M1TU A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD)
+		loop
+	ReadyJammed:
+		M1TU G 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_NOSECONDARY|WRF_NOSWITCH)
+		loop
+	Select:
+		TNT1 A 0
+		TNT1 A 4 A_TakeInventory("FidgetSpam",1)
+		M1TU A 0 A_JumpIfInventory("NeedToUnjam",1,"SelectJammed")
+		goto SelectAnim
+		TNT1 A 0 A_PlaySound("M1BOBCK",CHAN_WEAPON)
+		M1TU H 1 A_Raise
+		M1TU IJKLMN 1 A_Raise
+		TNT1 A 0 A_PlaySound("M1BOFWR",CHAN_WEAPON)
+		M1TU O 1 A_Raise
+		M1TU PIHGFEDCBAAAAA 1 A_Raise
+		Wait
+	SelectAnim:
+		"####" G 1 offset(71,156)
+		"####" H 1 offset(62,127) A_PlaySound("M1BOBCK",CHAN_WEAPON)
+		"####" I 1 offset(52,106)
+		"####" J 1 offset(44,88)
+		"####" K 1 offset(36,76)
+		"####" L 1 offset(28,64)
+		"####" M 1 offset(20,54)
+		"####" N 1 offset(14,45)
+		"####" O 1 offset(8,40) A_PlaySound("M1BOFWR",CHAN_WEAPON)
+		"####" P 1 offset(4,36)
+		"####" I 1 offset(1,33)
+		"####" HGFEDCB 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+		goto Ready	
+		
+	SelectJammed:
+		TNT1 A 0
+		M1TU BCDEFGGH 1 A_Raise
+		TNT1 I 0 A_PlaySound("M1BOBCK",CHAN_WEAPON)
+		M1TU IIIHHGG 1 A_Raise
+		wait
+	Fire:
+		TNT1 A 0
+		NULL A 0 A_TakeInventory("FidgetSpam",1)
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"TryToUnjam")
+		M1TU A 0 A_JumpIfInventory("M1CarbineClipIn",1,1)
+		Goto NoAmmo
+		M1TU A 0 ACS_NamedExecuteAlways("Powercounter",0)
+		M1TU A 0 A_GiveInventory("Powercounter",3)//< speed trigger
+		M1TU A 0 A_JumpIfInventory("M1AntiJam",1,"Fakefire") //Goodbye Jambingo D:
+		M1TU A 0 A_JumpIfInventory("Powercounter",12,"JAM60") //trigger this at 60%
+		M1TU A 0 A_JumpIfInventory("Powercounter",8,"JAM40") //40%
+	Fakefire:
+		M1TU A 0 A_TakeInventory("M1CarbineClipIn",1)
+		M1TU A 0
+		REPR AA 0 A_FireCustomMissile ("PistolSmokeSpawner", 0, 0, 1,16, 0, 0)
+		RIFF A 0 A_FireCustomMissile("BulletTracer", frandom(1.8,2.8), 0, 9, 7)
+		M1TU A 0 A_FireBullets (0.5, 0.2, 1, 20, "FFBulletPuff",FBF_NORANDOM)
+		TNT1 A 0 A_GunFlash("RecoilStuff",GFF_NOEXTCHANGE)
+		M1TU QR 1 Bright A_SpawnItem("FMBulletPuff2Lighter",10,30)
+		M1TU S 1
+		M1TU T 1 A_FireCustomMissile("CaseSpawn2",0,0,12,5)
+		M1TU UUVWXYY 1 
+		M1TU A 8 A_TakeInventory("M1AntiJam")
+		M1TU A 0 A_ReFire
+		Goto Ready
+		
+	RecoilStuff:
+		TNT1 A 1
+		TNT1 A 1 A_ZoomFactor(0.99)
+		NULL A 0 A_SetPitch(Pitch-1.2)
+		TNT1 A 0 A_SetAngle(random(-2,2)+angle)
+		TNT1 A 1 A_ZoomFactor(1.0)
+		NULL A 0 A_SetPitch(Pitch-0.3)
+		TNT1 A 1
+		TNT1 AA 1 A_SetPitch(Pitch+0.5)
+		stop
+	
+	RecoilStuff:
+		TNT1 A 1
+		TNT1 A 1 A_SetPitch(Pitch-2)
+		TNT1 A 0 A_ZoomFactor(0.98)
+		NULL A 0 A_SetPitch(Pitch-8)
+		TNT1 A 1 A_SetAngle(random(-4,4)+angle)
+		TNT1 A 0 A_ZoomFactor(1.0)
+		//NULL AA 1 A_SetPitch(Pitch-1)
+		//TNT1 A 1
+		TNT1 AA 1 A_SetPitch(Pitch+1)
+		TNT1 AAAA 1 A_SetPitch(Pitch+0.5)
+		stop
+	
+	NoAmmo:
+		M1TU A 1 offset(0,34) A_PlaySound("M1JDRYFI")
+		M1TU A 1 A_WeaponReady(WRF_NOFIRE)
+		Goto Ready
+	Jam40:
+		M1TU A 0 A_Jump(18,"Jam")
+		Goto Fakefire
+	Jam60:
+		M1TU A 0 A_Jump(32,"Jam")
+		Goto Fakefire	
+	Jam:
+		M1TU AA 0
+		M1TU A 0 A_GiveInventory("M1AntiJam")
+		M1TU A 0 A_PlayWeaponSound ("M1JDRYFI")
+		M1TU A 1 offset(0,34)
+		M1TU A 1 offset(0,33)
+		M1TU A 9 offset(0,32)
+		M1TU A 1 A_Print("Your M1-Carbine is jammed.",2)
+		M1TU A 0 A_PlayWeaponSound ("M1JDRYFI")
+		M1TU A 1 offset(0,34)
+		M1TU A 1 offset(0,33)
+		M1TU A 4 offset(0,32)
+		M1TU BCDEF 1
+		TNT1 A 0 A_GiveInventory("NeedToUnjam",1)
+		Goto Ready
+	TryToUnjam:	
+		TNT1 A 0 A_Jump(24,"UnjamFinish")
+		TNT1 A 0 A_JumpIfInventory("JamCount",5,"UnjamFinish")
+		M1TU H 1 A_PlaySound("M1BOBCK",CHAN_WEAPON)
+		M1TU I 3
+		M1TU H 2 A_GiveInventory("JamCount",1)
+		Goto ReadyJammed
+	UnjamFinish:
+		NULL A 0
+		M1TU H 1 A_PlaySound("M1BOBCK",CHAN_WEAPON)
+		M1TU JMN 1
+		M1TU O 1 A_PlaySound("M1BOFWR",CHAN_WEAPON)
+		M1TU PIHGFEDCBAA 1
+		NULL A 0 A_TakeInventory("JamCount",10)
+		NULL A 0 A_TakeInventory("NeedToUnjam",10)
+		Goto Ready	
+
+	AltFire:
+		TNT1 A 0 A_JumpIfInventory("FidgetSpam",1,"FidgetSpam")
+		M1GN A 0 A_JumpIfInventory("M1CarbineClipIn",8,"Reload")
+		M1GN A 0 A_JumpIfInventory("M1Ammo",1,"ReloadB")
+		Goto Reload
+	ReloadB:
+		M1TR ABCDEFGHIJ 1 A_WeaponReady(WRF_NOFIRE)
+		M1TR E 0 A_PlaySound("M1MAGOU",CHAN_WEAPON)
+		M1TR E 0 A_FireCustomMissile("M1ClipCasing",random(30,40),0,0,0)
+		M1TR KLMNO 1 A_WeaponReady(WRF_NOFIRE)
+		M1TR o 30 A_WeaponReady(WRF_NOFIRE)
+		M1TR PQRSS 1 A_WeaponReady(WRF_NOFIRE)
+		M1TR T 6 A_WeaponReady(WRF_NOFIRE)
+		M1TR U 1 A_WeaponReady(WRF_NOFIRE)
+		M1TR J 0 A_PlaySound("M1MAGIN",CHAN_WEAPON)
+		M1GN A 0 A_JumpIfInventory("M1Ammo",1,2)
+		goto CanIhavesex
+		TNT1 A 0
+		M1TR A 0 A_TakeInventory("M1Ammo",1)
+		M1TR J 0 A_JumpIfInventory("M1CarbineClipIn",1,2)
+		Goto ReloadEmpty
+		TNT1 AAAA 0
+		M1TR J 0 A_GiveInventory("M1CarbineClipIn",8)
+		M1TR WVVVWXX 1
+		M1TR H 3
+		M1TR GFEDCBA 1
+		M1TU A 2
+		Goto Ready
+	ReloadEmpty:
+		M1TR J 0 A_GiveInventory("M1CarbineClipIn",8)
+		M1TR WVVVWXX 1
+		M1TR H 3
+		M1TR GFEDCBA 1
+		M1TU A 3
+		M1TU BCDEF 1
+		M1TU G 3
+		M1TU H 1 A_PlaySound("M1BOBCK",CHAN_WEAPON)
+		M1TU IJKLLMN 1
+		M1TU O 1 A_PlaySound("M1BOFWR",CHAN_WEAPON)
+		M1TU PIHGFEDCBAA 1
+		Goto Ready //47
+	canIhavesex:
+		tnt1 a 0 a_print("fuck you now its jammed")
+		M1TR WVVVWXX 1
+		M1TR H 3
+		M1TR GFEDCBA 1
+		M1TU A 2
+		TNT1 A 0 A_GiveInventory("NeedToUnjam",10)
+		TNT1 A 0 A_TakeInventory("JamCount",10)
+		Goto Ready
+		
+	Reload:
+		M1TU BCDEF 1 A_WeaponReady(WRF_NOSECONDARY)
+		M1TU G 3 A_WeaponReady(WRF_NOSECONDARY)
+		NULL A 0 A_GiveInventory("FidgetSpam",1)
+	FidgetSpam:
+		M1TU H 1 A_PlaySound("M1BOBCK",CHAN_WEAPON)
+		M1TU IJK 1 A_WeaponReady(WRF_NOSECONDARY)
+	FidgetHold:
+		M1TU L 1 A_WeaponReady(WRF_NOSECONDARY)
+		NULL A 0 A_ReFire("FidgetHold")
+		M1TU MN 1 A_WeaponReady(WRF_NOSECONDARY)
+		M1TU O 0 A_PlaySound("M1BOFWR",CHAN_WEAPON)
+		M1TU OP 1 A_WeaponReady(WRF_NOSECONDARY)
+		M1TU IHGFE 1 A_WeaponReady
+		NULL A 0 A_TakeInventory("FidgetSpam",1)
+		M1TU DCBAAA 1 A_WeaponReady(WRF_NOSECONDARY)
+		Goto Ready
+	//zoom:
+		TNT1 A 0
+		TNT1 A 0 A_TakeInventory("M1Raised",1)
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+}}
+
+
+//Ammo save after drop weapon.//////////////////////////////////////////////////
+Actor Dropper_M1 : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",8,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",7,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",6,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",5,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",4,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",3,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",2,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",1,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"PickupEmptyJammed")
+		TNT1 A 1 A_FireCustomMissile("DroppedM1Empty",0,0,0)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup1Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedM11",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup2Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedM12",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup3Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedM13",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup4Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedM14",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup5Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedM15",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup6Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedM16",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup7Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedM17",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"PickupFullJammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedM1Full",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+///////////////////////
+	PickupEmptyJammed:
+		TNT1 A 1 A_FireCustomMissile("DroppedM1EmptyJammed",0,0,0)
+		Stop
+	Pickup1Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedM11Jammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup2Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedM12Jammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup3Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedM13Jammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup4Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedM14Jammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup5Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedM15Jammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup6Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedM16Jammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup7Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedM17Jammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	PickupFullJammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedM1FullJammed",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+Actor DeathDropper_M1 : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",8,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",7,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",6,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",5,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",4,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",3,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",2,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",1,"Pickup1")
+	PickupEmpty:
+		NULL A 0 A_JumpIfInventory("NeedToUnjam",1,"PickupEmptyJammed")
+		TNT1 A 1 A_SpawnItemEx("DroppedM1Empty",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	Pickup1:
+		NULL A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup1Jammed")
+		TNT1 A 0 A_SpawnItemEx("DroppedM11",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup2:
+		NULL A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup2Jammed")
+		TNT1 A 0 A_SpawnItemEx("DroppedM12",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup3:
+		NULL A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup3Jammed")
+		TNT1 A 0 A_SpawnItemEx("DroppedM13",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup4:
+		NULL A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup4Jammed")
+		TNT1 A 0 A_SpawnItemEx("DroppedM14",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup5:
+		NULL A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup5Jammed")
+		TNT1 A 0 A_SpawnItemEx("DroppedM15",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup6:
+		NULL A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup6Jammed")
+		TNT1 A 0 A_SpawnItemEx("DroppedM16",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup7:
+		NULL A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup7Jammed")
+		TNT1 A 0 A_SpawnItemEx("DroppedM17",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	PickupFull:
+		NULL A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup8Jammed")
+		TNT1 A 0 A_SpawnItemEx("DroppedM1Full",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	///////////////////////////////
+	PickupEmptyJammed:
+		TNT1 A 1 A_SpawnItemEx("DroppedM1EmptyJammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	Pickup1Jammed:
+		TNT1 A 0 A_SpawnItemEx("DroppedM11Jammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup2Jammed:
+		TNT1 A 0 A_SpawnItemEx("DroppedM12Jammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup3Jammed:
+		TNT1 A 0 A_SpawnItemEx("DroppedM13Jammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup4Jammed:
+		TNT1 A 0 A_SpawnItemEx("DroppedM14Jammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup5Jammed:
+		TNT1 A 0 A_SpawnItemEx("DroppedM15Jammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup6Jammed:
+		TNT1 A 0 A_SpawnItemEx("DroppedM16Jammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup7Jammed:
+		TNT1 A 0 A_SpawnItemEx("DroppedM17Jammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	PickupFullJammed:
+		TNT1 A 0 A_SpawnItemEx("DroppedM1FullJammed",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+ACTOR DroppedM1
+{
+	PROJECTILE
+	-NOGRAVITY
+	+EXPLODEONWATER
+	Damage 0
+	Radius 16
+	Height 8
+	Speed 9
+	  //Scale 0.16
+	DeathSound "weapons/gundrop"
+	BounceSound "weapons/gundrop"
+	Bouncetype Doom
+	BounceFactor 0.3
+	BounceCount 2
+	+SKYEXPLODE
+	States
+	{
+	Spawn:
+		M1GN Y 1
+		Loop
+	Death:
+		M1GN Y 35 A_playSound("weapons/gundrop",CHAN_BODY,0.7)
+		M1GN Y 1 A_SpawnItem("FakeM1",0,0,0,0)
+		Stop
+	}
+}
+
+ACTOR DroppedM1Full : DroppedM1
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM1Full",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM17 : DroppedM1
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM17",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM16 : DroppedM1
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM16",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM15 : DroppedM1
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM15",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM14 : DroppedM1
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM14",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM13 : DroppedM1
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM13",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM12 : DroppedM1
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM12",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM11 : DroppedM1
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM11",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM1Empty : DroppedM1
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM1Empty",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM1FullJammed : DroppedM1
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM1FullJammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM17Jammed  : DroppedM1
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM17Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM16Jammed  : DroppedM1
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM16Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM15Jammed  : DroppedM1
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM15Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM14Jammed  : DroppedM1
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM14Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM13Jammed  : DroppedM1
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM13Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM12Jammed  : DroppedM1
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM12Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM11Jammed  : DroppedM1
+{
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM11Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM1EmptyJammed  : DroppedM1
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM1EmptyJammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+
+Actor FakeM1Full : FakeM1NoRandom
+{ 
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",8)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",1,"AmmoPickupFull")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",8)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1Empty",0,0,0)
+		Stop
+	AmmoPickupFull:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Ammo",1,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1Ammo",1)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1Empty",0,0,0)
+		Stop
+}}
+
+Actor FakeM17 : FakeM1NoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",7)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",2,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",7)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1Empty",0,0,0)
+		Stop
+}}
+
+Actor FakeM16 : FakeM1NoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",6)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",3,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",6)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1Empty",0,0,0)
+		Stop
+}}
+
+Actor FakeM15 : FakeM1NoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",5)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",4,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",5)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1Empty",0,0,0)
+		Stop
+}}
+
+Actor FakeM14 : FakeM1NoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",4)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",5,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",4)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1Empty",0,0,0)
+		Stop
+}}
+
+Actor FakeM13 : FakeM1NoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",3)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",6,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",3)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1Empty",0,0,0)
+		Stop
+}}
+
+Actor FakeM12 : FakeM1NoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",2)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",7,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",2)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1Empty",0,0,0)
+		Stop
+}}
+
+Actor FakeM11 : FakeM1NoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",8,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",1)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1Empty",0,0,0)
+		Stop
+}}
+
+Actor FakeM1Empty : FakeM1NoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"ForgetIt")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_TakeInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+}}
+
+Actor FakeM1FullJammed : FakeM1NoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",8)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",1,"AmmoPickupFull")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",8)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1Empty",0,0,0)
+		Stop
+	AmmoPickupFull:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Ammo",1,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1Ammo",1)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1EmptyJammed",0,0,0)
+		Stop
+}}
+
+Actor FakeM17Jammed : FakeM1NoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",7)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",2,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",7)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1EmptyJammed",0,0,0)
+		Stop
+}}
+
+Actor FakeM16Jammed : FakeM1NoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",6)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",3,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",6)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1EmptyJammed",0,0,0)
+		Stop
+}}
+
+Actor FakeM15Jammed : FakeM1NoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",5)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",4,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",5)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1EmptyJammed",0,0,0)
+		Stop
+}}
+
+Actor FakeM14Jammed : FakeM1NoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",4)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",5,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",4)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1EmptyJammed",0,0,0)
+		Stop
+}}
+
+Actor FakeM13Jammed : FakeM1NoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",3)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",6,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",3)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1EmptyJammed",0,0,0)
+		Stop
+}}
+
+Actor FakeM12Jammed : FakeM1NoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",2)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",7,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",2)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1EmptyJammed",0,0,0)
+		Stop
+}}
+
+Actor FakeM11Jammed : FakeM1NoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",8,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("M1CarbineClipIn",1)
+		TNT1 A 1 A_FireCustomMissile("DroppedM1EmptyJammed",0,0,0)
+		Stop
+}}
+
+Actor FakeM1EmptyJammed : FakeM1NoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("M1Carbine",1,"ForgetIt")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		NULL A 0 A_GiveInventory("NeedToUnjam",1)
+		NULL A 0 A_TakeInventory("JamCount",10)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,8)
+		Stop
+}}
+
+//FAR THROWS
+ACTOR DroppedM1Far : DroppedM1
+{
+	Speed 30
+}
+
+Actor Dropper_M1Far : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",8,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",7,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",6,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",5,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",4,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",3,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",2,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("M1CarbineClipIn",1,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"PickupEmptyJammed")
+		TNT1 A 1 A_FireCustomMissile("DroppedM1EmptyFar",0,0,0)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup1Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedM11Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup2Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedM12Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup3Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedM13Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup4Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedM14Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup5Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedM15Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup6Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedM16Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"Pickup7Jammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedM17Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_JumpIfInventory("NeedToUnjam",1,"PickupFullJammed")
+		TNT1 A 0 A_FireCustomMissile("DroppedM1FullFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+///////////////////////
+	PickupEmptyJammed:
+		TNT1 A 1 A_FireCustomMissile("DroppedM1EmptyJammedFar",0,0,0)
+		Stop
+	Pickup1Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedM11JammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup2Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedM12JammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup3Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedM13JammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup4Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedM14JammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup5Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedM15JammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup6Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedM16JammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Pickup7Jammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedM17JammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	PickupFullJammed:
+		TNT1 A 0 A_FireCustomMissile("DroppedM1FullJammedFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("M1CarbineClipIn",8)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+ACTOR DroppedM1FullFar : DroppedM1Far
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM1Full",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM17Far : DroppedM1Far
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM17",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM16Far : DroppedM1Far
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM16",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM15Far : DroppedM1Far
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM15",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM14Far : DroppedM1Far
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM14",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM13Far : DroppedM1Far
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM13",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM12Far : DroppedM1Far
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM12",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM11Far : DroppedM1Far
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM11",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM1EmptyFar : DroppedM1Far
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM1Empty",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM1FullJammedFar : DroppedM1Far
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM1FullJammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM17JammedFar  : DroppedM1Far
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM17Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM16JammedFar  : DroppedM1Far
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM16Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM15JammedFar  : DroppedM1Far
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM15Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM14JammedFar  : DroppedM1Far
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM14Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM13JammedFar  : DroppedM1Far
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM13Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM12JammedFar  : DroppedM1Far
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM12Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM11JammedFar  : DroppedM1Far
+{
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM11Jammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedM1EmptyJammedFar  : DroppedM1Far
+{ +FORCEXYBILLBOARD
+	States
+	{
+	Death:
+		M1GN Y 35
+		M1GN Y 1 A_SpawnItemEx("FakeM1EmptyJammed",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}

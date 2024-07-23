@@ -1,0 +1,177 @@
+ACTOR ShovelSpawner: RandomSpawner 30074
+{
+//$Category WDI Weapons
+//$Title "Heavy Spawner (Shovel, Sledgehammer, Pickaxe, Nothing)"
+Dropitem "FakeShovel" 255, 65
+Dropitem "FakeSledge" 255, 15
+Dropitem "FakePickaxe" 255, 15
+DropItem "AnimalSpawner" 255, 5
+}
+
+Actor FakeShovel : CustomInventory 25346
+{  
+	//$Category WDI Weapons/Heavy Weapons
+	//$Sprite SHOVA0
+	//$Title "Shovel"
+	Radius 16
+	Height 8
+	Scale 0.96
+	Inventory.PickupMessage "\cjFound a \c[D9]Shovel. \cjuUseful for digging them a grave!\n\caDamage: \c[C4]30"
+	Inventory.Respawntics 10500 //5 Minutes
+	+FORCEXYBILLBOARD
+	+DonTGib
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		SHOV A -1
+		Stop
+	Pickup:
+		SHOV A 0
+		SHOV A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		SHOV A 0 A_PlaySound("Pickups/Weapon")
+		SHOV A 0 A_GiveInventory("Shovel",1)
+		SHOV A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		SHOV A 1 ACS_NamedExecute("OldWeapon_ID",0,7)
+		Stop
+	NotPickup:
+		SHOV A 0
+		SHOV A 1 ACS_NamedExecute("OldWeapon_ID",0,7)
+		Fail
+}}
+Actor FakeShovelNoRandom : FakeShovel
+{ 
+	States
+	{
+	Spawn:
+		SHOV A -1
+		Stop
+}}
+Actor Shovel : Wdi_BaseWeapon
+{
+	Radius 8
+	Height 32
+	Scale 0.96
+	Tag "Shovel"
+	Inventory.PickupMessage "Found a Shovel. Classy!"
+	Weapon.PreferredSkin "ShovelSkin"
+	Inventory.Icon "WEPICO6"
+	States
+	{
+	Spawn:
+		SHOV A 0
+		Goto Death
+	Pickup:
+	Select:
+		TNT1 A 6
+		2HLG A 0 A_JumpIfInventory("Stained",1,2)
+		SHLG A 0
+		"####" AAAAAAAAAAAAAAA 0 A_Raise
+		"####" A 1 offset(71,156)
+		"####" A 1 offset(62,127)
+		"####" A 1 offset(52,106)
+		"####" A 1 offset(44,88)
+		"####" A 1 offset(36,76)
+		"####" A 1 offset(28,64)
+		"####" A 1 offset(20,54)
+		"####" A 1 offset(14,45)
+		"####" A 1 offset(8,40)
+		"####" A 1 offset(4,36)
+		"####" A 1 offset(1,33)
+		"####" A 0 A_Jump(255,"Ready")
+		"####" A 0 A_Jump(255,"Ready")
+		goto Ready
+	Ready:
+	2HLG A 0 A_JumpIfInventory("Stained",1,2)
+		SHLG A 0
+	ReadyStay:
+		"####" A 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+	Fire:
+		"####" BBCDEFGHII 1
+	Hold:
+		"####" I 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" A 0 A_ReFire
+		"####" G 1
+		"####" J 1 A_PlaySound("shovel/swing")
+		"####" K 1 A_CustomPunch(16, 1, 1, "ShovelPuff", 72)
+		"####" L 1 A_CustomPunch(12, 1, 1, "ShovelPuff2", 72)
+		"####" MN 1 
+		TNT1 A 12
+		2HLG A 0 A_JumpIfInventory("Stained",1,2)
+		SHLG A 0
+		"####" OPQRSTUVWXX 1
+		Goto Ready
+	Death:
+		POOL A 0 A_SpawnItem("DroppedShovel",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		Goto Death + 1
+	//Zoom:
+		TNT1 A 0
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+}}
+
+ACTOR DroppedShovel: Wdi_BaseDroppedWeapon
+{
+	Scale 0.96
+	BounceSound "shovel/wall"
+	States
+	{
+	Spawn:
+		SHOV A 1
+		Loop
+	Death:
+		SHOV A 35 A_playSound("shovel/wall",CHAN_BODY,0.5)
+		SHOV A 1 A_SpawnItemEx("FakeShovelNoRandom",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+ACTOR DroppedShovelFar: Wdi_BaseDroppedWeaponfar
+{
+	Scale 0.96
+	BounceSound "shovel/wall"
+	States
+	{
+	Spawn:
+		SHOV A 1
+		Loop
+	Death:
+		SHOV A 35 A_playSound("shovel/wall",CHAN_BODY,0.5)
+		SHOV A 1 A_SpawnItemEx("FakeShovelNoRandom",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+actor ShovelPuff: BaseMeleePuff
+{
+  DamageType "ShovelMelee"
+  attacksound "Shovel/wall"
+  seesound "shovel/hit"
+  Decal "MeleeCrack"
+}
+Actor ShovelPuff2: ShovelPuff 
+{ 
+	attacksound "" 
+	seesound"" 
+	Decal "" 
+	States
+	{
+  Spawn:
+    TNT1 A 0
+    TNT1 A 1
+    stop
+  Crash:
+  	TNT1 A 0
+  	TNT1 A 1
+  	stop
+  Melee:
+  	TNT1 A 0
+  	TNT1 A 1
+  	stop
+	}
+}

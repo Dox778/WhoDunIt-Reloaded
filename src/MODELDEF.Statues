@@ -1,0 +1,50 @@
+//I believe these models come from a Risen3D model pack.
+//If you know the exact credits please let me know!
+
+Model CyberdemonStatue
+{ 
+   Path "Models\Statues"
+   Model 0 "Cybr.md2"
+   Model 1 "Cybrw.md2"
+   Model 2 "Cybrwea.md2"
+   Skin 0 "cybr0.png"
+   Skin 1 "cybrw0.png"
+   Skin 2 "cybrwea0.png"
+   Scale 0.625 0.625 0.625
+
+   FrameIndex STA5 A 0 0 FrameIndex STA5 A 1 0 FrameIndex STA5 A 2 0
+}
+
+Model DemonStatue
+{ 
+   Path "Models\Statues"
+   Model 0 "Demon.md2"
+   Skin 0 "Skindemon.pcx"
+   Scale 0.4 0.4 0.4
+
+   FrameIndex STA2 A 0 0
+}
+
+Model ArchvileStatue
+{ 
+   Path "Models\Statues"
+   Skin 0 "Archvile.png"
+   Model 0 "Archattack.md2"
+   Scale 1.25 1.25 1.5
+	
+	NOINTERPOLATION
+   FrameIndex STA3 A 0 0
+}
+
+Model BaronStatue
+{ 
+   Path "Models\Statues"
+   Skin 0 "Baron_SKIN.png"
+   Skin 1 "Baron_h0.png"
+   Model 0 "bruiser_body.md2"
+   Model 1 "bruiser_head.md2"
+   Scale 0.5 0.5 0.5
+
+
+   FrameIndex STA4 A 0 15	FrameIndex STA4 A 1 15	//FrameIndex STA4 A 2 15
+}

@@ -1,0 +1,447 @@
+//=================================================================================================================
+//ANIMATIONS STUFFS
+//---------------------------------------------------------------------------------------------------------------
+
+//JIGSAW--------------------------------
+cameratexture TCAMTEX1 128 64 fit 80 56
+
+texture BSAW01
+	allowdecals
+	pic BSAW01 rand 1 1
+	pic BSAW02 rand 1 1
+	pic BSAW03 rand 1 1
+texture BSAW04
+	allowdecals	
+	pic BSAW04 rand 1 1
+	pic BSAW05 rand 1 1
+	pic BSAW06 rand 1 1
+
+//wdi19-------------------------------
+cameratexture	cam1t8x6 	256 192		fit	80 60
+cameratexture	cam2t8x6 	256 192		fit	80 60
+cameratexture	cam3t8x6 	256 192		fit	80 60
+cameratexture	cam4t8x6 	256 192		fit	80 60
+cameratexture	cam5t8x6 	256 192		fit	80 60
+cameratexture	 MURDTV2 	256 192     fit 80 60
+
+texture MSELF1
+pic MSELF2 tics 20
+pic MSELF1 tics 10
+
+//fixed definitions from repository
+
+cameratexture MAPCAM1 256 256 fit 64 64
+cameratexture MAPCAM2 256 256 fit 64 64
+cameratexture MAPCAM3 256 256 fit 64 64
+cameratexture MAPCAM4 256 256 fit 64 64
+cameratexture MAPCAM5 256 256 fit 64 64
+cameratexture MAPCAM6 256 256 fit 64 64
+cameratexture MAPCAM7 256 256 fit 64 64
+cameratexture MAPCAM8 256 256 fit 64 64
+cameratexture MAPCAM9 256 256 fit 64 64
+cameratexture MAPCAM10 256 256 fit 64 64
+cameratexture MAPCAM11 256 256 fit 64 64
+cameratexture MAPCAM12 256 256 fit 64 64
+
+//Jigsaw
+cameratexture TCAMTEX1 256 128 fit 80 56
+cameratexture TCAMTEX2 256 128 fit 80 56
+cameratexture TCAMTEX3 256 128 fit 80 56
+
+
+//riclo
+cameratexture WDI18C1 256 256 fit 108 90
+cameratexture WDI18C2 256 256 fit 108 90
+cameratexture WDI18C3 256 256 fit 108 90
+cameratexture WDI18C4 256 256 fit 108 90
+cameratexture WDI18C5 256 256 fit 108 90
+cameratexture WDI18C6 256 256 fit 108 90
+cameratexture WDI18C7 256 256 fit 108 90
+cameratexture WDI18C8 256 256 fit 108 90
+cameratexture WDI18C9 256 256 fit 108 90
+cameratexture WDI18C10 256 256 fit 108 90
+cameratexture WDI18C11 256 256 fit 108 90
+cameratexture WDI18C12 256 256 fit 108 90
+cameratexture WDI18C13 256 256 fit 108 90
+cameratexture WDI18C14 256 256 fit 108 90
+
+texture TVSIGNAL
+	pic TVSIGNAL tics 185
+	pic TVSIGNA2 tics 185
+	pic TVSIGNA3 tics 185
+	pic TVSIGNA4 tics 185
+	
+//WDI25 - Abbuw:
+warp texture WATER4
+warp texture BADWATER
+warp texture WET004
+
+switch GANDHI on //laugh all you want, it works. I also wanted this to run at a higher frame rate, but this is already excessive enough!
+
+pic GNDI26        tics 5
+pic GNDI27        tics 5
+pic GNDI28        tics 5
+pic GNDI29        tics 5
+pic GNDI30        tics 5
+pic GNDI31        tics 5
+pic GNDI32        tics 5
+pic GNDI33        tics 5
+pic GNDI34        tics 5
+pic GNDI35        tics 5
+pic GNDI36        tics 5
+pic GNDI37        tics 5
+pic GNDI38        tics 5
+pic GNDI39        tics 5
+pic GNDI40        tics 5
+pic GNDI41        tics 5
+pic GNDI42        tics 5
+pic GNDI43        tics 5
+pic GNDI44        tics 5
+pic GNDI45        tics 5
+pic GNDI46        tics 5
+pic GNDI47        tics 5
+pic GNDI48        tics 5
+pic GNDI49        tics 5
+pic GNDI50        tics 5
+pic GNDI51        tics 5
+pic GNDI52        tics 5
+pic GNDI53        tics 5
+pic GNDI54        tics 5
+pic GNDI55        tics 5
+pic GNDI56        tics 5
+pic GNDI57        tics 5
+pic GNDI58        tics 5
+pic GNDI59        tics 5
+pic GNDI60        tics 5
+pic GNDI61        tics 5
+pic GNDI62        tics 5
+pic GNDI63        tics 5
+pic GNDI64        tics 5
+pic GNDI65        tics 5
+pic GNDI66        tics 5
+pic GNDI67        tics 5
+pic GNDI68        tics 5
+pic GNDI69        tics 5
+pic GNDI70        tics 5
+pic GNDI71        tics 5
+pic GNDI72        tics 5
+pic GNDI73        tics 5
+pic GNDI74        tics 5
+pic GNDI75        tics 5
+pic GNDI76        tics 5
+pic GNDI77        tics 5
+pic GNDI78        tics 5
+pic GNDI79        tics 5
+pic GNDI80        tics 5
+pic GNDI81        tics 5
+pic GNDI82        tics 5
+pic GNDI83        tics 5
+pic GNDI84        tics 5
+pic GNDI85        tics 5
+pic GNDI86        tics 5
+pic GNDI87        tics 5
+pic GNDI88        tics 5
+pic GNDI89        tics 5
+pic GNDI90        tics 5
+pic GNDI91        tics 5
+pic GNDI92        tics 5
+pic GNDI93        tics 5
+pic GNDI94        tics 5
+pic GNDI95        tics 5
+pic GNDI96        tics 5
+pic GNDI97        tics 5
+pic GNDI98        tics 5
+pic GNDI99        tics 5
+pic GNDI100       tics 5
+pic GNDI101       tics 5
+pic GNDI102       tics 5
+pic GNDI103       tics 5
+pic GNDI104       tics 70 //oh shoot, PNG time!!
+pic GNDI118       tics 5
+pic GNDI119       tics 5
+pic GNDI120       tics 5
+pic GNDI121       tics 5
+pic GNDI122       tics 5
+pic GNDI123       tics 5
+pic GNDI124       tics 5
+pic GNDI125       tics 5
+pic GNDI126       tics 5
+pic GNDI127       tics 5
+pic GNDI128       tics 5
+pic GNDI129       tics 5
+pic GNDI130       tics 5
+pic GNDI131       tics 5
+pic GNDI132       tics 5
+pic GNDI133       tics 5
+pic GNDI134       tics 5
+pic GNDI135       tics 5
+pic GNDI136       tics 5
+pic GNDI137       tics 5
+pic GNDI138       tics 5
+pic GNDI139       tics 5
+pic GNDI140       tics 5
+pic GNDI141       tics 5
+pic GNDI142       tics 5
+pic GNDI143       tics 5
+pic GNDI144       tics 5
+pic GNDI145       tics 5
+pic GNDI146       tics 5
+pic GNDI147       tics 5
+pic GNDI148       tics 5
+pic GNDI149       tics 5
+pic GNDI150       tics 5
+pic GNDI151       tics 5
+pic GNDI152       tics 5
+pic GNDI153       tics 5
+pic GNDI154       tics 5
+pic GNDI155       tics 5
+pic GNDI156       tics 5
+pic GNDI157       tics 5
+pic GNDI158       tics 5
+pic GNDI159       tics 5
+pic GNDI160       tics 5
+pic GNDI161       tics 5
+pic GNDI162       tics 5
+pic GNDI163       tics 5
+pic GNDI164       tics 5
+pic GNDI165       tics 5
+pic GNDI166       tics 5
+pic GNDI167       tics 5
+pic GNDI168       tics 5
+pic GNDI169       tics 5
+pic GNDI170       tics 5
+pic GNDI171       tics 5
+pic GNDI172       tics 5
+pic GNDI173       tics 5
+pic GNDI174       tics 5
+pic GNDI175       tics 5
+pic GNDI176       tics 5
+pic GNDI177       tics 5
+pic GNDI178       tics 5
+pic GNDI179       tics 5
+pic GNDI180       tics 5
+pic GNDI181       tics 5
+pic GNDI182       tics 5
+pic GNDI183       tics 5
+pic GNDI184       tics 5
+pic GNDI185       tics 5
+pic GNDI186       tics 5
+pic GNDI187       tics 5
+pic GNDI188       tics 5
+pic GNDI189       tics 5
+pic GNDI190       tics 5
+pic GNDI191       tics 5
+pic GNDI192       tics 5
+pic GNDI193       tics 5
+pic GNDI194       tics 5
+pic GNDI195       tics 5
+pic GNDI196       tics 5
+pic GNDI197       tics 5
+pic GNDI198       tics 5
+pic GNDI199       tics 5
+pic GNDI200       tics 5
+pic GNDI201       tics 5
+pic GNDI202       tics 5
+pic GNDI203       tics 5
+pic GNDI204       tics 5
+pic GNDI205       tics 5
+pic GNDI206       tics 5
+pic GNDI207       tics 5
+pic GNDI208       tics 5
+pic GNDI209       tics 5
+pic GNDI210       tics 5
+pic GNDI211       tics 5
+pic GNDI212       tics 5
+pic GNDI213       tics 5
+pic GNDI214       tics 5
+pic GNDI215       tics 5
+pic GNDI216       tics 5
+pic GNDI217       tics 5
+pic GNDI218       tics 5
+pic GNDI219       tics 5
+pic GNDI220       tics 5
+pic GNDI221       tics 5
+pic GNDI222       tics 5
+pic GNDI223       tics 5
+pic GNDI224       tics 5
+pic GNDI225       tics 5
+pic GNDI226       tics 5
+pic GNDI227       tics 5
+pic GNDI228       tics 5
+pic GNDI229       tics 5
+pic GNDI230       tics 5
+pic GNDI231       tics 5
+pic GNDI232       tics 5
+pic GNDI233       tics 5
+pic GNDI234       tics 5
+pic GNDI235       tics 5
+pic GNDI236       tics 5
+pic GNDI237       tics 5
+pic GNDI238       tics 5
+pic GNDI239       tics 5
+pic GNDI240       tics 5
+pic GNDI241       tics 5
+pic GNDI241       tics 5
+pic GNDI242       tics 5
+pic GNDI243       tics 5
+pic GNDI244       tics 5
+pic GNDI245       tics 5
+pic GNDI246       tics 5
+pic GNDI247       tics 5
+pic GNDI248       tics 5
+pic GNDI249       tics 5
+pic GNDI250       tics 5
+pic GNDI251       tics 5
+pic GNDI252       tics 5
+pic GNDI253       tics 5
+pic GNDI254       tics 5
+pic GNDI255       tics 5
+pic GNDI256       tics 5
+pic GNDI257       tics 5
+pic GNDI258       tics 5
+pic GNDI259       tics 5
+pic GNDI260       tics 5
+pic GNDI261       tics 5
+pic GNDI262       tics 5
+pic GNDI263       tics 5
+pic GNDI264       tics 5
+pic GNDI265       tics 5
+pic GNDI266       tics 5
+pic GNDI267       tics 5
+pic GNDI268       tics 5
+pic GNDI269       tics 5
+pic GNDI270       tics 5
+pic GNDI271       tics 5
+pic GNDI272       tics 5
+pic GNDI273       tics 5
+pic GNDI274       tics 5
+pic GNDI275       tics 5
+pic GNDI276       tics 5
+pic GNDI277       tics 5
+pic GNDI278       tics 5
+pic GNDI279       tics 5
+pic GNDI280       tics 5
+pic GNDI281       tics 5
+pic GNDI282       tics 5
+pic GNDI283       tics 5
+pic GNDI284       tics 5
+pic GNDI285       tics 5
+pic GNDI286       tics 5
+pic GNDI287       tics 5
+pic GNDI288       tics 5
+pic GNDI289       tics 5
+pic GNDI290       tics 5
+pic GNDI291       tics 5
+pic GNDI292       tics 5
+pic GNDI293       tics 5
+pic GNDI294       tics 5
+pic GNDI295       tics 5
+pic GNDI296       tics 5
+pic GNDI297       tics 5
+pic GNDI298       tics 5
+pic GNDI299       tics 5
+pic GNDI300       tics 5
+pic GNDI301       tics 5
+pic GNDI302       tics 5
+pic GNDI303       tics 5
+pic GNDI304       tics 5
+pic GNDI305       tics 5
+pic GNDI306       tics 5
+pic GNDI307       tics 5
+pic GNDI308       tics 5
+pic GNDI309       tics 5
+pic GNDI310       tics 5
+pic GNDI311       tics 5
+pic GNDI312       tics 5
+pic GNDI313       tics 5
+pic GNDI314       tics 5
+pic GNDI315       tics 5
+pic GNDI316       tics 5
+pic GNDI317       tics 5
+pic GNDI318       tics 5
+pic GNDI319       tics 5
+pic GNDI320       tics 5
+pic GNDI321       tics 5
+pic GNDI322       tics 5
+pic GNDI323       tics 5
+pic GNDI324       tics 5
+pic GNDI325       tics 5
+pic GNDI326       tics 5
+pic GNDI327       tics 5
+pic GNDI328       tics 5
+pic GNDI329       tics 5
+pic GNDI330       tics 5
+pic GNDI331       tics 5
+pic GNDI332       tics 5
+pic GNDI333       tics 5
+pic GNDI334       tics 5
+pic GNDI335       tics 5
+pic GNDI336       tics 5
+pic GNDI337       tics 5
+pic GNDI338       tics 5
+pic GNDI339       tics 5
+pic GNDI340       tics 5
+pic GNDI341       tics 5
+pic GNDI342       tics 5
+pic GNDI343       tics 5
+pic GNDI344       tics 5
+pic GNDI345       tics 5
+pic GNDI346       tics 5
+pic GNDI347       tics 5
+pic GNDI348       tics 5
+pic GNDI349       tics 5
+pic GNDI350       tics 5
+pic GNDI351       tics 5
+pic GNDI352       tics 5
+pic GNDI353       tics 5
+pic GNDI354       tics 5
+pic GNDI355       tics 5
+pic GNDI356       tics 5
+pic GNDI357       tics 5
+pic GNDI358       tics 5
+pic GNDI359       tics 5
+pic GNDI360       tics 5
+pic GNDI361       tics 5
+pic GNDI362       tics 5
+pic GNDI363       tics 5
+pic GNDI364       tics 5
+pic GNDI365       tics 5
+pic GNDI366       tics 5
+pic GNDI367       tics 5
+pic GNDI368       tics 5
+pic GNDI369       tics 5
+pic GNDI370       tics 5
+pic GNDI371       tics 5
+pic GNDI372       tics 5
+pic GNDI373       tics 5
+pic GNDI374       tics 5
+pic GNDI375       tics 5
+pic GNDI376       tics 5
+pic GNDI377       tics 5
+pic GNDI378       tics 5
+pic GNDI379       tics 5
+pic GNDI380       tics 5
+pic GNDI381       tics 5
+pic GNDI382       tics 5
+pic GNDI383       tics 5
+pic GNDI384       tics 5
+pic GNDI385       tics 5
+pic GNDI386       tics 5
+pic GNDI387       tics 5
+pic GNDI388       tics 5
+pic GNDI389       tics 5
+pic GNDI390       tics 5
+pic GNDI391       tics 5
+pic GNDI392       tics 5
+pic GNDI393       tics 5
+pic GNDI394       tics 5
+pic GNDI395       tics 5
+pic GNDI396       tics 5
+pic GNDI397       tics 5
+pic GNDI398       tics 5
+pic GNDI399       tics 5
+pic GNDI400       tics 5
+pic GNDI401       tics 5
+pic GNDI402       tics 5
+pic GNDI403       tics 5
+pic GNDI404       tics 5 //GANDHI II!!!

@@ -1,0 +1,180 @@
+//warp flat LAVAB 0.5
+
+texture LAVA2M
+pic LAVA2M tics 2
+pic LAVA2M1 tics 2
+
+
+warp2 texture WATER-S
+warp2 texture DWATER-S 1.5
+
+warp2 texture DWATERXS 1.5
+
+texture BSLIM01 range BSLIM07 tics 3
+texture FUZZ1 range FUZZ4 tics 3
+
+
+texture BVORTEX7
+    pic 1 tics 1
+    pic 2 tics 1
+    pic 3 tics 1
+    pic 4 tics 1
+
+texture BTRAIN0
+    pic 1 tics 2
+    pic 3 tics 2
+    pic 5 tics 2
+    pic 7 tics 2
+	
+texture BTRAIN0B
+    pic 2 tics 2
+    pic 4 tics 2
+    pic 6 tics 2
+    pic 8 tics 2
+	
+texture BIMHR01
+    pic 1 tics 12
+    pic 2 tics 12
+    pic 3 tics 12
+    pic 4 tics 12
+    pic 3 tics 12
+    pic 2 tics 12
+
+//===========
+
+cameratexture TCAMTEX1 128 64 fit 80 56
+
+texture BSAW01
+	allowdecals
+	pic BSAW01 rand 1 1
+	pic BSAW02 rand 1 1
+	pic BSAW03 rand 1 1
+	pic BSAW04 rand 1 1
+	pic BSAW05 rand 1 1
+	pic BSAW06 rand 1 1
+
+warp flat wlq1
+warp flat wlq2
+warp flat wlq3
+warp flat wlq4
+warp flat wlq5
+warp flat wlq6
+warp flat wlq7
+warp flat wlq8
+
+warp2 texture PSBGC0 0.1
+warp2 texture PSBGD0 0.1
+warp2 texture PSBGE0 0.1
+warp2 texture PSBGF0 0.1
+warp2 texture PSBGG0 0.1
+warp2 texture PSBGH0 0.1
+warp2 texture PSBGI0 0.1
+
+warp2 texture SSBGC0 0.1
+warp2 texture SSBGD0 0.1
+warp2 texture SSBGE0 0.1
+warp2 texture SSBGF0 0.1
+warp2 texture SSBGG0 0.1
+warp2 texture SSBGH0 0.1
+warp2 texture SSBGI0 0.1
+
+//warp2 texture XSMKA0 0.35 //Lets not warp this.
+ 
+warp2 texture WATER-S
+warp2 texture LAVA
+warp2 texture LAVA2
+warp2 texture MLAVA
+warp2 texture MLAVA2
+warp2 texture GWATER
+warp2 texture GWATER2
+
+warp2 texture WBLDA0 0.5
+
+warp flat wqlava2
+
+texture ADEL_N07
+pic ADEL_N07 rand 5 7
+pic ADEL_N98 rand 5 7
+pic ADEL_N08 rand 5 7
+pic ADEL_N98 rand 5 7
+
+texture ADEL_N08
+pic ADEL_N08 rand 5 7
+pic ADEL_N98 rand 5 7
+pic ADEL_N07 rand 5 7
+pic ADEL_N98 rand 5 7
+
+texture STATIC1
+pic STATIC1 tics 2
+pic STATIC2 tics 2
+pic STATIC3 tics 2
+pic STATIC4 tics 2
+pic STATIC5 tics 2
+pic STATIC6 tics 2
+
+texture TSTATIC1
+pic TSTATIC1 tics 2
+pic TSTATIC2 tics 2
+pic TSTATIC3 tics 2
+pic TSTATIC4 tics 2
+pic TSTATIC5 tics 2
+pic TSTATIC6 tics 2
+
+
+warp flat wqlava
+warp2 texture HYWATER
+warp2 texture SMPEA0 0.1
+warp flat wfwater1
+warp flat wblood1
+
+CameraTexture MURDTV 320 240 fit 160 32
+cameratexture RECAMTX 640 480 fit 213 160
+
+cameratexture MAP2CAM1 256 256 fit 64 64
+cameratexture MAP2CAM2 256 256 fit 64 64
+cameratexture MAP2CAM3 256 256 fit 64 64
+cameratexture MAP2CAM4 256 256 fit 64 64
+cameratexture MAP2CAM5 256 256 fit 64 64
+cameratexture MAP2CAM6 256 256 fit 64 64
+cameratexture MAP2CAM7 256 256 fit 64 64
+cameratexture MAP2CAM8 256 256 fit 64 64
+cameratexture MAP2CAM9 256 256 fit 64 64
+cameratexture MAP2CAM10 256 256 fit 64 64
+cameratexture MAP2CAM11 256 256 fit 64 64
+cameratexture MAP2CAM12 256 256 fit 64 64
+cameratexture	camtx128	384 384		fit	128 128
+cameratexture	camtx64 	384 384		fit	64 64
+
+texture NOIS1 range NOIS8 rand 1 3
+
+
+switch BSW07B on sound LightOff pic BSW07A tics 0
+switch BSW07A off sound LightOn pic BSW07B tics 0
+
+//Black water
+warp2 texture DIRWAT
+
+texture	BABWAS01  	range	BABWAS04  	tics 3
+texture	ESFMCLD1  	range	ESFMCLD4  	tics 3
+texture	RATASLD1  	range	RATASLD4  	tics 9
+
+texture steam1
+pic 1 tics 4
+pic 2 tics 4
+pic 3 tics 4
+pic 4 tics 4
+pic 5 tics 4
+
+texture bbfall1
+	pic bbfall1 tics 8
+	pic bbfall2 tics 8
+	pic bbfall3 tics 8
+	pic bbfall4 tics 8
+
+flat fan1
+	pic fan1 tics 1
+	pic fan2 tics 1
+	pic fan3 tics 1
+	pic fan4 tics 1
+
+

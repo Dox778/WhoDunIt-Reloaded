@@ -1,0 +1,191 @@
+Actor Dropper_PoolCue : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedCue", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_Wrench : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedWrench", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_BlueWrench : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedBlueWrench", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_Pipe : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedPipe", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_Shovel : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedShovel", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_Brick : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedBrick", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_Molly : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedMolly", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_NailedPlank : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedNailedPlank", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_Plank : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedPlank", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_Twig : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedTwig", 0, 0, 0)
+	Stop
+ }
+}
+
+
+Actor Dropper_FireAxe: DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Use:
+		TNT1 A 1 A_FireCustomMissile("DroppedFireAxe", 0, 0, 0)
+		Stop
+}}
+
+Actor Dropper_Axe: DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Use:
+		TNT1 A 1 A_FireCustomMissile("DroppedAxe", 0, 0, 0)
+		Stop
+}}
+
+Actor Dropper_Sledge: DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Use:
+		TNT1 A 1 A_FireCustomMissile("DroppedSledge", 0, 0, 0)
+		Stop
+}}
+
+Actor Dropper_ScrewDriver : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedScrewDriver", 0, 0, 0)
+	Stop
+ }
+}
+

@@ -1,0 +1,1133 @@
+================================
+CHANGELOG
+================================
+WHO DUN IT: RELOADED - V3.2 20/07/2024
+y: Teribear & DEA & Metal Danny 420 & Dox778
+MAIN CHANGES / MAP NEWS: (Teribear, DEA, METAL DANNY 420, Dox778)
+
+DEA:
+- The Random Item Box drop has been completely changed. (see the "RANDOM ITEM BOX" for more info)
+- Now you can turn off the chainsaw with "Alt.Fire" (you can reload it if it is turned off)
+- Added the ability to cancel the attack for throwing weapons (Brick: Immediately after clicking on "Alt.Fire"; Molotov: Hold "Alt.Fire" and stop pressing "Fire")
+- The (remaining) murderer inventory items are now visible above the HUD.
+- Added admin scripts for fun/test/misc: "WDI_AdminSpawn", "WDI_AdminGift" & "WDI_AdminTake". Default actor is set to "RandomWeaponKit" (use CVar "WDI_Admin_Thing" to change it).
+
+METAL DANNY 420:
+- Added Fireworks inventory item ("FireworksItem"). Can spawn instead of Flare or from RandomItemBox. Has 2% chance to fart take-off or spawn activated RandomItemBox.
+
+Dox778:
+- Extra details for grass and trees (mushrooms, insects and etc.) have been returned (If you have a low FPS, then configure it in "Mod Options > Preferences > Extra Details For Actors")
+
+Teribear:
+- Added a new FX effect - DUST. At the moment, added for WDI11.
+- New food - Grapes, 2 types of apple.
+- New console background.
+
+WDI11: "Bunker Down"
+- The decoration in the cave has been completely changed and a few minor changes.
+- New dwindling music has been added. Need to make 11 kills (!) BEFORE the dwindling phase.
+- For users with a weak PC, "puke 75" has been added to disable visual effects.
+
+WDI20: "Insomnia"
+- Now the murderer can see what's happening outside the murdhole (Only in 2 of the 3, in order to avoid a huge drop in FPS)
+
+EDITS / MINOR CHANGES: (Teribear, DEA)
+
+Teribear:
+- Food has been added/changed on some maps.
+- New drink food sound.
+- Edited TITLEMAP.
+- WDI16: Added decorative vines.
+- WDI20: The blocking walls were removed, which did not allow throwing weapons outside the game area.
+- WDI20: The script of the vending machine has been re-written. This gives out 1 of 3 types of food after 10 hits.
+- The rat's hitbox has been slightly increased.
+
+DEA:
+- Disabled ability to pickup ammo from used weapons.
+- Removed ability to refill ammo for fire extingusher by picking it up again.
+
+BUGFIXES / EXPLOIT FIXES:(Teribear, DEA, Dox778)
+
+DEA:
+- Fixed grab endless stun effect a.k.a. the GrabFreeze. 
+- Now impossible to use kick while being beartrapped.
+- Fixed murderer ability to pickup ammo from untouched shotgun if he already has max ammo.
+- Added missing HUD message for revolver and other weapon pickups.
+- Fixed murderer corpse duplication.
+
+Dox778:
+- Fixed a missing frame without blood for an Alternative attack of the bloody knife.
+
+Teribear:
+- Non-working scripts and actors on some maps have been rewritten/replaced.
+- Blood was removed from the Food Box & planted TNT.
+- WDI05: Fixed windows with frames without collision.
+- WDI18: Shed roof exploit fixed.
+- WDI20: Fixed one of the non-working murdholes inside the carriage.
+WDI13: "Echo Ridge"
+- Fixed unsilent murdholes. Now every murdhole is silent.
+- Roof-exploits fixed
+- Fixed a spawn where you get stuck in a tree in a pot.
+
+TECHNICAL / CODE:(Teribear & DEA)
+Teribear:
+- Some of the mod's resources have been re-sorted
+- Optimized mod size (328 MB > 297 MB; -31 MB)
+- Most of the "WDIExtraMapStuff" folder has been deleted.
+
+RANDOM ITEM BOX: (DEA)
+- Updated random weapon kit.
+    - Added more lists.
+        - Traps is almost same as UselessItems, but contains only traps.
+        - OverpoweredItems contains only super items, but drop chance is extreme low + admins can turn it off (CVar "WDIR_RandomBox_NoOPItems").
+    - Added more useless drops: Flame, Vase, Chairs, Food & Animals.
+    - Added more traps: Dynamites, Some murderer items at one drop, Bear Traps, Sound Emitters, Bricks & Spiders.
+    - Added more weapons: Screwdriver, Crowbar, Blue Wrench, Pickaxe, Sledgehammer, Bottle, Wiskey, Revolver, TNT & SoulCube.
+    - Added more unique items: Murderer key to murdholes, Doom&Skulltag items & powerups & runes (most of them inside Overpowered list).
+    - All murderer items now can be disabled using CVar "WDIR_RandomBox_NoMurdItems" (by default they're disabled).
+    - Changed drop chances and amount. They're now less random. Better things should be a bit more rarier.
+    - Fixed missing gravity in dropped bolts.
+    - Fixed wrong/missing icons.
+
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+patch_v3.1.2 
+
+~ (METAL DANNY 420 with help of Dox778)
+- Fixed the thrown Brick from doing random 30-240 damage by Doom randomizer code. Now always does 30 damage on murd.
+- Fixed the food munching/eating sounds. Now everyone including yourself can hear the sounds.
+
+~ (Teribear with help of Zeberpal & DEA & Dox778)
+WDI11:
+- Added (higher) barriers on the bridge area.
+- Fixed "exit" door switch.
+
+WDI16:
+- Fixed crab respawn (Thanks Dox for the tip.)
+
+WDIEX02:
+- Fixed the movement speed of the giant murd in the secret ending. (Thanks Zeberpal and DEA for the solution.) 
+
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+patch_v3.1.1 (by Teribear & Zeberpal)
+
+ADDED/MAP NEWS
+WDI11: "Bunker Down"
+- Total lighthing restyle.
+- 3 new ambient screams.
+- Decorations: fan in the ventilation, a broken wall in the bedroom, small cave in the bridge area
+- Ambient sounds (fan, lights, wind, generator)
+- Attention! Now you can fall into the abyss! Be careful!
+
+WDI16: "Castaway"
+- Map lighting has been changed... It also goes well with the rain. :P
+- Added a new animal: CRAB. It appears only on this map and only on the sand near the ocean.
+- The rain appears at the same time as the rainbow.
+
+EDITS/MINOR CHANGES:
+- WDI08: The monitor with cameras has been moved to the third floor in the room with M1
+- WDI11: The ventilation grate added in v3.1 has been removed.
+- WDI11: The layout of some murdholes has been SLIGHTLY changed (ventilation, for convenience. No more crouch) and blue murdhole (for more space)
+- WDI11: Minor interactive change ("exit" door switch)
+- WDI16: Changed rainbow texture.
+- WDI16: Now the rainbow appears gradually and not instantly.
+
+BUGFIXES:
+- WDI02: Fixed an exploit near the gate and statues.
+- WDI11: Fixed some shootable windows in murdholes.
+- WDI24: Fixed a visible murdhole between the "west wing" door and the library.
+- WDIEX03: Fixed murdteleport and message bug. Now the message is more noticeable and the teleport item ALWAYS appears in the inventory. After using teleport, it will appear in your inventory again after 90 seconds. [2;32m(Fixed by Zeberpal)[0m
+
+Special thanks to the DEA for their help in finding bugs and RIclo500 for finding a bug with TNT and providing a demo file.
+I also decided to try to test the new changelog design format. It is advisable to read this from a PC, it works much better there.
+Above all: this is your feedback! So please, if you don't like something from the changelog or do you have an idea how to improve something, write about it.
+- Teribear
+
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v3.1  (by METAL DANNY 420 & Kaminsky & Teribear & DEA)
+~ (Kaminsky) 
+- FIXED MURD FROM CRASHING BY MURDMARKS! THE ANCIENT BUG HAS FINALLY BEEN FIXED! YOU CAN NOW FREELY LOOK ANYWHERE AS MURD!
+
+~ (METAL DANNY 420) 
+-  Added WDI_ReloadedV3.0.1_TNT_patch.pk3 fix. No more need for the patch.
+- Edited options Low Health Indicators and Screen Damage Splashes. Default was on, but is now off.
+- Sledgehammer shockwave damage nerfed from 30 to 19. Max damage murd can now get is 45 with all combined hits from 1 move instead of 60.
+- (METAL DANNY 420 & DEA) Fixed HP regen bug that players could sometimes randomly get after manual map change until death.
+- (METAL DANNY 420 & DEA) Edited weapon respawn timers. Pistols & M1 & Crossbow = 20min. Shotgun = 25min. TNT = 30min. SprayCan = 5min. FireExtinguisher = 15min.
+
+~ (Dox778) 
+- Fixed KickSuperKnife Freeze bug which caused players to have 4 arms when stabbing 10x speed.
+
+~ (Teribear) 
+- Some code has been removed from WDIExtraMapStuff due to maps edits that added these things. (WDI08.dec, WDI15.dec)
+- WDI01: Added collision to the cars.
+- WDI13: Fixed an outside blue murdhole of which the door would not close so it was visibile to everyone.
+- WDI16: Fixed the mega delay of song lyrics.
+- WDI18: Fixed the ladder in the murdhole near the explosive wall on WDI18.
+- WDIEX01: Fixed soulcube ending item spawn. Now it has a 1/3 chance of spawning like the rest of the items.
+  WDI08: 
+- Layout Decoration: Decorations have been added on the balcony on the second floor, the entrance to the "information and admission" has been added, several medical tables have been added near the west wing, edited gym
+- ITEMS: fastfood in some places, wrench and flares on the balcony on the 2nd floor, few barrels, few trashcans, basketballs in gym
+- The ventilation grate on the 3nd floor is now breaking (you need a heavy metal weapon)
+- Added a monitor with cameras on the 1st floor.
+- The number of spawn spots of the safe key has been changed from 2 to 3
+- Added ambient sounds (pc, flicker lights, x-ray scanner, wind and etc)
+- Added interactive actions (pc, elevator buttons, breakable windows, breakable glass in gym, closed doors)
+- Now there will be a BlueTechnoKit inside the secret wall, and the Delay in opening the wall is now 12 seconds.
+- Minor various fixes (collision of 3D models, lights, secret button near the x-ray scanner)
+  WDI11:
+- Added repeatable action in teleport.
+- One of the exploit ventilation holes is closed. Added grate textures (There is also a second hole, but I did not close it. Therefore, I have blocked way to the next ventilation sectors for innocents if they find themselves there.)
+- Added echo in the cave and transition sector (I do not know what it is called. Do you know?)
+- Few minor fixes (vent lighting)
+  WDI15:
+- Layout Decoration: Added  lockers on the 1st floor,  female/male signs near the toilets, edited outside areas (grass, gates, fences), several benches have been added outside and on the second floor, Added added signs with class numbers, board
+- ITEMS: added dripping tap water in the cafeteria, food, various bottles, trees in a pots, flare inside locker and outside under the bench
+- Added ambient sounds (Lights, PC, wind)
+- Minor interactive actions (Locked gates, clothes, lockers)
+- Minor various fixes (Non-working scripts, 3d models collision, disappeared textures like glass and stalls In one of the toilets)
+  WDIEX02:
+- Fixed places where you could get stuck: The black car is in the garage, Boxes near the window in the garage, green grid on the construction site)
+- various collision fixes
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v3.0.1_TNT_patch  (by METAL DANNY 420 & Riclo500)
+- Fixed TNT from not breaking WDI18 walls when placed into the wall. 
+- Fixed TNT player insta-death from max radius explosion hit which now just damage when far away enough.
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v3.0.1  (by METAL DANNY 420 & Killer2)
+- Fixed half-broken brown pot from spawning infinite loot.
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v3.0
+- minor changes to stunning - now your bar goes down faster but you also take more stunning to cancel it out.
+- fixed stall dissapearing when you press use on it.
+- fixed beartraps making you stuck forever lol
+- buffed kicks' damage from 10 to 20.
+- removed pickup anims, they were a little desyncy :(
+- added MORE delays to playing dead lol
+- attempted to fix murd death cam
+- attempted to fix the visor shatters staying after death
+- removed +INVENTORY.UNDROPPABLE from the base token to hopefully fix the hud being visible when dead
+- gas canister and smoke bomb now go through players (that fixes gas popping instantly when it touches players)
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v2.9
+KNOWN ISSUES:
+- murd death cam doesnt really work? i remember it working but apparently it... never did? at least from my testing. Kaminsky save me
+SINCE LAST TESTS:
+- fixed EX maps being broken
+- fixed breathing clouds appearing in non cold maps.
+- fixed grass not existing in wdi16
+- removed starting animations for now due to being more of an annoyance, i'll work on it later.
+- fixed bottles not being taken away :3
++ New move for the murderer - a kick! Send an enemy FLYING by pressing the weapon zoom key with a knife out. 
+It's meant as an anti-blocking maneuver, in case innocents think they're smart by trying to body block you.
++ New win camera for the murderer.
+GAS CHANGES:
+* The canister now explodes 1 second AFTER being used, instead of landing on the floor
+* The canister now bounces a TINY bit
+* The canister no longer makes a bouncing sound
+* The gas now bounces off of walls, instead of just sliding along/up them
+* increased the gas' "range" on the floor.
+- updated some murd/inno tips, also changes their colors
+- fixed players no longer being able to go up specific steps
+- updated some weapon hud icons.
+- added options to control the murderer's death/win cam, as well as permitting movement during the end tally.
+- healing items now specify how much they heal.
+- the FUCKING gnome now has sprite variants
+- Flares no longer have a bounce limit. Also you only get 1 for picking up a spawned flare.
+- firearms no longer have a different bobbing style.
+- added a tiny delay before you can get up after playing dead, hopefully that'll make it more stable.
+- players now yell when falling down lol. Also they have a landing sound :DDDDDDD
+CODE CLEANUP:
+* Moved all inventory "tokens" to HACKS.txt
+* Cleaned up a lot of commented and outdated code.
+* MAJOR rework of the file structures, shifted a lot of actors around to organize them better (only DECORATE for now)
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v2.8
++ NEW WEAPON - GLASS BOTTLE! Some decorative bottles can be picked up now - first attack is a heavy swing, then you can follow up with up to 5 stabs.
++ NEW DEATHCAM FOR THE MURDERER! Inspired by WDI: Combat Overhaul, though this one is way shorter.
+- new "DeadStick" sprite variations, thanks to PGE.
+- Your hud now dissapears when you die.
+- restored dropped weapons' "delay" before they can be picked up
+- There's now a fade-in when the map starts.
+- you can no longer dance or drop dead in the safety period.
+- fixed minor visual stuff with dead bodies AGAIN
+- players will now scream in terror when falling down for an extended period of time
+- added an option to display permanent visor cracks if a player takes too much damage
+- changed the way the uppercut's slight camera bob works to hopefully combat pit abusers in wdi16 lol
+- hopefully fixed whatever issues were with wdiex01 and wdiex03.
+- hopefully made some WDI server options not reset anymore.
+- Hopefully made the beartrap no longer set the player free early if they play dead and get up.
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v2.7
++ Added a (janky) fix to WDI's common problem - favourite color bind! Choose a color in the settings and use a bind that'll apply it.
++ added some test maps (thanks Kinsie and BLOODWOLF)
++ REPLACED FISTS' ALT FIRE WITH A PLAYER GRAB MOVE! Both you and your victim are immobilized for a split second.
+to still use the uppercut, attack with the primary fire and immediately attack with altfire.
++ Made plenty of changes to the inventory menu.
++ Players now appear to bob a tiny bit, simulating breathing. (and yes it gets faster at low health and yes it has a chance to somewhat offset your preferred height but idgaf at this point)
+- dropped/tossed weapons now have a shorter cooldown before they can be picked up again.
+- weapons tossed far away are now less bouncy
+- knife now has an idle animation.
+- minor changes to M1's ammo sprite.
+- buffed fists' damage a tiny bit.
+- reduced the random weapon crate's max amount to 1.
+- inventory bar now has a background.
+- touched up the murd's camera.
+- fists now have a TINY speed buff for the player.
+- added... something in one of the menus :3
+- "change identity" bind now has a higher cooldown, and you can actually see the cooldown now.
+- added more recommended option
+- slighy changes to the mod's menus.
+- added an option to randomize tracks in a few maps.
+- made parallax weaker on some floor tiles.
+- increased the delay for changing your color + added a cooldown
+- New rain sound (Thanks Dissy EX!)
+- edited some on-screen messages (mainly (or entirely lol) regarding dancing)
+- some internal changes to some acs things
+- fixed changing color bind being spammable in multiplayer 
+- fixed rigged stimpacks spamming messages.
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v2.6
++ UPDATED BUMPMAPS SHADER AGAIN! What's new? FUCKING PARALLAX SHADERS OH MY GODDDDDDDDDDDDDDDDDDDDDD IM CUMMING IN MY PANTS
+Some textures will ONLY have parallax and no bumpmaps!
++ REFINED ADJUSTABLE PLAYERS' WIDTH/HEIGHT! You can now either customize it or leave it at random. It's also enabled by default now.
++ BROUGHT BACK PLAYING DEAD! This time however your collision isn't disabled. People can't walk over you, keep that in mind.
++ REWORKED CHANGING YOUR COLORS! Now the color you get is completely random, and it'll also randomize your width and/or height if you have it randomized.
+- Picking up a weapon when looking slightly down will play a new grabbing animation. muh detailz
+- reworked the menus and binds a little bit. you might need to rebind some things...
+- Removed that weird red light from bigkit before it starts healing.
+- Burned out flares, used fake stims now stay on the ground forever (assuming you have a specific option enabled)
+- revamped fake stims a tiny bit - they now have visual variation and a destroyed state.
+- increased flare's audible range a TINY bit.
+- some adjustments to molotov's explosion (slightly slower buildup for fire, flying fire parts now look better)
+- updated WDIEX01, WDIEX03, WDI25.
+- Added plenty of brightmaps to Marsis.
+- made one marsis door less ear-rapey.
+- adjusted the ping's offsets.
+- made the ping's trail wayyyy longer, it'll follow the ping now.
+- added some brightmaps to retorn's textures.
+- fixed the sledgehammer's pickup sprite not showing up.
+- Fixed stimpacks... straight up not working... oops.
+- Fixed the dedicated flare drop bind not working.
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v2.5
++ MERGED ALL OF WDI'S FILES INTO ONE! It'll be easier to load now (and will require a shitton of testing lol)
+- added glows to some floors/ceilings (doesnt work on walls that support bumpmaps if you loaded those)
+- renamed the keys + readjusted their hud icons
+- WDI10 now has a different track.
+- removed PLENTY of missing actors or duplicate actors.
+- added an option for each player to randomzie their width/height
+- all two-handed player skins now have somewhat consistent offsets.
+- screen splashes now have consistent sizes for every player
+- made shotgun's pumps look slightly more impactful
+- added brightmaps for vanilla textures (thanks to NightFright for Brightmaps Plus - https://forum.zdoom.org/viewtopic.php?t=64299)
+- More bumpmaps, plenty of adjustments to the shader's "strength".
+- Updated shader code, thanks to TDRR!
+- added some moar options
+- added 2 missing weapon icons
+- getting pinged no longer causes you to bleed lol
+- new key sprites (Thanks TommyGalano5!)
+- HOPEFULLY FIXED THE DEAD BODIES BEHAVING WEIRDLY
+- fixed the whiskey molly not being taken away when it explodes in your hand
+- fixed whiskey's thrown sprites looking wacky
+- fixed spraycan decals not synchronising between clients 
+- fixed the revolver now giving players ammo upon picking up if they already have a revolver.
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v1.9
++ INTRODUCED PINGING FOR REAL THIS TIME!!!! lol
+- hopefully fixed the dead bodies behaving weirdly
+- made the bump maps ACTUALLY optional, now an additional file needs to be loaded for them to show up.
+- added an option for film grain (old-ass WDI feature everyone seems to have forgotten).
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v1.8
+++ BUMP MAPS. IN ZANDRONUM. NOW A THING. (Still far from finished, but textures from WDI01 support that feature now)
++ NEW FEATURE - PINGING! Want your friend to look in a specific direction or precisely point at something? Look no further!
+- lowered dynamic lights' resolutions
+- added more options in the options menu
+- all firearms have drasticly increased recoil for dramatic effect
+- fixed the dead bodies looking weird... hopefully
+- ACTUALLY made inventory dropable this time lmfao
+- fixed whiksey molly's janky deselect animation
+- cut the flashlight's range in half
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v1.7
++ Wrench has new sprites + blue wrench is back, better than ever!
++ new molotov variant - a whiskey molotov! it's literally a molly reskin lol
+- TNT no longer gets damaged by gas, fire and other select damage types.
+- indestructible pushable objects can no longer be pushed (to prevent potential blocking of pathways n shit)
+- new shotgun pump sounds + its firerate has been reduced
+- molotovs have a chance to not spawn.
+- punching dead bodies now leaves a blood trail.
+- new medkit/ big kit sprites.
+- generic death body has a chance to drop its helmet.
+- adjustments to "permanent debris" options
+- hopefully made the drop inventory script actually work now :3
+- fixed bat becoming invisible during the 2nd attack.
+- rave kits, random weapon kits and TNT are now rarer.
+- fixed rain not being toggable properly.
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v1.6
++ PLAYERS NOW DROP THEIR INVENTORY UPON DEATH! The host can change the way it's handled.
+- minor adjustments to pistol and M1 ammo pickups.
+- new "going mad" death for the murderer if their sanity runs out.
+- Baseball bat, chainsaw and sledgehammer can now be stained
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+- made both axes SLIGHTLY slower
+- the player now comes to a full stop when dying in most death anims (to prevent some weird stuff like the murd ghost spawning far away from the body)
+- Added more murd holes to WDI04 (Thanks Remster :333)
+- melee weapons will now get stained less frequently.
+- fixed the crane in WDIEX02 letting players stay on thin air (super op!!!!)
+- ACTUALLY fixed the keyconf this time lmfao
+- fixed the blood on "QUIT" in the menu being misaligned.
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v1.5
+- wrench and shovel have edited sprites and both can now be stained.
+- moved zandronum options back to the main menu.
+- pot trees now drop twigs when broken.
+- reverted keyconf to what it was before. :(
+- (maybe) fixed the dead bodies looking weird when you join mid-game.
+- fixed bricks not bouncing off of players.
+- fixed one dead body infinitely spawning blood and thuds.
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v1.4
+- new broken window textures for wdi01, 02, 03, 05 and 06
+- added an option to turn on/off permanent debris/casings.
+- edited the double barrel's reload sprites and sounds
+- decreased some actors' radiuses (shell pickup)
+- edited the KEYCONF for no reason ol
+- adjustments to spent casings.
+- bear trap can now be dropped for other players.
+- some objects now have slightly more destruction.
+- updated mod logo and loading screen. (thanks Kaminsky <33333)
+- reverted the fonts back to default doom fonts.
+- removed sprites for 3D chair's hitboxes.
+- bottles won't break on spawn anymore.
+- fixed the camera being stuck when dying while dancing.
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v1.3
++ NEW WEAPON - a pickaxe! It's basically a slightly faster firing shovel.
++ COMPLETELY OVERHAULED MENUS AND FONTS! All thanks to my beloved Kaminsky for a fuckton of help regarding those. <3333
++ New option - screen flinching! When you take damage, now your screen will randomly flinch. (Optional and customizable)
+- improved 3d chair's collision
+- Changes to sound classes. There is less of them now to not help players stay incognito.
+- New TechPillar sprites
+- new "typing..." and cursor graphics.
+- more songs for dance 6.
+- Broken pot bits are now permanent.
+- swapped knife's fire and alt fire places.
+- placed TNT is now shootable, and when it's broken it explodes instantly.
+- made the sound emitter sound more convincing.
+- rain is now slightly louder.
+- fixed chasecam forcefully staying on when dying while dancing.
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v1.2
++ NEW WEAPON - sledgehammer! It lets you destroy barricaded walls, like those in WDI18. It's also most effective as a weapon when hitting the floor.
+sometimes replaces the shovel.
++ players can now dance properly even when dead... via ghosts!
++ started adding blood stains on melee weapons!
++ added a new dance - a guitar solo!
++ murderer's knife's primary fire is now a fast stab, it's twice as fast as the alt fire, but also less damaging.
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+- added changing dances as a separate option (in case you don't want a dedicated bind for that)
+- optimized dance code.
+- updated some pickup messages.
+- fixed TNT not having an icon.
+- adjusted multiple weapons' pickup sprites (either making the actors or sprite resolutions smaller)
+- adjusted sprites for the lead pipe.
+- removed playing dead due to it being too buggy.
+- removed weird camera movement when dying.
+- edited fake dead bodies code.
+- fixed a bug regarding dead players (exclusive to 3.2)
+- fixed spectators being able to dance lol
+- fixed dances not following the players properly after some time.
+- fixed chlorine gas dissapearing on sky and liquids.
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+v1.1
++ NEW WEAPON : Double barrel shotgun, exclusive to the murderer!
+avalaible by picking up the shotgun as a murderer.
++ EMS changes
+fixed cave decorations being broken in WDI14.
+reduced the amount of animals that spawn.
+added more objects for the EMS system.
+started adding plenty of ambient sounds to plenty of maps (crickets, waves, clocks etc etc)
++ Hatchet has new sprites
++ Moved the play dead bind to drop weapon when having fists out.
+- animals now spawn less frequently in grass.
+- adjusted multiple sounds' audible ranges.
+- made the shotgun no longer affected by rng.
+- Made some adjustments and changes to weather effects (Thanks Kaminsky <33333)
+- added basic smoke effects to fire decorations.
+- updated weapon displays on hud.
+- breakable pots and bottles can now be broken further.
+- Buffed twig's damage.
+- Buffed baseball bat's damage.
+- adjusted dance cam's height and distance from the player.
+- Peppino Spaghetti now has proper player shadow.
+- Fixed firearms' having a randomized ammo count when thrown far away.
+- Fixed the NOPAIN flag not being given back after playing dead. (with that also fixed health not regenerating).
+- Fixed the rain adjustments not really working per client.
+- Fixed the chainsaw behaving weirdly if you drop it while it's on.
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
+
+Who Dun It: Reloaded: (10.03.2023)
+- Changed the name from Dox's Reanimated to Who Dun It: Reloaded
+=============== GAMEPLAY CHANGES:
++ weapons can now be thrown far away! Hold the 'drop weapon' key for a moment and you'll immediately throw your weapon far away.
++ added playing dead - you need to bind it in the menu. It also doesn't change your hitbox size. ALSO you need to hold your fists out.
++ added gas canister for refueling your chainsaw!
++ also, to accomodate the gas canister's introduction, the chainsaw has been tweaked:
+you turn it on with the normal fire
+altfire is now for reloading (if you have multiple cans on you and hold it down for long enough, you'll keep using them)
+to turn it off, just deselect it
+- Tweaked spray cans' damage and responsiveness when it comes to drawing.
+- Made fire extinguisher spawn more frequently.
+- Optimized and smoothed out dance controls.
+- Added bouncy balls! They're there just to have fun and come with a lot of variation.
+=============== VISUAL ETC:
++ Started working on a new system - WDI Extra Map Stuff (EMS).
+It spawns additional actors and details via ACS for specific maps. They all can be disabled, if need be.
+So far only WDI16 and WDI14 have received that treatment.
+- added an optional timer for the hud.
+- added a peppino voice class lol
+- added customizable rain/snow.
+- made raindrops on your screen less frequent and less "sensitive".
+//nope // - the microphone can now play a tune upon being used.
+- added more variation to bottles and cocktail glasses.
+- improved pots/vases.
+- added more variation for vegetation (can also spawn animals).
+- added more animals! :333
+- optimized some sprites and graphics.
+
+=============== FIXES:
+- Fixed spray cans not dealing any damage.
+- fixed glass bottles and pots shattering the moment the map starts 
+- fixed the molotov's hold counter not reseting
+
+
+TODO:
+- run slightly faster with fists out?
+
+
+05.11.2022
+- fixed some weapons dissapearing on water
+- fixed the blue wrench being kept between maps
+
+30.10.2022
+- minor adjustment to rain and snow
+- shotgun now causes knockback
+- made the slow down icon/bar fancier
+- added footsteps in the snow
+- added a pump animation for the player when they fire the shotgun (or jerk it off lol)
+- the molotov can now blow up in your hand after 5 seconds
+- added a player shadow to dance 5
+- optimized dancing code :) (still functions the same but it looks cleaner now)
+- replaced WDI16's hellish music
+
+- added a screw driver weapon!!!!! it's basically a poorman's knife.
+
+22.10.2022
+- fixed an exploit regarding dropping a spare mag right before it is inserted (and added a special message for those who still try it :3)
+- added a new weapon - fire extinguisher!
+it can put out fires and has rather limited ammo.
+it also kills people by freezing them lmao
+- added a slight (probably unnoticable) push effect to weapons upon being hit. the fists have that effect more noticable 
+(its still not practical, but it is there).
+
+20.10.2022
+- made new weapons get properly dropped when you die
+- added visual variation to a wrench
+- cut bullethole durations in half (now it stays for between 15 to 30 seconds)
+- added an option to remove all screen damage splashes
+- added a small "wind up" to weapon throw anims
+- fixed the soulcube being undroppable
+- attemped to make the murderer receive more damage from fists
+- made some minor visual adjustments to rain (longer raindrops, add renderstyle)
+- fixed the mag counter dissapearing for the M1 when reloading
+- made the slowdown from falling damage *slightly* less punishing
+
+19.10.2022
+- removed wdiex maps for updates to work
+- made corpses keep the player's momentum when you die
+
+15.10.2022
+- adjusted sound ranges (guns can be heard further away and vice versa for weapon swings)
+- made blood splatters on screen blurrier, more saturated (they also spawn a lot if you get hit by a shotgun trap)
+- Weather now has a chance to change, time is customizable with the WDI_WTimer CVAR (set it to the amount of seconds you want it to take before weather has a 50% chance of switching).
+exceptions:
+WDI04 (takes place inside a building)
+WDI09 (takes place inside a building)
+WDI11 (takes place inside a building)
+WDI16 (not fitting skybox)
+WDI21 (mars)
+WDI25 (mars)
+WDIEX01 (mars)
+- fixed some bugs regarding chainsaw (undroppable when on, doesn't turn off when ammo runs out when idle)
+- made molotov no longer shootable lol
+- touched up baseball bat's pickup message.
+
+14.10.2022
+- made some changes regarding WDIEX03 Dea told me to do
+
+8.10.2022
+- fixed revolver player sprite offsets
+- fixed the chainsaw spamming a warning
+
+1.10.2022
+- redid the weapon drop bind
+- made gun sounds and music A LOT more audible
+- attempted to fix fists animations with bad connection
+- FINALLY introduced weapon drop animations that actually work!!!!!!... hopefully
+- removed the "someone got caught in your beartrap!" message
+- fixed selected dances being synced between players, instead of being a per-player option
+
+27.09.2022
+- made reloads cancellable before a new mag is put in
+- adjusted footsteps to be actually synced with the player's feet
+- fixed a bug regarding teamkilled players spawning 2 bodies
+- fixed start animations
+- increased molotov's pickup radius
+- nerfed mice health
+- nerfed molotov's health, now it dies instantly by guns
+- nerfed the shovel slightly
+- silenced jump/land sounds for sneakiness
+
+24.09.2022
+- redone the select/deselect animations
+- patched up WDIBeretta to be functional again (ihy Dea lol)
+- made weapon bob SLIGHTLY faster
+- fixed the crowbar not being taken away between maps
+- crowbar is now rarer
+- nerfed the fists somewhat
+- made blood not sink into the floor
+- added a... rare variation for a damned soul
+
+17.09.2022
+WEATHER:
+- added an option to disable weather effects on the client's end (in case it's actually laggy or sum shit)
+- optimized the weather code
+- added snow for snowy maps
+- added droplets and snow on the player's screen if they look up while it's raining/snowing
+- made rain SLIGHTLY less intense
+OTHER SHIT:
+- fixed the silenced beretta not being removed between maps
+- made the slap faster
+- made the crowbar actually spawn now lol
+- made the slap take SLIGHTLY less time
+- made fidget animations always accessible via the reload button
+
+14.09.2022
+- added subtle rain effect, toggable by the host
+- modified some weapon icons
+- modified the lol trap to be more lol-ish
+- optimized a lot of new sprites
+- added an alt fire for the knife (purely visual)
+- Redid the fists!
+primary fire:
+press - quick jab
+hold - strong cross
+alt fire:
+press - uppercut
+hold - slap
+reload: knuckle crack
+- as a result, separated the "fists" part from "fists with flashlight/lighter" (why do fists with lighter not work what  the fuck)
+
+11.09.2022
+- added a crowbar
+- players now have smoother attack anims when using certain weapons
+- cleaned up a lot of unnessesary comments and unused code
+
+10.09.2022
+- added a new sound class
+- added a noammo state for the crossbow
+- added an evil spirit that leaves the murderer's body when they die
+- made the chainsaw pulling SLIGHTLY faster
+- fixed the revolver not giving the player a spare mag if they pick it up with full loaded ammo
+- fixed knife sound effects
+- hopefully fixed the carbine acting janky when the target is close
+- made the ammo counters more colorful
+
+3.09.2022
+- falling down now makes the player slow down for quite some time
+- updated some ammo pickup messages
+- added a new player class
+- added FORCEYBILLBOARD and FORCEXYBILLBOARD to a bunch of actors
+- added a shadow behind the hp number
+- removed weird blood drop that spawns after being hit with a shovel
+- Removed some key sprite variations (mappers like to place multiple keys in the exact same spot for some reason)
+- Fixed a bug with the thrown chainsaw when it's turned on
+- Added an item for WDIEX03 (Dea's request)
+- you can now properly be pushed around when dancing (it also no longer stalls your movement)
+- nerfed slap's damage
+- increased a lot of actor's masses
+- HOPEFULLY fixed the bullet decals spawning when they shouldn't
+- more hitbox adjustments
+- added some effects to sound emitter's death
+- buffed shotgun trap's health
+- adjusted more sound volumes and ranges
+
+2.09.2022
+- Added a murderer's silenced pistol:
+the murderer can get it by simply picking up a colt - the innos cannot get the murd's colt and vice versa
+hold down the fire button to aim with laser sights for a perfectly accurate shot
+the casing needs to be manually ejected after each shot
+
+27.08.2022
+- adjusted some sound ranges
+- further buffed smoke canister (shorter deploy time)
+- fixed bullet holes appearing when damaged with a knife
+- fixed revolver dissapearing when you try to fire it
+- added a new dance
+- added some effects to gas canister, shotgun trap
+- added a jam meter for the pistol
+
+25.08.2022
+- adjusted multiple actor's hitboxes
+- added A LOT of variations with an A_SetScale trick
+- added new screen splashes;
+- some adjustments to the burning barrel
+
+24.08.2022
+- trees now can occasionally spawn leaves
+- decorative fire and burning trees now deal damage
+- some changes to blood terrain
+- added more vodka/beer variants
+
+16.08.2022
+- added some new TechnoKit musics
+- added more gore decorations
+- nerfed molotov bottle's health
+- updated big kit's healing particles
+- added a warp effect to some smoke-ish effects
+- updated burning barrel and torches
+
+13.08.2022
+- removed doomguy statues (it still had some 2d sprites)
+- changed toxic waste texture to a darker variant
+- Made smoke last longer (also buffed it)
+- molotov's flames bounce off ceiling now
+
+12.08.2022
+- planks, bricks, twigs and pipes now have random scales
+- molotov bottles can now be broken with a weapon (yes, they'll always explode)
+- multiple adjustments to footsteps (spawn height, gravity etc so it works nice with sinking in terrains)
+- players now somewhat sink in liquids
+- started adjusting offsets for player skins to be more consistent
+
+11.08.2022
+- trash cans can sometimes spawn trash around them
+- if some spawners fail to spawn an item, they'll drop a rat instead
+- added pickup variations for flare
+- added +FORCEXYBILLBOARD to some actors
+- slight change to footstep's properties.
+- walking on sand now spawns particles.
+- Some extra terrains now have footstep sounds.
+- some gore decorations now have more variations
+- Stone statues are now 3D models.
+- Some most common vegetation is now flammable
+- Death screams and bodies falling are now audible from further away
+- adjusted molotov's lighter light spawn  
+
+10.08.2022
+- removed bounce limit from dropped weapons
+- started working on burnable trees
+- added a warp effect to gas
+
+6.08.2022
+- crossbow projectile has less gravity, crossbow no longer uses A_Recoil
+- the player now walks faster if they actually use the run button and vice versa
+- added scorch decals for molotov
+- fixed flying beefmeat after being slapped a couple of times
+- buffed thrown molotov speed slightly
+- buffed thrown brick speed; decreased its bounce strength
+- new, optimized fire
+- added fireaxe/plank/nailed plank player skins
+- slightly changed shovel's offsets when preparing to swing
+
+4.06.2022
+- made some actors no longer dissapear on sky/liquids
+- made some footsteps quieter
+
+22.05.2022
+- New dancing system (thanks to Dea!)
+- added a lot more floor types
+
+21.05.2022
+- soulcube damage slightly buffed, also has a lifesteal effect
+- made the pistol jams worse
+- new item pickup sound
+- you can no longer turn the chainsaw on with no ammo.
+- dropping the chainsaw now instantly turns its sounds off.
+- you can no longer slap meat off of its place in WDIEX02.
+- some more items have colored pickups now
+
+20.05.2022
+- fixed the M1 carbine
+- fixed dropped weapons dissapearing on the liquids
+- made carpet footsteps quieter
+
+8.05.2022
+- fixed revolver skin crouching offsets
+- red torches are no longer pushable (WDI14 possible abuse)
+- made some pushable stuff no longer shootable (via species n shit)
+- fixed dropped weapons acting weirdly
+- fixed dropped items pushing stuff hard
+- removed A_light1 from carbine
+
+2.05.2022
+- Reorganized weapons code (swapped state positions, added more stuff to base weapon)
+- made more objects pushable
+- touched up pistol casing
+
+1.05.2022
+- added some more floor terrains
+- made Crossbow replace rocket launcher and M1 Carbine replace Chaingun so it looks cool in the test map lol
+- added the damage amount a weapon deals per hit to its pickup messages
+- Added new weapons:
+* blade of agony (common melee weapon)
+* revolver
+- fixed pistol having conflicting hud icons
+
+30.04.2022
+- added comments to picked up weapons
+- tossed weapons can actually hurt people now
+- touched up bear trap and sound emitter pickup messages
+- made tnt explode even faster
+- spray can 1st person sprites now represent their color
+- (hopefully) fixed bullet puffs spawning on bleeding actors
+- (hopefully) fixed TNT staying in your inventory between maps
+
+29.04.2022
+- some classes have jump sounds now
+- tried implementing player start anims differently
+- fixed flare bind
+- TNT takes less to explode now
+- added active TNT as a possibility from random crate
+
+28.04.2022
+- dropped weapons now bounce a tiny bit
+- added an option to have different stimpack colors
+
+25.04.2022
+- adjusted one of taunt's scaling
+- remade spent M1 and pistol mags
+- added a knuckle crack anim
+- new pistol pickup sprite
+- added player spawn anims
+- rave boxes are rarer now
+
+24.04.2022
+- added some proper land sound effects for some classes
+- added new select anims for the pistol and crossbow
+- stripped fire effects off of flying particles
+-firearms now have different bob styles
+
+23.04.2022
+- slapping no longer causes the player to flash bright
+- fixed spray cans being unselectable when they're empty
+- added burn player death
+
+22.04.2022
+- removed epic fire decorations (lag)
+- decreased the player's mass to make him thrustable by some specific attacks (slap lol)
+- added a slap for your fists lol (press reload)
+- Added default weapon and puff actors, made existing puffs/weapons inherit from them
+- players now make their respective landing sounds instead of default doomguy unfs.
+
+21.04.2022
+- Included more decoration touch ups.
+- Included WDI03 and WDIEX01 from WDImax.
+
+20.04.2022
+- Touched up multiple actors to make them more interactive (pushable, destroyable, other stuff)
+- Pot tree
+- WDI barrel
+- multiple vanilla doom actors
+- glass bottles, cocktail glass
+* WDIbarrel now has a veeeeery rare chance of dropping something
+* PotTree has a small chance to drop a basic key
+
+19.04.2022
+- Remade big kit effects, inspired by Kaminsky's stuff
+- (almost) all raves in a box now heal slowly
+- you now get only 3 flares instead of 5 when you pick them up
+- touched up fist puffs
+- Added AAbatteries and drawer key for the hud
+- added more options in the WDI options menu
+
+18.04.2022
+- dead bodies falling on the ground now play a landing sound
+- updated melee and bullet puffs, also added tracers for gunz
+- ammo pickups and molotov now have graphical variations
+- Added a fake teamkill halo powerup for the murderer (he gets a halo around him for about a minute and restores 1/5th of sanity)
+- added water footstep splashes
+- Murderer's exclamation marks and random weapon kit stuff now float
+- Flare throw is now different, can reach further now
+
+17.04.2022
+- Remade fire effect (decoration, molotov)
+- touched up bullet casings
+- Loltrap updated, shotgun trap puffs updated
+- crouching now silences footsteps
+- Different footstep types have different audible ranges
+- Foosteps now spawn slightly to the side of the player, so you can hear two surface sounds when standing between them.
+- WDI18's key items now have colored messages and soundz
+- finished all terrains missing footsteps (at least i think thats all of them)
+- made spray cans occasionally not spawn via a spawner
+- dead player bodies no longer spawn blood decals
+
+16.04.2022
+- A lot of new surfaces have footstep sounds
+- new footstep sounds
+- adjusted water terrain and splashes (no longer do you sink into the ground on liquids unfortunately. You also move slower in liquids)
+- shadows under actors are more subtle now
+- made knife and shotgun trap quieter and audible from a lesser distance
+
+15.04.2022
+- brick now has a melee attack
+
+14.04.2022
+- adjusted hatchet attack anim offsets
+
+13.04.2022
+- new lead pipe sprites
+- added Duke Nukem sound class
+- added Doomguy sound class
+
+12.04.2022
+- added Brutal Doomguy sound class
+- New molly land sounds
+- New spray can drop sounds
+- New shotgun trap sounds
+- new footstep sounds
+
+11.04.2022
+- fists now have gloved hands.
+- made an addon that adds shadows under actors
+
+10.04.2022
+- added 4 flare colors
+- health number interpolation increased (hud)
+- fidget (inspect) animations are now more interactive and annoying (you can delay them by holding the alt fire button and spam them quickly)
+- reanimated pistol reload, minor changes to M1 reload
+- added crouched sprites for molotov player.
+- knife can be stained again, minor backstab anim changes
+
+9.04.2022
+- minor shotgun trap adjustments
+- more keys have custom pickup messages and sounds
+- bear trap now has delay before being "active"
+- a lot of hud changes
+- dropped weapons now make updated impact sounds
+- weapons and beartrap take longer to respawn now (5 minutes)
+- flashlight sound is slightly less audible
+- fixed quick use flare bind
+
+- some wrench and pipe sprites adjustments
+- FistWithLighter no longer uses ammo, also fire attacks dont cause bleeding
+- fixed sprays being unusable with no ammo
+- added some keys to the hud (only basic 3 ones)
+
+5.04.2022
+- made RandomWeaponKit, BearTrap and TNT spawn slightly more frequently in MeleeSpawner
+
+4.04.2022
+- minor edits to firearms' firing sprites.
+
+03.04.2022
+- some ff puff changes
+- some changes to soulcube
+- added bullet ricochet/body hit sounds
+- nerfed the molotovs to be balanced against the murderer (sorry murderer :( )
+- fixed some player skin sprites
+- added dynamic lights to shotgun trap
+- removed weapon tossing animation to fix dumb stuff
+- fixed crossbow not being selectable without ammo
+- Fixed chainsaw dissapearing after dropping it (THANK GOD)
+- hopefully fixed molotov giving off light after losing it
+
+02.04.2022
+- added +FORCEXYBILLBOARD to a lot more actors
+
+1.04.2022
+- added worms player class
+- added key pickup sounds
+- added dynamic light to ThrownMolly
+- added RandomLootBox, also made new sprites for it (+ lights)
+- made technokits start music slightly faster
+- added smoke spawners to firearms
+- firearms now have camera movements when firing (also vertical climb)
+- adjusted hatchet's position
+- fixed sound emitters
+
+31.03.2022
+- rave box and random item box now appear next to your health item icons
+- made shotgun trap immune to heal damagetype (so the rave in a box doesnt kill it lol)
+- pickup messages are now colored!
+X - Added first person death animations (doesnt work in multi)
+- made some sounds audible from slightly further away (mainly wall impact sounds and music from raves)
+
+30.03.2022
+- made some rave kit songs more audible from larger distances
+- new sounds:
+flares (use, live)
+ammo pickup
+health pickup
+- slightly improved carbine and pistol fire animations
+- added inspect animations (try to reload with a full mag and it'll do a cool animation)
+- flares no longer "explode" and damage stuff around them constantly
+- replaced "technokit" with "technokit2" in medikit spawner in ITEMS.txt (so it spawns more variations)
+- some spray can damage adjustments
+
+29.03.2022
+- added new colored damage flashes for multiple damage types
+- you can now hold and pick up more flares
+- pistol is now jammable with quite a complicated system:
+each shot increases your "meter". If it reaches 3 (3 quick shots) and you try to shoot again, it's guaranteed to jam.
+You can drastically decrease the chance of jamming by simply letting the gun's fire animation to finish playing (when your gun starts bobbing
+again, it's good to go again without issues.
+If you choose to shoot a 2 or 3 shot burst you'll have to wait longer for your "meter" to completely go down.
+
+- carbine and pistol now have immersive, manual unjams
+- new flashlight sounds
+
+28.03.2022
+- added brick player skin
+- flashlight weapon flashing light sprites (Thanks Craneo and Sechtera!)
+- added spray paint player skin
+- firearms' no ammo states are now way shorter, so you can spam the empty fire sound lol
+- added floor decals for spray paint
+
+27.03.2022
+- player no longer walks in place after attacking if he's standing still
+- some weapons which should cast light now actually cast light (weapons firing, lighter)
+- slightly improved knife attack animation
+
+26.03.2022
+- reanimated twig
+- reanimated axe
+- reanimated fireaxe
+- reanimated brick
+- Reanimated plank
+- reanimated flashlight
+- added weapon dropping animations
+- Spray actor's sprites now represent their color
+- some weapons still bob during holding alt fire (saw, flashlights)
+- crossbow no longer has ridiculous rng damage
+- removed autoaim from hitscan and projectile weapons
+- nerfed a bunch of melee weapons a tiiiiiny bit
+- low tier melee weapons spawn a liiiiittle less frequently now
+
+
+24.03.2022
+- Updated to work with with wdi_touchupv9.21hotfix (Thanks to DEA!)
+- Improved flashlight casting light
+- new shotgun trap fire sprites + brightmaps
+
+23.03.2022
+- reanimated baseball bat
+
+22.03.2022
+Added pickable and placable TNT, its super deadly.
+Rarely replaces the molotov
+
+20.03.2022
+RAVES
+- made the rave boxes actually provide extra healing
+- made rare parties more common, added mario party
+
+- added pool cue and molotov player skins
+
+ADDED BRUTAL DOOM v20b's BASIC BLOOD STUFF
+NEW BOBBING STYLE FOR WEAPONS
+Added multiple new decals
+
+BRICK
+- new sounds
+KNIFE
+- new backstab, new sounds
+
+
+PLAYERS2:
+19.03.2022
+- added Dance4
+- Buffed molotovs (faster select, throw, fire is a lot deadlier)
+
+CROSSBOW:
+- Reanimated completely
+CROSSBOW DARTS:
+- No longer a ripper projectile (consistent 25 damage)
+- slight drop off on range
+- Slower travel speed
+
+PISTOL:
+- buffed damage
+
+CARBINE:
+- buffed damage
+- hopefully will jam less now
+
+CHAINSAW:
+- reanimated
+
+///////////////////////////////////////
+
+HACKS.txt:
+Added +FORCEXYBILLBOARD to multiple actors for better effect.
+
+EFFECTS.txt:
+Added +FORCEXYBILLBOARD to multiple actors for better effect.
+
+OTHER CHANGES:
+- SPRAYS - made paint projectiles a lot faster.
+- DECORATE - new flares
+
+PLAYERS2:
+- changed up player states to support new dances
+- added Innocent3 (Mario)
+- added Innocent4 (Luigi)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

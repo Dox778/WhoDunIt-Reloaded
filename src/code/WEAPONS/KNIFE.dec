@@ -1,0 +1,446 @@
+//Knife (Murderer only Weapon!)
+Actor MurderKnife : Wdi_BaseWeapon
+{  
+	Obituary ""
+	Tag "Knife"
+	Weapon.Kickback 100
+	Weapon.PreferredSkin "MurderSkin"
+	Weapon.SelectionOrder 100
+	Weapon.UpSound "weapons/KnifeReady"
+	+WEAPON.BFG
+	+WEAPON.NO_AUTO_SWITCH
+	Inventory.Icon "KNIFEICO"
+	States
+	{
+	KnifeIdle:
+		TNT1 A 0 ACS_NamedExecuteAlways("WDIplayerKickState",0)
+		TNT1 A 0 A_JumpIfInventory("StabbedAPerson",1,"KnifeIdleB")  // jumping to wrong state here caused the KickSuperKnife bug from older WDI:R version.
+		KNIF ALMNALMNALMNALMNALMN 5
+		stop
+	KnifeIdleB:
+		KNIF OPQROPQROPQROPQROPQR 5
+		stop
+		
+	Zoom:
+		TNT1 A 0 A_JumpIfInventory("KickBlocker",1,"ReadyNoKick")
+		TNT1 A 0 A_JumpIf(height < 40, "Ready")
+		TNT1 A 0 A_GunFlash("KnifeIdle",GFF_NOEXTCHANGE)
+		KICK ABC 1 SetPlayerProperty(0,1,PROP_FROZEN )
+		KICK D 1 A_playSound("Kick",0)
+		KICK EFFGH 1
+		KICK I 1 A_FireCustomMissile("AfuckingKick",0,0,0,1)
+		KICK JKKKLLMN 1
+		KICK O 0 SetPlayerProperty(0,0,PROP_FROZEN )
+		KICK OPQ 1 
+		TNT1 A 0 A_GunFlash("null",GFF_NOEXTCHANGE)
+	ReadyNoKick:
+		KNIB A 0 A_JumpIfInventory("StabbedAPerson",1,"ReadyStainedNoKick")
+		KNIF ALMN 5 A_WeaponReady
+	Ready:
+		KNIB A 0 A_JumpIfInventory("StabbedAPerson",1,"ReadyStained")
+		KNIF ALMN 5 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+	ReadyStainedNoKick:
+		KNIF OPQR 5 A_WeaponReady
+	ReadyStained:
+		KNIF OPQR 5 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop
+		
+	
+	
+	Deselect:
+		"####" "#" 0 A_JumpIfInventory("LChainsaw",1,2)
+		"####" "#" 0 A_GiveInventory("MurdInnocentBuff",1)
+		"####" "#" 1 offset(-1,33) A_StopSoundEx ("WEAPON")
+		"####" "#" 1 offset(-4,36)
+		"####" "#" 1 offset(-8,40)
+		"####" "#" 1 offset(-14,45)
+		"####" "#" 1 offset(-20,54)
+		"####" "#" 1 offset(-28,64)
+		"####" "#" 1 offset(-36,76)
+		"####" "#" 1 offset(-44,88)
+		"####" "#" 1 offset(-52,106)
+		"####" "#" 1 offset(-62,127)
+		"####" "#" 1 offset(-71,156)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1 A_Lower
+		wait
+		
+	Select:
+		KNIF A 0
+		//KNIF A 0 ACS_NamedExecuteAlways("WDIEX03Item",0)
+		KNIF A 0 A_GiveInventory("MurdNerfed",1)
+		KNIB A 0 A_JumpIfInventory("StabbedAPerson",1,2)
+		KNIF A 0
+	  "####" A 0
+		"####" "#" 6
+		"####" AAAAAAAAAAAAAAA 0 A_Raise
+		"####" "#" 1 offset(44,88)
+		"####" "#" 1 offset(36,76)
+		"####" "#" 1 offset(28,64)
+		"####" "#" 1 offset(20,54)
+		"####" "#" 1 offset(14,45)
+		"####" "#" 1 offset(8,40)
+		"####" "#" 1 offset(4,36)
+		"####" "#" 1 offset(1,33)
+		goto Ready
+	AltFire:
+        "####" B 0 A_JumpIfTargetInLOS ("ActualAltFire", 0, JLOSF_COMBATANTONLY |JLOSF_DEADNOJUMP | JLOSF_TARGETLOS,72,0)
+        "####" A 0 A_GiveInventory("PlayerAttackAnim",1)
+        Goto ActualAltFire+1
+   ActualAltFire:
+        "####" B 0 A_JumpIf (ACS_ExecuteWithResult(555), "BackStab")
+        "####" A 0 A_PlaySound("Knife/Swing")
+        "####" C 0 A_Recoil(-0.2)
+        KNIB A 0 A_JumpIfInventory("StabbedAPerson",1,2)
+        KNIF A 0
+        "####" K 1 A_CustomPunch (10, 1, 0, "StabPuff2SilentWall", 54)
+        "####" B 1 A_CustomPunch (5, 1, 0, "StabPuff", 64)
+        "####" C 1 A_CustomPunch (5, 1, 0, "StabPuff2NoBlood", 72)
+        KNIB A 0 A_JumpIfInventory("StabbedAPerson",1,2)
+        KNIF A 0
+        "####" A 0
+        "####" D 4
+        "####" EEFGHIJJ 1
+        "####" A 3
+        "####" A 1 A_ReFire
+        Goto Ready
+	Fire:
+		KNI2 B 0 A_JumpIfTargetInLOS ("ActualFire", 0, JLOSF_COMBATANTONLY |JLOSF_DEADNOJUMP | JLOSF_TARGETLOS,72,0)
+		KNI2 A 0 A_GiveInventory("PlayerAttackAnim",1)
+        Goto ActualFire+1
+	ActualFire:
+		KNI2 B 0 A_JumpIf (ACS_ExecuteWithResult(555), "BackStab")
+		KNI3 A 0 A_JumpIfInventory("StabbedAPerson",1,2)
+		KNI2 A 0
+	  "####" A 0
+		"####" A 1
+		"####" A 0 A_PlaySound("Knife/Swing")
+		"####" C 0 A_Recoil(-2)
+		"####" B 1 A_CustomPunch (10, 1, 0, "StabPuff2SilentWall", 54)
+		"####" C 1 A_CustomPunch (10, 1, 0, "StabPuff2SilentWall", 64)
+		"####" D 1 A_CustomPunch (5, 1, 0, "StabPuff", 72)
+		KNI3 A 0 A_JumpIfInventory("StabbedAPerson",1,2)
+		KNI2 A 0
+	  "####" A 0
+		"####" EEE 1 A_CustomPunch (5, 1, 0, "StabPuff2NoBlood", 72)
+		"####" E 4
+		"####" FFGHIJKL 1
+		"####" Z 10 //empty
+		"####" MNOPQ 1
+		KNIB A 0 A_JumpIfInventory("StabbedAPerson",1,2)
+		KNIF A 0
+	    "####" A 0
+		"####" A 1 A_ReFire
+		Goto Ready	
+		
+	BackStab:
+		KNIB A 0 A_GiveInventory("StabbedAPerson",1)
+		KNIB A 0 A_PlaySound("Knife/Swing")
+		KNIB L 1 A_CustomPunch (666, 1, 0, "BackStabPuff", 64)
+		KNIB MN 1
+		KNIB O 1	Offset(0, 37)
+		KNIB O 1	Offset(0, 35)
+		KNIB O 2	Offset(0, 33)
+		KNIB O 6	Offset(0, 32)
+		KNIB PPQRSTUU 1
+		KNIB V 5
+		KNIB WXYZ 1
+		KNIB "[\]" 1
+		TNT1 A 3
+		KNIB A 1 Offset(0, 70)
+		KNIB A 1 Offset(0, 50)
+		KNIB A 1 Offset(0, 40)
+		KNIB A 1 Offset(0, 34)
+		KNIB A 1 Offset(0, 32)
+		Goto Ready
+	WeaponDeath:
+		2IST JUVVKUUKVJKVJUKVJVJUVJKUVJUVKUJJKUV 1
+		2IST KKLMNOPRSS 1
+		2IST T 1
+		wait
+}}
+actor 20Dollars : MurderKnife //GIMME 20 DOLLARZ GIMME 20 DOLLARZ
+{
+	Tag "Gimme 20 dollars"
+  States
+  {
+	Select:
+		KNIF A 0 A_GiveInventory("MurdNerfed",1)
+		KNIB A 0 A_JumpIfInventory("StabbedAPerson",1,2)
+		KNIF A 0
+	  "####" A 0
+		"####" "#" 6
+		"####" AAAAAAAAAAAAAAA 0 A_Raise
+		"####" "#" 1 offset(44,88)
+		"####" "#" 1 offset(36,76)
+		"####" "#" 1 offset(28,64)
+		"####" "#" 1 offset(20,54)
+		"####" "#" 1 offset(14,45)
+		"####" "#" 1 offset(8,40)
+		"####" "#" 1 offset(4,36)
+		"####" "#" 1 offset(1,33)
+		goto Ready
+	Deselect:	 
+		"####" "#" 1 offset(-1,33) A_StopSoundEx ("WEAPON")
+		"####" "#" 1 offset(-4,36)
+		"####" "#" 1 offset(-8,40)
+		"####" "#" 1 offset(-14,45)
+		"####" "#" 1 offset(-20,54)
+		"####" "#" 1 offset(-28,64)
+		"####" "#" 1 offset(-36,76)
+		"####" "#" 1 offset(-44,88)
+		"####" "#" 1 offset(-52,106)
+		"####" "#" 1 offset(-62,127)
+		"####" "#" 1 offset(-71,156)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1 A_Lower
+		wait
+	Ready:
+		KNIB A 0 A_JumpIfInventory("StabbedAPerson",1,"ReadyStained")
+		KNIB A 0 A_PlaySoundEx ("SLSD20DS","WEAPON",1)
+		KNIF A 1 A_WeaponReady
+		Loop
+	ReadyStained:
+		KNIB A 0 A_PlaySoundEx ("SLSD20DS","WEAPON",1)
+		KNIB A 1 A_WeaponReady
+		Loop
+	  Fire:
+		"####" A 0 A_PlaySoundEx ("SLSD20DS","WEAPON",1)
+		"####" A 0 A_GiveInventory("PlayerAttackAnim",1)
+		"####" B 0 A_JumpIfTargetInLOS ("ActualFire", 0, JLOSF_COMBATANTONLY |JLOSF_DEADNOJUMP | JLOSF_TARGETLOS,72,0)
+        Goto ActualFire+1
+  }
+}
+
+
+actor StabPuff
+{
+  +NOBLOCKMAP
+  +NOGRAVITY
+  +PUFFONACTORS
+  DamageType "Default"
+  seesound "weapons/Knifehit"
+  AttackSound "Knife/Wall"
+  Obituary "" 
+  Decal "KnifeDecal"
+  states
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 1
+    stop
+	Attack:
+	TNT1 A 0 A_PlaySound("Knife/Wall")
+	TNT1 A 0
+	stop
+  Crash:
+  	TNT1 A 0
+  	TNT1 A 1
+  	stop
+  Melee:
+  	TNT1 A 0
+  	TNT1 A 1
+  	stop
+  }
+}
+
+actor StabPuff2 : StabPuff //The Silent puff
+{
+SeeSound ""
+ActiveSound ""
+DeathSound ""
+Decal ""
++DONTSPLASH
+}
+
+actor StabPuffSilent: stabpuff2
+{
++BLOODLESSIMPACT
+Decal ""
++DONTSPLASH
+}
+
+actor StabPuff2SilentWall : StabPuff //The Silent puff
+{
+SeeSound ""
+ActiveSound ""
+DeathSound ""
+AttackSound ""
+Decal ""
++DONTSPLASH
+}
+
+actor StabPuff2NoBlood: stabpuff2
+{
++BLOODLESSIMPACT
+AttackSound ""
++DONTSPLASH
+}
+Actor BackStabPuff
+{
+	DamageType "Backstab"
+	ActiveSound "Weapons/KnifeStab"
+	AttackSound ""
+	SeeSound "Knife/Backstab"
+	Obituary ""
+	+NOBLOCKMAP
+	+NOGRAVITY
+	+NODAMAGETHRUST
+	+PUFFGETSOWNER
+	+PUFFONACTORS
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 1
+		Stop
+	Crash:
+		TNT1 A 0
+		TNT1 A 1
+		Stop
+	Melee:
+		TNT1 A 0
+		TNT1 A 1 A_GiveToTarget("StabbedAPerson",1)
+		Stop
+}}
+
+Actor MurdInnocentBuff : CustomInventory
+{
+	Inventory.PickupMessage ""
+	Inventory.PickupSound ""
+	Inventory.MaxAmount 1
+	+INVENTORY.UNDROPPABLE
+	-INVENTORY.INTERHUBSTRIP
+	States
+	{
+	Pickup:
+		TNT1 A 0 A_GiveInventory("Murd_innoFire2", 1)
+		TNT1 A 0 A_GiveInventory("Murd_CueDamage", 1)
+		TNT1 A 0 A_GiveInventory("Murd_ShovelDamage", 1)
+		Stop
+}}
+
+Actor MurdNerfed : CustomInventory
+{
+	Inventory.PickupMessage ""
+	Inventory.PickupSound ""
+	Inventory.MaxAmount 1
+	+INVENTORY.UNDROPPABLE
+	-INVENTORY.INTERHUBSTRIP
+	States
+	{
+	Pickup:
+		TNT1 A 0 A_TakeInventory("PowerMurdMeleeDamage", 1)
+		TNT1 A 0 A_TakeInventory("PowerMurdCueDamage", 1)
+		TNT1 A 0 A_TakeInventory("PowerMurdShovelDamage", 1)
+		TNT1 A 0 A_TakeInventory("PowerMurdFistDamage", 1)
+		Stop
+}}
+
+////////////NEW HACKS///////////////////////////
+Actor PowerMurdFistDamage: PowerProtection
+{
+	Powerup.Duration 3024000
+	DamageFactor "fists", 0.3
+}
+
+Actor Murd_FistDamage : PowerupGiver
+{
+	Game Doom
+	Game Heretic
+	Game Hexen
+	SpawnID 0
+	Inventory.MaxAmount 0
+	Powerup.Type MurdFistDamage
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.UNDROPPABLE
+	States
+	{
+	Spawn:
+		GARD ABCD 6 Bright
+		Loop
+}}
+
+
+
+Actor Murd_innoFire2 : PowerupGiver
+{
+	Game Doom
+	Game Heretic
+	Game Hexen
+	SpawnID 0
+	Inventory.MaxAmount 0
+	Powerup.Type MurdMeleeDamage
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.UNDROPPABLE
+	States
+	{
+	Spawn:
+		GARD ABCD 6 Bright
+		Loop
+}}
+
+Actor PowerMurdMeleeDamage: PowerProtection
+{
+	Powerup.Duration 3024000
+	DamageFactor "Friendlymelee", 0.44 //0.63
+}
+
+
+Actor Murd_CueDamage : PowerupGiver
+{
+	Game Doom
+	Game Heretic
+	Game Hexen
+	SpawnID 0
+	Inventory.MaxAmount 0
+	Powerup.Type MurdCueDamage
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.UNDROPPABLE
+	States
+	{
+	Spawn:
+		GARD ABCD 6 Bright
+		Loop
+}}
+
+Actor PowerMurdCueDamage: PowerProtection
+{
+	Powerup.Duration 3024000
+	DamageFactor "FriendlyCueDamage", 0.44 //0.63
+}
+
+Actor Murd_ShovelDamage : PowerupGiver
+{
+	Game Doom
+	Game Heretic
+	Game Hexen
+	SpawnID 0
+	Inventory.MaxAmount 0
+	Powerup.Type MurdShovelDamage
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.UNDROPPABLE
+	States
+	{
+	Spawn:
+		GARD ABCD 6 Bright
+		Loop
+}}
+
+Actor PowerMurdShovelDamage: PowerProtection
+{
+	Powerup.Duration 3024000
+	DamageFactor "ShovelMelee",0.4 //0.60
+}
+
+//FOR_BALANCE
+Actor PowerFriendlyGunDamage2: PowerFriendlyGunDamage replaces PowerFriendlyGunDamage
+{
+	Powerup.Duration 3024000
+	DamageFactor "Friendlygun", 0.35
+}

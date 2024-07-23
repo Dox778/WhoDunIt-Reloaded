@@ -1,0 +1,803 @@
+Actor SewerBody 10515
+{
+	-SOLID
+	+FORCEXYBILLBOARD
+	States
+	{
+		spawn:
+		TNT1 A 0 NODELAY A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		TNT1 A 0 A_SpawnItemEX("GoreFlies",random(-4,4),random(-4,4),random(-32,52),0,0,0,0,SXF_CLIENTSIDE,120,7780)
+		TNT1 AAA 0 A_SpawnItemEX("Maggot",random(-4,4),random(-4,4),2,0,0,0,0,SXF_CLIENTSIDE,240,7780)
+		BODY Z -1
+		stop
+	}
+}
+Actor DeadBody : SewerBody 22016 {}
+
+ACTOR deadguy1 10450
+{
+	//$Category WDI Props/Gore
+	//$Sprite DEADA0
+	//$Title "Dead Guy 1"
+  mass 2000
+  Radius 12
+  Height 8
+  -SOLID
+  +FORCEXYBILLBOARD
+  States
+  {
+   Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	TNT1 A 0 A_SpawnItemEX("GoreFlies",random(-4,4),random(-4,4),random(-32,52),0,0,0,0,SXF_CLIENTSIDE,120,7780)
+	TNT1 AAA 0 A_SpawnItemEX("Maggot",random(-4,4),random(-4,4),2,0,0,0,0,SXF_CLIENTSIDE,230,7780)
+    DEAD A -1
+    loop
+  }
+}
+ACTOR deadguy2 : deadguy1 10451
+{
+	//$Category WDI Props/Gore
+	//$Sprite DEADB0
+	//$Title "Dead Guy 2"
+  States
+  {
+   Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	TNT1 A 0 A_SpawnItemEX("GoreFlies",random(-4,4),random(-4,4),random(-32,52),0,0,0,0,SXF_CLIENTSIDE,120,7780)
+	TNT1 AAA 0 A_SpawnItemEX("Maggot",random(-4,4),random(-4,4),2,0,0,0,0,SXF_CLIENTSIDE,230,7780)
+    DEAD B -1
+    loop
+  }
+}
+ACTOR deadguy3 : deadguy1 replaces DeadMarine 10452
+{
+	//$Category WDI Props/Gore
+	//$Sprite DEADC0
+	//$Title "Dead Guy 3"
+  States
+  {
+   Spawn:
+TNT1 A 0 NODELAY A_Jump(128,2)
+TNT1 A 0 A_SetScale(-scalex,scaley)
+	TNT1 A 0 A_SpawnItemEX("GoreFlies",random(-4,4),random(-4,4),random(-32,52),0,0,0,0,SXF_CLIENTSIDE,120,7780)
+	TNT1 AAA 0 A_SpawnItemEX("Maggot",random(-4,4),random(-4,4),2,0,0,0,0,SXF_CLIENTSIDE,220,7780)
+	TNT1 A 0 A_Jump(256,"Spawn1","Spawn2","Spawn3","Spawn4","Spawn5","Spawn6","Spawn7","Spawn8","Spawn9","Spawn10","Spawn11","Spawn12","Spawn13","Spawn14")
+	Spawn1: DPL1 L -1 
+	Spawn2: DPL2 N -1 
+	Spawn3: DPL2 Q -1 
+	Spawn4: DPL3 M -1 
+	Spawn5: DPL4 L -1 
+	Spawn6: DPL5 P -1 
+	Spawn7: DPL6 L -1 
+	Spawn8: DPL7 L -1 
+	Spawn9: DPL8 L -1 
+	Spawn10: DEAD C -1 
+	Spawn11: DEAD D -1 
+	Spawn12: DEAD E -1 
+	Spawn13: DEAD F -1 
+	Spawn14: BODY Z -1 
+	loop
+  }
+}
+ACTOR deadguy4 : deadguy3 10453
+{
+	//$Category WDI Props/Gore
+	//$Sprite DEADD0
+	//$Title "Dead Guy 4"
+  Translation "112:127=96:111"
+}
+ACTOR deadguy5 : deadguy3 10454
+{
+	//$Category WDI Props/Gore
+	//$Sprite DEADE0
+	//$Title "Dead Guy 5"
+  Translation "112:127=144:151"
+}
+ACTOR deadguy6 : deadguy3 10455
+{
+	//$Category WDI Props/Gore
+	//$Sprite DEADF0
+	//$Title "Dead Guy 6"
+  Translation "112:127=160:167"
+}
+
+
+
+
+
+ACTOR BrainMush
+{
+  Game Doom
+  Radius 16
+  Height 56
+  -SOLID
+  States
+  {
+  Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	TNT1 A 0 A_Jump(256,"Stay")
+	Stay:
+    MUSH A -1
+    Stop
+  }
+}
+ACTOR GoreChunk1 : BrainMush
+{
+  States
+  {
+  Stay:
+    CHNK A -1
+    Stop
+  }
+}
+ACTOR GoreChunk2 : BrainMush
+{
+  States
+  {
+  Stay:
+    CHNK B -1
+    Stop
+  }
+}
+ACTOR GoreChunk3 : BrainMush
+{
+  States
+  {
+  Stay:
+    CHNK C -1
+    Stop
+  }
+}
+ACTOR EyeBall : BrainMush
+{
+  States
+  {
+  Stay:
+    EYEB A -1
+    Stop
+  }
+}
+ACTOR Organ1 : BrainMush
+{
+  States
+  {
+  Stay:
+    ORGN A -1
+    Stop
+  }
+}
+ACTOR Organ2 : BrainMush
+{
+  States
+  {
+  Stay:
+    ORGN B -1
+    Stop
+  }
+}
+ACTOR RibCage : BrainMush
+{
+  States
+  {
+  Stay:
+    RIBC A -1
+    Stop
+  }
+}
+ACTOR SpinalCord : BrainMush
+{
+  States
+  {
+  Stay:
+    SPIN A -1
+    Stop
+  }
+}
+ACTOR Organs : BrainMush
+{
+  States
+  {
+  Stay:
+    ORGS A -1
+    Stop
+  }
+}
+ACTOR Torso : BrainMush
+{
+  States
+  {
+  Stay:
+    TRSO A -1
+    Stop
+  }
+}
+Actor Head1 : BrainMush
+{
+  States
+  {
+  Stay:
+    HED1 A -1
+    Loop
+  }
+}
+Actor Head2 : BrainMush
+{
+  States
+  {
+  Stay:
+    HED2 A -1
+    Loop
+  }
+}
+
+Actor Head3 : BrainMush
+{
+  States
+  {
+  Stay:
+    HED3 A -1
+    Loop
+  }
+}
+
+
+Actor GoreFlies
+{
++NOGRAVITY
++CLIENTSIDEONLY
++NOINTERACTION
++FORCEXYBILLBOARD
+radius 1
+height 1
+-SOLID
+
+States
+	{
+	Spawn:
+	GRFL A random(2,35) NODELAY A_SetScale(frandom(0.7,1.0),0)
+	TNT1 A 0 A_PlaySound("FLEAS", 1, 1, 1)
+	Stay:
+		GRFL ABDEFGHIJKLMNOPQRSTUVWXYZ 2
+		Loop		
+	STFU:
+	TNT1 A -1 A_StopSound(1)
+	stop
+	
+}}
+
+ACTOR GoreFliesBright: GoreFlies
+{
++BRIGHT
+translation "0:0=229:229" 
+}
+Actor Maggot
+{
+  Height 1
+  Radius 1
+  Mass 0
+  +DontSplash
+  +FORCEXYBILLBOARD
+  -NOGRAVITY
++CLIENTSIDEONLY
++NOBLOCKMAP
+Gravity 8.0
+  Speed 0
+  States
+  {
+  Spawn:
+	TNT1 A random(20,35) NODELAY A_SetScale(frandom(0.7,1.0),0)
+	TNT1 A 0 A_ChangeFlag("NOINTERACTION", true)
+	TNT1 A 0 A_Stop
+	Stay:
+    GRMG EFGHIJKLKJIHGFEFGHIJKLKJIHGF 4
+    loop
+}}
+Actor Worm: Maggot {translation "80:151=18:31"} //"80:151=18:31"
+Actor Albert: Maggot { translation "80:151=[147,112,219]:[0,0,0]" }
+
+ACTOR SmallSpider
+{
++CLIENTSIDEONLY
+Height 1
+radius 1
+Mass 1
++NoBlockMap
++DontSplash
++FORCEXYBILLBOARD
++THRUACTORS	
+Speed 2
+Scale 0.4
+	States
+	{
+	Spawn:
+		TRIT KLMN 5 A_Wander
+		loop
+	}
+}
+
+
+ACTOR NewSmallBloodPool: SmallBloodPool replaces SmallBloodPool
+{
+  +FORCEXYBILLBOARD
+  +CLIENTSIDEONLY
+  //+NOINTERACTION
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_SetScale(frandom(0.7,1.2))
+    POB2 A -1 
+    Stop
+  }
+}
+
+
+Actor DeadStickSpawner: RandomSpawner replaces DeadStick
+{
+DropItem "NewDeadStick"
+DropItem "DeadStickGreen"
+DropItem "DeadStickBlue"
+DropItem "DeadStickRed"
+DropItem "DeadStickOrange"
+DropItem "DeadStickPurple"
+DropItem "DeadStickPink"
+DropItem "DeadStickyellow"
+DropItem "DeadStickBrown"
+}
+Actor DeadStickGreen: DeadStick
+{
+Radius 8
+Height 58
++FORCEYBILLBOARD
+States
+	{
+	Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	TNT1 A 0 A_SpawnItemEX("GoreFlies",random(-4,4),random(-4,4),random(-32,52),0,0,0,0,SXF_CLIENTSIDE,120,7780)
+	TNT1 AAA 0 A_SpawnItemEX("Maggot",random(-4,4),random(-4,4),2,0,0,0,0,SXF_CLIENTSIDE,240,7780)
+	TNT1 A 0 A_Jump(256,"Spawn1","Spawn2","Spawn3","Spawn4","Spawn5","Spawn6","Spawn7","Spawn8")
+	Spawn1:
+	pold a -1
+	Spawn2:
+	pole a -1
+	Spawn3:
+	polf a -1
+	Spawn4:
+	polg a -1
+	Spawn5:
+	polh a -1
+	Spawn6:
+	pole b -1
+	Spawn7:
+	pole c -1
+	Spawn8:
+	pole d -1
+	
+	stop
+	}
+}
+Actor DeadStickBlue: DeadStickGreen { translation "112:127=[30,144,255]:[0,0,0]" }
+Actor DeadStickRed: DeadStickGreen { translation "112:127=[220,20,60]:[0,0,0]" }
+Actor DeadStickOrange: DeadStickGreen { translation "112:127=[255,69,0]:[0,0,0]" }
+Actor DeadStickPurple: DeadStickGreen { translation "112:127=[138,43,226]:[0,0,0]" }
+Actor DeadStickPink: DeadStickGreen { translation "112:127=[238,130,238]:[0,0,0]" }
+Actor DeadStickyellow: DeadStickGreen { translation "112:127=[255,255,0]:[0,0,0]" }
+Actor DeadStickBrown: DeadStickGreen { translation "112:127=[205, 127, 50]:[0,0,0]" }
+Actor NewDeadStick: DeadStick { }
+/////////////////////////////////////////////////////////////////////////////////
+Actor LiveStickSpawner: RandomSpawner replaces LiveStick
+{
+DropItem "NewLiveStick"
+DropItem "LiveStickGreen"
+DropItem "LiveStickBlue"
+DropItem "LiveStickRed"
+DropItem "LiveStickOrange"
+DropItem "LiveStickPurple"
+DropItem "LiveStickPink"
+DropItem "LiveStickyellow"
+DropItem "LiveStickBrown"
+}
+Actor LiveStickGreen: DeadStick
+{
+Radius 10
+Height 58
++FORCEYBILLBOARD
+States
+	{
+	Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	TNT1 A 0 A_SpawnItemEX("GoreFlies",random(-4,4),random(-4,4),random(-32,52),0,0,0,0,SXF_CLIENTSIDE,120,7780)
+	TNT1 AAA 0 A_SpawnItemEX("Maggot",random(-4,4),random(-4,4),2,0,0,0,0,SXF_CLIENTSIDE,240,7780)
+	Stay:
+	POLF A 6 
+	POLF B 8
+	loop
+	}
+}
+Actor LiveStickBlue: LiveStickGreen { translation "112:127=[30,144,255]:[0,0,0]" }
+Actor LiveStickRed: LiveStickGreen { translation "112:127=[220,20,60]:[0,0,0]" }
+Actor LiveStickOrange: LiveStickGreen { translation "112:127=[255,69,0]:[0,0,0]" }
+Actor LiveStickPurple: LiveStickGreen { translation "112:127=[138,43,226]:[0,0,0]" }
+Actor LiveStickPink: LiveStickGreen { translation "112:127=[238,130,238]:[0,0,0]" }
+Actor LiveStickyellow: LiveStickGreen { translation "112:127=[255,255,0]:[0,0,0]" }
+Actor LiveStickBrown: LiveStickGreen { translation "112:127=[205, 127, 50]:[0,0,0]" }
+Actor NewLiveStick: LiveStick { }
+/////////////////////////////////////////////////////////////////////////////////
+ACTOR NewHeadOnAStick: HeadOnAStick replaces HeadOnAStick
+{
+Radius 1
++FORCEYBILLBOARD
+  States
+  {
+  Spawn:
+  TNT1 A 0 NODELAY A_Jump(128,2)
+  TNT1 A 0 A_SetScale(-scalex,scaley)
+  TNT1 A 0 A_SpawnItemEX("GoreFlies",random(-4,4),random(-4,4),random(-32,52),0,0,0,0,SXF_CLIENTSIDE,120,7780)
+	TNT1 AAA 0 A_SpawnItemEX("Maggot",random(-4,4),random(-4,4),2,0,0,0,0,SXF_CLIENTSIDE,240,7780)
+  TNT1 A 0 A_Jump(256,"Spawn1","Spawn2","Spawn3","Spawn4","Spawn5")
+	Spawn1:
+    POL4 A -1
+	Spawn2:
+    POL8 A -1
+	Spawn3:
+    POL9 A -1
+	Spawn4:
+    POLA A -1
+	Spawn5:
+    POL7 A -1	
+    Stop
+  }
+}
+/////////////////////////////////////////////////////////////////////////////////
+ACTOR MarineGibSpawner: RandomSpawner replaces GibbedMarine
+{
+DropItem "NewGibbedMarine"
+DropItem "GibbedMarineBlue"
+DropItem "GibbedMarineRed"
+DropItem "GibbedMarineOrange"
+DropItem "GibbedMarinePurple"
+DropItem "GibbedMarinePink"
+DropItem "GibbedMarineyellow"
+DropItem "GibbedMarineBrown"
+}
+
+ACTOR GibbedMarineExtraSpawner: RandomSpawner replaces GibbedMarineExtra
+{
+DropItem "NewGibbedMarine"
+DropItem "GibbedMarineBlue"
+DropItem "GibbedMarineRed"
+DropItem "GibbedMarineOrange"
+DropItem "GibbedMarinePurple"
+DropItem "GibbedMarinePink"
+DropItem "GibbedMarineyellow"
+DropItem "GibbedMarineBrown"
+}
+Actor NewGibbedMarine: GibbedMarine 
+{ 
++FORCEXYBILLBOARD 
+	States
+	{
+	Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	TNT1 A 0 A_SpawnItemEX("GoreFlies",random(-4,4),random(-4,4),random(-32,52),0,0,0,0,SXF_CLIENTSIDE,120,7780)
+	TNT1 AAA 0 A_SpawnItemEX("Maggot",random(-4,4),random(-4,4),2,0,0,0,0,SXF_CLIENTSIDE,240,7780)
+	PLAY W -1
+    Stop
+	}
+}
+Actor GibbedMarineBlue: GibbedMarine { translation "112:127=[30,144,255]:[0,0,0]" +FORCEXYBILLBOARD }
+Actor GibbedMarineRed: GibbedMarine { translation "112:127=[220,20,60]:[0,0,0]" +FORCEXYBILLBOARD }
+Actor GibbedMarineOrange: GibbedMarine { translation "112:127=[255,69,0]:[0,0,0]" +FORCEXYBILLBOARD }
+Actor GibbedMarinePurple: GibbedMarine { translation "112:127=[138,43,226]:[0,0,0]" +FORCEXYBILLBOARD }
+Actor GibbedMarinePink: GibbedMarine { translation "112:127=[238,130,238]:[0,0,0]" +FORCEXYBILLBOARD }
+Actor GibbedMarineyellow: GibbedMarine { translation "112:127=[255,255,0]:[0,0,0]" +FORCEXYBILLBOARD }
+Actor GibbedMarineBrown: GibbedMarine { translation "112:127=[205, 127, 50]:[0,0,0]" +FORCEXYBILLBOARD }
+
+ACTOR NewFloatingSkull: FloatingSkull replaces FloatingSkull { +FORCEXYBILLBOARD +FLOATBOB +FLOAT FloatSpeed 1 }
+
+
+ACTOR RandomEvilEye: RandomSpawner replaces EvilEye
+{
+DropItem "EvilEveGreen"
+DropItem "EvilEveBlue"
+DropItem "EvilEveRed"
+DropItem "EvilEveOrange"
+DropItem "EvilEvePurple"
+DropItem "EvilEvePink"
+DropItem "EvilEveyellow"
+DropItem "EvilEveBrown"
+}
+Actor EvilEveGreen: EvilEye { +FORCEYBILLBOARD }
+Actor EvilEveBlue: EvilEveGreen { translation "112:127=[30,144,255]:[0,0,0]" }
+Actor EvilEveRed: EvilEveGreen { translation "112:127=[220,20,60]:[0,0,0]" }
+Actor EvilEveOrange: EvilEveGreen { translation "112:127=[255,69,0]:[0,0,0]" }
+Actor EvilEvePurple: EvilEveGreen { translation "112:127=[138,43,226]:[0,0,0]" }
+Actor EvilEvePink: EvilEveGreen { translation "112:127=[238,130,238]:[0,0,0]" }
+Actor EvilEveyellow: EvilEveGreen { translation "112:127=[255,255,0]:[0,0,0]" }
+Actor EvilEveBrown: EvilEveGreen { translation "112:127=[205, 127, 50]:[0,0,0]" }
+
+
+//////////////////////////
+ACTOR DeadDoomImpSpawner : RandomSpawner replaces DeadDoomimp
+{
+DropItem "NewDeadDoomimp"
+DropItem "NewDeadDoomimp2"
+}
+ACTOR NewDeadDoomimp: DeadDoomimp  { +FORCEXYBILLBOARD }
+ACTOR NewDeadDoomimp2: DeadDoomimp
+{
++FORCEXYBILLBOARD
+States
+	{
+	Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	TNT1 A 0 A_SpawnItemEX("GoreFlies",random(-4,4),random(-4,4),random(-32,52),0,0,0,0,SXF_CLIENTSIDE,120,7780)
+	TNT1 AAA 0 A_SpawnItemEX("Maggot",random(-4,4),random(-4,4),2,0,0,0,0,SXF_CLIENTSIDE,240,7780)
+	dimp m -1
+	stop
+	}
+}
+
+Actor DeadShotgunGuySpawner: randomspawner replaces DeadShotgunGuy
+{
+DropItem "NewDeadShotgunGuy", 256, 3
+DropItem "NewDeadSSGGuy", 256, 1
+}
+Actor NewDeadShotgunGuy: DeadShotgunGuy 
+{ 
++FORCEXYBILLBOARD 
+States
+{
+	Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	TNT1 A 0 A_SpawnItemEX("GoreFlies",random(-4,4),random(-4,4),random(-2,12),0,0,0,0,SXF_CLIENTSIDE,120,7780)
+	TNT1 AAA 0 A_SpawnItemEX("Maggot",random(-4,4),random(-4,4),2,0,0,0,0,SXF_CLIENTSIDE,180,7780)
+	Goto Super::Spawn
+		
+}
+}
+Actor NewDeadSSGGuy: DeadShotgunGuy
+{
++FORCEXYBILLBOARD
+States
+	{
+	Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	gpos n -1
+	stop
+	}
+
+}
+
+Actor DeadCacodemonSpawner: randomspawner replaces DeadCacodemon
+{
+DropItem "NewDeadCacodemon"
+DropItem "NewDeadCacodemon2"
+DropItem "NewDeadCacodemon3"
+}
+Actor NewDeadCacodemon: DeadCacodemon { +FORCEXYBILLBOARD }
+Actor NewDeadCacodemon2: DeadCacodemon
+{
++FORCEXYBILLBOARD
+States
+	{
+	Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	hed2 L -1
+	stop
+	}
+
+}
+Actor NewDeadCacodemon3: DeadCacodemon
+{
++FORCEXYBILLBOARD
+States
+	{
+	Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	hed3 l -1
+	stop
+	}
+}
+
+Actor DeadDemonSpawner: randomspawner replaces DeadDemon
+{
+DropItem "NewDeadDemon"
+DropItem "NewDeadDemon2"
+}
+Actor NewDeadDemon: DeadDemon { +FORCEXYBILLBOARD }
+Actor NewDeadDemon2: DeadDemon
+{
++FORCEXYBILLBOARD
+States
+	{
+	Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	srg2 n -1
+	stop
+	}
+
+}
+
+////////////////////////////////////////////////////////////////////
+ACTOR BloodyTwitchSpawner: RandomSpawner replaces BloodyTwitch
+{
+DropItem "NewBloodyTwitch"
+DropItem "BloodyTwitchGreen"
+DropItem "BloodyTwitchBlue"
+DropItem "BloodyTwitchRed"
+DropItem "BloodyTwitchOrange"
+DropItem "BloodyTwitchPurple"
+DropItem "BloodyTwitchPink"
+DropItem "BloodyTwitchyellow"
+DropItem "BloodyTwitchBrown"
+}
+ACTOR NewBloodyTwitch: BloodyTwitch { +FORCEYBILLBOARD }
+
+ACTOR BloodyTwitchGreen: NewBloodyTwitch
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	stay:
+    GOR1 F 10
+    GOR1 G 15
+    GOR1 H 8
+    GOR1 G 6
+    Loop
+  }
+}
+Actor BloodyTwitchBlue: BloodyTwitchGreen { translation "112:127=[30,144,255]:[0,0,0]" }
+Actor BloodyTwitchRed: BloodyTwitchGreen { translation "112:127=[220,20,60]:[0,0,0]" }
+Actor BloodyTwitchOrange: BloodyTwitchGreen { translation "112:127=[255,69,0]:[0,0,0]" }
+Actor BloodyTwitchPurple: BloodyTwitchGreen { translation "112:127=[138,43,226]:[0,0,0]" }
+Actor BloodyTwitchPink: BloodyTwitchGreen { translation "112:127=[238,130,238]:[0,0,0]" }
+Actor BloodyTwitchyellow: BloodyTwitchGreen { translation "112:127=[255,255,0]:[0,0,0]" }
+Actor BloodyTwitchBrown: BloodyTwitchGreen { translation "112:127=[205, 127, 50]:[0,0,0]" }
+////////////////////////////////////////////////////////////////////
+ACTOR Meat2Spawner: RandomSpawner replaces Meat2
+{
+DropItem "NewMeat2"
+DropItem "Meat2Green"
+DropItem "Meat2Blue"
+DropItem "Meat2Red"
+DropItem "Meat2Orange"
+DropItem "Meat2Purple"
+DropItem "Meat2Pink"
+DropItem "Meat2yellow"
+DropItem "Meat2Brown"
+}
+ACTOR NewMeat2: Meat2 { +FORCEYBILLBOARD }
+
+ACTOR Meat2Green: NewMeat2
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+    GOR2 F -1
+    stop
+  }
+}
+Actor Meat2Blue: Meat2Green { translation "112:127=[30,144,255]:[0,0,0]" }
+Actor Meat2Red: Meat2Green { translation "112:127=[220,20,60]:[0,0,0]" }
+Actor Meat2Orange: Meat2Green { translation "112:127=[255,69,0]:[0,0,0]" }
+Actor Meat2Purple: Meat2Green { translation "112:127=[138,43,226]:[0,0,0]" }
+Actor Meat2Pink: Meat2Green { translation "112:127=[238,130,238]:[0,0,0]" }
+Actor Meat2yellow: Meat2Green { translation "112:127=[255,255,0]:[0,0,0]" }
+Actor Meat2Brown: Meat2Green { translation "112:127=[205, 127, 50]:[0,0,0]" }
+////////////////////////////////////////////////////////////////////
+ACTOR Meat3Spawner: RandomSpawner replaces Meat3
+{
+DropItem "NewMeat3"
+DropItem "Meat3Green"
+DropItem "Meat3Blue"
+DropItem "Meat3Red"
+DropItem "Meat3Orange"
+DropItem "Meat3Purple"
+DropItem "Meat3Pink"
+DropItem "Meat3yellow"
+DropItem "Meat3Brown"
+}
+ACTOR NewMeat3: Meat3 { +FORCEYBILLBOARD }
+
+ACTOR Meat3Green: NewMeat3
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+    GOR3 D -1
+    stop
+  }
+}
+Actor Meat3Blue: Meat3Green { translation "112:127=[30,144,255]:[0,0,0]" }
+Actor Meat3Red: Meat3Green { translation "112:127=[220,20,60]:[0,0,0]" }
+Actor Meat3Orange: Meat3Green { translation "112:127=[255,69,0]:[0,0,0]" }
+Actor Meat3Purple: Meat3Green { translation "112:127=[138,43,226]:[0,0,0]" }
+Actor Meat3Pink: Meat3Green { translation "112:127=[238,130,238]:[0,0,0]" }
+Actor Meat3yellow: Meat3Green { translation "112:127=[255,255,0]:[0,0,0]" }
+Actor Meat3Brown: Meat3Green { translation "112:127=[205, 127, 50]:[0,0,0]" }
+////////////////////////////////////////////////////////////////////
+ACTOR Meat4Spawner: RandomSpawner replaces Meat4
+{
+DropItem "NewMeat4"
+DropItem "Meat4Green"
+DropItem "Meat4Blue"
+DropItem "Meat4Red"
+DropItem "Meat4Orange"
+DropItem "Meat4Purple"
+DropItem "Meat4Pink"
+DropItem "Meat4yellow"
+DropItem "Meat4Brown"
+}
+ACTOR NewMeat4: Meat4 { +FORCEYBILLBOARD }
+
+ACTOR Meat4Green: NewMeat4
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+    GOR2 G -1
+    stop
+  }
+}
+Actor Meat4Blue: Meat4Green { translation "112:127=[30,144,255]:[0,0,0]" }
+Actor Meat4Red: Meat4Green { translation "112:127=[220,20,60]:[0,0,0]" }
+Actor Meat4Orange: Meat4Green { translation "112:127=[255,69,0]:[0,0,0]" }
+Actor Meat4Purple: Meat4Green { translation "112:127=[138,43,226]:[0,0,0]" }
+Actor Meat4Pink: Meat4Green { translation "112:127=[238,130,238]:[0,0,0]" }
+Actor Meat4yellow: Meat4Green { translation "112:127=[255,255,0]:[0,0,0]" }
+Actor Meat4Brown: Meat4Green { translation "112:127=[205, 127, 50]:[0,0,0]" }
+////////////////////////////////////////////////////////////////////
+ACTOR Meat5Spawner: RandomSpawner //replaces Meat5
+{
+DropItem "NewMeat5"
+DropItem "Meat5Green"
+DropItem "Meat5Blue"
+DropItem "Meat5Red"
+DropItem "Meat5Orange"
+DropItem "Meat5Purple"
+DropItem "Meat5Pink"
+DropItem "Meat5yellow"
+DropItem "Meat5Brown"
+}
+ACTOR NewMeat5: Meat5 { +FORCEYBILLBOARD }
+
+ACTOR Meat5Green: NewMeat5
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+    GOR3 E -1
+    stop
+  }
+}
+Actor Meat5Blue: Meat5Green { translation "112:127=[30,144,255]:[0,0,0]" }
+Actor Meat5Red: Meat5Green { translation "112:127=[220,20,60]:[0,0,0]" }
+Actor Meat5Orange: Meat5Green { translation "112:127=[255,69,0]:[0,0,0]" }
+Actor Meat5Purple: Meat5Green { translation "112:127=[138,43,226]:[0,0,0]" }
+Actor Meat5Pink: Meat5Green { translation "112:127=[238,130,238]:[0,0,0]" }
+Actor Meat5yellow: Meat5Green { translation "112:127=[255,255,0]:[0,0,0]" }
+Actor Meat5Brown: Meat5Green { translation "112:127=[205, 127, 50]:[0,0,0]" }

@@ -1,0 +1,253 @@
+Actor FakeSledge : CustomInventory 25348
+{ 
+	//$Category WDI Weapons/Heavy Weapons
+	//$Sprite SLEG[0
+	//$Title "Sledgehammer"
+	Radius 16
+	Height 8
+	Scale 1.0
+	Inventory.PickupMessage "\cjFound a \c[W3]sledgehammer. \cjBlunt trauma at its finest!\n\caDamage: \c[C4]up to 46"
+	Inventory.Respawntics 21000 //10 Minutes
+	+FORCEXYBILLBOARD
+	+DonTGib
+	States
+	{
+	Spawn:
+		SLEG A 0 NODELAY A_Jump(128,2)
+		SLEG A 0 A_SetScale(-scalex,scaley)
+		"####" "[" -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("Sledgehammer",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("WDIROldWeapon_id",0,45)
+		Stop
+	NotPickup:
+		TNT1 A 0
+		TNT1 A 1 ACS_NamedExecute("WDIROldWeapon_id",0,45)
+		Fail
+}}
+Actor FakeSledgeNoRandom : FakeSledge
+{ 
+	States
+	{
+	Spawn:
+		SLEG "[" -1
+		Stop
+}}
+
+Actor SledgeHammer : Wdi_BaseWeapon
+{
+	Radius 8
+	Height 32
+	Tag "Sledgehammer"
+	Inventory.PickupMessage "You found a sledgehammer."
+	Weapon.PreferredSkin "SledgeSkin"
+	+INVENTORY.INTERHUBSTRIP
+	Inventory.Icon "WEPICO23"
+	States
+	{
+	Spawn:
+		"####" "[" 0
+		Goto Death
+	Pickup:
+	Select:
+		TNT1 A 6
+		2LEG A 0 A_JumpIfInventory("Stained",1,2)
+		SLEG A 0
+		"####" AAAAAAAAAAAAAAA 0 A_Raise
+		"####" A 1 offset(71,156)
+		"####" A 1 offset(62,127)
+		"####" A 1 offset(52,106)
+		"####" A 1 offset(44,88)
+		"####" A 1 offset(36,76)
+		"####" A 1 offset(28,64)
+		"####" A 1 offset(20,54)
+		"####" A 1 offset(14,45)
+		"####" A 1 offset(8,40)
+		"####" A 1 offset(4,36)
+		"####" A 1 offset(1,33)
+		"####" A 0 A_Jump(255,"Ready")
+		"####" A 0 A_Jump(255,"Ready")
+		goto Ready
+	Ready:
+		2LEG A 0 A_JumpIfInventory("Stained",1,2)
+		SLEG A 0
+	ReadyStay:
+		"####" A 1 A_WeaponReady(WRF_ALLOWZOOM)
+		loop
+	Fire:
+		"####" BCDEFGH 1	
+		TNT1 A 3
+		2LEG A 0 A_JumpIfInventory("Stained",1,2)
+		SLEG A 0
+		"####" IJKLMNOPQQRR 1
+	Hold:
+		"####" S 2
+		"####" A 0 A_ReFire
+		"####" Q 1
+		"####" T 1 A_Recoil(-1)
+		"####" U 1
+		"####" V 1 A_PlaySound("weapons/SledgeWoosh")
+		"####" W 1 
+		"####" X 1 A_CustomPunch(12,1,0,"SledgePUFF2", 60)
+		"####" Y 0 A_FireCustomMissile("SledgeFloorAttack",0,0,0,0 )
+		"####" Y 1 A_CustomPunch(14,1,0,"SledgePUFF", 60)
+		"####" Z 1 //A_SpawnItemEX("SledgeRadiusDamage",16,0,0,0,0,0,0,SXF_NOCHECKPOSITION)//A_Explode(40,32)//
+		TNT1 A 8
+		2LEG A 0 A_JumpIfInventory("Stained",1,2)
+		SLEG A 0
+		"####" HGFEDCBB 1
+		Goto Ready
+
+	Death:
+		"####" "[" 0 A_SpawnItem("DroppedAxe",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		wait
+	//Zoom:
+		TNT1 A 0
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+}}
+
+ACTOR SledgeRadiusSmoke
+{
+	+NOINTERACTION
+	+CLIENTSIDEONLY
+	+NOBLOCKMAP
+	+NOGRAVITY
+	radius 1
+	height 2
+	Renderstyle none
+	States
+	{
+	Death:
+	Spawn:
+	TNT1 A 0 
+	CELL AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	CELL AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	CELL AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	CELL AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	CELL AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	CELL AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	CELL AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	CELL AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	CELL AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	CELL AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	CELL AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	CELL AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	CELL AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	CELL AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	CELL AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	CELL AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	CELL AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	TNT1 AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	TNT1 AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	TNT1 AA 0 A_SpawnItemEX("MeleeSmoke",26,0,0,frandom(0.9,2.1),0,frandom(0.9,1.8)) CELL A 0 A_SetAngle(angle+18)
+	TNT1 AAA 0 A_SpawnItemEX("PotBits",random(-3,3),random(-3,3),1,frandom(-3.8,3.8),frandom(-3.9,3.8),frandom(3.2,7.8))
+	stop
+	}
+}
+ACTOR SledgePUFF: BaseMeleePuff
+{ 
+   AttackSound "weapons/SledgeHit"
+   SeeSound "weapons/SledgeHit"
+   +EXTREMEDEATH
+   Decal "MeleeCrack"
+   DamageType "friendlymelee"
+   }
+
+ACTOR SledgePUFF2: BaseMeleePuff
+{ 
+   AttackSound ""
+   SeeSound ""
+   +EXTREMEDEATH
+   Decal "MeleeCrack"
+  // -NOGRAVITY
+  // GRAVITY 4.0
+  // -NOINTERACTION
+   /*
+   States
+   {
+   Spawn:
+   Crash: //hit da wall
+	TNT1 AAAA 0 A_CustomMissile ("MeleeSmoke", 0, 0, random (160, -160), 2, random (0, 360))
+	TNT1 A 0 A_Quake(2,6,0,46,"none")
+	TNT1 A 0 ThrustThingZ(0,60,1,1)
+	TNT1 AA 1 NODELAY A_CheckFloor("CrashFloor")
+	TNT1 A 4
+	stop
+	
+   CrashFloor:
+	TNT1 A 0 A_SpawnItemEX("SledgeRadiusSmoke",0,0,0)
+	//TNT1 A 0 A_Quake(2,6,0,40,"none")
+	TNT1 A 8 A_Explode(20,40,0)
+	stop
+   }
+   */
+}
+
+Actor SledgeFloorAttack
+{
+	Projectile
+	Radius 1
+	Height 2
+	+ripper
+	Damage (0)
+	Speed 22
+	Damagetype "friendlymelee"
+	Renderstyle none
+	States
+	{
+	Spawn:
+	CELL A 1 NODELAY
+	stop
+	Death:
+	TNT1 A 0 A_CheckFloor("DeathFloor")
+	TNT1 AAAA 0 A_CustomMissile ("MeleeSmoke", 0, 0, random (160, -160), 2, random (0, 360))
+	stop
+	DeathFloor:
+	TNT1 A 0 A_SpawnItemEX("SledgeRadiusSmoke",0,0,0)
+	TNT1 A 0 A_Quake(2,6,0,52,"none")
+	TNT1 A 8 A_Explode(19,40,0,0,20)           // damage nerfed from 30 to 19 so max damage murd can get is 45 instead of 60.
+	stop
+	}
+}
+
+Actor DroppedSledge: Wdi_BaseDroppedWeapon
+{
+	BounceSound "Axe/Wall"
+	Scale 1.0
+	States
+	{
+	Spawn:
+		SLEG "[" -1
+		Stop
+	Death:
+		SLEG "[" 35 A_playSound("Axe/Wall",CHAN_BODY,0.5)
+		SLEG "[" 1 A_SpawnItem("FakeSledgeNoRandom",0,0,0,0)
+		Stop
+}}
+Actor DroppedSledgeFar: Wdi_BaseDroppedWeaponFar
+{
+	BounceSound "Axe/Wall"
+	Scale 1.0
+	States
+	{
+	Spawn:
+		SLEG "[" -1
+		Stop
+	Death:
+		SLEG "[" 35 A_playSound("Axe/Wall",CHAN_BODY,0.5)
+		SLEG "[" 1 A_SpawnItem("FakeSledgeNoRandom",0,0,0,0)
+		Stop
+}}
+
+
+

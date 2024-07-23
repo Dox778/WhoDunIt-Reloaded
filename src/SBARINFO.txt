@@ -1,0 +1,230 @@
+monospacefonts true, "0";
+interpolatehealth true, 5;
+//interpolateArmor true, 1;
+completeborder true;
+
+statusbar Fullscreen
+{
+	InInventory NOT HudCleaner
+	{
+		InInventory HudAlive
+		{		
+			//Background
+			//===========================================
+			InInventory NOT MurderMarker, 1
+			{
+				DrawImage "EMPLEFT", -249, 128;
+				DrawImage "EMPRIGHT", 163, 128;
+			}
+			else
+			{
+				DrawBar "FULLEFT", "EMPLEFT", MadMeter, horizontal,Reverse, -249, 128; //Left side
+				DrawBar "FULRIGHT", "EMPRIGHT", MadMeter, horizontal, 163, 128; //Right side			
+			}
+			
+			//Health related
+			//===========================================
+			DrawImage translatable "HUDCOLOR", -154, 140;
+			InInventory ColorCooldown, 1
+			{
+				DrawBar "HUDCLRCD", "HUDCLRBG", ColorCooldown, vertical, interpolate(2), -154, 140;
+			}
+			
+			drawnumber 3, HUDFONT_DOOM, red, Health, drawshadow|dontcap, -103, 156, darkred, 40;
+			
+			InInventory SmallKit, 1 { DrawImage "STIMA0", -144, 122; }
+			InInventory SmallKit, 2 { DrawImage "STIMA0", -128, 122; }
+			InInventory SmallKit, 3 { DrawImage "STIMA0", -112, 122; }
+			InInventory RandomWeaponKit, 1 { DrawImage "CKT6A0", -129, 90; }
+			InInventory BigKit, 1  { DrawImage "MEDIA0", -138, 104; }		
+			InInventory TechnoKit, 1 || Tigerkit, 1 { DrawImage "DKITA0", -119, 104; }
+			InInventory Eclipsinakit, 1 || BlueTechnoKit, 1 { DrawImage "DKITA0", -119, 104; }
+			InInventory ZKit, 1 || FrancisKit, 1 { DrawImage "DKITA0", -119, 104; }
+			
+			//Murderer Items:
+			//===========================================
+			InInventory SoundEmitter, 1 DrawImage "BEACA0", 328, 136;
+			InInventory SoundEmitter, 2 DrawImage "BEACA0", 336, 136;
+			InInventory SoundEmitter, 3 DrawImage "BEACA0", 344, 136;
+			InInventory SoundEmitter, 4 DrawImage "BEACA0", 352, 136;
+			
+			InInventory SmokeBomb, 1 DrawImage "SSBGA0", 368, 136;
+			InInventory SmokeBomb, 2 DrawImage "SSBGA0", 376, 136;
+			
+			InInventory FakeStim, 1 DrawImage "FTIMB0", 392, 136;
+			InInventory FakeStim, 2 DrawImage "FTIMB0", 400, 136;
+			InInventory FakeStim, 3 DrawImage "FTIMB0", 408, 136;
+			
+			InInventory TripShotgun, 1 DrawImage "TURTA1", 428, 134;
+			InInventory TripShotgun, 2 DrawImage "TURTA1", 444, 134;
+			
+			InInventory ChlorineGas DrawImage "PSBGA0", 462, 134;
+			
+			//Unique Murderer Items:
+			InInventory CatEyes DrawImage "CATYA0", 300, 148;
+			InInventory StealthCamouflage DrawImage "STLTA0", 320, 146;
+			InInventory SlenderMurdWall DrawImage "ACTIK0", 300, 104;
+			//===========================================
+			
+			//Keys
+			//===========================================
+			InInventory SafeKey, 1 { DrawImage "SAFEICON", -60, 142; }
+			InInventory BasementKey, 1 { DrawImage "BASEICON", -75, 142; }
+			InInventory BarKey, 1 || TrapKey, 1 { DrawImage "BARICON", -90, 137; }
+			
+			InInventory SawmillKey, 1 || ScissorsKey, 1 { DrawImage "KEY7A0", -35, 188; }
+			InInventory PoliceKey, 1 { DrawImage "KEY8A0", -20, 186; }
+			InInventory ShootersKey, 1 { DrawImage "SHOKICON", -10, 142; }
+			
+			InInventory DrawerKey, 1 { DrawImage "DKEYA0", -83, 170; }
+			InInventory AABatteries, 1 { DrawImage "AABTB0", -83, 128; }
+				
+			InInventory E1M1StorageKey, 1 || Keycard_LV4, 1 { DrawImage "MDKYA0", -32, 165; }
+			InInventory E1M1SecurityKey, 1 || Keycard_LV7,1 { DrawImage "SCKYA0", -32, 185; }
+			
+			//Weapon icons
+			//===========================================
+			InInventory Slot1Filled { drawimage "WEAPBACK", 420, 142; }			
+			InInventory BlueWrench  { drawimage "WEPICO1", 420, 142; }
+			InInventory PipeWrench  { drawimage "WEPICO2", 420, 142; }
+			InInventory LeadPipe    { drawimage "WEPICO3", 420, 142; }
+			InInventory BaseballBat { drawimage "WEPICO4", 420, 142; }
+			InInventory Crowbar     { drawimage "WEPICO5", 420, 142; }
+			InInventory Shovel      { drawimage "WEPICO6", 420, 142; }
+			InInventory Plank       { drawimage "WEPICO7", 420, 142; }
+			InInventory NailedPlank { drawimage "WEPICO8", 420, 142; }
+			InInventory PoolCue     { drawimage "WEPICO9", 420, 142; }
+			InInventory Molotov     { drawimage "WEPICO10", 420, 142; }
+			InInventory Brick       { drawimage "WEPICO11", 420, 142; }
+			InInventory Twig        { drawimage "WEPICO12", 420, 142; }
+			InInventory ScrewDriverWeapon { drawimage "WEPICO13", 420, 142; }
+			InInventory Axe         { drawimage "WEPICO14", 420, 142; }
+			InInventory FireAxe     { drawimage "WEPICO15", 420, 142; }
+			InInventory Sledgehammer { drawimage "WEPICO23", 420, 142; }
+			InInventory PickableTNT { drawimage "WEPICO24", 420, 142; }
+			InInventory Pickaxe { drawimage "WEPICO25", 420, 142; }
+			InInventory WhiskeyMolly { drawimage "WEPICO26", 420, 142; }
+			InInventory SoulCube { drawimage "WEPICO27", 420, 142; }
+			InInventory BottleWeapon2 { drawimage "WEPICO28", 420, 142; }
+			InInventory BottleWeapon { drawimage "WEPICO29", 420, 142; }		
+			InInventory LChainsaw {  IsSelected NOT LChainsaw  {  drawimage "WEPICO21", 420, 142; } }
+			InInventory SprayCanBLU {  DrawBar "CANFRONB", "CANBACK", Sprayammo, Vertical, 420, 142; }
+			InInventory SprayCanRED {  DrawBar "CANFRONR", "CANBACK", Sprayammo, Vertical, 420, 142; }
+			InInventory SprayCanGRN {  DrawBar "CANFROGR", "CANBACK", Sprayammo, Vertical, 420, 142; }
+			InInventory SprayCanORG {  DrawBar "CANFRORG", "CANBACK", Sprayammo, Vertical, 420, 142; }
+			InInventory SprayCanPNK {  DrawBar "CANFROPN", "CANBACK", Sprayammo, Vertical, 420, 142; }
+			InInventory SprayCanYLL {  DrawBar "CANFROYL", "CANBACK", Sprayammo, Vertical, 420, 142; }
+			InInventory FireExtinguisher {   DrawBar "CANFRWHT", "CANBACK", FireExtAmmo, Vertical, 420, 142; }
+			InInventory FlashlightZ { drawimage "LITFLASH", 384, 142; }
+			
+			InInventory Shotgun2 { IsSelected NOT Shotgun2     {  drawimage "WEPICO16", 420, 142; } }
+			InInventory DoubleBarrel { IsSelected NOT DoubleBarrel     {  drawimage "WEPICO16", 420, 142; } }
+			InInventory LCrossbow { IsSelected NOT LCrossbow   {  drawimage "WEPICO18", 420, 142; } }
+			InInventory M1Carbine { IsSelected NOT M1Carbine   {  drawimage "WEPICO17", 420, 142; } }
+			InInventory Beretta { IsSelected NOT Beretta       {  drawimage "WEPICO20", 420, 142; } }
+			InInventory MurdBeretta { IsSelected NOT MurdBeretta {  drawimage "WEPICO20", 420, 142; } }
+			InInventory Revolver { IsSelected NOT Revolver     {  drawimage "WEPICO19", 420, 142; } }
+			InInventory WDIBeretta { IsSelected NOT WDIBeretta {  drawimage "WEPICO20", 420, 142; } }
+			
+			/////////ONLY WHEN SELECTED!
+			IsSelected MurderKnife	{ drawimage "KNIFEICO", 420, 142; }		
+			IsSelected FistWithLighter { DrawBar "LITFRONT", "LITBACK", Lighterammo, Vertical, 384, 142; }
+			IsSelected FistWithFlashlight { drawimage "LITFLASH", 384, 142; }
+			
+			IsSelected LChainsaw {    DrawBar "GASFRONT", "GASBACK", Gasoline, Vertical, 420, 142; }
+			
+			IsSelected LCrossbow
+			{
+				drawimage "WEAPBAK2", 373, 142;
+				drawimage "XBPUA0", 406, 185;
+				InInventory LoadedBolts, 3 { drawimage "WEPICO22", 445, 190, centerbottom; }
+				InInventory LoadedBolts, 2 { drawimage "WEPICO22", 460, 190, centerbottom; }
+				InInventory LoadedBolts, 1 { drawimage "WEPICO22", 475, 190, centerbottom; }
+			}
+			IsSelected Shotgun2
+			{
+				drawimage "WEAPBAK2", 373, 142;
+				InInventory NewShell, 4 { drawimage "D3S1K0", 400, 166, centerbottom; }
+				InInventory NewShell, 3 { drawimage "D3S1K0", 420, 166, centerbottom; }
+				InInventory NewShell, 2 { drawimage "D3S1K0", 440, 166, centerbottom; }
+				InInventory NewShell, 1 { drawimage "D3S1K0", 460, 166, centerbottom; }
+				drawimage ammoicon1, 416, 186, centerbottom;
+				drawnumber 4, HUDFONT_DOOM, yellow, ammo1, drawshadow,466, 168, red, 0, green, 4;
+			}
+			IsSelected DoubleBarrel
+			{
+				drawimage "WEAPBAK2", 373, 142;
+				InInventory NewShell, 4 { drawimage "D3S1K0", 400, 166, centerbottom; }
+				InInventory NewShell, 3 { drawimage "D3S1K0", 420, 166, centerbottom; }
+				InInventory NewShell, 2 { drawimage "D3S1K0", 440, 166, centerbottom; }
+				InInventory NewShell, 1 { drawimage "D3S1K0", 460, 166, centerbottom; }
+				drawimage ammoicon1, 416, 186, centerbottom;
+				drawnumber 4, HUDFONT_DOOM, yellow, ammo1, drawshadow,466, 168, red, 1, green, 2;
+			}
+			IsSelected Beretta
+			{
+				drawimage "WEAPBAK2", 373, 142;
+				InInventory PistolClip, 2 { drawimage "CLP4A0", 415, 162, centerbottom; }
+				InInventory PistolClip, 1 { drawimage "CLP4A0", 445, 162, centerbottom; }
+				drawimage ammoicon1, 424, 186, centerbottom;
+				DrawBar "TEMP", "TEMPBACK", JamCountPistol2, Vertical, interpolate(40), 390, 150;
+				drawnumber 4, HUDFONT_DOOM, yellow, ammo1, drawshadow, 466, 168, red, 3, green, 7;
+			}
+			IsSelected MurdBeretta
+			{
+				drawimage "WEAPBAK2", 373, 142;
+				InInventory PistolClip, 2 { drawimage "CLP4A0", 415, 162, centerbottom; }
+				InInventory PistolClip, 1 { drawimage "CLP4A0", 445, 162, centerbottom; }
+				drawimage ammoicon1, 424, 186, centerbottom;
+				DrawBar "TEMP", "TEMPBACK", FiredColt, Vertical, interpolate(40), 390, 150;
+				drawnumber 4, HUDFONT_DOOM, yellow, ammo1, drawshadow, 466, 168, red, 3, green, 7;
+			}
+			IsSelected WDIBeretta
+			{
+				drawimage "WEAPBAK2", 373, 142;
+				InInventory PistolClip, 2 { drawimage "CLP4A0", 415, 162, centerbottom; }
+				InInventory PistolClip, 1 { drawimage "CLP4A0", 445, 162, centerbottom; }
+				drawimage ammoicon1, 420, 186, centerbottom;
+				drawnumber 4, HUDFONT_DOOM, yellow, ammo1, drawshadow,466, 168, red, 3, green, 7;
+			}
+			IsSelected Revolver
+			{
+				drawimage "WEAPBAK2", 373, 142;
+				InInventory PistolClip, 2 { drawimage "CLP4A0", 415, 162, centerbottom; }
+				InInventory PistolClip, 1 { drawimage "CLP4A0", 445, 162, centerbottom; }
+				drawimage ammoicon1, 424, 186, centerbottom;
+				drawnumber 4, HUDFONT_DOOM, yellow, ammo1, drawshadow,466, 168, red, 2, green, 5;
+			}
+			IsSelected M1Carbine
+			{
+				drawimage "WEAPBAK2", 373, 142;
+				InInventory M1Ammo, 1 { drawimage "M1CLIP", 458, 168, centerbottom; } 
+				drawimage ammoicon1, 416, 186, centerbottom;
+				drawnumber 4, HUDFONT_DOOM, yellow, ammo1, drawshadow,466, 168, red, 2, green, 7;
+			}	
+
+			//misc
+			//===========================================
+			
+			InInventory SlowCounter
+			{
+				drawimage "STUNICO2", 166, 110, centerbottom;
+				drawbar "STUNBA2", "STUNBAK2", SlowCounter, horizontal, interpolate(18), 140, 120;
+			}
+			InInventory DrawTimer, 1
+			{
+				DrawString SMALLFONT, Grey, time, 486, 140;
+			}
+			DrawImage "SINVBACK", -226, 128;
+			drawselectedinventory SMALLFONT, -226, 128, -165, 175;
+			
+		}
+	}
+}
+
+statusbar inventoryfullscreen
+{
+	drawimage "invback", -106, 60;
+	drawimage "INVARRO1", -116, 60;
+	DrawInventoryBar Strife, alwaysshowcounter, noarrows, Translucent, 7, SMALLFONT, -94, 56, -53, 114;
+}

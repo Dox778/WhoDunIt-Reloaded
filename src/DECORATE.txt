@@ -1,0 +1,240 @@
+#Include "code/Players.dec"
+#Include "code/Hacks.dec"
+#include "Code/RELO_STUFF.dec"
+//////////////////////ITEMS//////////////////////
+#Include "code/Items/Weapons.dec"
+#Include "code/Items/Murderer.dec"
+#Include "code/Items/Items.dec"
+#Include "code/Items/Heals.dec"
+#Include "code/Items/Keys.dec"
+#Include "code/Items/DeathDroppers.dec"
+#Include "code/Items/DROPS.dec"
+#include "Code/Items/FARDROPS.dec"
+#include "code/Items/RAVES.dec"
+#Include "Code/Items/Fireworks.dec"
+//////////////////////VISUAL EFFECTS//////////////////////
+#Include "code/Visual/Lights.dec"
+#Include "Code/Visual/Blood.dec"
+#Include "code/Visual/Effects.dec"
+#Include "code/Visual/FogClouds.dec" 
+#include "Code/Visual/NewFire.dec"
+#include "Code/Visual/SPLASHES.dec"
+#include "Code/Visual/PUFFS.dec"
+#include "Code/Visual/Weather.dec"
+//////////////////////DECORATIONS//////////////////////
+#Include "code/Decor.dec"
+#Include "Code/Decorations/Animals.dec"
+#Include "Code/Decorations/Plants.dec"
+#Include "Code/Decorations/SmallStuff.dec"
+#Include "Code/Decorations/BiggerStuff.dec"
+#Include "Code/Decorations/LightSrc.dec"
+#include "code/Decorations/MODELS.dec"
+#include "Code/Decorations/GoreStuff.dec"
+#include "Code/Decorations/VanillaDeco.dec"
+#include "Code/Decorations/Balls.dec"
+//////////////////////WEAPONS//////////////////////
+#include "code/weapons/BASEWEAPON.dec"
+#include "code/weapons/BATWEP.dec"
+#include "code/weapons/BERETTA.dec"
+#include "code/weapons/BRICK.dec"
+#include "code/weapons/CARBINE.dec"
+#include "code/weapons/CHAINSAW.dec"
+#include "code/weapons/CROSSBOW.dec"
+#include "code/weapons/FLASHLIG.dec"
+#include "code/weapons/HATCHET.dec"
+#include "code/weapons/KNIFE.dec"
+#include "code/weapons/MOLOTOV.dec"
+#include "code/weapons/NEWFIST.dec"
+#include "code/weapons/PLANKS.dec"
+#include "code/weapons/POOLCUE.dec"
+#include "code/weapons/LPIPE.dec"
+#include "code/weapons/SHOTGUN.dec"
+#include "code/weapons/SHOVEL.dec"
+#include "code/weapons/SOULC.dec"
+#include "code/weapons/SPRAYS.dec"
+#include "code/weapons/TWIG.dec"
+#include "code/weapons/WDIBERET.dec"
+#include "code/weapons/WRENCH.dec"
+#include "Code/Weapons/TNT.dec"
+#include "Code/Weapons/Crowbar.dec"
+#include "Code/Weapons/Revolver.dec"
+#include "Code/Weapons/BoA.dec"
+//#include "Code/Deagle.dec"
+#include "Code/Weapons/FireExt.dec"
+#include "Code/Weapons/ScrewDriver.dec"
+#include "Code/Weapons/DoubleBarrel.dec"
+#include "Code/Weapons/Sledge.dec"
+#include "Code/Weapons/Pickaxe.dec"
+#include "Code/Weapons/Whiskey.dec"
+#include "Code/Weapons/bottle.dec"
+#include "Code/Weapons/ZSaber.dec"
+//////////////////////MAP SPECIFIC//////////////////////
+#Include "code/MapSpecific/CLOCKTWN.dec" //Unoffical map made offical.
+#include "code/MapSpecific/SEWERS.dec"   //TheMisterCat sewers map stuff
+
+//////////////////////BIGPACK
+#Include "code/Bigpack/DEC_DECO.dec"  
+#Include "code/Bigpack/DEC_ITEMS.dec"    //keys, objects
+#Include "code/Bigpack/DEC_MONST.dec"  // sprites monsters
+#Include "code/Bigpack/DEC_SFX.dec"  // sfx 
+#Include "code/Bigpack/Jigsaw.dec"
+#include "code/Bigpack/riclo.dec"
+#include "code/Bigpack/Abbuw.dec"
+
+//////////////////////EX
+#Include "code/ex/TORNDECO.dec"
+#Include "code/ex/TORNWEAP.dec"
+#Include "code/ex/TORNMUSC.dec"
+#Include "code/ex/TORNMONS.dec"
+#Include "code/ex/DECMARS.dec"
+#Include "code/ex/WEPMARS.dec"
+#Include "code/ex/SLENDERD.dec"
+#Include "code/ex/AZTCSND.dec"
+#Include "code/ex/AZDECO.dec"
+#Include "code/ex/DROPPERS.dec"
+#Include "code/ex/COOPEX.dec"
+#Include "code/ex/CLOCKWEP.dec"
+#Include "code/ex/CLOCKHAX.dec"
+
+//////////////////////EMS
+#include "Code/WDIExtraMapStuff/WDI14.dec"
+#include "Code/WDIExtraMapStuff/WDI16.dec"
+
+//////////////////////////////////////////////////////
+
+Actor Infrared2 : Infrared Replaces Infrared //2045
+{
+	SpawnID 138
+	Inventory.PickupMessage "Light Amplification Visor"
+	Inventory.MaxAmount 0
+	Powerup.Duration 3095
+	Powerup.Type "LightAmp"
+	Inventory.PickupSound "Murd/Nighton"
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	States
+	{
+	Spawn:
+		GOGL A -1
+		Stop
+}}
+
+
+Actor Pinky : Demon replaces Demon
+{
+	DamageFactor "Burn", 0.5
+	DamageFactor "Gas", 0.5
+	DamageFactor "FlareEffect", 0.0
+	PainChance "Burn",32
+	PainChance "Gas",0
+	Obituary "$OB_DEFAULT"
+}
+
+
+ACTOR CommonWeapons : CustomInventory
+{
+	States
+	{
+	Spawn:
+		TNT1 A -1
+		stop
+	Pickup:
+		TNT1 A 0 A_Log("---------- Common weapons given")
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)
+		TNT1 A 0 A_GiveInventory("Twig",1)
+		TNT1 A 0 A_GiveInventory("PoolCue",1)
+		TNT1 A 0 A_GiveInventory("BaseballBat",1)
+		TNT1 A 0 A_GiveInventory("LeadPipe",1)
+		TNT1 A 0 A_GiveInventory("Crowbar",1)
+		TNT1 A 0 A_GiveInventory("PipeWrench",1)
+		TNT1 A 0 A_GiveInventory("BlueWrench",1)
+		TNT1 A 0 A_GiveInventory("ScrewDriverWeapon",1)
+		stop
+	}
+}
+ACTOR HeavyWeapons : CustomInventory
+{
+	States
+	{
+	Spawn:
+		TNT1 A -1
+		stop
+	Pickup:
+		TNT1 A 0 A_Log("---------- Stronger weapons/throwables given")
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)
+		TNT1 A 0 A_GiveInventory("Shovel",1)
+		TNT1 A 0 A_GiveInventory("Plank",1)
+		TNT1 A 0 A_GiveInventory("NailedPlank",1)
+		TNT1 A 0 A_GiveInventory("Axe",1)
+		TNT1 A 0 A_GiveInventory("FireAxe",1)
+		TNT1 A 0 A_GiveInventory("SledgeHammer",1)
+		TNT1 A 0 A_GiveInventory("Pickaxe",1)
+		TNT1 A 0 A_GiveInventory("FireExtinguisher",1)
+		TNT1 A 0 A_GiveInventory("BladeOfAgony",1)
+		TNT1 A 0 A_GiveInventory("Brick",1)
+		TNT1 A 0 A_GiveInventory("Molotov",1)
+		stop
+	}
+}
+ACTOR AllSprays : CustomInventory
+{
+	States
+	{
+	Spawn:
+		TNT1 A -1
+		stop
+	Pickup:	     
+		TNT1 A 0 A_Log("---------- All sprays given")
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)
+		TNT1 A 0 A_GiveInventory("SprayCanPNK",1)
+		TNT1 A 0 A_GiveInventory("SprayCanORG",1)
+		TNT1 A 0 A_GiveInventory("SprayCanYLL",1)
+		TNT1 A 0 A_GiveInventory("SprayCanGRN",1)
+		TNT1 A 0 A_GiveInventory("SprayCanRED",1)
+		TNT1 A 0 A_GiveInventory("SprayCanBLU",1)
+		stop
+	}
+}
+ACTOR FireArms : CustomInventory
+{
+	States
+	{
+	Spawn:
+		TNT1 A -1
+		stop
+	Pickup:       
+		TNT1 A 0 A_Log("---------- Firearms/extreme weapons given")
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)
+		TNT1 A 0 A_GiveInventory("LChainsaw",1)
+		TNT1 A 0 A_GiveInventory("LCrossbow",1)
+		TNT1 A 0 A_GiveInventory("Beretta",1)
+		TNT1 A 0 A_GiveInventory("MurdBeretta",1)
+		TNT1 A 0 A_GiveInventory("WDIBeretta",1)
+		TNT1 A 0 A_GiveInventory("Revolver",1)
+		TNT1 A 0 A_GiveInventory("M1Carbine",1)
+		TNT1 A 0 A_GiveInventory("Shotgun2",1)
+		TNT1 A 0 A_GiveInventory("DoubleBarrel",1)
+		TNT1 A 0 A_GiveInventory("SoulCube",1)
+		TNT1 A 0 A_GiveInventory("PickableTNT",1)
+		TNT1 A 0 A_giveInventory("ammo",100)
+		stop
+	}
+}
+
+ACTOR NewMegasphere: Megasphere replaces Megasphere { +FLOATBOB +FLOAT FloatSpeed 1 +FORCEXYBILLBOARD}
+ACTOR NewBlurSphere: BlurSphere replaces BlurSphere { +FLOATBOB +FLOAT FloatSpeed 1 +FORCEXYBILLBOARD}
+ACTOR NewSoulsphere: Soulsphere replaces Soulsphere { +FLOATBOB +FLOAT FloatSpeed 1 +FORCEXYBILLBOARD}
+
+
+
+Actor ActivatedDynamite : Key
+{ 
+Inventory.Amount 1 Inventory.MaxAmount 1
++INVENTORY.ALWAYSPICKUP +INVENTORY.UNDROPPABLE -INVENTORY.INVBAR
+States 
+{ 
+Spawn: 
+KEY5 A -1 
+Stop
+}}
+

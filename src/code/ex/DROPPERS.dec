@@ -1,0 +1,128 @@
+///////////////////////////////////////////////////DEATHDROPPERS
+
+Actor DeathDropper_BaseballBat : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("FakeBat", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+
+Actor DeathDropper_FlashlightZ : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("FakeFlashlightZ", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+
+Actor DeathDropper_Soulcube : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("FakeSoulcube", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+
+///////////////////////////////////////////DROPS
+Actor Dropper_BaseballBat : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedBat", 0, 0, 0)
+	Stop
+ }
+}
+/*
+Actor Dropper_SprayCanBLU : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedSprayCanBLU", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_SprayCanRED : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedSprayCanRED", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_FireAxe : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedAxe", 0, 0, 0)
+	Stop
+ }
+}
+*/
+Actor Dropper_FlashlightZ : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedFlashlightZ", 0, 0, 0)
+	Stop
+ }
+}
+
+Actor Dropper_Soulcube : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_FireCustomMissile("DroppedSoulcube", 0, 0, 0)
+	Stop
+ }
+}

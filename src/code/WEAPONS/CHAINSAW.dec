@@ -1,0 +1,1174 @@
+Actor FakeChainsawfix : CustomInventory Replaces Chainsaw //2005
+{
+	//$Category WDI Weapons/Limited Weapons
+	//$Sprite CSAWA0
+	//$Title "Chainsaw"
+	Radius 16 
+	Height 8 
+	Inventory.PickupMessage "\cjFound a \c[W4]chainsaw. \cjThe murderer's worst nightmare!\n\caDamage: \c[C4]4"
+	Inventory.Respawntics 21000 //10 Minutes
+	+DonTGib
+	+FORCEXYBILLBOARD
+	Scale 0.9
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		CSAW A -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1, 2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("LChainsaw",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("LChainsaw",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 AAAAA 0 A_GiveInventory("Gasoline",Random(0,100))
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,2)
+		Stop
+	NotPickup:
+		TNT1 A 0
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,2)
+		Fail
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Gasoline",500,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("Gasoline",Random(0,500))
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsawEmpty",0,0,0)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,2)
+		Stop
+	ForgetIt:
+		TNT1 A 1
+		Stop
+}}
+
+Actor FakeChainsawfixNoRandom : FakeChainsawfix
+{
+	States
+	{
+	Spawn:
+		CSAW A -1
+		Stop
+}}
+
+Actor TKFakeChainsaw : FakeChainsawfix
+{
+states
+	{
+	Pickup:
+		CSAW A 0
+		CSAW A 0 A_JumpIfInventory("TKToken",1,"NotPickup")	
+		CSAW A 0 A_JumpIfInventory("LChainsaw",1,"AmmoPickup")		
+		CSAW A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		CSAW A 0 A_PlaySound("pickups/weapon")
+		CSAW A 0 A_GiveInventory("LChainsaw",1)
+		CSAW A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 0 //A_Print("Picked up a Shotgun.")
+		CSAW A 1 ACS_ExecuteAlways(670,0,12)
+		CSAW A 0 A_JumpIfInventory("ChainsawOnce",1,"ForgetIt")
+		CSAW A 0 A_GiveInventory("Gasoline",random(150,500))
+		CSAW A 0 A_GiveInventory("ChainsawOnce",1)
+		Stop
+	NotPickup:
+		CSAW A 0
+		CSAW A 1 ACS_ExecuteAlways(670,0,12)
+		Fail
+}}
+
+//actor Pulled : inventory {inventory.maxamount 5}
+
+Actor LChainsaw : Wdi_BaseWeapon
+{
+	Radius 20
+	Height 16
+	Obituary ""
+	Tag "Chainsaw"
+	AttackSound "Weapons/Sawhit"
+	Inventory.PickupMessage "Found a Chainsaw."
+	Weapon.AmmoType1 "Gasoline"
+	Weapon.AmmoUse1 1
+	Weapon.PreferredSkin "ChainsawSkin"
+	Weapon.SelectionOrder 998
+	+WEAPON.AXEBLOOD
+	States
+	{
+	Spawn:
+		CSAW A 0
+		Goto Death
+	Select:
+		TNT1 A 6
+		2HSW A 0 A_JumpIfInventory("Stained",1,2)
+		CHSW A 0
+		"####" AAAAAAAAAAAAAAA 0 A_Raise
+		"####" A 1 offset(71,156)
+		"####" A 1 offset(62,127)
+		"####" A 1 offset(52,106)
+		"####" A 1 offset(44,88)
+		"####" A 1 offset(36,76)
+		"####" A 1 offset(28,64)
+		"####" A 1 offset(20,54)
+		"####" A 1 offset(14,45)
+		"####" A 1 offset(8,40)
+		"####" A 1 offset(4,36)
+		"####" A 1 offset(1,33)
+		"####" A 0 A_Jump(255,"Ready")
+		"####" A 0 A_Jump(255,"Ready")
+		goto Ready
+	OnSelect:
+		TNT1 A 0
+		TNT1 A 1 A_Raise
+		Wait
+	Deselect:
+		"####" "#" 0 A_TakeInventory("Pulled",4)
+		"####" "#" 0 A_StopSound(CHAN_6)
+		"####" "#" 0 A_StopSound(CHAN_7)
+		"####" "#" 0 A_JumpIfInventory("SawOn", 1, "OnLower")
+		"####" "#" 1 offset(-1,33)
+		"####" "#" 1 offset(-4,36)
+		"####" "#" 1 offset(-8,40)
+		"####" "#" 1 offset(-14,45)
+		"####" "#" 1 offset(-20,54)
+		"####" "#" 1 offset(-28,64)
+		"####" "#" 1 offset(-36,76)
+		"####" "#" 1 offset(-44,88)
+		"####" "#" 1 offset(-52,106)
+		"####" "#" 1 offset(-62,127)
+		"####" "#" 1 offset(-71,156)
+		"####" A 0 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1 A_Lower
+		Wait
+	OnLower:
+		TNT1 A 0 A_TakeInventory("SawOn",1)
+		2AWR A 0 A_JumpIfInventory("Stained",1,2)
+		SAWR A 0
+		"####" A 1 A_PlaySound("CHANOFF",CHAN_WEAPON)
+		2HSW A 0 A_JumpIfInventory("Stained",1,2)
+		CHSW A 0
+		"####" YZ 1 offset(-1,33)
+		"####" "[" 1 offset(-4,36)
+		"####" "]" 1 offset(-8,40)
+		"####" A 1 offset(-14,45)
+		"####" "#" 1 offset(-20,54)
+		"####" "#" 1 offset(-28,64)
+		"####" "#" 1 offset(-36,76)
+		"####" "#" 1 offset(-44,88)
+		"####" "#" 1 offset(-52,106)
+		"####" "#" 1 offset(-62,127)
+		"####" "#" 1 offset(-71,156)
+		"####" A 0 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1 A_Lower
+		Wait	
+	TurnOn:
+		TNT1 A 0 A_JumpIfNoAmmo("Failure")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",1,2)
+		Goto Failure
+		TNT1 AAA 0
+		TNT1 A 0 A_JumpIfInventory("SawOn", 1, "TurnOff")
+		Goto Pull
+	TurnOff:
+		SAWD A 0 A_TakeInventory("SawOn",1)
+		TNT1 A 0 A_StopSound(CHAN_6)
+		TNT1 A 0 A_PlaySound("CHANOFF",CHAN_WEAPON)
+		2HSW A 0 A_JumpIfInventory("Stained",1,2)
+		CHSW A 0
+		"####" YZ 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" "[]" 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" A 1 A_WeaponReady(WRF_NOFIRE)
+		"####" A 0 A_TakeInventory("Pulled",4)
+		Goto Ready
+	Pull:
+		TNT1 A 0 A_JumpIfNoAmmo("Failure")
+		TNT1 A 0 A_JumpIfInventory("Pulled",4,"Success")
+		TNT1 A 0 A_Jump(90,"Success")
+		TNT1 A 0 A_GiveInventory("Pulled",1)
+		2HSW A 0 A_JumpIfInventory("Stained",1,2)
+		CHSW A 0
+		"####" A 3 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" A 0 A_PlaySound("CHANPULL",CHAN_WEAPON)
+		"####" BCD 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" E 5 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" FGHIJKLM 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" A 1
+		Goto Ready
+	Success:
+		TNT1 A 0 A_JumpIfNoAmmo("Failure")
+		2HSW A 0 A_JumpIfInventory("Stained",1,2)
+		CHSW A 0
+		"####" A 6 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" A 0 A_GiveInventory("SawOn",1)
+		"####" A 0 A_TakeInventory("Pulled",4)
+		"####" A 0 A_PlaySound("CHANPUL4",CHAN_WEAPON)
+		"####" BCD 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" E 3 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" FGHIJKLMNOPQ 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		Goto ReadyOn
+	Failure:
+		TNT1 A 0 A_PlaySound("CHANPULL",CHAN_WEAPON)
+		2HSW A 0 A_JumpIfInventory("Stained",1,2)
+		CHSW A 0
+		"####" BCD 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" E 5 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" FGHIJKLM 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		Goto Ready
+	
+	Ready:
+		TNT1 A 0 A_JumpIfInventory("SawOn", 1, "ReadyOn")
+		2HSW A 0 A_JumpIfInventory("Stained",1,2)
+		CHSW A 0
+		"####" A 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Loop	
+	ReadyOn:	
+		"####" F 0 A_JumpIfNoAmmo("TurnOff")
+		"####" A 0 A_PlaySound("CHANIDLE",CHAN_6)
+		2HSW A 0 A_JumpIfInventory("Stained",1,2)
+		CHSW A 0
+		"####" STUVWX 1 A_WeaponReady(WRF_ALLOWZOOM)
+		"####" A 0 A_TakeInventory("Gasoline", 1)
+		"####" A 0 A_JumpIfNoAmmo("TurnOff")
+		"####" A 0 A_FireCustomMissile("LSawSmoke",250,0,10,-5,0)
+		"####" STUVWX 1 A_WeaponReady(WRF_ALLOWZOOM)
+		"####" A 0 A_TakeInventory("Gasoline", 1)
+		"####" A 0 A_JumpIfNoAmmo("TurnOff")
+		"####" A 0 A_FireCustomMissile("LSawSmoke",250,0,10,-5,0)	
+		Loop
+	
+	NoAmmoReady:
+		TNT1 A 0 A_JumpIfInventory("SawOn", 1, "TurnOff")
+		TNT1 A 0 ACS_ExecuteAlways(654, 0, 0, 0, 0)
+		
+		TNT1 A 0 A_StopSound(CHAN_6)
+		TNT1 A 0 A_StopSound(CHAN_7)
+		2AWF A 0 A_JumpIfInventory("Stained",1,2)
+		SAWF A 0
+		"####" A 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Goto Ready
+		
+		TNT1 A 0 A_StopSound(CHAN_6)
+		TNT1 A 0 A_StopSound(CHAN_7)
+		2HSW A 0 A_JumpIfInventory("Stained",1,2)
+		CHSW A 0
+		"####" A 1 A_WeaponReady(WRF_ALLOWZOOM)
+		TNT1 A 0 A_JumpIfInventory("SawOn", 1, "Ready")
+		Loop
+	Fire:
+		TNT1 A 0 A_JumpIfInventory("SawOn",1,1)
+		Goto TurnOn
+		TNT1 A 0 A_JumpIfNoAmmo ("Failure")
+		2AWF A 0 A_JumpIfInventory("Stained",1,2)
+		SAWF A 0
+		"####" ABC 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" C 0 A_PlaySound("CHANSTRT",CHAN_6)
+		"####" C 0 A_CustomPunch(2,1,0,"FMSawPuff", 52)
+		
+		"####" C 0 A_TakeInventory("Gasoline", 2)
+		"####" DEFG 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		
+		"####" A 0 A_ReFire("KeepFire")
+		"####" G 0 A_StopSound(CHAN_6)
+		"####" G 0 A_PlaySound("CHANSTOP",CHAN_7)
+		"####" HIJK 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		Goto ReadyOn
+	KeepFire:
+		"####" F 0 A_StopSound(CHAN_6)
+		"####" F 0 A_JumpIfNoAmmo ("RipLol")
+		"####" D 0 A_PlaySound("Weapons/Sawfull",CHAN_7)
+		2AWF A 0 A_JumpIfInventory("Stained",1,2)
+		SAWF A 0
+		"####" DEFG 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" A 0 A_CustomPunch(0,0,0,"FMSawPuff", 52)
+		"####" AAA 0 A_CustomPunch(4,1,0,"FMSawPuff", 52)
+		"####" D 0 A_TakeInventory("Gasoline", 3)
+		"####" G 0 A_FireCustomMissile("LSawSmoke",250,0,20,-5,0)
+		"####" F 0 A_ReFire("KeepFire")
+		"####" A 0 A_StopSound(CHAN_7)
+		"####" E 0 A_PlaySound("CHANSTOP",CHAN_7)
+		2AWF A 0 A_JumpIfInventory("Stained",1,2)
+		SAWF A 0
+		"####" HIJK 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" A 0 A_FireCustomMissile("LSawSmoke",250,0,20,-5,0)
+		Goto ReadyOn
+	RipLol:
+		"####" A 0 A_StopSound(CHAN_7)
+		"####" E 0 A_PlaySound("CHANSTOP",CHAN_7)
+		2AWF A 0 A_JumpIfInventory("Stained",1,2)
+		SAWF A 0
+		"####" HIJK 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" A 0 A_FireCustomMissile("LSawSmoke",250,0,20,-5,0)
+		Goto TurnOff
+	
+	AltFire: //Turn chainsaw off and click altFire again for reload.
+		"####" A 0 A_JumpIfInventory("SawOn",1,"AltFireSawOn")
+		Goto KeepAltFire
+	AltFireSawOn:
+		GoTo TurnOff
+	KeepAltFire:
+		TNT1 A 0 A_JumpIfInventory("Gasoline",400,"Ready")//Why would you do any of that if you're almost full?
+		TNT1 A 0 A_JumpIfInventory("SpareSawFuel",1,1)//A whopping 0 jerry cans? Buh-bye!
+		Goto Ready
+		TNT1 A 0 A_JumpIfInventory("SawOn",1,1)
+		Goto AltContinue
+		SAWD A 0 A_TakeInventory("SawOn",1)
+		TNT1 A 0 A_StopSound(CHAN_6)
+		TNT1 A 0 A_PlaySound("CHANOFF",CHAN_WEAPON)
+		2HSW A 0 A_JumpIfInventory("Stained",1,2)
+		CHSW A 0
+		"####" A 8
+	AltContinue:
+		TNT1 A 0 SetPlayerProperty(0,1,PROP_FROZEN)
+		2AWF A 0 A_JumpIfInventory("Stained",1,2)
+		SAWF A 0
+		"####" LMNOPQRSS 1
+		"####" S 45 A_PlaySound("PLUGOPEN",0)
+	Refuel:
+		"####" A 0 A_JumpIfInventory("Gasoline",400,"Done")//Don't waste your fuel like that, stop it!
+		"####" A 0 A_JumpIfInventory("SpareSawFuel",1,1)//No more jerries? Adios!
+		Goto Done
+		"####" A 0 A_PlaySound("GASREFIL",CHAN_6,1,1)
+		"####" A 0 A_TakeInventory("SpareSawFuel",1)
+		"####" SS 1 offset(2,34) A_GiveInventory("Gasoline",1) 
+		"####" SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS 1 offset(3,35) A_GiveInventory("Gasoline",1) 
+		"####" SSS 1 offset(2,34) A_GiveInventory("Gasoline",1) 
+		"####" SS	1 offset(1,33) A_GiveInventory("Gasoline",1) 
+		"####" S 0 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS 1 A_GiveInventory("Gasoline",1) 
+		"####" A 0 A_ReFire("Refuel")
+	Done:
+		"####" SRQPONMLL 1
+		"####" A 0 SetPlayerProperty(0,0,PROP_FROZEN)
+		"####" L 45 A_PlaySound("PLUGCLOS",CHAN_6)
+		2HSW A 0 A_JumpIfInventory("Stained",1,2)
+		CHSW A 0
+		"####" A 1 A_WeaponReady(WRF_NOFIRE)
+		"####" "][" 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" YZ 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		Goto Ready
+
+	
+	//zoom:
+		TNT1 A 0
+		TNT1 A 0 A_TakeInventory("SawOn",1)
+		TNT1 A 0 A_TakeInventory("ChainsawOnce",1)
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+		TNT1 A 0 A_TakeInventory("SawOn",1)
+		TNT1 A 0 A_TakeInventory("Pulled",10)
+	    TNT1 A 0 A_StopSound(CHAN_6)
+		TNT1 A 0 A_PlaySound("CHANOFF",CHAN_WEAPON)
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+	Death:
+		TNT1 A 0 A_SpawnItem("DroppedChainsaw",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		Wait
+	WeaponDeath:
+		2IST JUVVKUUKVJKVJUKVJVJUVJKUVJUVKUJJKUV 1
+		2IST KKLMNOPRSS 1
+		2IST T 1
+		wait
+}}
+
+Actor Pulled : Inventory
+{
+	Inventory.MaxAmount 4
+	Inventory.InterHubAmount 0
+	+INVENTORY.UNDROPPABLE
+}
+
+actor FMSawPuff : BulletPuff
+{
+DamageType "SawMelee"
+Decal "SawDecal"
+AttackSound "Chainsaw/Wall"
+activesound "dsempty"
+seesound "dsempty"
++FORCEXYBILLBOARD
+-CLIENTSIDEONLY
+ +PUFFONACTORS
+  +PUFFGETSOWNER
+  +BRIGHT
+	States
+	{
+	Spawn:
+	TNT1 A 0 NODELAY
+	BPUF A 1 A_SpawnItemEx ("RicoChet",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+	BPUF D 1 A_SetScale(0.16,0.16)
+      Stop
+	  XDeath:
+		TNT1 A 1
+		TNT1 A 1 A_GiveToTarget("Stained",1)
+      Stop
+	  Crash:
+	TNT1 A 0
+	BPUF A 1 A_SpawnItemEx ("RicoChet",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+	BPUF D 1 A_SetScale(0.16,0.16)
+      Stop
+	  }
+}
+
+//Ammo save after drop weapon.//////////////////////////////////////////////////
+Actor Dropper_Chainsaw : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("Gasoline",500,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",450,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",400,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",350,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",300,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",250,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",200,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",150,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",100,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",50,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsawEmpty",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw1",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw2",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw3",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw4",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw5",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw6",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw7",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw8",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw9",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsawFull",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+Actor DeathDropper_Chainsaw : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("Gasoline",500,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",450,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",400,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",350,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",300,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",250,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",200,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",150,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",100,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",50,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_SpawnItemEx("DroppedChainsawEmpty",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_SpawnItemEx("DroppedChainsaw1",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_SpawnItemEx("DroppedChainsaw2",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_SpawnItemEx("DroppedChainsaw3",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_SpawnItemEx("DroppedChainsaw4",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_SpawnItemEx("DroppedChainsaw5",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_SpawnItemEx("DroppedChainsaw6",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_SpawnItemEx("DroppedChainsaw7",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_SpawnItemEx("DroppedChainsaw8",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_SpawnItemEx("DroppedChainsaw9",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_SpawnItemEx("DroppedChainsawFull",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+Actor DroppedChainsaw: Wdi_BaseDroppedWeapon
+{
+	DeathSound "Weapons/Gundrop"
+	BounceSound "Weapons/Gundrop"
+	Scale 0.9
+	States
+	{
+	Spawn:
+		CSAW A -1
+		Stop
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsawfixNoRandom",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+}}
+
+ACTOR DroppedChainsawFull : DroppedChainsaw
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsawFull",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw9 : DroppedChainsaw
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw9",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw8 : DroppedChainsaw
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw8",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw7 : DroppedChainsaw
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw7",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw6 : DroppedChainsaw
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw6",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw5 : DroppedChainsaw
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw5",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw4 : DroppedChainsaw
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw4",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw3 : DroppedChainsaw
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw3",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw2 : DroppedChainsaw
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw1 : DroppedChainsaw
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw1",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsawEmpty : DroppedChainsaw
+{
+	States
+	{
+	Death:
+		CSAW A 35
+		CSAW A 1 A_SpawnItemEx("FakeChainsawEmpty",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+Actor FakeChainsawFull : FakeChainsawfixNoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("LChainsaw",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("LChainsaw",1)
+		TNT1 A 0 A_GiveInventory("Gasoline",500)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,2)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Gasoline",1,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("Gasoline",500)
+		TNT1 A 1 A_FireCustomMissile("DroppedChainsawEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeChainsaw9 : FakeChainsawfixNoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("LChainsaw",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("LChainsaw",1)
+		TNT1 A 0 A_GiveInventory("Gasoline",450)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,2)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Gasoline",50,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("Gasoline",450)
+		TNT1 A 1 A_FireCustomMissile("DroppedChainsawEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeChainsaw8 : FakeChainsawfixNoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("LChainsaw",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("LChainsaw",1)
+		TNT1 A 0 A_GiveInventory("Gasoline",400)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,2)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Gasoline",100,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("Gasoline",400)
+		TNT1 A 1 A_FireCustomMissile("DroppedChainsawEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeChainsaw7 : FakeChainsawfixNoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("LChainsaw",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("LChainsaw",1)
+		TNT1 A 0 A_GiveInventory("Gasoline",350)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,2)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Gasoline",150,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("Gasoline",350)
+		TNT1 A 1 A_FireCustomMissile("DroppedChainsawEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeChainsaw6 : FakeChainsawfixNoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("LChainsaw",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("LChainsaw",1)
+		TNT1 A 0 A_GiveInventory("Gasoline",300)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,2)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Gasoline",200,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("Gasoline",300)
+		TNT1 A 1 A_FireCustomMissile("DroppedChainsawEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeChainsaw5 : FakeChainsawfixNoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("LChainsaw",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("LChainsaw",1)
+		TNT1 A 0 A_GiveInventory("Gasoline",250)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,2)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Gasoline",250,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("Gasoline",250)
+		TNT1 A 1 A_FireCustomMissile("DroppedChainsawEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeChainsaw4 : FakeChainsawfixNoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("LChainsaw",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("LChainsaw",1)
+		TNT1 A 0 A_GiveInventory("Gasoline",200)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,2)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Gasoline",300,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("Gasoline",200)
+		TNT1 A 1 A_FireCustomMissile("DroppedChainsawEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeChainsaw3 : FakeChainsawfixNoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("LChainsaw",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("LChainsaw",1)
+		TNT1 A 0 A_GiveInventory("Gasoline",150)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,2)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Gasoline",350,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("Gasoline",150)
+		TNT1 A 1 A_FireCustomMissile("DroppedChainsawEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeChainsaw2 : FakeChainsawfixNoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("LChainsaw",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("LChainsaw",1)
+		TNT1 A 0 A_GiveInventory("Gasoline",100)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,2)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Gasoline",400,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("Gasoline",100)
+		TNT1 A 1 A_FireCustomMissile("DroppedChainsawEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeChainsaw1 : FakeChainsawfixNoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("LChainsaw",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("LChainsaw",1)
+		TNT1 A 0 A_GiveInventory("Gasoline",50)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,2)
+		Stop
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Gasoline",450,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("Gasoline",50)
+		TNT1 A 1 A_FireCustomMissile("DroppedChainsawEmpty",0,0,0)
+		Stop
+}}
+
+Actor FakeChainsawEmpty : FakeChainsawfixNoRandom
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1,2)
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("LChainsaw",1,"ForgetIt")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("LChainsaw",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,2)
+		Stop
+}}
+
+
+
+
+
+
+//Far dropped
+Actor Dropper_ChainsawFar : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Pickup:
+		TNT1 A 0 A_JumpIfInventory("Gasoline",500,"PickupFull")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",450,"Pickup9")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",400,"Pickup8")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",350,"Pickup7")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",300,"Pickup6")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",250,"Pickup5")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",200,"Pickup4")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",150,"Pickup3")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",100,"Pickup2")
+		TNT1 A 0 A_JumpIfInventory("Gasoline",50,"Pickup1")
+	PickupEmpty:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsawEmptyFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup1:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw1Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup2:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw2Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup3:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw3Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup4:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw4Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup5:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw5Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup6:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw6Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup7:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw7Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup8:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw8Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Pickup9:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsaw9Far",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	PickupFull:
+		TNT1 A 0 A_FireCustomMissile("DroppedChainsawFullFar",0,0,0)
+		TNT1 A 1 A_TakeInventory("Gasoline",500)
+		Stop
+	Use:
+		TNT1 A 1 
+		Stop
+}}
+
+Actor DroppedChainsawFar: Wdi_BaseDroppedWeaponFar
+{
+	DeathSound "Weapons/Gundrop"
+	BounceSound "Weapons/Gundrop"
+	Scale 0.9
+	States
+	{
+	Spawn:
+		CSAW A -1
+		Stop
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsawfixNoRandom",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+}}
+
+ACTOR DroppedChainsawFullFar : DroppedChainsawFar
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsawFull",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw9Far : DroppedChainsawFar
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw9",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw8Far : DroppedChainsawFar
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw8",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw7Far : DroppedChainsawFar
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw7",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw6Far : DroppedChainsawFar
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw6",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw5Far : DroppedChainsawFar
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw5",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw4Far : DroppedChainsawFar
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw4",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw3Far : DroppedChainsawFar
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw3",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw2Far : DroppedChainsawFar
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsaw1Far : DroppedChainsawFar
+{
+	States
+	{
+	Death:
+		CSAW AAAAA 7 A_SpawnItemEx("LSawSmoke",0,-12,12,0,0,0,0,SXF_NOCHECKPOSITION)
+		CSAW A 1 A_SpawnItemEx("FakeChainsaw1",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}
+
+ACTOR DroppedChainsawEmptyFar : DroppedChainsawFar
+{
+	States
+	{
+	Death:
+		CSAW A 35
+		CSAW A 1 A_SpawnItemEx("FakeChainsawEmpty",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		Stop
+	}
+}

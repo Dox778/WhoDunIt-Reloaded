@@ -1,0 +1,373 @@
+Actor FireDecorativeNew 20900
+{
+  Height 6
+  Radius 2
+  +BRIGHT
+  Renderstyle Add
+  scale 0.5
+  +NOGRAVITY
+  +BLOODLESSIMPACT
+  Alpha 1.0
+  DamageType "Fire"
+  Obituary "%o burned himself on decorative fire. Well, if you insist."
+  +NOINTERACTION
++NOCLIP
++RANDOMIZE
++FORCEYBILLBOARD
++CLIENTSIDEONLY
++DONTSPLASH
+RenderStyle add
+  //$Category WDI Effects
+  //$Sprite FFLGF0
+  //$Title "Fire Decoration"
+  States
+  {
+  Spawn:
+	TNT1 A 0 NODELAY A_SetScale(frandom(0.4,0.6))
+	TNT1 A 0 A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	Stay:
+    TNT1 A 0 A_PlaySoundEx("DSTORCH2", "SoundSlot6", 1)
+	NF4R ABCDEFGHIJKLMNOPQ 1 BRIGHT
+	FFLG F 0 A_SpawnItemEx("FireDecorativeSmoke",random(-2,2),random(-2,2),random(12,14),frandom(-0.3,0.3),frandom(-0.3,0.3),frandom(0.8,1.2),random(0,90),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,90)
+	TNT1 A 0 A_Explode(2,8,0,0,8)
+	loop
+	}
+}
+
+Actor FireDecorativeSmoke
+{
++NoGravity
++NoInteraction
++CLIENTSIDEONLY
++NoBlockmap
++NoTeleport
++ForceXYBillboard
+RenderStyle Translucent
+StencilColor Black
+Alpha 0.6
+Scale 0.3
+States
+{
+Spawn:
+	TNT1 A 0 NODELAY A_SetScale(frandom(0.1,0.3))
+	rsmk ABCDE 6 
+	stop
+}
+}
+
+Actor FireDecorativeGreen: FireDecorativeNew
+{
+States
+{
+	Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	stay:
+    TNT1 A 0 A_PlaySoundEx("DSTORCH2", "SoundSlot6", 1)
+	FFLG F 0 A_SpawnItemEx("FireDecorativeSmoke",random(-2,2),random(-2,2),random(12,14),frandom(-0.3,0.3),frandom(-0.3,0.3),frandom(0.8,1.2),random(0,90),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,90)
+	NF5R ABCDEFGHIJKLMNOPQ 1 BRIGHT
+	TNT1 A 0 A_Explode(2,8,0,0,8)
+	loop
+	}
+}
+
+Actor FireDecorativeBlue: FireDecorativeNew
+{
+States
+{
+Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+stay:
+    TNT1 A 0 A_PlaySoundEx("DSTORCH2", "SoundSlot6", 1)
+	FFLG F 0 A_SpawnItemEx("FireDecorativeSmoke",random(-2,2),random(-2,2),random(12,14),frandom(-0.3,0.3),frandom(-0.3,0.3),frandom(0.8,1.2),random(0,90),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,90)
+	NF6R ABCDEFGHIJKLMNOPQ 1 BRIGHT
+	TNT1 A 0 A_Explode(2,8,0,0,8)
+	loop
+	}
+}
+
+Actor FireDecorativeLargeNew : FireDecorativeNew 20901
+{
+  scale 0.8
+  States
+  {
+  Spawn:
+	TNT1 A 0 NODELAY A_SetScale(frandom(0.7,0.9))
+	TNT1 A 0 A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	stay:
+    TNT1 A 0 A_PlaySoundEx("DSTORCH2", "SoundSlot6", 1)
+	FFLG F 0 A_SpawnItemEx("FireDecorativeSmoke",random(-2,2),random(-2,2),random(12,14),frandom(-0.3,0.3),frandom(-0.3,0.3),frandom(0.8,1.2),random(0,90),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,90)
+	NF4R ABCDEFGHIJKLMNOPQ 1 BRIGHT
+	TNT1 A 0 A_Explode(2,16,0,0,16)
+	loop
+  }
+}
+
+
+Actor FireTreeA1
+{
+Radius 2 Height 4
+XScale 1.0 YScale 1.0
+//XScale 0.1 YScale 0.1
+Renderstyle Add
++BRIGHT -SOLID +NOGRAVITY
++FORCEYBILLBOARD
+	States
+	{
+	Spawn:
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.1,0.1)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.2,0.2)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.3,0.3)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.4,0.4)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.5,0.5)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.6,0.6)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.7,0.7)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.8,0.8)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.9,0.9)
+	TNT1 A 0  A_SetScale(1,1)
+	Goto stay
+	Stay:
+	TNT1 A 0 A_Explode(3,64,0,0,16)
+	NF4R ABCDEFGHIJKLMNOPQ 1
+	loop
+	}
+}
+Actor FireTreeA2: FireTreeA1
+{
+XScale 3.2 YScale 2.8
+States
+	{
+	Spawn:
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.3,0.3)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.7,0.7)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.2,1.2)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.6,1.6)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.9,1.9)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(2.2,2.2)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(2.5,2.5)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(2.8,2.8)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(3.0,2.6)
+	TNT1 A 0  A_SetScale(3.2,2.8)
+	Goto stay
+}
+}
+
+Actor FireTreeB2: FireTreeA1
+{
+XScale 2.0 YScale 1.8
+States
+	{
+	Spawn:
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.2,0.1)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.3,0.2)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.5,0.4)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.7,0.6)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.9,0.8)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.2,1.0)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.5,1.2)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.7,1.5)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.9,1.7)
+	TNT1 A 0  A_SetScale(2.0,1.8)
+	Goto stay
+}
+}
+
+Actor FireTreeE1: FireTreeA1 //FireTreeA1 but smaller
+{
+XScale 1.0 YScale 1.0
+States
+	{
+	Spawn:
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.1,0.1)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.2,0.2)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.3,0.3)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.4,0.4)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.5,0.5)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.6,0.6)
+	TNT1 A 0  A_SetScale(0.7,0.7)
+	Goto stay
+}
+}
+
+Actor FireTreeE2: FireTreeA1 //FireTreeB2 but smaller
+{
+XScale 2.6 YScale 2.2
+States
+	{
+	Spawn:
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.2,0.1)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.5,0.2)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.7,0.4)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.1,0.6)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.4,0.9)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.7,1.2)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(2.0,1.6)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(2.2,1.9)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(2.5,2.1)
+	TNT1 A 0  A_SetScale(2.6,2.2)
+	Goto stay
+}
+}
+
+Actor FireTreeF2: FireTreeA1 //FireTreeB2 but smaller
+{
+XScale 2.0 YScale 1.6
+States
+	{
+	Spawn:
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.2,0.1)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.4,0.2)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.6,0.4)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.8,0.6)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.0,0.9)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.1,1.1)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.2,1.2)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.3,1.3)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.4,1.4)
+	TNT1 A 0  A_SetScale(1.5,1.5)
+	Goto stay
+}
+}
+
+Actor FireTreeX1: FireTreeA1
+{
+XScale 1.2 YScale 1.5
+	States
+	{
+	Spawn:
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.1,0.1)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.2,0.2)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.3,0.3)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.4,0.4)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.5,0.5)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.6,0.7)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.7,0.9)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.9,1.1)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.2,1.3)
+	TNT1 A 0  A_SetScale(1.4,1.5)
+	Goto stay
+	Stay:
+	NF4R ABCDEFGHIJKLMNOPQ 1
+	loop
+	}
+}
+
+Actor FireTreeX2: FireTreeA1 //FireTreeB2 but smaller
+{
+XScale 1.2 YScale 2.8
+States
+	{
+	Spawn:
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.2,0.1)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.3,0.2)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.4,0.4)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.5,0.7)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.6,1.0)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.7,1.3)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.8,1.7)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.9,1.9)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.0,2.1)
+	TNT1 A 0  A_SetScale(1.0,2.2)
+	Goto stay
+}
+}
+
+///////////////////////
+Actor FireBFTree21: FireTreeA1
+{
+XScale 3.2 YScale 2.8
+States
+	{
+	Spawn:
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.1,0.1)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.2,0.3)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.3,0.5)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.4,0.7)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.5,1.0)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.6,1.3)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.7,1.7)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.8,2.0)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.9,2.3)
+	TNT1 A 0  A_SetScale(1.0,2.5)
+	Goto stay
+}
+}
+
+Actor FireBFTree31: FireTreeA1
+{
+XScale 3.2 YScale 2.8
+States
+	{
+	Spawn:
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.2,0.3)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.3,0.8)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.4,1.2)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.5,1.6)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.6,1.9)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.7,2.5)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(0.9,2.9)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.1,3.3)
+	NF4R ABCDEFGHIJKLMNOPQ 1 A_SetScale(1.3,3.7)
+	TNT1 A 0  A_SetScale(1.4,4.0)
+	Goto stay
+}
+}
+
+Actor FireBFGrass2: FireTreeA1
+{
+XScale 3.5 YScale 1.5
+States
+	{
+	Spawn:
+	NF4R ABCDEFGHIJKLMNOPQ 1 BRIGHT
+	loop
+}
+}
+
+Actor FireBFGrass3: FireTreeA1
+{
+XScale 1.2 YScale 1.1
+States
+	{
+	Spawn:
+	NF4R ABCDEFGHIJKLMNOPQ 1 BRIGHT
+	
+	loop
+}
+}
+
+Actor FireBFGrass5: FireTreeA1
+{
+XScale 2.0 YScale 1.0
+States
+	{
+	Spawn:
+	NF4R ABCDEFGHIJKLMNOPQ 1 BRIGHT
+	loop
+}
+}
+
+Actor FireGrassLarge: FireTreeA1
+{
+XScale 2.6 YScale 0.7
+States
+	{
+	Spawn:
+	NF4R ABCDEFGHIJKLMNOPQ 1 BRIGHT
+	loop
+}
+}
+
+Actor FireGrassMedium: FireTreeA1
+{
+XScale 1.9 YScale 0.4
+States
+	{
+	Spawn:
+	NF4R ABCDEFGHIJKLMNOPQ 1 BRIGHT
+	loop
+}
+}

@@ -1,0 +1,1 @@
+//Dummy file, the actual stuff is in WDIR-BumpMapsOPTIONAL.pk3

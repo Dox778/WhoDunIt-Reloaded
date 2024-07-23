@@ -1,0 +1,111 @@
+//==================================================================
+////////////////////    ANTIGHOST   ////////////////////
+//=================================================================
+
+bool hide_murderer;
+bool clean_murderer;
+
+script "RESPAWN_HIDE_MURDER" respawn
+{
+	if (GetCVar("wdi_enable_antighost")||hide_murderer){
+		if (clean_murderer)
+		ACS_NamedExecuteAlways("Clean_hidemurd",0);
+	}
+}
+
+script "DISCONECT_HIDE_MURDER"(int who) disconnect
+{
+	if (GetCVar("wdi_enable_antighost")||hide_murderer){
+		if (clean_murderer)
+		ACS_NamedExecuteAlways("Clean_hidemurd",0);
+	}
+}
+
+script "UPDATE_SEEKMURD" (void) net
+{
+	if(!hide_murderer){ //check if the murder has trigged or puked
+		if(!clean_murderer)
+		ACS_NamedExecuteAlways("Update_NewClients",0,gameinfo[1],gameinfo[2],GetCVar("wdi_enable_antighost"));//trigger depending of the admin
+		else
+		ACS_NamedExecuteAlways("Clean_hidemurd",0);
+	}
+	else{
+		ACS_NamedExecuteAlways("Auto_HideClients",0,gameinfo[1],gameinfo[2]); //automatic hide new clients or spectators
+	}
+}
+
+script "Update_NewClients" ( int gameinfo1,int gameinfo2,int cvar)ClientSide
+{
+	gameinfo[1]=gameinfo1; //gamestates
+	gameinfo[2]=gameinfo2; //murdinfo
+
+	if(cvar){
+		ConsoleCommand(StrParam(s:"set ", s:"wdi_enable_antighost", s:" 1"));
+		ConsoleCommand(StrParam(s:"archivecvar ",s:"wdi_enable_antighost"));
+	}else{
+		ConsoleCommand(StrParam(s:"set ", s:"wdi_enable_antighost", s:" 0"));
+		ConsoleCommand(StrParam(s:"archivecvar ",s:"wdi_enable_antighost"));
+	}
+}
+
+script "Hide_Murder" open ClientSide {
+	int player= ConsolePlayerNumber();
+	if(PlayerIsSpectator(player) || !PlayerInGame(player))
+	NamedRequestScriptpuke("UPDATE_SEEKMURD",0); //delay(1);
+	if (gameinfo[1] == GAMESTATE_GAMEOVER || !GetCVar("wdi_enable_antighost")){
+		terminate;
+	}
+	while(gameinfo[1] != GAMESTATE_GAMEOVER){
+		if (CheckPlayerCamera(player) == gameinfo[2]+TID_START && gameinfo[1] == GAMESTATE_GAMEACTIVE  &&(PlayerIsSpectator(player) || !PlayerInGame(player))){
+			SetHUDSize(640, 480, 1);
+			SetFont("SPECIALM");
+			HudMessage(s:"a";HUDMSG_TYPEON, 0, CR_WHITE, 320.0, 240.0, 0.1, 0.05, 0.05);
+		}
+		Delay(1);
+	}
+}
+
+script 408 (void) net
+{
+	if(!checkinventory("MurderMarker")|| hide_murderer||clean_murderer)terminate;
+
+	if(GetCVar("wdi_enable_antighost")){
+		clean_murderer=true;
+		print(s:"antighost deactivated");
+		Setactivator(0,AAPTR_DEFAULT);
+		ACS_NamedExecuteAlways("Clean_hidemurd",0);
+	}else{
+		hide_murderer=true;
+		print(s:"antighost activated");
+		Setactivator(0,AAPTR_DEFAULT);
+		ACS_NamedExecuteAlways("Auto_HideClients",0,gameinfo[1],gameinfo[2]);
+	}
+}
+
+script "Auto_HideClients" (int gameinfo1,int gameinfo2) ClientSide //hide new clients or actually players specting or dead
+{
+	if(hide_murderer)terminate; //do it once
+
+	gameinfo[1]=gameinfo1;
+	gameinfo[2]=gameinfo2;
+	hide_murderer=true;
+	int player= ConsolePlayerNumber();
+	while(gameinfo[1] != GAMESTATE_GAMEOVER ){
+		if (CheckPlayerCamera(player) == gameinfo[2]+TID_START && gameinfo[1] == GAMESTATE_GAMEACTIVE  &&(PlayerIsSpectator(player) || !PlayerInGame(player))){
+			SetHUDSize(640, 480, 1);
+			SetFont("SPECIALM");
+			HudMessage(s:"a";HUDMSG_TYPEON, 0, CR_WHITE, 320.0, 240.0, 0.1, 0.05, 0.05);
+		}
+		Delay(1);
+	}
+}
+
+script "Clean_Hidemurd" (void) clientside
+{
+	if(clean_murderer)terminate; //do it once
+
+	int player= ConsolePlayerNumber();
+	clean_murderer=true;
+	ACS_NamedTerminate("Hide_Murder",0);
+	ACS_NamedTerminate("auto_HideClients",0);
+}

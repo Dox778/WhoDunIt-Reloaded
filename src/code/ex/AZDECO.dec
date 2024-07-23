@@ -1,0 +1,225 @@
+Actor ModelSittersPlant1 29417
+{
+//$Category Aztec_map_ONLY
+ states
+ {
+  Spawn:
+Spawn:
+    NULL A -1
+  Loop
+  }
+}
+
+Actor ModelSittersPlant2 29418
+{
+//$Category Aztec_map_ONLY
+ states
+ {
+  Spawn:
+Spawn:
+    NULL A -1
+  Loop
+  }
+}
+
+Actor ModelSittersPlant3 29419
+{
+//$Category Aztec_map_ONLY
+ states
+ {
+  Spawn:
+Spawn:
+    NULL A -1
+  Loop
+  }
+}
+
+actor ChaseCam
+{
+  Height 16
+  Radius 8
+  +NOGRAVITY +NOBLOCKMAP
+  states
+  {
+  Spawn:
+    TNT1 A -1
+    stop
+  }
+}
+
+// Lightning
+
+actor BoltSpawner 29002
+{
+	//$sprite RSDBD0
+	radius 1
+	height 1
+	+NODAMAGETHRUST
+	states
+	{
+		Spawn:
+			TNT1 A 5 A_Jump(160, "Strike2")
+			TNT1 A 150
+			TNT1 A 1 A_SpawnItemEX("LightningStrike", random(-60, 60), random(-60, 60), 0, 0, 0, 0, 0, 128)
+			loop
+		Strike2:
+			TNT1 A 1 A_Jump(192, "StrikeSmall")
+			TNT1 A 50
+			TNT1 A 1 A_SpawnItemEX("LightningStrike", random(-60, 60), random(-60, 60), 0, 0, 0, 0, 0, 128)
+			goto Spawn
+		StrikeSmall:
+			TNT1 A 10
+			TNT1 A 1 A_SpawnItemEX("LightningStrikeSmall", random(-60, 60), random(-60, 60), 0, 0, 0, 0, 0, 128)
+			goto Spawn
+	}
+}
+
+actor PainfulBoltSpawner 29900
+{
+	radius 1
+	height 1
+	+NODAMAGETHRUST
+	states
+	{
+		Spawn:
+			TNT1 A 25 A_SpawnItemEx("LightningStrikeTrap1", 0, 0, 0, 0, 0, 0, 0, 0) 
+			TNT1 A 25 A_SpawnItemEx("LightningStrikeTrap2", 0, 0, 0, 0, 0, 0, 0, 0) 
+			TNT1 A 25 A_SpawnItemEx("LightningStrikeTrap3", 0, 0, 0, 0, 0, 0, 0, 0) 
+			TNT1 A 35 A_SpawnItemEx("LightningStrikeTrap4", 0, 0, 0, 0, 0, 0, 0, 0) 
+			goto Spawn
+	}
+}
+
+actor LightningStrikeTrap1 29901
+{
+	obituary "%o was murdered by a lightning strike."
+	renderstyle Add
+	scale 2.0
+	height 60
+	radius 3
+	speed 0
+	PROJECTILE
+	+FLOORHUGGER
+	+NOCLIP
+	states
+	{
+		Spawn:
+			LTNG A 1 bright
+		Death:
+			LTNG A 0 bright A_Explode(1000,115)
+			LTNG A 2 bright A_PlaySound("zolt!")
+			stop
+	}
+}
+
+actor LightningStrikeTrap2 29902
+{
+	obituary "%o was murdered by a lightning strike."
+	renderstyle Add
+	scale 2.0
+	height 60
+	radius 3
+	speed 0
+	PROJECTILE
+	+FLOORHUGGER
+	+NOCLIP
+	states
+	{
+		Spawn:
+			LTNG B 1 bright
+		Death:
+			LTNG B 0 bright A_Explode(1000,115)
+			LTNG B 2 bright A_PlaySound("zolt!")
+			stop
+	}
+}
+
+actor LightningStrikeTrap3 29903
+{
+	obituary "%o was murdered by a lightning strike."
+	renderstyle Add
+	scale 2.0
+	height 60
+	radius 3
+	speed 0
+	PROJECTILE
+	+FLOORHUGGER
+	+NOCLIP
+	states
+	{
+		Spawn:
+			LTNG C 1 bright
+		Death:
+			LTNG C 0 bright A_Explode(1000,115)
+			LTNG C 2 bright A_PlaySound("zolt!")
+			stop
+	}
+}
+
+actor LightningStrikeTrap4 29904
+{
+	obituary "%o was murdered by a lightning strike."
+	renderstyle Add
+	scale 2.0
+	height 60
+	radius 3
+	speed 0
+	PROJECTILE
+	+FLOORHUGGER
+	+NOCLIP
+	states
+	{
+		Spawn:
+			LTNG A 1 bright
+		Death:
+			LTNG A 2 bright A_Explode(1000,120)
+			LTNG BC 2 bright A_PlaySound("zolt!")
+			stop
+	}
+}
+
+/*
+actor LightningStrike
+{
+	obituary "$OB_LIGHTNING"
+	renderstyle Add
+	scale 2.0
+	height 60
+	radius 3
+	speed 0
+	PROJECTILE
+	+FLOORHUGGER
+	+NOCLIP
+	states
+	{
+		Spawn:
+			LTNG A 1 bright
+		Death:
+			LTNG A 2 bright
+			LTNG B 2 bright A_PlaySound("lightning!")
+			LTNG C 2 bright
+			IVVY A 3
+			LTNG B 2 bright
+			IVVY A 1
+			LTNG C 1 bright
+			stop
+	}
+}
+
+actor LightningStrikeSmall : LightningStrike
+{
+	xscale 0.7
+	yscale 2.0
+}
+*/
+actor GROSSSS 26279 
+{
+  +NOINTERACTION
+  //$Category AZTEC
+States
+  {
+    Spawn:
+	TRV5 A -1
+	Stop
+  }
+}

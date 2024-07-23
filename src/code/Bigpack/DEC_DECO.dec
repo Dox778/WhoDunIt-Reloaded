@@ -1,0 +1,491 @@
+//================================================================================================================
+//  DECORATIONS STUFFS
+//-------------------------------------------------------------
+//STATUES------------------------------------------------------
+Actor Ishtar 32260 
+{
+//$Category WDI Props
+    Health 100
+	Radius 12
+	Height 50
+	Scale 0.35
+	speed 3
+    Mass 900
+    BloodColor 88 88 88
+   +SOLID
+   +SHOOTABLE
+   +NOBLOOD
+	DamageFActor "Gas", 0.0
+	DamageFActor "FlareEffect", 0.0
+   PAINSOUND "PotBits"
+   DEATHSOUND "pot/break" 
+   +FORCEYBILLBOARD
+  States
+	{
+	Spawn:
+		ISHT A 1 
+		Loop	
+	Death:
+      ISHT A 1 A_PlaySound("pot/break")
+      ISHT A 1 A_Burst("PotBits") 
+    stop
+}}
+//WDI23-----------------------------------
+Actor PropQuickRevive 21203
+{
+//$Category WDI Props
+ Radius 1
+ Height 1
+ Scale 0.50
+ +SOLID
+ +NOGRAVITY
+ +NOBLOCKMAP
+ //+FORCEXYBILLBOARD
+ States
+ {
+  Spawn:
+	QCRV A -1 
+	stop
+ }
+}
+
+Actor Statue1 10002
+{
+//$Category WDI Props
+	Radius 18
+	Height 200
+	+SOLID
+	+NOGRAVITY
+	+FORCEYBILLBOARD
+	States
+	{
+	Spawn:
+		STAT A -1
+		Stop
+	}
+}
+
+Actor Tower 10001
+{
+//$Category WDI Props
+	Radius 18
+	Height 79
+	+SOLID
+	+NOGRAVITY
+	+FORCEYBILLBOARD
+	States
+	{
+	Spawn:
+		TOWR A -1 
+		//TOWR B 1 BRIGHT   mmmmmmmmm check sprite
+		//loop
+		Stop
+	}
+}
+
+//-------------------------------------------------------------
+//HANGING CORPSES----------------------------------------------
+
+//-------------------------------------------------------------
+//LIGHTS------------------------------------------------------
+Actor columnswitch:  SwitchableDecoration Replaces Column //2028
+{
+radius 16
+height 48
++SOLID
++FORCEYBILLBOARD
++SHOOTABLE
++NOBLOOD
+Health 50
+MASS 9999999
+DamageFactor "Gas", 0.0
+DamageFactor "FlareEffect", 0.0
+DamageFactor "SprayRED", 0.0
+DamageFactor "SprayBLU", 0.0
+DamageFactor "SprayYLL", 0.0
+DamageFactor "SprayGRN", 0.0
+DamageFactor "SprayORG", 0.0
+DamageFactor "SprayPNK", 0.0
+DamageFactor "burn", 0.0
+DamageFactor "fire", 0.0
+DamageFactor "ShovelMelee", 2.0
+DamageFactor "SawMelee", 2.0
+DamageFactor "friendlygun", 10.0
+Height 48
+DeathHeight 48
+Radius 4
+ProjectilePassHeight 0
+States
+{
+Spawn:
+	Active:
+	COLU A -1 BRIGHT A_JumpIfInventory("PipeSeq",1,"DeathStay")
+	Stop
+    Inactive:
+	COLU B -1 A_JumpIfInventory("PipeSeq",1,"DeathStay")
+	stop
+	Death:
+		TNT1 A 0 A_Giveinventory("PipeSeq",1)
+		TURT A 0 A_Playsound("SHTRDEST")
+		TNT1 AAAAAAA 0 A_SpawnItemEx("NewGlassShard", random(-2,2), random(-2,2), random(46,44), Random(3, 7), Random(3, 7), Random(5, 5), Random(0, 360), SXF_NOCHECKPOSITION, 20)
+	DeathStay:
+		COLU C random(30,100) A_SpawnItemEx("SparkEffectOnce", 0, 0, 46, 0, 0, 0, 0,SXF_NOCHECKPOSITION, 0)
+		loop
+}}	
+
+//-------------------------------------------------------------
+// FLOOR CORPSES-----------------------------------------------
+
+//-------------------------------------------------------------
+//TREES--------------------------------------------------------
+
+//-------------------------------------------------------------
+//TROPIC PLANTS------------------------------------------------
+//-------------------------------------------------------------
+// Small plants------------------------------------------------
+Actor Flowers1 30001
+{  //$Category WDI Environment/Flowers
+   //$Title "Flowers 1"
+   Radius 24
+   Height 24
+   scale 0.95
+	+FORCEYBILLBOARD
+   States
+   {
+   Spawn:
+      FLWA A -1
+	  stop
+	}
+}
+Actor Flowers2 30002
+{  //$Category WDI Environment/Flowers
+   //$Title "Flowers 2"
+   Radius 24
+   Height 24
+   scale 0.95
+	+FORCEYBILLBOARD
+   States
+   {
+   Spawn:
+      FLWB A -1
+	  stop
+	}
+}
+Actor Flowers3 30003
+{  //$Category WDI Environment/Flowers
+   //$Title "Flowers 2B"
+   Radius 24
+   Height 24
+   scale 0.95
+	+FORCEYBILLBOARD
+   States
+   {
+   Spawn:
+      FLWC A -1
+	  stop
+	}
+}
+Actor Flowers4 30004
+{  //$Category WDI Environment/Flowers
+   //$Title "Flowers 3"
+   Radius 24
+   Height 24
+   scale 0.95
+	+FORCEYBILLBOARD
+   States
+   {
+   Spawn:
+      FLWD A -1
+	  stop
+	}
+}
+Actor Flowers5 30005
+{  //$Category WDI Environment/Flowers
+   //$Title "Flowers 4"
+   Radius 24
+   Height 24
+   scale 0.95
+	+FORCEYBILLBOARD
+   States
+   {
+   Spawn:
+      FLWE A -1
+	  stop
+	}
+}
+Actor Flowers6 30006
+{  //$Category WDI Environment/Flowers
+   //$Title "Flowers 5"
+   Radius 24
+   Height 24
+   scale 0.95
+	+FORCEYBILLBOARD
+   States
+   {
+   Spawn:
+      FLWF A -1
+	  stop
+	}
+}
+
+//-------------------------------------------------------------
+//MISC---------------------------------------------------------
+Actor PotUU : PotA 31898 {
+  //$Category WDI Props/Pots
+  //$Sprite VASEB0
+  //$Title "Pot 7 (Breakable)"
+states {
+Spawn:
+VASE E -1
+Stop
+
+Death:
+VASE E 1 A_PlaySound("pot/break")
+VASE E 1 A_Burst("PotBits") 
+stop
+}}
+
+Actor DollSpawner: RandomSpawner 31899
+{
+DropItem "DoomDoll"
+DropItem "DoomDoll1"
+DropItem "DoomDoll2"
+DropItem "DoomDoll3"
+DropItem "DoomDoll4"
+DropItem "DoomDoll5"
+DropItem "DoomDoll6"
+DropItem "DoomDoll7"
+DropItem "DemonDoll"
+}
+
+Actor DoomDoll
+{
+ //$Category WDI Props
+ -NOBLOCKMAP
+ +PUSHABLE +SHOOTABLE +CANNOTPUSH +GHOST PushFactor 0.1
+ +FORCEXYBILLBOARD
+ +NOBLOOD
+ Mass 2000
+ Radius 12
+  States
+  {
+  Spawn:
+    DDOL A -1
+    Stop
+  }
+}
+Actor DoomDoll1: DoomDoll { translation "112:127=[30,144,255]:[0,0,0]" }
+Actor DoomDoll2: DoomDoll { translation "112:127=[220,20,60]:[0,0,0]" }
+Actor DoomDoll3: DoomDoll { translation "112:127=[255,69,0]:[0,0,0]" }
+Actor DoomDoll4: DoomDoll { translation "112:127=[138,43,226]:[0,0,0]" }
+Actor DoomDoll5: DoomDoll { translation "112:127=[238,130,238]:[0,0,0]" }
+Actor DoomDoll6: DoomDoll { translation "112:127=[255,255,0]:[0,0,0]" }
+Actor DoomDoll7: DoomDoll { translation "112:127=[205, 127, 50]:[0,0,0]" }
+
+Actor DemonDoll: DoomDoll
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_Jump(256,"1","2","3","4")
+		1: IMPD A -1
+		stop
+		2: SGGD A -1
+		stop
+		3: ZBMD A -1
+		stop
+		4: CGGD A -1
+		stop
+	}
+}
+
+
+
+
+
+Actor Nethertree 30007 
+{
+  //$Category WDI Props
+  //$Title "Nether Tree"
+  +SOLID
+  +FORCEYBILLBOARD
+height 48
+radius 16
+states {
+Spawn:
+NHTR C -1
+loop
+}}
+Actor Netherbeer 30008
+{
+	-SOLID
+	Radius 8
+	Height 18
+  //$Category WDI Props
+  //$Title "Nether beer bottle"
+	States
+	{
+	Spawn:
+		NHBR A -1
+		Stop
+	}
+}
+Actor Redlantern 30009
+{
+  //$Category WDI Light Sources
+	-SOLID
+	+NOCLIP
+	+NOGRAVITY
+	+NOINTERACTION
+	+FORCEYBILLBOARD
+	+BRIGHT
+	Radius 6
+	Height 49
+	states
+	{
+	Spawn:
+		RDLN A -1
+		Stop
+	}
+}
+
+Actor Tablelamp 30011
+{
+//$Category WDI Light Sources
+Radius 10
+Height 36
+Scale 0.8
++FORCEYBILLBOARD
+States
+{
+Spawn:
+LMP2 A -1
+loop
+}
+}
+
+//-------------------------------------------------------------------
+//-------------------------------------------------------------
+//ROCKS------------------------------------------------
+
+
+//-------------------------------------------------------------
+//MAPMARKERS------------------------------------------------
+Actor LightswitchMarker 30013 
+{
+- SOLID
++NOBLOCKMAP
++NOGRAVITY
++CLIENTSIDEONLY
++ALLOWCLIENTSPAWN
++FORCEXYBILLBOARD
+Radius 2
+Height 2
+Renderstyle Add
+Alpha 0.35
+Scale 0.6
+VisibleToTeam 1
+  //$Sprite LIMKA0
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0
+TNT1 A 0
+Goto On
+
+Active:
+LIMK A 1 BRIGHT A_UnHideThing
+LIMK A 1 BRIGHT
+Wait
+
+InActive:
+TNT1 A 1 A_HideThing
+TNT1 A 1
+Wait
+
+Off:
+TNT1 A 1
+Wait
+
+On:
+LIMK A 1 BRIGHT
+Wait
+}
+}
+	
+//---------------------------------------------
+Actor ActionMarkerBlueTeleport 181 //this do something in ur map jig?????
+{
+- SOLID
++NOBLOCKMAP
++NOGRAVITY
++CLIENTSIDEONLY
++ALLOWCLIENTSPAWN
++FORCEXYBILLBOARD
+Radius 2
+Height 2
+Renderstyle Add
+Alpha 0.45
+VisibleToTeam 1
+  //$Category WDI Murderer Stuff
+  //$Sprite ACTBA0
+  //$Title "Action Marker (Blue + Teleport)"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 //Thing_ChangeTID(0,256)
+TNT1 A 0
+Goto On
+//Goto Off
+
+Active:
+ACTB A 1 BRIGHT A_UnHideThing
+ACTB A 1 BRIGHT 
+Wait
+
+InActive:
+TNT1 A 1 A_HideThing
+TNT1 A 1
+Wait
+
+Off:
+TNT1 A 1
+Wait
+
+On:
+ACTB A 1 BRIGHT
+Wait
+}
+}
+
+
+//wdi21////////////////////////////////
+
+//I'll slaughter whoever replaced Tech Pillar sprite
+ACTOR TehPillar : TechPillar 14888
+{
++FORCEYBILLBOARD
+  States
+  {
+  Spawn:
+    TEHP A -1 NODELAY A_Jump(256,"1","2","3","4","5","6")
+    Stop
+	1: TEHP G -1 
+	stop
+	2: TEHP F -1 
+	stop
+	3: TEHP E -1 
+	stop
+	4: TEHP D -1 
+	stop
+	5: TEHP C -1 
+	stop
+	6: TEHP B -1 
+	stop
+  }
+}
+
+
+//from repo to test lagg wdi13

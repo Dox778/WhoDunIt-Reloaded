@@ -1,0 +1,150 @@
+//Silent Door
+:SilentDoor
+   door 60
+   playuntildone DSNULL
+   playrepeat DSNULL
+   stopsound DSNULL
+end
+
+//Silent Platform
+:SilentPlatform
+   platform 61
+   playuntildone DSNULL
+   playrepeat DSNULL
+   stopsound DSNULL
+end
+
+
+//Elevator
+:Elevator
+   platform 62
+   playuntildone Lift/Start
+   playrepeat Lift/Loop
+   stopsound Lift/Stop
+end
+
+//FactoryLift
+:FactoryLift
+   platform 63
+   playuntildone factlif3
+   playrepeat factlift
+   stopsound factlif2
+end
+
+//SewageDrain
+:SewageDrain
+	platform 16
+	playrepeat tdrain
+end
+
+//BIGPACK STUFF
+//Techbase Door
+:TechbaseDoor
+   playuntildone door1
+   stopsound doorend
+end
+
+//////////////////////////////////////////////////////////////////
+/////////////////// E X        S T U F F /////////////////////////
+//////////////////////////////////////////////////////////////////
+
+:D3DoorOpen
+   play D3DR01OP
+   stopsound YZNOSND1
+end
+
+:D3DoorClose
+   play D3DR01CL
+   stopsound YZNOSND1
+end
+
+[D3Door
+   Door 13
+   0 D3DoorOpen
+   1 D3DoorClose
+   2 D3DoorOpen
+   3 D3DoorClose
+]
+
+////////////////////////////
+:D32DoorOpen
+   play D3DR02OP
+   stopsound YZNOSND1
+end
+
+:D32DoorClose
+   play D3DR02CL
+   stopsound YZNOSND1
+end
+
+[D32Door
+   Door 14
+   0 D32DoorOpen
+   1 D32DoorClose
+   2 D32DoorOpen
+   3 D32DoorClose
+]
+///////////////////////
+:D33DoorOpen
+   play D3DR03OP
+   stopsound YZNOSND1
+end
+
+:D33DoorClose
+   play D3DR03CL
+   stopsound YZNOSND1
+end
+
+[D33Door
+   Door 15
+   0 D33DoorOpen
+   1 D33DoorClose
+   2 D33DoorOpen
+   3 D33DoorClose
+]
+
+///////////////////////
+:D34DoorOpen
+   play D3DR04OP
+   stopsound YZNOSND1
+end
+
+:D34DoorClose
+   play D3DR04CL
+   stopsound YZNOSND1
+end
+
+[D34Door
+   Door 16
+   0 D34DoorOpen
+   1 D34DoorClose
+   2 D34DoorOpen
+   3 D34DoorClose
+]
+
+///////////////////////
+:D35DoorOpen
+   play D3DR05OP
+   stopsound YZNOSND1
+end
+
+:D35DoorClose
+   play D3DR05CL
+   stopsound YZNOSND1
+end
+
+[D35Door
+   Door 17
+   0 D35DoorOpen
+   1 D35DoorClose
+   2 D35DoorOpen
+   3 D35DoorClose
+]
+
+
+:ScaryDoorSound
+    door               22
+    playuntildone      D35DoorOpen
+    playrepeat         D35DoorClose
+    stopsound          D35DoorClose
+end

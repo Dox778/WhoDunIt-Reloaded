@@ -1,0 +1,344 @@
+//=====================================================
+/////////////////////   AXE  //////////////////////////
+//=====================================================
+Actor Axepawner : RandomSpawner 2716
+{
+	//$Category WDI Weapons
+	//$Sprite AXEZA0
+	//$Title "Axe Spawner" 
+	DropItem "FakeFireAxeZ"  255, 30
+	DropItem "FakeAxe"  255, 30
+	DropItem "FakeFireExt"  255, 10
+	DropItem "AnimalSpawner"  255, 5
+}
+
+////////////////////////////////////////////////////////////////
+Actor FakeAxe : CustomInventory  25360  
+{ 
+	//$Category WDI Weapons/Heavy Weapons
+	//$Sprite AXEZA0
+	//$Title "Axe" 
+	Radius 16
+	Height 8
+	Scale 1.0
+	Inventory.PickupMessage "\cjFound a \c[V2]hatchet. \cjSuper sharp!\n\caDamage: \c[C4]28"
+	Inventory.Respawntics 21000 //10 Minutes
+	+FORCEXYBILLBOARD
+	+DonTGib
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		AXEZ A -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("Axe",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,15)
+		Stop
+	NotPickup:
+		TNT1 A 0
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,15)
+		Fail
+}}
+Actor FakeAxeNoRandom : FakeAxe
+{ 
+	States
+	{
+	Spawn:
+		AXEZ A -1
+		Stop
+}}
+
+Actor Axe : Wdi_BaseWeapon
+{
+	Radius 8
+	Height 32
+	Tag "Hatchet"
+	Inventory.PickupMessage "You found a hatchet."
+	Weapon.PreferredSkin "AxeSkin"
+	Inventory.Icon "WEPICO14"
+	States
+	{
+	Spawn:
+		AXEZ A 0
+		Goto Death
+	Pickup:
+	Select:
+		TNT1 A 6
+		2XE3 A 0 A_JumpIfInventory("Stained",1,2)
+		AXE3 A 0
+		"####" AAAAAAAAAAAAAAA 0 A_Raise
+		"####" A 1 offset(71,156)
+		"####" A 1 offset(62,127)
+		"####" A 1 offset(52,106)
+		"####" A 1 offset(44,88)
+		"####" A 1 offset(36,76)
+		"####" A 1 offset(28,64)
+		"####" A 1 offset(20,54)
+		"####" A 1 offset(14,45)
+		"####" A 1 offset(8,40)
+		"####" A 1 offset(4,36)
+		"####" A 1 offset(1,33)
+		"####" A 0 A_Jump(255,"Ready")
+		"####" A 0 A_Jump(255,"Ready")
+		goto Ready
+	Ready:
+		2XE3 A 0 A_JumpIfInventory("Stained",1,2)
+		AXE3 A 0
+		ReadyStay:
+		"####" A 1 A_WeaponReady(WRF_ALLOWZOOM)
+		loop
+	Fire:
+		"####" BCDEFGGG 1
+		"####" A 0 A_GiveInventory("PlayerAttackAnim",1)
+	Hold:
+		"####" G 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		"####" A 0 A_GiveInventory("PlayerAttackAnim",1)
+		
+		"####" A 0 A_ReFire
+		"####" H 1 A_Recoil(-1)
+		"####" I 1 A_PlaySound("Axe/Swing")
+		"####" J 1 A_CustomPunch(10,1,0,"FirstPuffAxe", 70)
+		"####" KL 1 A_CustomPunch(9,1,0,"AxeHitPuffHorizontal", 70)
+		"####" M 1
+		TNT1 A 6
+		2XE3 A 0 A_JumpIfInventory("Stained",1,2)
+		AXE3 A 0
+		"####" NOPQRSTUU 1
+		Goto Ready
+	Death:
+		AXEZ A 0 A_SpawnItem("DroppedAxe",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		wait
+	//Zoom:
+		TNT1 A 0
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+}}
+
+Actor FirstPuffAxe: BaseMeleePuff
+{
+	Scale 0.75
+	Alpha 0.9
+	+NOEXTREMEDEATH
+	-ALLOWPARTICLES
+}
+
+Actor PuffAxe: BaseMeleePuff
+{
+	Scale 0.75
+	Alpha 0.9
+	RenderStyle None
+	+NOEXTREMEDEATH
+	-ALLOWPARTICLES
+}
+
+Actor DroppedAxe: Wdi_BaseDroppedWeapon
+{
+	BounceSound "Axe/Wall"
+	Scale 1.0
+	States
+	{
+	Spawn:
+		AXEZ A -1
+		Stop
+	Death:
+		AXEZ A 35 A_playSound("Axe/Wall",CHAN_BODY,0.5)
+		AXEZ A 1 A_SpawnItem("FakeAxeNoRandom",0,0,0,0)
+		Stop
+}}
+Actor DroppedAxeFar: Wdi_BaseDroppedWeaponFar
+{
+	BounceSound "Axe/Wall"
+	Scale 1.0
+	States
+	{
+	Spawn:
+		AXEZ A -1
+		Stop
+	Death:
+		AXEZ A 35 A_playSound("Axe/Wall",CHAN_BODY,0.5)
+		AXEZ A 1 A_SpawnItem("FakeAxeNoRandom",0,0,0,0)
+		Stop
+}}
+
+
+
+//=====================================================
+///////////////////// FIRE AXE  ///////////////////////
+//=====================================================
+
+Actor FakeFireAxeZ : CustomInventory 30090
+{
+	//$Category WDI Weapons/Heavy Weapons
+	//$Title "Fire Axe"
+	Radius 16
+	Height 8
+	Inventory.PickupMessage "\cjFound a \c[H1]fire axe. \cjSuper sharp!\n\caDamage: \c[C4]28"
+	Inventory.Respawntics 21000 //10 Minutes
+	+FORCEXYBILLBOARD
+	+DontGib
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		AXEX Z -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("FireAxe",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,15)
+		Stop
+	NotPickup:
+		TNT1 A 0
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,15)
+		Fail
+}}
+Actor FakeFireAxeZNoRandom : FakeFireAxeZ
+{
+	States
+	{
+	Spawn:
+		AXEX Z -1
+		Stop
+}}
+
+
+Actor FakeFireAxeY : FakeFireAxeZ
+{
+	-FORCEXYBILLBOARD
+	+FORCEYBILLBOARD
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		AXEX Y -1
+		Stop
+}}
+
+
+//Sprites by neoworm axe fire
+Actor FireAxe : Wdi_BaseWeapon
+{ 
+	Radius 8
+	Height 32
+	Inventory.PickupMessage "You got Fireman axe!"
+	Tag "Fire Axe"
+	Obituary "%k butchered %o with his axe!"
+	//Weapon.SlotNumber 1
+	Weapon.PreferredSkin "FireAxeSkin"
+	Weapon.SelectionOrder 2201
+	Inventory.Icon "WEPICO15"
+	States
+	{
+	Spawn:
+		AXEX Z -1
+		Stop
+	Select:
+		TNT1 A 6
+		2XEX A 0 A_JumpIfInventory("Stained",1,2)
+		AXEX A 0
+		"####" AAAAAAAAAAAAAAA 0 A_Raise
+		"####" A 1 offset(71,156)
+		"####" A 1 offset(62,127)
+		"####" A 1 offset(52,106)
+		"####" A 1 offset(44,88)
+		"####" A 1 offset(36,76)
+		"####" A 1 offset(28,64)
+		"####" A 1 offset(20,54)
+		"####" A 1 offset(14,45)
+		"####" A 1 offset(8,40)
+		"####" A 1 offset(4,36)
+		"####" A 1 offset(1,33)
+		"####" A 0 A_Jump(255,"Ready")
+		"####" A 0 A_Jump(255,"Ready")
+		goto Ready
+	Ready:
+		2XEX A 0 A_JumpIfInventory("Stained",1,2)
+		AXEX A 0
+		ReadyStay:
+		"####" A 1 A_WeaponReady(WRF_ALLOWZOOM)
+		loop
+	Fire:
+		"####" BCDEFGHHII 1
+	Hold:
+		"####" I 1 A_WeaponReady(WRF_NOFIRE|WRF_DISABLESWITCH)
+		
+		"####" A 0 A_Refire
+		"####" J 1
+		//TNT1 A 0 ThrustThingZ(0,40,1,0)
+		"####" K 1 A_PlaySound("Axe/Swing", CHAN_WEAPON)
+		"####" L 1
+		"####" M 1 A_Recoil(-1)
+		"####" N 1 A_CustomPunch(12, 1, 0, "PuffAxe",72)
+		"####" O 1 A_CustomPunch(16, 1, 0, "AxeHitPuff",72)
+		"####" P 1
+		TNT1 A 6
+		2XEX A 0 A_JumpIfInventory("Stained",1,2)
+		AXEX A 0
+		"####" QRSTUVW 1
+		Goto Ready
+	//Zoom:
+		TNT1 A 0
+	  NULL A 0 A_GiveInventory("DropAnimWeapon",1)
+	  NULL A 0 A_SelectWeapon("DropAnimWeapon")
+		TNT1 A 0 A_TakeInventory("IsDropping",1)
+		TNT1 A 0 ACS_ExecuteAlways(418,0,0,0,0)
+		Goto Ready
+	Death:
+		"####" A 0 A_SpawnItem("DroppedFireAxe",0,0,0,0)
+		TNT1 A 0 A_FadeOut(1.0)
+		wait
+}}
+
+ACTOR AxeHitPuff : BaseMeleePuff
+{
+  SeeSound "Axe/Hit"
+  AttackSound "Axe/Wall"
+	Decal "AxeDecal"
+}
+ACTOR AxeHitPuffHorizontal : AxeHitPuff { Decal "AxeDecalHorizontal" }
+
+Actor DroppedFireAxe: Wdi_BaseDroppedWeapon
+{
+	BounceSound "Axe/Wall"
+	Scale 1.0
+	States
+	{
+	Spawn:
+		AXEX Z -1
+		Stop
+	Death:
+		AXEX Z 35 A_playSound("Axe/Wall",CHAN_BODY,0.5)
+		AXEX Z 1 A_SpawnItem("FakeFireAxeZNoRandom",0,0,0,0)
+		Stop
+}}
+Actor DroppedFireAxeFar: Wdi_BaseDroppedWeaponFar
+{
+	BounceSound "Axe/Wall"
+	Scale 1.0
+	States
+	{
+	Spawn:
+		AXEX Z -1
+		Stop
+	Death:
+		AXEX Z 35 A_playSound("Axe/Wall",CHAN_BODY,0.5)
+		AXEX Z 1 A_SpawnItem("FakeFireAxeZNoRandom",0,0,0,0)
+		Stop
+}}
+
+

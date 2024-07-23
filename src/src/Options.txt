@@ -1,0 +1,421 @@
+#library "Options"
+#include "zcommon.acs"
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//EVENT
+script "WDIReventScript" (int type, int arg1, int arg2) EVENT
+{
+	If(type == GAMEEVENT_ACTOR_DAMAGED)
+	{
+	ACS_NamedExecuteAlways("Health_regen",0);
+	}
+	delay(1);
+}
+
+
+//ENTER
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//DEBUGGING
+Script "DEBUGGING" ENTER
+{
+	If(GetCVAR("WDIR_Debug") == true)
+	{
+	Delay(4);
+	HudMessage(s:"Debug mode enabled"; HUDMSG_PLAIN, 69, CR_YELLOW, 1.5, 0.97, 0, 1.0);
+	If(GetCVAR("WDIR_DebugH") != 100)  {  SetActorProperty(0,APROP_Health, GetCVAR("WDIR_DebugH") );  }
+	If(GetCVAR("WDIR_Debug1") == true) {  ConsoleCommand("god");  }
+	If(GetCVAR("WDIR_Debug2") == true) {  ConsoleCommand("buddha");  }
+	If(GetCVAR("WDIR_Debug3") == true) {  ConsoleCommand("turbo 255");  }
+	If(GetCVAR("WDIR_Debug4") == true) {  ConsoleCommand("vid_fps 1");  }
+	If(GetCVAR("WDIR_Debug5") == true) {  GiveInventory("FlashlightZ",1); SetWeapon("FlashlightZ"); }
+	If(GetCVAR("WDIR_Debug6") == true) {  ConsoleCommand("give infrared");  }
+	If(GetCVAR("WDIR_Debug8") == true) {  ConsoleCommand("give murdermarker");  }
+	Delay(6);
+	log(s:"\ckDEBUG MODE ENABLED! \cfIf it's during a proper multiplayer match, ask the host to turn it off in the mod's options!!!");
+	If(GetCVAR("WDIR_Debug7") == true)
+	{
+		ConsoleCommand("idmypos 1");
+		int x, y, z, speed;
+		while(true)
+		{
+		HudMessage(s:GetActorFloorTexture(0); 0, 778778, CR_DARKGREEN, 0.99, 0.94, 0.5, 1.0);
+		x = GetActorVelX(0);
+		y = GetActorVelY(0);
+		z = GetActorVelZ(0);
+		speed = FixedMul(x, x) + FixedMul(y, y) + FixedMul(z, z);
+		print(f:FixedSqrt(speed));
+		delay(2);
+		}
+	}
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//ONE-TIME OPTIONS
+Script "WDICheckOptions" ENTER NET
+{
+	//Timer on hud
+	If(GetCvar("WDI_HudTimer") == 1) { GiveInventory("DrawTimer", 1); } else { TakeInventory("DrawTimer", 1); }
+//	ACS_NamedTerminate("BREATHING",0);
+//	delay(1);
+//	ACS_NamedExecutealways("BREATHING",0);
+	
+	Delay(3);
+	//Customizable X/Y scale
+	//first just apply the player's specified scale
+	int ScaleX = getCVAR("WDIR_PlayerScaleX");
+	int ScaleY = getCVAR("WDIR_PlayerScaleY");
+	int MinScaleXY = 0.95;
+	int MaxScaleXY = 1.05;
+	
+	SetActorProperty(0, APROP_ScaleX, clamp(ScaleX, MinScaleXY, MaxScaleXY) );
+	SetActorProperty(0, APROP_ScaleY, clamp(ScaleY, MinScaleXY, MaxScaleXY) );	
+	
+	//if they have it randomized, now randomize it lol
+	if (GetCvar("WDIR_RandomPlayerScaleX") == true)  { SetActorProperty(0, APROP_ScaleX, random(0.95,1.05)  ); }
+	if (GetCvar("WDIR_RandomPlayerScaleY") == true)  { SetActorProperty(0, APROP_ScaleY, random(0.95,1.05)  ); }
+	
+	Delay(3);
+	Terminate;
+}
+
+Script "BREATHING" enter
+{
+	delay(random(3,70)); //for custom height to kick in first
+	while(true)
+	{
+		if(  GetActorProperty(0, APROP_HEALTH) < 30 )
+		{
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) - 0.002 ); 	delay(1);
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) - 0.002 ); 	delay(1);
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) - 0.001 ); 	delay(1);
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) - 0.0005 ); delay(1);
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) - 0.0003 ); delay(1);
+		delay(15);
+	
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) + 0.002 ); 	delay(1);
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) + 0.002 ); 	delay(1);
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) + 0.001 ); 	delay(1);
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) + 0.0005 ); delay(1);
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) + 0.0003 );
+		delay(15);
+		}	
+		else
+		{
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) - 0.001 ); 	delay(1);		
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) - 0.001 ); 	delay(1);		
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) - 0.001 ); 	delay(1);		
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) - 0.001 ); 	delay(1);		
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) - 0.001 ); 	delay(1);		
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) - 0.0005 ); delay(1); 
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) - 0.0005 ); delay(1);
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) - 0.0003 );
+		delay(35);
+	
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) + 0.001 ); 	delay(1);
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) + 0.001 ); 	delay(1);
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) + 0.001 ); 	delay(1);
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) + 0.001 ); 	delay(1);
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) + 0.001 ); 	delay(1);
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) + 0.0005 ); delay(1);
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) + 0.0005 ); delay(1);
+		SetActorProperty(0, APROP_ScaleY, GetActorProperty(0, APROP_ScaleY) + 0.0003 ); delay(1);
+		delay(35);
+		}
+	}
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//OPEN
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+SCRIPT "iHateWarmup" ENTER
+{
+	GiveInventory("IsDancing", 1);
+	delay(35 * getCVAR("wdi_safety_time") );
+	TakeInventory("IsDancing", 1);
+	terminate;
+}
+
+
+
+//ENHANCEMENTS + MUSIC
+SCRIPT "wdirOPENscript" OPEN
+{
+	FadeRange(0,0,0,1.0,0,0,0,1.0,1.0);
+	Delay(5);
+	FadeRange(0,0,0,1.0,0,0,0,0.0,2.0);
+	Delay(10);
+	//ReplaceTextures("E1SKY1","FN_WHITE");
+	Switch( GetLevelInfo(LevelInfo_LevelNum) )
+	{
+	Case 1: SpawnForced("WDI01ExtraStuff",0,0,0,0,0); break;
+	Case 2: SpawnForced("WDI02ExtraStuff",0,0,0,0,0); break;
+	Case 3: SpawnForced("WDI03ExtraStuff",0,0,0,0,0); break;
+	
+	Case 5: SpawnForced("WDI05ExtraStuff",0,0,0,0,0); break;
+	Case 6: SpawnForced("WDI06ExtraStuff",0,0,0,0,0); break;
+	Case 7: SpawnForced("WDI07ExtraStuff",0,0,0,0,0); break;
+	Case 8: SpawnForced("WDI08ExtraStuff",0,0,0,0,0); break;
+	
+	Case 10: SpawnForced("WDI10ExtraStuff",0,0,0,0,0); break;
+	
+	Case 13: SpawnForced("WDI13ExtraStuff",0,0,0,0,0); break;
+	Case 14: SpawnForced("WDI14ExtraStuff",0,0,0,0,0); break;
+	Case 15: SpawnForced("WDI15ExtraStuff",0,0,0,0,0); break;
+	Case 16: SpawnForced("WDI16ExtraStuff",0,0,0,0,0); break;
+	Case 17: SpawnForced("WDI17ExtraStuff",0,0,0,0,0); break;
+	Case 18: SpawnForced("WDI18ExtraStuff",0,0,0,0,0); break;
+	Case 19: SpawnForced("WDI19ExtraStuff",0,0,0,0,0); break;
+	
+	Case 22: SpawnForced("WDI22ExtraStuff",0,0,0,0,0);  break;
+	//////////Possible WDIEX02s?
+	Case 32: SpawnForced("WDIEX02ExtraStuff",0,0,0,0,0); break;
+	Case 72: SpawnForced("WDIEX02ExtraStuff",0,0,0,0,0); break;
+	Case 41: SpawnForced("WDIEX02ExtraStuff",0,0,0,0,0); break;
+	Case 42: SpawnForced("WDIEX02ExtraStuff",0,0,0,0,0); break;
+	Case 50: SpawnForced("WDIEX02ExtraStuff",0,0,0,0,0); break;
+	///////
+	}
+	delay(2);
+//RANDOMIZED MUSIC
+	int RandomMusic = random(0,2);
+	int CheckLevel = GetLevelInfo(LevelInfo_LevelNum);
+	if(GetCVAR("WDI_RandomMusic") == true)
+	{
+		if(CheckLevel == 1 || CheckLevel == 2 || CheckLevel == 5 || CheckLevel == 6 || CheckLevel == 7 || CheckLevel == 8 || CheckLevel == 19 || CheckLevel == 23)
+		{
+			switch(RandomMusic)
+			{
+		  Default: SetMusic("D_LEVEL1",0); break;//case 0
+			Case 1: SetMusic("D_SPOOK",0); break;
+			Case 2: SetMusic("D_MANSI",0); break;
+			}
+		}
+	}
+	delay(5);
+	terminate;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+Script "CheckPretty" OPEN CLIENTSIDE
+{
+while(true)
+{
+	Delay(35);
+	Switch(GetCvar("WDI_Pretty"))
+	{
+		case 0:
+		SetACtorState(7780, "STFU"); 
+		SetActorProperty(7780,APROP_RenderStyle,STYLE_None);
+		While(GetCvar("WDI_Pretty") == 0) { Delay(35*3); }
+		break;
+		Case 1:
+		SetACtorState(7780, "Spawn"); 
+		SetActorProperty(7780,APROP_RenderStyle,STYLE_Normal);
+		While(GetCvar("WDI_Pretty") == 1) { Delay(35*3); }
+		break;
+		Case 2:
+		Thing_Remove(7780);
+		While(GetCvar("WDI_Pretty") == 2) { Delay(35*5); }
+		break;
+	}
+}
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+Script "CheckPingType" (void) CLIENTSIDE
+{
+if(GetCVAR("WDI_PingType") == 0) { SetResultValue(0); } //on
+else if(GetCVAR("WDI_PingType") == 1) { SetResultValue(1); } //on, silent
+else if(GetCVAR("WDI_PingType") == 2) { SetResultValue(2); } //off
+terminate;
+}
+
+
+function int clamp( int num, int min, int max ) //Thanks Kaminsky :3
+{
+    return ( num < min ? min : ( num > max ? max : num ));
+}
+
+function str byteToHex( int byte ) //Thanks Kaminsky :3 #2
+{
+    int char1 = byte / 16;
+    int char2 = byte % 16;
+    str result;
+
+    // 10-15 represent A-F in hexadecimal.
+    if ( char1 >= 10 )
+        result = StrParam( c:'A' + char1 - 10 );
+    else
+        result = StrParam( c:'0' + char1 );
+
+    if ( char2 >= 10 )
+        result = StrParam( s:result, c:'A' + char2 - 10 );
+    else
+        result = StrParam( s:result, c:'0' + char2 );
+
+    return result;
+}
+
+
+script "CheckPerma" (void)
+{
+SetResultValue(GetCVAR("WDI_PermaDebris"));
+terminate;
+}
+
+script "GetRainVolume" (void)
+{
+print(f:GetCVAR("WDIR_RainVolume") );
+SetResultValue(GetCVAR("WDIR_RainVolume"));
+terminate;
+}
+
+script "WDIGrassCheck" (void) NET
+{
+if (CheckActorFloorTexture(0, "Grass"))
+{
+SetResultValue(1);
+}
+else
+{
+SetResultValue(0);
+}
+}
+
+script "WDI16RockTexCheck" (void) NET
+{
+if (
+CheckActorFloorTexture(0, "DIRT_SU2") ||
+CheckActorFloorTexture(0, "ROCK6B") ||
+CheckActorFloorTexture(0, "ROCK1B") ||
+CheckActorFloorTexture(0, "WRCKA1") ||
+CheckActorFloorTexture(0, "ROCK9") ||
+CheckActorFloorTexture(0, "ROCK7A") ||
+CheckActorFloorTexture(0, "ROCK8C") ||
+CheckActorFloorTexture(0, "ROCKWAL4") ||
+CheckActorFloorTexture(0, "ROCK1") 
+)
+{
+SetResultValue(1);
+}
+else
+{
+SetResultValue(0);
+}
+}
+script "WDI16RockTexCheck2" (void) NET
+{
+if (
+CheckActorCeilingTexture(0, "DIRT_SU2") ||
+CheckActorCeilingTexture(0, "ROCK6B") ||
+CheckActorCeilingTexture(0, "ROCK1B") ||
+CheckActorCeilingTexture(0, "WRCKA1") ||
+CheckActorCeilingTexture(0, "ROCK9") ||
+CheckActorCeilingTexture(0, "ROCK7A") ||
+CheckActorCeilingTexture(0, "ROCK8C") ||
+CheckActorCeilingTexture(0, "ROCKWAL4") ||
+CheckActorCeilingTexture(0, "ROCK1")
+)
+{
+SetResultValue(1);
+}
+else
+{
+SetResultValue(0);
+}
+}
+
+
+Script "changeTheFuckingScales" (void) NET
+{
+		SetActorProperty(0,APROP_ScaleX, random(0.95, 1.05) );
+		SetActorProperty(0,APROP_ScaleY, random(0.95, 1.05) );
+	delay(1);
+}
+
+script "ChangeIdentity" (int type) NET CLIENTSIDE
+{
+	//TOTALLY random color (thanks Kaminsky!)
+	If(CheckInventory("ColorCooldown") ) {terminate;} //cant do dat
+	PlaySound(0,"Menu/Change",CHAN_BODY,0.75,false,ATTN_STATIC,true);
+    str command = "color ";
+	
+	if(type == 1) //favourite appearance
+	{
+		int color = GetCVAR( "WDIR_FavColor" );
+		int r = ( color >> 16 ) & 0xFF;
+		int g = ( color >> 8 ) & 0xFF;
+		int b = color & 0xFF;
+		command = StrParam( s:"color ", s:byteToHex( r ), s:byteToHex( g ), s:byteToHex( b )); 
+		NamedRequestScriptPuke("WDICheckOptions");
+	}
+	else //random appearance
+	{
+		NamedRequestScriptPuke("changeTheFuckingScales");
+
+		for ( int i = 0; i < 6; i++ )
+		{
+			int number = random( 0, 15 );
+
+			// 10-15 represent A-F in hexadecimal.
+			if ( number >= 10 )
+				command = StrParam( s:command, c:'A' + number - 10 );
+			else
+				command = StrParam( s:command, c:'0' + number );
+		}
+	}
+
+	ConsoleCommand( command );
+
+	GiveInventory("ColorCooldown",10);
+	delay(1);
+	TakeInventory("ColorCooldown",9);
+	delay(47);
+	TakeInventory("ColorCooldown",1);
+}
+
+Script "SuspendLmaoColors" (void) NET
+{
+	ACS_NamedSuspend("LmaoColors",0);
+}
+
+Script "LmaoColors" (void)//ENTER NET
+{
+	delay(1);
+	suspend;
+	while(true)
+	{
+	Thing_SetTranslation(0,10); delay(6);
+	Thing_SetTranslation(0,11); delay(6);
+	Thing_SetTranslation(0,12); delay(6);
+	Thing_SetTranslation(0,13); delay(6);
+	Thing_SetTranslation(0,14); delay(6);
+	Thing_SetTranslation(0,15); delay(6);
+	Thing_SetTranslation(0,16); delay(6);
+	Thing_SetTranslation(0,17); delay(6);
+	Thing_SetTranslation(0,18); delay(6);
+	Thing_SetTranslation(0,19); delay(6);
+	Thing_SetTranslation(0,20); delay(6);
+	Thing_SetTranslation(0,21); delay(6);
+	Thing_SetTranslation(0,22); delay(6);
+	Thing_SetTranslation(0,23); delay(6);
+	Thing_SetTranslation(0,24); delay(6);
+ 	Thing_SetTranslation(0,25); delay(6);
+ 	Thing_SetTranslation(0,26); delay(6);
+ 	Thing_SetTranslation(0,27); delay(6);
+ 	Thing_SetTranslation(0,28); delay(6);
+ 	Thing_SetTranslation(0,29); delay(6);
+ 	Thing_SetTranslation(0,30); delay(6);
+ 	Thing_SetTranslation(0,31); delay(6);
+ 	Thing_SetTranslation(0,32); delay(6);
+ 	Thing_SetTranslation(0,33); delay(6);
+	}
+}
+

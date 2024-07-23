@@ -1,0 +1,256 @@
+Actor FireworksItem : CustomInventory
+{
+  -INVENTORY.INTERHUBSTRIP
+  +INVENTORY.INVBAR 
+  +FORCEXYBILLBOARD
+  Inventory.MaxAmount 10
+  Tag "Fireworks"
+  Inventory.Icon "ARTIFIRE"
+  Scale 0.4
+  Inventory.RespawnTics 10500
+  Inventory.PickupMessage "\cjPicked up a \c[O1]fireworks rocket."
+	States
+	{
+	Spawn:
+	 TNT1 A 0
+	 FIWO B -1
+	Use:
+	TNT1 A 0 
+	TNT1 A 1 A_SpawnItemEx("fireworksLighting420",20,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	 stop
+	}
+}
+
+Actor fireworksLighting420
+{
+   Radius 8
+   Height 8
+   Scale 0.10
+  +NOBLOCKMAP
+  +NOTARGET
+  +DONTSQUASH
+  +NOTELEOTHER
+  +NONSHOOTABLE
+   States
+   {
+   Spawn:
+      TNT1 A 0
+	  FIWO A 0 A_PlaySound("FIREWLIT", 128)
+	  FIWO A 14  //delay for fuse lighting sound.
+	  FIWO ADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADAD 1 BRIGHT //rocket is lit and flickering.
+   Spawn2:
+	  FIWO D 1
+	  TNT1 A 0 A_PlaySound("FIREWOK4", 127)
+	  TNT1 A 0 A_SpawnItemEx("D420FFX2")
+	  TNT1 A 0 A_SpawnItemEx("D420FlashFX")
+	  TNT1 A 0 A_SpawnItemEx("FireworksRocket", 0, 0, 0, 0, 0, random(8, 10))
+	  TNT1 A 0 A_Jump (5, "SpawnFart")
+	  stop
+   SpawnFart:
+   	  TNT1 A 0 A_PlaySound("FIREFART", 128)
+	  stop
+	  		} 
+}
+
+Actor FireworksRocket  : fireworksLighting420
+{
+  +NOGRAVITY
+  +MISSILE
+  +SKYEXPLODE
+  +FORCEYBILLBOARD
+  Deathsound "FIREWOK3"
+   States
+   {
+   Spawn:
+      TNT1 A 0
+	  TNT1 A 0 A_Jump (128, "SpawnCB1")
+	  TNT1 A 0 A_Jump (128, "SpawnCB2")
+	  Goto Spawn2
+   SpawnCB1:
+	  TNT1 A 0 A_GiveInventory ("D420Cwr3", 0)
+	  TNT1 A 0 A_Jump (128, "SpawnCB2")
+	  Goto Spawn2
+   SpawnCB1S:
+	  TNT1 A 0
+	  TNT1 A 0 A_JumpIfInventory ("D420Cwr1",Random(130,200), "SpawnCB1E")
+	  Goto Spawn2S
+   SpawnCB1E:
+	  TNT1 A 0 A_TakeInventory ("D420Cwr3", 0)
+	  Goto Spawn2
+   SpawnCB2:
+	  TNT1 A 0 A_GiveInventory ("D420Cwr2", Random(1, 5))
+	  Goto Spawn2
+   Spawn2:
+	  TNT1 A 0 A_JumpIfInventory ("D420Cwr3", 1, "SpawnCB1S")
+   Spawn2S:
+	  TNT1 A 0 A_SpawnItemEx("D420FFX3", 0, 0, 0, random(-2.0, 2.0), random(-2.0, 2.0)) //this line here for always sparkles instead of sometimes not when it was in SpawnCB1S
+	  TNT1 A 0 A_JumpIfInventory ("D420Cwr2", 5, "Spawn2C1")
+	  TNT1 A 0 A_JumpIfInventory ("D420Cwr2", 4, "Spawn2C1")
+	  TNT1 A 0 A_JumpIfInventory ("D420Cwr2", 3, "Spawn2C1")
+	  TNT1 A 0 A_JumpIfInventory ("D420Cwr2", 2, "Spawn2C1")
+	  TNT1 A 0 A_JumpIfInventory ("D420Cwr2", 1, "Spawn2C1")
+	  TNT1 A 0 A_GiveInventory ("D420Cwr2", Random(1, 5))
+	  loop
+   Spawn2C1:
+	  FIWO C 1 BRIGHT
+	  Goto Spawn3
+   Spawn3:
+	  TNT1 A 0 A_GiveInventory ("D420Cwr1", 1)
+	  TNT1 A 0 A_JumpIfInventory ("D420Cwr1",Random(30,950), "ConfettiExplode") //this random number area decides travel time before exploding. Cwr1 can go from 0-1000 so current values allow much randomness, but never make it last too long.
+	  TNT1 A 0 A_GiveInventory ("Cwr4", 1)
+	  TNT1 A 0 A_JumpIfInventory ("Cwr4", 0, "Spawn4")
+	  Goto Spawn2
+   Spawn4:
+	  TNT1 A 0 ThrustThingZ(0, -1, 0, 1)
+	  TNT1 A 0 A_TakeInventory ("Cwr4", 0)
+	  Goto Spawn2
+   ConfettiExplode:
+      TNT1 A 0 
+      TNT1 A 0 A_Scream
+	  TNT1 A 0 A_SpawnItemEx("D420FFX1")
+	  TNT1 A 0 A_SpawnItemEx("D420FlashFX")
+	  TNT1 A 0 A_GiveInventory ("D420Cwr2", Random(1, 7))
+	  TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("FireworksConfetti", 0, 0, 0, random(-5.0, 5.0), random(-5.0, 5.0), random(-5.0, 5.0)) //250 confettis   with bigger random spread  
+	  TNT1 A 0 A_Jump (5, "LuckyDrop")
+      stop
+	LuckyDrop:
+	  TNT1 A 0 A_SpawnItemEx("DroppedRandomWeaponKit")
+	  stop
+	Death:
+	  TNT1 A 0
+	Goto ConfettiExplode
+   }
+}
+
+Actor FireworksConfetti
+{   
+   Radius 2
+   Height 2
+   Speed 0
+   Scale 0.20
+   PROJECTILE
+   +CLIENTSIDEONLY
+   +DONTSPLASH 
+   +FORCEXYBILLBOARD
+   States
+   {
+   Spawn:
+	  TNT1 A 0 BRIGHT
+	  TNT1 A 0 A_GiveInventory ("D420Cwr2", Random(1, 5))
+   Spawn2:
+	  TNT1 A 0 A_JumpIfInventory ("D420Cwr2", 5, "C5")
+	  TNT1 A 0 A_JumpIfInventory ("D420Cwr2", 4, "C4")
+	  TNT1 A 0 A_JumpIfInventory ("D420Cwr2", 3, "C3")
+	  TNT1 A 0 A_JumpIfInventory ("D420Cwr2", 2, "C2")
+	  TNT1 A 0 A_JumpIfInventory ("D420Cwr2", 1, "C1")
+   C1:
+      TNT1 A 0 BRIGHT
+      PEPF A 1 BRIGHT
+	  Goto Spawn3
+   C2:
+      TNT1 A 0 BRIGHT
+      PEPG A 1 BRIGHT
+	  Goto Spawn3
+   C3:
+      TNT1 A 0 BRIGHT
+      PEPH A 1 BRIGHT
+	  Goto Spawn3
+   C4:
+      TNT1 A 0 BRIGHT
+      PEPI A 1 BRIGHT
+	  Goto Spawn3
+   C5:
+      TNT1 A 0 BRIGHT
+      PEPJ A 1 BRIGHT
+	  Goto Spawn3
+   Spawn3:
+	  TNT1 A 0 BRIGHT A_GiveInventory ("D420Cwr1", 1)
+	  TNT1 A 0 BRIGHT A_JumpIfInventory ("D420Cwr1",Random(30,50), "Spawn4")
+	  Goto Spawn2
+   Spawn4:
+	  TNT1 A 0 BRIGHT ThrustThingZ(0, -2, 0, 1)
+	  TNT1 A 0 BRIGHT A_TakeInventory ("D420Cwr1", 0)
+      Goto Spawn2
+   Death:
+	  TNT1 A 10
+      stop
+   }
+}
+
+ACTOR D420FFX1
+{   
+   Radius 2
+   Height 2
+   Speed 0
+   Scale 1.80
+  +NOGRAVITY
+  +NOBLOCKMAP
+  +NOLIFTDROP
+  +NOTARGET
+  +DONTSQUASH
+  +NOTELEOTHER
+  +NONSHOOTABLE
+   States
+   {
+   Spawn:
+      FFX1 A 0 BRIGHT
+      FFX1 A 2 BRIGHT A_FadeOut
+      Wait
+   }
+}
+
+ACTOR D420FFX2  : D420FFX1
+{
+   Scale 1.50
+   States
+   {
+   Spawn:
+      TNT1 A 0 BRIGHT
+      FFX1 B 2 BRIGHT A_FadeOut
+      Wait
+   }
+}
+
+ACTOR D420FFX3  : D420FFX1
+{
+   Scale 0.60
+   States
+   {
+   Spawn:
+      TNT1 A 0 BRIGHT
+      FFX1 C 2 BRIGHT A_FadeOut
+      Wait
+   }
+}
+
+ACTOR D420FlashFX  : D420FFX1
+{
+   States
+   {
+   Spawn:
+      TNT1 A 0 BRIGHT
+	  TNT1 A 1 BRIGHT Light_ChangeToValue(5, 180)
+	  TNT1 A 0 BRIGHT Light_ChangeToValue(5, 66)
+      stop
+   }
+}
+
+ACTOR D420Cwr1 : Inventory
+{
+     Inventory.MaxAmount 1000
+}
+
+ACTOR D420Cwr2 : Inventory
+{
+     Inventory.MaxAmount 1000
+}
+
+ACTOR D420Cwr3 : Inventory
+{
+     Inventory.MaxAmount 1
+}
+
+ACTOR D420Cwr4 : Inventory
+{
+     Inventory.MaxAmount 7
+}

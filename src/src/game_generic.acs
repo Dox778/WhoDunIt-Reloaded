@@ -1,0 +1,220 @@
+Script 651 (VOID) Clientside //TK vengence script
+{
+	If(!CheckInventory("MurderMarker"))
+    {
+		if(PlayerClass(PlayerNumber()) == -1  || CheckActorInventory(TID_START+PlayerNumber(), "ScriptDeath")) terminate;
+        // broadcast that this player has killed an innocent
+		Setfont("SmallFont");
+        HudMessageBold(n:0, s:" \c[Green]has avenged an innocents death!"; HUDMSG_FADEOUT|HUDMSG_LOG, 7, CR_UNTRANSLATED, 0.5, 0.85, 6.5, 1.0);
+        // tell the current player the he/she killed an innocent
+		Setfont("SmallFont");
+        Hudmessage(s:"You have avenged an innocent death!"; HUDMSG_FADEOUT, 7, CR_RED, 0.5, 0.85, 6.5, 1.0);
+        TakeInventory("TKHero", 1);
+    }
+}
+
+Script 652 (void)
+{
+	Setfont("BigFont");
+	HudMessage(s:"BACKSTABBED!"; HUDMSG_PLAIN, 0, CR_RED, 0.5, 0.85, 3.0);
+}
+
+Script 653 (void)
+{
+	TakeActorInventory(ActivatorTID(), "Slot1Filled", 1);
+	TakeActorInventory(ActivatorTID(), "Brick", 1);
+	TakeActorInventory(ActivatorTID(), "Molotov", 1);
+}
+
+Script 654 (void)
+{
+	if(CheckActorInventory(ActivatorTID(), "SawOn")) // if the saw is on, turn it off
+	{
+		TakeActorInventory(ActivatorTID(), "SawOn", 1);
+	}
+	
+	else
+	{
+		GiveActorInventory(ActivatorTID(), "SawOn", 1);
+	}
+}
+
+//Melee
+#define WEP_PIPE 10
+#define WEP_WRENCH 11
+#define WEP_CHAINSAW 12
+#define WEP_CUE 13
+#define WEP_SHOVEL 14
+
+//Guns
+#define WEP_LUGER 20
+#define WEP_SHOTGUN 21
+#define WEP_CROSSBOW 22
+#define WEP_M1 23
+#define WEP_BRICK 24
+#define WEP_MOLLY 25
+#define WEP_PLANK 26
+#define WEP_NAILPLANK 27
+#define WEP_TWIG 28
+#define WEP_BAT 29
+
+script 670 (int WepID)
+{
+	switch (WepID)
+	{
+		case WEP_PIPE:
+			Setfont("SmallFont");
+			HudMessage(s:"Steel Pipe"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_WRENCH:
+			Setfont("SmallFont");
+			HudMessage(s:"Wrench"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_CHAINSAW:
+			Setfont("SmallFont");
+			HudMessage(s:"Chainsaw"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_LUGER:
+			Setfont("SmallFont");
+			HudMessage(s:"Beretta"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_SHOTGUN:
+			Setfont("SmallFont");
+			HudMessage(s:"Shotgun"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_CROSSBOW:
+			Setfont("SmallFont");
+			HudMessage(s:"Repeater Crossbow"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_CUE:
+			Setfont("SmallFont");
+			HudMessage(s:"Pool Cue"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_SHOVEL:
+			Setfont("SmallFont");
+			HudMessage(s:"Shovel"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_M1:
+			Setfont("SmallFont");
+			HudMessage(s:"M1 Carbine"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_BRICK:
+			Setfont("SmallFont");
+			HudMessage(s:"Brick (Throwable)"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_MOLLY:
+			Setfont("SmallFont");
+			HudMessage(s:"Molotov (Throwable)"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_PLANK:
+			Setfont("SmallFont");
+			HudMessage(s:"Wood Plank"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_NAILPLANK:
+			Setfont("SmallFont");
+			HudMessage(s:"Nail Plank"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_TWIG:
+			Setfont("SmallFont");
+			HudMessage(s:"Twig"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_BAT:
+			Setfont("SmallFont");
+			HudMessage(s:"Baseball Bat"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		default:
+			Setfont("SmallFont");
+			HudMessage(s:"Unnamed Pickup"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+	}
+}
+
+Script 407 (void)
+{
+	healthcounter[PlayerNumber()] = 0;
+}
+
+script 777 open //Health regen
+{
+	while(1)
+	{
+		for(int i = 0; i < 32; i++)
+		{
+			if(!CheckActorInventory(TID_START+i, "NoRegen") && !CheckActorInventory(TID_START+i, "GotHurt") && GetActorProperty(TID_START+i, APROP_HEALTH) > 0)
+			{
+				GiveActorInventory(TID_START+i, "Health", 1);
+			}
+			else if(CheckActorInventory(TID_START+i, "GotHurt"))
+			{
+				healthcounter[i]++;
+				if(healthcounter[i] >= 3)
+				{
+					healthcounter[i] = 0;
+					TakeActorInventory(TID_START+i, "GotHurt", 999);
+				}
+			}
+		}
+		delay(2*35);
+	}
+}
+
+// Speed setter script (handles the combat slowdown and everything)
+Script 778 Enter
+{
+	int counter = 1;
+	while(1)
+	{
+		while(!CheckActorInventory(TID_START+PlayerNumber(), "SlowCounter") && CheckActorInventory(TID_START+PlayerNumber(), "TKToken") < 2) 
+		{
+			Delay(1);
+			if(!CheckWeapon("MurderKnife") && !CheckWeapon("LChainsaw")) SetActorProperty(TID_START+PlayerNumber(), APROP_SPEED, 0.8);
+			if(CheckWeapon("LChainsaw")) SetActorProperty(TID_START+PlayerNumber(), APROP_SPEED, 0.75);
+			if(CheckWeapon("MurderKnife")) SetActorProperty(TID_START+PlayerNumber(), APROP_SPEED, 0.95);
+		}
+		
+		while(!CheckActorInventory(TID_START+PlayerNumber(), "SlowCounter") && CheckActorInventory(TID_START+PlayerNumber(), "TKToken") >= 2) 
+		{
+			Delay(1);
+			if(!CheckWeapon("MurderKnife")) SetActorProperty(TID_START+PlayerNumber(), APROP_SPEED, 0.6);
+		}
+		
+		if(CheckActorInventory(TID_START+PlayerNumber(), "SlowCounter"))
+		{
+			if(GetActorProperty(TID_START+PlayerNumber(), APROP_HEALTH) < 20)
+			{
+				TakeActorInventory(TID_START+PlayerNumber(), "SlowCounter",999);
+				counter = 0;
+			}
+			else
+			{
+				if(!CheckWeapon("MurderKnife") && !CheckWeapon("LChainsaw")) SetActorProperty(TID_START+PlayerNumber(), APROP_SPEED, 0.5);
+				if(CheckWeapon("LChainsaw")) SetActorProperty(TID_START+PlayerNumber(), APROP_SPEED, 0.45);
+				if(CheckWeapon("MurderKnife")) SetActorProperty(TID_START+PlayerNumber(), APROP_SPEED, 0.65);
+			}
+			
+			if(counter == 36)
+			{
+				TakeActorInventory(TID_START+PlayerNumber(), "SlowCounter",1);
+				counter = 0;
+			}
+		}
+		
+		counter++;
+		Delay(1);
+	}
+}

@@ -1,0 +1,473 @@
+ACTOR BallSpawner: RandomSpawner
+{
+DropItem "BouncyBall"
+DropItem "BouncyBall2"
+DropItem "BouncyBall3"
+DropItem "BouncyBall4"
+DropItem "BouncyBall5"
+DropItem "BouncyBall6"
+DropItem "BouncyBall7"
+DropItem "BouncyBall8"
+DropItem "BouncyBall9"
+}
+ACTOR BouncyBall : SwitchableDecoration 
+{
+Height 30
+Radius 6
+Scale 0.75
+Health 999
+PainChance 256
+DamageFactor "Gas",0
+DamageFactor "Fire",0
+DamageFactor "Burn",0
+
+DamageFactor "SprayBLU",0
+DamageFactor "SprayRED",0
+DamageFactor "SprayYLL",0
+DamageFactor "SprayGRN",0
+DamageFactor "SprayORG",0
+DamageFactor "SprayPNK",0
+
++FORCEPAIN 
++FORCEXYBILLBOARD
++NOBLOOD
++LOOKALLAROUND
++QUICKTORETALIATE
+-SOLID
++SHOOTABLE +CANNOTPUSH PushFactor 0.1
+Activation THINGSPEC_Default|THINGSPEC_ThingTargets|THINGSPEC_Activate
++BUMPSPECIAL
++USESPECIAL
+-FLOORCLIP
+	States
+	{
+	Spawn:
+		SOUL E 0 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOJUMP,0,512,1,0)
+		SOUL E 1 A_JumpIfCloser(18,"See")
+		loop
+	See: //Walked into 
+		SOUL E 1 A_FaceTarget
+		SOUL E 0 A_CustomMissile("BBallNormal",3,0,-180,CMF_AIMDIRECTION,0)
+		stop
+	Active: //Pressed use (weakest)
+		SOUL E 1 A_FaceTarget
+		SOUL E 0 A_CustomMissile("BBallSlow",3,0,-180,CMF_AIMDIRECTION,0)
+		stop
+	Pain: //Punched (farthest)
+		SOUL E 1 A_FaceTarget
+		SOUL E 0 A_CustomMissile("BBallFast",3,0,-180,CMF_AIMDIRECTION,0)
+		stop
+	Death:
+		SOUL E 0
+		stop
+	}
+}
+ACTOR BBallNormal
+{
+PROJECTILE SeeSound "ImBallin" BounceSound "ImBallin" DeathSound "ImBallin"
+Height 16 Radius 6 Scale 0.75 Gravity 0.7
+BounceType Doom BounceFactor 0.75 Speed 15 reactiontime 40 //universal thing for ThrustThingZ
+-NOGRAVITY -NOBLOCKMAP
++FORCEXYBILLBOARD +THRUACTORS
++BOUNCEONACTORS +ALLOWBOUNCEONACTORS +EXPLODEONWATER +SKYEXPLODE
+	States
+	{
+	Spawn:
+		SOUL E 2 NODELAY ThrustTHingZ(0,reactiontime,0,0)
+		SOUL E -1 A_ChangeFlag("THRUACTORS",0)
+	Death:
+		SOUL E 0 A_SpawnItemEX("BouncyBall",0,0,0,0,0,0,0,0)
+		stop
+	}
+}
+ACTOR BBallFast :BBallNormal { Speed 20 }
+ACTOR BBallSlow :BBallNormal { reactiontime 30 Speed 8 }
+
+
+
+
+ACTOR BouncyBall2 : BouncyBall 
+{States
+	{
+	Spawn:
+	SOUL F 0 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOJUMP,0,512,1,0)
+	SOUL F 1 A_JumpIfCloser(18,"See")
+	loop
+	See: //Walked into 
+	SOUL F 1 A_FaceTarget
+	SOUL F 0 A_CustomMissile("BBallNormal2",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Active: //Pressed use (weakest)
+	SOUL F 1 A_FaceTarget
+	SOUL F 0 A_CustomMissile("BBallSlow2",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Pain: //Punched (farthest)
+	SOUL F 1 A_FaceTarget
+	SOUL F 0 A_CustomMissile("BBallFast2",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	}
+}
+ACTOR BBallNormal2 : BBallNormal
+{States
+	{
+	Spawn:
+	SOUL F 2 NODELAY ThrustTHingZ(0,reactiontime,0,0)
+	SOUL F -1 A_ChangeFlag("THRUACTORS",0)
+	Death:
+	SOUL F 0 A_SpawnItemEX("BouncyBall2",0,0,0,0,0,0,0,0)
+	stop
+}}
+ACTOR BBallFast2 : BBallNormal2 { Speed 20 }
+ACTOR BBallSlow2 : BBallNormal2 { reactiontime 30 Speed 8 }
+
+ACTOR BouncyBall3 : BouncyBall 
+{States
+	{
+	Spawn:
+	SOUL G 0 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOJUMP,0,512,1,0)
+	SOUL G 1 A_JumpIfCloser(18,"See")
+	loop
+	See: //Walked into 
+	SOUL G 1 A_FaceTarget
+	SOUL G 0 A_CustomMissile("BBallNormal3",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Active: //Pressed use (weakest)
+	SOUL G 1 A_FaceTarget
+	SOUL G 0 A_CustomMissile("BBallSlow3",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Pain: //Punched (farthest)
+	SOUL G 1 A_FaceTarget
+	SOUL G 0 A_CustomMissile("BBallFast3",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	}
+}
+ACTOR BBallNormal3 : BBallNormal
+{States
+	{
+	Spawn:
+	SOUL G 2 NODELAY ThrustTHingZ(0,reactiontime,0,0)
+	SOUL G -1 A_ChangeFlag("THRUACTORS",0)
+	Death:
+	SOUL G 0 A_SpawnItemEX("BouncyBall3",0,0,0,0,0,0,0,0)
+	stop
+}}
+ACTOR BBallFast3 : BBallNormal3 { Speed 20 }
+ACTOR BBallSlow3 : BBallNormal3 { reactiontime 30 Speed 8 }
+
+ACTOR BouncyBall4 : BouncyBall 
+{States
+	{
+	Spawn:
+	SOUL H 0 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOJUMP,0,512,1,0)
+	SOUL H 1 A_JumpIfCloser(18,"See")
+	loop
+	See: //Walked into 
+	SOUL H 1 A_FaceTarget
+	SOUL H 0 A_CustomMissile("BBallNormal4",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Active: //Pressed use (weakest)
+	SOUL H 1 A_FaceTarget
+	SOUL H 0 A_CustomMissile("BBallSlow4",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Pain: //Punched (farthest)
+	SOUL H 1 A_FaceTarget
+	SOUL H 0 A_CustomMissile("BBallFast4",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	}
+}
+ACTOR BBallNormal4 : BBallNormal
+{States
+	{
+	Spawn:
+	SOUL H 2 NODELAY ThrustTHingZ(0,reactiontime,0,0)
+	SOUL H -1 A_ChangeFlag("THRUACTORS",0)
+	Death:
+	SOUL H 0 A_SpawnItemEX("BouncyBall4",0,0,0,0,0,0,0,0)
+	stop
+}}
+ACTOR BBallFast4 : BBallNormal4 { Speed 20 }
+ACTOR BBallSlow4 : BBallNormal4 { reactiontime 30 Speed 8 }
+
+ACTOR BouncyBall5 : BouncyBall 
+{States
+	{
+	Spawn:
+	SOUL I 0 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOJUMP,0,512,1,0)
+	SOUL I 1 A_JumpIfCloser(18,"See")
+	loop
+	See: //Walked into 
+	SOUL I 1 A_FaceTarget
+	SOUL I 0 A_CustomMissile("BBallNormal5",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Active: //Pressed use (weakest)
+	SOUL I 1 A_FaceTarget
+	SOUL I 0 A_CustomMissile("BBallSlow5",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Pain: //Punched (farthest)
+	SOUL I 1 A_FaceTarget
+	SOUL I 0 A_CustomMissile("BBallFast5",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	}
+}
+ACTOR BBallNormal5 : BBallNormal
+{States
+	{
+	Spawn:
+	SOUL I 2 NODELAY ThrustTHingZ(0,reactiontime,0,0)
+	SOUL I -1 A_ChangeFlag("THRUACTORS",0)
+	Death:
+	SOUL I 0 A_SpawnItemEX("BouncyBall5",0,0,0,0,0,0,0,0)
+	stop
+}}
+ACTOR BBallFast5 : BBallNormal5 { Speed 20 }
+ACTOR BBallSlow5 : BBallNormal5 { reactiontime 30 Speed 8 }
+
+ACTOR BouncyBall6 : BouncyBall 
+{States
+	{
+	Spawn:
+	SOUL J 0 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOJUMP,0,512,1,0)
+	SOUL J 1 A_JumpIfCloser(18,"See")
+	loop
+	See: //Walked into 
+	SOUL J 1 A_FaceTarget
+	SOUL J 0 A_CustomMissile("BBallNormal6",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Active: //Pressed use (weakest)
+	SOUL J 1 A_FaceTarget
+	SOUL J 0 A_CustomMissile("BBallSlow6",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Pain: //Punched (farthest)
+	SOUL J 1 A_FaceTarget
+	SOUL J 0 A_CustomMissile("BBallFast6",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	}
+}
+ACTOR BBallNormal6 : BBallNormal
+{States
+	{
+	Spawn:
+	SOUL J 2 NODELAY ThrustTHingZ(0,reactiontime,0,0)
+	SOUL J -1 A_ChangeFlag("THRUACTORS",0)
+	Death:
+	SOUL J 0 A_SpawnItemEX("BouncyBall6",0,0,0,0,0,0,0,0)
+	stop
+}}
+ACTOR BBallFast6 : BBallNormal6 { Speed 20 }
+ACTOR BBallSlow6 : BBallNormal6 { reactiontime 30 Speed 8 }
+
+ACTOR BouncyBall7 : BouncyBall 
+{States
+	{
+	Spawn:
+	SOUL K 0 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOJUMP,0,512,1,0)
+	SOUL K 1 A_JumpIfCloser(18,"See")
+	loop
+	See: //Walked into 
+	SOUL K 1 A_FaceTarget
+	SOUL K 0 A_CustomMissile("BBallNormal7",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Active: //Pressed use (weakest)
+	SOUL K 1 A_FaceTarget
+	SOUL K 0 A_CustomMissile("BBallSlow7",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Pain: //Punched (farthest)
+	SOUL K 1 A_FaceTarget
+	SOUL K 0 A_CustomMissile("BBallFast7",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	}
+}
+ACTOR BBallNormal7 : BBallNormal
+{States
+	{
+	Spawn:
+	SOUL K 2 NODELAY ThrustTHingZ(0,reactiontime,0,0)
+	SOUL K -1 A_ChangeFlag("THRUACTORS",0)
+	Death:
+	SOUL K 0 A_SpawnItemEX("BouncyBall7",0,0,0,0,0,0,0,0)
+	stop
+}}
+ACTOR BBallFast7 : BBallNormal7 { Speed 20 }
+ACTOR BBallSlow7 : BBallNormal7 { reactiontime 30 Speed 8 }
+
+ACTOR BouncyBall8 : BouncyBall 
+{States
+	{
+	Spawn:
+	SOUL L 0 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOJUMP,0,512,1,0)
+	SOUL L 1 A_JumpIfCloser(18,"See")
+	loop
+	See: //Walked into 
+	SOUL L 1 A_FaceTarget
+	SOUL L 0 A_CustomMissile("BBallNormal8",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Active: //Pressed use (weakest)
+	SOUL L 1 A_FaceTarget
+	SOUL L 0 A_CustomMissile("BBallSlow8",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Pain: //Punched (farthest)
+	SOUL L 1 A_FaceTarget
+	SOUL L 0 A_CustomMissile("BBallFast8",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	}
+}
+ACTOR BBallNormal8 : BBallNormal
+{States
+	{
+	Spawn:
+	SOUL L 2 NODELAY ThrustTHingZ(0,reactiontime,0,0)
+	SOUL L -1 A_ChangeFlag("THRUACTORS",0)
+	Death:
+	SOUL L 0 A_SpawnItemEX("BouncyBall8",0,0,0,0,0,0,0,0)
+	stop
+}}
+ACTOR BBallFast8 : BBallNormal8 { Speed 20 }
+ACTOR BBallSlow8 : BBallNormal8 { reactiontime 30 Speed 8 }
+
+ACTOR BouncyBall9 : BouncyBall 
+{States
+	{
+	Spawn:
+	SOUL M 0 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOJUMP,0,512,1,0)
+	SOUL M 1 A_JumpIfCloser(18,"See")
+	loop
+	See: //Walked into 
+	SOUL M 1 A_FaceTarget
+	SOUL M 0 A_CustomMissile("BBallNormal9",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Active: //Pressed use (weakest)
+	SOUL M 1 A_FaceTarget
+	SOUL M 0 A_CustomMissile("BBallSlow9",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Pain: //Punched (farthest)
+	SOUL M 1 A_FaceTarget
+	SOUL M 0 A_CustomMissile("BBallFast9",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	}
+}
+ACTOR BBallNormal9 : BBallNormal
+{States
+	{
+	Spawn:
+	SOUL M 2 NODELAY ThrustTHingZ(0,reactiontime,0,0)
+	SOUL M -1 A_ChangeFlag("THRUACTORS",0)
+	Death:
+	SOUL M 0 A_SpawnItemEX("BouncyBall9",0,0,0,0,0,0,0,0)
+	stop
+}}
+ACTOR BBallFast9 : BBallNormal8 { Speed 20 }
+ACTOR BBallSlow9 : BBallNormal8 { reactiontime 30 Speed 8 }
+
+ACTOR BasketBall : BouncyBall 25184
+{
+	//$Category WDI Props/Balls
+	//$Sprite SOULO0
+	//$Title "Basket ball"
+States
+	{
+	Spawn:
+	SOUL O 0 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOJUMP,0,512,1,0)
+	SOUL O 1 A_JumpIfCloser(18,"See")
+	loop
+	See: //Walked into 
+	SOUL O 1 A_FaceTarget
+	SOUL O 0 A_CustomMissile("BasketNormal",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Active: //Pressed use (weakest)
+	SOUL O 1 A_FaceTarget
+	SOUL O 0 A_CustomMissile("BasketSlow",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Pain: //Punched (farthest)
+	SOUL O 1 A_FaceTarget
+	SOUL O 0 A_CustomMissile("BasketFast",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	}
+}
+ACTOR BasketNormal : BBallNormal
+{States
+	{
+	Spawn:
+	SOUL O 2 NODELAY ThrustTHingZ(0,reactiontime,0,0)
+	SOUL O -1 A_ChangeFlag("THRUACTORS",0)
+	Death:
+	SOUL O 0 A_SpawnItemEX("BasketBall",0,0,0,0,0,0,0,0)
+	stop
+}}
+ACTOR BasketFast : BasketNormal { Speed 20 }
+ACTOR BasketSlow : BasketNormal { reactiontime 30 Speed 8 }
+
+ACTOR FootBall : BouncyBall 25185
+{
+	//$Category WDI Props/Balls
+	//$Sprite SOULP0
+	//$Title "Foot ball"
+States
+	{
+	Spawn:
+	SOUL P 0 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOJUMP,0,512,1,0)
+	SOUL P 1 A_JumpIfCloser(18,"See")
+	loop
+	See: //Walked into 
+	SOUL P 1 A_FaceTarget
+	SOUL P 0 A_CustomMissile("FBallNormal",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Active: //Pressed use (weakest)
+	SOUL P 1 A_FaceTarget
+	SOUL P 0 A_CustomMissile("FBallSlow",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Pain: //Punched (farthest)
+	SOUL P 1 A_FaceTarget
+	SOUL P 0 A_CustomMissile("FBallFast",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	}
+}
+ACTOR FBallNormal : BBallNormal
+{States
+	{
+	Spawn:
+	SOUL P 2 NODELAY ThrustTHingZ(0,reactiontime,0,0)
+	SOUL P -1 A_ChangeFlag("THRUACTORS",0)
+	Death:
+	SOUL P 0 A_SpawnItemEX("FootBall",0,0,0,0,0,0,0,0)
+	stop
+}}
+ACTOR FBallFast : FBallNormal { Speed 20 }
+ACTOR FBallSlow : FBallNormal { reactiontime 30 Speed 8 }
+
+ACTOR VolleyBall : BouncyBall 25186
+{
+	//$Category WDI Props/Balls
+	//$Sprite SOULN0
+	//$Title "Volley ball"
+States
+	{
+	Spawn:
+	SOUL N 0 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOJUMP,0,512,1,0)
+	SOUL N 1 A_JumpIfCloser(18,"See")
+	loop
+	See: //Walked into 
+	SOUL N 1 A_FaceTarget
+	SOUL N 0 A_CustomMissile("VBallNormal",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Active: //Pressed use (weakest)
+	SOUL N 1 A_FaceTarget
+	SOUL N 0 A_CustomMissile("VBallSlow",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	Pain: //Punched (farthest)
+	SOUL N 1 A_FaceTarget
+	SOUL N 0 A_CustomMissile("VBallFast",3,0,-180,CMF_AIMDIRECTION,0)
+	stop
+	}
+}
+ACTOR VBallNormal : BBallNormal
+{States
+	{
+	Spawn:
+	SOUL N 2 NODELAY ThrustTHingZ(0,reactiontime,0,0)
+	SOUL N -1 A_ChangeFlag("THRUACTORS",0)
+	Death:
+	SOUL N 0 A_SpawnItemEX("VolleyBall",0,0,0,0,0,0,0,0)
+	stop
+}}
+ACTOR VBallFast : VBallNormal { Speed 20 }
+ACTOR VBallSlow : VBallNormal { reactiontime 30 Speed 8 }

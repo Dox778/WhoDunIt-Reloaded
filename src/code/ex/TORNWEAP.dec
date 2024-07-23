@@ -1,0 +1,132 @@
+// Always spawn
+actor GunSpawnerBSM : RandomSpawner 22780
+{
+	//$Category Retorn_map_ONLY
+    DropItem "FakeBeretta" 
+	DropItem "FakeShotgun"
+	DropItem "FakeM1" 
+	DropItem "FakeRevolver" 
+}
+
+actor AmmoSpawnerBSM : RandomSpawner 22781
+{
+  //$Category WDI Ammo
+  //$Sprite TNT1A0
+  //$Title "Ammo Spawner"
+    DropItem "NewShell"
+    DropItem "NewShell"
+    DropItem "NewShell"
+    DropItem "PistolClip"
+	DropItem "PistolClip"
+    DropItem "M1Ammo"
+	DropItem "M1Ammo"
+	DropItem "SpareSawFuel"
+	//DropItem "AnimalSpawner" 255 1
+}
+
+actor GunSpawnerBSM2 : RandomSpawner 22782
+{
+	//$Category Retorn_map_ONLY
+    DropItem "FakeBeretta" 
+	DropItem "FakeShotgun"
+	DropItem "FakeM1" 
+	DropItem "FakeRevolver" 
+	DropItem "AnimalSpawner"
+}
+
+//////////////////////////////////////BASEBALL BAT by zeberpal
+
+
+
+//////////////////////////////////SPRAYCAN RED
+
+
+
+
+//==========================
+//CRUSH GAS
+
+Actor CrushCanister
+{
+	Radius 12
+	Height 12
+	Mass 10
+	Speed 25
+	DamageType "Cough"
+	PROJECTILE
+	+NOGRAVITY
+	+NOBLOOD
+	+NOCLIP
+	-BLOODSPLATTER
+    States
+{
+	Spawn:
+	TNT1 A 6
+	TNT1 A 1 A_Stop
+	TNT1 A 1 ThrustThingZ (0, 128, 1, 0)
+	Goto Death
+	
+	Death:
+	TNT1 A 1
+	TNT1 A 0 A_PlaySound("YZPROBIL")
+	SSBG BC 4
+	TNT1 A 8
+	TNT1 A 0 A_PlaySound("Smokebomb/Hiss")
+	TNT1 AAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx ("CrushCloud", 0, 0, 0, random(-25.0,25.0), random(-25.0,25.0), random(-1.0, 1.0), random(0, 360), SXF_ABSOLUTEMOMENTUM|SXF_ABSOLUTEANGLE|SXF_NOCHECKPOSITION, 0)
+	TNT1 AAAAAAAAAAAAA 0 A_SpawnItemEx ("CrushCloud", 0, 0, 0, random(-40.0,40.0), random(-40.0, 40.0), random(-1.0, 1.0), random(0, 360), SXF_ABSOLUTEMOMENTUM|SXF_ABSOLUTEANGLE|SXF_NOCHECKPOSITION, 0)
+	TNT1 AAAAAAAAAA 0 A_SpawnItemEx ("CrushCloud", 0, 0, 0, random(-60.0, 60.0), random(-60.0, 60.0), random(-1.0, 1.0), random(0, 360), SXF_ABSOLUTEMOMENTUM|SXF_ABSOLUTEANGLE|SXF_NOCHECKPOSITION, 0)
+	TNT1 A 1
+	stop
+		
+}
+}
+
+ACTOR CrushCloud //Lol wut
+{
+  Radius 66
+  Height 60
+  scale 3.5
+  DamageType "Cough"
+  Mass 0x7fffffff
+  ReactionTime 1
+  BounceFactor 0.0
+  MaxStepHeight 64
+  Gravity 0.0001
+  WallBounceFactor 0.0
+  +HEXENBOUNCE 
+  //+FLOATBOB
+  +NOBLOCKMAP
+  +NOGRAVITY
+  +CANNOTPUSH
+  +DROPOFF
+  +NOCLIP
+  +DONTSPLASH
+  +FOILINVUL
+  +CANBLAST
+  +BLOODLESSIMPACT
+  +SLIDESONWALLS
+  +FORCEXYBILLBOARD
+  +CLIENTSIDEONLY
+  Renderstyle Translucent
+  Alpha 0.85
+  DeathSound "PoisonShroomDeath"
+
+  States
+  {
+  Spawn:
+    XSMK A 1
+    XSMK A 1 A_Scream
+    XSMK A 4
+	XSMK H 1
+ 	Goto Float
+  
+  Float:
+    XSMK A 35 
+	XSMK A 0 A_Countdown
+	loop
+ 
+ Death:
+    XSMK A 1 A_FadeOut(0.001)
+    loop
+  }
+}

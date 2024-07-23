@@ -1,0 +1,288 @@
+Skybox DAWNCLOD
+{
+  CLOUDN
+  CLOUDE
+  CLOUDS
+  CLOUDW
+  CLOUDT
+  CLOUDB
+}
+
+skybox SKYB
+{ 
+SKYB_N
+SKYB_E
+SKYB_S
+SKYB_W
+SKYB_T
+SKYB_B
+}
+
+Skybox OVERCAST fliptop
+{
+  OVERCN
+  OVERCE
+  OVERCS
+  OVERCW
+  OVERCT
+  OVERCB
+}
+
+skybox STSKY8B
+{ 
+MILKY_N
+MILKY_E
+MILKY_S
+MILKY_W
+MILKY_T
+MILKY_B
+}
+
+skybox TWILIGHT
+{ 
+TWILT_N
+TWILT_E
+TWILT_S
+TWILT_W
+TWILT_T
+TWILT_B
+}
+
+pointlight Hallway
+{
+color 255 255 255
+size 128
+} 
+
+
+pointlight NoLight
+{
+color 0 0 0
+size 0
+} 
+
+
+pointlight BulbOn
+{
+color 200 170 155
+size 10
+}
+
+
+pointlight Elevator
+{
+color 255 255 255
+size 56
+offset 0 8 0
+
+}
+
+pointlight Chandelier
+{
+    color 1.0 1.0 1.0
+    size 40
+    offset 0 16 0
+}
+
+pointlight Chandelier2
+{
+    color 1.0 1.0 1.0
+    size 38
+    offset 0 16 0
+}
+
+pointlight Chandelier3
+{
+    color 1.0 1.0 1.0
+    size 36
+    offset 0 16 0
+}
+
+pointlight HealRed
+{
+    color 1.0 0.0 0.0
+    size 64
+    offset 0 0 0
+    dontlightself 0
+}
+
+pointlight HealWhite
+{
+    color 1.0 1.0 1.0
+    size 60
+    offset 0 0 0
+    dontlightself 0
+}
+
+
+PulseLight SMALLLANTERN
+{
+    color 1.0 1.0 0.8
+    size 56
+    secondarySize 58
+    interval 0.4
+    offset 0 7 0
+}
+
+pointlight PlayerShadow
+{
+    color 0.25 0.25 0.25
+    size 12
+    subtractive 1
+    dontlightself 1
+
+}
+
+pointlight DiscoRed
+{
+    color 1.0 0.0 0.0
+    size 64
+}
+
+pointlight DiscoGreen
+{
+    color 0.0 1.0 0.0
+    size 64
+}
+
+pointlight DiscoBlue
+{
+    color 0.0 0.0 1.0
+    size 64
+}
+
+pointlight DiscoYellow
+{
+    color 1.0 1.0 0.0
+    size 64
+}
+
+pointlight DiscoPurple
+{
+    color 1.0 0.0 1.0
+    size 64
+}
+
+object RedLight { frame TNT1A { light DiscoRed}}
+object GreenLight { frame TNT1A { light DiscoGreen}}
+object BlueLight { frame TNT1A { light DiscoBlue}}
+object YellowLight { frame TNT1A { light DiscoYellow}}
+object PurpleLight { frame TNT1A { light DiscoPurple}}
+
+object Innocent
+{
+    frame PLAYA {light PlayerShadow}
+    frame PLAYB {light PlayerShadow}
+    frame PLAYC {light PlayerShadow}
+    frame PLAYD {light PlayerShadow}
+    frame PLAYE {light PlayerShadow}
+    frame PLAYF {light PlayerShadow}
+    frame PLAYG {light PlayerShadow}
+}
+
+object Innocent2
+{
+    frame PLAYA {light PlayerShadow}
+    frame PLAYB {light PlayerShadow}
+    frame PLAYC {light PlayerShadow}
+    frame PLAYD {light PlayerShadow}
+    frame PLAYE {light PlayerShadow}
+    frame PLAYF {light PlayerShadow}
+    frame PLAYG {light PlayerShadow}
+}
+
+
+flickerlight FLARE1 { color 0.5 0.5 0.0 size 8 secondarySize 24 chance 1.0 }
+
+pointlight FLARE { color 0.8 0.3 0.3 size 96 }
+
+pointlight SHROOM { color 0.0 0.2 0.0 size 16 dontlightself 1}
+
+object HallwayLight
+{
+    frame TNT1A {light Hallway}
+	frame TNT1B {light NoLight}
+}
+
+object LibraryLight
+{
+    frame TNT1A {light Library}
+	frame TNT1B {light NoLight}
+}
+
+object ElevatorLight
+{
+    frame ELITA {light Elevator}
+	frame TNT1B {light NoLight}
+}
+
+
+object Chandelier2On
+{
+        frame CHANE { light Chandelier }
+	frame CHANF { light Chandelier2 }
+	frame CHANG { light Chandelier3 }
+}
+
+
+
+
+object BigKitLight 
+{ 
+frame TNT1A0 { light HealWhite }
+frame TNT1A1 { light HealWhite }
+frame TNT1A2 { light HealWhite }
+frame TNT1A3 { light HealWhite }
+frame TNT1A4 { light HealWhite }
+}
+
+object Bulb { frame BULBA { light BULBON }}
+object GlowShroom { frame SHRMA { light SHROOM }}
+
+//Brightmaps
+brightmap texture PANBOOK { map "BRPANBOO" }
+brightmap sprite BULBA0 { map "bulbc0" }
+brightmap texture ALITE50 { map "Graphics/ALITE50B.png" }
+brightmap sprite CHANA0{ map "Graphics/CHANA0B.png" }
+brightmap sprite SHRMA0{ map "Graphics/SHRMA0B.png" }
+
+brightmap sprite GNOMA0{ map "Graphics/GNOMBMAP.png" }
+brightmap sprite GNOMB0{ map "Graphics/GNOMBMAP.png" }
+brightmap sprite GNOMC0{ map "Graphics/GNOMBMAP.png" }
+brightmap sprite GNOMD0{ map "Graphics/GNOMBMAP.png" }
+brightmap sprite GNOME0{ map "Graphics/GNOMBMAP.png" }
+brightmap sprite GNOMF0{ map "Graphics/GNOMBMAP.png" }
+
+brightmap sprite HLMPE0{ map "Graphics/HLMPBM.png" }
+brightmap sprite HLMPF0{ map "Graphics/HLMPBM.png" }
+brightmap sprite HLMPG0{ map "Graphics/HLMPBM.png" }
+brightmap sprite HLMPH0{ map "Graphics/HLMPBM.png" }
+
+pointlight POLICERED
+{
+    color 1.0 0.1 0.1
+    size 80
+}
+
+pointlight POLICEBLUE
+{
+    color 0.1 0.1 1.0
+    size 80
+}
+
+object POLICELIGHT
+{
+    frame TNT1A { light POLICERED }
+    frame TNT1B { light POLICEBLUE }
+}
+
+
+Glow
+{
+	Flats
+	{
+		E1SKY1
+	//	FN_WHITE
+	}
+}
+

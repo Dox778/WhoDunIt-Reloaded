@@ -1,0 +1,10 @@
+clearteams 
+Team InnocentTeam
+{
+	AllowCustomPlayerColor
+}
+
+Team MurdererTeam
+{
+	AllowCustomPlayerColor
+}

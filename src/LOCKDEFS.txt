@@ -1,0 +1,177 @@
+Lock 1
+{
+	BarKey
+	Message "You need an antique key to open this door!"
+	RemoteMessage "You do not have the key for the Bar!"
+	Mapcolor 64 64 0
+	LOCKEDSOUND "Door/DoorFail"
+}
+
+//Murderer Key
+Lock 4
+{
+	MurdererKey
+	Message "" //No message
+	RemoteMessage "" //Burrhurr
+	Mapcolor 255 255 255 //White on the automap.
+	LOCKEDSOUND "DSNULL" //No sound
+}
+
+
+//Trap door (inside)
+Lock 20
+{
+	TrapKey //Murderer Only
+	Message "It doesn't open from this side!" 
+	RemoteMessage "It doesn't open from this side!" 
+	Mapcolor 0 0 0 //Black on automap
+	LOCKEDSOUND "Door/DoorKnock" 
+}
+
+Lock 55
+{
+		BasementKey
+		Message "You need a skeleton key to open this door!"
+		Mapcolor 255 0 0
+		LOCKEDSOUND "Door/DoorFail"
+}
+
+Lock 121
+{
+	SafeKey
+	Message "You need a yale key to open this door!"
+	Mapcolor 64 64 0
+	LOCKEDSOUND "Door/DoorFail"
+}
+
+Lock 144
+{
+	
+	Message "You do not have the key for the Security Room!"
+	RemoteMessage "You do not have the key for the Security Room!"
+	Mapcolor 64 64 0
+	LOCKEDSOUND "Door/DoorFail"
+}
+
+Lock 150
+{
+	Room1Key
+	Message "You do not have the key for room 1!"
+	RemoteMessage "You do not have the key for room 1!"
+	Mapcolor 64 64 0
+	LOCKEDSOUND "Door/DoorFail"
+}
+
+Lock 151
+{
+	Room8Key
+	Message "You do not have the key for room 8!"
+	RemoteMessage "You do not have the key for room 8!"
+	Mapcolor 64 64 0
+	LOCKEDSOUND "Door/DoorFail"
+}
+
+Lock 118
+{
+	SafeKeyBlaBla
+	Message "You do not have the key for the Safe!"
+	RemoteMessage "You do not have the key for the Safe!"
+	Mapcolor 64 64 0
+	LOCKEDSOUND "Door/DoorFail"
+}
+
+////////////////////////////////////////////////
+////////////// B I G      P A C K //////////////
+////////////////////////////////////////////////
+//WDI21:
+Lock 200
+{
+	E1M1StorageKey
+	Message "You need the storage room keycard to open this door."
+	RemoteMessage ""
+	Mapcolor 255 255 255
+	LOCKEDSOUND "weapons/noiseready"
+}
+
+Lock 201
+{
+	E1M1SecurityKey
+	Message "You need the security room keycard to open this door."
+	RemoteMessage ""
+	Mapcolor 255 255 255
+	LOCKEDSOUND "weapons/noiseready"
+}
+
+//WDI25:
+Lock 240
+{
+	MedKey
+	Message "You need the medical supplies keycard to open this door."
+	RemoteMessage ""
+	Mapcolor 255 255 255
+	LOCKEDSOUND "weapons/noiseready"
+}
+
+Lock 210
+{
+	SecKey
+	Message "You need the security room keycard to open this door."
+	RemoteMessage ""
+	Mapcolor 255 255 255
+	LOCKEDSOUND "weapons/noiseready"
+}
+
+//////////////////////////////////////////////
+////////////// E X      P A C K //////////////
+//////////////////////////////////////////////
+
+Lock 131
+{
+	SoldierArm
+}
+
+Lock 132
+{
+	Keycard_LV4
+	Message "You do not have the required keycard!"
+	RemoteMessage "You do not have the required keycard!"
+	LOCKEDSOUND "YZNOENTR"
+}
+
+Lock 133
+{
+	Keycard_LV7
+	Message "You do not have the required keycard!"
+	RemoteMessage "You do not have the required keycard!"
+	LOCKEDSOUND "YZNOENTR"
+}
+
+Lock 134
+{
+	ScissorsKey
+	Message "You do not have the required key!"
+	RemoteMessage "You do not have the required keyc!"
+    LOCKEDSOUND "Door/DoorFail"
+}
+
+Lock 180
+{
+	YZQUESTKEY4
+	Message "Location of Crest of Mercury"
+	RemoteMessage "Location of Crest of Mercury"
+}
+
+Lock 181
+{
+	YZQUESTKEY1
+	Message "Location of Disc of Ourboros"
+	RemoteMessage "Location of Disc of Ourboros"
+}
+
+Lock 79
+{
+	HujKey
+	Message "You need a safe key!"
+	RemoteMessage "You need a safe key!"
+    LOCKEDSOUND "Door/DoorFail"
+}

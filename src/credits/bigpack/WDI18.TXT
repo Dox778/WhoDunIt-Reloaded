@@ -1,0 +1,52 @@
+********************************************************************************
+
+This map was created by Riclo500. Anything not new to the wad takes its 
+resources from the whodunit_fixed2.pk3, and the wdi_bigpack addons. The WDIEX 
+Fireaxe and Baseball Bat are used from Zeberpal's WDIEX Mappack, but no other 
+resources other than those two items are used (This was intended so the map 
+would be compatible without the WDIEX mappack).
+
+As for just about everything in the wad itself:
+
+~~~~~~~~~
+Music Credits:
+~~~~~~~~~
+Nintendo and DanDaManProductions ((www.youtube.com/user/DanDaManProductions)) for MEDUAMB and D_BBLUE
+Tomoko Morita for D_FINAL6
+Dadebrayant ((www.youtube.com/user/dadebrayant)) for PIASONG1
+Nintendo for D_DCHASE
+
+~~~~~~~~~
+Sprites:
+~~~~~~~~~
+Dr.Doctor
+And some recolors that I did of sprites already included in the whodunit_fixed2.pk3 ((That horribly done demon thing is mine tho))
+
+~~~~~~~~~
+Textures:
+~~~~~~~~~
+Dr.Doctor
+And some textures included in the whodunit_fixed2.pk3/wdi_bigpacks that I edited
+
+********************************************************************************
+LESSLAG:
+
+This less lag verison removes the following details:
+-The entire outside inaccessable area
+-Removes several 3D floors that weren't necessary 
+-Removes much of the detail in the murderer holes
+-Gets rid of a bunch of things
+-Some Dynamic lights' size were lowered
+-The gate shadows
+-The generators in the basement
+-Alot of sectors have been removed (There's more small things)
+
+I didn't move around any items with only two exceptions:
+-A stimpack in the crate room that sometimes bugged; it's now moved to the couch
+-The molotov in the shed has been replaced with three bricks
+-Also, you won't need the safe key to get the hidden drawer key now (Just the easter egg)
+
+The point of this was to get rid of lag, regardless of whether or not it makes some parts of 
+the map look bland.
+
+********************************************************************************

@@ -1,0 +1,914 @@
+//================================================================
+//================================================
+//================================
+
+Actor GrassDetailSpawner
+{
++NOBLOCKMAP
++NOINTERACTION
+    States
+    {
+    Spawn:
+        TNT1 A 1 NODELAY A_SpawnItemEx("RandomMushroom",random(-32,32),random(-32,32),0,0,0,0,0,SXF_CLIENTSIDE,196 ,7780)
+        TNT1 A 1 A_SpawnItemEx("RandomRock",random(-32,32),random(-32,32),0,0,0,0,0,SXF_CLIENTSIDE,140 ,7780)
+        TNT1 A 1 A_SpawnItemEx("Worm",random(-32,32),random(-32,32),0,0,0,0,0,SXF_CLIENTSIDE,250 ,7780)
+        TNT1 A 1 A_SpawnItemEx("Maggot",random(-32,32),random(-32,32),0,0,0,0,0,SXF_CLIENTSIDE,250 ,7780)
+        //TNT1 A 1 A_SpawnItemEx("Spider",random(-32,32),random(-32,32),0,0,0,0,0,SXF_CLIENTSIDE,250 ,7780)
+        TNT1 A 1 A_SpawnItemEx("GoreFlies",random(-32,32),random(-32,32),random(2,20),0,0,0,0,SXF_CLIENTSIDE,250 ,7780)
+        TNT1 A 1 A_SpawnItemEx("GoreFliesBright",random(-32,32),random(-32,32),random(2,20),0,0,0,0,SXF_CLIENTSIDE,250 ,7780)
+        TNT1 A 1 A_SpawnItemEx("AnimalSpawner",0,0,random(2,20),0,0,0,0,0,250 ,7780)
+        stop
+    }
+}
+
+//BIG plants (trees etc)
+ACTOR LeafSpawner
+{
+	+CLIENTSIDEONLY +NOINTERACTION
+	+NOGRAVITY +NOBLOCKMAP
+	States
+	{
+		Spawn:
+		TNT1 A 1 NODELAY //A_JumpIf(CallACS("IsItPretty") == 0, "Null")
+		TNT1 A random(60,200) A_SpawnItemEX("LeafParticle",random(12,-12),random(12,-12),random(5,40),frandom(-1.2,1.2),frandom(-1.2,1.2),frandom(-0.9,-1.8),random(0,360),SXF_NOCHECKPOSITION|SXF_CLIENTSIDE,0,7780)
+		loop
+		STFU:
+		TNT1 A -1
+		stop
+	}
+}
+ACTOR LeafParticle
+{
+	Radius 1
+	Height 1
+	Gravity 0.1
+	PROJECTILE
+	Speed 0
+	-solid
+	+DONTSPLASH +THRUACTORS
+	+NOBLOCKMAP -NOGRAVITY
+	+CLIENTSIDEONLY +FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		PP11 A 175 NODELAY A_SetScale(frandom(0.1,0.3),frandom(0.1,0.3))
+		stop
+	Death:
+		PP11 A 30
+		stop
+	}
+}
+
+Actor TreeGrassSpawner
+{
+	+NOBLOCKMAP +NOINTERACTION
+	States
+	{
+	Spawn:
+		TNT1 A 1 NODELAY A_SetScale(frandom(0.4,0.8),frandom(0.4,0.8))
+		TNT1 A 1 A_SpawnItemEx("BFGrass2",random(-64,64),random(-64,64),0,0,0,0,0,0,210)
+		TNT1 A 1 A_SetScale(frandom(0.4,0.8),frandom(0.4,0.8))
+		TNT1 A 1 A_SpawnItemEx("BFGrass5",random(-64,64),random(-64,64),0,0,0,0,0,0,210)
+		TNT1 AAA 1 A_SpawnItemEx("GrassDetailSpawner",random(-32,32),random(-32,32),0,0,0,0,0,SXF_CLIENTSIDE,210)
+		stop
+	}
+}
+
+Actor TreeA 31995 
+{
+  //$Category WDI Environment/Trees
+  //$Sprite TRDTA0
+  //$Title "Tree 5"
+	radius 16
+	height 64
+	DeathHeight 64
+	Mass 0x7FFFFFFF
+	Health 10000
+	DamageFactor "Fire", 100
+	DamageFactor "Burn", 100	
+	+SOLID +VULNERABLE
+	+NOBLOOD +FORCEYBILLBOARD
+	-NOGRAVITY
+	states 
+	{
+	Spawn:
+		TNT1 A 0 NODELAY  A_SpawnItemEX("TreeGrassSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 0 A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		TRDT A -1
+		loop
+	Death:
+		TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+		TRDT A 90 A_SpawnItemEx("FireTreeA1",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+		TRDT B 125
+		TRDT B 70 A_SpawnItemEx("FireTreeA2",0,0,45,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+		TRDT C -1 Light("FireBurningLightHUGE")
+		stop
+	}
+}
+
+Actor TreeB : TreeA 31994 { 
+  //$Category WDI Environment/Trees
+  //$Sprite TRE1A0
+  //$Title "Tree 6"
+states { 
+Spawn:
+TNT1 A 0 NODELAY  A_SpawnItemEX("TreeGrassSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+TNT1 A 0 A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+TRE1 A -1
+loop
+Death:
+TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+TRE1 A 90 A_SpawnItemEx("FireTreeA1",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+TRDT D 125
+TRDT D 70 A_SpawnItemEx("FireTreeB2",0,0,45,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+TRDT E -1 Light("FireBurningLightHUGE")
+stop
+}}
+
+Actor TreeC : TreeA 31993 { 
+  //$Category WDI Environment/Trees
+  //$Sprite TRE4A0
+  //$Title "Tree 7"
+states { 
+Spawn: 
+TNT1 A 0 NODELAY  A_SpawnItemEX("TreeGrassSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+TNT1 A 0 A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+TRE4 A -1 
+loop 
+Death:
+TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+TRE4 A 90 A_SpawnItemEx("FireTreeA1",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+TRDT F 125
+TRDT F 70 A_SpawnItemEx("FireTreeA2",0,0,45,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+TRDT G -1 Light("FireBurningLightHUGE")
+stop
+}}
+
+Actor TreeD : TreeA 31992 { 
+  //$Category WDI Environment/Trees
+  //$Sprite TRE5A0
+  //$Title "Tree 8"
+states { 
+Spawn: 
+TNT1 A 0 NODELAY A_SpawnItemEX("TreeGrassSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+TNT1 A 0 A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+TRE5 A -1 
+loop 
+Death:
+TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+TRE5 A 90 A_SpawnItemEx("FireTreeA1",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+TRDT H 125
+TRDT H 70 A_SpawnItemEx("FireTreeA2",0,0,45,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+TRDT I -1 Light("FireBurningLightHUGE")
+stop
+}}
+
+Actor TreeE: TreeA 31986
+{
+  //$Category WDI Environment/Trees
+  //$Sprite TRDTA0
+  //$Title "Tree 1 (Small)"
+scale 0.7
+height 64
+	States
+	{
+	Death:
+	TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+	TRE4 A 90 A_SpawnItemEx("FireTreeE1",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+	TRDT F 125
+	TRDT F 70 A_SpawnItemEx("FireTreeE2",0,0,35,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+	TRDT G -1 Light("FireBurningLightHUGE")
+	stop
+	}
+}
+
+Actor TreeF: TreeB 31985
+{
+  //$Category WDI Environment/Trees
+  //$Sprite TRE1A0
+  //$Title "Tree 6 (Small)"
+scale 0.7
+height 64
+States
+{
+Death:
+TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+TRE1 A 90 A_SpawnItemEx("FireTreeE1",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+TRDT D 125
+TRDT D 70 A_SpawnItemEx("FireTreeF2",0,0,35,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+TRDT E -1 Light("FireBurningLightHUGE")
+stop
+}
+}
+
+Actor TreeG: TreeC 31984
+{
+  //$Category WDI Environment/Trees
+  //$Sprite TRE4A0
+  //$Title "Tree 7 (Small)"
+scale 0.7
+height 64
+States
+{
+Death:
+TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+TRE5 A 90 A_SpawnItemEx("FireTreeE1",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+TRDT H 125
+TRDT H 70 A_SpawnItemEx("FireTreeE2",0,0,35,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+TRDT I -1 Light("FireBurningLightHUGE")
+stop
+}
+}
+
+Actor TreeH: TreeD 31983
+{
+  //$Category WDI Environment/Trees
+  //$Sprite TRE5A0
+  //$Title "Tree 8 (Small)"
+scale 0.7
+height 64
+States
+{
+Death:
+TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+TRE4 A 90 A_SpawnItemEx("FireTreeE1",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+TRDT F 125
+TRDT F 70 A_SpawnItemEx("FireTreeE2",0,0,35,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+TRDT G -1 Light("FireBurningLightHUGE")
+stop
+}
+}
+
+Actor TreeX : TreeA 31991
+{ 
+  //$Category WDI Environment/Trees
+  //$Sprite XMASA0
+  //$Title "XMas Tree"
+states
+{ 
+Spawn: 
+XMAS A -1 
+loop
+Death:
+TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+XMAS A 90 A_SpawnItemEx("FireTreeX1",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+TRDT J 125
+TRDT J 70 A_SpawnItemEx("FireTreeX2",0,0,50,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+TRDT K -1 Light("FireBurningLightHUGE")
+stop
+}
+}
+
+actor BFTree2 14283
+{
+  //$Category WDI Environment/Trees
+  //$Sprite DREVD0
+  //$Title "Tree lol"
+	Radius 5
+	height 128
+	DeathHeight 128
+	scale 1.4
+	Health 10000
+	Mass 0x7FFFFFFF
+	DamageFactor "Fire", 100
+	DamageFactor "Burn", 100
+	+SOLID +FORCEYBILLBOARD
+	+SHOOTABLE +VULNERABLE
+	+NOBLOOD
+	States 
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_SpawnItemEX("LeafSpawner",0,0,60,0,0,0,0,SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+		TNT1 A 0 A_SpawnItemEx("AnimalSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,250)
+		TNT1 A 0 A_SpawnItemEX("TreeGrassSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 0 A_Jump(196,3)
+		TNT1 A 0 A_SetScale(random(0.7,1.2))
+		TNT1 A 0 A_SpawnItemEx("FallenLeaves",random(6,-6),random(6,-6),0,0,0,0,random(0,359),SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE,0 ,7780)
+		TNT1 A 0 A_SetScale(1.4)
+		TNT1 A 0 A_Jump(160,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		DREV B -1
+		Stop
+   
+	Death:
+		TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+		DREV B 90 A_SpawnItemEx("FireBFTree21",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+		TRDT P 125
+		TRDT P 70 A_SpawnItemEx("FireTreeA2",0,0,90,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+		TRDT Q -1 Light("FireBurningLightHUGE")
+		stop
+	}
+}
+actor BFTree3: BFTree2 14285
+{
+  //$Category WDI Environment/Trees
+  //$Sprite DREVD0
+  //$Title "Another tree"
+	States 
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_SpawnItemEX("TreeGrassSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+		TNT1 A 0 A_SpawnItemEx("AnimalSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,250)
+		TNT1 A 0 A_Jump(196,3)
+		TNT1 A 0 A_SetScale(random(0.7,1.2))
+		TNT1 A 0 A_SpawnItemEx("FallenLeaves",random(6,-6),random(6,-6),0,0,0,0,random(0,359),SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE,0 ,7780)
+		TNT1 A 0 A_SetScale(1.4)
+		TNT1 A 0 A_Jump(160,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		DREV C -1
+		Stop
+   
+	Death:
+		TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+		DREV C 70 A_SpawnItemEx("FireBFTree31",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+		TRDT R 70 //A_SpawnItemEx("FireTreeA2",0,0,45,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+		TRDT S -1 Light("FireBurningLightHUGE")
+		stop
+	}
+}
+actor BFTree4: BFTree2 14287
+{
+  //$Category WDI Environment/Trees
+  //$Sprite DREVD0
+  //$Title "Tree 3"
+	Radius 20
+	height 96
+
+
+States 
+ {
+   Spawn:
+   TNT1 A 0 NODELAY A_SpawnItemEX("LeafSpawner",0,0,30,0,0,0,0,SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+   TNT1 A 0 A_SpawnItemEX("TreeGrassSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+   TNT1 A 0 A_SpawnItemEx("AnimalSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,250)
+   TNT1 A 0 A_Jump(196,3)
+   TNT1 A 0 A_SetScale(random(0.7,1.2))
+   TNT1 A 0 A_SpawnItemEx("FallenLeaves",random(6,-6),random(6,-6),0,0,0,0,random(0,359),SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE,0 ,7780)
+   TNT1 A 0 A_SetScale(1.4)
+	TNT1 A 0 A_Jump(160,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+   DREV D -1
+   Stop
+   Death:
+	TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+	DREV D 70 A_SpawnItemEx("FireTreeA2",0,0,15,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+	TRDT T 70 //A_SpawnItemEx("FireTreeA2",0,0,45,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+	TRDT U -1 Light("FireBurningLightHUGE")
+	stop
+ }
+}
+
+actor BFTree7: BFTree2 14289
+{
+  //$Category WDI Environment/Trees
+  //$Sprite DREVG0
+  //$Title "Tree 4"
+States 
+ {
+   Spawn:
+   TNT1 A 0 NODELAY A_SpawnItemEX("LeafSpawner",0,0,60,0,0,0,0,SXF_NOCHECKPOSITION|SXF_CLIENTSIDE)
+   TNT1 A 0 A_SpawnItemEX("TreeGrassSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+   TNT1 A 0 A_SpawnItemEx("AnimalSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,250)
+   TNT1 A 0 A_Jump(196,3)
+   TNT1 A 0 A_SetScale(random(0.7,1.2))
+   TNT1 A 0 A_SpawnItemEx("FallenLeaves",random(6,-6),random(6,-6),0,0,0,0,random(0,359),SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE,0 ,7780)
+   TNT1 A 0 A_SetScale(1.4)
+	TNT1 A 0 A_Jump(160,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+   DREV G -1
+   Stop
+   Death:
+	Death:
+	TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+	DREV G 90 A_SpawnItemEx("FireTreeX2",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+	TRDT V 125
+	TRDT V 70 A_SpawnItemEx("FireTreeA2",0,0,90,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+	TRDT W -1 Light("FireBurningLightHUGE")
+	stop
+ }
+}
+
+
+
+//=========================================
+//SNOWY variants
+
+Actor SnoTre1 17654
+{
+  //$Category WDI Environment/Trees
+  //$Sprite SNTRA0
+  //$Title "Snow Tree 1"
+Game Doom
+SpawnID 3
+Radius 5
+Mass 0x7FFFFFFF
+height 64
+scale 1.4
++SOLID
++SHOOTABLE
++INVULNERABLE
++NOBLOOD
+States 
+ {
+	Spawn:
+	TNT1 A 0 NODELAY  A_SpawnItemEX("TreeGrassSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	TNT1 A 0 A_SetScale(frandom(1.4,1.6),0)
+	TNT1 A 0 A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+   SNTR A -1
+   Stop
+}}
+
+Actor SnoTre2 17655
+{
+  //$Category WDI Environment/Trees
+  //$Sprite SNTRB0
+  //$Title "Snow Tree 2"
+Game Doom
+SpawnID 3
+Radius 5
+Mass 1000000
+height 64
+scale 1.4
++SOLID
++SHOOTABLE
++INVULNERABLE
++NOBLOOD
+States 
+ {
+Spawn:
+	TNT1 A 0 NODELAY  A_SpawnItemEX("TreeGrassSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	TNT1 A 0 A_SetScale(frandom(1.4,1.6),0)
+	TNT1 A 0 A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+   SNTR B -1
+   Stop
+}}
+
+Actor SnoTre3 17656
+{
+  //$Category WDI Environment/Trees
+  //$Sprite SNTRC0
+  //$Title "Snow Tree 3"
+Game Doom
+SpawnID 3
+Radius 20
+scale 1.4
+Mass 1000000
+height 64
++SOLID
++INVULNERABLE
++NOBLOOD
++SHOOTABLE
+States 
+ {
+Spawn:
+	TNT1 A 0 NODELAY  A_SpawnItemEX("TreeGrassSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	TNT1 A 0 A_SetScale(frandom(1.4,1.6),0)
+	TNT1 A 0 A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+   SNTR C -1
+   Stop
+}}
+
+Actor SnoTre4 17657
+{
+  //$Category WDI Environment/Trees
+  //$Sprite SNTRD0
+  //$Title "Snow Tree 4"
+Game Doom
+SpawnID 3
++SOLID
++SHOOTABLE
++INVULNERABLE
++NOBLOOD
+Radius 5
+Mass 1000000
+height 64
+scale 1.4
+States 
+ {
+Spawn:
+	TNT1 A 0 NODELAY  A_SpawnItemEX("TreeGrassSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+	TNT1 A 0 A_SetScale(frandom(1.4,1.6),0)
+	TNT1 A 0 A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+   SNTR D -1
+   Stop
+}}
+actor SnoTre1_Optimized : SnoTre1 17659 { +ClientSideOnly +NOINTERACTION +NOBLOCKMAP}
+actor SnoTre2_Optimized : SnoTre2 17660 { +ClientSideOnly +NOINTERACTION +NOBLOCKMAP }
+actor SnoTre3_Optimized : SnoTre3 17661 { +ClientSideOnly +NOINTERACTION +NOBLOCKMAP }
+actor SnoTre4_Optimized : SnoTre4 17662 { +ClientSideOnly +NOINTERACTION +NOBLOCKMAP }
+
+Actor SnoGrass 17658
+{
+  //$Category WDI Environment/Grass
+  //$Sprite SNGR0
+  //$Title "Snow Grass"
++ClientSideOnly
++NOINTERACTION
+Scale 0.7
+States
+  {
+Spawn:
+	TNT1 A 0 NODELAY A_SetScale(frandom(0.6,0.8),frandom(0.6,0.8))
+	TNT1 A 0 A_SpawnItemEx("GrassDetailSpawner",random(-32,32),random(-32,32),0,0,0,0,0,SXF_CLIENTSIDE,0 ,7780)
+	TNT1 A 0 A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	SNGR A -1
+	Stop
+}}
+
+//================================================================
+//================================================
+//================================
+//Smaller plants (pots, grass)
+
+Actor PotTree : TreeA 31982 {
+  //$Category WDI Props
+  //$Sprite TREEC0
+  //$Title "Tree in a Pot"
+	height 48
+	radius 6
+	MaxStepHeight 12
+	Mass 1500
+	Health 50
+	DropItem "FakeTwig", 255, 1
+	DamageFactor "Gas", 0.0
+	DamageFactor "FlareEffect", 0.0
+	DamageFactor "SprayRED", 0.0
+	DamageFactor "SprayBLU", 0.0
+	DamageFactor "SprayYLL", 0.0
+	DamageFactor "SprayGRN", 0.0
+	DamageFactor "SprayORG", 0.0
+	DamageFactor "SprayPNK", 0.0
+	DamageFactor "burn", 0.0
+	DamageFactor "fire", 0.0
+	DamageFactor "ShovelMelee", 2.0
+	DamageFactor "SawMelee", 2.0
+	DamageFactor "friendlygun", 10.0
+	+PUSHABLE +CANNOTPUSH
+	+SHOOTABLE +NOBLOOD
+	+FORCEYBILLBOARD -NODAMAGE
+	states 
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		TREE C -1
+		loop
+	Death:
+		TNT1 A 0 A_NoBlocking
+		TNT1 AAA 0 A_SpawnItemEx("PotTreeLeaves", random(-1, 1), 0, random(32, 46), random(-2, 2), random(-2, 2), random(0, 2), random(0,90), SXF_NOCHECKPOSITION)
+		POTT G 0 A_SpawnItemEX("PotBits",0,0,5,random(-2,2),random(-2,2),random(0,-2),random(0,90),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+		POTT G 0 A_SpawnItemEX("PotBits",0,0,10,random(-2,2),random(-2,2),random(0,-2),random(0,90),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+		POTT G 0 A_SpawnItemEX("PotBits",0,0,15,random(-2,2),random(-2,2),random(0,-2),random(0,90),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+		POTT G 0 A_SpawnItemEX("PotBits",0,0,20,random(-2,2),random(-2,2),random(0,-2),random(0,90),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+		POTT G 0 A_SpawnItemEX("PotBits",0,0,25,random(-2,2),random(-2,2),random(0,-2),random(0,90),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+		POTT G 0 A_SpawnItemEX("PotBits",0,0,30,random(-2,2),random(-2,2),random(0,-2),random(0,90),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+		POTT G 0 A_SpawnItemEX("PotBits",0,0,35,random(-2,2),random(-2,2),random(0,-2),random(0,90),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+		POTT G 0 A_SpawnItemEX("PotBits",0,0,40,random(-2,2),random(-2,2),random(0,-2),random(0,90),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+		TNT1 A 0 A_SpawnItemEx("PotTreePot", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
+		stop
+	}
+}
+
+Actor PotTreeLeaves
+{
+	height 8
+	radius 4
+	Gravity 0.2
+	Scale 0.7
+	+CLIENTSIDEONLY +FORCEXYBILLBOARD
+	+DONTSPLASH +CANNOTPUSH
+	+NOBLOCKMAP +THRUACTORS
+	-SOLID
+	States
+	{
+	Spawn:
+		PP11 A 0 NODELAY A_Jump(128,"Stay")
+		PP11 A 0 A_SetScale(-scalex,scaley)
+		goto Stay
+		stay:
+		"####" "#" 1 A_Weave(1,0,2,0)
+		"####" "#" 0 A_CHeckFloor("Death")
+		Loop
+	Death:
+		"####" "#" 1 A_ChangeFlag("NOINTERACTION", true)
+		"####" "#" 1 A_Stop
+		"####" "#" 350
+		"####" "#" 1 A_JumpIf(CallACS("CheckPerma") == 1,"Death")
+	stop
+	}
+}
+Actor PotTreeLeaves2 : PotTreeLeaves
+{
+	States
+	{
+	Spawn:
+		PP11 B 0 NODELAY A_Jump(128,"Stay")
+		PP11 B 0 A_SetScale(-scalex,scaley)
+		goto Stay
+	}
+}
+
+actor GrassLarge 31008
+{  
+   scale 1.1
+   +FLOORCLIP
+  //+NOINTERACTION
+	+CLIENTSIDEONLY
+   +VULNERABLE
+//DamageFactor 0.0
++NOBLOOD
+DamageFactor "Fire", 100
+DamageFactor "Burn", 100
+Health 10000
+Radius 24
+Height 40
+Mass 0x7FFFFFFF
++FORCEYBILLBOARD
+  //$Category WDI Environment/Grass
+  //$Sprite GRASA0
+  //$Title "Tall Grass"
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		TNT1 A 0 A_SpawnItemEx("AnimalSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,252)
+		TNT1 A 0 A_SpawnItemEx("GrassDetailSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE)
+		TNT1 A 0 A_Jump(256,"Stay")
+	Stay:
+		GRAS A -1
+		stop
+	Death:
+		TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+		TNT1 A 0 A_SpawnItemEx("FireGrassLarge",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+		TNT1 A -1 Light("FireBurningLightHUGE")
+		stop
+	}
+}
+
+actor GrassMedium : GrassLarge 31009
+{
+  //$Category WDI Environment/Grass
+  //$Sprite GRASA0
+  //$Title "Medium Grass"
+  scale 0.8
+	States
+	{
+	Death:
+		TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+		TNT1 A 0 A_SpawnItemEx("FireGrassMedium",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+		TNT1 A -1 Light("FireBurningLightHUGE")
+		stop
+	}
+}
+
+actor BFGrass2 14275 
+{
+  //$Category WDI Environment/Grass
+  //$Sprite TRV2A0
+  //$Title "Grass 1"
+	DamageFactor "Fire", 100
+	DamageFactor "Burn", 100
+	Health 10000
+	+VULNERABLE +NOBLOOD
+	+CLIENTSIDEONLY +FORCEYBILLBOARD
+	Mass 0x7FFFFFFF
+States
+  {
+    Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	TNT1 A 0 A_SpawnItemEx("AnimalSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,250)
+	TNT1 A 0 A_SpawnItemEx("GrassDetailSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0 ,7780)
+	TRV2 A -1
+	Stop
+	
+	Death:
+	TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+	DREV B 0 A_SpawnItemEx("FireBFGrass2",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+	TRDT L -1 Light("FireBurningLightHUGE")
+	stop
+  }
+}
+
+actor BFGrass3: BFGrass2 14277
+{
+  //$Category WDI Environment/Grass
+  //$Sprite TRV3A0
+  //$Title "Grass 2"
+States
+  {
+    Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	TNT1 A 0 A_SpawnItemEx("AnimalSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,252)
+	TNT1 A 0 A_SpawnItemEx("GrassDetailSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0 ,7780)
+	TRV3 A -1
+	Stop
+	Death:
+	TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+	DREV B 0 A_SpawnItemEx("FireBFGrass3",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+	TRDT M -1 Light("FireBurningLightHUGE")
+	stop
+  }
+}
+
+actor BFGrass5: BFGrass2 14279 
+{
+  //$Category WDI Environment/Grass
+  //$Sprite TRV5A0
+  //$Title "Grass 3"
+States
+  {
+    Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	TNT1 A 0 A_SpawnItemEx("AnimalSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,252)
+	TNT1 A 0 A_SpawnItemEx("GrassDetailSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0 ,7780)
+	TRV5 A -1
+	Stop
+	Death:
+	TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+	DREV B 0 A_SpawnItemEx("FireBFGrass5",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+	TRDT N -1 Light("FireBurningLightHUGE")
+	stop
+  }
+}
+
+actor BFGrass6: BFGrass2 14281
+{
+  //$Category WDI Environment/Grass
+  //$Sprite TRV6A0
+  //$Title "Grass 4"
+States
+  {
+    Spawn:
+	TNT1 A 0 NODELAY A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	TNT1 A 0 A_SpawnItemEx("AnimalSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,252)
+	TNT1 A 0 A_SpawnItemEx("GrassDetailSpawner",0,0,0,0,0,0,0,SXF_CLIENTSIDE,0 ,7780)
+	TRV6 A -1
+	Stop
+	Death:
+	TNT1 A 0 A_PlaySoundEx("DSTORCH", "SoundSlot6", 1)
+	DREV B 0 A_SpawnItemEx("FireBFGrass5",0,0,0,0,0,0,0,SXF_CLIENTSIDE|SXF_NOCHECKPOSITION)
+	TRDT O -1 Light("FireBurningLightHUGE")
+	stop
+  }
+}
+
+
+actor GlowShroom 31010
+{  
+  //$Category WDI Environment
+  //$Sprite SHRMA0
+  //$Title "Glowing Mushroom"
+	Radius 8
+	Height 8
+	scale 0.75
+	+FLOORCLIP +FORCEYBILLBOARD
+	+CLIENTSIDEONLY +NOINTERACTION
+	States
+	{
+	Spawn:
+		SHRM A -1 Bright
+		stop
+	}
+}
+Actor RandomMushroom
+{
+Height 1
+Radius 1
+Mass 0
+-NOGRAVITY
++CLIENTSIDEONLY
++FORCEYBILLBOARD
++NOBLOCKMAP
+Gravity 8.0
+	States
+	{
+	Spawn:
+	TNT1 A 20 NODELAY
+    TNT1 A 0 A_ChangeFlag( "NOINTERACTION", true )
+	TNT1 A 0 A_SetScale(frandom(0.1,0.3),frandom(0.1,0.3))
+	TNT1 A 0 A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	TNT1 A 0 A_Jump(1,"silly")
+	TNT1 A 0 A_Jump(256, "1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24")
+	1: MUSH B -1
+	2: MUSH C -1
+	3: MUSH D -1
+	4: MUSH E -1
+	5: MUSH F -1
+	6: MUSH G -1
+	7: MUSH H -1
+	8: MUSH I -1
+	9: MUSH J -1
+	10: MUSH K -1
+	11: MUSH L -1
+	12: MUSH M -1
+	13: MUSH N -1
+	14: MUSH O -1
+	15: MUSH P -1
+	16: MUSH Q -1
+	17: MUSH R -1
+	18: MUSH S -1
+	19: MUSH T -1
+	20: MUSH U -1
+	21: MUSH V -1
+	22: MUSH W -1
+	23: MUSH X -1
+	24: MUSH Y -1
+	Silly: MUSH Z -1 A_SetScale(frandom(0.1,0.3))
+	stop
+	Null:
+	TNT1 A 1
+	stop
+	}
+}
+
+//================================================================
+//================================================
+//================================
+//ROCKS
+Actor RockA 31990 
+{
+  //$Category WDI Environment
+  //$Sprite RCK4A0
+  //$Title "Rock 1"
+	+CLIENTSIDEONLY
+	+FORCEXYBILLBOARD
+	states
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_Jump(128,2)
+		TNT1 A 0 A_SetScale(-scalex,scaley)
+		TNT1 A 0 A_Jump(256,"Stay")
+	Stay:
+		RCK4 A -1
+		loop
+	}
+}
+Actor RockB : RockA 31989 
+{
+  //$Category WDI Environment
+  //$Sprite RCK3A0
+  //$Title "Rock 2"
+	states
+	{
+	Stay:
+		RCK3 A -1
+		loop
+	}
+}
+
+Actor RandomRock
+{
+	Height 1
+	Radius 1
+	Mass 0
+	Gravity 8.0
+	-NOGRAVITY +NOBLOCKMAP
+	+CLIENTSIDEONLY +FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+	TNT1 A 20 NODELAY
+    TNT1 A 0 A_ChangeFlag( "NOINTERACTION", true )
+	TNT1 A 0 A_SetScale(frandom(0.1,0.4),frandom(0.1,0.4))
+	TNT1 A 0 A_Jump(128,2)
+	TNT1 A 0 A_SetScale(-scalex,scaley)
+	TNT1 A 1 A_Jump(256, "1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19")
+	1: DROK B -1
+	2: DROK C -1
+	3: DROK D -1
+	4: DROK E -1
+	5: DROK F -1
+	6: DROK G -1
+	7: DROK H -1
+	8: DROK I -1
+	9: DROK J -1
+	10: DROK K -1
+	11: DROK L -1
+	12: DROK M -1
+	13: DROK N -1
+	14: DROK O -1
+	15: DRT1 A -1
+	16: DRT2 A -1
+	17: DRT3 A -1
+	18: DRT4 A -1
+	19: DRT5 A -1
+	
+	stop
+	}
+}
+

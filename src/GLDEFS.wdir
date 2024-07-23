@@ -1,0 +1,804 @@
+//GZDoom used a weird "shader model" system (that isn't a thing in OpenGL and doesn't even match the real shader model to begin with) 
+//which it uses to know if a card should use shaders or not. Shader Model 2 in GZDoom means not using any shaders at all, 3 means most 
+//but no user shaders, and 4 means full support.
+// - TDRR
+#include BumpMaps.txt
+
+brightmap texture BLITE20 { map "brightmaps/auto/BLITE20.png" }
+brightmap texture BLITE22 { map "brightmaps/auto/BLITE22.png" }
+brightmap flat DM22 	  { map "brightmaps/auto/DM22.png" }
+brightmap texture "DM15" { 	map "brightmaps/auto/DM15.png" }
+brightmap texture "JNLITE2" { 	map "brightmaps/auto/JNLITE2.png" } 
+brightmap texture "JNLITE3" { 	map "brightmaps/auto/JNLITE3.png" } 
+brightmap texture "ALITE24" { 	map "brightmaps/auto/ALITE24.png" }  
+brightmap texture "ALITE22" { 	map "brightmaps/auto/ALITE22.png" }  
+brightmap texture "ALITE20" { 	map "brightmaps/auto/ALITE20.png" }  
+brightmap flat E1SKY1 { map "brightmaps/e1sky1.png" }
+brightmap flat BSEXIT { map "brightmaps/auto/BSEXIT.png" }
+brightmap texture BLIT06 { map "brightmaps/auto/BLIT06.png" } 
+brightmap flat FLAT17_2 { map "brightmaps/auto/FLAT17_2.png" } 
+brightmap texture ALIT38 { map "brightmaps/auto/ALIT38.png" } 
+brightmap texture BDOOR01 { map "brightmaps/auto/BDOOR01.png" }
+brightmap flat N_SVLY02 { map "brightmaps/auto/N_SVLY02.png" }
+brightmap flat N_LTYL05 { map "brightmaps/auto/N_LTYL05.png" }
+brightmap flat N_LTYL04 { map "brightmaps/auto/N_LTYL04.png" }
+brightmap texture YZTX1263 { map "brightmaps/auto/YZTX1263.png" }
+brightmap texture BBULL07 { map "brightmaps/auto/BBULL07.png" }
+brightmap texture JNLITE5 { map "brightmaps/auto/JNLITE5.png" }
+brightmap texture LITE3 { map "brightmaps/auto/LITE3.png" }
+brightmap texture LITE5 { map "brightmaps/auto/LITE5.png" }
+brightmap texture WL09 { map "brightmaps/auto/WL09.png" }
+
+brightmap flat dmdfeck { map "brightmaps/auto/dmdfeck.png" }
+brightmap texture COMPTALL { map "brightmaps/auto/COMPTALL.png" }
+brightmap flat N_LTWT02 { map "brightmaps/auto/N_LTWT02.png" }
+brightmap flat N_LTYL02 { map "brightmaps/auto/N_LTYL02.png" }
+brightmap flat FLAT17 { map "brightmaps/auto/FLAT17.png" }
+brightmap texture CEIL1_2 { map "brightmaps/auto/CEIL1_2.png" }
+brightmap texture EXITSG { map "brightmaps/auto/EXITSG.png" }
+brightmap flat flites1 { map "brightmaps/auto/flites1.png" }
+brightmap texture RLITE { map "brightmaps/auto/RLITE.png" }
+brightmap texture comp02_6 { map "brightmaps/auto/comp02_6.png" }
+brightmap flat TLITE6_5 { map "brightmaps/auto/TLITE6_5.png" }
+brightmap flat LITE4 { map "brightmaps/auto/LITE4.png" }
+brightmap flat COMPSTA1 { map "brightmaps/auto/COMPSTA1.png" }
+brightmap texture TLITE6_1 { map "brightmaps/auto/TLITE6_1.png" }
+brightmap texture TLITE6_6 { map "brightmaps/auto/TLITE6_6.png" }
+brightmap texture FLAT2 { map "brightmaps/auto/FLAT2.png" }
+brightmap texture EXITSIGN { map "brightmaps/auto/EXITSIGN.png" }
+brightmap texture COMPSTA2 { map "brightmaps/auto/COMPSTA2.png" }
+brightmap texture LITEBLU1 { map "brightmaps/auto/LITEBLU1.png" }
+brightmap texture LITEBLU4 { map "brightmaps/auto/LITEBLU4.png" }
+brightmap texture PIPEWAL1 { map "brightmaps/auto/PIPEWAL1.png" }
+brightmap texture METAL6 { map "brightmaps/auto/METAL6.png" }
+brightmap texture CEIL3_6 { map "brightmaps/auto/CEIL3_6.png" }
+brightmap texture SILVER2 { map "brightmaps/auto/SILVER2.png" }
+brightmap texture SILVER3 { map "brightmaps/auto/SILVER3.png" }
+brightmap texture CEIL3_4 { map "brightmaps/auto/CEIL3_4.png" }
+brightmap flat SPCDOOR3 { map "brightmaps/auto/SPCDOOR3.png" }
+brightmap flat SW2COMP { map "brightmaps/auto/SW2COMP.png" }
+brightmap texture WL09 { map "brightmaps/auto/WL09.png" }
+brightmap texture WL09 { map "brightmaps/auto/WL09.png" }
+brightmap texture WL09 { map "brightmaps/auto/WL09.png" }
+brightmap texture WL09 { map "brightmaps/auto/WL09.png" }
+brightmap texture WL09 { map "brightmaps/auto/WL09.png" }
+brightmap texture XCTXBLB1 { map "brightmaps/auto/XCTXBLB1.png" }
+brightmap texture YZTX1269 { map "TEXTURES/YZTX1269.png" }
+brightmap texture LOS_P348 { map "TEXTURES/LOS_P348.png" }
+brightmap texture YZTX1266 { map "TEXTURES/YZTX1266.png" }
+
+brightmap texture VOLTLOGO { map "TEXTURES/VOLTLOGO.png" }
+brightmap texture VOLTANI1 { map "TEXTURES/VOLTANI1.png" }
+brightmap texture VOLTANI2 { map "TEXTURES/VOLTANI2.png" }
+brightmap texture VOLTANI3 { map "TEXTURES/VOLTANI3.png" }
+brightmap texture VOLTANI4 { map "TEXTURES/VOLTANI4.png" }
+brightmap texture VOLTANI5 { map "TEXTURES/VOLTANI5.png" }
+brightmap texture VWHEEL3A { map "TEXTURES/VWHEEL3A.png" }
+
+brightmap texture YZTX4075 { map "brightmaps/auto/YZTX4075.png" }
+brightmap texture YZTX4069 { map "brightmaps/auto/YZTX4069.png" }
+brightmap texture YZTX3126 { map "brightmaps/auto/YZTX3126.png" }
+brightmap texture YZTX3120 { map "brightmaps/auto/YZTX3120.png" }
+brightmap texture YZTX1054 { map "brightmaps/auto/YZTX1054.png" }
+brightmap texture YZTX1201 { map "brightmaps/auto/YZTX1201.png" }
+brightmap texture YZTX706 { map "brightmaps/auto/YZTX706.png" }
+brightmap texture YZTX432 { map "brightmaps/auto/YZTX432.png" }
+brightmap texture YZTX41C1 { map "brightmaps/auto/YZTX41C1.png" }
+brightmap texture YZPLTRM { map "brightmaps/auto/YZPLTRM.png" }
+brightmap texture YZPCSCR2 { map "brightmaps/auto/YZPCSCR2.png" }
+brightmap texture YZPCSCR1 { map "brightmaps/auto/YZPCSCR1.png" }
+brightmap texture YZMATRI6 { map "brightmaps/auto/YZMATRI6.png" }
+brightmap texture YZMATRI5 { map "brightmaps/auto/YZMATRI5.png" }
+brightmap texture YZMATRI4 { map "brightmaps/auto/YZMATRI4.png" }
+brightmap texture YZMATRI3 { map "brightmaps/auto/YZMATRI3.png" }
+brightmap texture YZMATRI2 { map "brightmaps/auto/YZMATRI2.png" }
+brightmap texture YZMATRI1 { map "brightmaps/auto/YZMATRI1.png" }
+brightmap texture YZAIRLOK { map "brightmaps/auto/YZAIRLOK.png" }
+brightmap texture LOS_P263 { map "brightmaps/auto/LOS_P263.png" }
+brightmap texture PDATX5 { map "brightmaps/auto/PDATX5.png" }
+brightmap texture YZTX175A { map "brightmaps/auto/YZTX175A.png" }
+brightmap texture ANOX3237 { map "brightmaps/auto/ANOX3237.png" }
+brightmap texture XCLCDCL2 { map "brightmaps/auto/XCLCDCL2.png" }
+brightmap texture XCLCDCL1 { map "brightmaps/auto/XCLCDCL2.png" }
+brightmap texture XCHOTEL1 { map "brightmaps/auto/XCHOTEL1.png" }
+brightmap texture XCHOTEL2 { map "brightmaps/auto/XCHOTEL2.png" }
+brightmap texture DF_LITES { map "brightmaps/auto/DFLITES.png" }
+brightmap texture BUDKA1 { map "brightmaps/auto/BUDKA1.png" }
+brightmap texture BUDKA2 { map "brightmaps/auto/BUDKA2.png" }
+brightmap texture TVNOIZ1 { map "brightmaps/auto/TVNOIZ1.png" }
+brightmap texture TVNOIZ2 { map "brightmaps/auto/TVNOIZ1.png" }
+brightmap texture TVNOIZ3 { map "brightmaps/auto/TVNOIZ1.png" }
+brightmap texture TVNOIZ4 { map "brightmaps/auto/TVNOIZ1.png" }
+brightmap texture YZTX3128 { map "brightmaps/auto/YZTX3126.png" }
+brightmap texture YZTX3129 { map "brightmaps/auto/YZTX3126.png" }
+
+brightmap texture YZTX175A { map "brightmaps/auto/YZTX175A.png" }
+brightmap texture YZTX175A { map "brightmaps/auto/YZTX175A.png" }
+brightmap texture YZTX175A { map "brightmaps/auto/YZTX175A.png" }
+brightmap texture YZTX175A { map "brightmaps/auto/YZTX175A.png" }
+brightmap texture YZTX175A { map "brightmaps/auto/YZTX175A.png" }
+
+flickerlight2 TPortNormal
+{
+    color 0.5 0.5 0.7
+    size 40
+    secondarySize 56
+    interval 0.01
+    offset 0 32 0
+}
+
+flickerlight2 TPortZap
+{
+    color 0.45 0.45 0.9
+    size 88
+    secondarySize 128
+    interval 0.01
+    offset 0 32 0
+}
+
+
+
+flickerlight2 TELESMOKE
+{
+color 1.0 0.0 0.0
+size 64
+secondarySize 72
+interval 0.1
+offset 0 44 0
+}
+
+
+pulselight FLAREorange { color 0.7 0.4 0.2 size 90 secondarySize 100 interval 0.2 }
+pulselight FLAREyellow { color 0.6 0.5 0.0 size 90 secondarySize 100 interval 0.2 }
+pulselight FLAREgreen { color 0.0 0.7 0.3 size 90 secondarySize 100 interval 0.2 }
+pulselight FLAREblue { color 0.5 0.5 0.9 size 90 secondarySize 100 interval 0.2 }
+pulselight FLAREpink { color 0.8 0.3 0.3 size 90 secondarySize 100 interval 0.2 }
+
+pulselight FLAREpurple { color 0.6 0.0 0.9 size 90 secondarySize 100 interval 0.2 }
+pulselight FLAREwhite { color 1.0 1.0 1.0 size 90 secondarySize 100 interval 0.2 }
+pulselight FLAREnegative { color 1.0 0.8 1.0 size 90 secondarySize 100 interval 0.2 subtractive 1}
+pulselight FLAREpink2 { color 1.0 0.6 0.6 size 90 secondarySize 100 interval 0.2}
+
+pulselight NewChandelierLight { color 1.0 1.0 1.0 size 36 secondarySize 40 interval 0.2}
+
+//Alarm by SgtMarkIV. Added by Teribear
+pointlight ALARMREDLAMP
+{
+    color 1.0 0.0 0.0
+    size 64
+    offset 0 0 90
+}
+
+object Alarm
+{
+    frame ALAR { light ALARMREDLAMP }
+}
+
+object NewCandelabra
+{
+    frame CBRA { light CANDELABRA }
+}
+
+object NewCandlestick
+{
+    frame CAND { light CANDLE }
+}
+
+object Chandelier2On
+{
+    frame CHAN { light NewChandelierLight }
+}
+
+object NewTechLamp2
+{
+    frame TLP2A { light SMALLLAMP }
+	frame TLP2B { light SMALLLAMP }
+	frame TLP2C { light SMALLLAMP }
+	frame TLP2D { light SMALLLAMP }
+	
+}
+
+object NewTechLamp
+{
+    frame TLMPA { light BIGLAMP }
+	frame TLMPB { light BIGLAMP }
+	frame TLMPC { light BIGLAMP }
+	frame TLMPD { light BIGLAMP }
+	
+}
+
+
+pulselight HealRedSmall { color 1.0 0.0 0.0 size 6 secondarySize 8 interval 0.1 dontlightself 1}
+pulselight HealBlueSmall { color 0.0 0.0 1.0 size 6 secondarySize 8 interval 0.1 dontlightself 1}
+pulselight HealYellowSmall { color 0.6 0.5 0.0 size 6 secondarySize 8 interval 0.1 dontlightself 1}
+pulselight HealGreenSmall { color 0.0 0.7 0.3 size 6 secondarySize 8 interval 0.1 dontlightself 1}
+pulselight HealCyanSmall { color 0.5 0.5 0.9 size 6 secondarySize 8 interval 0.1 dontlightself 1}
+
+pulselight PedestalLight { color 0.5 0.5 0.9 size 14 secondarySize 18 interval 0.8 dontlightself 1 offset 0 48 0}
+object Pedestal 
+{ 
+frame YZPDA {  light PedestalLight } 
+}
+
+object DroppedTechnoKit2 
+{ 
+frame DKITF {  light HealBlueSmall } 
+frame DKITG {  light HealBlueSmall } 
+frame DKITJ {  light HealYellowSmall } 
+frame DKITK {  light HealYellowSmall } 
+frame DKITN {  light HealGreenSmall } 
+frame DKITO {  light HealGreenSmall } 
+frame DKITR {  light HealRedSmall } 
+frame DKITS {  light HealRedSmall } 
+frame DKITV {  light HealCyanSmall } 
+frame DKITW {  light HealCyanSmall } 
+}
+object DroppedEclipsinaKit 
+{ 
+frame DKITF {  light HealBlueSmall } 
+frame DKITG {  light HealBlueSmall } 
+frame DKITJ {  light HealYellowSmall } 
+frame DKITK {  light HealYellowSmall } 
+frame DKITN {  light HealGreenSmall } 
+frame DKITO {  light HealGreenSmall } 
+frame DKITR {  light HealRedSmall } 
+frame DKITS {  light HealRedSmall } 
+frame DKITV {  light HealCyanSmall } 
+frame DKITW {  light HealCyanSmall } 
+}
+object DroppedTigerkit 
+{ 
+frame DKITF {  light HealBlueSmall } 
+frame DKITG {  light HealBlueSmall } 
+frame DKITJ {  light HealYellowSmall } 
+frame DKITK {  light HealYellowSmall } 
+frame DKITN {  light HealGreenSmall } 
+frame DKITO {  light HealGreenSmall } 
+frame DKITR {  light HealRedSmall } 
+frame DKITS {  light HealRedSmall } 
+frame DKITV {  light HealCyanSmall } 
+frame DKITW {  light HealCyanSmall } 
+}
+object DroppedFranciskit 
+{ 
+frame DKITF {  light HealBlueSmall } 
+frame DKITG {  light HealBlueSmall } 
+frame DKITJ {  light HealYellowSmall } 
+frame DKITK {  light HealYellowSmall } 
+frame DKITN {  light HealGreenSmall } 
+frame DKITO {  light HealGreenSmall } 
+frame DKITR {  light HealRedSmall } 
+frame DKITS {  light HealRedSmall } 
+frame DKITV {  light HealCyanSmall } 
+frame DKITW {  light HealCyanSmall } 
+}
+
+
+object DroppedKit 
+{ 
+frame MEDIF {  light HealRedSmall } 
+frame MEDIG {  light HealRedSmall } 
+frame MEDIE {  light HealRed } 
+}
+
+object FlareUsed { 
+//ORANG
+frame FLARE0 {  light FLAREorange } 
+frame FLARF0 {  light FLAREorange } 
+frame FLARG0 {  light FLAREorange }
+//YELO
+frame FLARH0 {  light FLAREyellow } 
+frame FLARI0 {  light FLAREyellow } 
+frame FLARJ0 {  light FLAREyellow }
+//GREN
+frame FLARK0 {  light FLAREgreen } 
+frame FLARL0 {  light FLAREgreen } 
+frame FLARM0 {  light FLAREgreen }
+//BLU
+frame FLARN0 {  light FLAREblue } 
+frame FLARO0 {  light FLAREblue } 
+frame FLARQ0 {  light FLAREblue }
+//PEENK
+frame FLARR0 {  light FLAREpink } 
+frame FLARS0 {  light FLAREpink } 
+frame FLART0 {  light FLAREpink }
+//POORPOOL
+frame FLARU0 {  light FLAREpurple } 
+frame FLARV0 {  light FLAREpurple } 
+frame FLARW0 {  light FLAREpurple }
+//wHITE
+frame FLARX0 {  light FLAREwhite } 
+frame FLARY0 {  light FLAREwhite } 
+frame FLARZ0 {  light FLAREwhite }
+//NEGATIVE
+frame FLAR[0 {  light FLAREnegative } 
+frame FLAR\0 {  light FLAREnegative } 
+frame FLAR]0 {  light FLAREnegative }
+//pink2
+frame 2LARA0 {  light FLAREpink2 } 
+frame 2LARB0 {  light FLAREpink2 } 
+frame 2LARC0 {  light FLAREpink2 }
+}
+
+pointlight PlayerShadow
+{
+    color 0.20 0.20 0.20
+    size 10
+    subtractive 1
+    dontlightself 1
+
+}
+
+object Innocent3
+{
+    frame PLAYA {light PlayerShadow}
+    frame PLAYB {light PlayerShadow}
+    frame PLAYC {light PlayerShadow}
+    frame PLAYD {light PlayerShadow}
+    frame PLAYE {light PlayerShadow}
+    frame PLAYF {light PlayerShadow}
+    frame PLAYG {light PlayerShadow}
+}
+object Innocent4
+{
+    frame PLAYA {light PlayerShadow}
+    frame PLAYB {light PlayerShadow}
+    frame PLAYC {light PlayerShadow}
+    frame PLAYD {light PlayerShadow}
+    frame PLAYE {light PlayerShadow}
+    frame PLAYF {light PlayerShadow}
+    frame PLAYG {light PlayerShadow}
+}
+
+
+Object FireDecorativeLargeNew 
+{ 
+	frame NF4R { Light FireBurningLight } 
+}
+Object FireDecorativeNew
+{ 
+	frame NF4R { Light FireBurningLight } 
+}
+Object Mollyfire
+{ 
+	frame NF4R { Light FireBurningLight } 
+}
+Object MollyfireNoGravity
+{ 
+	frame NF4R { Light FireBurningLight } 
+}
+
+
+
+Object FireDecorativeGreen
+{ 
+	frame NF5R { Light GreenBurningLight } 
+}
+Object FireDecorativeBlue
+{ 
+	frame NF6R { Light BlueBurningLight } 
+}
+
+
+
+
+Object FFBulletPuff 
+{ 
+	frame BPUF { Light PlayerLighterLightSmall } 
+}
+Object TripShotgunPuff 
+{ 
+	frame BPUF { Light PlayerLighterLightSmall } 
+}
+
+Object FMBulletPuff2Lighter 
+{ 
+	frame TNT1 { Light PlayerLighterLight } 
+}
+Object FMBulletPuff2LighterSmall 
+{ 
+	frame TNT1 { Light PlayerLighterLightSmall } 
+}
+
+Object LolTrap 
+{ 
+	frame TURTB { Light PlayerLighterLightSmall } 
+	frame TURTD { Light PlayerLighterLight } 
+}
+Object ShotgunTrap 
+{ 
+	frame TURTB { Light PlayerLighterLightSmall } 
+	frame TURTD { Light PlayerLighterLight } 
+}
+
+object DoDance1 
+{
+    frame JAKE {light PlayerShadow}
+}
+object DoDance2
+{
+    frame JAKE {light PlayerShadow}
+}
+object DoDance3
+{
+    frame 2AKE {light PlayerShadow}
+}
+object DoDance4
+{
+    frame 2AKE {light PlayerShadow}
+}
+object DoDance5
+{
+    frame 3AKE {light PlayerShadow}
+}
+object DoDance6
+{
+    frame 3AKE {light PlayerShadow}
+}
+
+pulselight FireBurningLight
+{
+    color 1.0 0.3 0.0
+    size 60
+    secondarySize 70
+    interval 0.1
+    offset 0 20 0
+}
+
+pulselight BlueBurningLight
+{
+    color 0.3 0.3 1.0
+    size 65
+    secondarySize 70
+    interval 0.1
+    offset 0 60 0
+}
+
+pulselight GreenBurningLight
+{
+    color 0.1 1.0 0.1
+    size 65
+    secondarySize 70
+    interval 0.1
+    offset 0 20 0
+}
+
+pulselight FireBurningLightHUGE
+{
+    color 1.0 0.3 0.0
+    size 120
+    secondarySize 125
+    interval 0.1
+    offset 0 20 0
+}
+
+pulselight PlayerLighterLight
+{
+    color 1.0 0.3 0.0
+    size 80
+    secondarySize 90
+    interval 0.1
+    offset 0 0 0
+}
+pulselight PlayerLighterLightSmall
+{
+    color 1.0 0.3 0.0
+    size 20
+    secondarySize 30
+    interval 0.1
+    offset 0 0 0
+}
+
+Pointlight RandomLootboxLight
+{
+    color 1.0 0.0 0.0
+    size 8
+    offset 0 0 0
+}
+
+object MollyFireSpawn2
+{
+    frame CFFX { light FireBurningLight }
+}
+object MollyFire
+{
+    frame CFFX { light FireBurningLight }
+}
+object ThrownMolly
+{
+    frame MOPP { light FireBurningLight }
+}
+
+pulselight SOULSPHERE
+{
+    color 0.0 0.0 1.0
+    size 40
+    secondarySize 42
+    interval 2.0
+    offset 0 16 0
+}
+
+object NewSoulSphere
+{
+    frame SOUL { light SOULSPHERE }
+}
+
+object NewBlurSphere
+{
+    frame PINS { light BLURSPHERE1 }
+
+    frame PINSA { light BLURSPHERE2 }
+    frame PINSB { light BLURSPHERE3 }
+    frame PINSC { light BLURSPHERE4 }
+    frame PINSD { light BLURSPHERE5 }
+}
+
+object NewMegaSphere
+{
+    frame MEGAA0 { light MEGASPHERE1 }
+
+    frame MEGAB0 { light MEGASPHERE2 }
+    frame MEGAC0 { light MEGASPHERE3 }
+    frame MEGAD0 { light MEGASPHERE4 }
+}
+brightmap sprite YZPDA0 { map "brightmaps/AUTO/YZPDA0.png" disablefullbright }
+
+
+//FLARES
+brightmap sprite FLARE0 { map "brightmaps/ITEMS/FlareBmap1.png" disablefullbright }
+brightmap sprite FLARF0 { map "brightmaps/ITEMS/FlareBmap2.png" disablefullbright }
+brightmap sprite FLARG0 { map "brightmaps/ITEMS/FlareBmap3.png" disablefullbright }
+brightmap sprite FLARH0 { map "brightmaps/ITEMS/FlareBmap1.png" disablefullbright }
+brightmap sprite FLARI0 { map "brightmaps/ITEMS/FlareBmap2.png" disablefullbright }
+brightmap sprite FLARJ0 { map "brightmaps/ITEMS/FlareBmap3.png" disablefullbright }
+brightmap sprite FLARK0 { map "brightmaps/ITEMS/FlareBmap1.png" disablefullbright }
+brightmap sprite FLARL0 { map "brightmaps/ITEMS/FlareBmap2.png" disablefullbright }
+brightmap sprite FLARM0 { map "brightmaps/ITEMS/FlareBmap3.png" disablefullbright }
+brightmap sprite FLARN0 { map "brightmaps/ITEMS/FlareBmap1.png" disablefullbright }
+brightmap sprite FLARO0 { map "brightmaps/ITEMS/FlareBmap2.png" disablefullbright }
+brightmap sprite FLARQ0 { map "brightmaps/ITEMS/FlareBmap3.png" disablefullbright }
+brightmap sprite FLARR0 { map "brightmaps/ITEMS/FlareBmap1.png" disablefullbright }
+brightmap sprite FLARS0 { map "brightmaps/ITEMS/FlareBmap2.png" disablefullbright }
+brightmap sprite FLART0 { map "brightmaps/ITEMS/FlareBmap3.png" disablefullbright }
+
+brightmap sprite FLARU0 { map "brightmaps/ITEMS/FlareBmap4.png" disablefullbright }
+brightmap sprite FLARV0 { map "brightmaps/ITEMS/FlareBmap5.png" disablefullbright }
+brightmap sprite FLARW0 { map "brightmaps/ITEMS/FlareBmap6.png" disablefullbright }
+brightmap sprite FLARX0 { map "brightmaps/ITEMS/FlareBmap4.png" disablefullbright }
+brightmap sprite FLARY0 { map "brightmaps/ITEMS/FlareBmap5.png" disablefullbright }
+brightmap sprite FLARZ0 { map "brightmaps/ITEMS/FlareBmap6.png" disablefullbright }
+brightmap sprite FLAR[0 { map "brightmaps/ITEMS/FlareBmap4.png" disablefullbright }
+brightmap sprite FLAR\0 { map "brightmaps/ITEMS/FlareBmap5.png" disablefullbright }
+brightmap sprite FLAR]0 { map "brightmaps/ITEMS/FlareBmap6.png" disablefullbright }
+brightmap sprite 2LARA0 { map "brightmaps/ITEMS/FlareBmap4.png" disablefullbright }
+brightmap sprite 2LARB0 { map "brightmaps/ITEMS/FlareBmap5.png" disablefullbright }
+brightmap sprite 2LARC0 { map "brightmaps/ITEMS/FlareBmap6.png" disablefullbright }
+
+
+//RANDOM ITEM BOX
+brightmap sprite CKT6A0 { map "brightmaps/ITEMS/CKT6A0.png" disablefullbright }
+brightmap sprite CKT6B0 { map "brightmaps/ITEMS/CKT6B0.png" disablefullbright }
+brightmap sprite CKT6C0 { map "brightmaps/ITEMS/CKT6C0.png" disablefullbright }
+
+//MOLOTOV
+brightmap sprite MLTVM0 { map "brightmaps/Molotov/MLTVM0.png" disablefullbright }
+brightmap sprite MLTVN0 { map "brightmaps/Molotov/MLTVN0.png" disablefullbright }
+brightmap sprite MLTVO0 { map "brightmaps/Molotov/MLTVO0.png" disablefullbright }
+brightmap sprite MLTVP0 { map "brightmaps/Molotov/MLTVP0.png" disablefullbright }
+brightmap sprite MLTVQ0 { map "brightmaps/Molotov/MLTVQ0.png" disablefullbright }
+brightmap sprite MLTVR0 { map "brightmaps/Molotov/MLTVR0.png" disablefullbright }
+brightmap sprite MLTVS0 { map "brightmaps/Molotov/MLTVS0.png" disablefullbright }
+brightmap sprite MLTVT0 { map "brightmaps/Molotov/MLTVT0.png" disablefullbright }
+brightmap sprite MLTVU0 { map "brightmaps/Molotov/MLTVU0.png" disablefullbright }
+brightmap sprite MLTVV0 { map "brightmaps/Molotov/MLTVV0.png" disablefullbright }
+brightmap sprite MLTVW0 { map "brightmaps/Molotov/MLTVW0.png" disablefullbright }
+brightmap sprite MLTVX0 { map "brightmaps/Molotov/MLTVX0.png" disablefullbright }
+
+brightmap sprite MOLVA0 { map "brightmaps/Molotov/MOLVA0.png" disablefullbright }
+brightmap sprite MOLVB0 { map "brightmaps/Molotov/MOLVB0.png" disablefullbright }
+brightmap sprite MOLVC0 { map "brightmaps/Molotov/MOLVC0.png" disablefullbright }
+brightmap sprite MOLVD0 { map "brightmaps/Molotov/MOLVD0.png" disablefullbright }
+brightmap sprite MOLVE0 { map "brightmaps/Molotov/MOLVE0.png" disablefullbright }
+brightmap sprite MOLVF0 { map "brightmaps/Molotov/MOLVF0.png" disablefullbright }
+brightmap sprite MOLVG0 { map "brightmaps/Molotov/MOLVG0.png" disablefullbright }
+brightmap sprite MOLVH0 { map "brightmaps/Molotov/MOLVH0.png" disablefullbright }
+brightmap sprite MOLVI0 { map "brightmaps/Molotov/MOLVI0.png" disablefullbright }
+brightmap sprite MOLVJ0 { map "brightmaps/Molotov/MOLVJ0.png" disablefullbright }
+brightmap sprite MOLVK0 { map "brightmaps/Molotov/MOLVK0.png" disablefullbright }
+brightmap sprite MOLVL0 { map "brightmaps/Molotov/MOLVL0.png" disablefullbright }
+brightmap sprite MOLVM0 { map "brightmaps/Molotov/MOLVM0.png" disablefullbright }
+brightmap sprite MOLVN0 { map "brightmaps/Molotov/MOLVN0.png" disablefullbright }
+brightmap sprite MOLVO0 { map "brightmaps/Molotov/MOLVO0.png" disablefullbright }
+brightmap sprite MOLVP0 { map "brightmaps/Molotov/MOLVP0.png" disablefullbright }
+brightmap sprite MOLVQ0 { map "brightmaps/Molotov/MOLVQ0.png" disablefullbright }
+
+brightmap sprite MOPPA0 { map "brightmaps/Molotov/MOPPA0.png" disablefullbright }
+brightmap sprite MOPPB0 { map "brightmaps/Molotov/MOPPB0.png" disablefullbright }
+brightmap sprite MOPPC0 { map "brightmaps/Molotov/MOPPC0.png" disablefullbright }
+brightmap sprite MOPPD0 { map "brightmaps/Molotov/MOPPD0.png" disablefullbright }
+brightmap sprite MOPPE0 { map "brightmaps/Molotov/MOPPE0.png" disablefullbright }
+brightmap sprite MOPPF0 { map "brightmaps/Molotov/MOPPF0.png" disablefullbright }
+brightmap sprite MOPPG0 { map "brightmaps/Molotov/MOPPG0.png" disablefullbright }
+brightmap sprite MOPPH0 { map "brightmaps/Molotov/MOPPH0.png" disablefullbright }
+brightmap sprite MOPPI0 { map "brightmaps/Molotov/MOPPI0.png" disablefullbright }
+brightmap sprite MOPPJ0 { map "brightmaps/Molotov/MOPPJ0.png" disablefullbright }
+brightmap sprite MOPPK0 { map "brightmaps/Molotov/MOPPK0.png" disablefullbright }
+brightmap sprite MOPPL0 { map "brightmaps/Molotov/MOPPL0.png" disablefullbright }
+brightmap sprite MOPPM0 { map "brightmaps/Molotov/MOPPM0.png" disablefullbright }
+brightmap sprite MOPPN0 { map "brightmaps/Molotov/MOPPN0.png" disablefullbright }
+brightmap sprite MOPPO0 { map "brightmaps/Molotov/MOPPO0.png" disablefullbright }
+brightmap sprite MOPPP0 { map "brightmaps/Molotov/MOPPP0.png" disablefullbright }
+
+brightmap sprite LIT1I0 { map "brightmaps/Molotov/LIT1I0.png" disablefullbright }
+brightmap sprite LIT1J0 { map "brightmaps/Molotov/LIT1J0.png" disablefullbright }
+brightmap sprite LIT1K0 { map "brightmaps/Molotov/LIT1K0.png" disablefullbright }
+brightmap sprite LIT1L0 { map "brightmaps/Molotov/LIT1L0.png" disablefullbright }
+brightmap sprite LIT1M0 { map "brightmaps/Molotov/LIT1M0.png" disablefullbright }
+brightmap sprite LIT1N0 { map "brightmaps/Molotov/LIT1N0.png" disablefullbright }
+brightmap sprite LIT1O0 { map "brightmaps/Molotov/LIT1O0.png" disablefullbright }
+brightmap sprite LIT1P0 { map "brightmaps/Molotov/LIT1P0.png" disablefullbright }
+brightmap sprite LIT1Q0 { map "brightmaps/Molotov/LIT1Q0.png" disablefullbright }
+brightmap sprite LIT1R0 { map "brightmaps/Molotov/LIT1R0.png" disablefullbright }
+brightmap sprite LIT1S0 { map "brightmaps/Molotov/LIT1S0.png" disablefullbright }
+brightmap sprite LIT1T0 { map "brightmaps/Molotov/LIT1T0.png" disablefullbright }
+
+//FIREARMS
+brightmap sprite REPSB0 { map "brightmaps/Firearms/REPSB0.png" disablefullbright }
+brightmap sprite M1TUQ0 { map "brightmaps/Firearms/M1TUQ0.png" disablefullbright }
+brightmap sprite M1TUR0 { map "brightmaps/Firearms/M1TUR0.png" disablefullbright }
+brightmap sprite DHSGB0 { map "brightmaps/Firearms/DHSGB0.png" disablefullbright }
+brightmap sprite DHSGC0 { map "brightmaps/Firearms/DHSGC0.png" disablefullbright }
+
+brightmap sprite DBSGB0 { map "brightmaps/Firearms/DBSGB0.png" disablefullbright }
+brightmap sprite DBSGC0 { map "brightmaps/Firearms/DBSGC0.png" disablefullbright }
+brightmap sprite 4BSGA0 { map "brightmaps/Firearms/4BSGA0.png" disablefullbright }
+brightmap sprite 4BSGB0 { map "brightmaps/Firearms/4BSGB0.png" disablefullbright }
+
+//SHOTGUN TRAP
+brightmap sprite TURTA1 { map "brightmaps/ITEMS/TURTA1.png" disablefullbright }
+brightmap sprite TURTA8A2 { map "brightmaps/ITEMS/TURTA8A2.png" disablefullbright }
+brightmap sprite TURTA7A3 { map "brightmaps/ITEMS/TURTA7A3.png" disablefullbright }
+brightmap sprite TURTB1 { map "brightmaps/ITEMS/TURTB1.png" disablefullbright }
+brightmap sprite TURTB8B2 { map "brightmaps/ITEMS/TURTB8B2.png" disablefullbright }
+brightmap sprite TURTB7B3 { map "brightmaps/ITEMS/TURTB7B3.png" disablefullbright }
+brightmap sprite TURTB6B4 { map "brightmaps/ITEMS/TURTB6B4.png" disablefullbright }
+brightmap sprite TURTB5 { map "brightmaps/ITEMS/TURTB5.png" disablefullbright }
+brightmap sprite TURTD1 { map "brightmaps/ITEMS/TURTD1.png" disablefullbright }
+brightmap sprite TURTD8D2 { map "brightmaps/ITEMS/TURTD8D2.png" disablefullbright }
+brightmap sprite TURTD7D3 { map "brightmaps/ITEMS/TURTD7D3.png" disablefullbright }
+brightmap sprite TURTD6D4 { map "brightmaps/ITEMS/TURTD6D4.png" disablefullbright }
+brightmap sprite TURTD5 { map "brightmaps/ITEMS/TURTD5.png" disablefullbright }
+
+//FLASHLIGHT
+brightmap sprite FLSGN0 { map "brightmaps/Firearms/FLSGN0.png" disablefullbright }
+
+//REVOLVER
+brightmap sprite REVOD0 { map "brightmaps/Firearms/REVOD0.png" disablefullbright }
+
+
+//FLASHLIGHT MARINE FIRING FRAMES
+brightmap sprite SFLZF1 { map "brightmaps/SFLZF1.png" disablefullbright }
+brightmap sprite SFLZF2 { map "brightmaps/SFLZF2.png" disablefullbright }
+brightmap sprite SFLZF3 { map "brightmaps/SFLZF3.png" disablefullbright }
+brightmap sprite SFLZF4 { map "brightmaps/SFLZF4.png" disablefullbright }
+brightmap sprite SFLZF5 { map "brightmaps/SFLZF5.png" disablefullbright }
+brightmap sprite SFLZF6 { map "brightmaps/SFLZF6.png" disablefullbright }
+brightmap sprite SFLZF7 { map "brightmaps/SFLZF7.png" disablefullbright }
+brightmap sprite SFLZF8 { map "brightmaps/SFLZF8.png" disablefullbright }
+
+//big kit
+brightmap sprite MEDIF0 { map "brightmaps/ITEMS/MEDIF0.png" disablefullbright }
+brightmap sprite MEDIG0 { map "brightmaps/ITEMS/MEDIG0.png" disablefullbright }
+brightmap sprite MEDIH0 { map "brightmaps/ITEMS/RaveB3.png" disablefullbright }
+brightmap sprite MEDII0 { map "brightmaps/ITEMS/RaveB4.png" disablefullbright }
+//technokits
+brightmap sprite DKITF0 { map "brightmaps/ITEMS/RaveB1.png" disablefullbright }
+brightmap sprite DKITG0 { map "brightmaps/ITEMS/RaveB2.png" disablefullbright }
+brightmap sprite DKITH0 { map "brightmaps/ITEMS/RaveB3.png" disablefullbright }
+brightmap sprite DKITI0 { map "brightmaps/ITEMS/RaveB4.png" disablefullbright }
+brightmap sprite DKITJ0 { map "brightmaps/ITEMS/RaveB1.png" disablefullbright }
+brightmap sprite DKITK0 { map "brightmaps/ITEMS/RaveB2.png" disablefullbright }
+brightmap sprite DKITL0 { map "brightmaps/ITEMS/RaveB3.png" disablefullbright }
+brightmap sprite DKITM0 { map "brightmaps/ITEMS/RaveB4.png" disablefullbright }
+brightmap sprite DKITN0 { map "brightmaps/ITEMS/RaveB1.png" disablefullbright }
+brightmap sprite DKITO0 { map "brightmaps/ITEMS/RaveB2.png" disablefullbright }
+brightmap sprite DKITP0 { map "brightmaps/ITEMS/RaveB3.png" disablefullbright }
+brightmap sprite DKITQ0 { map "brightmaps/ITEMS/RaveB4.png" disablefullbright }
+brightmap sprite DKITR0 { map "brightmaps/ITEMS/RaveB1.png" disablefullbright }
+brightmap sprite DKITS0 { map "brightmaps/ITEMS/RaveB2.png" disablefullbright }
+brightmap sprite DKITT0 { map "brightmaps/ITEMS/RaveB3.png" disablefullbright }
+brightmap sprite DKITU0 { map "brightmaps/ITEMS/RaveB4.png" disablefullbright }
+brightmap sprite DKITV0 { map "brightmaps/ITEMS/RaveB1.png" disablefullbright }
+brightmap sprite DKITW0 { map "brightmaps/ITEMS/RaveB2.png" disablefullbright }
+brightmap sprite DKITX0 { map "brightmaps/ITEMS/RaveB3.png" disablefullbright }
+brightmap sprite DKITY0 { map "brightmaps/ITEMS/RaveB4.png" disablefullbright }
+
+
+brightmap sprite CBRAB0 { map "brightmaps/CBRAB0.png" disablefullbright }
+brightmap sprite CBRAC0 { map "brightmaps/CBRAC0.png" disablefullbright }
+brightmap sprite CANDB0 { map "brightmaps/CANDB0.png" disablefullbright }
+brightmap sprite CANDC0 { map "brightmaps/CANDC0.png" disablefullbright }
+
+brightmap sprite CHANI0 { map "brightmaps/CHANI0.png" disablefullbright }
+brightmap sprite CHANJ0 { map "brightmaps/CHANJ0.png" disablefullbright }
+
+//CROSSBOW
+brightmap sprite ARWPA5 { map "brightmaps/ITEMS/ARWPA5.png" disablefullbright }
+brightmap sprite ARWPA6A4 { map "brightmaps/ITEMS/ARWPA6A4.png" disablefullbright }
+brightmap sprite ARWPA7A3 { map "brightmaps/ITEMS/ARWPA7A3.png" disablefullbright }
+brightmap sprite ARWPA8A2 { map "brightmaps/ITEMS/ARWPA8A2.png" disablefullbright }
+
+brightmap sprite 2BOWA0 { map "brightmaps/Firearms/2BOWA0.png" disablefullbright }
+brightmap sprite 2BOWB0 { map "brightmaps/Firearms/2BOWB0.png" disablefullbright }
+brightmap sprite 2BOWC0 { map "brightmaps/Firearms/2BOWC0.png" disablefullbright }
+brightmap sprite 2BOWD0 { map "brightmaps/Firearms/2BOWD0.png" disablefullbright }
+brightmap sprite 2BOWE0 { map "brightmaps/Firearms/2BOWE0.png" disablefullbright }
+brightmap sprite 2BOWF0 { map "brightmaps/Firearms/2BOWF0.png" disablefullbright }
+brightmap sprite 2BOWG0 { map "brightmaps/Firearms/2BOWG0.png" disablefullbright }
+brightmap sprite 2BOWH0 { map "brightmaps/Firearms/2BOWH0.png" disablefullbright }
+brightmap sprite 2BOWK0 { map "brightmaps/Firearms/2BOWK0.png" disablefullbright }
+brightmap sprite CBOWA0 { map "brightmaps/Firearms/CBOWA0.png" disablefullbright }
+brightmap sprite CBOWQ0 { map "brightmaps/Firearms/CBOWQ0.png" disablefullbright }
+brightmap sprite CBOWR0 { map "brightmaps/Firearms/CBOWR0.png" disablefullbright }
+brightmap sprite CBOWS0 { map "brightmaps/Firearms/CBOWS0.png" disablefullbright }
+brightmap sprite CBOWT0 { map "brightmaps/Firearms/CBOWT0.png" disablefullbright }
+brightmap sprite CBOWU0 { map "brightmaps/Firearms/CBOWU0.png" disablefullbright }
+brightmap sprite CBOWV0 { map "brightmaps/Firearms/CBOWV0.png" disablefullbright }
+brightmap sprite CBOWW0 { map "brightmaps/Firearms/CBOWW0.png" disablefullbright }
+brightmap sprite CBOWX0 { map "brightmaps/Firearms/CBOWX0.png" disablefullbright }
+brightmap sprite CBOWY0 { map "brightmaps/Firearms/CBOWY0.png" disablefullbright }
+brightmap sprite CBOWZ0 { map "brightmaps/Firearms/CBOWZ0.png" disablefullbright }
+
+
+
+//WHISKEY
+brightmap sprite 2LTVM0 { map "brightmaps/Whiskey/2LTVM0.png" disablefullbright }
+brightmap sprite 2LTVN0 { map "brightmaps/Whiskey/2LTVN0.png" disablefullbright }
+brightmap sprite 2LTVO0 { map "brightmaps/Whiskey/2LTVO0.png" disablefullbright }
+brightmap sprite 2LTVP0 { map "brightmaps/Whiskey/2LTVP0.png" disablefullbright }
+brightmap sprite 2LTVQ0 { map "brightmaps/Whiskey/2LTVQ0.png" disablefullbright }
+brightmap sprite 2LTVR0 { map "brightmaps/Whiskey/2LTVR0.png" disablefullbright }
+brightmap sprite 2LTVS0 { map "brightmaps/Whiskey/2LTVS0.png" disablefullbright }
+brightmap sprite 2LTVT0 { map "brightmaps/Whiskey/2LTVT0.png" disablefullbright }
+brightmap sprite 2LTVU0 { map "brightmaps/Whiskey/2LTVU0.png" disablefullbright }
+brightmap sprite 2LTVV0 { map "brightmaps/Whiskey/2LTVV0.png" disablefullbright }
+brightmap sprite 2LTVW0 { map "brightmaps/Whiskey/2LTVW0.png" disablefullbright }
+brightmap sprite 2LTVX0 { map "brightmaps/Whiskey/2LTVX0.png" disablefullbright }
+
+brightmap sprite 2OLVA0 { map "brightmaps/Whiskey/2OLVA0.png" disablefullbright }
+brightmap sprite 2OLVB0 { map "brightmaps/Whiskey/2OLVB0.png" disablefullbright }
+brightmap sprite 2OLVC0 { map "brightmaps/Whiskey/2OLVC0.png" disablefullbright }
+brightmap sprite 2OLVD0 { map "brightmaps/Whiskey/2OLVD0.png" disablefullbright }
+brightmap sprite 2OLVE0 { map "brightmaps/Whiskey/2OLVE0.png" disablefullbright }
+brightmap sprite 2OLVF0 { map "brightmaps/Whiskey/2OLVF0.png" disablefullbright }
+brightmap sprite 2OLVG0 { map "brightmaps/Whiskey/2OLVG0.png" disablefullbright }
+brightmap sprite 2OLVH0 { map "brightmaps/Whiskey/2OLVH0.png" disablefullbright }
+brightmap sprite 2OLVI0 { map "brightmaps/Whiskey/2OLVI0.png" disablefullbright }
+brightmap sprite 2OLVJ0 { map "brightmaps/Whiskey/2OLVJ0.png" disablefullbright }
+brightmap sprite 2OLVK0 { map "brightmaps/Whiskey/2OLVK0.png" disablefullbright }
+brightmap sprite 2OLVL0 { map "brightmaps/Whiskey/2OLVL0.png" disablefullbright }
+brightmap sprite 2OLVM0 { map "brightmaps/Whiskey/2OLVM0.png" disablefullbright }
+brightmap sprite 2OLVN0 { map "brightmaps/Whiskey/2OLVN0.png" disablefullbright }
+brightmap sprite 2OLVO0 { map "brightmaps/Whiskey/2OLVO0.png" disablefullbright }
+brightmap sprite 2OLVP0 { map "brightmaps/Whiskey/2OLVP0.png" disablefullbright }
+brightmap sprite 2OLVQ0 { map "brightmaps/Whiskey/2OLVQ0.png" disablefullbright }
+
+brightmap sprite WHISB0 { map "brightmaps/Whiskey/WHISB0.png" disablefullbright }
+brightmap sprite WHISC0 { map "brightmaps/Whiskey/WHISC0.png" disablefullbright }
+brightmap sprite WHISD0 { map "brightmaps/Whiskey/WHISD0.png" disablefullbright }
+brightmap sprite WHISE0 { map "brightmaps/Whiskey/WHISE0.png" disablefullbright }
+brightmap sprite WHISF0 { map "brightmaps/Whiskey/WHISF0.png" disablefullbright }
+brightmap sprite WHISG0 { map "brightmaps/Whiskey/WHISG0.png" disablefullbright }
+brightmap sprite WHISH0 { map "brightmaps/Whiskey/WHISH0.png" disablefullbright }
+brightmap sprite WHISI0 { map "brightmaps/Whiskey/WHISI0.png" disablefullbright }
+brightmap sprite WHISJ0 { map "brightmaps/Whiskey/WHISJ0.png" disablefullbright }
+brightmap sprite WHISK0 { map "brightmaps/Whiskey/WHISK0.png" disablefullbright }
+brightmap sprite WHISL0 { map "brightmaps/Whiskey/WHISL0.png" disablefullbright }
+brightmap sprite WHISM0 { map "brightmaps/Whiskey/WHISM0.png" disablefullbright }
+brightmap sprite WHISN0 { map "brightmaps/Whiskey/WHISN0.png" disablefullbright }
+brightmap sprite WHISO0 { map "brightmaps/Whiskey/WHISO0.png" disablefullbright }
+brightmap sprite WHISP0 { map "brightmaps/Whiskey/WHISP0.png" disablefullbright }
+brightmap sprite WHISQ0 { map "brightmaps/Whiskey/WHISQ0.png" disablefullbright }
+
+
+

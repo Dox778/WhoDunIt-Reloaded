@@ -1,0 +1,417 @@
+
+Actor DeathDropper : CustomInventory
+{
+ Inventory.Amount 1
+ Inventory.MaxAmount 0
+ +INVENTORY.AUTOACTIVATE
+ +INVENTORY.ALWAYSPICKUP
+ +INVENTORY.UNDROPPABLE
+ -INVENTORY.INVBAR
+ +FORCEXYBILLBOARD
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 
+	Stop
+ }
+}
+
+
+Actor DeathDropper_PoolCue : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("FakeCue", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+
+Actor DeathDropper_Wrench : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("FakeWrench", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+
+Actor DeathDropper_Pipe : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("FakePipe", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+
+Actor DeathDropper_Shovel : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("FakeShovel", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+
+
+Actor DeathDropper_Brick : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("FakeBrick", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+
+Actor DeathDropper_Molly : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("ThrownMolly", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+
+Actor DeathDropper_Whiskey : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("ThrownWhiskey", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+
+Actor DeathDropper_NailedPlank : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("FakeNailedPlank", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+
+Actor DeathDropper_Plank : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("FakePlank", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+
+Actor DeathDropper_Twig : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("FakeTwig", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+
+////////////////////////
+//WDI reanimated stuff
+Actor DeathDropper_Crowbar : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("FakeCrowbar", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+Actor DeathDropper_BlueWrench : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("FakeBlueWrench", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+Actor DeathDropper_PickableTNT : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("FakePickableTNT", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+
+Actor DeathDropper_FireAxe : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Use:
+		TNT1 A 1 A_SpawnItemEx("FakeFireAxeZNoRandom", 0, 0, 24.0, 0, 0, 0, 0,SXF_NOCHECKPOSITION)
+		Stop
+}}
+
+Actor DeathDropper_Axe : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Use:
+		TNT1 A 1 A_SpawnItemEx("FakeAxe", 0, 0, 24.0, 0, 0, 0, 0,SXF_NOCHECKPOSITION)
+		Stop
+}}
+
+Actor DeathDropper_Sledge : DeathDropper
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Wait
+	Use:
+		TNT1 A 1 A_SpawnItemEx("FakeSledge", 0, 0, 24.0, 0, 0, 0, 0,SXF_NOCHECKPOSITION)
+		Stop
+}}
+
+Actor DeathDropper_ScrewDriver : DeathDropper
+{
+ States
+ {
+   Spawn:
+	TNT1 A 1
+	Wait
+
+   Use:
+	TNT1 A 1 A_SpawnItemEx("FakeScrewDriver", 0, 0, 24.0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	Stop
+ }
+}
+
+
+
+
+//================================================================
+//================================================
+//================================
+//DEATH ITEM DROPS
+
+ACTOR SmallKitPlayerDrop
+{
+	Radius 1
+	Height 2
+	Renderstyle none
+	+THRUACTORS -SOLID
+	States
+	{
+	Spawn:
+		TNT1 A 1 NODELAY A_SpawnItemEx("SmallKit",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,0)
+		stop
+	}
+}
+ACTOR BigKitPlayerDrop : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("BigKit",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,0)
+	stop
+}}
+ACTOR ColorfulFlarePlayerDrop : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("ColorfulFlare",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,0)
+	stop
+}}
+ACTOR PistolClipPlayerDrop : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("PistolClip",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,0)
+	stop
+}}
+ACTOR NewShellPlayerDrop : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("NewShell",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,0)
+	stop
+}}
+ACTOR M1AmmoPlayerDrop : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("M1Ammo",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,0)
+	stop
+}}
+ACTOR LoadedBoltsPlayerDrop : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("NewLoadedBoltsNoGravity",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,0)
+	stop
+}}
+ACTOR SpareSawFuelPlayerDrop : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("SpareSawFuel",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,0)
+	stop
+}}
+ACTOR BearTrapPlayerDrop : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("BearTrap",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,0)
+	stop
+}}
+ACTOR RandomWeaponKitPlayerDrop : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("RandomWeaponKit",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,0)
+	stop
+}}
+
+
+////////////////////////////////////////////
+
+
+
+ACTOR SmallKitPlayerDropRandom : SmallKitPlayerDrop
+{
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("SmallKit",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,128)
+	stop
+}}
+ACTOR BigKitPlayerDropRandom : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("BigKit",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,128)
+	stop
+}}
+ACTOR ColorfulFlarePlayerDropRandom : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("ColorfulFlare",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,128)
+	stop
+}}
+ACTOR PistolClipPlayerDropRandom : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("PistolClip",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,128)
+	stop
+}}
+ACTOR NewShellPlayerDropRandom : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("NewShell",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,128)
+	stop
+}}
+ACTOR M1AmmoPlayerDropRandom : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("M1Ammo",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,128)
+	stop
+}}
+ACTOR LoadedBoltsPlayerDropRandom : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("NewLoadedBoltsNoGravity",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,128)
+	stop
+}}
+ACTOR SpareSawFuelPlayerDropRandom : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("SpareSawFuel",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,128)
+	stop
+}}
+ACTOR BearTrapPlayerDropRandom : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("BearTrap",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,128)
+	stop
+}}
+ACTOR RandomWeaponKitPlayerDropRandom : SmallKitPlayerDrop {
+States
+{
+Spawn:
+	TNT1 A 1 NODELAY A_SpawnItemEx("RandomWeaponKit",random(-4,4),random(-4,4),random(0,8),   random(-2,2),random(-2,2),random(2,8),random(0,90),SXF_NOCHECKPOSITION,128)
+	stop
+}}

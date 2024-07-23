@@ -1,0 +1,13 @@
+Sounds sourced and edited by Dissy EX
+
+-Bottle
+--BOTLSWI 1-2: Intact bottle swing
+--BOTLWHT 1-2: Intact bottle wall hit
+--BOTLHIT 1-3: Intact bottle flesh hit
+
+--BOTLBRK 1-3: Bottle breaking on impact //glass shatter only
+
+--BOTLBSW 1-2: Broken bottle swing
+--BOTLBWH 1-3: Broken bottle wall hit
+--BOTLBFH 1-3: Broken bottle flesh hit
+(Sounds sourced and modified from Doom Eternal, Left 4 Dead 2, and Team Fortress 2)

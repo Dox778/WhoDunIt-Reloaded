@@ -1,0 +1,137 @@
+
+script 653 (void)
+{
+	TakeActorInventory(ActivatorTID(), "Slot1Filled", 1);
+	TakeActorInventory(ActivatorTID(), "Brick", 1);
+	TakeActorInventory(ActivatorTID(), "Molotov", 1);
+}
+//Damm chainsaw
+script 654 (void)
+{
+	if(CheckActorInventory(ActivatorTID(), "SawOn")) // if the saw is ON, turn it OFF
+	{
+		TakeActorInventory(ActivatorTID(), "SawOn", 1);
+	}
+	else
+	{
+		GiveActorInventory(ActivatorTID(), "SawOn", 1);
+	}
+}
+script "OldWeapon_ID" (int WepID) clientside
+{
+	Setfont("SmallFont");
+	HudMessage(s:OldWeapon_id[WepID]; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+	delay(15);
+}
+/* REALEASEEEE THISSSSSSSSSSS!!!!
+script "NewWeapon_ID" (int WepID) clientside
+{
+	Setfont("SmallFont");
+	HudMessage(s:NewWeapon_id[WepID]; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+}*/
+
+// old system deprecated
+//Melee
+#define WEP_PIPE 10
+#define WEP_WRENCH 11
+#define WEP_CHAINSAW 12
+#define WEP_CUE 13
+#define WEP_SHOVEL 14
+
+//Guns
+#define WEP_LUGER 20
+#define WEP_SHOTGUN 21
+#define WEP_CROSSBOW 22
+#define WEP_M1 23
+#define WEP_BRICK 24
+#define WEP_MOLLY 25
+#define WEP_PLANK 26
+#define WEP_NAILPLANK 27
+#define WEP_TWIG 28
+#define WEP_BAT 29
+
+script 670 (int WepID)
+{
+	switch (WepID)
+	{
+		case WEP_PIPE:
+			Setfont("SmallFont");
+			HudMessage(s:"Steel Pipe"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_WRENCH:
+			Setfont("SmallFont");
+			HudMessage(s:"Wrench"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_CHAINSAW:
+			Setfont("SmallFont");
+			HudMessage(s:"Chainsaw"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_LUGER:
+			Setfont("SmallFont");
+			HudMessage(s:"Beretta"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_SHOTGUN:
+			Setfont("SmallFont");
+			HudMessage(s:"Shotgun"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_CROSSBOW:
+			Setfont("SmallFont");
+			HudMessage(s:"Repeater Crossbow"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_CUE:
+			Setfont("SmallFont");
+			HudMessage(s:"Pool Cue"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_SHOVEL:
+			Setfont("SmallFont");
+			HudMessage(s:"Shovel"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_M1:
+			Setfont("SmallFont");
+			HudMessage(s:"M1 Carbine"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_BRICK:
+			Setfont("SmallFont");
+			HudMessage(s:"Brick (Throwable)"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_MOLLY:
+			Setfont("SmallFont");
+			HudMessage(s:"Molotov (Throwable)"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_PLANK:
+			Setfont("SmallFont");
+			HudMessage(s:"Wood Plank"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_NAILPLANK:
+			Setfont("SmallFont");
+			HudMessage(s:"Nail Plank"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_TWIG:
+			Setfont("SmallFont");
+			HudMessage(s:"Twig"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case WEP_BAT:
+			Setfont("SmallFont");
+			HudMessage(s:"Baseball Bat"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		default:
+			Setfont("SmallFont");
+			HudMessage(s:"Unnamed Pickup"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+	}
+}

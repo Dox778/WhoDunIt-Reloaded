@@ -1,0 +1,1337 @@
+//WDI WATER
+
+ FLAT AWATER01
+ pic SW5001 tics 4
+ pic SW5003 tics 4
+ pic SW5005 tics 4
+ pic SW5007 tics 4
+ pic SW5009 tics 4
+ pic SW5011 tics 4
+ pic SW5013 tics 4
+ pic SW5015 tics 4
+ pic SW5017 tics 4
+ pic SW5019 tics 4
+ pic SW5021 tics 4
+ pic SW5023 tics 4
+ pic SW5025 tics 4
+ pic SW5027 tics 4
+ pic SW5029 tics 4
+ pic SW5031 tics 4
+ 
+ 
+ FLAT DIRWAT2 //slightly brownish
+ pic SW4001 tics 4
+ pic SW4003 tics 4
+ pic SW4005 tics 4
+ pic SW4007 tics 4
+ pic SW4009 tics 4
+ pic SW4011 tics 4
+ pic SW4013 tics 4
+ pic SW4015 tics 4
+ pic SW4017 tics 4
+ pic SW4019 tics 4
+ pic SW4021 tics 4
+ pic SW4023 tics 4
+ pic SW4025 tics 4
+ pic SW4027 tics 4
+ pic SW4029 tics 4
+ pic SW4031 tics 4
+ 
+ FLAT DIRWAT5 //slightly brownish
+ pic SW4001 tics 4
+ pic SW4003 tics 4
+ pic SW4005 tics 4
+ pic SW4007 tics 4
+ pic SW4009 tics 4
+ pic SW4011 tics 4
+ pic SW4013 tics 4
+ pic SW4015 tics 4
+ pic SW4017 tics 4
+ pic SW4019 tics 4
+ pic SW4021 tics 4
+ pic SW4023 tics 4
+ pic SW4025 tics 4
+ pic SW4027 tics 4
+ pic SW4029 tics 4
+ pic SW4031 tics 4 
+ 
+ FLAT DIRWAT
+ pic SW3001 tics 4
+ pic SW3003 tics 4
+ pic SW3005 tics 4
+ pic SW3007 tics 4
+ pic SW3009 tics 4
+ pic SW3011 tics 4
+ pic SW3013 tics 4
+ pic SW3015 tics 4
+ pic SW3017 tics 4
+ pic SW3019 tics 4
+ pic SW3021 tics 4
+ pic SW3023 tics 4
+ pic SW3025 tics 4
+ pic SW3027 tics 4
+ pic SW3029 tics 4
+ pic SW3031 tics 4
+ 
+ FLAT DIRWAT3
+ pic SW3001 tics 4
+ pic SW3003 tics 4
+ pic SW3005 tics 4
+ pic SW3007 tics 4
+ pic SW3009 tics 4
+ pic SW3011 tics 4
+ pic SW3013 tics 4
+ pic SW3015 tics 4
+ pic SW3017 tics 4
+ pic SW3019 tics 4
+ pic SW3021 tics 4
+ pic SW3023 tics 4
+ pic SW3025 tics 4
+ pic SW3027 tics 4
+ pic SW3029 tics 4
+ pic SW3031 tics 4
+ 
+ FLAT GRANUKE1
+ pic SW2001 tics 4
+ pic SW2003 tics 4
+ pic SW2005 tics 4
+ pic SW2007 tics 4
+ pic SW2009 tics 4
+ pic SW2011 tics 4
+ pic SW2013 tics 4
+ pic SW2015 tics 4
+ pic SW2017 tics 4
+ pic SW2019 tics 4
+ pic SW2021 tics 4
+ pic SW2023 tics 4
+ pic SW2025 tics 4
+ pic SW2027 tics 4
+ pic SW2029 tics 4
+ pic SW2031 tics 4
+ 
+ FLAT AZWATER3
+ pic SW1001 tics 4
+ pic SW1003 tics 4
+ pic SW1005 tics 4
+ pic SW1007 tics 4
+ pic SW1009 tics 4
+ pic SW1011 tics 4
+ pic SW1013 tics 4
+ pic SW1015 tics 4
+ pic SW1017 tics 4
+ pic SW1019 tics 4
+ pic SW1021 tics 4
+ pic SW1023 tics 4
+ pic SW1025 tics 4
+ pic SW1027 tics 4
+ pic SW1029 tics 4
+ pic SW1031 tics 4
+ 
+ FLAT AZWATER2
+ pic SW1001 tics 4
+ pic SW1003 tics 4
+ pic SW1005 tics 4
+ pic SW1007 tics 4
+ pic SW1009 tics 4
+ pic SW1011 tics 4
+ pic SW1013 tics 4
+ pic SW1015 tics 4
+ pic SW1017 tics 4
+ pic SW1019 tics 4
+ pic SW1021 tics 4
+ pic SW1023 tics 4
+ pic SW1025 tics 4
+ pic SW1027 tics 4
+ pic SW1029 tics 4
+ pic SW1031 tics 4
+ 
+ FLAT AZWATER1
+ pic SW1001 tics 4
+ pic SW1003 tics 4
+ pic SW1005 tics 4
+ pic SW1007 tics 4
+ pic SW1009 tics 4
+ pic SW1011 tics 4
+ pic SW1013 tics 4
+ pic SW1015 tics 4
+ pic SW1017 tics 4
+ pic SW1019 tics 4
+ pic SW1021 tics 4
+ pic SW1023 tics 4
+ pic SW1025 tics 4
+ pic SW1027 tics 4
+ pic SW1029 tics 4
+ pic SW1031 tics 4
+ 
+ FLAT DWATER-S
+ pic SW1001 tics 4
+ pic SW1003 tics 4
+ pic SW1005 tics 4
+ pic SW1007 tics 4
+ pic SW1009 tics 4
+ pic SW1011 tics 4
+ pic SW1013 tics 4
+ pic SW1015 tics 4
+ pic SW1017 tics 4
+ pic SW1019 tics 4
+ pic SW1021 tics 4
+ pic SW1023 tics 4
+ pic SW1025 tics 4
+ pic SW1027 tics 4
+ pic SW1029 tics 4
+ pic SW1031 tics 4
+ 
+ FLAT DWAT-RUN
+ pic SW1001 tics 4
+ pic SW1003 tics 4
+ pic SW1005 tics 4
+ pic SW1007 tics 4
+ pic SW1009 tics 4
+ pic SW1011 tics 4
+ pic SW1013 tics 4
+ pic SW1015 tics 4
+ pic SW1017 tics 4
+ pic SW1019 tics 4
+ pic SW1021 tics 4
+ pic SW1023 tics 4
+ pic SW1025 tics 4
+ pic SW1027 tics 4
+ pic SW1029 tics 4
+ pic SW1031 tics 4 
+ 
+ FLAT HYWATER
+ pic SW0001 tics 4
+ pic SW0003 tics 4
+ pic SW0005 tics 4
+ pic SW0007 tics 4
+ pic SW0009 tics 4
+ pic SW0011 tics 4
+ pic SW0013 tics 4
+ pic SW0015 tics 4
+ pic SW0017 tics 4
+ pic SW0019 tics 4
+ pic SW0021 tics 4
+ pic SW0023 tics 4
+ pic SW0025 tics 4
+ pic SW0027 tics 4
+ pic SW0029 tics 4
+ pic SW0031 tics 4
+ 
+ FLAT WATER-S
+ pic SW1001 tics 4
+ pic SW1003 tics 4
+ pic SW1005 tics 4
+ pic SW1007 tics 4
+ pic SW1009 tics 4
+ pic SW1011 tics 4
+ pic SW1013 tics 4
+ pic SW1015 tics 4
+ pic SW1017 tics 4
+ pic SW1019 tics 4
+ pic SW1021 tics 4
+ pic SW1023 tics 4
+ pic SW1025 tics 4
+ pic SW1027 tics 4
+ pic SW1029 tics 4
+ pic SW1031 tics 4
+
+ ///////////////////////////////////////////
+ //WATER///////////////////////////////////
+ //////////////////////////////////////////
+ FLAT WFWATER1
+ pic SW0001 tics 4
+ pic SW0003 tics 4
+ pic SW0005 tics 4
+ pic SW0007 tics 4
+ pic SW0009 tics 4
+ pic SW0011 tics 4
+ pic SW0013 tics 4
+ pic SW0015 tics 4
+ pic SW0017 tics 4
+ pic SW0019 tics 4
+ pic SW0021 tics 4
+ pic SW0023 tics 4
+ pic SW0025 tics 4
+ pic SW0027 tics 4
+ pic SW0029 tics 4
+ pic SW0031 tics 4
+ 
+ FLAT FWATER1
+ pic SW0001 tics 4
+ pic SW0003 tics 4
+ pic SW0005 tics 4
+ pic SW0007 tics 4
+ pic SW0009 tics 4
+ pic SW0011 tics 4
+ pic SW0013 tics 4
+ pic SW0015 tics 4
+ pic SW0017 tics 4
+ pic SW0019 tics 4
+ pic SW0021 tics 4
+ pic SW0023 tics 4
+ pic SW0025 tics 4
+ pic SW0027 tics 4
+ pic SW0029 tics 4
+ pic SW0031 tics 4
+
+ FLAT FWATER2
+ pic SW0001 tics 4
+ pic SW0003 tics 4
+ pic SW0005 tics 4
+ pic SW0007 tics 4
+ pic SW0009 tics 4
+ pic SW0011 tics 4
+ pic SW0013 tics 4
+ pic SW0015 tics 4
+ pic SW0017 tics 4
+ pic SW0019 tics 4
+ pic SW0021 tics 4
+ pic SW0023 tics 4
+ pic SW0025 tics 4
+ pic SW0027 tics 4
+ pic SW0029 tics 4
+ pic SW0031 tics 4
+
+
+
+FLAT FWATER3
+ pic SW0001 tics 4
+ pic SW0003 tics 4
+ pic SW0005 tics 4
+ pic SW0007 tics 4
+ pic SW0009 tics 4
+ pic SW0011 tics 4
+ pic SW0013 tics 4
+ pic SW0015 tics 4
+ pic SW0017 tics 4
+ pic SW0019 tics 4
+ pic SW0021 tics 4
+ pic SW0023 tics 4
+ pic SW0025 tics 4
+ pic SW0027 tics 4
+ pic SW0029 tics 4
+ pic SW0031 tics 4
+
+ 
+ FLAT FWATER4
+ pic SW0001 tics 4
+ pic SW0003 tics 4
+ pic SW0005 tics 4
+ pic SW0007 tics 4
+ pic SW0009 tics 4
+ pic SW0011 tics 4
+ pic SW0013 tics 4
+ pic SW0015 tics 4
+ pic SW0017 tics 4
+ pic SW0019 tics 4
+ pic SW0021 tics 4
+ pic SW0023 tics 4
+ pic SW0025 tics 4
+ pic SW0027 tics 4
+ pic SW0029 tics 4
+ pic SW0031 tics 4
+ 
+  FLAT LPWATER  ///////GZDB LTP RESOURCE FILE
+ pic SW0001 tics 4
+ pic SW0003 tics 4
+ pic SW0005 tics 4
+ pic SW0007 tics 4
+ pic SW0009 tics 4
+ pic SW0011 tics 4
+ pic SW0013 tics 4
+ pic SW0015 tics 4
+ pic SW0017 tics 4
+ pic SW0019 tics 4
+ pic SW0021 tics 4
+ pic SW0023 tics 4
+ pic SW0025 tics 4
+ pic SW0027 tics 4
+ pic SW0029 tics 4
+ pic SW0031 tics 4
+
+///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+////////WATER FALL//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+FLAT BBFALL1
+ pic WF2001 tics 4
+ pic WF2003 tics 4
+ pic WF2005 tics 4
+ pic WF2007 tics 4
+ pic WF2009 tics 4
+ pic WF2011 tics 4
+ pic WF2013 tics 4
+ pic WF2015 tics 4
+ pic WF2017 tics 4
+ pic WF2019 tics 4
+ pic WF2021 tics 4
+ pic WF2023 tics 4
+ pic WF2025 tics 4
+ pic WF2027 tics 4
+ pic WF2029 tics 4
+ pic WF2031 tics 4
+
+FLAT WATR-RUN
+ pic WF2001 tics 4
+ pic WF2003 tics 4
+ pic WF2005 tics 4
+ pic WF2007 tics 4
+ pic WF2009 tics 4
+ pic WF2011 tics 4
+ pic WF2013 tics 4
+ pic WF2015 tics 4
+ pic WF2017 tics 4
+ pic WF2019 tics 4
+ pic WF2021 tics 4
+ pic WF2023 tics 4
+ pic WF2025 tics 4
+ pic WF2027 tics 4
+ pic WF2029 tics 4
+ pic WF2031 tics 4
+
+ FLAT BBFALL1
+ pic WF0001 tics 4
+ pic WF0003 tics 4
+ pic WF0005 tics 4
+ pic WF0007 tics 4
+ pic WF0009 tics 4
+ pic WF0011 tics 4
+ pic WF0013 tics 4
+ pic WF0015 tics 4
+ pic WF0017 tics 4
+ pic WF0019 tics 4
+ pic WF0021 tics 4
+ pic WF0023 tics 4
+ pic WF0025 tics 4
+ pic WF0027 tics 4
+ pic WF0029 tics 4
+ pic WF0031 tics 4
+
+ FLAT WFALL1
+ pic WF0001 tics 4
+ pic WF0003 tics 4
+ pic WF0005 tics 4
+ pic WF0007 tics 4
+ pic WF0009 tics 4
+ pic WF0011 tics 4
+ pic WF0013 tics 4
+ pic WF0015 tics 4
+ pic WF0017 tics 4
+ pic WF0019 tics 4
+ pic WF0021 tics 4
+ pic WF0023 tics 4
+ pic WF0025 tics 4
+ pic WF0027 tics 4
+ pic WF0029 tics 4
+ pic WF0031 tics 4
+ 
+  FLAT WFALL2
+ pic WF0001 tics 4
+ pic WF0003 tics 4
+ pic WF0005 tics 4
+ pic WF0007 tics 4
+ pic WF0009 tics 4
+ pic WF0011 tics 4
+ pic WF0013 tics 4
+ pic WF0015 tics 4
+ pic WF0017 tics 4
+ pic WF0019 tics 4
+ pic WF0021 tics 4
+ pic WF0023 tics 4
+ pic WF0025 tics 4
+ pic WF0027 tics 4
+ pic WF0029 tics 4
+ pic WF0031 tics 4
+ 
+  FLAT WFALL3
+ pic WF0001 tics 4
+ pic WF0003 tics 4
+ pic WF0005 tics 4
+ pic WF0007 tics 4
+ pic WF0009 tics 4
+ pic WF0011 tics 4
+ pic WF0013 tics 4
+ pic WF0015 tics 4
+ pic WF0017 tics 4
+ pic WF0019 tics 4
+ pic WF0021 tics 4
+ pic WF0023 tics 4
+ pic WF0025 tics 4
+ pic WF0027 tics 4
+ pic WF0029 tics 4
+ pic WF0031 tics 4
+ 
+  FLAT WFALL4
+ pic WF0001 tics 4
+ pic WF0003 tics 4
+ pic WF0005 tics 4
+ pic WF0007 tics 4
+ pic WF0009 tics 4
+ pic WF0011 tics 4
+ pic WF0013 tics 4
+ pic WF0015 tics 4
+ pic WF0017 tics 4
+ pic WF0019 tics 4
+ pic WF0021 tics 4
+ pic WF0023 tics 4
+ pic WF0025 tics 4
+ pic WF0027 tics 4
+ pic WF0029 tics 4
+ pic WF0031 tics 4
+
+ FLAT LPFWATER
+ pic WF0001 tics 4
+ pic WF0003 tics 4
+ pic WF0005 tics 4
+ pic WF0007 tics 4
+ pic WF0009 tics 4
+ pic WF0011 tics 4
+ pic WF0013 tics 4
+ pic WF0015 tics 4
+ pic WF0017 tics 4
+ pic WF0019 tics 4
+ pic WF0021 tics 4
+ pic WF0023 tics 4
+ pic WF0025 tics 4
+ pic WF0027 tics 4
+ pic WF0029 tics 4
+ pic WF0031 tics 4
+ 
+ 
+ 
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+//SLIME//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
+FLAT SLIME01
+ pic SS0001 tics 4
+ pic SS0003 tics 4
+ pic SS0005 tics 4
+ pic SS0007 tics 4
+ pic SS0009 tics 4
+ pic SS0011 tics 4
+ pic SS0013 tics 4
+ pic SS0015 tics 4
+ pic SS0017 tics 4
+ pic SS0019 tics 4
+ pic SS0021 tics 4
+ pic SS0023 tics 4
+ pic SS0025 tics 4
+ pic SS0027 tics 4
+ pic SS0029 tics 4
+ pic SS0031 tics 4
+
+
+FLAT SLIME02
+ pic SS0001 tics 4
+ pic SS0003 tics 4
+ pic SS0005 tics 4
+ pic SS0007 tics 4
+ pic SS0009 tics 4
+ pic SS0011 tics 4
+ pic SS0013 tics 4
+ pic SS0015 tics 4
+ pic SS0017 tics 4
+ pic SS0019 tics 4
+ pic SS0021 tics 4
+ pic SS0023 tics 4
+ pic SS0025 tics 4
+ pic SS0027 tics 4
+ pic SS0029 tics 4
+ pic SS0031 tics 4
+
+ 
+ FLAT SLIME03
+ pic SS0001 tics 4
+ pic SS0003 tics 4
+ pic SS0005 tics 4
+ pic SS0007 tics 4
+ pic SS0009 tics 4
+ pic SS0011 tics 4
+ pic SS0013 tics 4
+ pic SS0015 tics 4
+ pic SS0017 tics 4
+ pic SS0019 tics 4
+ pic SS0021 tics 4
+ pic SS0023 tics 4
+ pic SS0025 tics 4
+ pic SS0027 tics 4
+ pic SS0029 tics 4
+ pic SS0031 tics 4
+
+
+FLAT SLIME04
+ pic SS0001 tics 4
+ pic SS0003 tics 4
+ pic SS0005 tics 4
+ pic SS0007 tics 4
+ pic SS0009 tics 4
+ pic SS0011 tics 4
+ pic SS0013 tics 4
+ pic SS0015 tics 4
+ pic SS0017 tics 4
+ pic SS0019 tics 4
+ pic SS0021 tics 4
+ pic SS0023 tics 4
+ pic SS0025 tics 4
+ pic SS0027 tics 4
+ pic SS0029 tics 4
+ pic SS0031 tics 4
+
+
+FLAT SLIME05
+ pic SS0001 tics 4
+ pic SS0003 tics 4
+ pic SS0005 tics 4
+ pic SS0007 tics 4
+ pic SS0009 tics 4
+ pic SS0011 tics 4
+ pic SS0013 tics 4
+ pic SS0015 tics 4
+ pic SS0017 tics 4
+ pic SS0019 tics 4
+ pic SS0021 tics 4
+ pic SS0023 tics 4
+ pic SS0025 tics 4
+ pic SS0027 tics 4
+ pic SS0029 tics 4
+ pic SS0031 tics 4
+
+
+FLAT SLIME06
+ pic SS0001 tics 4
+ pic SS0003 tics 4
+ pic SS0005 tics 4
+ pic SS0007 tics 4
+ pic SS0009 tics 4
+ pic SS0011 tics 4
+ pic SS0013 tics 4
+ pic SS0015 tics 4
+ pic SS0017 tics 4
+ pic SS0019 tics 4
+ pic SS0021 tics 4
+ pic SS0023 tics 4
+ pic SS0025 tics 4
+ pic SS0027 tics 4
+ pic SS0029 tics 4
+ pic SS0031 tics 4
+
+
+
+FLAT SLIME07
+ pic SS0001 tics 4
+ pic SS0003 tics 4
+ pic SS0005 tics 4
+ pic SS0007 tics 4
+ pic SS0009 tics 4
+ pic SS0011 tics 4
+ pic SS0013 tics 4
+ pic SS0015 tics 4
+ pic SS0017 tics 4
+ pic SS0019 tics 4
+ pic SS0021 tics 4
+ pic SS0023 tics 4
+ pic SS0025 tics 4
+ pic SS0027 tics 4
+ pic SS0029 tics 4
+ pic SS0031 tics 4
+
+
+FLAT SLIME08
+ pic SS0001 tics 4
+ pic SS0003 tics 4
+ pic SS0005 tics 4
+ pic SS0007 tics 4
+ pic SS0009 tics 4
+ pic SS0011 tics 4
+ pic SS0013 tics 4
+ pic SS0015 tics 4
+ pic SS0017 tics 4
+ pic SS0019 tics 4
+ pic SS0021 tics 4
+ pic SS0023 tics 4
+ pic SS0025 tics 4
+ pic SS0027 tics 4
+ pic SS0029 tics 4
+ pic SS0031 tics 4
+ 
+ FLAT LPSLIME /////////////GZDB LTP RESOURCE FILE
+ pic SS0001 tics 4
+ pic SS0003 tics 4
+ pic SS0005 tics 4
+ pic SS0007 tics 4
+ pic SS0009 tics 4
+ pic SS0011 tics 4
+ pic SS0013 tics 4
+ pic SS0015 tics 4
+ pic SS0017 tics 4
+ pic SS0019 tics 4
+ pic SS0021 tics 4
+ pic SS0023 tics 4
+ pic SS0025 tics 4
+ pic SS0027 tics 4
+ pic SS0029 tics 4
+ pic SS0031 tics 4
+ 
+ ////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////
+ ////////SLIME FALL//////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////
+ 
+FLAT LPFSLIME
+ pic SF0001 tics 4
+ pic SF0003 tics 4
+ pic SF0005 tics 4
+ pic SF0007 tics 4
+ pic SF0009 tics 4
+ pic SF0011 tics 4
+ pic SF0013 tics 4
+ pic SF0015 tics 4
+ pic SF0017 tics 4
+ pic SF0019 tics 4
+ pic SF0021 tics 4
+ pic SF0023 tics 4
+ pic SF0025 tics 4
+ pic SF0027 tics 4
+ pic SF0029 tics 4
+ pic SF0031 tics 4
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//NUKAGE////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+FLAT NUKAGE1
+ pic SN0001 tics 4
+ pic SN0003 tics 4
+ pic SN0005 tics 4
+ pic SN0007 tics 4
+ pic SN0009 tics 4
+ pic SN0011 tics 4
+ pic SN0013 tics 4
+ pic SN0015 tics 4
+ pic SN0017 tics 4
+ pic SN0019 tics 4
+ pic SN0021 tics 4
+ pic SN0023 tics 4
+ pic SN0025 tics 4
+ pic SN0027 tics 4
+ pic SN0029 tics 4
+ pic SN0031 tics 4
+
+FLAT NUKAGE2
+ pic SN0001 tics 4
+ pic SN0003 tics 4
+ pic SN0005 tics 4
+ pic SN0007 tics 4
+ pic SN0009 tics 4
+ pic SN0011 tics 4
+ pic SN0013 tics 4
+ pic SN0015 tics 4
+ pic SN0017 tics 4
+ pic SN0019 tics 4
+ pic SN0021 tics 4
+ pic SN0023 tics 4
+ pic SN0025 tics 4
+ pic SN0027 tics 4
+ pic SN0029 tics 4
+ pic SN0031 tics 4
+
+ FLAT NUKAGE3
+ pic SN0001 tics 4
+ pic SN0003 tics 4
+ pic SN0005 tics 4
+ pic SN0007 tics 4
+ pic SN0009 tics 4
+ pic SN0011 tics 4
+ pic SN0013 tics 4
+ pic SN0015 tics 4
+ pic SN0017 tics 4
+ pic SN0019 tics 4
+ pic SN0021 tics 4
+ pic SN0023 tics 4
+ pic SN0025 tics 4
+ pic SN0027 tics 4
+ pic SN0029 tics 4
+ pic SN0031 tics 4
+ 
+ FLAT LPNUKE /////GZDB LTP RESOURCE FILE
+ pic SN0001 tics 4
+ pic SN0003 tics 4
+ pic SN0005 tics 4
+ pic SN0007 tics 4
+ pic SN0009 tics 4
+ pic SN0011 tics 4
+ pic SN0013 tics 4
+ pic SN0015 tics 4
+ pic SN0017 tics 4
+ pic SN0019 tics 4
+ pic SN0021 tics 4
+ pic SN0023 tics 4
+ pic SN0025 tics 4
+ pic SN0027 tics 4
+ pic SN0029 tics 4
+ pic SN0031 tics 4
+ 
+  FLAT LPNNUKE /////GZDB LTP RESOURCE FILE
+ pic SNN0001 tics 4
+ pic SNN0003 tics 4
+ pic SNN0005 tics 4
+ pic SNN0007 tics 4
+ pic SNN0009 tics 4
+ pic SNN0011 tics 4
+ pic SNN0013 tics 4
+ pic SNN0015 tics 4
+ pic SNN0017 tics 4
+ pic SNN0019 tics 4
+ pic SNN0021 tics 4
+ pic SNN0023 tics 4
+ pic SNN0025 tics 4
+ pic SNN0027 tics 4
+ pic SNN0029 tics 4
+ pic SNN0031 tics 4
+
+ ////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////
+ /////////////NUKADGE FALL///////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////
+  FLAT HYNUKE
+ pic SN0001 tics 4
+ pic SN0003 tics 4
+ pic SN0005 tics 4
+ pic SN0007 tics 4
+ pic SN0009 tics 4
+ pic SN0011 tics 4
+ pic SN0013 tics 4
+ pic SN0015 tics 4
+ pic SN0017 tics 4
+ pic SN0019 tics 4
+ pic SN0021 tics 4
+ pic SN0023 tics 4
+ pic SN0025 tics 4
+ pic SN0027 tics 4
+ pic SN0029 tics 4
+ pic SN0031 tics 4
+ 
+ FLAT SFALL1
+ pic NF0001 tics 4
+ pic NF0003 tics 4
+ pic NF0005 tics 4
+ pic NF0007 tics 4
+ pic NF0009 tics 4
+ pic NF0011 tics 4
+ pic NF0013 tics 4
+ pic NF0015 tics 4
+ pic NF0017 tics 4
+ pic NF0019 tics 4
+ pic NF0021 tics 4
+ pic NF0023 tics 4
+ pic NF0025 tics 4
+ pic NF0027 tics 4
+ pic NF0029 tics 4
+ pic NF0031 tics 4
+
+ FLAT SFALL2
+ pic NF0001 tics 4
+ pic NF0003 tics 4
+ pic NF0005 tics 4
+ pic NF0007 tics 4
+ pic NF0009 tics 4
+ pic NF0011 tics 4
+ pic NF0013 tics 4
+ pic NF0015 tics 4
+ pic NF0017 tics 4
+ pic NF0019 tics 4
+ pic NF0021 tics 4
+ pic NF0023 tics 4
+ pic NF0025 tics 4
+ pic NF0027 tics 4
+ pic NF0029 tics 4
+ pic NF0031 tics 4
+ 
+ FLAT SFALL3
+ pic NF0001 tics 4
+ pic NF0003 tics 4
+ pic NF0005 tics 4
+ pic NF0007 tics 4
+ pic NF0009 tics 4
+ pic NF0011 tics 4
+ pic NF0013 tics 4
+ pic NF0015 tics 4
+ pic NF0017 tics 4
+ pic NF0019 tics 4
+ pic NF0021 tics 4
+ pic NF0023 tics 4
+ pic NF0025 tics 4
+ pic NF0027 tics 4
+ pic NF0029 tics 4
+ pic NF0031 tics 4
+ 
+ FLAT SFALL4
+ pic NF0001 tics 4
+ pic NF0003 tics 4
+ pic NF0005 tics 4
+ pic NF0007 tics 4
+ pic NF0009 tics 4
+ pic NF0011 tics 4
+ pic NF0013 tics 4
+ pic NF0015 tics 4
+ pic NF0017 tics 4
+ pic NF0019 tics 4
+ pic NF0021 tics 4
+ pic NF0023 tics 4
+ pic NF0025 tics 4
+ pic NF0027 tics 4
+ pic NF0029 tics 4
+ pic NF0031 tics 4
+
+ FLAT LPFNUKE   ////GZDB LTP RESOURCE FILE
+ pic NF0001 tics 4
+ pic NF0003 tics 4
+ pic NF0005 tics 4
+ pic NF0007 tics 4
+ pic NF0009 tics 4
+ pic NF0011 tics 4
+ pic NF0013 tics 4
+ pic NF0015 tics 4
+ pic NF0017 tics 4
+ pic NF0019 tics 4
+ pic NF0021 tics 4
+ pic NF0023 tics 4
+ pic NF0025 tics 4
+ pic NF0027 tics 4
+ pic NF0029 tics 4
+ pic NF0031 tics 4
+ 
+  FLAT LPFNNUKE   ////GZDB LTP RESOURCE FILE
+ pic NNF0001 tics 4
+ pic NNF0003 tics 4
+ pic NNF0005 tics 4
+ pic NNF0007 tics 4
+ pic NNF0009 tics 4
+ pic NNF0011 tics 4
+ pic NNF0013 tics 4
+ pic NNF0015 tics 4
+ pic NNF0017 tics 4
+ pic NNF0019 tics 4
+ pic NNF0021 tics 4
+ pic NNF0023 tics 4
+ pic NNF0025 tics 4
+ pic NNF0027 tics 4
+ pic NNF0029 tics 4
+ pic NNF0031 tics 4
+ 
+///////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+//BLOOD/////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+FLAT BLOOD1
+ pic SB0001 tics 4
+ pic SB0003 tics 4
+ pic SB0005 tics 4
+ pic SB0007 tics 4
+ pic SB0009 tics 4
+ pic SB0011 tics 4
+ pic SB0013 tics 4
+ pic SB0015 tics 4
+ pic SB0017 tics 4
+ pic SB0019 tics 4
+ pic SB0021 tics 4
+ pic SB0023 tics 4
+ pic SB0025 tics 4
+ pic SB0027 tics 4
+ pic SB0029 tics 4
+ pic SB0031 tics 4
+
+
+FLAT BLOOD2
+ pic SB0001 tics 4
+ pic SB0003 tics 4
+ pic SB0005 tics 4
+ pic SB0007 tics 4
+ pic SB0009 tics 4
+ pic SB0011 tics 4
+ pic SB0013 tics 4
+ pic SB0015 tics 4
+ pic SB0017 tics 4
+ pic SB0019 tics 4
+ pic SB0021 tics 4
+ pic SB0023 tics 4
+ pic SB0025 tics 4
+ pic SB0027 tics 4
+ pic SB0029 tics 4
+ pic SB0031 tics 4
+
+FLAT BLOOD3
+ pic SB0001 tics 4
+ pic SB0003 tics 4
+ pic SB0005 tics 4
+ pic SB0007 tics 4
+ pic SB0009 tics 4
+ pic SB0011 tics 4
+ pic SB0013 tics 4
+ pic SB0015 tics 4
+ pic SB0017 tics 4
+ pic SB0019 tics 4
+ pic SB0021 tics 4
+ pic SB0023 tics 4
+ pic SB0025 tics 4
+ pic SB0027 tics 4
+ pic SB0029 tics 4
+ pic SB0031 tics 4
+ 
+FLAT WBLOOD1
+ pic SB0001 tics 4
+ pic SB0003 tics 4
+ pic SB0005 tics 4
+ pic SB0007 tics 4
+ pic SB0009 tics 4
+ pic SB0011 tics 4
+ pic SB0013 tics 4
+ pic SB0015 tics 4
+ pic SB0017 tics 4
+ pic SB0019 tics 4
+ pic SB0021 tics 4
+ pic SB0023 tics 4
+ pic SB0025 tics 4
+ pic SB0027 tics 4
+ pic SB0029 tics 4
+ pic SB0031 tics 4 
+ 
+ 
+ 
+ FLAT LPBLOOD    ///// GZDB LTP RESOURCE FILE
+ pic SB0001 tics 4
+ pic SB0003 tics 4
+ pic SB0005 tics 4
+ pic SB0007 tics 4
+ pic SB0009 tics 4
+ pic SB0011 tics 4
+ pic SB0013 tics 4
+ pic SB0015 tics 4
+ pic SB0017 tics 4
+ pic SB0019 tics 4
+ pic SB0021 tics 4
+ pic SB0023 tics 4
+ pic SB0025 tics 4
+ pic SB0027 tics 4
+ pic SB0029 tics 4
+ pic SB0031 tics 4
+
+
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+///////////BLOOD FALL////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
+FLAT BFALL1
+ pic BF0001 tics 4
+ pic BF0003 tics 4
+ pic BF0005 tics 4
+ pic BF0007 tics 4
+ pic BF0009 tics 4
+ pic BF0011 tics 4
+ pic BF0013 tics 4
+ pic BF0015 tics 4
+ pic BF0017 tics 4
+ pic BF0019 tics 4
+ pic BF0021 tics 4
+ pic BF0023 tics 4
+ pic BF0025 tics 4
+ pic BF0027 tics 4
+ pic BF0029 tics 4
+ pic BF0031 tics 4
+
+FLAT BFALL2
+ pic BF0001 tics 4
+ pic BF0003 tics 4
+ pic BF0005 tics 4
+ pic BF0007 tics 4
+ pic BF0009 tics 4
+ pic BF0011 tics 4
+ pic BF0013 tics 4
+ pic BF0015 tics 4
+ pic BF0017 tics 4
+ pic BF0019 tics 4
+ pic BF0021 tics 4
+ pic BF0023 tics 4
+ pic BF0025 tics 4
+ pic BF0027 tics 4
+ pic BF0029 tics 4
+ pic BF0031 tics 4
+
+FLAT BFALL3
+ pic BF0001 tics 4
+ pic BF0003 tics 4
+ pic BF0005 tics 4
+ pic BF0007 tics 4
+ pic BF0009 tics 4
+ pic BF0011 tics 4
+ pic BF0013 tics 4
+ pic BF0015 tics 4
+ pic BF0017 tics 4
+ pic BF0019 tics 4
+ pic BF0021 tics 4
+ pic BF0023 tics 4
+ pic BF0025 tics 4
+ pic BF0027 tics 4
+ pic BF0029 tics 4
+ pic BF0031 tics 4
+
+FLAT BFALL4
+ pic BF0001 tics 4
+ pic BF0003 tics 4
+ pic BF0005 tics 4
+ pic BF0007 tics 4
+ pic BF0009 tics 4
+ pic BF0011 tics 4
+ pic BF0013 tics 4
+ pic BF0015 tics 4
+ pic BF0017 tics 4
+ pic BF0019 tics 4
+ pic BF0021 tics 4
+ pic BF0023 tics 4
+ pic BF0025 tics 4
+ pic BF0027 tics 4
+ pic BF0029 tics 4
+ pic BF0031 tics 4
+ 
+ FLAT LPFBLOOD    ///// GZDB LTP RESOURCE FILE
+ pic BF0001 tics 4
+ pic BF0003 tics 4
+ pic BF0005 tics 4
+ pic BF0007 tics 4
+ pic BF0009 tics 4
+ pic BF0011 tics 4
+ pic BF0013 tics 4
+ pic BF0015 tics 4
+ pic BF0017 tics 4
+ pic BF0019 tics 4
+ pic BF0021 tics 4
+ pic BF0023 tics 4
+ pic BF0025 tics 4
+ pic BF0027 tics 4
+ pic BF0029 tics 4
+ pic BF0031 tics 4
+
+ FLAT FIRELAV2    ///// DOOM 1 E4M5 incorrect texture used for bloodfall
+ pic BF0001 tics 4
+ pic BF0003 tics 4
+ pic BF0005 tics 4
+ pic BF0007 tics 4
+ pic BF0009 tics 4
+ pic BF0011 tics 4
+ pic BF0013 tics 4
+ pic BF0015 tics 4
+ pic BF0017 tics 4
+ pic BF0019 tics 4
+ pic BF0021 tics 4
+ pic BF0023 tics 4
+ pic BF0025 tics 4
+ pic BF0027 tics 4
+ pic BF0029 tics 4
+ pic BF0031 tics 4
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+//////////LAVA//////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+//WDI LAVA
+FLAT YZTX181A
+ pic SL0001 tics 4 
+ pic SL0003 tics 4
+ pic SL0005 tics 4
+ pic SL0007 tics 4
+ pic SL0009 tics 4
+ pic SL0011 tics 4
+ pic SL0013 tics 4
+ pic SL0015 tics 4
+ pic SL0017 tics 4
+ pic SL0019 tics 4
+ pic SL0021 tics 4
+ pic SL0023 tics 4
+ pic SL0025 tics 4
+ pic SL0027 tics 4
+ pic SL0029 tics 4
+ pic SL0031 tics 4
+ 
+FLAT WQLAVA
+ pic SL0001 tics 4 
+ pic SL0003 tics 4
+ pic SL0005 tics 4
+ pic SL0007 tics 4
+ pic SL0009 tics 4
+ pic SL0011 tics 4
+ pic SL0013 tics 4
+ pic SL0015 tics 4
+ pic SL0017 tics 4
+ pic SL0019 tics 4
+ pic SL0021 tics 4
+ pic SL0023 tics 4
+ pic SL0025 tics 4
+ pic SL0027 tics 4
+ pic SL0029 tics 4
+ pic SL0031 tics 4
+ 
+ 
+
+FLAT LAVAB
+ pic SL0001 tics 4 
+ pic SL0003 tics 4
+ pic SL0005 tics 4
+ pic SL0007 tics 4
+ pic SL0009 tics 4
+ pic SL0011 tics 4
+ pic SL0013 tics 4
+ pic SL0015 tics 4
+ pic SL0017 tics 4
+ pic SL0019 tics 4
+ pic SL0021 tics 4
+ pic SL0023 tics 4
+ pic SL0025 tics 4
+ pic SL0027 tics 4
+ pic SL0029 tics 4
+ pic SL0031 tics 4
+
+FLAT LAVA1
+ pic SL0001 tics 4 
+ pic SL0003 tics 4
+ pic SL0005 tics 4
+ pic SL0007 tics 4
+ pic SL0009 tics 4
+ pic SL0011 tics 4
+ pic SL0013 tics 4
+ pic SL0015 tics 4
+ pic SL0017 tics 4
+ pic SL0019 tics 4
+ pic SL0021 tics 4
+ pic SL0023 tics 4
+ pic SL0025 tics 4
+ pic SL0027 tics 4
+ pic SL0029 tics 4
+ pic SL0031 tics 4
+ 
+ FLAT LAVA2
+ pic SL0001 tics 4 
+ pic SL0003 tics 4
+ pic SL0005 tics 4
+ pic SL0007 tics 4
+ pic SL0009 tics 4
+ pic SL0011 tics 4
+ pic SL0013 tics 4
+ pic SL0015 tics 4
+ pic SL0017 tics 4
+ pic SL0019 tics 4
+ pic SL0021 tics 4
+ pic SL0023 tics 4
+ pic SL0025 tics 4
+ pic SL0027 tics 4
+ pic SL0029 tics 4
+ pic SL0031 tics 4
+ 
+ FLAT LAVA3
+ pic SL0001 tics 4 
+ pic SL0003 tics 4
+ pic SL0005 tics 4
+ pic SL0007 tics 4
+ pic SL0009 tics 4
+ pic SL0011 tics 4
+ pic SL0013 tics 4
+ pic SL0015 tics 4
+ pic SL0017 tics 4
+ pic SL0019 tics 4
+ pic SL0021 tics 4
+ pic SL0023 tics 4
+ pic SL0025 tics 4
+ pic SL0027 tics 4
+ pic SL0029 tics 4
+ pic SL0031 tics 4
+ 
+ FLAT LAVA4
+ pic SL0001 tics 4 
+ pic SL0003 tics 4
+ pic SL0005 tics 4
+ pic SL0007 tics 4
+ pic SL0009 tics 4
+ pic SL0011 tics 4
+ pic SL0013 tics 4
+ pic SL0015 tics 4
+ pic SL0017 tics 4
+ pic SL0019 tics 4
+ pic SL0021 tics 4
+ pic SL0023 tics 4
+ pic SL0025 tics 4
+ pic SL0027 tics 4
+ pic SL0029 tics 4
+ pic SL0031 tics 4
+ 
+  FLAT LPLAVA    ///// GZDB LTP RESOURCE FILE
+ pic SL0001 tics 4 
+ pic SL0003 tics 4
+ pic SL0005 tics 4
+ pic SL0007 tics 4
+ pic SL0009 tics 4
+ pic SL0011 tics 4
+ pic SL0013 tics 4
+ pic SL0015 tics 4
+ pic SL0017 tics 4
+ pic SL0019 tics 4
+ pic SL0021 tics 4
+ pic SL0023 tics 4
+ pic SL0025 tics 4
+ pic SL0027 tics 4
+ pic SL0029 tics 4
+ pic SL0031 tics 4
+ 
+  FLAT LAVAFL   ///////////////brutal doom Lava//////////////////
+ pic SL0001 tics 4 
+ pic SL0003 tics 4
+ pic SL0005 tics 4
+ pic SL0007 tics 4
+ pic SL0009 tics 4
+ pic SL0011 tics 4
+ pic SL0013 tics 4
+ pic SL0015 tics 4
+ pic SL0017 tics 4
+ pic SL0019 tics 4
+ pic SL0021 tics 4
+ pic SL0023 tics 4
+ pic SL0025 tics 4
+ pic SL0027 tics 4
+ pic SL0029 tics 4
+ pic SL0031 tics 4
+ 
+ 
+///////////////////////////////////////////////////////////////////////////
+ /////////////////////// LAVAFALL //////////////////////////////////////////////
+ /////////////////////////////////////////////////////////////////////////// 
+ 
+ 
+ FLAT LPFLava ///////LTP Resource file///////
+ pic LF0001 tics 4
+ pic LF0003 tics 4
+ pic LF0005 tics 4
+ pic LF0007 tics 4
+ pic LF0009 tics 4
+ pic LF0011 tics 4
+ pic LF0013 tics 4
+ pic LF0015 tics 4
+ pic LF0017 tics 4
+ pic LF0019 tics 4
+ pic LF0021 tics 4
+ pic LF0023 tics 4
+ pic LF0025 tics 4
+ pic LF0027 tics 4
+ pic LF0029 tics 4
+ pic LF0031 tics 4
+ 
+

@@ -1,0 +1,133 @@
+sprite DOORA0, 1, 1 { Patch TNT1, 0, 0 }
+sprite CHARA0, 1, 1 { Patch TNT1, 0, 0 }
+sprite ELITA0, 1, 1 { Patch TNT1, 0, 0 }
+sprite ELITB0, 1, 1 { Patch TNT1, 0, 0 }
+
+texture NOIS1, 128, 128 { XScale 2.0 YScale 2.0 Patch NOISE1, 0, 0 {}}
+texture NOIS2, 128, 128 { XScale 2.0 YScale 2.0 Patch NOISE2, 0, 0 {}}
+texture NOIS3, 128, 128 { XScale 2.0 YScale 2.0 Patch NOISE3, 0, 0 {}}
+texture NOIS4, 128, 128 { XScale 2.0 YScale 2.0 Patch NOISE4, 0, 0 {}}
+texture NOIS5, 128, 128 { XScale 2.0 YScale 2.0 Patch NOISE5, 0, 0 {}}
+texture NOIS6, 128, 128 { XScale 2.0 YScale 2.0 Patch NOISE6, 0, 0 {}}
+texture NOIS7, 128, 128 { XScale 2.0 YScale 2.0 Patch NOISE7, 0, 0 {}}
+texture NOIS8, 128, 128 { XScale 2.0 YScale 2.0 Patch NOISE8, 0, 0 {}}
+texture ELEVHACK, 1, 1 { Patch TNT1, 0, 0 }
+
+//Medals
+graphic MEDLS, 256, 64 { XScale 1.0 YScale 1.0 Patch MEDALS, 0, 0 {Alpha 0.99 Style Add}}
+graphic MEDLA, 256, 64 { XScale 1.0 YScale 1.0 Patch MEDALA, 0, 0 {Alpha 0.99 Style Add}}
+graphic MEDLB, 256, 64 { XScale 1.0 YScale 1.0 Patch MEDALB, 0, 0 {Alpha 0.99 Style Add}}
+graphic MEDLC, 256, 64 { XScale 1.0 YScale 1.0 Patch MEDALc, 0, 0 {Alpha 0.99 Style Add}}
+graphic MEDLD, 256, 64 { XScale 1.0 YScale 1.0 Patch MEDALD, 0, 0 {Alpha 0.99 Style Add}}
+graphic MEDLF, 256, 64 { XScale 1.0 YScale 1.0 Patch MEDALE, 0, 0 {Alpha 0.99 Style Add}}
+graphic MEDLEF, 256, 64 { XScale 1.0 YScale 1.0 Patch MEDALEF, 0, 0 {Alpha 0.99 Style Add}}
+
+graphic STUNICO, 24, 11
+{
+	XScale 0.25
+	YScale 0.25
+	Patch STUNICON, 0, 0 {}
+}
+
+graphic STUNBA, 40, 4
+{
+	XScale 0.5
+	YScale 0.5
+	Patch STUNBAR, 0, 0 {}
+}
+
+graphic STUNBAK, 40, 4
+{
+	XScale 0.5
+	YScale 0.5
+	Patch STUNBACK, 0, 0 {}
+}
+
+Texture ADEL_N98, 32, 128
+{
+	Patch ADEL_N07, 0, 0
+	{
+		Style Copy
+	}
+	Patch ADEL_N08, 0, 0
+	{
+		Alpha 0.50
+		Style Translucent
+	}
+}
+
+//Title
+
+graphic TITLEPOP, 400, 100 { XScale 2.0 YScale 2.0 Patch WDIMAIN, 0, 0 {}}
+graphic TITFUCKR, 400, 100 { XScale 2.0 YScale 2.0 Patch WDIFADE, 0, 0 {}}
+
+graphic ARWHUD, 32, 6 { XScale 0.5 YScale 0.5 Patch ARWPA7A3, 0, 0 {}}
+//graphic M1HUD, 64, 80 { XScale 3.0 YScale 3.0 Patch M1GNY0, 0, 0 {}}
+graphic M1CLIP2, 50, 54 { XScale 1.0 YScale 1.0 Patch M1CLIP, 32, 32 {}}
+
+texture BWPANL01, 128, 128 { XScale 1.0 YScale 1.0 Patch BWPANL01, 0, 0 {}}
+texture LITESWIA, 20, 32 { XScale 2.0 YScale 2.0 Patch LITESWIA, 0, 0 {}}
+texture LITESWIB, 20, 32 { XScale 2.0 YScale 2.0 Patch LITESWIB, 0, 0 {}}
+texture BOX01, 128, 128 { XScale 2.0 YScale 2.0 Patch WOODBOX, 0, 0 {}}
+texture BOX02, 128, 128 { XScale 4.0 YScale 4.0 Patch WOODBOX, 0, 0 {}}
+texture SNOWBOX1, 128, 128 { XScale 2.0 YScale 2.0 Patch SNOWBOX, 0, 0 {}}
+texture SNOWBOX2, 128, 128 { XScale 4.0 YScale 4.0 Patch SNOWBOX, 0, 0 {}}
+texture CURT1, 32, 128 { XScale 1.0 YScale 4.0 Patch Curt02, 0, 0 {}}
+texture SHIRTS01, 205, 64 { XScale 2.0 YScale 2.0 Patch SHIRTS, 0, 0 {}}
+
+sprite SANKA0, 1, 1 { Patch TNT1A0, 0, 0 }
+sprite MOILA0, 1, 1 { Patch TNT1A0, 0, 0 }
+sprite DRARA0, 1, 1 { Patch TNT1A0, 0, 0 }
+sprite CARRA0, 1, 1 { Patch TNT1A0, 0, 0 }
+sprite SOAPA0, 1, 1 { Patch TNT1A0, 0, 0 }
+sprite TPAPA0, 1, 1 { Patch TNT1A0, 0, 0 }
+sprite TVELA0, 1, 1 { Patch TNT1A0, 0, 0 }
+sprite PIANA0, 1, 1 { Patch TNT1A0, 0, 0 }
+sprite STALA0, 1, 1 { Patch TNT1A0, 0, 0 }
+
+Texture ADEL_N98, 32, 128
+{
+	Patch ADEL_N07, 0, 0
+	{
+		Style Copy
+	}
+	Patch ADEL_N08, 0, 0
+	{
+		Alpha 0.50
+		Style Translucent
+	}
+}
+
+texture URGRAT03, 128, 36 { patch URGRAT01, 0, 0 }
+texture BSLIME02, 128, 64 { XScale 0.5 YScale 0.5 patch BSLIME01, 0, 0 }
+texture CATLITE1, 16, 8 { Xscale 2 Yscale 4 patch LITE5, 0, 0 }
+texture CATLITE2, 16, 8 { Xscale 2 Yscale 4 patch LITE5, 0, 0 { Translation "0:255=175:191"} }
+texture CATLITE3, 16, 8 { Xscale 2 Yscale 4 patch LITE5, 0, 0 { Translation "0:255=198:207" } }
+texture CATLITE4, 16, 8 { Xscale 2 Yscale 4 patch LITE5, 0, 0 { Translation "0:255=112:121" } }
+texture CSKY, 128, 128 { patch CFM01, 0, 0 { Translation "0:255=0:0" } }
+sprite SMOGA0, 128, 128 { offset 64, 64 patch SMOGA0, 0, 0}
+sprite SMOGB0, 128, 128 { offset 64, 64 patch SMOGB0, 0, 0}
+sprite SMOGC0, 128, 128 { XScale 0.5 YScale 0.5 offset 64, 64 patch SMOGB0, 0, 0}
+sprite CBOXA0, 1, 1 { patch NULL, 0, 0 }
+sprite GRATA0, 1, 1 { patch NULL, 0, 0 }
+sprite MARTA0, 1, 1 { patch NULL, 0, 0 }
+sprite BOTTA0, 1, 1 { patch NULL, 0, 0 }
+sprite BOTTB0, 1, 1 { patch NULL, 0, 0 }
+sprite BOTTC0, 1, 1 { patch NULL, 0, 0 }
+sprite BOTTD0, 1, 1 { patch NULL, 0, 0 }
+sprite CABLA0, 1, 1 { patch NULL, 0, 0 }
+sprite BARRA0, 1, 1 { patch NULL, 0, 0 }
+sprite MIP1A0, 1, 1 { patch NULL, 0, 0 }
+sprite MIP2A0, 1, 1 { patch NULL, 0, 0 }
+sprite TLBXA0, 1, 1 { patch NULL, 0, 0 }	
+sprite TOOLA0, 1, 1 { patch NULL, 0, 0 }	
+sprite SPANA0, 1, 1 { patch NULL, 0, 0 }
+sprite CHIPA0, 1, 1 { patch NULL, 0, 0 }
+sprite SCRWA0, 1, 1 { patch NULL, 0, 0 }
+sprite TRIPA0, 1, 1 { patch NULL, 0, 0 }
+sprite TRPAA0, 1, 1 { patch NULL, 0, 0 }
+sprite BMERA0, 1, 1 { patch NULL, 0, 0 }
+sprite NPIPA0, 1, 1 { patch NULL, 0, 0 }
+sprite NPIPB0, 1, 1 { patch NULL, 0, 0 }
+sprite NPIPC0, 1, 1 { patch NULL, 0, 0 }
+sprite PAGEA0, 1, 1 { patch NULL, 0, 0 }

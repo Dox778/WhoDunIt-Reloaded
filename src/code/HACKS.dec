@@ -1,0 +1,712 @@
+//TOKENS (Base token is used both as a bool and int base :3 IM SO SMART)
+ACTOR WDIToken: Inventory 
+{ 
+	Inventory.MaxAmount 1 
+	Inventory.pickupmessage ""  
+	Inventory.pickupsound "" 
+	-Inventory.INVBAR
+	+INVENTORY.UNTOSSABLE
+	+INVENTORY.UNDROPPABLE
+	+INVENTORY.INTERHUBSTRIP
+}
+//Animation or player-related
+Actor RemoveLight: WDIToken {}
+Actor GoToMelee: WDIToken {}
+Actor GoToReload: WDIToken {}
+Actor GoToMiniReload: WDIToken {}
+Actor GoToThrowItem: WDIToken {}
+Actor GoToLighter: WDIToken {}
+Actor GoToFlashlight: WDIToken {}
+ACTOR PipeSeq : WDIToken { Inventory.MaxAmount 2 }
+Actor NeedPump: WDIToken {}
+Actor Pump0: WDIToken {}
+Actor Pump1: WDIToken {}
+Actor Pump2: WDIToken {}
+Actor IsPunching: WDIToken {}
+ACTOR WrenchAttackAnim: WDIToken {}
+Actor IsDancing : WDIToken {}
+Actor PlayDead: WDIToken {}
+ACTOR PlayerAttackAnim: WDIToken {}
+//Weapon-related
+ACTOR Slot1Filled : WDIToken {}
+ACTOR Stained : WDIToken {} 
+Actor StabbedAPerson : WDIToken {}
+Actor FireHold: WDIToken {inventory.maxamount 10}
+Actor GotNewWeap: WDIToken {}
+Actor DroppingAnimation: WDIToken {}
+actor ThrowFar: WDIToken {}
+ACTOR FidgetSpam: WDIToken {}
+Actor SawOn : WDIToken {}
+Actor SawOff : WDIToken {}
+ACTOR SawCombo : WDIToken {}
+Actor WDIFakeReload: WDIToken {}
+Actor M1Raised : WDIToken {}
+Actor M1AntiJam: WDIToken {}
+Actor NeedToUnjam: WDIToken {}
+Actor NeedToUnjamPistol: WDIToken {}
+Actor JamCount: WDIToken {Inventory.MaxAmount 10}
+ACTOR FiredColt: WDIToken {}
+Actor JamCountPistol: WDIToken {Inventory.MaxAmount 10}
+Actor JamCountPistol2: WDIToken {Inventory.MaxAmount 3}
+Actor "KickBlocker": "WDIToken" {}			//Disables ability to use kick in bear trap.
+Actor "WeaponInOnHold": "WDIToken" {}		//Just dummy item for check in some weapons Hold states.
+Actor "WeaponInOnAltHold": "WDIToken" {}	//Just dummy item for check in some weapons Hold states.
+
+ACTOR BottleBroke : WDIToken {}
+ACTOR BottleDurability : WDIToken { inventory.maxamount 6 }
+Actor FistIdleAnim: WDIToken { inventory.maxamount 10 }
+ACTOR HasGrabbed : WDIToken {}
+
+ACTOR M1Once : WDIToken {}
+ACTOR ShotgunOnce : WDIToken {}
+ACTOR ChainsawOnce : WDIToken {}
+ACTOR PistolOnce : WDIToken {}
+ACTOR CrossbowOnce : WDIToken {}
+ACTOR SprayCanOnce : WDIToken {}
+
+//For random weapon kit:
+Actor "RandomBox_NoOPItems": "WDIToken" {}
+Actor "RandomBox_NoMurdItems": "WDIToken" {}
+
+//Gameplay-related
+ACTOR DrawTimer : WDIToken {}
+Actor ColorCooldown: WDIToken {	Inventory.MaxAmount 10 }
+Actor Powercounter: WDIToken { Inventory.MaxAmount 20 }
+Actor HudType: WDIToken {}
+Actor KilledByMurderer : WDIToken {}
+Actor GotHurt : WDIToken { Inventory.Amount 6 Inventory.MaxAmount 6 }
+Actor RAPETHRESHHOLD : WDIToken { Inventory.MaxAmount 10 }
+Actor ReadyRegen : WDIToken { Inventory.InterHubAmount 0 }
+Actor NoRegen : WDIToken { Inventory.InterHubAmount 0 }
+Actor CrowGroupFlee : WDIToken {}
+Actor Warm_weapon : WDIToken {}
+Actor WarmupFucksThingsUp : WDIToken {} 
+Actor PowerOff: WDIToken {}
+Actor TKToken : WDIToken { Inventory.MaxAmount 3 }
+Actor CameraOn : WDIToken {}
+Actor CameraCheck : WDIToken {}
+Actor HudCleaner: WDIToken {}
+Actor HudAlive: WDIToken { -INVENTORY.INTERHUBSTRIP }
+Actor ScriptDeath : WDIToken {}
+Actor MarkMe : WDIToken { -INVENTORY.INTERHUBSTRIP }
+actor InoKill : WDIToken  {}
+actor Hero: WDIToken  {}
+actor KillMarker: WDIToken  { Inventory.MaxAmount 99 }
+//actor SlowCounter : WDIToken  { Inventory.MaxAmount 5 }
+actor SlowCounter : WDIToken  { Inventory.MaxAmount 10 }
+actor IveBeenGrabbed : WDIToken  { }
+actor Warm : WDIToken {} //When this isn't present, the player will emit fog.
+
+//MURD STUFF
+//Dummy item dump
+//For scripts
+
+actor GasUsed : WDIToken  {  Inventory.MaxAmount 100 } 
+actor SmokeUsed : WDIToken  {  Inventory.MaxAmount 100 } 
+actor TripUsed : WDIToken  {  Inventory.MaxAmount 100 } 
+actor StimUsed : WDIToken  {  Inventory.MaxAmount 100 } 
+actor FakeStimUsed : WDIToken  {  Inventory.MaxAmount 100 }
+actor NoiseMakerUsed : WDIToken  {  Inventory.MaxAmount 100 } 
+actor BackStabCount : WDIToken  {  Inventory.MaxAmount 100 } 
+
+
+
+
+Actor InGame : CustomInventory
+{
+Inventory.Amount 1
+Inventory.MaxAmount 1
+states
+{
+Spawn:
+TNT1 A -1
+stop
+}}
+
+Actor CameraWDI 13963
+{
++NOGRAVITY
++SOLID
++SHOOTABLE
++NOBLOOD
+DeathSound "weapons/gundrop"
+height 10
+radius 16
+health 30
+mass 65535
+	DamageFactor "Gas", 0.0
+	DamageFactor "FlareEffect", 0.0
+  //$Category WDI Effects
+  //$Sprite CAMRA2A8
+  //$Title "Camera"
+states
+{
+Spawn:
+CAMR A -1
+loop
+Death:
+CAMR A 1 A_Scream
+stop
+}}
+
+Actor CustomAimingCamera
+{
+	Height 4
+	Radius 2
+	CameraHeight 1
+	-SOLID
+	+THRUACTORS
+	+NOBLOCKMAP
+	+NOGRAVITY
+	//Gravity 0.001
+	mass 1
+	+DONTSPLASH
+	ReactionTime 350
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_SetPitch(20)
+		loopie:
+		TNT1 A 0 A_CountDown
+		TNT1 A 1 A_Facetarget
+		loop
+	Death:
+		TNT1 A 1
+		stop
+	}
+}
+Actor MurdWinCamera : CustomAimingCamera
+{
+	CameraHeight 38
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_Warp(AAPTR_DEFAULT, 10,0,0,180)
+		TNT1 A 0 A_Recoil(9)
+		loopie:
+		TNT1 A 0 A_CountDown
+		TNT1 A 0 //A_SetPitch(pitch-1)
+		TNT1 A 1 A_Facetarget
+		loop
+	Death:
+		TNT1 A 1
+		stop
+	}
+}
+
+actor ChaseCam
+{
+  Height 16
+  Radius 8
+  +NOGRAVITY +NOBLOCKMAP
+  states
+  {
+  Spawn:
+    TNT1 A -1
+    stop
+  }
+}
+
+actor ChaseCam2
+{
+  height 0 
+  radius 0
+  +NOGRAVITY
+  states
+  {
+  Spawn:
+    TNT1 A -1
+    stop
+  } 
+}
+
+Actor MurderDoorUnblocker : CustomInventory 
+{
+  inventory.pickupmessage ""
+  inventory.pickupsound ""
+  Inventory.MaxAmount 1
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    AWI3 A -1
+    stop
+  Pickup:
+    TNT1 A 0 
+    TNT1 A 0 A_ChangeFlag("NOBLOCKMONST", 1)
+    stop
+  }
+}
+
+Actor MurderDoorBlocker : CustomInventory 
+{
+  inventory.pickupmessage ""
+  inventory.pickupsound ""
+  Inventory.MaxAmount 1
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    AWI3 A -1
+    stop
+  Pickup:
+    TNT1 A 0 
+    TNT1 A 0 A_ChangeFlag("NOBLOCKMONST", 0)
+    stop
+  }
+}
+
+
+
+
+actor TKHero: CustomInventory 
+{
+  inventory.pickupmessage ""
+  inventory.pickupsound ""
+  Inventory.MaxAmount 1
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    AWI3 A -1
+    stop
+  Pickup:
+    TNT1 A 0 
+    TNT1 A 0 ACS_ExecuteAlways(651, 0, 0, 0)
+    stop
+  }
+}
+
+actor BackstabHero: CustomInventory 
+{
+  inventory.pickupmessage ""
+  inventory.pickupsound ""
+  Inventory.MaxAmount 1
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    AWI3 A -1
+    stop
+  Pickup:
+    TNT1 A 0 
+    TNT1 A 0 ACS_ExecuteAlways(652, 0, 0, 0)
+    stop
+  }
+}
+
+
+
+
+Actor TIDGiver : CustomInventory
+{
+
+  inventory.pickupmessage ""
+  inventory.pickupsound ""
+  Inventory.MaxAmount 1
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    AWI3 A -1
+    stop
+  Pickup:
+    TNT1 A 0 
+    TNT1 A 0 ACS_ExecuteAlways(102, 0, 0, 0)
+    stop
+  }
+}
+
+
+
+ACTOR PowerFriendlyCueDamage: PowerProtection
+{
+	Powerup.Duration 3024000
+	Damagefactor "CueMelee", 0.25
+}
+
+ACTOR PowerFriendlyShovelDamage: PowerProtection
+{
+	Powerup.Duration 3024000
+	Damagefactor "ShovelMelee", 0.20
+}
+
+ACTOR PowerFriendlyGunDamage: PowerProtection
+{
+	Powerup.Duration 3024000
+	Damagefactor "friendlygun", 0.25
+}
+
+ACTOR PowerFriendlySawDamage: PowerProtection
+{
+	Powerup.Duration 3024000
+	Damagefactor "SawMelee", 0.25
+}
+
+ACTOR PowerFriendlyMeleeDamage: PowerProtection
+{
+	Powerup.Duration 3024000
+	Damagefactor "friendlymelee", 0.25
+}
+
+ACTOR PowerFriendlyThrownDamage : PowerProtection
+{
+	Powerup.Duration 3024000
+	Damagefactor "friendlythrown", 0.25
+}
+
+ACTOR PowerFriendlyBurnDamage : PowerProtection
+{
+	Powerup.Duration 3024000
+	Damagefactor "Burn", 0.5
+}
+
+actor PowerMurderNerf : PowerDamage
+{
+	Powerup.Duration 3024000
+	//damagefactor "friendlygun", 1.25
+	damagefactor "friendlygun", 1.0
+}
+
+actor PowerMurderNerf2 : PowerDamage
+{
+	Powerup.Duration 3024000
+	//damagefactor "friendlymelee", 1.65
+	damagefactor "friendlymelee", 1.0
+}
+
+actor PowerMurderNerf3 : PowerDamage
+{
+	Powerup.Duration 3024000
+	damagefactor "SawMelee", 2.0
+}
+
+actor PowerMurderNerf4 : PowerDamage
+{
+	Powerup.Duration 3024000
+	//damagefactor "CueMelee", 1.65
+	damagefactor "CueMelee", 1.0
+}
+
+actor PowerMurderNerf5 : PowerDamage
+{
+	Powerup.Duration 3024000
+	//damagefactor "ShovelMelee", 1.65
+	damagefactor "ShovelMelee", 1.0
+}
+
+ACTOR FriendlyCueDamage : PowerupGiver
+{
+	Game Doom
+	Game Heretic
+	Game Hexen
+	SpawnID 0
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.UNDROPPABLE
+	Inventory.MaxAmount 0
+	Powerup.Type FriendlyCueDamage
+	States
+	{
+	Spawn:
+		GARD ABCD 6 Bright
+		Loop
+	}
+}
+
+ACTOR FriendlyShovelDamage : PowerupGiver
+{
+	Game Doom
+	Game Heretic
+	Game Hexen
+	SpawnID 0
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.UNDROPPABLE
+	Inventory.MaxAmount 0
+	Powerup.Type FriendlyShovelDamage
+	States
+	{
+	Spawn:
+		GARD ABCD 6 Bright
+		Loop
+	}
+}
+
+ACTOR FriendlyFire1 : PowerupGiver
+{
+	Game Doom
+	Game Heretic
+	Game Hexen
+	SpawnID 0
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.UNDROPPABLE
+	Inventory.MaxAmount 0
+	Powerup.Type FriendlyGunDamage
+	States
+	{
+	Spawn:
+		GARD ABCD 6 Bright
+		Loop
+	}
+}
+
+ACTOR FriendlyFire2 : PowerupGiver
+{
+	Game Doom
+	Game Heretic
+	Game Hexen
+	SpawnID 0
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.UNDROPPABLE
+	Inventory.MaxAmount 0
+	Powerup.Type FriendlyMeleeDamage
+	States
+	{
+	Spawn:
+		GARD ABCD 6 Bright
+		Loop
+	}
+}
+
+ACTOR FriendlyFire3 : PowerupGiver
+{
+	Game Doom
+	Game Heretic
+	Game Hexen
+	SpawnID 0
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.UNDROPPABLE
+	Inventory.MaxAmount 0
+	Powerup.Type FriendlySawDamage
+	States
+	{
+	Spawn:
+		GARD ABCD 6 Bright
+		Loop
+	}
+}
+
+ACTOR FriendlyFire4 : PowerupGiver
+{
+	Game Doom
+	Game Heretic
+	Game Hexen
+	SpawnID 0
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.UNDROPPABLE
+	Inventory.MaxAmount 0
+	Powerup.Type FriendlyThrownDamage
+	States
+	{
+	Spawn:
+		GARD ABCD 6 Bright
+		Loop
+	}
+}
+
+ACTOR FriendlyFire5 : PowerupGiver
+{
+	Game Doom
+	Game Heretic
+	Game Hexen
+	SpawnID 0
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.UNDROPPABLE
+	Inventory.MaxAmount 0
+	Powerup.Type FriendlyBurnDamage
+	States
+	{
+	Spawn:
+		GARD ABCD 6 Bright
+		Loop
+	}
+}
+
+
+ACTOR FriendlyFire6 : PowerupGiver
+{
+	Game Doom
+	Game Heretic
+	Game Hexen
+	SpawnID 0
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.UNDROPPABLE
+	Inventory.MaxAmount 0
+	Powerup.Type FriendlyFistDamage
+	States
+	{
+	Spawn:
+		GARD ABCD 6 Bright
+		Loop
+	}
+}
+ACTOR PowerFriendlyFistDamage: PowerProtection
+{
+	Powerup.Duration 3024000
+	Damagefactor "Fist", 0.25
+}
+
+
+
+ACTOR MurderNerf1 : PowerupGiver //Nerf his guns
+{
+	Game Doom
+	Game Heretic
+	Game Hexen
+	SpawnID 0
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.UNDROPPABLE
+	Inventory.MaxAmount 0
+	Powerup.Type MurderNerf 
+	States
+	{
+	Spawn:
+		GARD ABCD 6 Bright
+		Loop
+	}
+}
+
+ACTOR MurderNerf2 : PowerupGiver //Nerf his melee (slightly)
+{
+	Game Doom
+	Game Heretic
+	Game Hexen
+	SpawnID 0
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.UNDROPPABLE
+	Inventory.MaxAmount 0
+	Powerup.Type MurderNerf2 
+	States
+	{
+	Spawn:
+		GARD ABCD 6 Bright
+		Loop
+	}
+}
+
+ACTOR MurderNerf3 : PowerupGiver //Buff his Saw (so it counter-acts their protection)
+{
+	Game Doom
+	Game Heretic
+	Game Hexen
+	SpawnID 0
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.UNDROPPABLE
+	Inventory.MaxAmount 0
+	Powerup.Type MurderNerf3
+	States
+	{
+	Spawn:
+		GARD ABCD 6 Bright
+		Loop
+	}
+}
+
+ACTOR MurderNerf4 : PowerupGiver 
+{
+	Game Doom
+	Game Heretic
+	Game Hexen
+	SpawnID 0
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.UNDROPPABLE
+	Inventory.MaxAmount 0
+	Powerup.Type MurderNerf4
+	States
+	{
+	Spawn:
+		GARD ABCD 6 Bright
+		Loop
+	}
+}
+
+ACTOR MurderNerf5 : PowerupGiver 
+{
+	Game Doom
+	Game Heretic
+	Game Hexen
+	SpawnID 0
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.UNDROPPABLE
+	Inventory.MaxAmount 0
+	Powerup.Type MurderNerf5
+	States
+	{
+	Spawn:
+		GARD ABCD 6 Bright
+		Loop
+	}
+}
+
+Actor MurdererNerf : CustomInventory
+{
+  inventory.pickupmessage ""
+  inventory.pickupsound ""
+  Inventory.MaxAmount 1
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    AWI3 A -1
+    stop
+  Pickup:
+    TNT1 A 0 A_GiveInventory("MurderNerf1", 1)
+    TNT1 A 0 A_GiveInventory("MurderNerf2", 1)
+	TNT1 A 0 A_GiveInventory("MurderNerf3", 1)
+	TNT1 A 0 A_GiveInventory("MurderNerf4", 1)
+	TNT1 A 0 A_GiveInventory("MurderNerf5", 1)
+	//TNT1 A 0 A_GiveInventory("MurdererMorph", 1)
+    stop
+  }
+}
+
+Actor InnocentBuff : CustomInventory
+{
+  inventory.pickupmessage ""
+  inventory.pickupsound ""
+  Inventory.MaxAmount 1
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    AWI3 A -1
+    stop
+  Pickup:
+    TNT1 A 0 A_GiveInventory("FriendlyFire1", 1)
+    TNT1 A 0 A_GiveInventory("FriendlyFire2", 1)
+	TNT1 A 0 A_GiveInventory("FriendlyFire3", 1)
+	TNT1 A 0 A_GiveInventory("FriendlyCueDamage", 1)
+	TNT1 A 0 A_GiveInventory("FriendlyShovelDamage", 1)
+	TNT1 A 0 A_GiveInventory("FriendlyFire4", 1)
+	TNT1 A 0 A_GiveInventory("FriendlyFire5", 1)
+	TNT1 A 0 A_GiveInventory("FriendlyFire6", 1) 
+    stop
+  }
+}
+
+ACTOR ABigNothing replaces TeleportFog
+{
+ RenderStyle None
+ +CLIENTSIDEONLY
+ +NOINTERACTION
+ +NOBLOOD
+ +BLOODLESSIMPACT
+ States
+ {
+ Spawn:
+  TNT1 A 1
+  Stop
+ }
+}

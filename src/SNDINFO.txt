@@ -1,0 +1,171 @@
+// Danny Fireworks
+FIREWLIT FIREWLIT
+$rolloff FIREWLIT 100 600
+$volume FIREWLIT 2.0
+$limit FIREWLIT 10
+
+FIREWOK4 FIREWOK4
+$rolloff FIREWOK4 1100 6500
+$limit FIREWOK4 10
+
+FIREWOK3 FIREWOK3
+$rolloff FIREWOK3 1200 7500
+$volume FIREWOK3 2.0
+$limit FIREWOK3 10
+
+FIREFART FIREFART
+$rolloff FIREFART 400 1800
+$volume FIREFART 2.0
+$limit FIREFART 10
+
+// Teribear Sounds
+VENTGRAT VENTGRAT
+PCSNDT PCSNDT
+PCSNDV PCSNDV
+LIGHTEN1 LIGHTEN1
+GATEJAM GATEJAM
+SKUWIND SKUWIND
+CRY01 CRY01
+CRY02 CRY02
+CRY03 CRY03
+FLIES FLIES
+FAN FAN
+VENDAUT VENDAUT
+MUDRINK MUDRINK
+MUAPPLE MUAPPLE
+
+$AMBIENT 162 PCSNDV POINT CONTINUOUS 1.0
+$AMBIENT 163 SKUWIND POINT CONTINUOUS 1.0 //From Skulltag_content
+$AMBIENT 164 FLIES POINT CONTINUOUS 1.0 //From BoA
+$AMBIENT 165 FAN POINT CONTINUOUS 1.0
+
+//////////////////////////////////////////////////////////////////
+
+TextTink TextTink
+
+misc/spawn DSNULL
+
+weapons/sgclick DSCLICK
+
+//Zeberpal sounds
+
+DSCHAFIR    DSCHAFIR
+
+//Terrain crap
+NJMT DSEMPTY
+
+drip drip
+comphum comphum
+torch torch
+machine machine
+thunder thunder
+rain rain
+swon swon
+swoff swoff
+scman1 scman1
+scman2 scman2
+scwom1 scwom1
+scwom2 scwom2
+scmon1 scmon1
+thun1 thun1
+thun2 thun2
+thun3 thun3
+thun4 thun4
+thun5 thun5
+thun6 thun6
+thun7 thun7
+
+$AMBIENT 1 drip POINT CONTINUOUS 0.1
+$AMBIENT 2 comphum POINT CONTINUOUS 0.1
+$AMBIENT 3 torch POINT CONTINUOUS 0.1
+$AMBIENT 4 rain POINT CONTINUOUS 0.5
+
+EASTERTIME ETIET
+LABORDAY LDILD
+CHRISTMAS CTICT
+HALLOWEEN HIH
+
+
+Glass				dsglass
+
+rumble rumble
+lowbeep lowbeep
+door1 door1
+doorend doorend
+null null
+
+reactor reactor
+fuzz fuzz
+zap1 zap1
+zap2 zap2
+zap3 zap3
+zap4 zap4
+compwobb compwobb
+ooze ooze
+factbuzz factbuzz
+factlift factlift
+factlif2 factlif2
+factlif3 factlif3
+twarmup twarmup
+tdrain tdrain
+piperoom piperoom
+
+wflow wflow
+wdrips wdrips
+wdrip1 wdrip1
+wdrip2 wdrip2
+wdrip3 wdrip3
+wdrip4 wdrip4
+$volume wdrip1 0.1
+$volume wdrip2 0.1
+$volume wdrip3 0.1
+$volume wdrip4 0.1
+$rolloff wdrip1 16 256
+$rolloff wdrip2 16 256
+$rolloff wdrip3 16 256
+$rolloff wdrip4 16 256
+
+creak1 creak1
+creak2 creak2
+creak3 creak3
+creak4 creak4
+creak5 creak5
+lights elecbuz1
+compbuzz elecbuz2
+crackle crackle
+
+vstep1 vstep1
+vstep2 vstep2
+vstep3 vstep3
+vstep4 vstep4
+
+
+$pitchshift factlift 0
+$pitchshift factlif2 0
+$pitchshift factlif3 0
+
+$pitchshift wdrip1 3
+$pitchshift wdrip2 3
+$pitchshift wdrip3 4
+$pitchshift wdrip4 3
+
+$ambient 41 lowbeep point 2.0 continuous 0.15
+$ambient 42 rumble point 0.8 continuous 0.3
+$ambient 43 fuzz point 1.0 continuous 0.1
+$ambient 44 compwobb point 1.8 continuous 0.05
+$ambient 45 reactor point 1.0 continuous 0.3
+$ambient 46 ooze point 0.8 continuous 0.4
+$ambient 47 creak point 0.6 random 6.0 60.0 0.5
+$ambient 48 lights point 2.0 continuous 0.8
+$ambient 49 compbuzz point 2.0 continuous 0.8
+$ambient 50 crackle point 2.0 continuous 0.6
+$ambient 51 wflow point 1.5 continuous 0.2
+$ambient 52 wdrips point 1.5 continuous 0.2
+$ambient 53 piperoom point 1.5 continuous 0.3
+
+$random wdrip { wdrip1 wdrip2 wdrip3 wdrip4 }
+$random floor/vent { vstep1 vstep2 vstep3 vstep4 null null null}
+$random zap { zap1 zap2 zap3 zap4 }
+$random creak { creak1 creak2 creak3 creak5 }
+
+

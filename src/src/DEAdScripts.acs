@@ -1,0 +1,59 @@
+#Library "DEAdScripts.acs"
+#Include "ZCommon.acs"
+
+//DEA: I'ma sorry if my code is poorly made and shitty. I'm not very good codder...
+////////////////////////////////////////////////////////////////////////////////
+//Admin Scripts for Fun or Test.
+Script "WDI_AdminSpawn" (Int AdminGiftTarget)
+{
+	AdminGiftTarget--;
+	If ((AdminGiftTarget > -1) && (AdminGiftTarget < 33))
+		SpawnSpotFacingForced(GetCVarString("WDI_Admin_Thing"),600+AdminGiftTarget,0);
+	Else For(Int AdminScriptTarget = 0; AdminScriptTarget < 32; AdminScriptTarget++)
+		SpawnSpotFacingForced(GetCVarString("WDI_Admin_Thing"),600+AdminScriptTarget,0);
+}
+
+Script "WDI_AdminGift" (Int AdminGiftTarget, Int AdminGiftItemAmount)
+{
+	AdminGiftTarget--;
+	If (AdminGiftItemAmount == 0) AdminGiftItemAmount++;
+	If ((AdminGiftTarget > -1) && (AdminGiftTarget < 33))
+		GiveActorInventory(600+AdminGiftTarget,GetCVarString("WDI_Admin_Thing"),AdminGiftItemAmount);
+	Else For(Int AdminScriptTarget = 0; AdminScriptTarget < 32; AdminScriptTarget++)
+		GiveActorInventory(600+AdminScriptTarget,GetCVarString("WDI_Admin_Thing"),AdminGiftItemAmount);
+}
+
+Script "WDI_AdminTake" (Int AdminGiftTarget, Int AdminGiftItemAmount)
+{
+	AdminGiftTarget--;
+	If (AdminGiftItemAmount == 0) AdminGiftItemAmount++;
+	If ((AdminGiftTarget > -1) && (AdminGiftTarget < 33))
+		GiveActorInventory(600+AdminGiftTarget,GetCVarString("WDI_Admin_Thing"),AdminGiftItemAmount);
+	Else For(Int AdminScriptTarget = 0; AdminScriptTarget < 32; AdminScriptTarget++)
+		TakeActorInventory(600+AdminScriptTarget,GetCVarString("WDI_Admin_Thing"),AdminGiftItemAmount);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+///Random Box CVars checks.
+Script "WDIR_RandomBox_Check" (Void)
+{
+	If (GetCVar("WDIR_RandomBox_NoOPItems"))
+		GiveInventory("RandomBox_NoOPItems",1);
+
+	If (GetCVar("WDIR_RandomBox_NoMurdItems"))
+		GiveInventory("RandomBox_NoMurdItems",1);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+///WDI Damage Event Script + Grab.
+Script "WDIR_DamageEventScript" (Int Type, Int Damage, Int DamageType) Event
+{
+	If (Type == 11)
+	{
+		If (DamageType == "Grab")
+		{
+			Delay(15);
+			SetPlayerProperty(0,0,Prop_TotallyFrozen);
+		}
+	}
+}

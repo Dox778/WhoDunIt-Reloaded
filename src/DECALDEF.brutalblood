@@ -1,0 +1,269 @@
+
+decal FireExtDecal
+{
+pic Scorch2
+x-scale 0.4
+y-scale 0.4
+//shade "00 00 00"
+randomflipx
+randomflipy
+}
+
+decal MeleeCrack1
+{
+pic BFGLITE1
+x-scale 0.3
+y-scale 0.3
+shade "00 00 00"
+randomflipx
+randomflipy
+}
+decal MeleeCrack2
+{
+pic BFGLITE2
+x-scale 0.3
+y-scale 0.3
+shade "00 00 00"
+randomflipx
+randomflipy
+}
+decalgroup MeleeCrack
+{
+	MeleeCrack1	1
+	MeleeCrack2	1
+}
+
+decal Scorch
+{
+pic Scorchdecal
+x-scale 0.5
+y-scale 0.5
+//shade "00 00 00"
+randomflipx
+randomflipy
+}
+
+decal Scorchsmaller
+{
+pic Scorchdecal
+x-scale 0.25
+y-scale 0.25
+//shade "00 00 00"
+randomflipx
+randomflipy
+}
+
+
+stretcher BrutalBloodSmearer
+{
+   GoalX 0.4
+   GoalY 2.0
+   StretchStart 1
+   StretchTime 24
+}
+decal KnifeDecal
+{
+pic BULDE1
+x-scale 0.1
+y-scale 0.5
+shade "00 00 00"
+randomflipx
+randomflipy
+}
+decal SawDecal
+{
+pic BULDE1
+x-scale 0.3
+y-scale 0.9
+shade "00 00 00"
+randomflipx
+randomflipy
+}
+decal AxeDecal
+{
+pic BULDE1
+x-scale 0.2
+y-scale 1.6
+shade "00 00 00"
+randomflipx
+randomflipy
+}
+decal AxeDecalHorizontal
+{
+pic BULDE1
+y-scale 0.2
+x-scale 1.6
+shade "00 00 00"
+randomflipx
+randomflipy
+}
+
+
+decal BrutalBloodSmear1
+{
+	pic BSPLNEW4
+	x-scale 0.6
+	y-scale 0.6
+	randomflipx
+	animator BrutalBloodSmearer
+}
+
+decal BrutalBloodSmear2
+{
+	pic BSPLNEW5
+	x-scale 0.6
+	y-scale 0.6
+	randomflipx
+	animator BrutalBloodSmearer
+}
+
+decalgroup BrutalBloodSmear
+{
+	BrutalBloodSmear1	1
+	BrutalBloodSmear2	1
+}
+
+
+
+/// +++++++++++++++++////
+/// Blood Base
+/// +++++++++++++++++////
+decal BloodSplat001
+{
+pic BSPLNEW
+x-scale 0.6
+y-scale 0.6
+randomflipx
+randomflipy
+//lowerdecal BrutalBloodSmear
+}
+
+decal BloodSplat002
+{
+pic BSPLNEW
+x-scale 0.6
+y-scale 0.6
+randomflipx
+randomflipy
+//lowerdecal BrutalBloodSmear
+}
+
+decalgroup BloodSplat
+{
+BloodSplat001 6
+BloodSplat002 6
+}
+
+/// +++++++++++++++++////
+/// Red Blood
+/// +++++++++++++++++////
+
+decal BrutalBloodSplat01
+{
+pic BSPLNEW
+x-scale 0.6
+y-scale 0.6
+randomflipx
+randomflipy
+//lowerdecal BrutalBloodSmear
+}
+
+decal BrutalBloodSplat02
+{
+pic BSPLNEW2
+x-scale 0.6
+y-scale 0.6
+randomflipx
+randomflipy
+//lowerdecal BrutalBloodSmear
+}
+
+
+
+decalgroup BrutalBloodSplat
+{
+BrutalBloodSplat01 6
+BrutalBloodSplat02 6
+}
+
+
+
+
+decal BrutalBloodSuper01
+{
+pic BSPLBIG1
+x-scale 0.9
+y-scale 0.9
+randomflipx
+randomflipy
+lowerdecal BrutalBloodSmear
+}
+
+decal BrutalBloodSuper02
+{
+pic BSPLBIG2
+x-scale 0.9
+y-scale 0.9
+randomflipx
+lowerdecal BrutalBloodSmear
+}
+
+decalgroup BrutalBloodSuper
+{
+BrutalBloodSuper01 6
+BrutalBloodSuper02 6
+}
+
+
+
+
+
+
+
+
+
+
+
+
+slider BSlide1
+{
+DistY -26
+SlideStart 0
+SlideTime 9
+}
+
+stretcher BStretch1
+{
+GoalX 1.0
+GoalY 3.5
+StretchStart 0
+StretchTime 9
+}
+
+slider BSlide2
+{
+DistY -20
+SlideStart 0
+SlideTime 12
+}
+
+stretcher BStretch2
+{
+GoalX 1.0
+GoalY 3.2
+StretchStart 0
+StretchTime 12
+}
+
+combiner BloodSlide1
+{
+BSlide1
+BStretch1
+}
+
+combiner BloodSlide2
+{
+BSlide2
+BStretch2
+}
+

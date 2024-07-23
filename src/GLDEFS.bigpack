@@ -1,0 +1,138 @@
+//==============================================================================================================
+//GLOBAL STUFFS
+//---------------------------------------------------------
+
+Skybox GCLOU
+{
+GCLOU_N
+GCLOU_W
+GCLOU_S
+GCLOU_E
+GCLOU_T
+GCLOU_B
+}
+
+skybox SLSKY
+{
+SLSKY_BK
+SLSKY_RT
+SLSKY_FT
+SLSKY_LF
+SLSKY_UP
+SLSKY_UP
+}
+
+skybox SRISE
+{
+SRISE_FT
+SRISE_LT
+SRISE_BK
+SRISE_RT
+SRISE_UP
+SRISE_UP
+}
+
+//---------------------------------------------------------
+
+pointlight  Columnlight
+{
+ color 0.8 0.8 0.5
+ size 48 
+} 
+
+object columnswitch
+{
+    frame COLUA { light Columnlight }  
+}
+
+//---------------------------------------------------------
+pointlight DiscoRed2
+{
+    color 1.0 0.0 0.0
+    size 32
+}
+
+pointlight DiscoGreen2
+{
+    color 0.0 1.0 0.0
+    size 96
+}
+
+pointlight DiscoBlue2
+{
+    color 0.0 0.0 1.0
+    size 220
+}
+
+pointlight DiscoYellow2
+{
+    color 1.0 1.0 0.0
+    size 128
+}
+
+pointlight DiscoPurple2
+{
+    color 1.0 0.0 1.0
+    size 96
+}
+
+object RedLight2 { frame TNT1A { light DiscoRed2}}
+object GreenLight2 { frame TNT1A { light DiscoGreen2}}
+object BlueLight2 { frame TNT1A { light DiscoBlue2}}
+object YellowLight2 { frame TNT1A { light DiscoYellow2}}
+object PurpleLight2 { frame TNT1A { light DiscoPurple2}}
+
+
+
+
+//JIgsaw
+//Skybox ARCTIC
+skybox CRIM
+{ 
+CRIM_N
+CRIM_E
+CRIM_S
+CRIM_W
+CRIM_T
+CRIM_B
+}
+
+pointlight LFTLITE
+{
+color 0.5 0.70 0.58
+size 100
+}
+pointlight LIFTRED
+{
+color 1 0 0
+size 10
+}
+pointlight LIFTGRN
+{
+color 0 1 0
+size 10
+}
+object Liftlight
+{
+	frame BLNKA { light LFTLITE }
+}
+
+object Liftred
+{
+	frame BLNKA { light LIFTRED }
+}
+object Liftgreen
+{
+	frame BLNKA { light LIFTGRN }
+}
+
+//Abbuw - WDI25:
+Skybox ABSKY1 fliptop
+{ 
+  ABSKY1_R
+  ABSKY1_F
+  ABSKY1_L
+  ABSKY1_B
+  ABSKY1_T
+  ABSKY1_T
+}

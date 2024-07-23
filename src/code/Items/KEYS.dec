@@ -1,0 +1,207 @@
+actor BarKeySpawner : RandomSpawner 32065
+{
+  //$Category WDI Keys
+  //$Sprite KEY1A0
+  //$Title "Bar Key Spawner"
+    DropItem "BarKey" 176 1
+}
+
+actor SafeKeySpawner : RandomSpawner 14258
+{
+  //$Category WDI Keys
+  //$Sprite KEY5A0
+  //$Title "Safe Key Spawner"
+    DropItem "SafeKey" 176 1
+}
+
+actor BasementKeySpawner : RandomSpawner 14259
+{
+  //$Category WDI Keys
+  //$Sprite BKEYA0
+  //$Title "Basement Key Spawner"
+    DropItem "BasementKey" 176 1
+}
+
+actor SafeKey : Key 14257
+{
+  //$Category WDI Keys
+  //$Sprite KEY5A0
+  //$Title "Safe Key"
+  Scale 0.35
+  spawnid 86
+  inventory.pickupmessage "\cjPocketed a \c[J7]Yale key."
+  inventory.icon "ARTISAF"
+  +INVENTORY.UNDROPPABLE
+  +FORCEXYBILLBOARD
+  Inventory.PickupSound "Pickup/Key"
+  states
+  {
+  Spawn:
+	KEY5 A 0 NODELAY A_Jump(128,2)
+	KEY5 A 0 A_SetScale(-scalex,scaley)
+	KEY5 A 5 A_Jump(256,"Spawn1","Spawn2","Spawn3","Spawn4")
+	Spawn1:
+		KEY5 A -1
+		stop
+	Spawn2:
+		KEY5 B -1
+		stop
+	Spawn3:
+		KEY5 C -1
+		stop
+	Spawn4:
+		KEY5 D -1
+		stop
+  }
+}
+
+actor BarKey : Key replaces RedCard 13
+{
+  //$Category WDI Keys
+  //$Sprite KEY1A0
+  //$Title "Bar Key"
+  Scale 0.35
+  spawnid 86
+  inventory.pickupmessage "\cjPocketed a \c[O6]Antique key."
+  inventory.icon "ARTIBAR"
+  +INVENTORY.UNDROPPABLE
+  +FORCEXYBILLBOARD
+  Inventory.PickupSound "Pickup/Key"
+  states
+  {
+  Spawn:
+	KEY1 A 0 NODELAY A_Jump(128,2)
+	KEY1 A 0 A_SetScale(-scalex,scaley)
+    KEY1 A 5 A_Jump(256,"Spawn1","Spawn2","Spawn3","Spawn4")
+
+	Spawn1:
+		KEY1 A -1
+		stop
+	Spawn2:
+		KEY1 B -1
+		stop
+	Spawn3:
+		KEY1 C -1
+		stop
+	Spawn4:
+		KEY1 D -1
+		stop
+  }
+}
+
+Actor BasementKey : Key 14444
+{
+  //$Category WDI Keys
+  //$Sprite BKEYA0
+  //$Title "Basement Key"
+-NOGRAVITY
+  +INVENTORY.UNDROPPABLE
+height 8
+radius 4
+inventory.pickupmessage "\cjPocketed a \c[D5]Skeleton Key."
+Inventory.PickupSound "Pickup/Key"
+Scale 0.35
++FORCEXYBILLBOARD
+states
+{
+Spawn:
+BKEY A 0 NODELAY A_Jump(128,2)
+BKEY A 0 A_SetScale(-scalex,scaley)
+BKEY A 5 A_Jump(256,"Spawn1","Spawn2","Spawn3","Spawn4")
+
+	Spawn1:
+		BKEY A -1
+		stop
+	Spawn2:
+		BKEY B -1
+		stop
+	Spawn3:
+		BKEY C -1
+		stop
+	Spawn4:
+		BKEY D -1
+		stop
+}}
+
+actor TrapKey : Key
+{
+  Scale 0.35
+  inventory.pickupmessage "\cjPocketed a \c[O6]trap key."
+  inventory.icon "KEY1A0"
+  +INVENTORY.UNDROPPABLE
+  +FORCEXYBILLBOARD
+  Inventory.PickupSound "Pickup/Key"
+  states
+  {
+ Spawn:
+	KEY1 A 0 NODELAY A_Jump(128,2)
+	KEY1 A 0 A_SetScale(-scalex,scaley)
+    KEY1 A 1 A_Jump(256,"Spawn1","Spawn2","Spawn3","Spawn4")
+    stop
+	Spawn1:
+		KEY1 A -1
+		stop
+	Spawn2:
+		KEY1 B -1
+		stop
+	Spawn3:
+		KEY1 C -1
+		stop
+	Spawn4:
+		KEY1 D -1
+		stop
+  }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MORE SPECIFIC NOW
+actor Room1Key : Key 16555
+{
+  Scale 0.35
+  spawnid 86
+  inventory.pickupmessage "Pocketed the Room 1 key."
+  inventory.icon "ARTISAF"
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    KEY5 A -1
+    stop
+  }
+}
+
+actor Room8Key : Key 16556
+{
+  Scale 0.35
+  spawnid 86
+  inventory.pickupmessage "Pocketed the Room 8 key."
+  inventory.icon "ARTISAF"
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    KEY5 A -1
+    stop
+  }
+}
+
+actor SecurityKey : BarKey 10306
+{
+  Scale 0.35
+  inventory.pickupmessage "Pocketed the Security Room key."
+  inventory.icon "ARTIBAR"
+}
+
+
+
+Actor MurdererKey : RedSkull replaces RedSkull
+{
++INVENTORY.UNDROPPABLE
+}
+
+Actor _RedCard : RedCard replaces RedCard { +INVENTORY.UNDROPPABLE }
+Actor _BlueCard : BlueCard replaces BlueCard { +INVENTORY.UNDROPPABLE }
+Actor _YellowCard : YellowCard replaces YellowCard { +INVENTORY.UNDROPPABLE }
+
+Actor _RedSkull : RedSkull replaces RedSkull { +INVENTORY.UNDROPPABLE }
+Actor _BlueSkull : BlueSkull replaces BlueSkull { +INVENTORY.UNDROPPABLE }
+Actor _YellowSkull : YellowSkull replaces YellowSkull { +INVENTORY.UNDROPPABLE }

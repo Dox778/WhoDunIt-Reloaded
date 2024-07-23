@@ -1,0 +1,106 @@
+Actor Bulb 32055 
+{
+  //$Category WDI Light Sources
+  //$Sprite BULBA0
+  //$Title "Light Bulb (controllable)"
+	+NOCLIP
+	+NOGRAVITY
+	+NOINTERACTION
+	scale 0.5
+	states 
+	{
+	Spawn:
+		On: BULB A -1
+		Off: BULB B -1
+		loop
+	}
+}
+
+actor Str_LampDesk : SwitchableDecoration 14252
+{
+  //$Category WDI Light Sources
+  //$Sprite NJEXA2A8
+  //$Title "Desk Lamp"
+	scale 0.75
+	radius 8
+	height 8
+	+DORMANT +USESPECIAL
+	Activation THINGSPEC_Default|THINGSPEC_Switch
+	states
+	{
+	Spawn:
+	Inactive:
+		NJEX A -1 A_PlaySound("FlashOFF",0)
+		stop
+	Active:
+		NJEX A -1 BRIGHT Light("Chandelier") A_PlaySound("FlashON",0)
+		stop
+	}
+}
+
+
+Actor Chandelier 11114 
+{
+  //$Category WDI Light Sources
+  //$Sprite CHANA0
+  //$Title "Chandelier (Off/Offset)"
+	+SPAWNCEILING +NOGRAVITY
+	+FORCEYBILLBOARD +NOINTERACTION
+	States
+	{
+	Spawn:
+		CHAN A -1 offset(25,0)
+		stop
+	}
+}
+
+Actor Chandelier2Off 14071
+{
+  //$Category WDI Light Sources
+  //$Sprite CHANH0
+  //$Title "Chandelier (Off)"
+	Radius 10
+	Height 21
+	+SPAWNCEILING +NOGRAVITY
+	+FORCEYBILLBOARD +NOINTERACTION
+	States
+	{
+	Spawn:
+		CHAN H 1 
+		Loop
+	}
+}
+
+Actor Chandelier2On : Chandelier2Off 14072
+{
+  //$Category WDI Light Sources
+  //$Sprite CHANE0
+  //$Title "Chandelier (On)"
+	scale 0.5
+	States
+	{
+	Spawn:
+		CHAN IJ 2
+		Loop
+	}
+}
+
+ACTOR TechLanternSmall 14248
+{
+  //$Category WDI Light Sources
+  //$Sprite HLMPG0
+  //$Title "Lantern"
+	Radius 6
+	Height 45
+	+NOGRAVITY +FORCEYBILLBOARD
+	+NOINTERACTION
+	States
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_SpawnItemEx("GoreFlies",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,190 ,7780)
+		TNT1 A 0 A_SpawnItemEx("GoreFliesBright",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,190 ,7780)
+		Stay:
+		HLMP G -1
+		loop
+	}
+}

@@ -1,0 +1,49 @@
+//////////////////////
+//Most of this decorate
+//stuff are from realm667
+///////////////////////
+
+
+//evil_owl
+
+ACTOR loudyowl 13721
+{
+  Game Doom
+  Radius 16
+  Height 40
+  +SOLID
+  +NOGRAVITY
+  //$Category WDI Props
+  //$Sprite NOWLA0
+  //$Title "Owl"
+  States
+  {
+  Spawn:
+    NOWL A -1
+    Stop
+  }
+}
+
+
+actor Gonefishing 14254
+{
+  speed 24
+  MaxStepHeight 16
+  MaxDropoffHeight 32
+  MONSTER
+  +FRIENDLY
+  -SHOOTABLE
+  //$Category WDI Easter Eggs
+  //$Sprite GNFIA2A8
+  //$Title "GONE FISHING"
+  states
+  {
+  Spawn:
+    GNFI A 1 A_Look2
+    loop
+  See:
+    GNFI ABCD 4 A_Wander
+    loop
+  }
+}
+

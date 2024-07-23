@@ -1,0 +1,414 @@
+//base zandro's option definitions
+OptionValue "LightingModes"
+{
+	0, "Standard (recommended)"
+	1, "Bright"
+	2, "Doom"
+	3, "Dark"
+	4, "Legacy"
+	8, "Software"
+}
+OptionValue "FilterModes"
+{
+	0, "None (Recommended)"
+	1, "None (nearest mipmap)"
+	5, "None (linear mipmap)"
+	2, "Linear"
+	3, "Bilinear"
+	4, "Trilinear"
+}
+OptionValue "BillboardModes"
+{
+	0, "Y axis (Recommended)"
+	1, "X/Y axis"
+}
+OptionValue "SpriteclipModes"
+{
+	0, "Never"
+	1, "Smart"
+	2, "Always (recommended)"
+	3, "Smarter"
+}
+
+
+//actual menu lol
+ListMenu "MainMenu"
+{
+	IfGame(Doom, Chex)
+	{
+		StaticPatch 28, 2, "M_DOOM"
+		Position 97, 90
+		IfOption(ReadThis)
+		{
+			//Position 97, 64
+			Position 48, 100
+		}
+	}
+	IfGame(Strife)
+	{
+		StaticPatch 84, 2, "M_STRIFE"
+		Position 97, 45
+	}
+	IfGame(Heretic)
+	{
+		StaticPatch 88, 0, "M_HTIC"
+		StaticPatch 40, 10, "M_SKL01"
+		StaticPatch 232, 10, "M_SKL00"
+		Position 110, 56
+	}
+	IfGame(Hexen)
+	{
+		StaticPatch 88, 0, "M_HTIC"
+		StaticPatch 37, 80, "FBULB0"
+		StaticPatch 278, 80, "FBULA0"
+		Position 110, 56
+	}
+	Selector "M_SKULL1",-38,-3
+	CenterMenu
+	Linespacing 22
+	Font "KAMINSKYBIG_THICK", "Black", "White"
+	TextItem "Mod Options", "o", "WDIReanimatedInformation"
+	TextItem "Mod Introduction","r", "ReadThisMenu"
+	TextItem "Options", "o", "OptionsMenu"
+	TextItem "Singleplayer", "s", "OfflineMenu"
+	TextItem "Quit", "q", "QuitMenu"
+	
+	StaticPatch 38, 190, "QUITBLOD" 
+	StaticPatch 30, 98, "VertLine" 
+}
+
+ListMenu "OfflineMenu"
+{
+	IfGame(Doom, Chex)
+	{
+		StaticPatch 94, 2, "M_DOOM"
+		Position 97, 72
+		IfOption(ReadThis)
+		{
+			Position 97, 64
+		}
+	}
+	IfGame(Strife)
+	{
+		StaticPatch 84, 2, "M_STRIFE"
+		Position 97, 45
+	}
+	IfGame(Heretic)
+	{
+		StaticPatch 88, 0, "M_HTIC"
+		StaticPatch 40, 10, "M_SKL01"
+		StaticPatch 232, 10, "M_SKL00"
+		Position 110, 56
+	}
+	IfGame(Hexen)
+	{
+		StaticPatch 88, 0, "M_HTIC"
+		StaticPatch 37, 80, "FBULB0"
+		StaticPatch 278, 80, "FBULA0"
+		Position 110, 56
+	}
+	
+	TextItem "New Game", "n", "PlayerClassMenu"
+	TextItem "Save Game", "s", "SaveGameMenu"
+	TextItem "Load Game", "l", "LoadGameMenu"
+}
+
+OptionMenu "WDIRControls"
+{
+	Title "Who Dun It: Reloaded - Controls"
+	StaticText ""
+	StaticText ""
+	StaticText "---- Main ----",1
+	Control "Fire",						"+attack"
+	Control "Alt fire",						"+altattack"
+	Control "Fidget animations",	"+reload"
+	Control "Use",                    "+use"
+    Control "Walk forward",                "+forward"
+    Control "Walk back",                   "+back"
+    Control "Strafe left",               "+moveleft"
+    Control "Strafe right",              "+moveright"
+	Control "Jump",              "+jump"
+	Control "Run",              "+speed"
+	Control "Toggle Run",              "toggle cl_run"
+	Control "Crouch",              "+crouch"
+	Control "Toggle Crouch",              "crouch"
+	Control "Activate Item",		"InvUse"
+	Control "Next Item",			"InvNext"
+	Control "Previous Item",		"InvPrev"
+	Control "Drop Item",			"InvDrop"
+	StaticText ""
+	StaticText "---- Who Dun It: Reloaded ----",1
+	Control "Drop weapon",			"+zoom"
+	Control "Ping",			"use Action_Ping"
+	Control "Change appearance",			"pukename ChangeIdentity"
+	Control "Favourite appearance",			"pukename ChangeIdentity 1"
+	Control "Do Dance",			"pukename WDIStartDance always"
+	Control "Change Dance",			"pukename WDIChangeDanceStyle"
+	Control "Admin Vote Yes",			"puke -830"
+	Control "Admin Vote No",			"puke -835"
+	Control "kill the lag",			"puke 75"
+	Control "Anti ghost",			"puke +408"
+	StaticText ""
+	StaticText "---- Murderer exclusive ----",1
+	Control "Wield Knife",			"use murderknife"
+	StaticText ""
+	StaticText "---- Quick use binds ----",1
+	Control "Use stimpack",			"Use SmallKit"
+	Control "Use bigkit",			"use bigkit"
+	Control "Use flare",			"use Flare"
+	Control "Use trip shotgun",			"use tripshotgun"
+	Control "Use fake stimpack",			"use fakestim"
+	Control "Use chlorine gas",			"use chlorinegas"
+	Control "Use sound emitter",			"use soundemitter"
+	Control "Use smoke bomb",			"use smokebomb"
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	
+}
+
+OptionMenu "WDIRUseThese"
+{
+	Title "Who Dun It: Reloaded - Recommended Options"
+	StaticText ""
+	StaticText ""
+	SubMenu "Text scaling",				"ZA_TextScaling"
+	StaticText "Enable text scaling.",1
+	StaticText ""
+	Option "Zandronum crash handling",		"CrashLogs",				"ZandroCrashLogs"
+	StaticText "Help the zandronum devs out! Every report helps!",1
+	StaticText ""
+	Option "Rendering Interpolation",					"cl_capfps", "OffOn"
+	staticText "Have more than 35 max fps.",1
+	StaticText ""
+	Option "Use shaders for lights", "gl_dynlight_shader", "OnOff"
+	StaticText "Required for bumpmaps and parallax to work!",1
+	StaticText ""
+	Option "Sprite billboard",			gl_billboard_mode,				"BillboardModes"
+	StaticText "Actors won't look weird when looking at it from above.",1
+	StaticText ""
+	Option "Force Additive Lighting", "gl_lights_additive", "AddLightsOptions"
+	StaticText "To make lights not ugly.",1 
+	StaticText ""
+	Option "Adjust sprite clipping",	gl_spriteclip,					"SpriteclipModes"
+	staticText "Stuff won't sink in the floor.",1
+	StaticText ""
+	Option "Sector light mode",			gl_lightmode,					"LightingModes"
+	Option "Texture Filter mode",		gl_texture_filter,				"FilterModes"
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+}
+
+OptionMenu "WDIRpreferences"
+{
+	Title "Who Dun It: Reloaded - Preferences"
+	StaticText ""
+	StaticText ""
+//	Command "Reapply some options", "pukename WDICheckOptions"//, "sex"
+	StaticText ""
+	StaticText "------------------------------------------------------------ Hidden zandronum options ------------------------------------------------------------"
+	StaticText ""
+	Option "Sound when inactive",		"CL_SoundWhenNotActive",				"OnOff"
+	//Slider "Field of view", "WDIR_FOV", 30, 120, 5 , 0
+	Option "Show FPS", "vid_fps", "OnOff"
+	Slider "Max FPS", "vid_maxfps",35, 1000, 5 , 0
+	Slider "Chasecam distance", "chase_dist", 32, 160, 4 , 0
+	Slider "Chasecam height", "chase_height", -20, 20, 4 , 0
+	Slider "Shake intensity", "r_quakeintensity", 0.1, 1, 0.1, 1
+	StaticText ""
+	StaticText ""
+	StaticText "------------------------------------------------------------ Somewhat gameplay-altering ------------------------------------------------------------"
+	StaticText ""
+	ColorPicker "Favourite color", "WDIR_FavColor"
+	StaticText "Used for the 'favourite appearance' bind.",1
+	StaticText ""
+	Option "Random width", "WDIR_RandomPlayerScaleX", "OnOff"
+	Slider "Your width multiplier", "WDIR_PlayerScaleX", 0.95, 1.05, 0.01 , 2
+	Option "Random height", "WDIR_RandomPlayerScaleY", "OnOff"
+	Slider "Your height multiplier", "WDIR_PlayerScaleY", 0.95, 1.05, 0.01 , 2
+	StaticText "These options apply to yourself for everyone to see.",1
+	StaticText ""
+	Option "Dance type", "WDIMAX_Reanimated_DanceStyle", "DanceOptions"
+	Option "Ping style", "WDI_PingType", "PingStyle"
+	
+	StaticText ""
+	StaticText ""
+	StaticText "------------------------------------------------------------ On-screen visuals ------------------------------------------------------------"
+	StaticText ""
+	Option "Game timer on Hud", "WDI_HudTimer", "OnOff"
+	Slider "Film grain", "wdi_filmgrain_level",0, 4, 1 , 0
+	Option "Low health indicators", "WDIR_LowHPScreen", "OnOff"
+	Option "Screen damage splashes", "WDI_ScreenSplashes", "OnOff"
+	Option "Screen flinch when damaged", "WDI_ScreenFlinch", "OnOff" 
+	Slider "Flinch multiplier", "WDI_FlinchPower", 1, 8, 1  , 0
+	
+	
+	StaticText ""
+	StaticText ""
+	StaticText "------------------------------------------------------------ Visuals ------------------------------------------------------------"
+	StaticText ""
+	StaticText ""
+	Option "Permanent objects", "WDI_PermaDebris", "OnOff" 
+	Option "Random weather", "WDI_ClientRain", "OnOff"
+	Slider "Rain volume", "WDIR_RainVolume", 0.1, 1.0, 0.1, 1
+	Slider "Rain strength", "WDI_Wpower", 1, 8, 1 , 0
+	Slider "Snow strength", "WDI_Wpower2", 1, 8, 1 , 0
+	StaticText "Default value for both is 3.", 1
+	StaticText "Values above 5 are not recommended...", 1
+	StaticText ""
+	Option "Extra details for actors", "WDI_Pretty", "PrettySwitch"
+	StaticText "The option will take effect after a map restart if it's", 1
+	StaticText "set to 'non-existent'. Useful if your framerate sux.", 1
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+}
+
+OptionMenu "WDIReanimatedInformation"
+{
+	Title "Who Dun It: Reloaded - Options"
+	StaticText ""
+	StaticText ""
+	SubMenu "Controls", "WDIRControls"
+	SubMenu "Preferences", "WDIRpreferences"
+	SubMenu "Recommended options", "WDIRUseThese"
+	//SubMenu "Server options", "WDIRadmin"
+	StaticText ""
+	StaticText ""
+	StaticText "--- Server options (host/rcon only) ---"
+	StaticText ""
+	StaticText "------------------------------------------------------------ Who Dun It: Reloaded ------------------------------------------------------------"
+	StaticText ""
+	Option "Item death drops", "WDI_InvDropType", "InvDropOptions"
+	Option "Allow dances", "WDI_NoDance", "OffOn"  
+	Slider "Ping cooldown (in seconds)", "WDI_PingCooldown", 1, 5, 1, 0
+	Slider "Weather timer", "WDI_WTimer", 60, 600, 15, 0
+	StaticText "Time in tics for the weather to HAVE A CHANCE of switching.", 1
+	StaticText "DEFAULT: 420 (7 minutes)", 1
+	StaticText ""
+	Option "Randomized music", "WDI_RandomMusic", "OnOff"
+	StaticText "Supported maps: WDI- 01, 02, 05, 06, 07, 08, 19, 23", 1
+	StaticText ""
+	StaticText ""
+	StaticText "------------------------------------------------------------ Base WDI Options ------------------------------------------------------------"
+	StaticText ""
+	Option "WDI autoconfig", "wdi_disable_autoconfig", "OffOn"  
+	StaticText "Automatically adjusts some server settings for Who Dun It.", 1
+	StaticText ""
+	Slider "Safety time (in seconds)", "wdi_safety_time", 5, 60, 1, 0
+	StaticText "DEFAULT: 30", 1
+	StaticText ""
+    Slider "Murd's max health", "wdi_murd_maxbonus", 150, 500, 10, 0 //not really important
+	StaticText "DEFAULT: 300", 1
+	StaticText ""
+	Slider "Murd's bonus health", "wdi_murd_healthbonus", 5, 25, 5, 0
+	StaticText "Determines how much health the murderer gets for each player", 1
+	StaticText "DEFAULT: 10", 1
+	StaticText ""
+	/*
+	Option "Enable blacklist", "wdi_disable_autoconfig", "OnOff" 
+	StaticText "If a player becomes murderer, they're disqualified", 1
+	StaticText "from being the murderer for the set amount of rounds.", 1
+	StaticText ""
+	Slider "Blacklist duration", "wdi_blacklist_rounds", 1, 5, 1, 0
+	StaticText "DEFAULT: 5", 1
+	StaticText ""
+	Option "Blacklist AFK players", "wdi_disable_blacklistafk", "OffOn" 
+	StaticText ""
+//	Slider "Blacklist duration", "wdi_innoslot", 3, 10, 1, 0 //idk tbh
+//	StaticText "DEFAULT: 3", 1
+	*/
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText "------------------------------------------------------------ DEBUG ------------------------------------------------------------",1
+	StaticText ""
+	Option "im a cheater (enable)", "WDIR_Debug", "OnOff"   
+	Slider "can i get a heal", "WDIR_DebugH", 1, 999, 1, 0
+	Option "I'm f- invincible!", "WDIR_Debug1", "OnOff"   
+	Option "I will not die!", "WDIR_Debug2", "OnOff"   
+	Option "Sonic The Hedgehog", "WDIR_Debug3", "OnOff"   
+	Option "whatismyfps.com", "WDIR_Debug4", "OnOff"   
+	Option "Let there be light!", "WDIR_Debug5", "OnOff"   
+	Option "I'm too blind for this", "WDIR_Debug6", "OnOff"   
+	Option "Google mode", "WDIR_Debug7", "OnOff"
+	Option "jeff", "WDIR_Debug8", "OnOff"
+	Command "Test map",			"rcon changemapmap test"
+	Command "Texture test map",			"rcon changemapmap tex01"
+	StaticText ""
+	StaticText ":)",1
+	
+}
+
+OptionValue "AddLightsOptions"
+{
+	0, "No (Recommended)"
+	1, "Yes"
+}
+
+
+OptionValue "EnableOrDisable"
+{
+	0, "OFF"
+	1, "ON"
+}
+
+OptionValue "PrettySwitch"
+{
+	1, "Visible"
+	0, "Invisible"
+	2, "Non-existent"
+}
+
+OptionValue "PingStyle"
+{
+	0, "ON"
+	1, "ON, silent"
+	2, "OFF"
+}
+
+OptionValue "DanceOptions"
+{
+	0, "1 (Adventure time)"
+	1, "2 (Twerk)"
+	2, "3"
+	3, "4 (Classic gif)"
+	4, "5"
+	5, "6 (Guitar solo)"
+	6, "RANDOM"
+}
+
+OptionValue "InvDropOptions"
+{
+	0, "Ammo, limited health"
+	1, "Everything"
+	2, "Randomized"
+	3, "OFF"
+}
+
+OptionValue "ZandroCrashLogs"
+{
+	0, "Dont generate logs"
+	1, "Display crash window"
+	2, "Always generate logs"
+}

@@ -1,0 +1,433 @@
+script 420 enter
+{
+	int player = PlayerNumber();
+	int activity;
+	Active_player[player] = FALSE; //shitty start
+	while (!activity && PlayerInGame(0) && (gameinfo[1] == GAMESTATE_SAFETYCOUNTDOWN || gameinfo[1] == GAMESTATE_WAITFORPLAYERS ))
+	{
+		int buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+		activity = GetActorVelX(0)+GetActorVelY(0)+GetActorVelZ(0)+GetActorPitch(0)+buttons & (BT_USE|BT_ATTACK|BT_ALTATTACK|BT_JUMP|BT_CROUCH);
+		if(activity != 0.0)
+		Active_player[player] = TRUE;
+		Delay(1);
+	}
+}
+
+script 421 (void ) net
+{
+	if (!GetCVar("wdi_enable_blacklistinno")){
+		Print(s:"\cgdisable by the admin");
+		terminate;
+	}
+
+	int player=PlayerNumber();
+
+	if( PlayerIsSpectator(Player) || (!ClassifyActor(player) & ACTOR_ALIVE)){
+		Print(s:"\cgyou are dead or spectator.");
+		terminate;
+	}
+
+	if(PlayerCount()<= 2){
+		Print(s:"\cgyou need almost 3 players to activate this feature.");
+		terminate;
+	}
+
+	int blacklisted = playercount();
+	
+	if(blacklisted<GetCVar("wdi_blacklist_rounds")){
+		blacklisted=GetCVar("wdi_blacklist_rounds");
+	}
+
+	if (!Active_player[player] && blacklist[player] == blacklisted){
+		Print(s:"\cgyou are already skipped.");
+		terminate;
+	}
+
+	if(inno_slots < GetCVar("wdi_innoslot")){
+		inno_slots++;}
+	else{
+		Print(s:"\cgmax number of innocents skipped reached.");
+		terminate;
+	}
+
+	if(PlayerInGame(0) && (gameinfo[1] == GAMESTATE_SAFETYCOUNTDOWN || gameinfo[1] == GAMESTATE_WAITFORPLAYERS )){
+		Active_player[player] = FALSE;
+		blacklist[player] = blacklisted;
+		Print(s:"\cgyou have been skipped to be Murderer.");}
+	else
+	Print(s:"\cgonly can be activated during safety countdown.");
+	Delay(17);
+}
+
+script 422 enter
+{
+	int player = PlayerNumber();
+	blacklist_once();
+	if(!onoff_Blist[player])
+	blacklist[player] = PlayerCount()-1;
+
+	onoff_Blist[PlayerNumber()] = TRUE;
+}
+
+script 515 (void) //DEATH CRUSHED AND EXTREME DEATH
+{
+	GiveActorInventory(TID_START+gameinfo[2], "KillMarker", 1);
+	GiveActorInventory(TID_START+gameinfo[2], "GetSuperSane", 1);
+}
+
+script "AUTO_CONFIG" open
+{
+	if(GetCVar("wdi_disable_autoconfig") == FALSE){
+		if(GetCVar("sv_respawnsuper") == FALSE) ConsoleCommand("sv_respawnsuper TRUE");
+		if(GetCVar("sv_coop_loseammo") == FALSE) ConsoleCommand("sv_coop_loseammo TRUE");
+		if(GetCVar("sv_coop_losepowerups") == FALSE) ConsoleCommand("sv_coop_losepowerups TRUE");
+		if(GetCVar("sv_coop_losearmor") == FALSE) ConsoleCommand("sv_coop_losearmor TRUE");
+		if(GetCVar("sv_coop_loseweapons") == FALSE) ConsoleCommand("sv_coop_loseweapons TRUE");
+		if(GetCVar("sv_coop_losekeys") == FALSE) ConsoleCommand("sv_coop_losekeys TRUE");
+		if(GetCVar("sv_coop_loseinventory") == FALSE) ConsoleCommand("sv_coop_loseinventory TRUE");
+		if(GetCVar("sv_forcegldefaults") == FALSE) ConsoleCommand("sv_forcegldefaults TRUE");
+		if(GetCVar("sv_disallowspying") == FALSE) ConsoleCommand("sv_disallowspying TRUE");
+		if(GetCVar("sv_disallowsuicide") == FALSE) ConsoleCommand("sv_disallowsuicide TRUE");
+		if(GetCVar("sv_noautomapallies") == FALSE) ConsoleCommand("sv_noautomapallies TRUE");
+		if(GetCVar("sv_noidentifytarget") == FALSE) ConsoleCommand("sv_noidentifytarget TRUE");
+		if(GetCVar("sv_randomcoopstarts") == FALSE) ConsoleCommand("sv_randomcoopstarts TRUE");
+		if(GetCVar("sv_nocoopinfo") == FALSE) ConsoleCommand("sv_nocoopinfo TRUE");
+		if(GetCVar("sv_weapondrop") == TRUE) ConsoleCommand("sv_weapondrop FALSE");
+		if(GetCVar("compat_limited_airmovement") == FALSE) ConsoleCommand("compat_limited_airmovement TRUE");
+		if(GetCVar("compat_nocrosshair") == FALSE) ConsoleCommand("compat_nocrosshair TRUE");
+		while(1){
+			if(GetCVar("sv_applylmsspectatorsettings") == FALSE && gameinfo[1] != GAMESTATE_GAMEOVER) ConsoleCommand("sv_applylmsspectatorsettings TRUE");
+			else if(GetCVar("sv_applylmsspectatorsettings") == TRUE && gameinfo[1] == GAMESTATE_GAMEOVER) ConsoleCommand("sv_applylmsspectatorsettings FALSE");
+			Delay(1);
+		}
+	}else{ //keep the game running less overhauled lms_spectatorchat testing crashes basic mode.
+		ConsoleCommand("sv_applylmsspectatorsettings TRUE");
+		while(gameinfo[1] != GAMESTATE_GAMEOVER)Delay(1);
+		ConsoleCommand("sv_applylmsspectatorsettings FALSE");
+	}
+	Delay(1);
+}
+
+Script 555 (void) // Backstab script
+{
+	SetResultValue(findplayerback());
+}
+
+script 652 (void)
+{
+	SetFont("BigFont");
+	HudMessage(s:"BACKSTABBED!"; HUDMSG_PLAIN, 0, CR_RED, 0.5, 0.85, 3.0);
+}
+
+str blood[10] = { "blood0", "blood1", "blood2", "blood3", "blood4", "blood5", "blood6", "blood7", "blood8", "blood9" };
+
+script 552 (int type) ClientSide //Type currently does nothing, but will be used to define what kind of spatter will be drawn.
+{
+	SetFont(blood[Random(0,9)]);
+	HudMessage(s:"a"; HUDMSG_FADEOUT, 5463, CR_UNTRANSLATED, Random(0.0, 0.9), Random(0.0, 0.9), Random(1.5, 3.0), Random(1.0, 2.0));
+}
+
+script 713 (int state)
+{
+	switch(state)
+	{
+	case 0:
+		bCameraState = FALSE;
+		UpdateClient(5,0,bCameraState);
+		break;
+
+	case 1:
+		bCameraState = TRUE;
+		UpdateClient(5,0,bCameraState);
+		break;
+
+	case 2:
+		bCameraState = FALSE;
+		bCameraDestroyed = TRUE;
+		UpdateClient(5,0,bCameraState);
+		UpdateClient(6,0,bCameraDestroyed);
+		break;
+	}
+}
+
+script 712 (void) ClientSide //onoff: 0 = OFF. 1 = ON. 2 = destroyed.
+{
+	if (!Client_action()) { terminate;}
+	Delay(35);
+	while( ThingCountName("DeployedCamera", 0))
+	{
+		if(CheckInventory("MurderMarker"))
+		{
+			//Camera turned ON.
+			if(ThingCountName("DeployedCamera", 0))
+			{
+				if(bCameraState)
+				{
+					bHideCamera = FALSE;
+					switch (getaspectratio())
+					{
+					case ASPECT_4_3:
+						SetCameraToTexture(1337, "RECAMTX", 90);
+						SetHUDSize(1024, 768, 0);
+						SetFont("RECAMTX");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 500, CR_UNTRANSLATED, 913.0, 688.0, 1.0);
+						SetFont("TSTATIC1");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 499, CR_UNTRANSLATED, 913.0, 688.0, 1.0);
+						SetFont("TVBORD");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 497, CR_UNTRANSLATED, 913.0, 688.0, 1.0);
+						break;
+
+					case ASPECT_5_4:
+						SetCameraToTexture(1337, "RECAMTX", 90);
+						SetHUDSize(1024, 768, 0);
+						SetFont("RECAMTX");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 500, CR_UNTRANSLATED, 913.0, 688.0, 1.0);
+						SetFont("TSTATIC1");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 499, CR_UNTRANSLATED, 913.0, 688.0, 1.0);
+						SetFont("TVBORD");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 497, CR_UNTRANSLATED, 913.0, 688.0, 1.0);
+						break;
+
+					case ASPECT_16_9:
+						SetCameraToTexture(1337, "RECAMTX", 90);
+						SetHUDSize(1024, 768, 0);
+						SetFont("RECAMTX");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 500, CR_UNTRANSLATED, 1085.0, 688.0, 1.0);
+						SetFont("TSTATIC1");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 499, CR_UNTRANSLATED, 1085.0, 688.0, 1.0);
+						SetFont("TVBORD");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 497, CR_UNTRANSLATED, 1085.0, 688.0, 1.0);
+						break;
+
+					case ASPECT_16_10:
+						SetCameraToTexture(1337, "RECAMTX", 90);
+						SetHUDSize(1024, 768, 0);
+						SetFont("RECAMTX");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 500, CR_UNTRANSLATED, 1085.0, 688.0, 1.0);
+						SetFont("TSTATIC1");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 499, CR_UNTRANSLATED, 1085.0, 688.0, 1.0);
+						SetFont("TVBORD");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 497, CR_UNTRANSLATED, 1085.0, 688.0, 1.0);
+						break;
+					}
+				}
+
+				//Camera turned OFF. (By user)
+				if(!bCameraState && !bHideCamera)
+				{
+					bHideCamera = TRUE;
+					switch (getaspectratio())
+					{
+					case ASPECT_4_3:
+						SetHUDSize(1024, 768, 0);
+						SetFont("RECAMTX");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 500, CR_UNTRANSLATED, 913.0, 688.0, 1.0);
+						SetFont("STATIC1");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 499, CR_UNTRANSLATED, 913.0, 688.0, 1.0);
+						SetFont("TVBORD");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 497, CR_UNTRANSLATED, 913.0, 688.0, 1.0);
+						break;
+
+					case ASPECT_5_4:
+						SetHUDSize(1024, 768, 0);
+						SetFont("RECAMTX");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 500, CR_UNTRANSLATED, 913.0, 688.0, 1.0);
+						SetFont("STATIC1");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 499, CR_UNTRANSLATED, 913.0, 688.0, 1.0);
+						SetFont("TVBORD");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 497, CR_UNTRANSLATED, 913.0, 688.0, 1.0);
+						break;
+
+					case ASPECT_16_9:
+						SetHUDSize(1024, 768, 0);
+						SetFont("RECAMTX");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 500, CR_UNTRANSLATED, 1085.0, 688.0, 1.0);
+						SetFont("STATIC1");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 499, CR_UNTRANSLATED, 1085.0, 688.0, 1.0);
+						SetFont("TVBORD");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 497, CR_UNTRANSLATED, 1085.0, 688.0, 1.0);
+						break;
+
+					case ASPECT_16_10:
+						SetHUDSize(1024, 768, 0);
+						SetFont("RECAMTX");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 500, CR_UNTRANSLATED, 1085.0, 688.0, 1.0);
+						SetFont("STATIC1");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 499, CR_UNTRANSLATED, 1085.0, 688.0, 1.0);
+						SetFont("TVBORD");
+						HudMessage(s:"a"; HUDMSG_PLAIN, 497, CR_UNTRANSLATED, 1085.0, 688.0, 1.0);
+						break;
+					}
+				}
+			}
+
+			//Camera Destroyed.
+			if(bCameraDestroyed && !bHideCamera)
+			{
+				bCameraDestroyed = FALSE;
+				bCameraState = TRUE;
+				bHideCamera = TRUE;
+				switch (getaspectratio())
+				{
+				case ASPECT_4_3:
+					SetCameraToTexture(1337, "RECAMTX", 90);
+					SetHUDSize(1024, 768, 0);
+					SetFont("RECAMTX");
+					HudMessage(s:"a"; HUDMSG_PLAIN, 500, CR_UNTRANSLATED, 913.0, 688.0, 3.0);
+					SetFont("TSTATIC1");
+					HudMessage(s:"a"; HUDMSG_PLAIN, 499, CR_UNTRANSLATED, 913.0, 688.0, 3.0);
+					SetFont("CAMCRPT");
+					HudMessage(s:"a"; HUDMSG_PLAIN, 498, CR_UNTRANSLATED, 913.0, 688.0, 3.0);
+					SetFont("TVBORD");
+					HudMessage(s:"a"; HUDMSG_PLAIN, 497, CR_UNTRANSLATED, 913.0, 688.0, 3.0);
+
+				case ASPECT_5_4:
+					SetCameraToTexture(1337, "RECAMTX", 90);
+					SetHUDSize(1024, 768, 0);
+					SetFont("RECAMTX");
+					HudMessage(s:"a"; HUDMSG_PLAIN, 500, CR_UNTRANSLATED, 913.0, 688.0, 3.0);
+					SetFont("TSTATIC1");
+					HudMessage(s:"a"; HUDMSG_PLAIN, 499, CR_UNTRANSLATED, 913.0, 688.0, 3.0);
+					SetFont("CAMCRPT");
+					HudMessage(s:"a"; HUDMSG_PLAIN, 498, CR_UNTRANSLATED, 913.0, 688.0, 3.0);
+					SetFont("TVBORD");
+					HudMessage(s:"a"; HUDMSG_PLAIN, 497, CR_UNTRANSLATED, 913.0, 688.0, 3.0);
+					break;
+
+				case ASPECT_16_9:
+					SetCameraToTexture(1337, "RECAMTX", 90);
+					SetHUDSize(1024, 768, 0);
+					SetFont("RECAMTX");
+					HudMessage(s:"a"; HUDMSG_PLAIN, 500, CR_UNTRANSLATED, 1085.0, 688.0, 3.0);
+					SetFont("TSTATIC1");
+					HudMessage(s:"a"; HUDMSG_PLAIN, 499, CR_UNTRANSLATED, 1085.0, 688.0, 3.0);
+					SetFont("CAMCRPT");
+					HudMessage(s:"a"; HUDMSG_PLAIN, 498, CR_UNTRANSLATED, 1085.0, 688.0, 3.0);
+					SetFont("TVBORD");
+					HudMessage(s:"a"; HUDMSG_PLAIN, 497, CR_UNTRANSLATED, 1085.0, 688.0, 3.0);
+					break;
+
+				case ASPECT_16_10:
+					SetCameraToTexture(1337, "RECAMTX", 90);
+					SetHUDSize(1024, 768, 0);
+					SetFont("RECAMTX");
+					HudMessage(s:"a"; HUDMSG_PLAIN, 500, CR_UNTRANSLATED, 1085.0, 688.0, 3.0);
+					SetFont("TSTATIC1");
+					HudMessage(s:"a"; HUDMSG_PLAIN, 499, CR_UNTRANSLATED, 1085.0, 688.0, 3.0);
+					SetFont("CAMCRPT");
+					HudMessage(s:"a"; HUDMSG_PLAIN, 498, CR_UNTRANSLATED, 1085.0, 688.0, 3.0);
+					SetFont("TVBORD");
+					HudMessage(s:"a"; HUDMSG_PLAIN, 497, CR_UNTRANSLATED, 1085.0, 688.0, 3.0);
+					break;
+				}
+
+			}
+
+			Delay(1);
+		}
+
+		Delay(1);
+	}
+}
+
+script 711 (void) //if STATEMENTS AAAAAAAAAA
+{
+	if(!ThingCountName("DeployedCamera", 0))
+	{
+		GiveInventory("RemoteCameraLauncher", 1);
+		Delay(35);
+		terminate;
+	}
+
+	if(ThingCountName("DeployedCamera", 0))
+	{
+		if(bCameraState)
+		{
+			bCameraState = FALSE;
+			UpdateClient(5,0,bCameraState);
+			terminate;
+		}
+
+		else if(!bCameraState)
+		{
+			bCameraState = TRUE;
+			UpdateClient(5,0,bCameraState);
+			terminate;
+		}
+	}
+}
+
+script 750 enter ClientSide
+{
+//	if(GetCVar("wdi_filmgrain_level") <= 0)
+//	{
+//		ConsoleCommand("set wdi_filmgrain_level 0");
+//		ConsoleCommand("archivecvar wdi_filmgrain_level");
+//	}
+
+	if(GetCVar("wdi_filmgrain_level") == 0)
+	terminate;
+
+	if (!Client_action()) { terminate;}
+
+	////////////////////////////////////////////////////////
+
+	while(1)
+	{
+		Switch(GetCVar("wdi_filmgrain_level"))
+		{
+		case 0:
+			HudMessage(s:""; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 0.0, 0.0, 0.1);
+			break;
+
+		case 1:
+			SetHUDSize(320, 200, 1);
+			SetFont("NOISE1"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 160.0, 100.0, 0.0625); Delay(1);
+			SetFont("NOISE2"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 160.0, 100.0, 0.0625); Delay(1);
+			SetFont("NOISE3"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 160.0, 100.0, 0.0625); Delay(1);
+			SetFont("NOISE4"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 160.0, 100.0, 0.0625); Delay(1);
+			SetFont("NOISE5"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 160.0, 100.0, 0.0625); Delay(1);
+			SetFont("NOISE6"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 160.0, 100.0, 0.0625); Delay(1);
+			SetFont("NOISE7"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 160.0, 100.0, 0.0625); Delay(1);
+			SetFont("NOISE8"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 160.0, 100.0, 0.0625);
+			break;
+
+		case 2:
+			SetHUDSize(640, 400, 1);
+			SetFont("NOISE1"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 320.0, 200.0, 0.0625); Delay(1);
+			SetFont("NOISE2"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 320.0, 200.0, 0.0625); Delay(1);
+			SetFont("NOISE3"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 320.0, 200.0, 0.0625); Delay(1);
+			SetFont("NOISE4"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 320.0, 200.0, 0.0625); Delay(1);
+			SetFont("NOISE5"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 320.0, 200.0, 0.0625); Delay(1);
+			SetFont("NOISE6"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 320.0, 200.0, 0.0625); Delay(1);
+			SetFont("NOISE7"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 320.0, 200.0, 0.0625); Delay(1);
+			SetFont("NOISE8"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 320.0, 200.0, 0.0625);
+			break;
+
+		case 3:
+			SetHUDSize(0, 0, 1); //FUNNY SIZE, AIN'T IT?
+			SetFont("NOISE1"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 1.5, 0.0, 0.0625); Delay(2);
+			SetFont("NOISE2"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 1.5, 0.0, 0.0625); Delay(2);
+			SetFont("NOISE3"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 1.5, 0.0, 0.0625); Delay(2);
+			SetFont("NOISE4"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 1.5, 0.0, 0.0625); Delay(2);
+			SetFont("NOISE5"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 1.5, 0.0, 0.0625); Delay(2);
+			SetFont("NOISE6"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 1.5, 0.0, 0.0625); Delay(2);
+			SetFont("NOISE7"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 1.5, 0.0, 0.0625); Delay(2);
+			SetFont("NOISE8"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 1.5, 0.0, 0.0625); Delay(1);
+			break;
+		case 4:
+			SetHUDSize(1728, 1080, 1); //Super-res compat (e.g. 2560x1600, and who the hell uses that?)
+			SetFont("NOISE1"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 864.0, 540.0, 0.0625); Delay(2);
+			SetFont("NOISE2"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 864.0, 540.0, 0.0625); Delay(2);
+			SetFont("NOISE3"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 864.0, 540.0, 0.0625); Delay(2);
+			SetFont("NOISE4"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 864.0, 540.0, 0.0625); Delay(2);
+			SetFont("NOISE5"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 864.0, 540.0, 0.0625); Delay(2);
+			SetFont("NOISE6"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 864.0, 540.0, 0.0625); Delay(2);
+			SetFont("NOISE7"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 864.0, 540.0, 0.0625); Delay(2);
+			SetFont("NOISE8"); HudMessage(s:"a"; HUDMSG_PLAIN, 77, CR_UNTRANSLATED, 864.0, 540.0, 0.0625); Delay(1);
+			break;
+		}
+		Delay(1);
+	}
+}
+

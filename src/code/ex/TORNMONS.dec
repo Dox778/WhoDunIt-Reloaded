@@ -1,0 +1,468 @@
+ACTOR ArchvileFirex : ArchvileFire
+{
+	Speed 5
+        +NOBLOCKMAP
+        +NOCLIP
+}
+
+ACTOR Sjasface
+{
+floatspeed 15
+Speed 10
+MONSTER
+Health 0x7FFFFFFF
+RENDERSTYLE TRANSLUCENT
+Alpha 0.5
+meleedamage 2
+DamageFactor "FlareEffect", 0.0
+Radius 20
+Height 72
+Cameraheight 32
+Mass 9999999999999
+obituary "%o found the ghoul."
++FLOAT
++LOOKALLAROUND
++NOGRAVITY
++DROPOFF
++NOTELEOTHER
+//Seesound "Sjassee"
+Bloodcolor Black
+Painchance 250
+States
+{
+Spawn:
+SJAS A 1 A_Look
+Loop
+See:
+SJAS BBBBBBBBBBBBBB 1 A_Chase
+SJAS A 0 A_Playsound("Sjasact")
+SJAS A 0 A_UnHideThing
+Loop
+Pain:
+SJAS B 5 A_Playsound("Sjaspain")
+Goto See
+Melee:
+SJAS C 0 A_FaceTarget
+SJAS C 0 A_MeleeAttack
+//SJAS C 0 A_VileAttack
+SJAS C 0 A_Playsound("Sjasattack")
+SJAS CDCDCDCDCD 1 
+SJAS C 10 A_HideThing
+Goto See
+Death:
+SJAS E 50 A_Playsound("Sjaspain")
+SJAS EFEFEFEFEFEFEFEFEFEFEFEF 2 A_Playsound("Sjaspain")
+SJAS FGFGFGFGFGFGFGFGFGFGFGFG 2 A_Playsound("Sjaspain")
+SJAS GHGHGHGHGHGHGHGHGHGHGHGH 2 A_Playsound("Sjaspain")
+SJAS F 50 A_Playsound("Sjaspain")
+SJAS C 0 A_Playsound("Sjasdeath")
+SJAS C 0 A_Fall
+  	FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,0,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,30,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,60,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,90,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,120,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,150,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,180,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-30,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-60,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-90,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-120,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-150,2)
+TNT1 A 30
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,0,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,30,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,60,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,90,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,120,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,150,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,180,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-30,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-60,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-90,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-120,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-150,2)
+TNT1 A 30
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,0,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,30,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,60,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,90,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,120,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,150,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,180,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-30,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-60,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-90,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-120,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-150,2)
+TNT1 A 50
+Stop
+}
+}
+
+ACTOR Sjasdummy
+{
+floatspeed 15
+Speed 10
+MONSTER
+Health 0x7FFFFFFF
+RENDERSTYLE TRANSLUCENT
+Alpha 0.5
+meleedamage 0
+Radius 20
+Height 72
+Cameraheight 32
+Mass 9999999999999
+DamageFactor "FlareEffect", 0.0
+obituary "%o found the ghoul."
++FLOAT
++LOOKALLAROUND
++NOGRAVITY
++NOTELEOTHER
+//Seesound "Sjassee"
+Bloodcolor Black
+Painchance 128
+States
+{
+Spawn:
+SJAS A 1 A_Look
+Loop
+See:
+SJAS BBBBBBBBBBBBBB 1 A_Chase
+SJAS A 0 A_Playsound("Sjasact")
+SJAS A 0 A_UnHideThing
+Loop
+Pain:
+SJAS B 5 A_Playsound("Sjaspain")
+SJAS B 3 A_Pain
+Goto See
+Melee:
+SJAS C 0 A_FaceTarget
+SJAS C 0 A_MeleeAttack
+//SJAS C 0 A_VileAttack
+SJAS C 0 A_Playsound("Sjasattack")
+SJAS CDCDCDCDCD 1 
+SJAS C 10 A_HideThing
+Goto See
+Death:
+SJAS E 50 A_Playsound("Sjaspain")
+SJAS EFEFEFEFEFEFEFEFEFEFEFEF 2 A_Playsound("Sjaspain")
+SJAS FGFGFGFGFGFGFGFGFGFGFGFG 2 A_Playsound("Sjaspain")
+SJAS GHGHGHGHGHGHGHGHGHGHGHGH 2 A_Playsound("Sjaspain")
+SJAS F 50 A_Playsound("Sjaspain")
+SJAS C 0 A_Playsound("Sjasdeath")
+SJAS C 0 A_Fall
+  	FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,0,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,30,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,60,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,90,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,120,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,150,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,180,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-30,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-60,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-90,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-120,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-150,2)
+TNT1 A 30
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,0,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,30,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,60,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,90,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,120,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,150,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,180,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-30,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-60,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-90,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-120,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-150,2)
+TNT1 A 30
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,0,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,30,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,60,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,90,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,120,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,150,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,180,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-30,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-60,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-90,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-120,2)
+        FIRE A 0 BRIGHT A_CustomMissile("ArchvileFirex",0,0,-150,2)
+TNT1 A 50
+Stop
+}
+}
+
+ACTOR Sjasfriendly: Sjasface
+{
+meleedamage 0
++FRIENDLY
+}
+
+
+ACTOR CreeperGhoul
+{
+MONSTER
++NOBLOCKMONST
++DROPOFF
+BloodColor white
+- SOLID
+Speed 5
++DONTSPLASH
+//Renderstyle Fuzzy
+Cameraheight 8
+Health 0x7FFFFFFF
+Radius 13
+xscale 0.8
+yscale 0.1
+MeleeDamage 1
+DamageFactor "FlareEffect", 0.0
+painchance 1
+Obituary "%o was creeped up on by the creeper"
++LOOKALLAROUND
+states
+{
+	Spawn:
+	CREE A 1 A_Look
+	//CREE A 0 Thing_Hate(10, 1, 4)
+	Loop
+	See:
+	CREE A 0 A_ChangeFlag("FRIGHTENED", 0)
+	CREE A 0 A_Playsound("creeperact")
+	CREE AAAABBBBAAAABBBBAAAABBBBAAAABBBBAAAABBBBAAAABBBB 2 A_Chase
+	Loop
+	Melee:
+	//CREE A 0 A_MeleeAttack
+	//CREE A 8
+	CREE A 0 A_FaceTarget
+	CREE A 8 A_SargAttack
+    CREE A 8
+	//Goto Pain+1
+	Pain:
+	//CREE A 0 A_PlaySound("Creeperpain")
+	//CREE A 0 A_ChangeFlag("FRIGHTENED", 1)
+	CREE BABABABABABABABABABABAB 1 A_Chase
+	CREE ABABABABABAB 2 A_Chase
+	CREE ABABABABABAB 3 A_Chase
+	//CREE A 0 A_ChangeFlag("FRIGHTENED", 0)
+	Goto See
+	Death:
+	TNT1 A 20 A_SpawnItem("Creeperdeath")
+	TNT1 A 1 A_Fall
+	Stop
+	}
+}
+
+actor Creeperactivate : CustomInventory
+{
+  inventory.pickupmessage ""
+  inventory.pickupsound ""
+  states
+  {
+  Spawn:
+    TNT1 A -1
+    stop
+  Pickup:
+    TNT1 A 0 ACS_Execute(997, 0)
+    stop
+  }
+}
+
+actor BeatingHeartJM 
+{
+	//$Category Retorn_map_ONLY
+  scale 0.5
+  health 100
+  radius 32
+  height 184
+  mass 900
+  +SOLID
+  +SHOOTABLE
+  PAINSOUND "brain/pain"
+  DEATHSOUND "brain/death" 
+  states
+  {
+  Spawn:
+    HART A -1
+    loop
+	  Pain:
+    HART A 3 A_Pain
+    goto See
+	 Death:
+    HART A 5
+    HART A 3 A_PlayerScream
+    HART A 3 A_NoBlocking
+    HART A 6
+    HART A 3 ACS_ExecuteAlways(725,0,0,0,0)
+	HART A -1
+    Stop
+  }
+}
+
+// Always spawn
+actor PoliceRaider : RandomSpawner 
+{
+	//$Category Retorn_map_ONLY
+    DropItem "Legaviy1" 
+	DropItem "Legaviy2"
+}
+
+
+ACTOR Legaviy1
+{
+  Health 100
+  Radius 20
+  Height 56
+  Mass 100
+  scale 0.37
+  Speed 14
+  PainChance 170
+  DamageFactor "FlareEffect", 0.0
+  Monster
+  +FLOORCLIP
+  +NOINFIGHTING
+  SeeSound "XSCOPS"
+  AttackSound "weapons/BerettaFire"
+  activesound "XSCOPS"
+  //PainSound "XSCOPP"
+  DeathSound "P2Death"
+    Obituary "%o was shot by a cop."
+    HitObituary "%o is under arrest."
+  States
+  {
+  Spawn:
+    FCP1 A 1 A_AlertMonsters
+    FCP1 A 10 A_Look
+    Goto See
+  See:
+    FCP1 AABBCCDD 3 A_Chase
+    Loop
+  Missile:
+    FCP1 E 10 A_FaceTarget
+    FCP1 F 10 Bright A_SPosAttackUseAtkSound
+    FCP1 E 10
+    Goto See
+Melee:
+   FCP1 E 0 A_FaceTarget
+   FCP1 E 3 A_SkelWhoosh
+   FCP1 E 3 A_FaceTarget
+   FCP1 E 6 A_CustomMeleeAttack(random(1,10)*6,"pipe/hit","none") // Does not make any sound when missing
+  Pain:
+    FCP1 E 3
+    FCP1 E 3 A_Pain
+    Goto See
+ Death:
+    FCP1 H 5
+    FCP1 I 5 A_Scream
+    FCP1 J 5 A_NoBlocking
+    FCP1 K 5
+    FCP1 L -1
+    Stop
+  XDeath:
+    FCP1 H 5
+    FCP1 I 5 A_Scream
+    FCP1 J 5 A_NoBlocking
+    FCP1 K 5
+    FCP1 L -1
+    Stop
+  Raise:
+    FCP1 L 5
+    FCP1 KJIH 5
+    Goto See
+  }
+}
+
+ACTOR Legaviy2
+{
+  Health 100
+  Radius 20
+  Height 56
+  Mass 100
+  scale 0.52
+  Speed 14
+  PainChance 170
+  DamageFactor "FlareEffect", 0.0
+  Monster
+  +FLOORCLIP
+  +NOINFIGHTING
+  SeeSound "XSCOPS"
+  AttackSound "weapons/BerettaFire"
+  activesound "XSCOPS"
+  //PainSound "XSCOPP"
+  DeathSound "P2Death"
+    Obituary "%o was shot by a cop."
+    HitObituary "%o is under arrest."
+  States
+  {
+  Spawn:
+    FCP2 A 1 A_AlertMonsters
+    FCP2 A 10 A_Look
+    Goto See
+  See:
+    FCP2 AABBCCDD 3 A_Chase
+    Loop
+  Missile:
+    FCP2 E 10 A_FaceTarget
+    FCP2 F 10 Bright A_SPosAttackUseAtkSound
+    FCP2 E 10
+    Goto See
+Melee:
+   FCP2 E 0 A_FaceTarget
+   FCP2 E 3 A_SkelWhoosh
+   FCP2 E 3 A_FaceTarget
+   FCP2 E 6 A_CustomMeleeAttack(random(1,10)*6,"pipe/hit","none") // Does not make any sound when missing
+  Pain:
+    FCP2 E 3
+    FCP2 E 3 A_Pain
+    Goto See
+ Death:
+    FCP2 H 5
+    FCP2 I 5 A_Scream
+    FCP2 J 5 A_NoBlocking
+    FCP2 K 5
+    FCP2 L -1
+    Stop
+  XDeath:
+    FCP2 H 5
+    FCP2 I 5 A_Scream
+    FCP2 J 5 A_NoBlocking
+    FCP2 K 5
+    FCP2 L -1
+    Stop
+  Raise:
+    FCP2 L 5
+    FCP2 KJIH 5
+    Goto See
+  }
+}
+
+// Always spawn
+actor FriendlyDude : RandomSpawner 
+{
+	//$Category Retorn_map_ONLY
+    DropItem "FriendlyMarineSSG" 
+	DropItem "FriendlyMarineRailgun"
+	DropItem "FriendlyMarineChaingun"
+}
+
+
+actor FriendlyMarineSSG : marinessg 
+{
+    Speed 32
+	Health 700
+	+FRIENDLY
+}
+
+actor FriendlyMarineRailgun : marinerailgun
+{
+	Health 700
+	+FRIENDLY
+}
+
+actor FriendlyMarineChaingun : marinechaingun
+{
+	Health 300
+	+FRIENDLY
+}

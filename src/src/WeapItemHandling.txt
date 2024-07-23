@@ -1,0 +1,927 @@
+//a HUUUUUUUGE thank you to Sergeant_Mark_IV for... you know... actually writing that script...
+#library "WeapItemHandling"
+#include "zcommon.acs"
+Script "WeaponEnterScript" ENTER
+{
+	GiveInventory("PowerMurdFistDamage",1); //i didnt feel like making another enter script lmao
+	Delay(1);
+	if(GameType() == GAME_SINGLE_PLAYER) { TakeInventory("StartUpWeapon",1); GiveInventory("NewFist",1); } //i dont want that in singleplayer
+	Delay(5);
+	terminate;
+}
+
+
+Script "NewTranslations" OPEN //Creates plenty o translations...
+{
+	CreateTranslation(10, 112:127=[255, 0, 0]:[0,0,0]);
+	CreateTranslation(11, 112:127=[255, 64, 0]:[0,0,0]);
+	CreateTranslation(12, 112:127=[255, 128, 0]:[0,0,0]);
+	CreateTranslation(13, 112:127=[255, 196, 0]:[0,0,0]);
+	CreateTranslation(14, 112:127=[255, 255, 0]:[0,0,0]);
+	CreateTranslation(15, 112:127=[196, 255, 0]:[0,0,0]);
+	CreateTranslation(16, 112:127=[128, 255, 0]:[0,0,0]);
+	CreateTranslation(17, 112:127=[64, 255, 0]:[0,0,0]);
+	CreateTranslation(18, 112:127=[0, 255, 0]:[0,0,0]);
+	CreateTranslation(19, 112:127=[0, 255, 64]:[0,0,0]);
+	CreateTranslation(20, 112:127=[0, 255, 128]:[0,0,0]);
+	CreateTranslation(21, 112:127=[0, 255, 196]:[0,0,0]);
+	CreateTranslation(22, 112:127=[0, 255, 255]:[0,0,0]);
+	CreateTranslation(23, 112:127=[0, 196, 255]:[0,0,0]);
+	CreateTranslation(24, 112:127=[0, 128, 255]:[0,0,0]);
+	CreateTranslation(25, 112:127=[0, 64, 255]:[0,0,0]);
+	CreateTranslation(26, 112:127=[0, 0, 255]:[0,0,0]);
+	CreateTranslation(27, 112:127=[64, 0, 255]:[0,0,0]);
+	CreateTranslation(28, 112:127=[128, 0, 255]:[0,0,0]);
+	CreateTranslation(29, 112:127=[196, 0, 255]:[0,0,0]);
+	CreateTranslation(30, 112:127=[255, 0, 255]:[0,0,0]);
+	CreateTranslation(31, 112:127=[255, 0, 196]:[0,0,0]);
+	CreateTranslation(32, 112:127=[255, 0, 128]:[0,0,0]);
+	CreateTranslation(33, 112:127=[255, 0, 64]:[0,0,0]);
+}
+
+Script "TranslateGreen" (void) //Translates player-like greens to a new color
+{
+	int randomizer = random(1,4);
+	Switch(randomizer)
+	{
+	Default: Thing_SETTranslation(0,10); Delay(2); break;
+	Case 2: Thing_SETTranslation(0,11); Delay(2); break;
+	Case 3: Thing_SETTranslation(0,12); Delay(2); break;
+	Case 4: Thing_SETTranslation(0,13); Delay(2); break;
+	}
+	terminate;
+}
+
+Script "PingCooldown" (void)
+{
+	int Cooldown = 35*GetCVAR("WDI_PingCooldown");
+	//delay(5);
+	//print(d: Cooldown );
+	Delay( Cooldown );
+	GiveInventory("Action_Ping",1);
+	terminate;
+}
+
+
+
+/*
+SmallKit
+BigKit
+ColorfulFlare
+PistolClip
+NewShell
+SpareSawFuel
+M1Ammo
+
++ PlayerDrop
+*/
+//Players drop their inventory when they die!!!! :333
+SCRIPT "DeadInvDrop" DEATH
+{
+	int PlayerTID = ActivatorTID();
+	
+	int StimNum = CheckInventory("SmallKit");
+	int BKitNum = CheckInventory("BigKit");
+	int FlareNum = CheckInventory("ColorfulFlare");
+	int ClipNum = CheckInventory("PistolClip");
+	int ShelNum = CheckInventory("NewShell");
+	int FuelNum = CheckInventory("SpareSawFuel");
+	int M1Num = CheckInventory("M1Ammo");
+	int BoltNum = CheckInventory("LoadedBolts");
+	int LootNum = CheckInventory("RandomWeaponKit");
+	int TrapNum = CheckInventory("BearTrap");
+	TakeInventory("HudAlive", 1);
+	SetActivator(0); //set it to the world
+	Delay(40); //wait for body to fall down
+	
+	Switch(GetCVAR("WDI_InvDropType") )
+	{
+	Default: //If all else fails, return to default - drop ONE of each healing item, all ammo.
+		if(StimNum > 0)   {    SpawnSpot("SmallKitPlayerDrop",PlayerTID,0);}
+		if(BKitNum > 0)   {    SpawnSpot("BigKitPlayerDrop",PlayerTID,0);}
+		until(FlareNum < 1)   {    SpawnSpot("ColorfulFlarePlayerDrop",PlayerTID,0);    FlareNum--; FlareNum--; FlareNum--;    }
+		until(ClipNum == 0)   {    SpawnSpot("PistolClipPlayerDrop",PlayerTID,0);    ClipNum--;    }
+		until(ShelNum == 0)  {    SpawnSpot("NewShellPlayerDrop",PlayerTID,0);    ShelNum--;    }
+		until(FuelNum == 0)   {    SpawnSpot("SpareSawFuelPlayerDrop",PlayerTID,0);    FuelNum--;    }
+		until(M1Num == 0)   {    SpawnSpot("M1AmmoPlayerDrop",PlayerTID,0);    M1Num--;    }
+		until(BoltNum == 0)   {    SpawnSpot("LoadedBoltsPlayerDrop",PlayerTID,0);    BoltNum--;    }
+		until(LootNum == 0)   {    SpawnSpot("RandomWeaponKitPlayerDrop",PlayerTID,0);    LootNum--;    }
+		until(TrapNum == 0)    {    SpawnSpot("BearTrapPlayerDrop",PlayerTID,0);    TrapNum--;    }
+		break;
+	Case 1: //Drop EVERYTHING, no limits.
+		until(StimNum == 0)   {    SpawnSpot("SmallKitPlayerDrop",PlayerTID,0);    StimNum--;    }
+		until(BKitNum == 0)   {    SpawnSpot("BigKitPlayerDrop",PlayerTID,0);    BKitNum--;    }
+		until(FlareNum < 1)   {    SpawnSpot("ColorfulFlarePlayerDrop",PlayerTID,0);    FlareNum--; FlareNum--; FlareNum--;    }
+		until(ClipNum == 0)   {    SpawnSpot("PistolClipPlayerDrop",PlayerTID,0);    ClipNum--;    }
+		until(ShelNum == 0)  {    SpawnSpot("NewShellPlayerDrop",PlayerTID,0);    ShelNum--;    }
+		until(FuelNum == 0)   {    SpawnSpot("SpareSawFuelPlayerDrop",PlayerTID,0);    FuelNum--;    }
+		until(M1Num == 0)   {    SpawnSpot("M1AmmoPlayerDrop",PlayerTID,0);    M1Num--;    }
+		until(BoltNum == 0)   {    SpawnSpot("LoadedBoltsPlayerDrop",PlayerTID,0);    BoltNum--;    }
+		until(LootNum == 0)   {    SpawnSpot("RandomWeaponKitPlayerDrop",PlayerTID,0);    LootNum--;    }
+		until(TrapNum == 0)    {    SpawnSpot("BearTrapPlayerDrop",PlayerTID,0);    TrapNum--;    }
+	break;
+	Case 2: //Each item has a 50% chance to NOT spawn.
+		until(StimNum == 0)   {    SpawnSpot("SmallKitPlayerDropRandom",PlayerTID,0);    StimNum--;    }
+		until(BKitNum == 0)   {    SpawnSpot("BigKitPlayerDropRandom",PlayerTID,0);    BKitNum--;    }
+		until(FlareNum < 1)   {    SpawnSpot("ColorfulFlarePlayerDropRandom",PlayerTID,0);    FlareNum--; FlareNum--; FlareNum--;    }
+		until(ClipNum == 0)   {    SpawnSpot("PistolClipPlayerDropRandom",PlayerTID,0);    ClipNum--;    }
+		until(ShelNum == 0)  {    SpawnSpot("NewShellPlayerDropRandom",PlayerTID,0);    ShelNum--;    }
+		until(FuelNum == 0)   {    SpawnSpot("SpareSawFuelPlayerDropRandom",PlayerTID,0);    FuelNum--;    }
+		until(M1Num == 0)   {    SpawnSpot("M1AmmoPlayerDropRandom",PlayerTID,0);    M1Num--;    }
+		until(BoltNum == 0)   {    SpawnSpot("LoadedBoltsPlayerDropRandom",PlayerTID,0);    BoltNum--;    }
+		until(LootNum == 0)   {    SpawnSpot("RandomWeaponKitPlayerDropRandom",PlayerTID,0);    LootNum--;    }
+		until(TrapNum == 0)    {    SpawnSpot("BearTrapPlayerDropRandom",PlayerTID,0);    TrapNum--;    }
+		break;
+	Case 3: //off
+		Delay(1);
+		Break;
+	}
+	Delay(1);
+	//ClearInventory();
+//	TakeInventory("SmallKit");
+//	TakeInventory("BigKit");
+//	TakeInventory("ColorfulFlare");
+//	TakeInventory("PistolClip");
+	//TakeInventory("NewShell");
+//	TakeInventory("SpareSawFuel");
+//	TakeInventory("M1Ammo");
+//	TakeInventory("LoadedBolts");
+//	TakeInventory("RandomWeaponKit");
+//	TakeInventory("BearTrap");
+	terminate;
+}
+
+
+
+
+
+
+
+
+
+Script "DanceMorph" (void)
+{
+	MorphActor(0,"DancingPlayer1","ABigNothing",105,0,0,0);
+	ACS_NamedExecute("BDStartCamera", 0, 0, 0, 0);
+	SetPlayerProperty(0,1,PROP_TOTALLYFROZEN);
+	delay(104);
+	ACS_NamedExecute("BDStopCamera", 0, 0, 0, 0);
+	SetPlayerProperty(0,0,PROP_TOTALLYFROZEN);
+}
+/*
+Script "WDITerminateDance" Death
+{
+	ACS_NamedExecute("BDStopCamera", 0, 0, 0, 0);
+	//ACS_NamedTerminate("WDIStartDance", 0);
+	Thing_Remove(PlayerNumber()+600+128);
+	delay(1);
+	terminate;
+}
+*/
+Script "WDISetDanceTID" (void)
+{
+	Thing_ChangeTID(0,APROP_TargetTID+128);
+	delay(1);
+	terminate;
+}
+
+Script "WDIplayerKickState" (void)
+{
+	SetActorState(0,"MurdKick");
+	Delay(1);
+	terminate;
+}
+
+Script "WDIStartDance" (VOID) NET
+{
+	If ( (GetLevelInfo(LevelInfo_LevelNum) == 32) ) //Disabled on retorn
+    {
+		PlaySound(0,"Menu/Change",CHAN_BODY,0.75,false,ATTN_STATIC,true);
+        log(s:"\ckCan't dance on this map!");
+		Delay(5);
+		terminate;
+    }
+	if(GetCVAR("WDI_NoDance") //server-side disabled
+	|| PlayerIsSpectator(PlayerNumber() ) == 1 //true spectator
+	|| CheckInventory("IsDancing") //already dancing
+	|| CheckInventory("PlayDead") //playing dead
+	|| CheckInventory("HasGrabbed") //grabbing/being grabbed
+	|| CheckActorState(0,"Pain.ElectroTrap",true) == true )//electrotrapp'd (unused)
+	//|| !CheckInventory("WarmupFucksThingsUp")  )//i hate warmup jesusssssssssss
+	{ terminate; }
+
+	GiveInventory("IsDancing",1); //prevents playerz from spamming dances
+	
+	int cvar;
+	str className;
+	
+	//Set the number first...
+	If(GetCVar("WDIMAX_Reanimated_DanceStyle") == 6 || GetCVar("WDIMAX_Reanimated_DanceStyle") < 0 || GetCVar("WDIMAX_Reanimated_DanceStyle") > 6)
+		{
+			cvar = random(1,6);
+		}
+		else
+		{
+			cvar = GetCVar("WDIMAX_Reanimated_DanceStyle") + 1;
+		}
+		
+	//Now do the dances	
+	if(PlayerIsSpectator(PlayerNumber()) == 2 || GetActorProperty(0,APROP_Health ) <= 0 ) //is dead or hp less than or equal to 0???
+	{
+		className = StrParam( s:"DoDance", d:cvar, s:"Ghost" );
+		SpawnSpotFacing( className,0 );
+		Delay(105);
+	}
+	else
+	{
+		className = StrParam( s:"DoDance", d:cvar );
+		SetActorState(0,className);
+		NamedExecuteClientScript("DanceCamera",PlayerNumber(),0,0,0,0);
+		SetPlayerProperty(0,1,PROP_TOTALLYFROZEN);
+		Delay(104);
+		NamedExecuteClientScript("StopDanceCamera",PlayerNumber(),0,0,0,0);
+		SetPlayerProperty(0,0,PROP_TOTALLYFROZEN);
+	}
+
+	TakeInventory("IsDancing",1);
+	Terminate;
+}
+
+bool g_bDancing = false;
+
+Script "DanceCamera" (void) CLIENTSIDE
+{
+	bool IsChase = GetPlayerChasecam( PlayerNumber() ); //true if using chasecam, to not turn it off if it's on before dancing
+	//int hello = 0;
+	g_bDancing = true;
+	while(g_bDancing)
+	{
+	if( GetPlayerChasecam( PlayerNumber() ) == false ) { SetPlayerChasecam( PlayerNumber(), true); }
+	delay(1);
+//	hello++;
+	}
+	if(IsChase == false) { SetPlayerChasecam( PlayerNumber(), false); }
+	terminate;
+}
+
+Script "StopDanceCamera" DEATH CLIENTSIDE
+{
+    g_bDancing = false;
+}
+
+
+Script "WDIChangeDanceStyle" (VOID) NET //CLIENTSIDE
+{
+	//SetFont("BigFont");
+	SetHUDSize(640,480,1);
+	SetCVar("WDIMAX_Reanimated_DanceStyle",GetCVar("WDIMAX_Reanimated_DanceStyle")+1);
+	If (GetCVar("WDIMAX_Reanimated_DanceStyle") >= 7)
+		SetCVar("WDIMAX_Reanimated_DanceStyle",0);
+	PlaySound(0,"Menu/Change",CHAN_BODY,0.75,false,ATTN_STATIC,true);
+	Switch(GetCVar("WDIMAX_Reanimated_DanceStyle"))
+	{
+	case 0:
+	HUDMessage(s:"-Dance style: 1 (Adventure Time)-"; HUDMsg_Log|HUDMsg_FadeOut,944333,CR_Green,320.0,440.0,1.0,1.0);
+	break;
+	case 1:
+	HUDMessage(s:"-Dance style: 2 (Twerk)-"; HUDMsg_Log|HUDMsg_FadeOut,944333,CR_Green,320.0,440.0,1.0,1.0);
+	break;
+	case 2:
+	HUDMessage(s:"-Dance style: 3-"; HUDMsg_Log|HUDMsg_FadeOut,944333,CR_Green,320.0,440.0,1.0,1.0);
+	break;
+	case 3:
+	HUDMessage(s:"-Dance style: 4 (Classic gif)-"; HUDMsg_Log|HUDMsg_FadeOut,944333,CR_Green,320.0,440.0,1.0,1.0);
+	break;
+	case 4:
+	HUDMessage(s:"-Dance style: 5-"; HUDMsg_Log|HUDMsg_FadeOut,944333,CR_Green,320.0,440.0,1.0,1.0);
+	break;
+	case 5:
+	HUDMessage(s:"-Dance style: 6 (Guitar)-"; HUDMsg_Log|HUDMsg_FadeOut,944333,CR_Green,320.0,440.0,1.0,1.0);
+	break;
+	case 6:
+	HUDMessage(s:"-Dance style: Random-"; HUDMsg_Log|HUDMsg_FadeOut,944333,CR_Green,320.0,440.0,1.0,1.0);
+	break;
+	default:
+	HUDMessage(s:"---Dance style bugged---"; HUDMsg_Log|HUDMsg_FadeOut,944333,CR_Red,320.0,440.0,1.0,1.0);
+	break;
+	}
+}
+
+
+Script "PlayDead" (void) NET
+{
+        SetFont("BigFont");
+        SetHUDSize(640,480,1);
+        HUDMessage(s:"\c[C1]Use weapon drop with fists out instead!"; HUDMsg_Log|HUDMsg_FadeOut,94433,CR_Red,320.0,240.0,1.55,1.0);
+		Delay(35);
+		terminate;
+}
+
+Script "PlayDeadStart" (void)
+{
+	If ((GetLevelInfo(LevelInfo_LevelNum) == 32)||(GetLevelInfo(LevelInfo_LevelNum) == 72)||(GetLevelInfo(LevelInfo_LevelNum) == 41)||(GetLevelInfo(LevelInfo_LevelNum) == 42)||(GetLevelInfo(LevelInfo_LevelNum) == 50))
+    {
+        SetFont("BigFont");
+        SetHUDSize(640,480,1);
+        HUDMessage(s:"\c[C1]Not on this map."; HUDMsg_Log|HUDMsg_FadeOut,94433,CR_Red,320.0,240.0,1.55,1.0);
+		Delay(35);
+		terminate;
+    }
+
+	else
+	{
+	SetActorState(0,"PlayDead");
+	GiveInventory("PlayDead",1); 
+
+	Delay(60);
+	}
+}
+
+
+Script "PlayDeadStop" (void) //NET
+{
+	SetActorState(0,"GetUp");
+	TakeInventory("PlayDead",1); 
+
+	Delay(60);
+
+}
+
+Script "GrabbingPlayer" (void) //NET
+{
+	SetActorState(0,"GrabbingPlayer");
+	Delay(2);
+}
+
+//Bear Trap Stun code.
+Script "S_BearTrap" (void)
+{
+	SetPlayerProperty(0, ON,PROP_FROZEN);
+	GiveInventory("KickBlocker",999);
+	FadeTo(64,16,16,0.75,1.0);
+	Print(s:"You were caught in a beartrap!");
+	DamageThing(random(7,15),MOD_CRUSH);
+	SpawnSpotForced("BearTrapUsed",ActivatorTID(),0,0);
+	Delay(350);
+	FadeTo(64,16,16,0.0,3.0);
+	FadeTo(64,16,16,0.0,3.0);
+	SetPlayerProperty(0, OFF,PROP_FROZEN); //if(CheckInventory("PlayDead" == 1))  { SetPlayerProperty(0,  OFF, PROP_FROZEN); }
+	TakeInventory("KickBlocker",999);
+	ActivatorSound("SDBEARTP", 127);
+}
+
+Script "FakeHalo" (void)
+{
+Int FakeHaloLoopCount = 0;
+	fadeto(128, 128, 64, 0.15, 0.5);
+	while(FakeHaloLoopCount <= 2100)//1 minute in tics	
+	{
+		GiveInventory("YellowHaloSpawner", 1);
+		Delay(1);
+		FakeHaloLoopCount++;
+	}
+	fadeto(128, 128, 64, 0.0, 5.0);
+	fadeto(128, 128, 64, 0.0, 5.0);
+	Terminate;
+}	
+
+
+script "FootstepFloor" (void)
+{
+  if(CheckActorFloorTexture(0, "BSNOW01") || CheckActorFloorTexture(0, "ASNOW01") || CheckActorFloorTexture(0, "ASNOW99") || CheckActorFloorTexture(0, "SQCO2") && GetActorVelZ(0) == 0) 
+  {
+	//log(s:"ok here you go");
+    SetResultValue(TRUE);
+  }
+  else
+  {
+	//log(s:"Nope lol");
+	//log( s:GetActorFloorTexture( 0 ));
+	SetResultValue(FALSE);
+  }
+}
+
+
+script "WDIROldWeapon_id" (int WepID)
+{
+	switch (WepID)
+	{
+		case 40:
+			Setfont("SmallFont");
+			HudMessage(s:"Revolver"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case 41:
+			Setfont("SmallFont");
+			HudMessage(s:"TNT"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case 42:
+			Setfont("SmallFont");
+			HudMessage(s:"Crowbar"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+			
+		case 43:
+			Setfont("SmallFont");
+			HudMessage(s:"Fire Extinguisher"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+		case 44:
+			Setfont("SmallFont");
+			HudMessage(s:"Screw driver"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+		case 45:
+			Setfont("SmallFont");
+			HudMessage(s:"Sledgehammer"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+		case 46:
+			Setfont("SmallFont");
+			HudMessage(s:"Double-barrel shotgun"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+		case 47:
+			Setfont("SmallFont");
+			HudMessage(s:"Pickaxe"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+		
+		default:
+			Setfont("SmallFont");
+			HudMessage(s:"Unnamed Pickup"; HUDMSG_FADEOUT, 69, CR_UNTRANSLATED, 1.5, 0.98, 1.0, 1.0);
+			break;
+	}
+}
+
+Script "WDINewActivateDrop" (void)
+{
+	WDI_YAHOODropPlayerWeapon_Live(ActivatorTID());
+}
+
+function void wdi_YAHOOdropplayerweapon_live(int id)
+{
+	TakeActorInventory(id, "IsDropping", 1);
+
+	if(CheckWeapon("PickableTNT"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "PickableTNT", 1);
+		GiveActorInventory(id, "Dropper_PickableTNT", 1);
+	}
+	else if(CheckWeapon("Revolver"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "Revolver", 1);
+		GiveActorInventory(id, "Dropper_Revolver", 1);
+	}
+	else if(CheckWeapon("WhiskeyMolly"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "WhiskeyMolly", 1);
+		GiveActorInventory(id, "Dropper_Whiskey", 1);
+	}
+	else if(CheckWeapon("BladeOfAgony"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "BladeOfAgony", 1);
+		GiveActorInventory(id, "DroppedBoA", 1);
+	}
+	else if(CheckWeapon("MurdBeretta"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "MurdBeretta", 1);
+		GiveActorInventory(id, "Dropper_Beretta", 1);
+	}
+	
+	else if(CheckWeapon("Crowbar"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "Crowbar", 1);
+		GiveActorInventory(id, "DropperCrowbar", 1);
+	}
+	
+	else if(CheckWeapon("BlueWrench"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "BlueWrench", 1);
+		GiveActorInventory(id, "Dropper_BlueWrench", 1);
+	}
+	
+	else if(CheckWeapon("SoulCube"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "SoulCube", 1);
+		GiveActorInventory(id, "Dropper_SoulCube", 1);
+	}
+	
+	else if(CheckWeapon("FireExtinguisher"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "FireExtinguisher", 1);
+		GiveActorInventory(id, "Dropper_FireExt", 1);
+	}
+	else if(CheckWeapon("ScrewDriverWeapon"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "ScrewDriverWeapon", 1);
+		GiveActorInventory(id, "Dropper_ScrewDriver", 1);
+	}
+	else if(CheckWeapon("DoubleBarrel"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "DoubleBarrel", 1);
+		GiveActorInventory(id, "Dropper_DoubleBarrel", 1);
+	}
+	else if(CheckWeapon("SledgeHammer"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "SledgeHammer", 1);
+		GiveActorInventory(id, "Dropper_Sledge", 1);
+	}
+	else if(CheckWeapon("Pickaxe"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "Pickaxe", 1);
+		GiveActorInventory(id, "Dropper_Pickaxe", 1);
+	}
+	else if(CheckWeapon("BottleWeapon"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "BottleWeapon", 1);
+		if(CheckInventory("BottleBroke"))
+		{
+		GiveActorInventory(id, "Dropper_BottleWeapon2", 1);
+		}
+		else
+		{
+		GiveActorInventory(id, "Dropper_BottleWeapon", 1);
+		}
+	TakeActorInventory(id, "BottleBroke", 10);
+	}
+	
+	else if(CheckWeapon("BottleWeapon2"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "BottleWeapon2", 1);
+		if(CheckInventory("BottleBroke"))
+		{
+		GiveActorInventory(id, "Dropper_BrownBottleWeapon2", 1);
+		}
+		else
+		{
+		GiveActorInventory(id, "Dropper_BrownBottleWeapon", 1);
+		}
+	TakeActorInventory(id, "BottleBroke", 10);
+	}
+	
+	
+	//unused lmfao
+	else if(CheckWeapon("StickyPipebomb"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "StickyPipebomb", 1);
+		if(CheckInventory("HasThrownPipebomb"))
+			{
+				GiveActorInventory(id, "Dropper_StickyPipebombOnlyDeto", 1);
+			}
+		else if(CheckInventory("NoDeto"))
+			{
+				GiveActorInventory(id, "Dropper_StickyPipebombNoDeto", 1);
+			}
+		else GiveActorInventory(id, "Dropper_StickyPipebomb", 1);
+	}
+}
+
+
+Script "WDIR_DeathStuff" Death
+{
+	WDIR_DropPlayerWeapon(ActivatorTID());
+}
+
+function void wdir_dropplayerweapon(int id)
+{
+	if(CheckWeapon("Revolver"))
+		GiveActorInventory(id, "DeathDropper_Revolver", 1);
+	else if(CheckWeapon("Crowbar"))
+		GiveActorInventory(id, "DeathDropper_Wrench", 1);
+	else if(CheckWeapon("BlueWrench"))
+		GiveActorInventory(id, "DeathDropper_BlueWrench", 1);
+	else if(CheckWeapon("PickableTNT"))
+		GiveActorInventory(id, "DeathDropper_PickableTNT", 1);
+	else if(CheckWeapon("FireExtinguisher"))
+		GiveActorInventory(id, "DeathDropper_FireExt", 1);	
+	else if(CheckWeapon("ScrewDriverWeapon"))
+		GiveActorInventory(id, "DeathDropper_ScrewDriver", 1);	
+	else if(CheckWeapon("DoubleBarrel"))
+		GiveActorInventory(id, "DeathDropper_DoubleBarrel", 1);	
+	else if(CheckWeapon("SledgeHammer"))
+		GiveActorInventory(id, "DeathDropper_Sledge", 1);
+	else if(CheckWeapon("Pickaxe"))
+		GiveActorInventory(id, "DeathDropper_Pickaxe", 1);
+	else if(CheckWeapon("Whiskey"))
+		GiveActorInventory(id, "DeathDropper_Whiskey", 1);
+	else if(CheckWeapon("BottleWeapon2"))
+		GiveActorInventory(id, "DeathDropper_BrownBottleWeapon", 1);
+	else if(CheckWeapon("BottleWeapon"))
+		GiveActorInventory(id, "DeathDropper_BottleWeapon", 1);
+		
+			
+}
+
+//Weapons thrown faaaaar away
+
+Script "WDIActivateDropFar" (void)
+{
+	WDI_DropPlayerWeapon_LiveFar(ActivatorTID());
+}
+
+function void WDI_DropPlayerWeapon_LiveFar(int id)
+{
+	TakeActorInventory(id, "IsDropping", 1);
+	
+	if(CheckWeapon("PoolCue"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "PoolCue", 1);
+		GiveActorInventory(id, "Dropper_PoolCueFar", 1);
+	}
+		
+	else if(CheckWeapon("PipeWrench"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "PipeWrench", 1);
+		GiveActorInventory(id, "Dropper_WrenchFar", 1);
+	}
+		
+	else if(CheckWeapon("LeadPipe"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "LeadPipe", 1);
+		GiveActorInventory(id, "Dropper_PipeFar", 1);
+	}
+		
+	else if(CheckWeapon("Shovel"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "Shovel", 1);
+		GiveActorInventory(id, "Dropper_ShovelFar", 1);
+	}
+		
+	else if(CheckWeapon("LChainsaw"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "LChainsaw", 1);
+		GiveActorInventory(id, "Dropper_ChainsawFar", 1);
+	}
+		
+	else if(CheckWeapon("Beretta"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "Beretta", 1);
+		GiveActorInventory(id, "Dropper_BerettaFar", 1);
+	}
+		
+	else if(CheckWeapon("LCrossbow"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "LCrossbow", 1);
+		GiveActorInventory(id, "Dropper_CbowFar", 1);
+	}
+		
+	else if(CheckWeapon("M1Carbine"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "M1Carbine", 1);
+		GiveActorInventory(id, "Dropper_M1Far", 1);
+	}
+		
+	else if(CheckWeapon("Shotgun2"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "Shotgun2", 1);
+		GiveActorInventory(id, "Dropper_ShotgunFar", 1);
+	}
+		
+	else if(CheckWeapon("Brick"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "Brick", 1);
+		GiveActorInventory(id, "Dropper_BrickFar", 1);
+	}
+		
+	else if(CheckWeapon("Molotov"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "Molotov", 1);
+		GiveActorInventory(id, "Dropper_MollyFar", 1);
+	}
+	else if(CheckWeapon("WhiskeyMolly"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "WhiskeyMolly", 1);
+		GiveActorInventory(id, "Dropper_WhiskeyFar", 1);
+	}
+	
+	else if(CheckWeapon("NailedPlank"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "NailedPlank", 1);
+		GiveActorInventory(id, "Dropper_NailedPlankFar", 1);
+	}
+	
+	else if(CheckWeapon("Plank"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "Plank", 1);
+		GiveActorInventory(id, "Dropper_PlankFar", 1);
+	}
+	
+	else if(CheckWeapon("Twig"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "Twig", 1);
+		GiveActorInventory(id, "Dropper_TwigFar", 1);
+	}
+	
+	if(CheckWeapon("PickableTNT"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "PickableTNT", 1);
+		GiveActorInventory(id, "Dropper_PickableTNTFar", 1);
+	}
+	else if(CheckWeapon("Revolver"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "Revolver", 1);
+		GiveActorInventory(id, "Dropper_RevolverFar", 1);
+	}
+	else if(CheckWeapon("BladeOfAgony"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "BladeOfAgony", 1);
+		GiveActorInventory(id, "DroppedBoAFar", 1);
+	}
+	else if(CheckWeapon("MurdBeretta"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "MurdBeretta", 1);
+		GiveActorInventory(id, "Dropper_BerettaFar", 1);
+	}
+	
+	else if(CheckWeapon("Crowbar"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "Crowbar", 1);
+		GiveActorInventory(id, "DropperCrowbarFar", 1);
+	}
+	
+	else if(CheckWeapon("BlueWrench"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "BlueWrench", 1);
+		GiveActorInventory(id, "Dropper_BlueWrenchFar", 1);
+	}
+	
+	else if(CheckWeapon("SoulCube"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "SoulCube", 1);
+		GiveActorInventory(id, "Dropper_SoulCubeFar", 1);
+	}
+	
+	else if(CheckWeapon("FireExtinguisher"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "FireExtinguisher", 1);
+		GiveActorInventory(id, "Dropper_FireExtFar", 1);
+	}
+	else if(CheckWeapon("ScrewDriverWeapon"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "ScrewDriverWeapon", 1);
+		GiveActorInventory(id, "Dropper_ScrewDriverFar", 1);
+	}
+	
+	else if(CheckWeapon("Axe"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "Axe", 1);
+		GiveActorInventory(id, "Dropper_AxeFar", 1);
+	}
+	else if(CheckWeapon("FireAxe"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "FireAxe", 1);
+		GiveActorInventory(id, "Dropper_FireAxeFar", 1);
+	}
+	else if(CheckWeapon("SledgeHammer"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "SledgeHammer", 1);
+		GiveActorInventory(id, "Dropper_SledgeFAR", 1);
+	}
+	else if(CheckWeapon("Pickaxe"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "Pickaxe", 1);
+		GiveActorInventory(id, "Dropper_PickaxeFAR", 1);
+	}
+	
+	else if(CheckWeapon("SprayCanBLU"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "SprayCanBLU", 1);
+		GiveActorInventory(id, "Dropper_SprayCanBLUFar", 1);
+	}
+	else if(CheckWeapon("SprayCanGRN"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "SprayCanGRN", 1);
+		GiveActorInventory(id, "Dropper_SprayCanGRNFar", 1);
+	}
+	else if(CheckWeapon("SprayCanYLL"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "SprayCanYLL", 1);
+		GiveActorInventory(id, "Dropper_SprayCanYLLFar", 1);
+	}
+	else if(CheckWeapon("SprayCanORG"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "SprayCanORG", 1);
+		GiveActorInventory(id, "Dropper_SprayCanORGFar", 1);
+	}
+	else if(CheckWeapon("SprayCanPNK"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "SprayCanPNK", 1);
+		GiveActorInventory(id, "Dropper_SprayCanPNKFar", 1);
+	}
+	else if(CheckWeapon("SprayCanRED"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "SprayCanRED", 1);
+		GiveActorInventory(id, "Dropper_SprayCanREDFar", 1);
+	}
+	else if(CheckWeapon("FlashlightZ"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "FlashlightZ", 1);
+		GiveActorInventory(id, "Dropper_FlashlightZFar", 1);
+	}
+	else if(CheckWeapon("BaseballBat"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "BaseballBat", 1);
+		GiveActorInventory(id, "Dropper_BaseballBatFar", 1);
+	}
+	
+	else if(CheckWeapon("DoubleBarrel"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "DoubleBarrel", 1);
+		GiveActorInventory(id, "Dropper_DoubleBarrelFar", 1);
+	}
+	
+	else if(CheckWeapon("BottleWeapon"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "BottleWeapon", 1);
+		if(CheckInventory("BottleBroke"))
+		{
+		GiveActorInventory(id, "Dropper_BottleWeapon2FAR", 1);
+		}
+		else
+		{
+		GiveActorInventory(id, "Dropper_BottleWeaponFAR", 1);
+		}
+	TakeActorInventory(id, "BottleBroke", 10);
+	}
+	
+	else if(CheckWeapon("BottleWeapon2"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "BottleWeapon2", 1);
+		if(CheckInventory("BottleBroke"))
+		{
+		GiveActorInventory(id, "Dropper_BrownBottleWeapon2FAR", 1);
+		}
+		else
+		{
+		GiveActorInventory(id, "Dropper_BrownBottleWeaponFAR", 1);
+		}
+	TakeActorInventory(id, "BottleBroke", 10);
+	}
+	
+	
+	else if(CheckWeapon("StickyPipebomb"))
+	{
+		TakeActorInventory(id, "Slot1Filled", 1);
+		TakeActorInventory(id, "StickyPipebomb", 1);
+		if(CheckInventory("HasThrownPipebomb"))
+			{
+				GiveActorInventory(id, "Dropper_StickyPipebombOnlyDeto", 1);
+			}
+		else if(CheckInventory("NoDeto"))
+			{
+				GiveActorInventory(id, "Dropper_StickyPipebombNoDeto", 1);
+			}
+		else GiveActorInventory(id, "Dropper_StickyPipebomb", 1);
+	}
+}

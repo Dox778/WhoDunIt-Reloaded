@@ -1,0 +1,292 @@
+Actor FogFiller 26666
+{
+radius 8
+height 8
++NOGRAVITY
+  //$Category WDI Effects
+  //$Sprite XSMKA0
+  //$Title "Fog Filler (Spawner)"
+states
+	{
+	Spawn:
+	 TNT1 A 0
+	 TNT1 AAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("SexyFog", random(-Args[0], Args[0]), random(-Args[0], Args[0]), random(-Args[0], Args[0]), random(-Args[1], Args[1]), random(-Args[1], Args[1]), random(-Args[1], Args[1]), random(0, 360), SXF_CLIENTSIDE, 0)
+	 stop
+	}
+}
+
+Actor SexyFog : Smokecloud 26667
+{
+  //$Category WDI Effects
+  //$Sprite XSMKA0
+  //$Title "Fog (Sexy)"
+speed 1
+scale 0.35
++FORCEXYBILLBOARD
+states
+	{
+	Spawn:
+	 XSMK A 1 
+	  loop
+	}
+}
+
+Actor FreezerFan 15061
+{
++NOGRAVITY
++NOBLOCKMAP
+  //$Category WDI Effects
+  //$Sprite SMOKQ0
+  //$Title "Freezer Fan (Spawns Clouds)"
+States
+	{
+	Spawn:
+		TNT1 A 1 A_SpawnItemEx ("FanCloud", 0, 0, 0, random(5, 15), 0, random(-2, 2), random(-8.0, 8.0), SXF_CLIENTSIDE, 0)
+		loop
+	}
+}
+
+ACTOR FanCloud
+{
+	PROJECTILE
+	-NOGRAVITY
+	+LOWGRAVITY
+	+DONTSPLASH
+	+LOOKALLAROUND
+	+FORCEXYBILLBOARD
+	scale 0.5
+	Damage 0
+	Radius 8
+	Height 8
+	Speed 0
+	DamageType "Ice"
+	DeathSound ""
+	Translation Ice
+	RenderStyle Add
+	Alpha 0.5
+	States
+	{
+	Spawn:
+	    SMOK QPONMLKJIHGFEDBC 1 A_FadeOut(0.03)
+		goto Death
+	Death:
+		//TNT1 A 1 A_Jump(235, 2)
+		TNT1 A 1 //A_Explode(2, 32, 1)
+		TNT1 A 0
+		stop
+	}
+}
+
+ACTOR ColdCloud 15060
+{
+  Translation Ice
+  Radius 20
+  Height 30
+  Mass 1
+  Speed 1
+  DamageType "Ice"
+  +DROPOFF
+  +NODAMAGETHRUST
+  +DONTSPLASH
+  +FOILINVUL
+  +BLOODLESSIMPACT
+  +SLIDESONWALLS
+  RenderStyle Add
+  Obituary "%o went north."
+  HitObituary "%o went north."
+  Alpha 0.25
+  DeathSound "PoisonShroomDeath"
+  //$Category WDI Effects
+  //$Sprite PSBGD0
+  //$Title "Freezer Cloud"
+  States
+  {
+  Spawn:
+    PSBG D 1
+    PSBG D 1 A_Scream
+    PSBG DEFH 4
+	PSBG H 1 
+ 	Goto Float
+  
+  Float:
+	PSBG H 1 A_Wander 
+	PSBG H 8  
+    PSBH H 1 A_Jump(255, "Float")
+	goto Explode
+	
+	Explode:
+	PSBG H 350 
+	PSBG H 1 A_Explode(4,256)
+	goto Float
+
+Death:
+    PSBG HG 7
+    PSBG FD 6 A_FadeOut(0.1)
+    goto Death + 1
+  }
+}
+
+/////////////////////////
+// FOG by TORMENTOR667 //
+/////////////////////////
+
+Actor FogCloud_Generator 9918
+{
+ +Missile
+ +NoBlockmap
+ +NoGravity
+ +NoSector
+ +Clientsideonly
+ Radius 1
+ Height 1
+  //$Category WDI Effects
+  //$Sprite XSMKA0
+  //$Title "Fog Generator"
+ States
+ {
+  Spawn:
+   TNT1 A 0	
+   TNT1 A 0 A_Jump(128,1,2)
+   TNT1 A 0 A_SpawnItemEx ("FogCloud_V1", 0, 0, random(0, 32), 0, 0, 0, 0, 128)
+   TNT1 A 0 A_SpawnItemEx ("FogCloud_V2", 0, 0, random(0, 32), 0, 0, 0, 0, 128)
+   TNT1 A 0 A_SpawnItemEx ("FogCloud_V2", 0, 0, random(0, 32), 0, 0, 0, 0, 128)
+   stop
+ }
+}
+
+
+Actor FogCloud_V1 
+{
+ +Missile
+ +NoGravity
+ +NoBlockmap
+ +Clientsideonly
+ +FORCEXYBILLBOARD
+ Radius 1
+ Height 1
+ Speed 0
+ RenderStyle Translucent
+ Alpha 0.25
+ Scale 3
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 A 0 A_CheckSight("OPTIMIZE")	
+   XSMK AAAAAAAAAAAAAAAAAAAA 10 A_FadeIn(0.002)
+   XSMK AAAAAAAAAAAAAAAAAAAA 10 A_FadeOut(0.002)
+   loop
+
+   OPTIMIZE:
+   TNT1 A 1
+   goto Spawn
+ }
+}
+
+Actor FogCloud_V2 : FogCloud_V1
+{
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 A 0 A_CheckSight("OPTIMIZE")	
+   XSMK AAAAAAAAAAAAAA 10 A_FadeIn(0.002)
+   XSMK AAAAAAAAAAAAAA 10 A_FadeOut(0.002)
+   loop
+ }
+}
+
+Actor FogCloud_V3 : FogCloud_V1
+{
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 A 0 A_CheckSight("OPTIMIZE")	
+   XSMK AAAAAAAAAAAAAA 13 A_FadeIn(0.002)
+   XSMK AAAAAAAAAAAAAA 13 A_FadeOut(0.002)
+   loop
+ }
+}
+
+/* STEAM */
+
+Actor SteamSpawner : SwitchableDecoration 20902
+{
+  //$Category WDI Effects
+  //$Sprite STEMA0
+  //$Title "Steam Spawner"
+	Height 2
+	Radius 1
+	Mass 0
+	+NOBLOCKMAP +NOGRAVITY
+	+CLIENTSIDEONLY +NOINTERACTION
+	States
+	{
+	Spawn:
+	Active:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIf(Args[0] == 1, "Down")
+		TNT1 A 0 A_JumpIf(Args[0] > 1, "Forward")
+		TNT1 A 0 A_JumpIf(Args[1] > 0, "UpBurst")
+		TNT1 A 0 A_JumpIf(Args[3] > 0, 2)
+		TNT1 A 1 A_SpawnItemEx("SteamParticle", 0, 0, 1, (0.1)*Random(0, 4), 0, (0.1)*Random(35, 40), Random(0, 360), 128)
+		Loop
+	Down:
+		TNT1 A 0 A_JumpIf(Args[1] > 0, "DownBurst")
+		TNT1 A 0 A_JumpIf(Args[3] > 0, 2)
+		TNT1 A 1 A_SpawnItemEx("SteamParticle", 0, 0, 0, (0.1)*Random(0, 4), 0, (-0.1)*Random(35, 40), Random(0, 360), 128)
+		Loop
+	Forward:
+		TNT1 A 0 A_JumpIf(Args[1] > 0, "ForwardBurst")
+		TNT1 A 0 A_JumpIf(Args[3] > 0, 2)
+		TNT1 A 1 A_SpawnItemEx("SteamParticle", 0, 0, 0, (0.1)*Random(35, 40), 0, (0.1)*Random(-5, 5), Random(-8, 8), 128)
+		Loop
+	UpBurst:
+		TNT1 A 1 A_Jump(Args[2]/16, 1)
+		Loop
+		TNT1 A 0 A_JumpIf(Args[3] > 0, 2)
+		TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 1, (0.1)*Random(0, 4), 0, (0.1)*Random(35, 40), Random(0, 360), 128)
+		TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 1, (0.1)*Random(0, 4), 0, (0.1)*Random(35, 40), Random(0, 360), 128)
+		TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 1, (0.1)*Random(0, 4), 0, (0.1)*Random(35, 40), Random(0, 360), 128)
+		Loop
+	DownBurst:
+		TNT1 A 1 A_Jump(Args[2]/16, 1)
+		Loop
+		TNT1 A 0 A_JumpIf(Args[3] > 0, 2)
+		TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 0, (0.1)*Random(0, 4), 0, (-0.1)*Random(35, 40), Random(0, 360), 128)
+		TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 0, (0.1)*Random(0, 4), 0, (-0.1)*Random(35, 40), Random(0, 360), 128)
+		TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 0, (0.1)*Random(0, 4), 0, (-0.1)*Random(35, 40), Random(0, 360), 128)
+		Loop
+	ForwardBurst:
+		TNT1 A 1 A_Jump(Args[2]/16, 1)
+		Loop
+		TNT1 A 0 A_JumpIf(Args[3] > 0, 2)
+		TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 0, (0.1)*Random(35, 40), 0, (0.1)*Random(-5, 5), Random(-8, 8), 128)
+		TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 0, (0.1)*Random(35, 40), 0, (0.1)*Random(-5, 5), Random(-8, 8), 128)
+		TNT1 AAAAAAAAAA 1 A_SpawnItemEx("SteamParticle", 0, 0, 0, (0.1)*Random(35, 40), 0, (0.1)*Random(-5, 5), Random(-8, 8), 128)
+		Loop
+	Inactive:
+		TNT1 A 1 A_StopSoundEx("SoundSlot7")
+		TNT1 A 1
+		Goto Inactive+1
+  }
+}
+
+Actor SteamParticle
+{
+	Height 1
+	Radius 1
+	Scale 0.4
+	Alpha 0.65
+	RenderStyle Add
+	+Missile +DONTSPLASH
+	+NOGRAVITY +NOBLOCKMAP
+	+CLIENTSIDEONLY +FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		STEM ABCDEFGHIJKL 2 NODELAY A_SetTranslucent(alpha-0.05, 1)
+		Stop
+	}
+}
