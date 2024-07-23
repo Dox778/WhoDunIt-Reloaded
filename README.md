@@ -22,7 +22,7 @@ The mod has plenty of custom maps designed specifically for this gamemode, each 
 
 # WHERE AND HOW TO PLAY THE MOD
 
-- There exists an [official Who Dun It: Reloaded](https://euroboros.net/zandronum/serverinfo.php?id=14829&popup=1) server hosted on euroboros.
+- There exists an [official Who Dun It: Reloaded](https://www.webdoomer.com/servers?search=Who%20Dun%20It%3A%20Reloaded) server hosted on euroboros.
 - You can also join [METAL DANNY 420's discord server](https://discord.gg/VB8TAmDg8Z) where he hosts dedicated multiplayer events, where Who Dun It: Reloaded is (almost) always played!
 <br>
 
