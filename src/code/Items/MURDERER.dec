@@ -84,6 +84,7 @@ Actor ChlorineGas : CustomInventory 10492
 	//$Category WDI Murderer Stuff
 	//$Sprite PSBGA0
 	//$Title "Bertholite"
+	Tag "Bertholite"
 	Inventory.PickupFlash "PickupFlash"
 	Inventory.MaxAmount 1
 	Inventory.Amount 1
@@ -200,6 +201,7 @@ ACTOR SmokeBomb : CustomInventory 10498
   //$Category WDI Murderer Stuff
   //$Sprite SSBGA0
   //$Title "Smoke Bomb"
+  Tag "Smoke Bomb"
   +INVBAR
   +FANCYPICKUPSOUND
   +INVENTORY.UNDROPPABLE
@@ -324,6 +326,7 @@ ACTOR TripShotgun : CustomInventory 10493
   //$Category WDI Murderer Stuff
   //$Sprite TURTA8A2
   //$Title "Trip Shotgun"
+  Tag "Trip Shotgun"
   +INVBAR
   +FANCYPICKUPSOUND
   +INVENTORY.UNDROPPABLE
@@ -580,6 +583,7 @@ Actor LolTrap
 
 Actor RemoteCamera: CustomInventory
 {
+    Tag "Remote Camera"
 	Scale 0.1
 	Inventory.DefMaxAmount
 	Inventory.PickupFlash "PickupFlash"
@@ -713,6 +717,7 @@ ACTOR SoundEmitter : CustomInventory 10495
   //$Category WDI Murderer Stuff
   //$Sprite BEACA0
   //$Title "Sound Emitter"
+  Tag "Sound Emitter"
   +INVBAR
   +FANCYPICKUPSOUND
   +INVENTORY.UNDROPPABLE
@@ -850,6 +855,7 @@ actor FakeStim : CustomInventory 10500
   //$Category WDI Murderer Stuff
   //$Sprite FTIMA0
   //$Title "Poison Stimpack"
+  Tag "Fake Stimpack"
   inventory.pickupmessage "\cjPicked up a \c[V1]Rigged Stimpack."
   inventory.pickupsound ""
   Inventory.Icon "ARTIFTIM"
@@ -1000,6 +1006,7 @@ ACTOR FakeTeamkillHalo : CustomInventory
   //$Category WDI Murderer Stuff
   //$Sprite TURTA8A2
   //$Title "Fake Halo"
+  Tag "Fake Teamkill Halo"
   +INVBAR
   +FANCYPICKUPSOUND
   +INVENTORY.UNDROPPABLE

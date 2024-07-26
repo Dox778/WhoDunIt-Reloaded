@@ -197,6 +197,7 @@ ACTOR EasterEgg : CustomInventory 10400
   //$Category WDI Easter Eggs
   //$Sprite EASTA0
   //$Title "THE EASTER EGG"
+  Tag "Easter Egg"
   +INVBAR
   +FANCYPICKUPSOUND
   -INVENTORY.INTERHUBSTRIP

@@ -243,6 +243,7 @@ ACTOR PistolClip : Ammo replaces Clip 30062
   //$Category WDI Ammo
   //$Sprite CLP4A0
   //$Title "Pistol Magazine"
+  Tag "Pistol Clip"
    Scale 0.35	
    Inventory.MaxAmount 2
    +INVENTORY.INVBAR 
@@ -266,6 +267,7 @@ ACTOR M1Ammo : Ammo replaces Clipbox 31013
   //$Category WDI Ammo
   //$Sprite CLP3A0
   //$Title "M1 Magazine"
+  Tag "M1 Magazine"
    Scale 0.9
    Inventory.MaxAmount 1
    Inventory.Icon "ARTIM1"
@@ -298,6 +300,7 @@ ACTOR NewShell : Ammo replaces Shell 30061
   //$Category WDI Ammo
   //$Sprite D3S1E0
   //$Title "Shotgun Shell"
+  Tag "Shotgun Shell"
   Game Doom
   SpawnID 12
   Scale 0.4
@@ -331,7 +334,8 @@ ACTOR NewShell : Ammo replaces Shell 30061
   }
 }
 ACTOR SpareSawFuel : Ammo 
-{ 
+{
+  Tag "Chainsaw Fuel" 
   Game Doom
   XScale 0.7
 	YScale 0.6

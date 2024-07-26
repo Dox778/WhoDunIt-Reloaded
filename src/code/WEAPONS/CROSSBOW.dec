@@ -249,6 +249,7 @@ ACTOR LoadedBolts : Ammo //30065
   //$Category WDI Ammo
   //$Sprite ARWPA7A3
   //$Title "Crossbow Bolt"
+  Tag "Crossbow Bolt"
   Game Doom
   SpawnID 12
   +NOGRAVITY

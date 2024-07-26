@@ -17,6 +17,7 @@ Actor SmallKit : CustomInventory Replaces Stimpack //2011
 	//$Category WDI Items
 	//$Sprite STIMA0
 	//$Title "Small Medkit"
+	Tag "Small Medkit"
 	Inventory.MaxAmount 3
 	Inventory.Icon "ARTISTIM"
 	Inventory.Respawntics 10500 //5 minutes
@@ -164,6 +165,7 @@ Actor BigKit : CustomInventory replaces Medikit //2012
   //$Category WDI Items
   //$Sprite MEDIA0
   //$Title "Big Medkit"
+  Tag "Big Medkit"
 	Health 50
 	DamageType Heal
 	Inventory.MaxAmount 1
