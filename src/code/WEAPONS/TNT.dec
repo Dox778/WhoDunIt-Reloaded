@@ -172,7 +172,7 @@ Actor WDI18bombdropped
 	+SHOOTABLE
 	+FORCEXYBILLBOARD
 	+NOBLOOD
-	Health 26
+	Health 75
 	MASS 99999
 	DamageFactor "Gas", 0.0
 	DamageFactor "FlareEffect", 0.0
@@ -184,7 +184,7 @@ Actor WDI18bombdropped
 	DamageFactor "SprayPNK", 0.0
 	DamageFactor "burn", 0.0
 	DamageFactor "fire", 0.0
-	DamageFactor "ShovelMelee", 2.0
+	DamageFactor "ShovelMelee", 1.0
 	DamageFactor "SawMelee", 2.0
 	DamageFactor "friendlygun", 10.0
   States
