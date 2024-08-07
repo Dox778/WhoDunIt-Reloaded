@@ -9,3 +9,9 @@
 	SpaceWidth 6
 	Template SMLFN%03d
 }
+
+"NIGHTMARE"
+{
+	SpaceWidth 9
+	Template NGHTR%03d
+}
