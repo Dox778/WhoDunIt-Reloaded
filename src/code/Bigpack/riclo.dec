@@ -544,7 +544,7 @@ ACTOR Ampoule 20030
   States
   {
   Spawn:
-    BULB A -1
+    RILA A -1
     Stop
   }
 }
