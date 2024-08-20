@@ -33,6 +33,7 @@ FAN FAN
 VENDAUT VENDAUT
 MUDRINK MUDRINK
 MUAPPLE MUAPPLE
+MUCROT MUCROT
 
 $AMBIENT 162 PCSNDV POINT CONTINUOUS 1.0
 $AMBIENT 163 SKUWIND POINT CONTINUOUS 1.0 //From Skulltag_content
@@ -167,5 +168,3 @@ $random wdrip { wdrip1 wdrip2 wdrip3 wdrip4 }
 $random floor/vent { vstep1 vstep2 vstep3 vstep4 null null null}
 $random zap { zap1 zap2 zap3 zap4 }
 $random creak { creak1 creak2 creak3 creak5 }
-
-

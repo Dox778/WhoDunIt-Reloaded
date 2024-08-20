@@ -148,3 +148,9 @@ end
     playrepeat         D35DoorClose
     stopsound          D35DoorClose
 end
+
+//WDI26
+:Door5
+	door		5
+	playuntildone	URFDOOR2
+END

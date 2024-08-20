@@ -1829,4 +1829,29 @@ Floor CONCRETE rock
 Floor LITE3 metal  
 Floor DM47 hard   
 Floor FUZZ5 tile    
+
+//WDI26
+floor CRATOP4 wood
+floor CLAGFLR2 metal
+floor CONS1_1 metal
+floor METFLOOR metal
+floor METBLOC4 metal
+floor METBLOC3 metal
+floor METBLOC2 metal
+floor METBLOC1 metal
+floor FLOR4_8B tile2
+floor CONR metal
+floor CONL metal
+floor COMPGLC metal2
+floor SHAWNT08 tile2
+floor SHAWN01C tile2
+floor 0_RUS02A metal
+floor F0023 metal
+floor RWALL14 hard
+floor 0_RUS13 metal2
+floor 0_RUS09 metal2
+floor 0_RUS08 metal2
+floor 0_RUS88 metal2
+floor 0_RUS89 metal2
+floor BCUTPAD metal2
 endif

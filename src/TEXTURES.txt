@@ -131,3 +131,408 @@ sprite NPIPA0, 1, 1 { patch NULL, 0, 0 }
 sprite NPIPB0, 1, 1 { patch NULL, 0, 0 }
 sprite NPIPC0, 1, 1 { patch NULL, 0, 0 }
 sprite PAGEA0, 1, 1 { patch NULL, 0, 0 }
+
+// WDI26 MAP BY RICLO500
+
+Texture "PLNTDOC1", 296, 426
+{
+	XScale 9.500
+	YScale 9.900
+	Patch "PLNTDOC1", 0, 0
+}
+
+Texture "PLNTDOC2", 952, 652
+{
+	XScale 21.500
+	YScale 21.900
+	Patch "PLNTDOC2", 0, 0
+}
+
+Texture "PLNTDOC3", 638, 458
+{
+	XScale 12.500
+	YScale 12.900
+	Patch "PLNTDOC3", 0, 0
+}
+
+Texture "FACLPICS", 680, 798
+{
+	XScale 25.000
+	YScale 25.000
+	Patch "FACLPICS", 0, 0
+}
+Texture "PLASMAPH", 286, 187
+{
+	XScale 12.000
+	YScale 12.000
+	Patch "PLASMAPH", 0, 0
+}
+
+Texture "PLNTPICS", 680, 798
+{
+	XScale 25.000
+	YScale 25.000
+	Patch "PLNTPICS", 0, 0
+}
+
+Texture "TECPRINT", 237, 146
+{
+	XScale 4.000
+	YScale 4.000
+	Patch "TECPRINT", 0, 0
+}
+
+Texture "SHOWSIGN", 48, 63
+{
+	XScale 2.800
+	YScale 2.800
+	Patch "SHOWSIGN", 0, 0
+}
+
+Texture "PCPICS", 280, 280
+{
+	XScale 5.000
+	YScale 5.000
+	Patch "PCPICS", 0, 0
+}
+
+Texture "SPOOKPC", 140, 140
+{
+	XScale 5.000
+	YScale 5.000
+	Patch "SPOOKPC", 0, 0
+}
+
+Texture "HIDEFPC", 140, 140
+{
+	XScale 5.000
+	YScale 5.000
+	Patch "HIDEFPC", 0, 0
+}
+
+Texture "MEME5", 410, 308
+{
+	XScale 5.500
+	YScale 5.500
+	Patch "MEME5", 0, 0
+}
+
+Texture "MEME1", 488, 997
+{
+	XScale 16.000
+	YScale 16.000
+	Patch "MEME1", 0, 0
+}
+
+Texture "MEME2", 601, 884
+{
+	XScale 11.000
+	YScale 11.000
+	Patch "MEME2", 0, 0
+}
+
+Texture "MEME7", 1394, 148
+{
+	XScale 27.200
+	YScale 27.200
+	Patch "MEME7", 0, 0
+}
+
+Texture "GUNSAFE", 128, 215
+{
+	XScale 2.000
+	YScale 2.000
+	Patch "GUNSAFE", 0, 0
+}
+
+Texture "GUNSAFE2", 128, 215
+{
+	XScale 2.000
+	YScale 2.000
+	Patch "GUNSAFE2", 0, 0
+}
+
+Texture "GUNSAFE3", 128, 215
+{
+	XScale 2.000
+	YScale 2.000
+	Patch "GUNSAFE3", 0, 0
+}
+
+Texture "PIC1A", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC1A", 0, 0
+}
+
+Texture "PIC1B", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC1B", 0, 0
+}
+
+Texture "PIC1C", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC1C", 0, 0
+}
+
+Texture "PIC1D", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC1D", 0, 0
+}
+
+Texture "PIC2A", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC2A", 0, 0
+}
+
+Texture "PIC2B", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC2B", 0, 0
+}
+
+Texture "PIC2C", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC2C", 0, 0
+}
+
+Texture "PIC2D", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC2D", 0, 0
+}
+
+Texture "PIC3A", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC3A", 0, 0
+}
+
+Texture "PIC3B", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC3B", 0, 0
+}
+
+Texture "PIC3C", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC3C", 0, 0
+}
+
+Texture "PIC3D", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC3D", 0, 0
+}
+
+Texture "PIC4A", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC4A", 0, 0
+}
+
+Texture "PIC4B", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC4B", 0, 0
+}
+
+Texture "PIC4C", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC4C", 0, 0
+}
+
+Texture "PIC4D", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC4D", 0, 0
+}
+
+Texture "PIC5A", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC5A", 0, 0
+}
+
+Texture "PIC5B", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC5B", 0, 0
+}
+
+Texture "PIC5C", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC5C", 0, 0
+}
+
+Texture "PIC5D", 93, 87
+{
+	XScale 1.6
+	YScale 1.6
+	Patch "PIC5D", 0, 0
+}
+Texture "WP973052", 1920, 1080
+{
+	XScale 4
+	YScale 4
+	Patch "WP973052", 0, 0
+}
+Texture "PICTARE4", 160, 106
+{
+	XScale 1.4
+	YScale 1.4
+	Patch "PICTARE4", 0, 0
+}
+Texture "PICTARE2", 116, 109
+{
+	XScale 1.7
+	YScale 1.7
+	Patch "PICTARE2", 0, 0
+}
+Texture "MURDCAM1", 72, 48
+{
+	XScale 3
+	YScale 3
+	Patch "MURDCAM1", 0, 0
+}
+Texture "MURDCAM2", 72, 48
+{
+	XScale 3
+	YScale 3
+	Patch "MURDCAM2", 0, 0
+}
+Texture "GIGACHAD", 75, 75
+{
+	XScale 3
+	YScale 3
+	Patch "GIGACHAD", 0, 0
+}
+Texture "MAPARROW", 128, 128
+{
+	XScale 1.5
+	YScale 1.5
+	Patch "MAPARROW", 0, 0
+}
+Texture "BLUCAM01", 112, 8
+{
+	XScale 3
+	YScale 3
+	Patch "BLUCAM01", 0, 0
+}
+Texture "BLUCAM02", 112, 8
+{
+	XScale 3
+	YScale 3
+	Patch "BLUCAM02", 0, 0
+}
+Texture "BLUCAM03", 112, 8
+{
+	XScale 3
+	YScale 3
+	Patch "BLUCAM03", 0, 0
+}
+Texture "BLUCAM04", 112, 8
+{
+	XScale 3
+	YScale 3
+	Patch "BLUCAM04", 0, 0
+}
+Texture "BLUCAM05", 112, 8
+{
+	XScale 3
+	YScale 3
+	Patch "BLUCAM05", 0, 0
+}
+Texture "BLUCAM06", 112, 8
+{
+	XScale 3
+	YScale 3
+	Patch "BLUCAM06", 0, 0
+}
+Texture "WHICAM01", 112, 8
+{
+	XScale 3
+	YScale 3
+	Patch "WHICAM01", 0, 0
+}
+Texture "WHICAM02", 112, 8
+{
+	XScale 3
+	YScale 3
+	Patch "WHICAM02", 0, 0
+}
+Texture "WHICAM03", 112, 8
+{
+	XScale 3
+	YScale 3
+	Patch "WHICAM03", 0, 0
+}
+Texture "WHICAM04", 112, 8
+{
+	XScale 3
+	YScale 3
+	Patch "WHICAM04", 0, 0
+}
+Texture "WHICAM05", 112, 8
+{
+	XScale 3
+	YScale 3
+	Patch "WHICAM05", 0, 0
+}
+Texture "WHICAM06", 112, 8
+{
+	XScale 3
+	YScale 3
+	Patch "WHICAM06", 0, 0
+}
+Texture "WHICAM07", 112, 8
+{
+	XScale 3
+	YScale 3
+	Patch "WHICAM07", 0, 0
+}
+Texture "WHICAM08", 112, 8
+{
+	XScale 3
+	YScale 3
+	Patch "WHICAM08", 0, 0
+}
+Texture "WHICAM09", 112, 8
+{
+	XScale 3
+	YScale 3
+	Patch "WHICAM09", 0, 0
+}
+Texture "WHICAM10", 112, 8
+{
+	XScale 3
+	YScale 3
+	Patch "WHICAM10", 0, 0
+}

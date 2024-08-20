@@ -136,3 +136,50 @@ Skybox ABSKY1 fliptop
   ABSKY1_T
   ABSKY1_T
 }
+
+//Riclo500 - WDI26:
+flickerlight2 TPortNormal
+{
+    color 0.5 0.5 0.7
+    size 40
+    secondarySize 56
+    interval 0.01
+    offset 0 32 0
+}
+
+flickerlight2 TPortZap
+{
+    color 0.45 0.45 0.9
+    size 88
+    secondarySize 128
+    interval 0.01
+    offset 0 32 0
+}
+
+pointlight REDSTROBE
+{
+    color 0.4 0.0 0.0
+    size 48
+}
+
+pulselight REDWARNING
+{
+    color 0.4 0.0 0.0
+    size 32
+    secondarySize 48
+    interval 1
+    offset 0 0 -8
+} 
+
+object StrobeRayRed
+{
+    frame BAL1C { light REDSTROBE }
+}
+
+object StrobeLightRed
+{
+    frame STRRA { light REDWARNING }
+	frame STRRB { light REDWARNING }
+	frame STRRC { light REDWARNING }
+	frame STRRD { light REDWARNING }
+}

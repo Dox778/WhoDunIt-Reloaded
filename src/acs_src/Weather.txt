@@ -18,7 +18,7 @@ while(true)
 		}
     else
 		{
-		If((currLevelNum == 13)||(currLevelNum == 14)||(currLevelNum == 24))
+		If((currLevelNum == 13)||(currLevelNum == 14)||(currLevelNum == 24)||(currLevelNum == 26))
 			{
 				if(GetActorPitch(cameraTID) < -0.12 && CheckActorCeilingTexture(cameraTID, "F_SKY1") && RSC < 3*GetCVAR("WDI_Wpower2"))
 				{
@@ -109,7 +109,8 @@ SetResultValue(0);
 
 script "RandomRain" open
 {
-	If((GetLevelInfo(LevelInfo_LevelNum) == 4)||(GetLevelInfo(LevelInfo_LevelNum) == 6)||(GetLevelInfo(LevelInfo_LevelNum) == 9)||(GetLevelInfo(LevelInfo_LevelNum) == 11)||(GetLevelInfo(LevelInfo_LevelNum) == 16)||(GetLevelInfo(LevelInfo_LevelNum) == 21)||(GetLevelInfo(LevelInfo_LevelNum) == 25)||(GetLevelInfo(LevelInfo_LevelNum) == 31))
+	If((GetLevelInfo(LevelInfo_LevelNum) == 4)||(GetLevelInfo(LevelInfo_LevelNum) == 6)||(GetLevelInfo(LevelInfo_LevelNum) == 9)||(GetLevelInfo(LevelInfo_LevelNum) == 11)||(GetLevelInfo(LevelInfo_LevelNum) == 16)||
+	(GetLevelInfo(LevelInfo_LevelNum) == 21)||(GetLevelInfo(LevelInfo_LevelNum) == 25)||(GetLevelInfo(LevelInfo_LevelNum) == 26)||(GetLevelInfo(LevelInfo_LevelNum) == 31))
 		{
 		SetCVAR("WDI_rain",0);
 		Terminate;

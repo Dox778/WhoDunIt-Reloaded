@@ -413,3 +413,1360 @@ actor Dirted5
 	  stop
 	}
 }
+
+///////////////////////////////////
+///////// WDI 26 DECORATE /////////
+///////////////////////////////////
+
+actor TREE01(SOLID) 10247
+{
+//$Category WDI26 Decorate
+  height 176
+  radius 60
+  +SOLID
+  +FORCEYBILLBOARD
+  states
+  {
+  Spawn:
+  TRE1 A -1
+  Stop
+  }
+}
+ACTOR Duke_Bush 23002
+{
+//$Category WDI26 Decorate
+  Game Doom
+  height 0
+  radius 0
+  scale 1
+  +CLIENTSIDEONLY
+  +FORCEYBILLBOARD
+  States
+  {
+  Spawn:
+    DPLM C -1
+    Stop
+  }
+}
+actor BRAN11 20026
+{
+//$Category WDI26 Decorate
+  height 28
+  radius 14
+  +SOLID
+  states
+  {
+  Spawn:
+  BRA1 A -1
+  Stop
+  }
+}
+actor BRAN12 20027
+{
+//$Category WDI26 Decorate
+  height 28
+  radius 14
+  +SOLID
+  states
+  {
+  Spawn:
+  BRA2 A -1
+  Stop
+  }
+}
+actor BRAN13 20028
+{
+//$Category WDI26 Decorate
+  height 28
+  radius 14
+  +SOLID
+  states
+  {
+  Spawn:
+  BRA3 A -1
+  Stop
+  }
+}
+actor POTTREE02 10244
+{
+//$Category WDI26 Decorate
+  height 48
+  radius 14
+  +SOLID
+  states
+  {
+  Spawn:
+  TRE6 A -1
+  Stop
+  }
+}
+ACTOR PushableBarrel 10246
+{
+//$Category WDI26 Decorate
+    Health 0x7FFFFFFF
+    Radius 10
+    Height 34
+    Mass 450
+    +SOLID
+    +SHOOTABLE
+    +NOBLOOD
+	//+SLIDESONWALLS
+    States
+    {
+        Spawn:
+            BEXP B -1
+        stop
+    }
+}
+Actor TechnoPillar 32222
+{
+//$Category WDI26 Decorate
+  Radius 18
+  Height 112
+  +SOLID
+  States
+  {
+  Spawn:
+    ELEC A -1
+	stop
+  }
+}
+ACTOR Ampoule 20030
+{
+//$Category WDI26 Decorate
+  Game Doom
+  Radius 5
+  Height 10
+  scale .75    
+  -SOLID
++NOGRAVITY
++CLIENTSIDEONLY
+  States
+  {
+  Spawn:
+    BULB A -1
+    Stop
+  }
+}
+ACTOR PushableBarrelOil 32223
+{
+//$Category WDI26 Decorate
+    Health 0x7FFFFFFF
+    Radius 10
+    Height 34
+    Mass 225
+    +SOLID
+    +SHOOTABLE
+    +NOBLOOD
+	//+SLIDESONWALLS
+    States
+    {
+        Spawn:
+            OILD A -1
+        stop
+    }
+}
+ACTOR CEILING_TV 20080
+{
+//$Category WDI26 Decorate
+  Game Doom
+  Radius 10
+  Height 20
+  scale .7
+  -SOLID
+  +SPAWNCEILING 
+  +NOGRAVITY
+  +CLIENTSIDEONLY
+  States
+  {
+  Spawn:
+    TVSD A -1 
+    Stop
+  }
+}
+
+Actor BigSteamParticle : SteamParticle
+{
+//$Category WDI26 Decorate
+  Scale 3.0
+}
+
+actor Meat 32226
+{
+//$Category WDI26 Decorate
+//$Title "Meat (No Eating)"
+  height 4
+  radius 4
+  states
+  {
+  Spawn:
+  FRUT A -1
+  Stop
+  }
+}
+
+ACTOR Carrot : SwitchableDecoration 32228 // Updated for Reloaded
+{
+	//$Category WDI26 Decorate
+	//$Sprite FRUTC0
+	//$Title "Carrot"
+  mass 5000
+  Radius 4
+  Height 6
+  scale 0.8
+  Deathsound "MUCROT"
+  -SOLID
+  +FORCEXYBILLBOARD
+  +USESPECIAL
+  +PUSHABLE +SHOOTABLE +CANNOTPUSH +GHOST PushFactor 0.1
+  +NOBLOOD
+	Activation THINGSPEC_Activate | THINGSPEC_ThingTargets | THINGSPEC_NoDeathSpecial
+  States
+  {
+   Spawn:
+   FRUT C 35 NODELAY
+	FRUT C 0 A_SpawnItemEx("GoreFlies",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+	FRUT C 0 A_SpawnItemEx("Maggot",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+	FRUT C 0 A_SpawnItemEx("Worm",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+    FRUT C -1
+    loop
+	Active:
+	TNT1 A 0 A_Scream
+	TNT1 A 0 A_PlaySound("MUCROT")
+	//TNT1 A 0 A_GiveToTarget("HealthBonus", 1)
+	TNT1 A 0 A_Jump(256,"ok1","ok2","ok3","ok4","ok5")
+	ok1:
+	TNT1 A 1 A_Print("Why is it so bitter...?")
+	stop
+	ok2:
+	TNT1 A 1 A_Print("It had to be rinsed first...")
+	stop
+	ok3:
+	TNT1 A 1 A_Print("It's completely tasteless.")
+	stop
+	ok4:
+	TNT1 A 0 A_Print("A little sweet and healthy!")
+	TNT1 A 1 A_GiveToTarget("HealthBonus", 1)
+	stop
+	ok5:
+	TNT1 A 0 A_Print("Hrum-hrum.")
+	TNT1 A 1 A_GiveToTarget("HealthBonus", 1)
+	stop
+  }
+}
+
+ACTOR Cabbage : Carrot 32227 // Updated for Reloaded
+{
+	//$Category WDI26 Decorate
+	//$Sprite FRUTB0
+	//$Title "Cabbage"
+  height 4
+  radius 4
+  scale 0.9
+  Deathsound "EatMunch"
+  States
+  {
+   Spawn:
+   FRUT B 35 NODELAY
+	FRUT B 0 A_SpawnItemEx("GoreFlies",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+	FRUT B 0 A_SpawnItemEx("Maggot",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+	FRUT B 0 A_SpawnItemEx("Worm",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+    FRUT B -1
+    loop
+	Active:
+	TNT1 A 0 A_Scream
+	TNT1 A 0 A_PlaySound("EatMunch")
+	//TNT1 A 0 A_GiveToTarget("HealthBonus", 1)
+	TNT1 A 0 A_Jump(256,"ok1","ok2","ok3","ok4","ok5")
+	ok1:
+	TNT1 A 1 A_Print("It's like eating real grass.")
+	stop
+	ok2:
+	TNT1 A 1 A_Print("It had to be rinsed first...")
+	stop
+	ok3:
+	TNT1 A 1 A_Print("Did I really eat something? I missed it.")
+	stop
+	ok4:
+	TNT1 A 0 A_Print("Delicious, even when it's raw!")
+	TNT1 A 1 A_GiveToTarget("HealthBonus", 1)
+	stop
+	ok5:
+	TNT1 A 0 A_Print("It's still good... Even without the dishes.")
+	TNT1 A 1 A_GiveToTarget("HealthBonus", 1)
+	stop
+  }
+}
+
+actor CabbageFr 32235
+{
+//$Category WDI26 Decorate
+//$Sprite FRUTB0
+//$Title "Cabbage (No Eating)"
+  height 4
+  radius 6
+  scale 0.9
+  states
+  {
+  Spawn:
+  FRUT B -1
+  Stop
+  }
+}
+
+ACTOR Cheese : Carrot 32229 // Updated for Reloaded
+{
+	//$Category WDI26 Decorate
+	//$Sprite FRUTD0
+	//$Title "Cheese"
+  height 4
+  radius 4
+  scale 0.8
+  Deathsound "EatMunch"
+  States
+  {
+   Spawn:
+   FRUT D 35 NODELAY
+	FRUT D 0 A_SpawnItemEx("GoreFlies",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+	FRUT D 0 A_SpawnItemEx("Maggot",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+	FRUT D 0 A_SpawnItemEx("Worm",0,0,random(2,20),0,0,0,0,SXF_CLIENTSIDE,246 ,7780)
+    FRUT D -1
+    loop
+	Active:
+	TNT1 A 0 A_Scream
+	TNT1 A 0 A_PlaySound("EatMunch")
+	//TNT1 A 0 A_GiveToTarget("HealthBonus", 1)
+	TNT1 A 0 A_Jump(256,"ok1","ok2","ok3","ok4","ok5")
+	ok1:
+	TNT1 A 1 A_Print("This smell is disgusting!")
+	stop
+	ok2:
+	TNT1 A 1 A_Print("It was clearly not blue cheese...")
+	stop
+	ok3:
+	TNT1 A 1 A_Print("It's too bitter!")
+	stop
+	ok4:
+	TNT1 A 0 A_Print("Now I understand why mice like cheese...")
+	TNT1 A 1 A_GiveToTarget("HealthBonus", 1)
+	stop
+	ok5:
+	TNT1 A 0 A_Print("It's not cold yet!")
+	TNT1 A 1 A_GiveToTarget("HealthBonus", 1)
+	stop
+  }
+}
+
+actor CheeseFr 32237
+{
+//$Category WDI26 Decorate
+//$Title "Cheese (No eating)"
+  height 4
+  radius 4
+  scale 0.8
+  states
+  {
+  Spawn:
+  FRUT D -1
+  Stop
+  }
+}
+
+
+actor Food1NoEat 32230
+{
+//$Category WDI26 Decorate
+
+  height 4
+  radius 4
+  states
+  {
+  Spawn:
+  FRUT E -1
+  Stop
+  }
+}
+actor Fish 32231
+{
+//$Category WDI26 Decorate
+//$Title "Fish (No Eating)"
+  height 4
+  radius 4
+  states
+  {
+  Spawn:
+  FRUT F -1
+  Stop
+  }
+}
+
+//********************TELEPORTER DECORATE********************
+//Swiped from Realm667 and edited (Slightly)
+Actor TPortal : SwitchableDecoration 
+{
+	+CLIENTSIDEONLY
+	+NOINTERACTION
+	+NOBLOCKMAP
+	+NOGRAVITY
+	+NOTELEPORT
+	+FORCEXYBILLBOARD
+	RenderStyle Add
+	Alpha 0.8
+	Scale 0.25
+	States
+	{
+	Spawn:
+	Active:
+		TNT1 AAAAA 7 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,172)
+		TNT1 A 0 A_SetTranslucent(0.1,1)
+		TNT1 A 0 A_PlaySound("TPortalAppear")
+		TELZ ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		TELZ A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.2,1)
+		TELZ ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		TELZ A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.3,1)
+		TELZ ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		TELZ A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.4,1)
+		TELZ ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		TELZ A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.5,1)
+		TELZ ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		TELZ A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.6,1)
+		TELZ ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		TELZ A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.7,1)
+		TELZ ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		TELZ A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.8,1)
+		goto Activated
+	Activated:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound("TPortalLoopp",5,1,1)
+		goto Ready
+	Ready:
+		TELZ ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		TELZ A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		loop
+	Inactive:
+		TNT1 A 0 A_StopSound(5)
+		TNT1 A 0 A_PlaySound("TPortalFade")
+		TELZ ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		TELZ A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.8,1)
+		TELZ ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		TELZ A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.7,1)
+		TELZ ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		TELZ A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.6,1)
+		TELZ ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		TELZ A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.5,1)
+		TELZ ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		TELZ A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.4,1)
+		TELZ ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		TELZ A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.3,1)
+		TELZ ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		TELZ A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.2,1)
+		TELZ ABCDCB 1 bright Light("TPortNormal") A_SpawnItem("TPortMistSpawner",0,32)
+		TELZ A 0 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+		TNT1 A 0 A_SetTranslucent(0.1,1)
+		TNT1 AAA 7 A_SpawnItemEx("TPortLightningWaveSpawner",0,0,32,0,0,0,0,0,144)
+		goto Inactivated
+	Inactivated:
+		TNT1 A 1
+		loop
+	}
+}
+
+// Spawn this for a permanent portal
+
+Actor TPortalPermanent : TPortal 32332
+{
+//$Category WDI26 Decorate
+	States
+	{
+	Spawn:
+		goto Activated
+	}
+}
+Actor Counter : Inventory
+{
+	Inventory.MaxAmount 255
+}
+
+//***************//
+// Support Actors//
+//***************//
+
+Actor VisualSpecialEffect
+{
+	+CLIENTSIDEONLY
+	+NOINTERACTION
+	+NOBLOCKMAP
+	+NOGRAVITY
+	+NOTELEPORT
+	+FORCEXYBILLBOARD
+}
+
+Actor TPortMist : VisualSpecialEffect
+{
+	RenderStyle Add
+	Alpha 0.25
+	Scale 0.225
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(256,1,2,3,4,5,6,7,8,9,10)
+	Loopy:
+		MISN ABCDEFGHIJKLMOOPQR 1 bright A_FadeOut(0.01)
+		loop
+	}
+}
+
+Actor TPortMistSpawner : VisualSpecialEffect
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AA 0 A_SpawnItemEx("TPortMist",Random(-14,14),Random(-14,14),Random(-14,14),0.012*Random(-50,50),0.012*Random(-50,50),0.012*Random(-50,50),0,0,24)
+		stop
+	}
+}
+
+Actor TPortLightning : VisualSpecialEffect
+{
+	RenderStyle Add
+	Alpha 0.7
+	States
+	{
+	Spawn:
+		TNT1 A 0 // Huh, that's the jump...
+		TNT1 A 0 A_Jump(256,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72)
+	Select:
+		BLT1 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade")
+		BLT2 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade")
+		BLT3 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade")
+		BLT4 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade")
+	Fade:
+		"----" A 1 bright A_FadeOut(0.15)
+		loop
+	}
+}
+
+Actor TPortLightningSmall : TPortLightning
+{
+	Scale 0.2
+}
+
+Actor TPortLightningMedium : TPortLightning
+{
+	Scale 0.3
+}
+
+Actor TPortLightningLarge : TPortLightning
+{
+	Scale 0.4
+}
+
+Actor TPortLightningHuge : TPortLightning
+{
+	Scale 0.5
+}
+
+// A wave of lightning
+Actor TPortLightningWave : VisualSpecialEffect
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("TPortLightningSmall",Random(-2,2),Random(-2,2),Random(-2,2),0,0,0,0,0,32)
+		TNT1 A 0 A_SpawnItemEx("TPortLightningMedium",Random(-3,3),Random(-3,3),Random(-3,3),0,0,0,0,0,56)
+		TNT1 A 0 A_SpawnItemEx("TPortLightningLarge",Random(-4,4),Random(-4,4),Random(-3,3),0,0,0,0,0,96)
+		TNT1 A 0 A_SpawnItemEx("TPortLightningHuge",Random(-5,5),Random(-5,5),Random(-5,5),0,0,0,0,0,144)
+		stop
+	}
+}
+
+// Spawns lightning waves
+Actor TPortLightningWaveSpawner : VisualSpecialEffect
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound("TPortalZapp")
+		TNT1 A 2 Light("TPortZapp") A_SpawnItem("TPortLightningWave")
+		TNT1 A 1 Light("TPortZapp") A_SpawnItem("TPortLightningWave")
+		TNT1 A 3 Light("TPortZapp") A_SpawnItem("TPortLightningWave")
+		TNT1 A 5 Light("TPortZapp") A_SpawnItem("TPortLightningWave")
+		TNT1 A 1 Light("TPortZapp") A_SpawnItem("TPortLightningWave")
+		TNT1 A 2 Light("TPortZapp") A_SpawnItem("TPortLightningWave")
+		TNT1 A 4 A_SpawnItem("TPortLightningWave")
+		stop
+	}
+}
+actor UACJunkPile 32333
+{
+//$Category WDI26 Decorate
+  height 20
+  radius 25
+  states
+  {
+  Spawn:
+  JPIL A -1
+  Stop
+  }
+}
+actor UACJunkPile2 32334
+{
+//$Category WDI26 Decorate
+  height 28
+  radius 28
+  states
+  {
+  Spawn:
+  JPIL B -1
+  Stop
+  }
+}
+
+actor BioSuitDecoration 32232
+{
+//$Category WDI26 Decorate
+  height 72
+  radius 14
+  +SOLID
+  states
+  {
+  Spawn:
+  BIOS A -1
+  Stop
+  }
+}
+actor BioPlant1 32233
+{
+//$Category WDI26 Decorate
+  height 4
+  radius 4
+  states
+  {
+  Spawn:
+  PLAB A -1
+  Stop
+  }
+}
+  actor BioPlant2 30116
+{
+//$Category WDI26 Decorate
+  height 4
+  radius 4
+  states
+  {
+  Spawn:
+  PLAB B -1
+  Stop
+  }
+}
+  actor BioPlant3 30117
+{
+//$Category WDI26 Decorate
+  height 4
+  radius 4
+  states
+  {
+  Spawn:
+  PLAB C -1
+  Stop
+  }
+}
+  actor BioPlant4 30118
+{
+//$Category WDI26 Decorate
+  height 4
+  radius 4
+  states
+  {
+  Spawn:
+  PLAB D -1
+  Stop
+  }
+}
+  actor Microscope 30119
+{
+//$Category WDI26 Decorate
+  height 8
+  radius 4
+  states
+  {
+  Spawn:
+  MCRO A -1
+  Stop
+  }
+}
+  actor Cellpackdecoration 30120
+{
+//$Category WDI26 Decorate
+  height 21
+  radius 32
+  states
+  {
+  Spawn:
+  CELP A -1
+  Stop
+  }
+}
+Actor Silenthurt : Custominventory
+{
+  Inventory.PickupMessage "Cheating hacker!!!!!!!!"
+  Inventory.PickUpSound "silence"
+  ReactionTime 9999999
+  States
+  {
+   Spawn:
+	Pickup:
+		TNT1 A 0 A_Playsound("silence", CHAN_VOICE)
+		Stop
+   }
+}
+ACTOR SnowFlakeSpeedy 29003
+{
+	Radius 0
+	Height 0
+	Speed 99
+	Mass 0
+	Projectile
+	RenderStyle TRANSLUCENT
+	Alpha 0.8
+	Scale 0.3
+	+NOGRAVITY // Greater fall speed control
+	+NOBLOCKMAP
+	+CLIENTSIDEONLY
+	+NOTELEPORT
+	+INVULNERABLE
+	+NONSHOOTABLE
+	+DONTSPLASH
+	+CORPSE
+	States
+	{
+		Spawn:
+			SNOF A 1 bright
+		Crash:
+			SNOF A 35 bright
+			Stop
+	}
+}
+ACTOR PortableBlizzard 29004
+{
+//$Category WDI26 Decorate
+	Radius 16
+	Height 6
+	RenderStyle NONE
+	+ALLOWCLIENTSPAWN
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+NOBLOCKMAP
+	+NOLIFTDROP
+	+NOTELEPORT
+	+SPAWNCEILING
+	+NOCLIP
+	States
+	{
+		Spawn:
+			TNT1 A 1 A_SpawnItemEx("SnowFlakeSpeedy",random(-900,900),random(-900,900),random(-500,0),45,0,-0.7,random(60,70),128) // client-side spawning flag
+			Loop
+	}
+}
+ACTOR SnowFlakePretty 29005
+{
+	Radius 0
+	Height 0
+	Speed 86
+	Mass 0
+	Projectile
+	RenderStyle TRANSLUCENT
+	Alpha 0.8
+	Scale 0.3
+	-NOGRAVITY // Greater fall speed control
+	+NOBLOCKMAP
+	+CLIENTSIDEONLY
+	+NOTELEPORT
+	+INVULNERABLE
+	+NONSHOOTABLE
+	+DONTSPLASH
+	+CORPSE
+	States
+	{
+		Spawn:
+			SNFL ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB 5 bright
+		Death:
+			SNFL AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 8 bright A_FADEOUT
+			Stop
+	}
+}
+ACTOR SnowFlakePrettySpawner 29006
+{
+//$Category WDI26 Decorate
+	Radius 16
+	Height 6
+	RenderStyle NONE
+	+ALLOWCLIENTSPAWN
+	+CLIENTSIDEONLY
+	+NOGRAVITY
+	+NOBLOCKMAP
+	+NOLIFTDROP
+	+NOTELEPORT
+	+SPAWNCEILING
+	+NOCLIP
+	States
+	{
+		Spawn:
+			TNT1 A 1 A_SpawnItemEx("SnowFlakePretty",random(-1900,1900),random(-1900,1900),0,45,0,-0.7,random(60,70),128) // client-side spawning flag
+			Loop
+	}
+}
+Actor WINDGUSTS 29007
+//$Category WDI26 Decorate/Sounds
+{
+-NOGRAVITY
+reactiontime 999
+states
+{
+spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundex ("WIND", CHAN_VOICE, 11.0, 0) 
+goto butloop
+
+butloop:
+TNT1 A 35	
+TNT1 A 0 A_CountDown
+loop
+
+cutoff:
+TNT1 AA 0 A_Stopsoundex("Voice")
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+Actor ELE3
+//$Category WDI26 Decorate/Sounds
+{
+-NOGRAVITY
+reactiontime 999
+states
+{
+spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundex ("ELE3", CHAN_VOICE, 11.0, 0) 
+goto butloop
+
+butloop:
+TNT1 A 35	
+TNT1 A 0 A_CountDown
+loop
+
+cutoff:
+TNT1 AA 0 A_Stopsoundex("Voice")
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+Actor COMPY1 29010
+//$Category WDI26 Decorate/Sounds
+{
+-NOGRAVITY
+reactiontime 999
+states
+{
+spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundex ("COMPY1", CHAN_VOICE, 11.0, 0) 
+goto butloop
+
+butloop:
+TNT1 A 35	
+TNT1 A 0 A_CountDown
+loop
+
+cutoff:
+TNT1 AA 0 A_Stopsoundex("Voice")
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+Actor COMPY2 29011
+//$Category WDI26 Decorate/Sounds
+{
+-NOGRAVITY
+reactiontime 999
+states
+{
+spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundex ("COMPY2", CHAN_VOICE, 11.0, 0) 
+goto butloop
+
+butloop:
+TNT1 A 35	
+TNT1 A 0 A_CountDown
+loop
+
+cutoff:
+TNT1 AA 0 A_Stopsoundex("Voice")
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+Actor COMPY4 29012
+//$Category WDI26 Decorate/Sounds
+{
+-NOGRAVITY
+reactiontime 999
+states
+{
+spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundex ("COMPY4", CHAN_VOICE, 11.0, 0) 
+goto butloop
+
+butloop:
+TNT1 A 35	
+TNT1 A 0 A_CountDown
+loop
+
+cutoff:
+TNT1 AA 0 A_Stopsoundex("Voice")
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+Actor GENER 29013
+//$Category WDI26 Decorate/Sounds
+{
+-NOGRAVITY
+reactiontime 999
+states
+{
+spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundex ("GENER", CHAN_VOICE, 11.0, 0) 
+goto butloop
+
+butloop:
+TNT1 A 35	
+TNT1 A 0 A_CountDown
+loop
+
+cutoff:
+TNT1 AA 0 A_Stopsoundex("Voice")
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+Actor Plasmatorture 
+//$Category WDI26 Decorate/Sounds
+{
+-NOGRAVITY
+reactiontime 999
+states
+{
+spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundex ("Torture2", CHAN_VOICE, 11.0, 0) 
+goto butloop
+
+butloop:
+TNT1 A 35	
+TNT1 A 0 A_CountDown
+loop
+
+cutoff:
+TNT1 AA 0 A_Stopsoundex("Voice")
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+ACTOR StrobeLightRed : SwitchableDecoration 12401
+//$Category WDI26 Decorate
+{
+  Radius 16
+  Height 16
+  +NOGRAVITY
+  +SPAWNCEILING
+  States
+  {
+  Spawn:
+  Active:
+	STRR A 1 BRIGHT A_PlaySound("Strobelight/Alarm", CHAN_6, 1, TRUE)
+	STRR A 0 A_CustomMissile ("StrobeRayRed", 0, 0, 0, 2, -35)
+    STRR A 0 A_CustomMissile ("StrobeRayRed", 0, 0, 180, 2, -35)
+    STRR A 0 A_SetAngle(10 + angle)
+	STRR A 1 BRIGHT
+	STRR A 0 A_CustomMissile ("StrobeRayRed", 0, 0, 0, 2, -35)
+    STRR A 0 A_CustomMissile ("StrobeRayRed", 0, 0, 180, 2, -35)
+    STRR A 0 A_SetAngle(10 + angle)
+	STRR A 1 BRIGHT
+	STRR A 0 A_CustomMissile ("StrobeRayRed", 0, 0, 0, 2, -35)
+    STRR A 0 A_CustomMissile ("StrobeRayRed", 0, 0, 180, 2, -35)
+    STRR A 0 A_SetAngle(10 + angle)
+	
+	STRR B 1 BRIGHT
+	STRR B 0 A_CustomMissile ("StrobeRayRed", 0, 0, 0, 2, -35)
+    STRR B 0 A_CustomMissile ("StrobeRayRed", 0, 0, 180, 2, -35)
+    STRR B 0 A_SetAngle(10 + angle)
+	STRR B 1 BRIGHT
+	STRR B 0 A_CustomMissile ("StrobeRayRed", 0, 0, 0, 2, -35)
+    STRR B 0 A_CustomMissile ("StrobeRayRed", 0, 0, 180, 2, -35)
+    STRR B 0 A_SetAngle(10 + angle)
+	STRR B 1 BRIGHT
+	STRR B 0 A_CustomMissile ("StrobeRayRed", 0, 0, 0, 2, -35)
+    STRR B 0 A_CustomMissile ("StrobeRayRed", 0, 0, 180, 2, -35)
+    STRR B 0 A_SetAngle(10 + angle)
+	
+	STRR C 1 BRIGHT
+	STRR C 0 A_CustomMissile ("StrobeRayRed", 0, 0, 0, 2, -35)
+    STRR C 0 A_CustomMissile ("StrobeRayRed", 0, 0, 180, 2, -35)
+    STRR C 0 A_SetAngle(10 + angle)
+	STRR C 1 BRIGHT
+	STRR C 0 A_CustomMissile ("StrobeRayRed", 0, 0, 0, 2, -35)
+    STRR C 0 A_CustomMissile ("StrobeRayRed", 0, 0, 180, 2, -35)
+    STRR C 0 A_SetAngle(10 + angle)
+	STRR C 1 BRIGHT
+	STRR C 0 A_CustomMissile ("StrobeRayRed", 0, 0, 0, 2, -35)
+    STRR C 0 A_CustomMissile ("StrobeRayRed", 0, 0, 180, 2, -35)
+    STRR C 0 A_SetAngle(10 + angle)
+	
+	STRR D 1 BRIGHT
+	STRR D 0 A_CustomMissile ("StrobeRayRed", 0, 0, 0, 2, -35)
+    STRR D 0 A_CustomMissile ("StrobeRayRed", 0, 0, 180, 2, -35)
+    STRR D 0 A_SetAngle(10 + angle)
+	STRR D 1 BRIGHT
+	STRR D 0 A_CustomMissile ("StrobeRayRed", 0, 0, 0, 2, -35)
+    STRR D 0 A_CustomMissile ("StrobeRayRed", 0, 0, 180, 2, -35)
+    STRR D 0 A_SetAngle(10 + angle)
+	STRR D 1 BRIGHT
+	STRR D 0 A_CustomMissile ("StrobeRayRed", 0, 0, 0, 2, -35)
+    STRR D 0 A_CustomMissile ("StrobeRayRed", 0, 0, 180, 2, -35)
+    STRR D 0 A_SetAngle(10 + angle)
+    Loop
+  Inactive:
+    STRR A -1 A_StopSound (CHAN_6)
+	Stop
+  }
+}
+ACTOR StrobeRayBlue
+{
+  Radius 2
+  Height 2
+  Speed 100
+  Damage 0
+  Renderstyle None
+  projectile
+  -ACTIVATEIMPACT
+  -ACTIVATEPCROSS
+  +RIPPER
+  +BLOODLESSIMPACT
+  +PAINLESS
+  +THRUACTORS
+  +DONTSPLASH
+  States
+  {
+  Spawn:
+    BAL1 A 8
+    Loop
+  Death:
+    BAL1 C 3
+    Stop
+  }
+}
+
+ACTOR StrobeRayGreen : StrobeRayBlue
+{
+}
+
+ACTOR StrobeRayRed : StrobeRayBlue
+{
+}
+
+ACTOR StrobeRayYellow : StrobeRayBlue
+{
+}
+ACTOR FakeShotgunVertical : CustomInventory 29000
+{
+  //$Category WDI Weapons/Limited Weapons
+  //$Sprite SHVTA0
+  //$Title "Shotgun (Vertical)"
+	Radius 4
+	Height 16
+	Scale 0.9
+	Inventory.PickupMessage "\cjFound a \c[O1]Shotgun. \cjBRUTAL up close! \n\caDamage: \c[C4]up to 64"
+	Inventory.Respawntics 52500 //25min
+	+FORCEXYBILLBOARD
+	+DontGib
+	States
+	{ 
+	Spawn:
+		//TNT1 A 0 NODELAY A_Jump(128,2)
+		//TNT1 A 0 A_SetScale(-scalex,scaley)
+		SHVT A -1
+		Stop
+	Pickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("MurderMarker",1, "PickupMurd")
+		TNT1 A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("Shotgun2",1,"AmmoPickup")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("Shotgun2",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 0 A_GiveInventory("SuperShells",Random(0,4))
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,4)
+		Stop
+	NotPickup:
+		TNT1 A 0
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,4)
+		Fail
+	AmmoPickup:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("NewShell",4,"AmmoPickupFull")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("NewShell",Random(0,4))
+		TNT1 A 0 A_FireCustomMissile("DroppedShotgunEmpty",0,0,0)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,4)
+		Stop
+	AmmoPickupFull:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("SuperShells",4,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("SuperShells",Random(0,4))
+		TNT1 A 0 A_FireCustomMissile("DroppedShotgunEmpty",0,0,0)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,4)
+		Stop
+	ForgetIt:
+		TNT1 A 1
+		Stop
+		
+	PickupMurd:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("DoubleBarrel",1,"AmmoPickupMurd")
+		TNT1 A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickupMurd")
+		TNT1 A 0 A_PlaySound("Pickups/Weapon")
+		TNT1 A 0 A_GiveInventory("DoubleBarrel",1)
+		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
+		TNT1 A 0 A_GiveInventory("DBShells",Random(0,2))
+		TNT1 A 1 ACS_NamedExecute("WDIROldWeapon_id",0,46)
+		TNT1 A 0 A_Log("\cjMurderer's shotgun is a little different...")
+		Stop
+	NotPickupMurd:
+		TNT1 A 0
+		TNT1 A 1 ACS_NamedExecute("WDIROldWeapon_id",0,46)
+		Fail
+	AmmoPickupMurd:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("NewShell",4,"AmmoPickupMurdFull")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("NewShell",Random(0,4))
+		TNT1 A 0 A_FireCustomMissile("DroppedShotgunEmpty",0,0,0)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,46)
+		Stop
+	AmmoPickupMurdFull:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("DBShells",2,"ForgetIt")
+		TNT1 A 0 A_PlaySound("Pickup/Ammo")
+		TNT1 A 0 A_GiveInventory("DBShells",Random(0,2))
+		TNT1 A 0 A_FireCustomMissile("DroppedShotgunEmpty",0,0,0)
+		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,46)
+		Stop
+}}
+ACTOR FakeM1Vertical : CustomInventory 29001
+{
+  //$Category WDI Weapons/Limited Weapons
+  //$Sprite M1VTA0
+  //$Title "M1 Carbine (Vertical)"
+	Radius 4
+	Height 16
+	Inventory.PickupMessage "Found an M1 Carbine"
+	Inventory.RespawnTics 3024000 //1 hour
+	  Scale 0.9
+	States
+	{
+	Spawn:
+		M1VT A -1
+		Stop
+	Pickup:
+		PIST A 0
+		PIST A 0 A_JumpIfInventory("MurderMarker",1, 2)
+		PIST A 0 A_JumpIfInventory("TKToken",1,"NotPickup")
+		PIST A 0
+		PIST A 0 A_JumpIfInventory("M1Carbine",1,"AmmoPickup")		
+		PIST A 0 A_JumpIfInventory("Slot1Filled",1,"NotPickup")
+		PIST A 0 A_PlaySound("pickups/weapon")
+		PIST A 0 A_GiveInventory("M1Carbine",1)
+		PIST A 0 A_GiveInventory("Slot1Filled",1)
+		TNT1 A 0 //A_Print("Picked up a Beretta.")
+		PIST A 1 ACS_Execute(670,0,23)
+		PIST A 0 A_JumpIfInventory("M1Once",1,"ForgetIt")
+		PIST A 0 A_GiveInventory("M1CarbineClipIn",random(2,5))
+		PIST A 0 A_GiveInventory("M1Once",1)
+		Stop
+	NotPickup:
+		PIST A 0
+		M1GN Y 1 ACS_Execute(670,0,23)
+		Fail
+	AmmoPickup:
+		PIST A 0
+		PIST A 0 A_JumpIfInventory("M1Ammo",1,"NotPickup")
+		PIST A 0 A_PlaySound("pickups/ammo")
+		TNT1 A 0 //A_Print("Picked up some Pistol ammo.")
+		M1GN Y 1 A_GiveInventory("M1Ammo",1)
+		Stop
+	ForgetIt:
+		M1GN Y 1
+		Stop
+	}
+}
+ACTOR NewShellBox : NewShell 29002
+{
+  //$Category WDI Ammo
+  //$Sprite SBOXA0
+  //$Title "NewShellBox (4 shells)"
+Scale 0.75
+Radius 4
+Height 8
+Inventory.Amount 4
+Inventory.PickupMessage "Found more shells than you can carry!"
+States
+{
+Spawn:
+    SBOX A -1
+    Stop
+    }
+}
+actor GunSafeCode : Key 29014
+{
+//$Category WDI26 Decorate
+  Radius 4
+  Height 8
+  inventory.pickupmessage "Found the code for the gun safe."
+  inventory.icon "GSFCA0"
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    GSFC A -1
+    stop
+  }
+}
+actor TheSafeKey : Key 29015
+{
+//$Category WDI26 Decorate
+  Scale 0.15
+  Radius 4
+  Height 8
+  inventory.pickupmessage "Pocketed a key designed for a small safe." 
+  inventory.icon "ARTISAF"
+  +INVENTORY.UNDROPPABLE
+  states
+  {
+  Spawn:
+    KEY5 A -1
+    stop
+  }
+}
+Actor Rbox : CustomInventory 29016
+{
+  Scale 0.8
+  +FLOORCLIP
+  +INVENTORY.INVBAR 
+  -INVENTORY.INTERHUBSTRIP
+  +INVENTORY.UNDROPPABLE
+  Inventory.MaxAmount 1
+  Inventory.Icon "RBOXI0"
+  Inventory.PickupMessage "The human stands rather prudently in the world, drawing upon the shivers of life. To whom is he to say that which belongs here and is currently residing upon his planet? He is but a self, encroached to where he ought to be, to reflect in the manner of which he sees. The HUMAN chuckles as he experiences the HUMANITY within himself. The ANGER, the MISERY, the HAPPINESS, the ECSTASY, the SADNESS. With fists of madness, he ravages the walls of his reality with his windmill arms, punching, swinging, flailing within the void. There is no one there but himself. He is composing a symphony with his fists."
+
+	States
+	{
+	Spawn:
+	 RBOX A -1
+
+	Use:
+	 TNT1 A 0 A_SpawnItemEx("DroppedRbox", 32, 0, 42, 0, 0, 0, 0, 0, 0)
+	 stop
+
+	}
+}
+Actor DroppedRbox
+{
+-NOGRAVITY
+Mass 999999999
+  ReactionTime 11
+
+	States
+	{
+	Spawn:
+	 RBOX A 120
+	 RBOX A 0 A_PlaySound("RBOXOPEN")
+	 RBOX A 60
+	 RBOX B 130
+	 RBOX B 0 A_PlaySound("NETH")
+	 RBOX B 30
+	 RBOX C 3
+	 RBOX B 3
+	 RBOX D 2
+	 RBOX B 2
+	 RBOX D 1
+	 RBOX B 1
+	 RBOX C 1
+	 RBOX D 1
+	 RBOX C 1 
+	 RBOX D 1 
+	 RBOX C 1 
+	 RBOX D 1
+	  goto Death
+
+	Death:
+	TNT1 A 0 A_SpawnItemEx("Netherdemon", 0, 20, 0, 0, 0, 0, 0, 0, 0)
+	//TNT1 A 0 A_SpawnItemEx("Netherdemon", 54, 20, 0, 0, 0, 0, 0, 0, 0)
+	//TNT1 A 0 A_SpawnItemEx("Netherdemon", -54, 20, 0, 0, 0, 0, 0, 0, 0)
+	 stop
+	}
+}
+Actor Elevatormapmarker : MapMarker 29009
+{
+//$Category WDI26 Decorate
++NOBLOCKMAP
++NOGRAVITY
++DONTSPLASH
++INVISIBLE
+Scale 0.05
+States
+{
+Spawn:
+ELEM A -1
+Stop
+}
+}

@@ -97,15 +97,6 @@ gameinfo
 "NNF0017", "NNF0019", "NNF0021", "NNF0023", "NNF0025", "NNF0027", "NNF0029", "NNF0031"
 }
 
-map TITLEMAP "Welcome to Who Dun It: Reloaded"
-{
-	levelnum = 700
-	next = "TITLEMAP"
-	sky1 = "SKYB", 0.0
-	lightning 
-	smoothlighting 
-}
-
 defaultmap
 {
 	allowcrouch
@@ -119,6 +110,15 @@ defaultmap
 	f1 = "WDIHELP1" "WDIHELP2" "WDIHELP3" "WDIHELP4"
 	next = WDI01
 	//OutsideFog = "06 06 06"
+}
+
+map TITLEMAP "Welcome to Who Dun It: Reloaded"
+{
+	levelnum = 700
+	next = "TITLEMAP"
+	sky1 = "SKYB", 0.0
+	lightning 
+	smoothlighting 
 }
 
 map TEST "Modder Test Map"
@@ -280,7 +280,7 @@ map WDI16 "Castaway"
 {
 	levelnum = 16
 	next = WDI17
-	SKY1 = "DAWNCLOD", 0.0
+	//SKY1 = "DAWNCLOD", 0.0
 	music = D_OCEAN
 	evenlighting
 }
@@ -360,12 +360,20 @@ map WDI24 "Scarlet Blizzard"
 }
 
 
-map WDI25 "Phobos Outpost (TEST)"
+map WDI25 "Phobos Outpost"
 {
 	levelnum = 25
 	music = "D_H2AMB"
 	next = WDI01
 	evenlighting
+}
+
+map WDI26 "Decommissioned UAC Research Station"
+{
+levelnum = 26
+next = WDI18
+music = "SLEETY"
+evenlighting
 }
 
 map WDIEX01 "Marsis"

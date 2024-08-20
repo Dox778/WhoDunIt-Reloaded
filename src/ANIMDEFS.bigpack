@@ -48,6 +48,7 @@ cameratexture TCAMTEX1 256 128 fit 80 56
 cameratexture TCAMTEX2 256 128 fit 80 56
 cameratexture TCAMTEX3 256 128 fit 80 56
 
+/////////////////////////////////////////////////////////
 
 //riclo
 cameratexture WDI18C1 256 256 fit 108 90
@@ -70,6 +71,56 @@ texture TVSIGNAL
 	pic TVSIGNA2 tics 185
 	pic TVSIGNA3 tics 185
 	pic TVSIGNA4 tics 185
+	
+//WDI26
+texture tmcon18
+	pic tmcon18 tics 8
+	pic tmcon19 tics 8
+	pic tmcon20 tics 8
+	pic tmcon21 tics 8
+	
+texture tmcon11
+	pic tmcon11 tics 3
+	pic tmcon12 tics 3
+	pic tmcon13 tics 3
+	pic tmcon14 tics 3
+	
+texture tmcon27
+	pic tmcon27 tics 30
+	pic tmconb tics 30
+	
+texture tmcon1
+	pic tmcon1 tics 8
+	pic tmcon2 tics 8
+	pic tmcon3 tics 8
+	pic tmcon4 tics 8
+	
+texture spookpc
+	pic hidefpc tics 875
+	pic spookpc tics 5
+	
+texture MURDCAM1
+	pic MURDCAM1 tics 17
+	pic MURDCAM2 tics 17
+	
+cameratexture WDI26C1 256 256 fit 105 63
+cameratexture WDI26C2 256 256 fit 105 63
+cameratexture WDI26C3 256 256 fit 105 63
+cameratexture WDI26C4 256 256 fit 105 63
+cameratexture WDI26C5 256 256 fit 105 63
+cameratexture WDI26C6 256 256 fit 105 63
+cameratexture WDI26C7 256 256 fit 105 63
+cameratexture WDI26C8 256 256 fit 105 63
+cameratexture WDI26C9 256 256 fit 105 63
+cameratexture WDI26C10 256 256 fit 105 63
+cameratexture WDI26C11 256 256 fit 105 63
+cameratexture WDI26C12 256 256 fit 105 63
+cameratexture WDI26C13 256 256 fit 105 63
+cameratexture WDI26C14 256 256 fit 105 63
+cameratexture WDI26C15 256 256 fit 105 63
+cameratexture WDI26C16 256 256 fit 105 63
+
+/////////////////////////////////////////////////////////
 	
 //WDI25 - Abbuw:
 warp texture WATER4
