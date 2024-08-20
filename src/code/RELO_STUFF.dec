@@ -350,6 +350,21 @@ ACTOR AppleB: AppleA 25314
   }
 }
 
+actor AppleFr 25315
+{
+//$Category WDI Reloaded Stuff/Props
+//$Title Apple 1 (No eating)
+  Radius 4
+  Height 6
+  scale 0.6
+  states
+  {
+  Spawn:
+  APPL A -1
+  Stop
+  }
+}
+
 ACTOR FruitSpawner : RandomSpawner 25160
 {
 
