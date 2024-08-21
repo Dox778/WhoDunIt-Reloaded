@@ -692,7 +692,7 @@ ACTOR Cabbage : Carrot 32227 // Updated for Reloaded
 	TNT1 A 1 A_GiveToTarget("HealthBonus", 1)
 	stop
 	ok5:
-	TNT1 A 0 A_Print("It's still good... Even without the dishes.")
+	TNT1 A 0 A_Print("It's still good... Even without the rest of the meal.")
 	TNT1 A 1 A_GiveToTarget("HealthBonus", 1)
 	stop
   }
