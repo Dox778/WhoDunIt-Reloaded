@@ -1243,7 +1243,7 @@ states
 {
 spawn:
 TNT1 A 0
-TNT1 A 0 A_PlaySoundex ("WIND", CHAN_VOICE, 11.0, 0) 
+TNT1 A 0 A_PlaySoundex ("WINDRI", CHAN_VOICE, 11.0, 0) 
 goto butloop
 
 butloop:
