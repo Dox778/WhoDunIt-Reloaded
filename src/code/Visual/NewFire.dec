@@ -26,12 +26,39 @@ RenderStyle add
 	TNT1 A 0 NODELAY A_SetScale(frandom(0.4,0.6))
 	TNT1 A 0 A_Jump(128,2)
 	TNT1 A 0 A_SetScale(-scalex,scaley)
+	TNT1 A 0 A_SpawnItemEx("RealisticFireSparks",0,0,23,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
 	Stay:
     TNT1 A 0 A_PlaySoundEx("DSTORCH2", "SoundSlot6", 1)
 	NF4R ABCDEFGHIJKLMNOPQ 1 BRIGHT
 	FFLG F 0 A_SpawnItemEx("FireDecorativeSmoke",random(-2,2),random(-2,2),random(12,14),frandom(-0.3,0.3),frandom(-0.3,0.3),frandom(0.8,1.2),random(0,90),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,90)
 	TNT1 A 0 A_Explode(2,8,0,0,8)
 	loop
+	}
+}
+
+ACTOR RealisticFireSparks
+{
+Speed 0
+-FORCEXYBILLBOARD
++NOINTERACTION
++NOCLIP
++CLIENTSIDEONLY
++ISMONSTER
+-COUNTKILL
+Alpha 1.0
+Renderstyle Add
+    YScale 1.0
+	XScale -1.0
+	States
+	{
+    Spawn:
+        SPFN ABCDEFGHIJKLMNOPQRSTUVWXYZ 1 BRIGHT
+		SPFM ABCDEFG 1 BRIGHT
+        loop
+	Death:
+	SPFN ABCDEFGHIJKLMNOPQRSTUVWXYZ 1 BRIGHT A_FadeOut(0.05)
+	SPFM ABCDEFG 1 BRIGHT A_FadeOut(0.05)
+	Stop
 	}
 }
 
@@ -97,6 +124,7 @@ Actor FireDecorativeLargeNew : FireDecorativeNew 20901
 	TNT1 A 0 NODELAY A_SetScale(frandom(0.7,0.9))
 	TNT1 A 0 A_Jump(128,2)
 	TNT1 A 0 A_SetScale(-scalex,scaley)
+	TNT1 A 0 A_SpawnItemEx("RealisticFireSparks",0,0,23,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
 	stay:
     TNT1 A 0 A_PlaySoundEx("DSTORCH2", "SoundSlot6", 1)
 	FFLG F 0 A_SpawnItemEx("FireDecorativeSmoke",random(-2,2),random(-2,2),random(12,14),frandom(-0.3,0.3),frandom(-0.3,0.3),frandom(0.8,1.2),random(0,90),SXF_CLIENTSIDE|SXF_NOCHECKPOSITION,90)

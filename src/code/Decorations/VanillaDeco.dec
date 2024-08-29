@@ -180,6 +180,7 @@ States
 	TNT1 A 0 A_SetScale(0.7,0.5)
 	TNT1 A 0 A_SpawnItemEx("FireDecorativeNew",0,0,29,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
 	TNT1 A 0 A_SetScale(1)
+	TNT1 A 0 A_SpawnItemEx("RealisticFireSparks1",0,0,36,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERSCALE)
 	FCAN D -1
 	stop
 	}
