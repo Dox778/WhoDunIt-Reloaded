@@ -367,8 +367,6 @@ actor AppleFr 25315
 
 ACTOR FruitSpawner : RandomSpawner 25160
 {
-
-
 	DropItem "AppleA"
 	DropItem "AppleB" 
 	DropItem "Grape" 
@@ -447,6 +445,8 @@ Actor CloudSpawnerFX 25158
 	TNT1 A 0 A_JumpIf(Args[4] == 1, "TanCloud1")
 	TNT1 A 0 A_JumpIf(Args[4] == 2, "TanCloud2")
 	TNT1 A 0 A_JumpIf(Args[4] == 3, "HellClouds")
+	TNT1 A 0 A_JumpIf(Args[4] == 4, "TanCloud3")
+	TNT1 A 0 A_JumpIf(Args[4] == 5, "TanCloud4")
   Grey:
 	TNT1 A 30 A_SpawnItemEx("CloudMain", Random(Args[0]*2, -Args[0]*2), Random(Args[0]*2, -Args[0]*2), Random(0, Args[1]), Random(5, 15), 0, 0, Random(6, -6), 128, Args[2])
     Loop
@@ -455,6 +455,12 @@ Actor CloudSpawnerFX 25158
     Loop
   TanCloud2:
     TNT1 A 30 A_SpawnItemEx("CloudTan2", Random(Args[0]*2, -Args[0]*2), Random(Args[0]*2, -Args[0]*2), Random(0, Args[1]), Random(5, 15), 0, 0, Random(6, -6), 128, Args[2])
+    Loop
+  TanCloud3:
+    TNT1 A 30 A_SpawnItemEx("CloudTan3", Random(Args[0]*2, -Args[0]*2), Random(Args[0]*2, -Args[0]*2), Random(0, Args[1]), Random(5, 15), 0, 0, Random(6, -6), 128, Args[2])
+    Loop
+  TanCloud4:
+    TNT1 A 30 A_SpawnItemEx("CloudTan4", Random(Args[0]*2, -Args[0]*2), Random(Args[0]*2, -Args[0]*2), Random(0, Args[1]), Random(5, 15), 0, 0, Random(6, -6), 128, Args[2])
     Loop
   HellClouds:
     TNT1 A 30 A_SpawnItemEx("HellCloud", Random(Args[0]*2, -Args[0]*2), Random(Args[0]*2, -Args[0]*2), Random(0, Args[1]), Random(5, 15), 0, 0, Random(6, -6), 128, Args[2])
@@ -499,6 +505,20 @@ Actor CloudTan2 : CloudMain
 {
   Alpha 0.1
   Scale 2.3
+  Translation "80:111=48:79"
+}
+
+Actor CloudTan3 : CloudMain
+{
+  Alpha 0.07
+  Scale 3
+  Translation "80:111=48:79"
+}
+
+Actor CloudTan4 : CloudMain
+{
+  Alpha 0.05
+  Scale 3
   Translation "80:111=48:79"
 }
 
