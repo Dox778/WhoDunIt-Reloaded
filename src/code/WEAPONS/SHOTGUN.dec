@@ -7,7 +7,7 @@ Actor FakeShotgun : CustomInventory Replaces Shotgun 30050
 	//$Title "Shotgun"
 	Radius 16
 	Height 8
-	Inventory.PickupMessage "\cjFound a \c[O1]Shotgun. \cjBRUTAL up close! \n\caDamage: \c[C4]up to 64"
+	//Inventory.PickupMessage "\cjFound a \c[O1]Shotgun. \cjBRUTAL up close! \n\caDamage: \c[C4]up to 64"
 	Inventory.Respawntics 52500 //25min
 	+FORCEXYBILLBOARD
 	+DontGib
@@ -30,6 +30,7 @@ Actor FakeShotgun : CustomInventory Replaces Shotgun 30050
 		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
 		TNT1 A 0 A_GiveInventory("SuperShells",Random(0,4))
 		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,4)
+		TNT1 A 0 A_Log("\cjFound a \c[O1]Shotgun. \cjBRUTAL up close! \n\caDamage: \c[C4]up to 64")
 		Stop
 	NotPickup:
 		TNT1 A 0
@@ -64,7 +65,7 @@ Actor FakeShotgun : CustomInventory Replaces Shotgun 30050
 		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
 		TNT1 A 0 A_GiveInventory("DBShells",Random(0,2))
 		TNT1 A 1 ACS_NamedExecute("WDIROldWeapon_id",0,46)
-		TNT1 A 0 A_Log("\cjMurderer's shotgun is a little different...")
+		TNT1 A 0 A_Log("\cjFound a \c[O1]Shotgun. \cjBut murderer's shotgun is a little different... \n\caDamage: \c[C4]up to 48")
 		Stop
 	NotPickupMurd:
 		TNT1 A 0
@@ -511,6 +512,7 @@ Actor FakeShotgunFull : FakeShotgunNoRandom
 		TNT1 A 0 A_GiveInventory("SuperShells",4)
 		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
 		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,4)
+		TNT1 A 0 A_Log("\cjFound a \c[O1]Shotgun. \cjBRUTAL up close! \n\caDamage: \c[C4]up to 64")
 		Stop
 	AmmoPickup:
 		TNT1 A 0
@@ -535,7 +537,7 @@ Actor FakeShotgunFull : FakeShotgunNoRandom
 		TNT1 A 0 A_GiveInventory("DBShells",2)
 		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
 		TNT1 A 1 ACS_NamedExecute("WDIROldWeapon_id",0,46)
-		TNT1 A 0 A_Log("\cjMurderer's shotgun is a little different...")
+		TNT1 A 0 A_Log("\cjFound a \c[O1]Shotgun. \cjBut murderer's shotgun is a little different... \n\caDamage: \c[C4]up to 48")
 		Stop
 	AmmoPickupMurdPickup:
 		TNT1 A 0
@@ -569,6 +571,7 @@ Actor FakeShotgun3 : FakeShotgunNoRandom
 		TNT1 A 0 A_GiveInventory("SuperShells",3)
 		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
 		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,4)
+		TNT1 A 0 A_Log("\cjFound a \c[O1]Shotgun. \cjBRUTAL up close! \n\caDamage: \c[C4]up to 64")
 		Stop
 	AmmoPickup:
 		TNT1 A 0
@@ -593,7 +596,7 @@ Actor FakeShotgun3 : FakeShotgunNoRandom
 		TNT1 A 0 A_GiveInventory("DBShells",2)
 		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
 		TNT1 A 1 ACS_NamedExecute("WDIROldWeapon_id",0,46)
-		TNT1 A 0 A_Log("\cjMurderer's shotgun is a little different...")
+		TNT1 A 0 A_Log("\cjFound a \c[O1]Shotgun. \cjBut murderer's shotgun is a little different... \n\caDamage: \c[C4]up to 48")
 		Stop
 	AmmoPickupMurdPickup:
 		TNT1 A 0
@@ -627,6 +630,7 @@ Actor FakeShotgun2 : FakeShotgunNoRandom
 		TNT1 A 0 A_GiveInventory("SuperShells",2)
 		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
 		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,4)
+		TNT1 A 0 A_Log("\cjFound a \c[O1]Shotgun. \cjBRUTAL up close! \n\caDamage: \c[C4]up to 64")
 		Stop
 	AmmoPickup:
 		TNT1 A 0
@@ -651,7 +655,7 @@ Actor FakeShotgun2 : FakeShotgunNoRandom
 		TNT1 A 0 A_GiveInventory("DBShells",2)
 		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
 		TNT1 A 1 ACS_NamedExecute("WDIROldWeapon_id",0,46)
-		TNT1 A 0 A_Log("\cjMurderer's shotgun is a little different...")
+		TNT1 A 0 A_Log("\cjFound a \c[O1]Shotgun. \cjBut murderer's shotgun is a little different... \n\caDamage: \c[C4]up to 48")
 		Stop
 	AmmoPickupMurdPickup:
 		TNT1 A 0
@@ -685,6 +689,7 @@ Actor FakeShotgun1 : FakeShotgunNoRandom
 		TNT1 A 0 A_GiveInventory("SuperShells",1)
 		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
 		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,4)
+		TNT1 A 0 A_Log("\cjFound a \c[O1]Shotgun. \cjBRUTAL up close! \n\caDamage: \c[C4]up to 64")
 		Stop
 	AmmoPickup:
 		TNT1 A 0
@@ -710,7 +715,7 @@ Actor FakeShotgun1 : FakeShotgunNoRandom
 		TNT1 A 0 A_GiveInventory("DBShells",1)
 		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
 		TNT1 A 1 ACS_NamedExecute("WDIROldWeapon_id",0,46)
-		TNT1 A 0 A_Log("\cjMurderer's shotgun is a little different...")
+		TNT1 A 0 A_Log("\cjFound a \c[O1]Shotgun. \cjBut murderer's shotgun is a little different... \n\caDamage: \c[C4]up to 48")
 		Stop
 	AmmoPickupMurdPickup:
 		TNT1 A 0
@@ -743,6 +748,7 @@ Actor FakeShotgunEmpty : FakeShotgunNoRandom
 		TNT1 A 0 A_GiveInventory("Shotgun2",1)
 		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
 		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,4)
+		TNT1 A 0 A_Log("\cjFound a \c[O1]Shotgun. \cjBRUTAL up close! \n\caDamage: \c[C4]up to 64")
 		Stop
 		
 	PickupMurd:
@@ -752,7 +758,7 @@ Actor FakeShotgunEmpty : FakeShotgunNoRandom
 		TNT1 A 0 A_GiveInventory("DoubleBarrel",1)
 		TNT1 A 0 A_GiveInventory("Slot1Filled",1)	 TNT1 A 0 A_GiveInventory("GotNewWeap",1) 
 		TNT1 A 1 ACS_NamedExecute("OldWeapon_ID",0,4)
-		TNT1 A 0 A_Log("\cjMurderer's shotgun is a little different...")
+		TNT1 A 0 A_Log("\cjFound a \c[O1]Shotgun. \cjBut murderer's shotgun is a little different... \n\caDamage: \c[C4]up to 48")
 		Stop
 }}
 
