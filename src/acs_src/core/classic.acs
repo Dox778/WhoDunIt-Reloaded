@@ -594,8 +594,8 @@ script "WDIRdeathStuff" death
 			UpdateClient(3, 0, remainingpercentage);
 			if(((remainingpercentage <= REMAINING  && remainingpercentage != 0) || (playinfo[0] <= 2 && playinfo[0] > 0)) && !dwindlemessage)
 			{
-				SetFont("BIGFONT");
-				HudMessageBold(s:"The Innocent's numbers are dwindling..."; HUDMSG_PLAIN|HUDMSG_LOG, 0, CR_RED, 0.5, 0.3, 3.0);
+				SetFont("NIGHTMARE");
+				HudMessageBold(s:"The Innocent's numbers are dwindling..."; HUDMSG_FADEINOUT|HUDMSG_LOG, 0, CR_RED, 0.5, 0.3, 3.0, 0.0, 1.1);
 				int odds = Random(1,100);
 				if(odds >= 99)
 				ACS_Execute(415,0,0,0,0);
