@@ -5,9 +5,7 @@ completeborder true;
 
 statusbar Fullscreen
 {
-	InInventory NOT HudCleaner
-	{
-		InInventory HudAlive
+    ifSpectator NOT
 		{		
 			//Background
 			//===========================================
@@ -220,7 +218,6 @@ statusbar Fullscreen
 			
 		}
 	}
-}
 
 statusbar inventoryfullscreen
 {
