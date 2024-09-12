@@ -1,3 +1,7 @@
+///////////////////////////////////////////////////////////////////
+////////////////  R E L O A D E D     S O U N D S  ////////////////
+///////////////////////////////////////////////////////////////////
+
 // Danny Fireworks
 FIREWLIT FIREWLIT
 $rolloff FIREWLIT 100 600
@@ -34,13 +38,19 @@ VENDAUT VENDAUT
 MUDRINK MUDRINK
 MUAPPLE MUAPPLE
 MUCROT MUCROT
+LAMPA1 LAMPA1
+LAMPA2 LAMPA2
+LAMPA3 LAMPA3
+LAMPA4 LAMPA4
+LAMPA5 LAMPA5
 
 $AMBIENT 162 PCSNDV POINT CONTINUOUS 1.0
 $AMBIENT 163 SKUWIND POINT CONTINUOUS 1.0 //From Skulltag_content
 $AMBIENT 164 FLIES POINT CONTINUOUS 1.0 //From BoA
 $AMBIENT 165 FAN POINT CONTINUOUS 1.0
+$Random LAMPA  { LAMPA1 LAMPA2 LAMPA3 LAMPA4 LAMPA5 }
 
-//////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 
 TextTink TextTink
 
