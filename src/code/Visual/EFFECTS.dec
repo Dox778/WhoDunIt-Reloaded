@@ -378,7 +378,7 @@ Actor RedHalo : YellowHalo
 	}
 }
 
-ACTOR Breath
+/*ACTOR Breath
 {
 	PROJECTILE
 	scale 0.02
@@ -423,7 +423,7 @@ ACTOR BreathTest
 		TNT1 A 0
 		stop
 	}
-}
+}*/
 
 //Bullet cases
 ACTOR ShotgunCasing
@@ -431,7 +431,7 @@ ACTOR ShotgunCasing
 	Height 12
 	Radius 9
 	Speed 6
-	Scale 0.40
+	Scale .175
 	Mass 0
 	PROJECTILE
 //	+DOOMBOUNCE
