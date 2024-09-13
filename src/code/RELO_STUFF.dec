@@ -367,6 +367,8 @@ actor AppleFr 25315
 
 ACTOR FruitSpawner : RandomSpawner 25160
 {
+//$Category WDI Reloaded Stuff/Props
+//$Title Fruit Spawner (Random)
 	DropItem "AppleA"
 	DropItem "AppleB" 
 	DropItem "Grape" 
