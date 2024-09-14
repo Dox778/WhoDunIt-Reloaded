@@ -48,6 +48,94 @@ TWILT_T
 TWILT_B
 }
 
+/////////////////// TERIBEAR SKYBOXES ///////////////////
+
+skybox Sky23 fliptop {
+VLNTD_rt
+VLNTD_ft
+VLNTD_lf
+VLNTD_bk
+VLNTD_up
+VLNTD_dn
+}
+
+skybox DAWN1
+{
+DAWN1_N
+DAWN1_E
+DAWN1_S
+DAWN1_W
+DAWN1_T
+DAWN1_B
+}
+
+skybox SUNNI fliptop
+{
+sunni_rt
+sunni_ft
+sunni_lf
+sunni_bk
+sunni_up
+sunni_dn
+}
+
+skybox DORR
+{ 
+DORR_N
+DORR_E
+DORR_S
+DORR_W
+DORR_T
+DORR_B
+}
+
+skybox STRMD fliptop {
+STRMD_rt
+STRMD_ft
+STRMD_lf
+STRMD_bk
+STRMD_up
+STRMD_dn
+}
+
+skybox NGHT2 fliptop {
+NGHT2_rt
+NGHT2_ft
+NGHT2_lf
+NGHT2_bk
+NGHT2_up
+NGHT2_dn
+}
+
+skybox SKYNI fliptop {
+SKYNI_rt
+SKYNI_ft
+SKYNI_lf
+SKYNI_bk
+SKYNI_up
+SKYNI_dn
+}
+
+skybox SKY106 fliptop {
+sky106rt
+sky106ft
+sky106lf
+sky106bk
+sky106up
+sky106dn
+}
+
+skybox aurbo fliptop {
+sky140rt
+sky140ft
+sky140lf
+sky140bk
+sky140up
+sky140dn
+}
+
+/////////////////////////////////////////////////////////
+
 pointlight Hallway
 {
 color 255 255 255

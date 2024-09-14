@@ -190,7 +190,7 @@ map WDI05 "Men's Night Out"
 map WDI06 "Surrounded"
 {
 	levelnum = 6
-	sky1 = "STSKY8B", 0.0
+	sky1 = "DORR", 0.0 //old "STSKY8B", 0.0
 	music = D_LEVEL1
 	next = WDI07
 	lightning 
