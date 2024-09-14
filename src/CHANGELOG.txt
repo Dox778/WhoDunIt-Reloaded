@@ -1,8 +1,62 @@
 ================================
 CHANGELOG
 ================================
+WHO DUN IT: RELOADED - V3.3 14/09/2024
+By: Teribear & Riclo500 & Justice
+MAIN CHANGES / MAP NEWS: (Teribear, Riclo500)
+
+Riclo500:
+- ADDED NEW MAP: WDI26 "Decommissioned UAC Research Station"- This version contains various bugfixes and improved compatibility with WDI Reloaded by Riclo500 and Teribear.
+
+Teribear:
+- Some maps now have a different weather/different times of the day/different skies. It works in such a way that it is selected at the beginning of the map. The sky and lighting are also changing.
+ Supported maps: WDI01 (2 variants), WDI13 (5 variants), WDI16 (3 variants + 1 secret, for fun. Use "puke 164"), WDI23 (3 variants)
+ 
+- Added sparks to flames. Fire has become even more realistic now.
+- Three new effects have been added: Cinder, Ash, Floating Clouds. These effects appear on different maps. Also maps on which any effects have been added in this update: WDI05, WDI09, WDI13, WDI14, WDI16, WDI18, WDI21, WDI22, WDI26, WDIEX01, WDIEX02
+- WDI11: Added 5 secret buttons for an Easter egg. It's quite difficult to activate the Easter egg and it only had a 50% chance to actually trigger.
+
+WDI16: "Castaway"
+- Global sound work: added echo and ambient sounds.
+- Added new dwindling music. (Taken from "WDI Max")
+
+EDITS / MINOR CHANGES: (Teribear, Justice)
+
+Teribear:
+- Nerfed Double-Barrel Shotgun. The maximum damage you can do up close for 2 shots in a row is 96. Players with 100 hp will not die.
+- The breathing effect has been temporarily removed.
+- Now dwindling message uses a new bloody font. The disappearing effect has also been added.
+- New sprites for shells: pickup item, casing and inventory icon.
+- New sprites for rain splash. The splashes are more realistic.
+- Changed names for most of the inventory items ("Smallkit" > "Small Medkit", "SpareSawFuel" > "Chainsaw Fuel", "Newshell" > "Shotgun Shell" and etc)
+- TNT's HP has been increased from 26 to 75.
+- WDI01, WDI13: Added an extra weapon: a screwdriver on the shelf in WDI01/ In the basement at WDI13.
+- WDI01, WDI11, WDI13: Added a small random to some "light" weapon spawns. It can be replaced with weapons that are close in balance (Pipe/Crowbar, Pool Cue/Baseball Bat)
+- WDI11: Reduced the required number of victims to activate the special dwindling music.
+- WDI11: Several lamps now have a special flickering effect.
+- WDI05, WDI16: Added food.
+
+Justice:
+- WDI05 + WDI09: The maps are now more optimized. Mostly 3d models of chairs have been changed to 2d in WDI05 and the total number of vertexes and visplanes have been reduced.
+
+BUGFIXES / EXPLOIT FIXES: (Teribear)
+
+Teribear:
+- Removed the visible HUD for the spectators and dead players.
+- WDI11: The ventilation exploit is completely blocked for innocents.
+- WDI13: Added collision to one of the grills under the bridge.
+- WDI16: Fixed the blue fade inside the blood water.
+- WDI16: Fixed the safety teleport that teleported you as soon as you came into contact with the abyss sector, even on the bridge.
+- WDI18: Now a chainsaw can be spawned in shed or in the basement. (Thanks to Riclo500 for the hint)
+- WDI23: An exploit has been removed that allows innocents to get inside the murdhole through a hole in the floor of the second floor.
+- WDIEX01: Invisible-walls exploit has been blocked near the ancient teleport.
+- WDIEX01: A fall into the elevator shaft will now result in instant death.
+- WDIEX02: Fixed various exploits. (Subway exploit, transition between freezer and Funland and etc)
+```
+-------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
 WHO DUN IT: RELOADED - V3.2 20/07/2024
-y: Teribear & DEA & Metal Danny 420 & Dox778
+By: Teribear & DEA & Metal Danny 420 & Dox778
 MAIN CHANGES / MAP NEWS: (Teribear, DEA, METAL DANNY 420, Dox778)
 
 DEA:
